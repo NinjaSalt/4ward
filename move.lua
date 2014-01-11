@@ -23,12 +23,12 @@ function teleport( event, params )
 			--if where the finger eneded is less than where the enemy began move it up if it not already in lane 1
 			if myY<markY then
 				if body.y ~= lane1 then
-					body.y=body.y-70
+					body.y=body.y-(lane2-lane1)
 				end
 			--do the same as before but moving down
 			elseif myY>markY then
 				if body.y ~= lane4 then
-					body.y=body.y+70
+					body.y=body.y+(lane2-lane1)
 				end
 			end
 		end
