@@ -34,27 +34,35 @@ local allEne = {} -- empty table for storing objects
 -- Heroes, you can see the class heroes.lua
 local hero1 = myHeroes[0]
 hero1 = display.newImage( hero1.image )
+hero1 = makeHero ( hero1, myHeroes[0] )
 hero1.x =50; hero1.y = lane1
 hero1.height = 50; hero1.width = 50
 physics.addBody( hero1, { } )
+hero1:addEventListener( "touch", ability )
 
 local hero2 = myHeroes[1]
 hero2 = display.newImage( hero2.image )
+hero2 = makeHero ( hero2, myHeroes[1] )
 hero2.x =50; hero2.y = lane2
 hero2.height = 50; hero2.width = 50
 physics.addBody( hero2, { } )
+hero2:addEventListener( "touch", ability )
 
 local hero3 = myHeroes[2]
 hero3 = display.newImage( hero3.image )
+hero3 = makeHero ( hero3, myHeroes[2] )
 hero3.x =50; hero3.y = lane3
 hero3.height = 50; hero3.width = 50
 physics.addBody( hero3, { } )
+hero3:addEventListener( "touch", ability )
 
 local hero4 = myHeroes[3]
 hero4 = display.newImage( hero4.image )
+hero4 = makeHero ( hero4, myHeroes[3] )
 hero4.x =50; hero4.y = lane4
 hero4.height = 50; hero4.width = 50
 physics.addBody( hero4,{ } )
+hero4:addEventListener( "touch", ability )
 
 --calls the teleportation function located in move.lua
 local function teleport( event )
