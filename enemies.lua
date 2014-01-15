@@ -21,14 +21,15 @@ function makeEnemy(newE, oldE)
         newE.speed = oldE.speed
         newE.defense = oldE.defense
         newE.image = oldE.image
+        newE.class = oldE.class
         return newE
 end
 
 --create and use enemy
-babyBlue = Enemy.create("BabyBlue", 5, 1, 1, 1, "BombBabyBlue.png")
-darkBlue = Enemy.create("DarkBlue", 7, 2, 1, 2, "BombDarkBlue.png")
-pinkBomb = Enemy.create("PinkBomb", 5, 2, 2, 3, "BombPink.png")
-greenBomb = Enemy.create("GreenBomb", 7, 1, 3, 3, "BombGreen.png")
+babyBlue = Enemy.create("BabyBlue", 5, 1, -20, 1, "BombBabyBlue.png")
+darkBlue = Enemy.create("DarkBlue", 7, 2, -25, 2, "BombDarkBlue.png")
+pinkBomb = Enemy.create("PinkBomb", 5, 2, -30, 3, "BombPink.png")
+greenBomb = Enemy.create("GreenBomb", 7, 1, -18, 3, "BombGreen.png")
 myEnemies = {}
 myEnemies[0] = babyBlue
 myEnemies[1] = darkBlue
