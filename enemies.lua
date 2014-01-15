@@ -24,6 +24,26 @@ function makeEnemy(newE, oldE)
         return newE
 end
 
+-- "create functions for enemies: dying, abilties"
+
+--ability, just a very temporary placeholder until enemy abilties are decided.
+function enemyAbility( event )
+        local enemy = event.target
+        if event.phase == "began" then
+                print ( enemy.name )
+        end
+end
+
+--dying/taking damage
+function enemyLoseHealth( event ) --check for collision event.
+        local enemy = event.target
+        if event.phase == "began" then
+        enemy.health = enemy.health-10 -- change this once strength/weakness is implemented.
+        if (enemy.health <= 0) then
+                enemy:removeSelf( )
+        end
+end
+
 --create and use enemy
 babyBlue = Enemy.create("BabyBlue", 5, 1, 1, 1, "BombBabyBlue.png")
 darkBlue = Enemy.create("DarkBlue", 7, 2, 1, 2, "BombDarkBlue.png")
