@@ -20,6 +20,7 @@ local gameUI = require("move")
 local physics = require("physics")
 require("heroes")
 require("enemies")
+local collision = require("collision")
 --Start the physics engine without any gravity
 physics.start()
 physics.setGravity( 0, 0 )
@@ -60,33 +61,8 @@ for n=0, 3, 1 do
 	elseif (n == 3) then hero[n].y = lane4
 	end
 	hero[n].height = 50; hero[n].width = 50
-	physics.addBody( hero[n], { } )
 	hero[n]:addEventListener( "touch", ability )
 end
---[[local hero2 = myHeroes[1]
-hero2 = display.newImage( hero2.image )
-hero2 = makeHero ( hero2, myHeroes[1] )
-hero2.x =50; hero2.y = lane2
-hero2.height = 50; hero2.width = 50
-physics.addBody( hero2, { } )
-hero2:addEventListener( "touch", ability )
-
-local hero3 = myHeroes[2]
-hero3 = display.newImage( hero3.image )
-hero3 = makeHero ( hero3, myHeroes[2] )
-hero3.x =50; hero3.y = lane3
-hero3.height = 50; hero3.width = 50
-physics.addBody( hero3, { } )
-hero3:addEventListener( "touch", ability )
-
-local hero4 = myHeroes[3]
-hero4 = display.newImage( hero4.image )
-hero4 = makeHero ( hero4, myHeroes[3] )
-hero4.x =50; hero4.y = lane4
-hero4.height = 50; hero4.width = 50
-physics.addBody( hero4,{ } )
-hero4:addEventListener( "touch", ability )
---]]
 
 --creates an enemy
 --John's code
@@ -113,6 +89,7 @@ local function spawnEne( )
 	allEne[#allEne]:setLinearVelocity( allEne[#allEne].speed, 0 )
 	--listen for a draging action
 	allEne[#allEne]:addEventListener( "touch", teleport ) 
+	--allEne[#allEne]:addEventListener( "enterFrame", allEne[#allEne].move )
 	return true
 end
 
@@ -120,10 +97,6 @@ end
 --super janky but just stops veleocity on collision
 local function onCollision( event )
         if ( event.phase == "began" ) then
-				if ( event.object1.class=="hero" or event.object2.class=="hero" ) then
-					event.object1:setLinearVelocity( 0, 0 )
-					event.object2:setLinearVelocity( 0, 0 )
-				end
 				if ( event.object1.class=="shot" ) then
 					event.object1:removeSelf()
 				end
@@ -131,13 +104,13 @@ local function onCollision( event )
 					event.object2:removeSelf()
 				end
 				if ( event.object1.class=="enemy" ) then
-					event.object1.health=event.object1.health-2
+					--event.object1.health=event.object1.health-2
 					if ( event.object1.health <= 0 ) then
 						event.object1:removeSelf()
 					end
 				end
 				if ( event.object2.class=="enemy" ) then
-					event.object2.health=event.object2.health-2
+					--event.object2.health=event.object2.health-2
 					if ( event.object2.health <= 0 ) then
 						event.object2:removeSelf()
 					end
@@ -151,7 +124,7 @@ end
  
 Runtime:addEventListener( "collision", onCollision )
 
-timer.performWithDelay( 300, spawnEne, 0 )
+timer.performWithDelay( 3000, spawnEne, 0 )
 
 local shot = {}
 
@@ -185,5 +158,17 @@ end
 
 -- wait 800 milliseconds, then call start function above
 timer.performWithDelay( 800, start )
+
+local function gameLoop( event )
+	for i = 0,table.maxn( allEne ) do
+		for n = 0,table.maxn( hero ) do
+			if ( hasCollidedCircle( hero[n], allEne[i]) ) then
+				allEne[i]:setLinearVelocity(0, 0)
+			end
+		end
+	end
+   return true
+end
+Runtime:addEventListener( "enterFrame", gameLoop )
 
 --bkg:addEventListener( "touch", spawnEne ) -- touch the screen to create disks
