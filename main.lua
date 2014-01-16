@@ -49,15 +49,21 @@ enemyBBlue.height = 50; enemyBBlue.width = 50
 
 -- Heroes, you can see the class heroes.lua
 local hero = {}
-local hero1 = myHeroes[0]
-hero1 = display.newImage( hero1.image )
-hero1 = makeHero ( hero1, myHeroes[0] )
-hero1.x =50; hero1.y = lane1
-hero1.height = 50; hero1.width = 50
-physics.addBody( hero1, { } )
-hero1:addEventListener( "touch", ability )
-
-local hero2 = myHeroes[1]
+for n=0, 3, 1 do
+	hero[n] = myHeroes[n]
+	hero[n] = display.newImage( hero[n].image )
+	hero[n] = makeHero ( hero[n], myHeroes[0] )
+	hero[n].x =50
+	if (n == 0) then hero[n].y = lane1
+	elseif (n == 1) then hero[n].y = lane2
+	elseif (n == 2) then hero[n].y = lane3
+	elseif (n == 3) then hero[n].y = lane4
+	end
+	hero[n].height = 50; hero[n].width = 50
+	physics.addBody( hero[n], { } )
+	hero[n]:addEventListener( "touch", ability )
+end
+--[[local hero2 = myHeroes[1]
 hero2 = display.newImage( hero2.image )
 hero2 = makeHero ( hero2, myHeroes[1] )
 hero2.x =50; hero2.y = lane2
@@ -80,7 +86,7 @@ hero4.x =50; hero4.y = lane4
 hero4.height = 50; hero4.width = 50
 physics.addBody( hero4,{ } )
 hero4:addEventListener( "touch", ability )
-
+--]]
 
 --creates an enemy
 --John's code
