@@ -17,13 +17,10 @@ lane4 = 280
 
 --The load the other files
 local gameUI = require("move")
-local physics = require("physics")
 require("heroes")
 require("enemies")
 local collision = require("collision")
 --Start the physics engine without any gravity
-physics.start()
-physics.setGravity( 0, 0 )
 
 --load the backgroudn image into bkg and set the size of it to the size of the playable area which is defined in the build file
 local bkg = display.newImage( "back.jpg", centerX, centerY, true )
@@ -84,12 +81,10 @@ local function spawnEne( )
 	allEne[#allEne].x = 430; allEne[#allEne].y = lane
 
 	--apply physics to the enemy; kinematic means that it will only collide with dynamic body types but not other kinematic 
-	physics.addBody( allEne[#allEne], "kinematic", { } )
 	--set the move speed
-	allEne[#allEne]:setLinearVelocity( allEne[#allEne].speed, 0 )
+	transition.to( allEne[#allEne], { time=(7000*allEne[#allEne].speed), x=(50) } )
 	--listen for a draging action
 	allEne[#allEne]:addEventListener( "touch", teleport ) 
-	--allEne[#allEne]:addEventListener( "enterFrame", allEne[#allEne].move )
 	return true
 end
 
@@ -141,12 +136,11 @@ local function shoot()
 		shot[n].x =100; shot[n].y = lane
 		shot[n].height = 10; shot[n].width = 10
 		shot[n].class = "shot"
-		physics.addBody( shot[n], { } )
+		--physics.addBody( shot[n], { } )
 
 		-- remove the "isBullet" setting below to see the brick pass through cans without colliding!
-		shot[n].isBullet = true
-
-		shot[n]:setLinearVelocity(1000, 0)
+		transition.to( shot[n], { time=(300), x=(500) } )
+		--shot[n]:setLinearVelocity(1000, 0)
 		--n = n + 1
 	end
 end
@@ -163,7 +157,7 @@ local function gameLoop( event )
 	for i = 0,table.maxn( allEne ) do
 		for n = 0,table.maxn( hero ) do
 			if ( hasCollidedCircle( hero[n], allEne[i]) ) then
-				allEne[i]:setLinearVelocity(0, 0)
+				transition.cancel( allEne[i] )
 			end
 		end
 	end
