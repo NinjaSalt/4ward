@@ -40,20 +40,16 @@ function enemyLoseHealth( event ) --check for collision event.
         local enemy = event.target
         if event.phase == "began" then
         enemy.health = enemy.health-10 -- change this once strength/weakness is implemented.
-        if (enemy.health <= 0) then
+        end
+		if (enemy.health <= 0) then
                 enemy:removeSelf( )
         end
 end
 
 --create and use enemy
 babyBlue = Enemy.create("BabyBlue", 5, 1, -20, 1, "BombBabyBlue.png")
-<<<<<<< HEAD
 darkBlue = Enemy.create("DarkBlue", 7, 2, -22, 2, "BombDarkBlue.png")
 pinkBomb = Enemy.create("PinkBomb", 5, 2, -25, 3, "BombPink.png")
-=======
-darkBlue = Enemy.create("DarkBlue", 7, 2, -25, 2, "BombDarkBlue.png")
-pinkBomb = Enemy.create("PinkBomb", 5, 2, -30, 3, "BombPink.png")
->>>>>>> origin/enemy
 greenBomb = Enemy.create("GreenBomb", 7, 1, -18, 3, "BombGreen.png")
 myEnemies = {}
 myEnemies[0] = babyBlue
