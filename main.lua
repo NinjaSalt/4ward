@@ -19,6 +19,7 @@ lane4 = 280
 local gameUI = require("move")
 local physics = require("physics")
 require("heroes")
+require("enemies")
 --Start the physics engine without any gravity
 physics.start()
 physics.setGravity( 0, 0 )
@@ -27,9 +28,24 @@ physics.setGravity( 0, 0 )
 local bkg = display.newImage( "back.jpg", centerX, centerY, true )
 bkg.height=display.contentHeight; bkg.width=display.contentWidth
 
+--calls the teleportation function located in move.lua
+local function teleport( event )
+	return move.teleport( event )
+	
+end
+
 -- The enemy "class" eneGfx is an array of images and allEne is basically array of all the enemies
 local eneGfx = { "BombBabyBlue.png", "BombDarkBlue.png", "BombPink.png", "BombGreen.png" }
 local allEne = {} -- empty table for storing objects
+
+-- Enemies (testing if this works)
+local enemyBBlue = myEnemies[0]
+--enemyBBlue = display.newImage( enemyBBlue.image )
+enemyBBlue = makeEnemy ( enemyBBlue, myEnemies[0] )
+enemyBBlue.height = 50; enemyBBlue.width = 50
+--physics.addBody( enemyBBlue, "kinematic", { } )
+--enemyBBlue:setLinearVelocity( enemyBBlue.speed, 0 )
+--enemyBBlue:addEventListener( "touch", teleport ) 
 
 -- Heroes, you can see the class heroes.lua
 local hero1 = myHeroes[0]
@@ -64,13 +80,9 @@ hero4.height = 50; hero4.width = 50
 physics.addBody( hero4,{ } )
 hero4:addEventListener( "touch", ability )
 
---calls the teleportation function located in move.lua
-local function teleport( event )
-	return move.teleport( event )
-	
-end
 
 --creates an enemy
+--John's code
 local function spawnEne( )
 	local lane = lane1
 	--set teh lane it will spawn in
@@ -90,6 +102,7 @@ local function spawnEne( )
 	enemy.x = 430; enemy.y = lane
 	enemy.health=5
 	enemy.class="enemy"
+
 	--apply physics to the enemy; kinematic means that it will only collide with dynamic body types but not other kinematic 
 	physics.addBody( enemy, "kinematic", { } )
 	--set the move speed
@@ -97,6 +110,98 @@ local function spawnEne( )
 	--listen for a draging action
 	enemy:addEventListener( "touch", teleport ) 
 	return true
+end
+
+local function spawnbblue( )
+	local lane = lane1
+	--set teh lane it will spawn in
+	local randomPos = math.random(1, 4)
+	if (randomPos == 1) then lane = lane1
+	elseif (randomPos == 2) then lane = lane2
+	elseif (randomPos == 3) then lane = lane3
+	elseif (randomPos == 4) then lane = lane4
+	end
+
+	local enemy = myEnemies[0]
+	enemy = display.newImage(enemy.image)
+	enemy = makeEnemy(enemy, myEnemies[0])
+	--allEne[#allEne + 1] = display.newImage( enemy.image )
+	enemy.height = 50; enemy.width = 50
+	enemy.x = 430; enemy.y = lane
+	
+	physics.addBody( enemy, "kinematic", { } )
+	enemy:setLinearVelocity( enemy.speed, 0 )
+	enemy:addEventListener( "touch", teleport )
+	return enemy
+end
+
+local function spawndblue( )
+	local lane = lane1
+	--set teh lane it will spawn in
+	local randomPos = math.random(1, 4)
+	if (randomPos == 1) then lane = lane1
+	elseif (randomPos == 2) then lane = lane2
+	elseif (randomPos == 3) then lane = lane3
+	elseif (randomPos == 4) then lane = lane4
+	end
+
+	local enemy = myEnemies[1]
+	enemy = display.newImage(enemy.image)
+	enemy = makeEnemy(enemy, myEnemies[1])
+	--allEne[#allEne + 1] = display.newImage( enemy.image )
+	enemy.height = 50; enemy.width = 50
+	enemy.x = 430; enemy.y = lane
+	
+	physics.addBody( enemy, "kinematic", { } )
+	enemy:setLinearVelocity( enemy.speed, 0 )
+	enemy:addEventListener( "touch", teleport )
+	return enemy
+end
+
+local function spawnpink( )
+	local lane = lane1
+	--set teh lane it will spawn in
+	local randomPos = math.random(1, 4)
+	if (randomPos == 1) then lane = lane1
+	elseif (randomPos == 2) then lane = lane2
+	elseif (randomPos == 3) then lane = lane3
+	elseif (randomPos == 4) then lane = lane4
+	end
+
+	local enemy = myEnemies[2]
+	enemy = display.newImage(enemy.image)
+	enemy = makeEnemy(enemy, myEnemies[2])
+	--allEne[#allEne + 1] = display.newImage( enemy.image )
+	enemy.height = 50; enemy.width = 50
+	enemy.x = 430; enemy.y = lane
+	
+	physics.addBody( enemy, "kinematic", { } )
+	enemy:setLinearVelocity( enemy.speed, 0 )
+	enemy:addEventListener( "touch", teleport )
+	return enemy
+end
+
+local function spawngreen( )
+	local lane = lane1
+	--set teh lane it will spawn in
+	local randomPos = math.random(1, 4)
+	if (randomPos == 1) then lane = lane1
+	elseif (randomPos == 2) then lane = lane2
+	elseif (randomPos == 3) then lane = lane3
+	elseif (randomPos == 4) then lane = lane4
+	end
+
+	local enemy = myEnemies[3]
+	enemy = display.newImage(enemy.image)
+	enemy = makeEnemy(enemy, myEnemies[3])
+	--allEne[#allEne + 1] = display.newImage( enemy.image )
+	enemy.height = 50; enemy.width = 50
+	enemy.x = 430; enemy.y = lane
+	
+	physics.addBody( enemy, "kinematic", { } )
+	enemy:setLinearVelocity( enemy.speed, 0 )
+	enemy:addEventListener( "touch", teleport )
+	return enemy
 end
 
 --super janky but just stops veleocity on collision
@@ -134,7 +239,24 @@ end
 Runtime:addEventListener( "collision", onCollision )
 
 --spawn enemies every 3 seconds
-timer.performWithDelay( 3000, spawnEne, 0 )
+--still need to fix this :(
+for random = 0, 4, 1 do
+if (random == 1) then
+	timer.performWithDelay( 3000, spawnbblue, 0 )
+end
+if (random == 2) then
+	timer.performWithDelay( 3000, spawndblue, 0 )
+end
+if (random == 3) then
+	timer.performWithDelay( 3000, spawnpink, 0 )
+end
+if (random == 4) then
+	timer.performWithDelay( 3000, spawngreen, 0 )
+end
+end
+
+--timer.performWithDelay( 3000, spawnEne, 0 )
+
 
 
 local shot = {}
