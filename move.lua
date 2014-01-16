@@ -8,6 +8,7 @@ function teleport( event, params )
 	local phase = event.phase
 	local stage = display.getCurrentStage()
 	local markY = body.y
+	local oneLaneAtATime = true
 	
 	if "began" == phase then
 		stage:setFocus( body, event.id )
@@ -20,15 +21,29 @@ function teleport( event, params )
 		elseif "ended" == phase or "cancelled" == phase then
 			stage:setFocus( body, nil )
 			body.isFocus = false
-			--if where the finger eneded is less than where the enemy began move it up if it not already in lane 1
-			if myY<markY then
-				if body.y ~= lane1 then
-					body.y=body.y-(lane2-lane1)
+			if oneLaneAtATime == true then
+				--if where the finger ended is less than where the enemy began move it up if it not already in lane 1
+				--if myY ~= nil and myY<markY then
+				if event.y - event.yStart < -7 then
+					if body.y ~= lane1 then
+						body.y=body.y-80
+					end
+				--do the same as before but moving down
+				--elseif myY ~= nil and myY>markY then
+				elseif event.y - event.yStart > 7 then
+					if body.y ~= lane4 then
+					body.y=body.y+80
+					end
 				end
-			--do the same as before but moving down
-			elseif myY>markY then
-				if body.y ~= lane4 then
-					body.y=body.y+(lane2-lane1)
+			elseif oneLaneAtATime == false then
+				if event.y < 80 then
+					body.y = lane1
+				elseif event.y < 160 then
+					body.y = lane2
+				elseif event.y < 240 then
+					body.y = lane3
+				else --if event.y < 320 then
+					body.y = lane4
 				end
 			end
 		end
