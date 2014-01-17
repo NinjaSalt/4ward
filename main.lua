@@ -32,6 +32,10 @@ local function teleport( event )
 	
 end
 
+local function moveSpeed( x, speed )
+	local timeComplete = (7000*((x-50)/380))*speed
+	return timeComplete
+end
 -- The enemy "class" eneGfx is an array of images and allEne is basically array of all the enemies
 local eneGfx = { "BombBabyBlue.png", "BombDarkBlue.png", "BombPink.png", "BombGreen.png" }
 local allEne = {} -- empty table for storing objects
@@ -82,7 +86,7 @@ local function spawnEne( )
 
 	--apply physics to the enemy; kinematic means that it will only collide with dynamic body types but not other kinematic 
 	--set the move speed
-	transition.to( allEne[#allEne], { time=(7000*allEne[#allEne].speed), x=(50) } )
+	transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed)), x=(50) } )
 	--listen for a draging action
 	allEne[#allEne]:addEventListener( "touch", teleport ) 
 	return true
