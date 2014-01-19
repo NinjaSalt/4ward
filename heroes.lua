@@ -9,6 +9,7 @@ function Hero.create(health, attack, image, name)
    hero.image = image
    hero.name = name
    hero.class = "hero"
+   hero.abilityUsed = false
    return hero
 end
 
@@ -19,6 +20,21 @@ function ability( event )
 	local hero = event.target
 	if event.phase == "began" then
 		print ( hero.name )
+		if (hero.abilityUsed == false) then
+			print(hero.abilityUsed )
+			print("ability used!")
+			hero.abilityUsed = true
+		elseif (hero.abilityUsed == true) then
+			print(hero.abilityUsed)
+			print("cooling down")
+			hero.abilityUsed = false
+		end
+	end
+end
+function cooldown( event )
+	local hero = event.target
+	if event.phase == "began" then
+		print ( "cooling down" )
 	end
 end
 function makeHero( newH, oldH )
@@ -27,6 +43,7 @@ function makeHero( newH, oldH )
 	newH.image = oldH.image
 	newH.name = oldH.name
 	newH.class = oldH.class
+	newH.abilityUsed = oldH.abilityUsed
 	return newH
 end
 

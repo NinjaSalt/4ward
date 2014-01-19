@@ -36,18 +36,18 @@ local function moveSpeed( x, speed )
 	local timeComplete = (7000*((x-50)/380))*speed
 	return timeComplete
 end
+
+local function heroTouch(hero)
+	if (hero.abilityUsed == false) then
+		hero:addEventListener( "touch", ability )
+	elseif (hero.abilityUsed == true ) then
+		hero:addEventListener( "touch", cooldown )
+	end
+end
+
 -- The enemy "class" eneGfx is an array of images and allEne is basically array of all the enemies
 local eneGfx = { "BombBabyBlue.png", "BombDarkBlue.png", "BombPink.png", "BombGreen.png" }
 local allEne = {} -- empty table for storing objects
-
--- Enemies (testing if this works)
-local enemyBBlue = myEnemies[0]
---enemyBBlue = display.newImage( enemyBBlue.image )
-enemyBBlue = makeEnemy ( enemyBBlue, myEnemies[0] )
-enemyBBlue.height = 50; enemyBBlue.width = 50
---physics.addBody( enemyBBlue, "kinematic", { } )
---enemyBBlue:setLinearVelocity( enemyBBlue.speed, 0 )
---enemyBBlue:addEventListener( "touch", teleport ) 
 
 -- Heroes, you can see the class heroes.lua
 local hero = {}
@@ -55,6 +55,9 @@ for n=0, 3, 1 do
 	hero[n] = myHeroes[n]
 	hero[n] = display.newImage( hero[n].image )
 	hero[n] = makeHero ( hero[n], myHeroes[0] )
+	hero[n].name = myHeroes[n].name
+	hero[n].health = myHeroes[n].health
+	hero[n].abilityUsed = myHeroes[n].abilityUsed
 	hero[n].x =50
 	if (n == 0) then hero[n].y = lane1
 	elseif (n == 1) then hero[n].y = lane2
@@ -84,7 +87,6 @@ local function spawnEne( )
 	allEne[#allEne].height = 50; allEne[#allEne].width = 50
 	allEne[#allEne].x = 430; allEne[#allEne].y = lane
 
-	--apply physics to the enemy; kinematic means that it will only collide with dynamic body types but not other kinematic 
 	--set the move speed
 	transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed)), x=(50) } )
 	--listen for a draging action
