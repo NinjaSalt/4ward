@@ -16,6 +16,7 @@ end
 function Hero:upgradeH( amount )
    self.health = self.health + amount
 end
+
 function ability( event )
 	local hero = event.target
 	if event.phase == "began" then
@@ -31,12 +32,14 @@ function ability( event )
 		end
 	end
 end
+
 function cooldown( event )
 	local hero = event.target
 	if event.phase == "began" then
 		print ( "cooling down" )
 	end
 end
+
 function makeHero( newH, oldH )
 	newH.health = oldH.health      
 	newH.attack = oldH.attack

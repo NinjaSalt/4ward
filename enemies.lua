@@ -1,7 +1,7 @@
 Enemy = {}
 Enemy.__index = Enemy
 
-function Enemy.create(name, health, attack, speed, defense, image)
+function Enemy.create(name, health, attack, speed, defense, image, maxHealth)
         local enemy = {}                                --new object
         setmetatable( enemy, Enemy )        --make Enemy
         enemy.name = name                                 --initialize object
@@ -10,6 +10,7 @@ function Enemy.create(name, health, attack, speed, defense, image)
         enemy.speed = speed
         enemy.defense = defense
         enemy.image = image
+        enemy.maxHealth = maxHealth
         enemy.class = "enemy"
         return enemy
 end
@@ -22,6 +23,7 @@ function makeEnemy(newE, oldE)
         newE.defense = oldE.defense
         newE.image = oldE.image
         newE.class = oldE.class
+        newE.maxHealth= oldE.maxHealth
         return newE
 end
 
@@ -47,10 +49,10 @@ function enemyLoseHealth( event ) --check for collision event.
 end
 
 --create and use enemy
-babyBlue = Enemy.create("BabyBlue", 5, 1, 1, 1, "BombBabyBlue.png")
-darkBlue = Enemy.create("DarkBlue", 7, 2, .9, 2, "BombDarkBlue.png")
-pinkBomb = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "BombPink.png")
-greenBomb = Enemy.create("GreenBomb", 7, 1, .85, 3, "BombGreen.png")
+babyBlue = Enemy.create("BabyBlue", 5, 1, 1, 1, "BombBabyBlue.png", 5)
+darkBlue = Enemy.create("DarkBlue", 7, 2, .9, 2, "BombDarkBlue.png", 7)
+pinkBomb = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "BombPink.png", 5)
+greenBomb = Enemy.create("GreenBomb", 7, 1, .85, 3, "BombGreen.png", 7)
 myEnemies = {}
 myEnemies[0] = babyBlue
 myEnemies[1] = darkBlue

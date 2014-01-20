@@ -48,6 +48,7 @@ end
 -- The enemy "class" eneGfx is an array of images and allEne is basically array of all the enemies
 local eneGfx = { "BombBabyBlue.png", "BombDarkBlue.png", "BombPink.png", "BombGreen.png" }
 local allEne = {} -- empty table for storing objects
+allEnemHealth = {}
 
 -- Heroes, you can see the class heroes.lua
 local hero = {}
@@ -83,14 +84,32 @@ local function spawnEne( )
 	allEne[#allEne + 1] = myEnemies[randomEne]
 	allEne[#allEne] = display.newImage(allEne[#allEne].image)
 	allEne[#allEne] = makeEnemy(allEne[#allEne], myEnemies[randomEne])
+
+	-- add health bars to enemies.
+	allEnemHealth[#allEne] = #allEne
+	allEnemHealth[#allEne] = display.newImage( "enemhealth.jpg" )
+	--print ( #allEne )
+	--print ( #allEnemHealth )
+	allEnemHealth[#allEne].height = 10 
+	print (allEne[#allEne].health)
+	print (allEne[#allEne].maxHealth)
+	allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
+	allEnemHealth[#allEne].x = 430; allEnemHealth[#allEne].y = lane - 25
+	--allEnemHealth[#allEne].
+	--end health bar.
+
 	--define the enemy
 	allEne[#allEne].height = 50; allEne[#allEne].width = 50
 	allEne[#allEne].x = 430; allEne[#allEne].y = lane
 
-	--set the move speed
+	--set the move speedallEne
 	transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed)), x=(50) } )
+	
+	--move health bars along with enemies
+	transition.to( allEnemHealth[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed)), x=(50) } )
 	--listen for a draging action
 	allEne[#allEne]:addEventListener( "touch", teleport ) 
+
 	return true
 end
 
@@ -156,6 +175,13 @@ local function start()
 	timer.performWithDelay( 2000, shoot, 0 )
 end
 
+local function updateHealth()
+
+	for i=1, table.maxn( allEne ) do
+		allEnemHealth[i].width = allEne[i].health/allEne[i].maxHealth * 50
+	end
+end
+
 -- wait 800 milliseconds, then call start function above
 timer.performWithDelay( 800, start )
 
@@ -167,8 +193,10 @@ local function gameLoop( event )
 			end
 		end
 	end
+
    return true
 end
-Runtime:addEventListener( "enterFrame", gameLoop )
 
+Runtime:addEventListener( "enterFrame", gameLoop )
+Runtime:addEventListener( "enterFrame", updateHealth )
 --bkg:addEventListener( "touch", spawnEne ) -- touch the screen to create disks
