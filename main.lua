@@ -176,9 +176,9 @@ local function start()
 end
 
 local function updateHealth()
-
 	for i=1, table.maxn( allEne ) do
 		allEnemHealth[i].width = allEne[i].health/allEne[i].maxHealth * 50
+		allEnemHealth[i].y = allEne[i].y - 25
 	end
 end
 
