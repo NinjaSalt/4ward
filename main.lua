@@ -29,20 +29,11 @@ bkg.height=display.contentHeight; bkg.width=display.contentWidth
 --calls the teleportation function located in move.lua
 local function teleport( event )
 	return move.teleport( event )
-	
 end
 
 local function moveSpeed( x, speed )
 	local timeComplete = (7000*((x-50)/380))*speed
 	return timeComplete
-end
-
-local function heroTouch(hero)
-	if (hero.abilityUsed == false) then
-		hero:addEventListener( "touch", ability )
-	elseif (hero.abilityUsed == true ) then
-		hero:addEventListener( "touch", cooldown )
-	end
 end
 
 -- The enemy "class" eneGfx is an array of images and allEne is basically array of all the enemies

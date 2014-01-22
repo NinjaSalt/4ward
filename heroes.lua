@@ -19,24 +19,36 @@ end
 
 function ability( event )
 	local hero = event.target
+	local heroX = event.x
+	local phase = event.phase
+	local stage = display.getCurrentStage()
+	local markY = hero.y
 	if event.phase == "began" then
-		print ( hero.name )
-		if (hero.abilityUsed == false) then
-			print(hero.abilityUsed )
-			print("ability used!")
-			hero.abilityUsed = true
-		elseif (hero.abilityUsed == true) then
-			print(hero.abilityUsed)
-			print("cooling down")
-			hero.abilityUsed = false
+		stage:setFocus( hero, event.id )
+		hero.isFocus = true
+	elseif hero.isFocus then
+		if "ended" == phase or "cancelled" == phase then
+			stage:setFocus( hero, nil )
+			hero.isFocus = false
+			--checks if the touch moved either left or right
+			if (event.x - event.xStart ~= 0 and event.x - event.xStart < -7) then
+				print("left "..hero.name)
+			elseif (event.x - event.xStart ~= 0 and event.x - event.xStart > 7) then
+				print("right "..hero.name)
+			--checks if the touch didn't move from original position. Meaning that it was a tap
+			elseif (event.x - event.xStart == 0) then
+				print ( hero.name )
+				if (hero.abilityUsed == false) then
+					print(hero.abilityUsed )
+					print("ability used!")
+					hero.abilityUsed = true
+				elseif (hero.abilityUsed == true) then
+					print(hero.abilityUsed)
+					print("cooling down")
+					hero.abilityUsed = false
+				end
+			end
 		end
-	end
-end
-
-function cooldown( event )
-	local hero = event.target
-	if event.phase == "began" then
-		print ( "cooling down" )
 	end
 end
 
