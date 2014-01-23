@@ -66,9 +66,9 @@ end
 lapis = Hero.create(1000, 1, "siren.png", "lapis")
 norienne = Hero.create(1000, 1, "archer.png", "norienne")
 sun = Hero.create(1000, 1, "monkeyking.png", "sun")
-joe = Hero.create(1000, 1, "penguinknight1.png", "joe")
+--joe = Hero.create(1000, 1, "penguinknight1.png", "joe")
 myHeroes = {}
 myHeroes[0]=lapis
 myHeroes[1]=norienne
 myHeroes[2]=sun
-myHeroes[3]=joe
+--myHeroes[3]=joe

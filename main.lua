@@ -10,10 +10,9 @@ local _W = display.contentWidth
 local _H = display.contentHeight
 
 --The y location of the four lanes
-lane1 = 40
-lane2 = 120
-lane3 = 200
-lane4 = 280
+lane1 = 80
+lane2 = 160
+lane3 = 240
 
 --The load the other files
 local gameUI = require("move")
@@ -47,7 +46,7 @@ allEnemHealth = {}
 
 -- Heroes, you can see the class heroes.lua
 local hero = {}
-for n=0, 3, 1 do
+for n=0, 2, 1 do
 	hero[n] = myHeroes[n]
 	hero[n] = display.newImage( hero[n].image )
 	hero[n] = makeHero ( hero[n], myHeroes[0] )
@@ -58,7 +57,7 @@ for n=0, 3, 1 do
 	if (n == 0) then hero[n].y = lane1
 	elseif (n == 1) then hero[n].y = lane2
 	elseif (n == 2) then hero[n].y = lane3
-	elseif (n == 3) then hero[n].y = lane4
+	--elseif (n == 3) then hero[n].y = lane4
 	end
 	hero[n].height = 50; hero[n].width = 50
 	hero[n]:addEventListener( "touch", ability )
@@ -69,11 +68,11 @@ end
 local function spawnEne( )
 	local lane = lane1
 	--set teh lane it will spawn in
-	local randomPos = math.random(1, 4)
+	local randomPos = math.random(1, 3)
 	if (randomPos == 1) then lane = lane1
 	elseif (randomPos == 2) then lane = lane2
 	elseif (randomPos == 3) then lane = lane3
-	elseif (randomPos == 4) then lane = lane4
+	--elseif (randomPos == 4) then lane = lane4
 	end
 	local randomEne = math.random(0, 3)
 	allEne[#allEne + 1] = myEnemies[randomEne]
@@ -159,7 +158,7 @@ local function shoot()
 		if (n == 1) then lane = lane1
 		elseif (n == 2) then lane = lane2
 		elseif (n == 3) then lane = lane3
-		elseif (n == 4) then lane = lane4
+		--elseif (n == 4) then lane = lane4
 		end
 		shot[n] = display.newImage( "icon.png")
 		shot[n].x =100; shot[n].y = lane
