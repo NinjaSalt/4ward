@@ -193,7 +193,11 @@ local function gameLoop( event )
 	for i = 0,table.maxn( allEne ) do
 		for n = 0,table.maxn( hero ) do
 			if ( hasCollidedCircle( hero[n], allEne[i]) ) then
-				transition.cancel( allEne[i] )
+				allEne[i]:removeSelf()
+				table.remove(allEne, i)
+				enemiesInQueue = enemiesInQueue -1
+				allEnemHealth[i]:removeSelf()
+				table.remove(allEnemHealth, i)
 			end
 		end
 	end
