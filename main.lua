@@ -12,6 +12,9 @@ local _H = display.contentHeight
 allEne = {} -- empty table for storing objects
 allEnemHealth = {}
 
+-- Hero Attack Variables
+local bullet_speed = 50 
+local bullet_array = {}		-- Make an array to hold the bullets
 
 --The y location of the three lanes
 lane1 = 80
@@ -55,6 +58,26 @@ for n=0, 2, 1 do
 	end
 	hero[n].height = 50; hero[n].width = 50
 	hero[n]:addEventListener( "touch", ability )
+end
+
+-- remove bullet
+local function remove_bullet( bullet )
+	local index = table.indexOf( bullet_array, bullet )
+	transition.cancel( bullet.transition )
+	table.remove( bullet_array, index )
+	display.remove( bullet )
+end
+
+-- make bullet
+local function make_bullet( x, y )
+	local bullet = display.newCircle( 0, 0, 5 )
+	bullet:setFillColor( 0, 0, 0 )
+	bullet.x = x
+	bullet.y = y
+	table.insert( bullet_array, bullet)
+
+	local bt = x * bullet_speed
+	bullet.transition = transition.to( bullet, {x=500, time=bt, onComplete=remove_bullet} )
 end
 
 local function moveSpeed( x, speed, lane )
@@ -157,34 +180,13 @@ Runtime:addEventListener( "collision", onCollision )
 enemiesInQueue = 20
 timer.performWithDelay( 3000, spawnEne, enemiesInQueue )
 
-local shot = {}
-
-
-local function shoot()
-	local lane = 1
-	for  n=1, 4, 1 do
-		if (n == 1) then lane = lane1
-		elseif (n == 2) then lane = lane2
-		elseif (n == 3) then lane = lane3
-		--elseif (n == 4) then lane = lane4
-		end
-		shot[n] = display.newImage( "icon.png")
-		shot[n].x =100; shot[n].y = lane
-		shot[n].height = 10; shot[n].width = 10
-		shot[n].class = "shot"
-		--physics.addBody( shot[n], { } )
-
-		-- remove the "isBullet" setting below to see the brick pass through cans without colliding!
-		transition.to( shot[n], { time=(300), x=(500) } )
-		--shot[n]:setLinearVelocity(1000, 0)
-		--n = n + 1
-	end
+local function HeroNormalAttacks()
+	-- parameters for ---------------------> make_bullet (x,y, hero attack)
+	timer.performWithDelay( 2000, function() make_bullet(hero[0].x, hero[0].y, hero[0].attack) end, 0 )
+	timer.performWithDelay( 2000, function() make_bullet(hero[1].x, hero[1].y, hero[1].attack) end, 0 )
+	timer.performWithDelay( 2000, function() make_bullet(hero[2].x, hero[2].y, hero[2].attack) end, 0 )
 end
 
-local function start()
-	-- throw 3 shot
-	timer.performWithDelay( 2000, shoot, 0 )
-end
 
 local function updateHealth()
 	for i=1, table.maxn( allEne ) do
@@ -194,7 +196,7 @@ local function updateHealth()
 end
 
 -- wait 800 milliseconds, then call start function above
-timer.performWithDelay( 800, start )
+timer.performWithDelay( 800, HeroNormalAttacks )
 
 local function gameLoop( event )
 	for i = 0,table.maxn( allEne ) do
