@@ -9,7 +9,11 @@ local centerY = display.contentCenterY
 local _W = display.contentWidth
 local _H = display.contentHeight
 
---The y location of the four lanes
+allEne = {} -- empty table for storing objects
+allEnemHealth = {}
+
+
+--The y location of the three lanes
 lane1 = 80
 lane2 = 160
 lane3 = 240
@@ -34,16 +38,6 @@ local function teleport( event )
 	return move.teleport( event )
 end
 
-local function moveSpeed( x, speed )
-	local timeComplete = (7000*((x-50)/380))*speed
-	return timeComplete
-end
-
--- The enemy "class" eneGfx is an array of images and allEne is basically array of all the enemies
-local eneGfx = { "BombBabyBlue.png", "BombDarkBlue.png", "BombPink.png", "BombGreen.png" }
-local allEne = {} -- empty table for storing objects
-allEnemHealth = {}
-
 -- Heroes, you can see the class heroes.lua
 local hero = {}
 for n=0, 2, 1 do
@@ -61,6 +55,20 @@ for n=0, 2, 1 do
 	end
 	hero[n].height = 50; hero[n].width = 50
 	hero[n]:addEventListener( "touch", ability )
+end
+
+local function moveSpeed( x, speed, lane )
+	local laneSpeed
+	for i = 0,table.maxn( hero ) do
+		if ( hero[i].y == lane ) then
+			if (hero[i].laneSpeed == 1) then speedMod = .5
+			elseif (hero[i].laneSpeed == 2) then speedMod = 1
+			elseif (hero[i].laneSpeed == 3) then speedMod = 2
+			end
+		end
+	end
+	local timeComplete = ((7000*((x-50)/380))*speed)/speedMod
+	return timeComplete
 end
 
 --creates an enemy
@@ -97,10 +105,10 @@ local function spawnEne( )
 	allEne[#allEne].x = 430; allEne[#allEne].y = lane
 
 	--set the move speedallEne
-	transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed)), x=(50) } )
+	transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50) } )
 	
 	--move health bars along with enemies
-	transition.to( allEnemHealth[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed)), x=(50) } )
+	transition.to( allEnemHealth[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50) } )
 	--listen for a draging action
 	allEne[#allEne]:addEventListener( "touch", teleport ) 
 	enemiesOnScreen = enemiesOnScreen + 1  --added to test for victory condition -Ryan
@@ -146,7 +154,7 @@ end
  
 Runtime:addEventListener( "collision", onCollision )
 
-enemiesInQueue = 5
+enemiesInQueue = 20
 timer.performWithDelay( 3000, spawnEne, enemiesInQueue )
 
 local shot = {}

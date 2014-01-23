@@ -9,6 +9,7 @@ function Hero.create(health, attack, image, name)
    hero.image = image
    hero.name = name
    hero.class = "hero"
+   hero.laneSpeed = 2
    hero.abilityUsed = false
    return hero
 end
@@ -32,8 +33,14 @@ function ability( event )
 			hero.isFocus = false
 			--checks if the touch moved either left or right
 			if (event.x - event.xStart ~= 0 and event.x - event.xStart < -7) then
+				if ( hero.laneSpeed ~=1 ) then
+					hero.laneSpeed = hero.laneSpeed-1
+				end
 				print("left "..hero.name)
 			elseif (event.x - event.xStart ~= 0 and event.x - event.xStart > 7) then
+				if ( hero.laneSpeed ~=3 ) then
+					hero.laneSpeed = hero.laneSpeed+1
+				end
 				print("right "..hero.name)
 			--checks if the touch didn't move from original position. Meaning that it was a tap
 			elseif (event.x - event.xStart == 0) then
@@ -59,6 +66,7 @@ function makeHero( newH, oldH )
 	newH.name = oldH.name
 	newH.class = oldH.class
 	newH.abilityUsed = oldH.abilityUsed
+	newH.laneSpeed = oldH.laneSpeed
 	return newH
 end
 
