@@ -26,6 +26,10 @@ local collision = require("collision")
 local bkg = display.newImage( "back.jpg", centerX, centerY, true )
 bkg.height=display.contentHeight; bkg.width=display.contentWidth
 
+--variables to keep track of enemies
+local enemiesOnScreen = 0
+local enemiesInQueue = 0
+
 --calls the teleportation function located in move.lua
 local function teleport( event )
 	return move.teleport( event )
@@ -100,7 +104,7 @@ local function spawnEne( )
 	transition.to( allEnemHealth[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed)), x=(50) } )
 	--listen for a draging action
 	allEne[#allEne]:addEventListener( "touch", teleport ) 
-
+	enemiesOnScreen = enemiesOnScreen + 1  --added to test for victory condition -Ryan
 	return true
 end
 
@@ -118,12 +122,20 @@ local function onCollision( event )
 					--event.object1.health=event.object1.health-2
 					if ( event.object1.health <= 0 ) then
 						event.object1:removeSelf()
+						enemiesOnScreen = enemiesOnScreen - 1  --added to detect victory -Ryan
+						if enemiesOnScreen == 0 and enemiesInQueue == 0 then
+							print("You win!")
+						end	
 					end
 				end
 				if ( event.object2.class=="enemy" ) then
 					--event.object2.health=event.object2.health-2
 					if ( event.object2.health <= 0 ) then
 						event.object2:removeSelf()
+						enemiesOnScreen = enemiesOnScreen - 1  --added to detect victory -Ryan
+						if enemiesOnScreen == 0 and enemiesInQueue == 0 then
+							print("You win!")
+						end	
 					end
 				end
         elseif ( event.phase == "ended" ) then
@@ -135,7 +147,8 @@ end
  
 Runtime:addEventListener( "collision", onCollision )
 
-timer.performWithDelay( 3000, spawnEne, 0 )
+enemiesInQueue = 5
+timer.performWithDelay( 3000, spawnEne, enemiesInQueue )
 
 local shot = {}
 
