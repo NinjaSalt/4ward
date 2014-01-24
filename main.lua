@@ -80,7 +80,7 @@ local function make_bullet( x, y , attack)
 	bullet.transition = transition.to( bullet, {x=500, time=bt, onComplete=remove_bullet} )
 end
 
-local function moveSpeed( x, speed, lane )
+function moveSpeed( x, speed, lane )
 	local laneSpeed
 	for i = 0,table.maxn( hero ) do
 		if ( hero[i].y == lane ) then
@@ -131,7 +131,7 @@ local function spawnEne( )
 	transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50) } )
 	
 	--move health bars along with enemies
-	transition.to( allEnemHealth[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50) } )
+	--transition.to( allEnemHealth[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50) } )
 	--listen for a draging action
 	allEne[#allEne]:addEventListener( "touch", teleport ) 
 	enemiesOnScreen = enemiesOnScreen + 1  --added to test for victory condition -Ryan
@@ -187,11 +187,20 @@ local function HeroNormalAttacks()
 	timer.performWithDelay( 2000, function() make_bullet(hero[2].x, hero[2].y, hero[2].attack) end, 0 )
 end
 
+function updateMoveSpeed (hero)
+	for i = 1,table.maxn( allEne ) do
+		if (allEne[i].y==hero.y) then
+			transition.cancel(allEne[i])
+			transition.to( allEne[i], { time=(moveSpeed(allEne[i].x, allEne[i].speed, allEne[i].y)), x=(50) } )
+		end
+	end
+end
 
 local function updateHealth()
 	for i=1, table.maxn( allEne ) do
 		allEnemHealth[i].width = allEne[i].health/allEne[i].maxHealth * 50
 		allEnemHealth[i].y = allEne[i].y - 25
+		allEnemHealth[i].x = allEne[i].x
 	end
 end
 

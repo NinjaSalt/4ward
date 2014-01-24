@@ -46,6 +46,9 @@ function teleport( event, params )
 					body.y = lane4
 				end
 			end
+			transition.cancel(body)
+			transition.to( body, { time=(moveSpeed(body.x, body.speed, body.y)), x=(50) } )
+
 		end
 	end
 

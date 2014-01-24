@@ -35,11 +35,13 @@ function ability( event )
 			if (event.x - event.xStart ~= 0 and event.x - event.xStart < -7) then
 				if ( hero.laneSpeed ~=1 ) then
 					hero.laneSpeed = hero.laneSpeed-1
+					updateMoveSpeed(hero)
 				end
 				print("left "..hero.name)
 			elseif (event.x - event.xStart ~= 0 and event.x - event.xStart > 7) then
 				if ( hero.laneSpeed ~=3 ) then
 					hero.laneSpeed = hero.laneSpeed+1
+					updateMoveSpeed(hero)
 				end
 				print("right "..hero.name)
 			--checks if the touch didn't move from original position. Meaning that it was a tap
