@@ -69,13 +69,13 @@ local function remove_bullet( bullet )
 end
 
 -- make bullet
-local function make_bullet( x, y )
+local function make_bullet( x, y , attack)
 	local bullet = display.newCircle( 0, 0, 5 )
 	bullet:setFillColor( 0, 0, 0 )
 	bullet.x = x
 	bullet.y = y
 	table.insert( bullet_array, bullet)
-
+	bullet.attack = attack
 	local bt = x * bullet_speed
 	bullet.transition = transition.to( bullet, {x=500, time=bt, onComplete=remove_bullet} )
 end
@@ -211,6 +211,22 @@ local function gameLoop( event )
 		end
 	end
 
+	for i = 0,table.maxn( allEne ) do
+		for n = 0,table.maxn( bullet_array  ) do
+			if ( hasCollidedCircle( bullet_array [n], allEne[i]) ) then
+				allEne[i].health=allEne[i].health-bullet_array[n].attack
+				if ( allEne[i].health <= 0 ) then
+					allEne[i]:removeSelf()
+					table.remove(allEne, i)
+					enemiesInQueue = enemiesInQueue -1
+					allEnemHealth[i]:removeSelf()
+					table.remove(allEnemHealth, i)
+				end
+				remove_bullet(bullet_array[n])
+			end
+		end
+	end
+	
    return true
 end
 
