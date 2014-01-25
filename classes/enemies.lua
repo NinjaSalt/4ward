@@ -15,18 +15,6 @@ function Enemy.create(name, health, attack, speed, defense, image, maxHealth)
         return enemy
 end
 
-function makeEnemy(newE, oldE)
-        newE.name = oldE.name
-        newE.health = oldE.health
-        newE.attack = oldE.attack
-        newE.speed = oldE.speed
-        newE.defense = oldE.defense
-        newE.image = oldE.image
-        newE.class = oldE.class
-        newE.maxHealth= oldE.maxHealth
-        return newE
-end
-
 -- "create functions for enemies: dying, abilties"
 
 --ability, just a very temporary placeholder until enemy abilties are decided.
@@ -48,11 +36,23 @@ function enemyLoseHealth( event ) --check for collision event.
         end
 end
 
+function passValuesToNewEne(newE, oldE)
+        newE.name = oldE.name
+        newE.health = oldE.health
+        newE.attack = oldE.attack
+        newE.speed = oldE.speed
+        newE.defense = oldE.defense
+        newE.image = oldE.image
+        newE.class = oldE.class
+        newE.maxHealth= oldE.maxHealth
+        return newE
+end
+
 --create and use enemy
-babyBlue = Enemy.create("BabyBlue", 5, 1, 1, 1, "BombBabyBlue.png", 5)
-darkBlue = Enemy.create("DarkBlue", 7, 2, .9, 2, "BombDarkBlue.png", 7)
-pinkBomb = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "BombPink.png", 5)
-greenBomb = Enemy.create("GreenBomb", 7, 1, .85, 3, "BombGreen.png", 7)
+babyBlue = Enemy.create("BabyBlue", 5, 1, 1, 1, "images/BombBabyBlue.png", 5)
+darkBlue = Enemy.create("DarkBlue", 7, 2, .9, 2, "images/BombDarkBlue.png", 7)
+pinkBomb = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "images/BombPink.png", 5)
+greenBomb = Enemy.create("GreenBomb", 7, 1, .85, 3, "images/BombGreen.png", 7)
 myEnemies = {}
 myEnemies[0] = babyBlue
 myEnemies[1] = darkBlue

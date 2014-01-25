@@ -1,5 +1,5 @@
 
-module(..., package.seeall)
+--module(..., package.seeall)
 
 --the teleport mechanic
 function teleport( event, params )
