@@ -48,6 +48,36 @@ function passValuesToNewEne(newE, oldE)
         return newE
 end
 
+function moveSpeed( x, speed, lane )
+	local laneSpeed
+	for i = 0,table.maxn( hero ) do
+		if ( hero[i].y == lane ) then
+			if (hero[i].laneSpeed == 1) then speedMod = .5
+			elseif (hero[i].laneSpeed == 2) then speedMod = 1
+			elseif (hero[i].laneSpeed == 3) then speedMod = 2
+			end
+		end
+	end
+	local timeComplete = ((7000*((x-50)/380))*speed)/speedMod
+	return timeComplete
+end
+
+function updateMoveSpeed (myHero)
+	for i = 1,table.maxn( allEne ) do
+		if (allEne[i].y==myHero.y) then
+			transition.cancel(allEne[i])
+			transition.to( allEne[i], { time=(moveSpeed(allEne[i].x, allEne[i].speed, allEne[i].y)), x=(50) } )
+		end
+	end
+end
+
+function updateEnemyHealth()
+	for i=1, table.maxn( allEne ) do
+		allEnemHealth[i].width = allEne[i].health/allEne[i].maxHealth * 50
+		allEnemHealth[i].y = allEne[i].y - 25
+		allEnemHealth[i].x = allEne[i].x
+	end
+end
 --create and use enemy
 babyBlue = Enemy.create("BabyBlue", 5, 1, 1, 1, "images/BombBabyBlue.png", 5)
 darkBlue = Enemy.create("DarkBlue", 7, 2, .9, 2, "images/BombDarkBlue.png", 7)

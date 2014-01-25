@@ -7,7 +7,7 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 
 -- Array to store heroes
-local hero = {}
+hero = {}
 
 -- Lanes y positions
 local lane1 = 80
@@ -15,8 +15,8 @@ local lane2 = 160
 local lane3 = 240
 
 --Enemy varis
-local allEne = {} 
-local allEnemHealth = {}
+allEne = {} 
+allEnemHealth = {}
 
 -- Hero Attack Variables
 local bullet_speed = 50 
@@ -114,37 +114,6 @@ function scene:createEne( )
 	return eneAndBar
 end
 
-function moveSpeed( x, speed, lane )
-	local laneSpeed
-	for i = 0,table.maxn( hero ) do
-		if ( hero[i].y == lane ) then
-			if (hero[i].laneSpeed == 1) then speedMod = .5
-			elseif (hero[i].laneSpeed == 2) then speedMod = 1
-			elseif (hero[i].laneSpeed == 3) then speedMod = 2
-			end
-		end
-	end
-	local timeComplete = ((7000*((x-50)/380))*speed)/speedMod
-	return timeComplete
-end
-
-function updateMoveSpeed (hero)
-	for i = 1,table.maxn( allEne ) do
-		if (allEne[i].y==hero.y) then
-			transition.cancel(allEne[i])
-			transition.to( allEne[i], { time=(moveSpeed(allEne[i].x, allEne[i].speed, allEne[i].y)), x=(50) } )
-		end
-	end
-end
-
-local function updateHealth()
-	for i=1, table.maxn( allEne ) do
-		allEnemHealth[i].width = allEne[i].health/allEne[i].maxHealth * 50
-		allEnemHealth[i].y = allEne[i].y - 25
-		allEnemHealth[i].x = allEne[i].x
-	end
-end
-
 local function gameLoop( event )
 	for i = 0,table.maxn( allEne ) do
 		for n = 0,table.maxn( hero ) do
@@ -214,7 +183,7 @@ function scene:createScene( event )
    spawnEneTimer = timer.performWithDelay( 3000, spawnEne, 0)
 	-- parameters for ---------------------> make_bullet (x,y, hero attack)
 	attackTimer = timer.performWithDelay( 2000, heroNormalAttacks, 0)
-	Runtime:addEventListener( "enterFrame", updateHealth )
+	Runtime:addEventListener( "enterFrame", updateEnemyHealth )
 	Runtime:addEventListener( "enterFrame", gameLoop )
 	local function onTap( event )
 	  storyboard.removeScene( scene )
@@ -238,7 +207,7 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  Runtime:removeEventListener( "enterFrame", updateHealth )
+  Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )
   timer.cancel(attackTimer)
   timer.cancel(spawnEneTimer)
