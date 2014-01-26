@@ -22,6 +22,9 @@ allEnemHealth = {}
 local bullet_speed = 50 
 local bullet_array = {}   -- Make an array to hold the bullets
 
+-- Timer variable
+local laneTimer = 1
+
 local move = require("classes.move")
 require("classes.heroes")
 require("classes.enemies")
@@ -113,6 +116,36 @@ function scene:createEne( )
 	eneAndBar[1]=allEnemHealth[#allEne]
 	return eneAndBar
 end
+
+-- countdown timer for the speed update
+function laneTimerDown(hero)
+	local laneSpeed
+	--if (laneTmer == 1) then
+		laneTmer = 0
+	--end
+  	print("timer: "..laneTmer)
+    if(laneTmer==0 and hero.abilityUsed == true)then
+    	print( "resetting speed" )
+    	hero.abilityUsed = false
+    	hero.laneSpeed = 2
+	end
+ end
+
+--janky code :(
+function checkAbility()
+	for n=0, 2, 1 do
+		if (hero[n].abilityUsed == true) then
+			-- does the countdown and changes the values of laneSpeed and abilityUsed
+			timer.performWithDelay( 3000, laneTimerDown(hero[n]))
+			-- updates the speed with the new changes
+			timer.performWithDelay( 3000, updateMoveSpeed(hero[n]))
+		end
+	end
+end
+
+--checks every second if the hero's ability was used
+-- kind of janky. will need to work on this for polishing
+timer.performWithDelay( 2000, checkAbility, 1000 )
 
 local function gameLoop( event )
 	for i = 0,table.maxn( allEne ) do
