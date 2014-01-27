@@ -247,7 +247,7 @@ function scene:createScene( event )
 	Runtime:addEventListener( "enterFrame", gameLoop )
 	local function onTap( event )
 	  storyboard.removeScene( scene )
-	  storyboard.gotoScene( "scenes.scene_splash",options)
+	  storyboard.gotoScene( "scenes.scene_home",options)
 	end
     home:addEventListener( "tap", onTap )
 end

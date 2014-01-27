@@ -18,20 +18,29 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  local bkg = display.newImage( "images/back.jpg", centerX, centerY, true )
-  bkg.height=display.contentHeight; bkg.width=display.contentWidth
-  group:insert(bkg)
   
   local options = {
    effect = "fade",
    time = 500
 }
 
-  local function onTap( event )
-  storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_ingame",options)
+ local gameTitle = display.newText( "4Ward Games", 0, 0, native.systemFontBold, 36 )
+  gameTitle.x = display.contentCenterX
+  gameTitle.y = display.contentCenterY - 20
+ 
+  group:insert( gameTitle )
+ 
+  local startButton = display.newText( "Presents...", 0, 0, native.systemFont, 18 )
+  startButton.x = display.contentCenterX
+  startButton.y = display.contentCenterY + 40
+
+  group:insert( startButton)
+
+  local function onTimer()
+    storyboard.gotoScene("scenes.scene_home", options)
   end
-  bkg:addEventListener( "tap", onTap )
+
+  splashTimer = timer.performWithDelay( 2000, onTimer)
 
 end
  

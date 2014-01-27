@@ -18,10 +18,31 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  local rect = display.newRect(0,0,700,320)
-  rect:setFillColor( 0.8 )
-  group:insert(rect)
+  
+  local options = {
+   effect = "fade",
+   time = 500
+}
+
+ local gameTitle = display.newText( "Now we're cooking!", 0, 0, native.systemFontBold, 36 )
+  gameTitle.x = display.contentCenterX
+  gameTitle.y = display.contentCenterY - 20
  
+  group:insert( gameTitle )
+ 
+  local startButton = display.newText( "Start", 0, 0, native.systemFont, 18 )
+  startButton.x = display.contentCenterX
+  startButton.y = display.contentCenterY + 80
+
+  group:insert( startButton)
+
+  local function onTap( event )
+  storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_ingame",options)
+  end
+
+  startButton:addEventListener( "tap", onTap )
+  
 end
  
 -- Called BEFORE scene has moved onscreen:
