@@ -11,6 +11,7 @@ function Hero.create(health, attack, image, name)
    hero.class = "hero"
    hero.laneSpeed = 2
    hero.abilityUsed = false
+   hero.timer = 50
    return hero
 end
 
@@ -75,6 +76,7 @@ function makeHero( newH, oldH )
 	newH.class = oldH.class
 	newH.abilityUsed = oldH.abilityUsed
 	newH.laneSpeed = oldH.laneSpeed
+	newH.timer = oldH.timer
 	return newH
 end
 

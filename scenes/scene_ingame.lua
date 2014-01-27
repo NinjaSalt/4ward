@@ -51,10 +51,7 @@ function scene:createHeroes()
   for n=0, 2, 1 do
     hero[n] = myHeroes[n]
     hero[n] = display.newImage( hero[n].image )
-    hero[n] = makeHero ( hero[n], myHeroes[0] )
-    hero[n].name = myHeroes[n].name
-    hero[n].health = myHeroes[n].health
-    hero[n].abilityUsed = myHeroes[n].abilityUsed
+    hero[n] = makeHero ( hero[n], myHeroes[n] )
     hero[n].x =50
     if (n == 0) then hero[n].y = lane1
     elseif (n == 1) then hero[n].y = lane2
@@ -137,11 +134,11 @@ end
 -- countdown timer for the speed update
 function laneTimerDown(hero)
 	local laneSpeed
-    currentTime = laneTimer
-	laneTimer = laneTimer - 1
-	if(laneTimer==0)then
+    currentTime = hero.timer
+	hero.timer = hero.timer - 1
+	if(hero.timer==0)then
     	print( "resetting speed" )
-    	currentTime = laneTimer
+    	currentTime = hero.timer
     	hero.abilityUsed = false
     	hero.laneSpeed = 2
 	end
@@ -194,7 +191,7 @@ local function gameLoop( event )
 				laneTimerDown(hero[n])
 				if (hero[n].abilityUsed == false) then
 					updateMoveSpeed(hero[n])
-					laneTimer = 50
+					hero[n].timer = 50
 				end
 			end
 	end
