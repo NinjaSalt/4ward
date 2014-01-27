@@ -1,7 +1,7 @@
 Enemy = {}
 Enemy.__index = Enemy
 
-function Enemy.create(name, health, attack, speed, defense, image, maxHealth)
+function Enemy.create(name, health, attack, speed, defense, image, maxHealth, type)
         local enemy = {}                                --new object
         setmetatable( enemy, Enemy )        --make Enemy
         enemy.name = name                                 --initialize object
@@ -12,6 +12,7 @@ function Enemy.create(name, health, attack, speed, defense, image, maxHealth)
         enemy.image = image
         enemy.maxHealth = maxHealth
         enemy.class = "enemy"
+        enemy.type = type
         return enemy
 end
 
@@ -45,6 +46,7 @@ function passValuesToNewEne(newE, oldE)
         newE.image = oldE.image
         newE.class = oldE.class
         newE.maxHealth= oldE.maxHealth
+        newE.type = oldE.type
         return newE
 end
 
@@ -79,12 +81,22 @@ function updateEnemyHealth()
 	end
 end
 --create and use enemy
-babyBlue = Enemy.create("BabyBlue", 5, 1, 1, 1, "images/BombBabyBlue.png", 5)
-darkBlue = Enemy.create("DarkBlue", 7, 2, .9, 2, "images/BombDarkBlue.png", 7)
-pinkBomb = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "images/BombPink.png", 5)
-greenBomb = Enemy.create("GreenBomb", 7, 1, .85, 3, "images/BombGreen.png", 7)
+babyBlue = Enemy.create("BabyBlue", 5, 1, 1, 1, "images/BombBabyBlue.png", 5, "egg")
+darkBlue = Enemy.create("DarkBlue", 7, 2, .9, 2, "images/BombDarkBlue.png", 7, "flour")
+pinkBomb = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "images/BombPink.png", 5, "potato")
+greenBomb = Enemy.create("GreenBomb", 7, 1, .85, 3, "images/BombGreen.png", 7, "strawberry")
+pancake = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "images/BombPink.png", 5, "pancake")
 myEnemies = {}
 myEnemies[0] = babyBlue
 myEnemies[1] = darkBlue
 myEnemies[2] = pinkBomb
 myEnemies[3] = greenBomb
+--combo enemies that shouldn't be spawning
+myEnemies[4] = pancake
+
+--in progress. not sure about this yet
+local foodGroups = {}
+foodGroups.egg = "egg"
+foodGroups.flour = "flour"
+foodGroups.potato = "potato"
+foodGroups.strawberry = "strawberry"
