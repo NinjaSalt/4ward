@@ -78,6 +78,12 @@ function makeHero( newH, oldH )
 	return newH
 end
 
+function updateHeroHealth(heroHealth)
+	for i=0, 2, 1 do
+		allHeroHealth[i].width = heroHealth/3 * 50
+	end
+end
+
 -- create and use an Hero
 lapis = Hero.create(1000, 1, "images/siren.png", "lapis")
 norienne = Hero.create(1000, 1, "images/archer.png", "norienne")

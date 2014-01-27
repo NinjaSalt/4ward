@@ -18,6 +18,9 @@ local lane3 = 240
 allEne = {} 
 allEnemHealth = {}
 
+--Hero health
+allHeroHealth = {}
+
 -- Hero Attack Variables
 local bullet_speed = 50 
 local bullet_array = {}   -- Make an array to hold the bullets
@@ -26,10 +29,14 @@ local bullet_array = {}   -- Make an array to hold the bullets
 --found that a countdown from 50 is equivalent to about 3 seconds
 local laneTimer = 50
 
+-- Temporary hero health
+local heroHealth = 3
+
 local move = require("classes.move")
 require("classes.heroes")
 require("classes.enemies")
 require("classes.collision")
+require("classes.level")
 
 -- Clear previous scene
 storyboard.removeAll()
@@ -56,6 +63,15 @@ function scene:createHeroes()
     end
     hero[n].height = 50; hero[n].width = 50
 	hero[n]:addEventListener( "touch", ability )
+	
+	-- add health bars to heroes
+	--allHeroHealth[n] = #allEne
+	allHeroHealth[n] = display.newImage( "images/enemhealth.jpg" )
+	allHeroHealth[n].height = 10 
+	allHeroHealth[n].width = heroHealth/3 * 50
+	allHeroHealth[n].x = 50; allHeroHealth[n].y = n * 80 + 50
+	--end health bar.
+	
   end
 end  
 
@@ -140,6 +156,15 @@ local function gameLoop( event )
 				table.remove(allEne, i)
 				allEnemHealth[i]:removeSelf()
 				table.remove(allEnemHealth, i)
+				heroHealth = heroHealth - 1
+				updateHeroHealth(heroHealth)
+				if heroHealth <= 0 then
+					currentLevel:endLevel(false)
+				end
+				currentLevel:decrementEnemy()
+				if currentLevel.totalNumberOfEnemies == 0 and #allEne == 0 then
+					currentLevel:endLevel(true)
+				end
 			end
 		end
 	end
@@ -153,6 +178,10 @@ local function gameLoop( event )
 					table.remove(allEne, i)
 					allEnemHealth[i]:removeSelf()
 					table.remove(allEnemHealth, i)
+					currentLevel:decrementEnemy()
+					if currentLevel.totalNumberOfEnemies == 0 and #allEne == 0 then
+						currentLevel:endLevel(true)
+					end
 				end
 				remove_bullet(bullet_array[n])
 			end
@@ -208,8 +237,10 @@ function scene:createScene( event )
   scene.createHeroes()
   for n=0,2,1 do
     group:insert(hero[n])
+	group:insert(allHeroHealth[n])
   end
-   spawnEneTimer = timer.performWithDelay( 3000, spawnEne, 0)
+  currentLevel = Level.create(1,1,3,0,1,1,3000,false,"back.jpg")
+  currentLevel:startLevel(spawnEne)
 	-- parameters for ---------------------> make_bullet (x,y, hero attack)
 	attackTimer = timer.performWithDelay( 2000, heroNormalAttacks, 0)
 	Runtime:addEventListener( "enterFrame", updateEnemyHealth )

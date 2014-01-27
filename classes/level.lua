@@ -16,14 +16,28 @@ function Level.create(levelID, levelDifficulty, totalNumberOfEnemies, enemiesDes
    return level
 end
 
-function Level:startLevel(levelID,levelDifficulty, totalNumberOfEnemies, victoryCondition, backgroundImage)
-
+function Level:startLevel(spawnEne)
+	self:startSpawningofEnemies(spawnEne)
 end
 
-function Level:startSpawningofEnemies (timeBetweenEachSpawn, enemyIDQueue)
-
+function Level:startSpawningofEnemies (spawnEne)
+	spawnEneTimer = timer.performWithDelay( self.timeBetweenEachSpawn, spawnEne, self.totalNumberOfEnemies )
 end
 
 function Level:endLevel(levelCompleted)
+	if levelCompleted ~= nil then
+		self.levelCompleted = levelCompleted
+	end
+	if self.levelCompleted == true then
+		print("You win!")
+	else print("You lose!")
+	end
+	timer.cancel(attackTimer)
+	timer.cancel(spawnEneTimer)
+end
 
+function Level:decrementEnemy()
+	if self.totalNumberOfEnemies ~= -1 then
+		self.totalNumberOfEnemies = self.totalNumberOfEnemies -1
+	end
 end
