@@ -23,7 +23,8 @@ local bullet_speed = 50
 local bullet_array = {}   -- Make an array to hold the bullets
 
 -- Timer variable
-local laneTimer = 1
+--found that a countdown from 50 is equivalent to about 3 seconds
+local laneTimer = 50
 
 local move = require("classes.move")
 require("classes.heroes")
@@ -120,32 +121,16 @@ end
 -- countdown timer for the speed update
 function laneTimerDown(hero)
 	local laneSpeed
-	--if (laneTmer == 1) then
-		laneTmer = 0
-	--end
-  	print("timer: "..laneTmer)
-    if(laneTmer==0 and hero.abilityUsed == true)then
+    currentTime = laneTimer
+	laneTimer = laneTimer - 1
+	if(laneTimer==0)then
     	print( "resetting speed" )
+    	currentTime = laneTimer
     	hero.abilityUsed = false
     	hero.laneSpeed = 2
 	end
+	
  end
-
---janky code :(
-function checkAbility()
-	for n=0, 2, 1 do
-		if (hero[n].abilityUsed == true) then
-			-- does the countdown and changes the values of laneSpeed and abilityUsed
-			timer.performWithDelay( 3000, laneTimerDown(hero[n]))
-			-- updates the speed with the new changes
-			timer.performWithDelay( 3000, updateMoveSpeed(hero[n]))
-		end
-	end
-end
-
---checks every second if the hero's ability was used
--- kind of janky. will need to work on this for polishing
-timer.performWithDelay( 2000, checkAbility, 1000 )
 
 local function gameLoop( event )
 	for i = 0,table.maxn( allEne ) do
@@ -172,6 +157,17 @@ local function gameLoop( event )
 				remove_bullet(bullet_array[n])
 			end
 		end
+	end
+
+	--countdown timer for hero speed
+	for n = 0,table.maxn( hero ) do
+			if ( hero[n].abilityUsed == true ) then
+				laneTimerDown(hero[n])
+				if (hero[n].abilityUsed == false) then
+					updateMoveSpeed(hero[n])
+					laneTimer = 50
+				end
+			end
 	end
 	
    return true
