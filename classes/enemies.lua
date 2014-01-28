@@ -60,7 +60,7 @@ function moveSpeed( x, speed, lane )
 			end
 		end
 	end
-	local timeComplete = ((7000*((x-50)/380))*speed)/speedMod
+	local timeComplete = ((30000*((x-50)/380))*speed)/speedMod
 	return timeComplete
 end
 
@@ -93,10 +93,3 @@ myEnemies[2] = pinkBomb
 myEnemies[3] = greenBomb
 --combo enemies that shouldn't be spawning
 myEnemies[4] = pancake
-
---in progress. not sure about this yet
-local foodGroups = {}
-foodGroups.egg = "egg"
-foodGroups.flour = "flour"
-foodGroups.potato = "potato"
-foodGroups.strawberry = "strawberry"

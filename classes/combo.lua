@@ -1,4 +1,6 @@
 --circle-based collision detection
+require("classes.enemies")
+
 function combination( obj1, obj2 )
    hasCollidied = false
    if ( obj1 == nil ) then  --make sure the first object exists
@@ -13,14 +15,19 @@ function combination( obj1, obj2 )
    local objectSize = (obj2.contentWidth/2) + (obj1.contentWidth/2)
 
    if ( distance < objectSize ) then
-      hasCollidied = true
-   end
-   hasCollidied = false
-
-   if (hasCollidied == true) then
+      print("has collided")
       newType = foodgroup[obj1.type][obj2.type]
-      
+      print(obj1.type)
+      print(obj2.type)
+      print(newType)
+      return true
    end
+
+   return false
+end
+
+function replaceEnemy (obj1, obj2)
+      return foodgroup[obj1.type][obj2.type]
 end
 
 

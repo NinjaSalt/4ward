@@ -37,6 +37,7 @@ require("classes.heroes")
 require("classes.enemies")
 require("classes.collision")
 require("classes.level")
+require("classes.combo")
 
 -- Clear previous scene
 storyboard.removeAll()
@@ -195,7 +196,36 @@ local function gameLoop( event )
 				end
 			end
 	end
-	
+
+	for i = 0,table.maxn( allEne ) do
+		for n = 0,table.maxn( allEne ) do
+			if (i == n) then
+			elseif(combination(allEne[i], allEne[n])) then
+				print("collided")
+				print(replaceEnemy(allEne[i], allEne[n]))
+				--[[for j = 0,table.maxn( myEnemies ) do
+					if (myEnemies[j].type == replaceEnemy(allEne[i], allEne[n])) then
+						allEne[n] = myEnemies[j]
+						allEne[n] = passValuesToNewEne(allEne[n], myEnemies[j])
+						allEne[n] = display.newImage(allEne[n].image)
+					end
+				end]]--
+				allEne[i]:removeSelf()
+				table.remove(allEne, i)
+				allEnemHealth[i]:removeSelf()
+				table.remove(allEnemHealth, i)
+				break
+			end
+			--[[if (hasRemoved) then
+				allEne[n]:removeSelf()
+				table.remove(allEne, n)
+				allEnemHealth[n]:removeSelf()
+				table.remove(allEnemHealth, n)
+				hasRemoved = false
+			end]]--
+		end
+	end
+
    return true
 end
 
@@ -236,7 +266,7 @@ function scene:createScene( event )
     group:insert(hero[n])
 	group:insert(allHeroHealth[n])
   end
-  currentLevel = Level.create(1,1,3,0,1,1,3000,false,"back.jpg")
+  currentLevel = Level.create(1,1,10,0,1,1,3000,false,"back.jpg")
   currentLevel:startLevel(spawnEne)
 	-- parameters for ---------------------> make_bullet (x,y, hero attack)
 	attackTimer = timer.performWithDelay( 2000, heroNormalAttacks, 0)
