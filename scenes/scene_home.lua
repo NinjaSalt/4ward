@@ -37,8 +37,8 @@ function scene:createScene( event )
   group:insert( startButton)
 
   local function onTap( event )
-  storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_ingame",options)
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_map",options)
   end
 
   startButton:addEventListener( "tap", onTap )

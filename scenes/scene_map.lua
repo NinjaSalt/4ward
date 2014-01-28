@@ -18,20 +18,27 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  local rect = display.newRect(0,0,480,320)
-  rect:setFillColor( 0.5 )
-  group:insert(rect)
-  
-  local options = {
-   effect = "fade",
-   time = 500
-}
-
+  local levels = {}
+  local mapTitle = display.newText( "Level Select", 0, 0, native.systemFontBold, 36 )
+  mapTitle.x = display.contentCenterX
+  mapTitle.y = 50
+ 
+  group:insert( mapTitle )
+ 
   local function onTap( event )
-    storyboard.gotoScene( "scenes.scene_home",options)
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id}})
   end
-  rect:addEventListener( "tap", onTap )
+  
+  levels[0] = display.newText( "Level 1", 0, 0, native.systemFont, 18 )
+  levels[0].x = display.contentCenterX
+  levels[0].y = mapTitle.y + 80
+  levels[0].id = 1
 
+  group:insert( levels[0])
+  
+  
+  levels[0]:addEventListener( "tap", onTap )
 end
  
 -- Called BEFORE scene has moved onscreen:

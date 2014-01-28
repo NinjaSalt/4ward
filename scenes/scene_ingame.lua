@@ -5,7 +5,7 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
-
+local level
 -- Array to store heroes
 hero = {}
 
@@ -13,7 +13,6 @@ hero = {}
 local lane1 = 80
 local lane2 = 160
 local lane3 = 240
-
 --Enemy varis
 allEne = {} 
 allEnemHealth = {}
@@ -266,7 +265,7 @@ function scene:createScene( event )
     group:insert(hero[n])
 	group:insert(allHeroHealth[n])
   end
-  currentLevel = Level.create(1,1,10,0,1,1,3000,false,"back.jpg")
+  currentLevel = Level.create(level,1,10,0,1,1,3000,false,"back.jpg")
   currentLevel:startLevel(spawnEne)
 	-- parameters for ---------------------> make_bullet (x,y, hero attack)
 	attackTimer = timer.performWithDelay( 2000, heroNormalAttacks, 0)
@@ -288,7 +287,8 @@ end
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
   local group = self.view
- 
+  local params = event.params
+  level = params.level
 end
  
 -- Called when scene is about to move offscreen:
