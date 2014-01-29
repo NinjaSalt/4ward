@@ -135,7 +135,7 @@ end
 function laneTimerDown(hero)
 	local laneSpeed
     currentTime = hero.timer
-	hero.timer = hero.timer - 1
+	hero.timer = hero.timer - .5
 	if(hero.timer==0)then
     	currentTime = hero.timer
     	hero.abilityUsed = false
@@ -264,7 +264,6 @@ local function gameLoop( event )
 
 	updateEnemyHealth()
 
-
    return true
 end
 
@@ -275,7 +274,7 @@ function scene:createScene( event )
   group = self.view
 
   local options = {
-    effect = "fade",
+    effect = "slideDown",
     time = 500
   }
   --create enemies and add them and their healthbar to the group
@@ -296,8 +295,11 @@ function scene:createScene( event )
   local bkg = display.newImage( "images/back.jpg", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert(bkg)
-  local home = display.newRect( 0, 0, 80, 80)
-  group:insert(home)
+
+  local pauseButton = display.newImage("images/Pause.png",25,25 )
+  pauseButton.x = 466
+  pauseButton.y = 12
+  group:insert(pauseButton)
   
   --create the heroes
   scene.createHeroes()
@@ -307,15 +309,18 @@ function scene:createScene( event )
   end
   currentLevel = Level.create(level,1,10,0,1,1,2500,false,"back.jpg")
   currentLevel:startLevel(spawnEne)
+
 	-- parameters for ---------------------> make_bullet (x,y, hero attack)
 	attackTimer = timer.performWithDelay( 2000, heroNormalAttacks, 0)
 	--Runtime:addEventListener( "enterFrame", updateEnemyHealth )
 	Runtime:addEventListener( "enterFrame", gameLoop )
+
 	local function onTap( event )
 	  storyboard.removeScene( scene )
 	  storyboard.gotoScene( "scenes.scene_home",options)
 	end
-    home:addEventListener( "tap", onTap )
+
+    pauseButton:addEventListener( "tap", onTap )
 end
  
 -- Called BEFORE scene has moved onscreen:
