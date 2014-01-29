@@ -32,8 +32,6 @@ function Level:endLevel(levelCompleted)
 		print("You win!")
 	else print("You lose!")
 	end
-	timer.cancel(attackTimer)
-	timer.cancel(spawnEneTimer)
 end
 
 function Level:decrementEnemy()

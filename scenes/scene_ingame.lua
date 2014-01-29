@@ -5,7 +5,7 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
-local level
+local thisLevel
 -- Array to store heroes
 hero = {}
 
@@ -157,10 +157,13 @@ local function gameLoop( event )
 				updateHeroHealth(heroHealth)
 				if heroHealth <= 0 then
 					currentLevel:endLevel(false)
+					storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel}})
+
 				end
 				currentLevel:decrementEnemy()
 				if currentLevel.totalNumberOfEnemies == 0 and #allEne == 0 then
 					currentLevel:endLevel(true)
+					storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel}})
 				end
 			end
 		end
@@ -178,6 +181,7 @@ local function gameLoop( event )
 					currentLevel:decrementEnemy()
 					if currentLevel.totalNumberOfEnemies == 0 and #allEne == 0 then
 						currentLevel:endLevel(true)
+						storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel}})
 					end
 				end
 				remove_bullet(bullet_array[n])
@@ -288,7 +292,7 @@ end
 function scene:enterScene( event )
   local group = self.view
   local params = event.params
-  level = params.level
+  thisLevel = params.level
 end
  
 -- Called when scene is about to move offscreen:
