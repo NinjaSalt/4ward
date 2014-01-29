@@ -206,6 +206,7 @@ local function gameLoop( event )
 			elseif(combination(allEne[i], allEne[n])) then
 				print("collided")
 				print(replaceEnemy(allEne[i], allEne[n]))
+				currentLevel:decrementEnemy()
 				--[[for j = 0,table.maxn( myEnemies ) do
 					if (myEnemies[j].type == replaceEnemy(allEne[i], allEne[n])) then
 						allEne[n] = myEnemies[j]
@@ -269,7 +270,7 @@ function scene:createScene( event )
     group:insert(hero[n])
 	group:insert(allHeroHealth[n])
   end
-  currentLevel = Level.create(level,1,10,0,1,1,3000,false,"back.jpg")
+  currentLevel = Level.create(level,1,10,0,1,1,300,false,"back.jpg")
   currentLevel:startLevel(spawnEne)
 	-- parameters for ---------------------> make_bullet (x,y, hero attack)
 	attackTimer = timer.performWithDelay( 2000, heroNormalAttacks, 0)
