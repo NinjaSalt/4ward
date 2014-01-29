@@ -83,13 +83,17 @@ end
 --create and use enemy
 babyBlue = Enemy.create("BabyBlue", 5, 1, 1, 1, "images/BombBabyBlue.png", 5, "egg")
 darkBlue = Enemy.create("DarkBlue", 7, 2, .9, 2, "images/BombDarkBlue.png", 7, "flour")
-pinkBomb = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "images/BombPink.png", 5, "potato")
-greenBomb = Enemy.create("GreenBomb", 7, 1, .85, 3, "images/BombGreen.png", 7, "strawberry")
+--pinkBomb = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "images/BombPink.png", 5, "potato")
+--greenBomb = Enemy.create("GreenBomb", 7, 1, .85, 3, "images/BombGreen.png", 7, "strawberry")
 pancake = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "images/BombPink.png", 5, "pancake")
+bad = Enemy.create("GreenBomb", 5, 2, 1.1, 3, "images/BombGreen.png", 5, "bad")
 myEnemies = {}
 myEnemies[0] = babyBlue
 myEnemies[1] = darkBlue
-myEnemies[2] = pinkBomb
-myEnemies[3] = greenBomb
+
+comboEnemies = {}
+--myEnemies[2] = pinkBomb
+--myEnemies[3] = greenBomb
 --combo enemies that shouldn't be spawning
-myEnemies[4] = pancake
+comboEnemies[0] = pancake
+comboEnemies[1] = bad 

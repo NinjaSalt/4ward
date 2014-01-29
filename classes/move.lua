@@ -40,10 +40,10 @@ function teleport( event, params )
 					body.y = lane1
 				elseif event.y < 160 then
 					body.y = lane2
-				elseif event.y < 240 then
+				else --event.y < 240 then
 					body.y = lane3
-				else --if event.y < 320 then
-					body.y = lane4
+				--else --if event.y < 320 then
+				--	body.y = lane4
 				end
 			end
 			transition.cancel(body)

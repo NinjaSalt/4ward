@@ -18,7 +18,7 @@ function combination( obj1, obj2 )
    local dx = obj1.x - obj2.x
    local dy = obj1.y - obj2.y
    local distance = math.sqrt( dx*dx + dy*dy )
-   local objectSize = (obj2.contentWidth/2) + (obj1.contentWidth/2)
+   local objectSize = (obj2.contentWidth/4) + (obj1.contentWidth/4)
 
    if ( distance < objectSize ) then
       print("has collided")
@@ -33,7 +33,9 @@ function combination( obj1, obj2 )
 end
 
 function replaceEnemy (obj1, obj2)
+      if (obj1~=nil and obj2~=nil) then
       return foodgroup[obj1.type][obj2.type]
+   end
 end
 
 
@@ -52,4 +54,6 @@ end
       oil = {egg = "bad", flour = "donut", potato = "fries", strawberry = "bad", oil = "bad", steak = "CFS", sugar = "bad"},
       steak = {egg = "steakOm", flour = "CFS", potato = "steakBaked", strawberry = "bad", oil = "CFS", steak = "bad", sugar = "bad"},
       sugar = {egg = "bad", flour = "cake", potato = "bad", strawberry = "strawberryCandy", oil = "bad", steak = "bad", sugar = "bad"},
+      pancake = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad"},
+      bad = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad"}
    }

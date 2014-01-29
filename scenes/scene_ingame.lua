@@ -24,12 +24,11 @@ allHeroHealth = {}
 local bullet_speed = 50 
 local bullet_array = {}   -- Make an array to hold the bullets
 
--- Timer variable
---found that a countdown from 50 is equivalent to about 3 seconds
-local laneTimer = 50
-
 -- Temporary hero health
 local heroHealth = 3
+
+local eneAndBar 
+local group 
 
 local move = require("classes.move")
 require("classes.heroes")
@@ -106,7 +105,7 @@ function scene:createEne( )
 	elseif (randomPos == 2) then lane = lane2
 	elseif (randomPos == 3) then lane = lane3
 	end
-	local randomEne = math.random(0, 3)
+	local randomEne = math.random(0, 1)
 	allEne[#allEne + 1] = myEnemies[randomEne]
 	allEne[#allEne] = display.newImage(allEne[#allEne].image)
 	allEne[#allEne] = passValuesToNewEne(allEne[#allEne], myEnemies[randomEne])
@@ -137,7 +136,6 @@ function laneTimerDown(hero)
     currentTime = hero.timer
 	hero.timer = hero.timer - 1
 	if(hero.timer==0)then
-    	print( "resetting speed" )
     	currentTime = hero.timer
     	hero.abilityUsed = false
     	hero.laneSpeed = 2
@@ -200,35 +198,69 @@ local function gameLoop( event )
 			end
 	end
 
-	for i = 0,table.maxn( allEne ) do
-		for n = 0,table.maxn( allEne ) do
-			if (i == n) then
+	-- this is the code for collision checking, and combining to make new enemies
+
+	for i = 1,table.maxn( allEne ) do
+		for n = 1,table.maxn( allEne ) do
+			if (i == n) then --"colliding with itself, ignore when this happens"
 			elseif(combination(allEne[i], allEne[n])) then
-				print("collided")
-				print(replaceEnemy(allEne[i], allEne[n]))
-				currentLevel:decrementEnemy()
-				--[[for j = 0,table.maxn( myEnemies ) do
-					if (myEnemies[j].type == replaceEnemy(allEne[i], allEne[n])) then
-						allEne[n] = myEnemies[j]
-						allEne[n] = passValuesToNewEne(allEne[n], myEnemies[j])
-						allEne[n] = display.newImage(allEne[n].image)
+				--print("collided")
+				--print(replaceEnemy(allEne[i], allEne[n]))
+				for j = 0,table.maxn( comboEnemies ) do
+					if (comboEnemies[j].type == replaceEnemy(allEne[i], allEne[n])) then
+
+						allEne[#allEne + 1] = comboEnemies[j]
+						allEne[#allEne] = display.newImage(allEne[#allEne].image)
+						allEne[#allEne] = passValuesToNewEne(allEne[#allEne], comboEnemies[j])
+
+						-- add health bars to enemies.
+						allEnemHealth[#allEne] = #allEne
+						allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
+						allEnemHealth[#allEne].height = 10 
+						--allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
+						allEne[#allEne].health = (allEne[n].health + allEne[i].health)/2
+						allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
+						allEnemHealth[#allEne].x = allEnemHealth[n].x; allEnemHealth[#allEne].y = allEnemHealth[n].y
+						--end health bar.
+
+						--define the enemy
+						allEne[#allEne].height = 50; allEne[#allEne].width = 50
+						allEne[#allEne].x = allEne[n].x; allEne[#allEne].y = allEne[n].y
+
+						--set the move speedallEne
+						transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50) } )
+						allEne[#allEne]:addEventListener( "touch", teleport ) 
+						eneAndBar[0]=allEne[#allEne]
+						eneAndBar[1]=allEnemHealth[#allEne]
+						group:insert(eneAndBar[0])
+						group:insert(eneAndBar[1])
+
+						allEne[n]: removeSelf()
+						table.remove(allEne, n)
+						allEnemHealth[n]:removeSelf()
+						table.remove(allEnemHealth, n)
+
+						if (n > i) then -- removes teleported enemy 
+							allEne[i]:removeSelf()
+							table.remove(allEne, i)
+							allEnemHealth[i]:removeSelf()
+							table.remove(allEnemHealth, i)
+							currentLevel:decrementEnemy()
+						else
+							allEne[i-1]:removeSelf()
+							table.remove(allEne, i-1)
+							allEnemHealth[i-1]:removeSelf()
+							table.remove(allEnemHealth, i-1)
+							currentLevel:decrementEnemy()
+						end
 					end
-				end]]--
-				allEne[i]:removeSelf()
-				table.remove(allEne, i)
-				allEnemHealth[i]:removeSelf()
-				table.remove(allEnemHealth, i)
-				break
+				end
 			end
-			--[[if (hasRemoved) then
-				allEne[n]:removeSelf()
-				table.remove(allEne, n)
-				allEnemHealth[n]:removeSelf()
-				table.remove(allEnemHealth, n)
-				hasRemoved = false
-			end]]--
 		end
 	end
+
+	updateEnemyHealth()
+
 
    return true
 end
@@ -237,7 +269,7 @@ end
 function scene:createScene( event )
 
   --Create the group that hold all the objects in the scene
-  local group = self.view
+  group = self.view
 
   local options = {
     effect = "fade",
@@ -245,7 +277,7 @@ function scene:createScene( event )
   }
   --create enemies and add them and their healthbar to the group
   local function spawnEne()
-    local eneAndBar = scene.createEne()
+  	eneAndBar = scene.createEne()
     group:insert(eneAndBar[0])
 	group:insert(eneAndBar[1])
   end
@@ -270,11 +302,11 @@ function scene:createScene( event )
     group:insert(hero[n])
 	group:insert(allHeroHealth[n])
   end
-  currentLevel = Level.create(level,1,10,0,1,1,300,false,"back.jpg")
+  currentLevel = Level.create(level,1,10,0,1,1,2500,false,"back.jpg")
   currentLevel:startLevel(spawnEne)
 	-- parameters for ---------------------> make_bullet (x,y, hero attack)
 	attackTimer = timer.performWithDelay( 2000, heroNormalAttacks, 0)
-	Runtime:addEventListener( "enterFrame", updateEnemyHealth )
+	--Runtime:addEventListener( "enterFrame", updateEnemyHealth )
 	Runtime:addEventListener( "enterFrame", gameLoop )
 	local function onTap( event )
 	  storyboard.removeScene( scene )
