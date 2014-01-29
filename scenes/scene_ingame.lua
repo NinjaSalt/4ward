@@ -13,6 +13,7 @@ hero = {}
 local lane1 = 80
 local lane2 = 160
 local lane3 = 240
+
 --Enemy varis
 allEne = {} 
 allEnemHealth = {}
@@ -27,7 +28,7 @@ local bullet_array = {}   -- Make an array to hold the bullets
 -- Temporary hero health
 local heroHealth = 3
 
-local eneAndBar 
+local eneAndBar = {}
 local group 
 
 local move = require("classes.move")
@@ -97,7 +98,7 @@ function make_bullet( hero )
 end
 
 function scene:createEne( )
-	local eneAndBar = {}
+	--local eneAndBar = {}
 	local lane = lane1
 	--set the lane it will spawn in
 	local randomPos = math.random(1, 3)
@@ -199,13 +200,11 @@ local function gameLoop( event )
 	end
 
 	-- this is the code for collision checking, and combining to make new enemies
-
 	for i = 1,table.maxn( allEne ) do
 		for n = 1,table.maxn( allEne ) do
 			if (i == n) then --"colliding with itself, ignore when this happens"
 			elseif(combination(allEne[i], allEne[n])) then
-				--print("collided")
-				--print(replaceEnemy(allEne[i], allEne[n]))
+				-- create a new emeny at the end of the list
 				for j = 0,table.maxn( comboEnemies ) do
 					if (comboEnemies[j].type == replaceEnemy(allEne[i], allEne[n])) then
 
@@ -218,6 +217,7 @@ local function gameLoop( event )
 						allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
 						allEnemHealth[#allEne].height = 10 
 						--allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
+						--need to work on the new health bar for the combo enemy
 						allEne[#allEne].health = (allEne[n].health + allEne[i].health)/2
 						allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
 						allEnemHealth[#allEne].x = allEnemHealth[n].x; allEnemHealth[#allEne].y = allEnemHealth[n].y
@@ -235,18 +235,21 @@ local function gameLoop( event )
 						group:insert(eneAndBar[0])
 						group:insert(eneAndBar[1])
 
+						--remove the second enemy we want to replace
 						allEne[n]: removeSelf()
 						table.remove(allEne, n)
 						allEnemHealth[n]:removeSelf()
 						table.remove(allEnemHealth, n)
 
 						if (n > i) then -- removes teleported enemy 
+							-- if i is less than n in the enemy list, remove i since i is not effect when n was removed
 							allEne[i]:removeSelf()
 							table.remove(allEne, i)
 							allEnemHealth[i]:removeSelf()
 							table.remove(allEnemHealth, i)
 							currentLevel:decrementEnemy()
 						else
+							-- if i is greater than n, need to remove the enemy 1 less than where i orginally was before removing n since the whole list shifted
 							allEne[i-1]:removeSelf()
 							table.remove(allEne, i-1)
 							allEnemHealth[i-1]:removeSelf()
