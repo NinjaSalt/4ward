@@ -10,9 +10,9 @@ local thisLevel
 hero = {}
 
 -- Lanes y positions
-local lane1 = 80
-local lane2 = 160
-local lane3 = 240
+lane1 = 80
+lane2 = 160
+lane3 = 240
 
 --Enemy varis
 allEne = {} 
