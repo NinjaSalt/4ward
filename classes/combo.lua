@@ -71,7 +71,7 @@ end
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
        fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
 
-      sugar = {egg = "bad", flour = "cake", potato = "bad", strawberry = "strawberryCandy", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
+      sugar = {egg = "meringue", flour = "cake", potato = "bad", strawberry = "strawberryCandy", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
        fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
 
