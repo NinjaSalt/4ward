@@ -97,7 +97,7 @@ function make_bullet( hero )
   return bullet
 end
 
-function scene:createEne( )
+function scene:createEne(enemyID)
 	--local eneAndBar = {}
 	local lane = lane1
 	--set the lane it will spawn in
@@ -106,10 +106,10 @@ function scene:createEne( )
 	elseif (randomPos == 2) then lane = lane2
 	elseif (randomPos == 3) then lane = lane3
 	end
-	local randomEne = math.random(0, 1)
-	allEne[#allEne + 1] = myEnemies[randomEne]
+	--local randomEne = math.random(0, 1)
+	allEne[#allEne + 1] = myEnemies[enemyID]
 	allEne[#allEne] = display.newImage(allEne[#allEne].image)
-	allEne[#allEne] = passValuesToNewEne(allEne[#allEne], myEnemies[randomEne])
+	allEne[#allEne] = passValuesToNewEne(allEne[#allEne], myEnemies[enemyID])
 
 	-- add health bars to enemies.
 	allEnemHealth[#allEne] = #allEne
@@ -278,8 +278,8 @@ function scene:createScene( event )
     time = 500
   }
   --create enemies and add them and their healthbar to the group
-  local function spawnEne()
-  	eneAndBar = scene.createEne()
+  function spawnEne(enemyID)
+  	eneAndBar = scene:createEne(enemyID)
     group:insert(eneAndBar[0])
 	group:insert(eneAndBar[1])
   end
@@ -307,8 +307,8 @@ function scene:createScene( event )
     group:insert(hero[n])
 	group:insert(allHeroHealth[n])
   end
-  currentLevel = Level.create(level,1,10,0,1,1,2500,false,"back.jpg")
-  currentLevel:startLevel(spawnEne)
+  currentLevel = Level.create(1)
+  currentLevel:startLevel()
 
 	-- parameters for ---------------------> make_bullet (x,y, hero attack)
 	attackTimer = timer.performWithDelay( 2000, heroNormalAttacks, 0)
@@ -342,7 +342,7 @@ function scene:exitScene( event )
   Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )
   timer.cancel(attackTimer)
-  timer.cancel(spawnEneTimer)
+  --timer.cancel(spawnEneTimer)
 end
  
 -- Called AFTER scene has finished moving offscreen:

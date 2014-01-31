@@ -1,37 +1,34 @@
 Level = {}
 Level.__index = Level
 
-function Level.create(levelID, levelDifficulty, totalNumberOfEnemies, enemiesDestroyed, victoryCondition, enemyIDQueue, timeBetweenEachSpawn, levelCompleted, backgroundImage)
+local levels = {}
+levels[1] = {}
+levels[1] = {1, 0, {1,0,1,0}, 3000}
+
+function Level.create(levelID) --victoryCondition, enemyIDQueue, timeBetweenEachSpawn)
    local level = {}             -- our new object
    setmetatable(level,Level)  -- make Level handle lookup
    level.levelID = levelID
-   level.levelDifficulty  = levelDifficulty
-   level.totalNumberOfEnemies = totalNumberOfEnemies
-   level.enemiesDestroyed = enemiesDestroyed
-   level.victoryCondition = victoryCondition
-   level.enemyIDQueue = enemyIDQueue
-   level.timeBetweenEachSpawn = timeBetweenEachSpawn
-   level.levelCompleted = levelCompleted
-   level.backgroundImage = backgroundImage
+   level.enemyIDQueue = {}
+   level.enemyIDQueue = levels[levelID][3] --#enemyIDQueue
+   level.totalNumberOfEnemies = #(level.enemyIDQueue)
+   level.enemiesAlive = level.totalNumberOfEnemies
+   level.timeBetweenEachSpawn = levels[levelID][4]
+   level.spawnTimer = {}
+   level.spawnCounter = 0
    return level
 end
 
-function Level:startLevel(spawnEne)
-	self:startSpawningofEnemies(spawnEne)
-end
-
-function Level:startSpawningofEnemies (spawnEne)
-	spawnEneTimer = timer.performWithDelay( self.timeBetweenEachSpawn, spawnEne, self.totalNumberOfEnemies )
+function Level:startLevel()
+	self.spawnEneTimer = timer.performWithDelay( self.timeBetweenEachSpawn, self, self.totalNumberOfEnemies )
 end
 
 function Level:endLevel(levelCompleted)
-	if levelCompleted ~= nil then
-		self.levelCompleted = levelCompleted
-	end
-	if self.levelCompleted == true then
+	if levelCompleted == true then
 		print("You win!")
 	else print("You lose!")
 	end
+	timer.cancel(self.spawnEneTimer)
 end
 
 function Level:decrementEnemy()
@@ -39,3 +36,10 @@ function Level:decrementEnemy()
 		self.totalNumberOfEnemies = self.totalNumberOfEnemies -1
 	end
 end
+
+--function Level:spawnNextEnemy()
+function Level:timer(event)
+	self.spawnCounter = self.spawnCounter + 1
+	spawnEne(self.enemyIDQueue[self.spawnCounter])
+end
+
