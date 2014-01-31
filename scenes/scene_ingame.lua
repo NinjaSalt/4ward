@@ -342,7 +342,7 @@ function scene:exitScene( event )
   Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )
   timer.cancel(attackTimer)
-  --timer.cancel(spawnEneTimer)
+  timer.cancel(currentLevel.spawnEneTimer)
 end
  
 -- Called AFTER scene has finished moving offscreen:
