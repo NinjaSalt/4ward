@@ -23,16 +23,23 @@ function scene:createScene( event )
    effect = "fade",
    time = 500
 }
+  local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
+  bkg.height=display.contentHeight; bkg.width=display.contentWidth
+  group:insert (bkg)
 
- local gameTitle = display.newText( "Now we're cooking!", 0, 0, native.systemFontBold, 36 )
-  gameTitle.x = display.contentCenterX
-  gameTitle.y = display.contentCenterY - 20
+
+ --local gameTitle = display.newText( "Now we're cooking!", 0, 0, native.systemFontBold, 36 )
+  gameTitle = display.newImage("images/mocklogo.png")
+  gameTitle.width = gameTitle.width*.2
+  gameTitle.height = gameTitle.height*.2
+  gameTitle.x = display.contentCenterX - 10
+  gameTitle.y = display.contentCenterY - 30
  
   group:insert( gameTitle )
  
   local startButton = display.newText( "Start", 0, 0, native.systemFont, 18 )
   startButton.x = display.contentCenterX
-  startButton.y = display.contentCenterY + 80
+  startButton.y = display.contentCenterY + 120
 
   group:insert( startButton)
 
@@ -42,7 +49,6 @@ function scene:createScene( event )
   end
 
   startButton:addEventListener( "tap", onTap )
-  
 end
  
 -- Called BEFORE scene has moved onscreen:
