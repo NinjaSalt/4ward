@@ -77,9 +77,9 @@ function updateHeroHealth(heroHealth)
 end
 
 -- create and use an Hero
-lapis = Hero.create(1000, 1, "images/siren.png", "lapis")
-norienne = Hero.create(1000, 1, "images/archer.png", "norienne")
-sun = Hero.create(1000, 1, "images/monkeyking.png", "sun")
+lapis = Hero.create(1000, 1, "images/ramsey.png", "lapis")
+norienne = Hero.create(1000, 1, "images/giada.png", "norienne")
+sun = Hero.create(1000, 1, "images/brown.png", "sun")
 --joe = Hero.create(1000, 1, "penguinknight1.png", "joe")
 myHeroes = {}
 myHeroes[0]=lapis
