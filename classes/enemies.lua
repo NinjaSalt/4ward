@@ -75,6 +75,9 @@ end
 
 function updateEnemyHealth()
 	for i=1, table.maxn( allEne ) do
+		if ( allEnemHealth[i].y == nil ) then  --make sure the first object exists
+		  break
+	    end
 		allEnemHealth[i].width = allEne[i].health/allEne[i].maxHealth * 50
 		allEnemHealth[i].y = allEne[i].y - 25
 		allEnemHealth[i].x = allEne[i].x
