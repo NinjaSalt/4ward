@@ -92,23 +92,50 @@ strawberry = Enemy.create("strawberry", 7, 1, .85, 3, "images/strawberry.png", 7
 
 -- placeholders
 flour = Enemy.create("flour", 7, 2, .9, 2, "images/flour.png", 7, "flour")
-pinkBomb = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "images/BombPink.png", 5, "potato")
+potato = Enemy.create("potato", 7, 2, .9, 2, "images/potato.png", 7, "potato")
+oil = Enemy.create("oil", 7, 2, .9, 2, "images/oil.png", 7, "oil")
+sugar = Enemy.create("sugar", 7, 2, .9, 2, "images/sugar.png", 7, "sugar")
 
 --combinations
-pancake = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "images/BombPink.png", 5, "pancake")
-donut = Enemy.create ("donut", 5, 2, 1.1, 3, "iamges/donut.png", 5, "donut")
 bad = Enemy.create("GreenBomb", 5, 2, 1.1, 3, "images/BombGreen.png", 5, "bad")
+pancake = Enemy.create("pancake", 5, 2, 1.1, 3, "images/pancake.png", 5, "pancake")
+donut = Enemy.create ("donut", 5, 2, 1.1, 3, "images/donut.png", 5, "donut")
+cake = Enemy.create ("cake", 5, 2, 1.1, 3, "images/Cake.png", 5, "cake")
+CFS = Enemy.create ("CFS", 5, 2, 1.1, 3, "images/CFS.png", 5, "CFS")
+croquette = Enemy.create ("croquette", 5, 2, 1.1, 3, "images/croquette.png", 5, "croquette")
+fries = Enemy.create ("fries", 5, 2, 1.1, 3, "images/fries.png", 5, "fries")
+mashed = Enemy.create ("mashed", 5, 2, 1.1, 3, "images/MashPotato.png", 5, "mashed")
+meringue = Enemy.create ("meringue", 5, 2, 1.1, 3, "images/meringue.png", 5, "meringue")
+scrambledPotato = Enemy.create ("scrambledPotato", 5, 2, 1.1, 3, "images/potatoegg.png", 5, "scrambledPotato")
+steakBaked = Enemy.create ("steakBaked", 5, 2, 1.1, 3, "images/steakbaked.png", 5, "steakBaked")
+steakOm = Enemy.create ("steakOm", 5, 2, 1.1, 3, "images/SteakOm.png", 5, "steakOm")
+strawberryCandy = Enemy.create ("strawberryCandy", 5, 2, 1.1, 3, "images/StrawberryCandy.png", 5, "strawberryCandy")
+strawberryTart = Enemy.create ("strawberryTart", 5, 2, 1.1, 3, "images/StrawberryTart.png", 5, "strawberryTart")
 
 myEnemies = {}
 myEnemies[0] = egg
 myEnemies[1] = flour
 myEnemies[2] = steak
 myEnemies[3] = strawberry
+myEnemies[4] = oil
+myEnemies[5] = potato
+myEnemies[6] = sugar
 
 comboEnemies = {}
 --myEnemies[2] = pinkBomb
 --myEnemies[3] = greenBomb
 --combo enemies that shouldn't be spawning
-comboEnemies[0] = pancake
-comboEnemies[1] = donut 
-comboEnemies[2] = bad 
+comboEnemies[0] = bad
+comboEnemies[1] = pancake 
+comboEnemies[2] = donut 
+comboEnemies[3] = cake
+comboEnemies[4] = CFS
+comboEnemies[5] = croquette
+comboEnemies[6] = fries
+comboEnemies[7] = mashed
+comboEnemies[8] = meringue
+comboEnemies[9] = scrambledPotato
+comboEnemies[10] = steakBaked
+comboEnemies[11] = steakOm
+comboEnemies[12] = strawberryCandy
+comboEnemies[13] = strawberryTart
