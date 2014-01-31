@@ -1,22 +1,21 @@
 Level = {}
 Level.__index = Level
 
-local levels = {}
-levels[1] = {}
-levels[1] = {1, 0, {1,0,1,0}, 3000}
-
-function Level.create(levelID) --victoryCondition, enemyIDQueue, timeBetweenEachSpawn)
+function Level.create(levelID, victoryCondition, enemyIDQueue, timeBetweenEachSpawn)
    local level = {}             -- our new object
    setmetatable(level,Level)  -- make Level handle lookup
    level.levelID = levelID
    level.enemyIDQueue = {}
-   level.enemyIDQueue = levels[levelID][3] --#enemyIDQueue
-   level.totalNumberOfEnemies = #(level.enemyIDQueue)
+   level.enemyIDQueue = enemyIDQueue
+   level.totalNumberOfEnemies = #(enemyIDQueue)
    level.enemiesAlive = level.totalNumberOfEnemies
-   level.timeBetweenEachSpawn = levels[levelID][4]
-   level.spawnTimer = {}
+   level.timeBetweenEachSpawn = timeBetweenEachSpawn
    level.spawnCounter = 0
    return level
+end
+
+function Level.load(levelID)
+	return levels[levelID]
 end
 
 function Level:startLevel()
@@ -42,3 +41,7 @@ function Level:timer(event)
 	spawnEne(self.enemyIDQueue[self.spawnCounter])
 end
 
+
+levels = {}
+levels[1] = {}
+levels[1] = Level.create(1, 0, {1,0,1,0}, 1500)

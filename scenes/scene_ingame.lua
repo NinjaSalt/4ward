@@ -307,7 +307,7 @@ function scene:createScene( event )
     group:insert(hero[n])
 	group:insert(allHeroHealth[n])
   end
-  currentLevel = Level.create(1)
+  currentLevel = Level.load(1)
   currentLevel:startLevel()
 
 	-- parameters for ---------------------> make_bullet (x,y, hero attack)
