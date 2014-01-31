@@ -91,7 +91,7 @@ steak = Enemy.create ("steak", 6, 1, 1, 1, "images/egg.png", 5, "steak")
 strawberry = Enemy.create("strawberry", 7, 1, .85, 3, "images/strawberry.png", 7, "strawberry")
 
 -- placeholders
-darkBlue = Enemy.create("DarkBlue", 7, 2, .9, 2, "images/BombDarkBlue.png", 7, "flour")
+flour = Enemy.create("flour", 7, 2, .9, 2, "images/flour.png", 7, "flour")
 pinkBomb = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "images/BombPink.png", 5, "potato")
 
 --combinations
@@ -101,7 +101,7 @@ bad = Enemy.create("GreenBomb", 5, 2, 1.1, 3, "images/BombGreen.png", 5, "bad")
 
 myEnemies = {}
 myEnemies[0] = egg
-myEnemies[1] = darkBlue
+myEnemies[1] = flour
 myEnemies[2] = steak
 myEnemies[3] = strawberry
 
