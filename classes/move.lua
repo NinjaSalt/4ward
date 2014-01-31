@@ -26,13 +26,13 @@ function teleport( event, params )
 				--if myY ~= nil and myY<markY then
 				if event.y - event.yStart < -7 then
 					if body.y ~= lane1 then
-						body.y=body.y-80
+						body.y=body.y-(lane2-lane1)
 					end
 				--do the same as before but moving down
 				--elseif myY ~= nil and myY>markY then
 				elseif event.y - event.yStart > 7 then
-					if body.y ~= lane4 then
-					body.y=body.y+80
+					if body.y ~= lane3 then
+					body.y=body.y+(lane2-lane1)
 					end
 				end
 			elseif oneLaneAtATime == false then
