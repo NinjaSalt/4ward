@@ -83,20 +83,32 @@ function updateEnemyHealth()
 		allEnemHealth[i].x = allEne[i].x
 	end
 end
+
 --create and use enemy
-babyBlue = Enemy.create("BabyBlue", 5, 1, 1, 1, "images/BombBabyBlue.png", 5, "egg")
+-- basic ingredients
+egg = Enemy.create("egg", 5, 1, 1, 1, "images/egg.png", 5, "egg")
+steak = Enemy.create ("steak", 6, 1, 1, 1, "images/egg.png", 5, "steak")
+strawberry = Enemy.create("strawberry", 7, 1, .85, 3, "images/strawberry.png", 7, "strawberry")
+
+-- placeholders
 darkBlue = Enemy.create("DarkBlue", 7, 2, .9, 2, "images/BombDarkBlue.png", 7, "flour")
---pinkBomb = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "images/BombPink.png", 5, "potato")
---greenBomb = Enemy.create("GreenBomb", 7, 1, .85, 3, "images/BombGreen.png", 7, "strawberry")
+pinkBomb = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "images/BombPink.png", 5, "potato")
+
+--combinations
 pancake = Enemy.create("PinkBomb", 5, 2, 1.1, 3, "images/BombPink.png", 5, "pancake")
+donut = Enemy.create ("donut", 5, 2, 1.1, 3, "iamges/donut.png", 5, "donut")
 bad = Enemy.create("GreenBomb", 5, 2, 1.1, 3, "images/BombGreen.png", 5, "bad")
+
 myEnemies = {}
-myEnemies[0] = babyBlue
+myEnemies[0] = egg
 myEnemies[1] = darkBlue
+myEnemies[2] = steak
+myEnemies[3] = strawberry
 
 comboEnemies = {}
 --myEnemies[2] = pinkBomb
 --myEnemies[3] = greenBomb
 --combo enemies that shouldn't be spawning
 comboEnemies[0] = pancake
-comboEnemies[1] = bad 
+comboEnemies[1] = donut 
+comboEnemies[2] = bad 
