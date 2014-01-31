@@ -292,7 +292,7 @@ function scene:createScene( event )
 	createBullet(hero[1])
 	createBullet(hero[2])
    end
-  local bkg = display.newImage( "images/back.jpg", centerX, centerY, true )
+  local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert(bkg)
 
