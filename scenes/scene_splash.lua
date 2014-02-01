@@ -21,26 +21,12 @@ function scene:createScene( event )
   
   local options = {
    effect = "fade",
-   time = 500
+   time = 300	
 }
 
-  local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
-  bkg.height=display.contentHeight; bkg.width=display.contentWidth
-  group:insert (bkg)
-
- local gameTitle = display.newText( "4Ward Games", 0, 0, native.systemFontBold, 36 )
-  gameTitle:setFillColor(black)
-  gameTitle.x = display.contentCenterX
-  gameTitle.y = display.contentCenterY - 20
- 
-  group:insert( gameTitle )
- 
-  local startButton = display.newText( "Presents...", 0, 0, native.systemFont, 18 )
-  startButton:setFillColor(black)
-  startButton.x = display.contentCenterX
-  startButton.y = display.contentCenterY + 40
-
-  group:insert( startButton)
+  local splashScreen = display.newImage("images/4wardlogo.png", centerX,centerY,true)
+  splashScreen.height=display.contentHeight; splashScreen.width=display.contentWidth
+  group:insert(splashScreen)
 
   local function onTimer()
     storyboard.gotoScene("scenes.scene_home", options)

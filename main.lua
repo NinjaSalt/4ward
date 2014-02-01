@@ -11,6 +11,13 @@ local options = {
    time = 500
 }
 
+  -- load music
+  local theme = audio.loadStream("audio/theme.wav")
+
+  -- play music
+  local themeChannel = audio.play(theme,{channel =1, loops=-1})
+
+
 local storyboard = require( "storyboard" )
 storyboard.gotoScene("scenes.scene_splash" , options)
 
