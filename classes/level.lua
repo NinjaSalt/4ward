@@ -51,11 +51,12 @@ end
 --function Level:spawnNextEnemy()
 function Level:timer(event)
 	self.spawnCounter = self.spawnCounter + 1
-	print(self.spawnCounter)
 	spawnEne(self.enemyIDQueue[self.spawnCounter])
+	self.timeBetweenEachSpawn = 500
+	print ("Hi")
 end
 
 
 levels = {}
 levels[1] = {}
-levels[1] = Level.create(1, 0, {1,0,1,0}, 1500)
+levels[1] = Level.create(1, 0, {1,0,1,0}, 2000)

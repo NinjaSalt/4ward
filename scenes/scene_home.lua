@@ -38,6 +38,7 @@ function scene:createScene( event )
   group:insert( gameTitle )
  
   local startButton = display.newText( "Start", 0, 0, native.systemFont, 18 )
+  startButton:setFillColor(black)
   startButton.x = display.contentCenterX
   startButton.y = display.contentCenterY + 120
 
