@@ -47,7 +47,7 @@ end
    foodgroup = {}
 
    foodgroup = {
-      egg = {egg = "bad", flour = "pancake", potato = "scambledPotato", strawberry = "bad", oil = "bad", steak = "steakOm", sugar = "meringue", pancake = "bad",
+      egg = {egg = "bad", flour = "pancake", potato = "scrambledPotato", strawberry = "bad", oil = "bad", steak = "steakOm", sugar = "meringue", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
        fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
 
@@ -55,7 +55,7 @@ end
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
        fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
 
-      potato = {egg = "scambledPotato", flour = "croquette", potato = "mashed", strawberry = "bad", oil = "fries", steak = "steakBaked", sugar = "bad", pancake = "bad",
+      potato = {egg = "scrambledPotato", flour = "croquette", potato = "mashed", strawberry = "bad", oil = "fries", steak = "steakBaked", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
        fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
 
