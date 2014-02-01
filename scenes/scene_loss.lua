@@ -23,26 +23,34 @@ function scene:createScene( event )
    effect = "fade",
    time = 500
 }
+  
+  local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
+  bkg.height=display.contentHeight; bkg.width=display.contentWidth
+  group:insert (bkg)
 
  local gameTitle = display.newText( "Defeat!", 0, 0, native.systemFontBold, 36 )
+  gameTitle:setFillColor(black)
   gameTitle.x = display.contentCenterX
   gameTitle.y = 80
   
   group:insert( gameTitle )
   
   local scoreTitle = display.newText( "Enemies Left: Over 9000", 0, 0, native.systemFontBold, 24 )
+  scoreTitle:setFillColor(black)
   scoreTitle.x = display.contentCenterX
   scoreTitle.y = gameTitle.y + 50
  
   group:insert( scoreTitle )
  
   local replayButton = display.newText( "Replay", 0, 0, native.systemFont, 18 )
+  replayButton:setFillColor(black)
   replayButton.x = display.contentCenterX
   replayButton.y = scoreTitle.y + 50
 
   group:insert( replayButton)
   
   local mapButton = display.newText( "Map", 0, 0, native.systemFont, 18 )
+  mapButton:setFillColor(black)
   mapButton.x = display.contentCenterX
   mapButton.y = replayButton.y + 50
 

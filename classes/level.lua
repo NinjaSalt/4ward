@@ -56,7 +56,16 @@ function Level:timer(event)
 	print ("Hi")
 end
 
+--use as reference to create enemies
+--myEnemies[0] = egg
+--myEnemies[1] = flour
+--myEnemies[2] = steak
+--myEnemies[3] = strawberry
+--myEnemies[4] = oil
+--myEnemies[5] = potato
+--myEnemies[6] = sugar
+-- end reference
 
 levels = {}
 levels[1] = {}
-levels[1] = Level.create(1, 0, {1,0,1,0}, 2000)
+levels[1] = Level.create(1, 0, {1,4,1,0,5,2}, 2000)

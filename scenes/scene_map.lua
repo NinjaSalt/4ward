@@ -19,7 +19,13 @@ storyboard.removeAll()
 function scene:createScene( event )
   local group = self.view
   local levels = {}
+
+  local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
+  bkg.height=display.contentHeight; bkg.width=display.contentWidth
+  group:insert (bkg)
+
   local mapTitle = display.newText( "Level Select", 0, 0, native.systemFontBold, 36 )
+  mapTitle:setFillColor(black)
   mapTitle.x = display.contentCenterX
   mapTitle.y = 50
  
@@ -31,6 +37,7 @@ function scene:createScene( event )
   end
   
   levels[0] = display.newText( "Level 1", 0, 0, native.systemFont, 18 )
+  levels[0]:setFillColor(black)
   levels[0].x = display.contentCenterX
   levels[0].y = mapTitle.y + 80
   levels[0].id = 1
