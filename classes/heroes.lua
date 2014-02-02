@@ -1,3 +1,4 @@
+require("classes.items")
 Hero = {}
 Hero.__index = Hero
 
@@ -12,11 +13,12 @@ function Hero.create(health, attack, image, name)
    hero.laneSpeed = 2
    hero.abilityUsed = false
    hero.timer = 50
+   hero.item = 0
    return hero
 end
 
-function Hero:upgradeH( amount )
-   self.health = self.health + amount
+function Hero:changeItem( item )
+   self.item = item
 end
 
 function ability( event )
@@ -47,7 +49,7 @@ function ability( event )
 				end
 			--checks if the touch didn't move from original position. Meaning that it was a tap
 			elseif (event.x - event.xStart == 0) then
-				print ( hero.name )
+				useItem(hero)
 				if (hero.abilityUsed == false) then
 					hero.abilityUsed = true
 				elseif (hero.abilityUsed == true) then
@@ -67,6 +69,7 @@ function makeHero( newH, oldH )
 	newH.abilityUsed = oldH.abilityUsed
 	newH.laneSpeed = oldH.laneSpeed
 	newH.timer = oldH.timer
+	newH.item = oldH.item
 	return newH
 end
 
@@ -77,12 +80,12 @@ function updateHeroHealth(heroHealth)
 end
 
 -- create and use an Hero
-lapis = Hero.create(1000, 1, "images/ramsey.png", "lapis")
-norienne = Hero.create(1000, 1, "images/giada.png", "norienne")
-sun = Hero.create(1000, 1, "images/brown.png", "sun")
+chefB = Hero.create(1000, 1, "images/ramsey.png", "chefB")
+chefDin = Hero.create(1000, 1, "images/giada.png", "chefDin")
+chefDess = Hero.create(1000, 1, "images/brown.png", "chefDess")
 --joe = Hero.create(1000, 1, "penguinknight1.png", "joe")
 myHeroes = {}
-myHeroes[0]=lapis
-myHeroes[1]=norienne
-myHeroes[2]=sun
+myHeroes[0]=chefB
+myHeroes[1]=chefDin
+myHeroes[2]=chefDess
 --myHeroes[3]=joe

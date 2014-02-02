@@ -6,6 +6,8 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
  
+require("classes.items")
+require("classes.heroes")
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -18,42 +20,42 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  local levelList = {}
+  local itemList = {}
 
   local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-  local mapTitle = display.newText( "Level Select", 0, 0, native.systemFontBold, 36 )
-  mapTitle:setFillColor(black)
-  mapTitle.x = display.contentCenterX
-  mapTitle.y = 50
+  local storeTitle = display.newText( "Store", 0, 0, native.systemFontBold, 36 )
+  storeTitle:setFillColor(black)
+  storeTitle.x = display.contentCenterX
+  storeTitle.y = 50
  
-  group:insert( mapTitle )
- 
-  local function onTapLevel( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id}})
-  end
+  group:insert( storeTitle )
   
-  levelList[0] = display.newText( "Level 1", 0, 0, native.systemFont, 18 )
-  levelList[0]:setFillColor(black)
-  levelList[0].x = display.contentCenterX
-  levelList[0].y = mapTitle.y + 80
-  levelList[0].id = 1
+  itemList[0] = display.newText( "Egg", 0, 0, native.systemFont, 24 )
+  itemList[0]:setFillColor(black)
+  itemList[0].x = display.contentCenterX
+  itemList[0].y = storeTitle.y + 80
+  itemList[0].id = 1
 
-  group:insert( levelList[0])
-  
-  levelList[0]:addEventListener( "tap", onTapLevel )
-  
-  local menu = display.newRect( 455, 25, 50, 50 )
-
-  local function onTapMenu( event )
+  local function onTapItem( event )
+	--chefB.item = event.target.id
     storyboard.removeScene( scene )
-    storyboard.showOverlay( "scenes.scene_mapMenu",{ effect = "slideDown", time = 500})
+    storyboard.showOverlay( "scenes.scene_storeChef",{ effect = "slideDown", time = 500, params = {item = event.target.id}})
   end
-  group:insert( menu )
-  menu:addEventListener( "tap", onTapMenu )
+  group:insert( itemList[0])
+  
+  itemList[0]:addEventListener( "tap", onTapItem )
+  
+  local back = display.newRect( 455, 25, 50, 50 )
+
+  local function onTapBack( event )
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_map",{ effect = "slideDown", time = 500})
+  end
+  group:insert( back )
+  back:addEventListener( "tap", onTapBack )
 end
  
 -- Called BEFORE scene has moved onscreen:

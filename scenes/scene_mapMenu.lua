@@ -51,7 +51,7 @@ function scene:createScene( event )
   
   local function onTapStore( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_home",options)
+    storyboard.gotoScene( "scenes.scene_store",options)
   end
   
   storeButton:addEventListener( "tap", onTapStore )

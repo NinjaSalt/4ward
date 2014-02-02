@@ -1,11 +1,15 @@
 ---------------------------------------------------------------------------------
 -- SCENE NAME
 -- Scene notes go here
+-- The menu for the map screen
 ---------------------------------------------------------------------------------
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
+local itemToGive
  
+require("classes.items")
+require("classes.heroes")
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -18,42 +22,61 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  local levelList = {}
-
-  local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
-  bkg.height=display.contentHeight; bkg.width=display.contentWidth
+  
+  local options = {
+   effect = "fade",
+   time = 500
+}
+  local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
+  bkg:setFillColor( gray )
+  bkg.alpha = .5
   group:insert (bkg)
-
-  local mapTitle = display.newText( "Level Select", 0, 0, native.systemFontBold, 36 )
-  mapTitle:setFillColor(black)
-  mapTitle.x = display.contentCenterX
-  mapTitle.y = 50
- 
-  group:insert( mapTitle )
- 
-  local function onTapLevel( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id}})
+  
+  bkg:addEventListener("touch", function() return true end)
+  bkg:addEventListener("tap", function() return true end)
+  local menuBack = display.newRect( display.contentWidth/2, display.contentHeight/2, 250, 250)
+  group:insert (menuBack)
+  
+  local selChefB = display.newImage(chefB.image, display.contentWidth/2, (display.contentHeight/2) - 60)
+  selChefB.height = 50 
+  selChefB.width = 50 
+  group:insert (selChefB)
+  
+  local function onTapChefB( event )
+    chefB.item = itemToGive
+	storyboard.removeScene( scene )
+    storyboard.hideOverlay( "slideDown", 500 )
   end
   
-  levelList[0] = display.newText( "Level 1", 0, 0, native.systemFont, 18 )
-  levelList[0]:setFillColor(black)
-  levelList[0].x = display.contentCenterX
-  levelList[0].y = mapTitle.y + 80
-  levelList[0].id = 1
-
-  group:insert( levelList[0])
+  selChefB:addEventListener( "tap", onTapChefB )
   
-  levelList[0]:addEventListener( "tap", onTapLevel )
+  local selChefDin = display.newImage(chefDin.image, display.contentWidth/2, (display.contentHeight/2) )
+  selChefDin.height = 50 
+  selChefDin.width = 50 
+  group:insert (selChefDin)
   
-  local menu = display.newRect( 455, 25, 50, 50 )
-
-  local function onTapMenu( event )
-    storyboard.removeScene( scene )
-    storyboard.showOverlay( "scenes.scene_mapMenu",{ effect = "slideDown", time = 500})
+  local function onTapChefDin( event )
+    chefDin.item = itemToGive
+	storyboard.removeScene( scene )
+    storyboard.hideOverlay( "slideDown", 500 )
   end
-  group:insert( menu )
-  menu:addEventListener( "tap", onTapMenu )
+  
+  selChefDin:addEventListener( "tap", onTapChefDin )
+  
+  local selChefDess = display.newImage(chefDess.image, display.contentWidth/2, (display.contentHeight/2) + 60)
+  selChefDess.height = 50 
+  selChefDess.width = 50 
+  group:insert (selChefDess)
+  
+  local function onTapChefDess( event )
+    chefDess.item = itemToGive
+	storyboard.removeScene( scene )
+    storyboard.hideOverlay( "slideDown", 500 )
+  end
+  
+  selChefDess:addEventListener( "tap", onTapChefDess )
+
+  --startButton:addEventListener( "tap", onTap )
 end
  
 -- Called BEFORE scene has moved onscreen:
@@ -65,7 +88,8 @@ end
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
   local group = self.view
- 
+  local params = event.params
+  itemToGive = params.item
 end
  
 -- Called when scene is about to move offscreen:

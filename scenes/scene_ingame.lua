@@ -37,6 +37,7 @@ require("classes.enemies")
 require("classes.collision")
 require("classes.level")
 require("classes.combo")
+require("classes.items")
 
 -- Clear previous scene
 storyboard.removeAll()
