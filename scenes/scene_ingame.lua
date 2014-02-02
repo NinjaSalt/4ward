@@ -125,7 +125,7 @@ function scene:createEne(enemyID)
 	allEne[#allEne].x = 430; allEne[#allEne].y = lane
 
 	--set the move speedallEne
-	transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50) } )
+	transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50) }  )
 	allEne[#allEne]:addEventListener( "touch", teleport ) 
 	eneAndBar[0]=allEne[#allEne]
 	eneAndBar[1]=allEnemHealth[#allEne]
@@ -308,6 +308,7 @@ function scene:createScene( event )
     group:insert(hero[n])
 	group:insert(allHeroHealth[n])
   end
+  
   currentLevel = Level.load(thisLevel)
   currentLevel:startLevel()
 
@@ -317,8 +318,9 @@ function scene:createScene( event )
 	Runtime:addEventListener( "enterFrame", gameLoop )
 
 	local function onTap( event )
-	  storyboard.removeScene( scene )
-	  storyboard.gotoScene( "scenes.scene_home",options)
+		timer.pause(attackTimer)
+		timer.pause(currentLevel.spawnEneTimer)
+		transition.pause()
 	end
 
     pauseButton:addEventListener( "tap", onTap )
