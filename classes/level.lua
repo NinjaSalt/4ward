@@ -16,17 +16,7 @@ function Level.create(levelID, victoryCondition, enemyIDQueue, timeBetweenEachSp
 end
 
 function Level.load(levelID)
-	local level = {}
-   setmetatable(level,Level)  -- make Level handle lookup
-	level.levelID = levelID
-   level.enemyIDQueue = {}
-   level.enemyIDQueue = levels[levelID].enemyIDQueue
-   level.totalNumberOfEnemies = levels[levelID].totalNumberOfEnemies
-   level.enemiesAlive = levels[levelID].enemiesAlive
-   level.timeBetweenEachSpawn = levels[levelID].timeBetweenEachSpawn
-   level.spawnCounter = 0
-   level.spawnEneTimer = {}
-   return level
+   return levels[levelID]
 end
 
 function Level:startLevel()
