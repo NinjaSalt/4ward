@@ -1,6 +1,7 @@
 ---------------------------------------------------------------------------------
 -- SCENE NAME
 -- Scene notes go here
+-- The menu for the map screen
 ---------------------------------------------------------------------------------
  
 local storyboard = require( "storyboard" )
@@ -18,42 +19,55 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  local levelList = {}
-
-  local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
-  bkg.height=display.contentHeight; bkg.width=display.contentWidth
+  
+  local options = {
+   effect = "fade",
+   time = 500
+}
+  local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
+  bkg:setFillColor( gray )
+  bkg.alpha = .5
   group:insert (bkg)
-
-  local mapTitle = display.newText( "Level Select", 0, 0, native.systemFontBold, 36 )
-  mapTitle:setFillColor(black)
-  mapTitle.x = display.contentCenterX
-  mapTitle.y = 50
- 
-  group:insert( mapTitle )
- 
-  local function onTapLevel( event )
+  
+  bkg:addEventListener("touch", function() return true end)
+  bkg:addEventListener("tap", function() return true end)
+  local menuBack = display.newRect( display.contentWidth/2, display.contentHeight/2, 250, 250)
+  group:insert (menuBack)
+  
+  local mainButton = display.newText( "Main Menu", display.contentWidth/2, (display.contentHeight/2) - 60, native.systemFont, 24 )
+  mainButton:setFillColor(black)
+  group:insert (mainButton)
+  
+  local function onTapMain( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id}})
+    storyboard.gotoScene( "scenes.scene_home",options)
   end
   
-  levelList[0] = display.newText( "Level 1", 0, 0, native.systemFont, 18 )
-  levelList[0]:setFillColor(black)
-  levelList[0].x = display.contentCenterX
-  levelList[0].y = mapTitle.y + 80
-  levelList[0].id = 1
-
-  group:insert( levelList[0])
+  mainButton:addEventListener( "tap", onTapMain )
   
-  levelList[0]:addEventListener( "tap", onTapLevel )
+  local storeButton = display.newText( "Store", display.contentWidth/2, (display.contentHeight/2) , native.systemFont, 24 )
+  storeButton:setFillColor(black)
+  group:insert (storeButton)
   
-  local menu = display.newRect( 455, 25, 50, 50 )
-
-  local function onTapMenu( event )
+  local function onTapStore( event )
     storyboard.removeScene( scene )
-    storyboard.showOverlay( "scenes.scene_levelMenu",{ effect = "slideDown", time = 500})
+    storyboard.gotoScene( "scenes.scene_home",options)
   end
-  group:insert( menu )
-  menu:addEventListener( "tap", onTapMenu )
+  
+  storeButton:addEventListener( "tap", onTapStore )
+  
+  local backButton = display.newText( "Back", display.contentWidth/2, (display.contentHeight/2) + 60, native.systemFont, 24 )
+  backButton:setFillColor(black)
+  group:insert (backButton)
+
+  local function onTapBack( event )
+    storyboard.removeScene( scene )
+    storyboard.hideOverlay( "slideDown", 500 )
+  end
+  
+  backButton:addEventListener( "tap", onTapBack )
+
+  --startButton:addEventListener( "tap", onTap )
 end
  
 -- Called BEFORE scene has moved onscreen:
