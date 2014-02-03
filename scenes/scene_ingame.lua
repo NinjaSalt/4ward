@@ -272,7 +272,7 @@ end
 function scene:createScene( event )
 
   --Create the group that hold all the objects in the scene
-  local group = self.view
+  group = self.view
   local params = event.params
   thisLevel = params.level
   

@@ -32,8 +32,7 @@ end
 
 function startLevel(level)
 print("#enemies:"..level.totalNumberOfEnemies)
-	spawnEneTimer = timer.performWithDelay( level.timeBetweenEachSpawn, function() spawnNextEnemy(level) end, level.totalNumberOfEnemies )
-	spawnEneTimer.params = { myLevel = level}
+	spawnEneTimer = timer.performWithDelay( level.timeBetweenEachSpawn[1], function() spawnNextEnemy(level) end)
 end
 
 function endLevel(level, levelCompleted)
@@ -54,7 +53,10 @@ end
 function spawnNextEnemy(level)
 	level.spawnCounter = level.spawnCounter + 1
 	spawnEne(level.enemyIDQueue[level.spawnCounter])
-	level.timeBetweenEachSpawn = 500
+	--See if there are more enemies, if so recursively call the timer
+	if ( #(level.enemyIDQueue)~= level.spawnCounter ) then
+		spawnEneTimer = timer.performWithDelay( level.timeBetweenEachSpawn[level.spawnCounter], function() spawnNextEnemy(level) end)
+	end
 end
 
 --use as reference to create enemies
@@ -68,4 +70,5 @@ end
 -- end reference
 
 levels = {}
-levels[1] = Level.create(1, 0, {1,4,1,0,5,2}, 2000)
+-- the time between signifies the time that the next enemy will take to spawn
+levels[1] = Level.create(1, 0, {1,4,1,0,5,2}, {2000,1000,1500,3000,4000,5000})
