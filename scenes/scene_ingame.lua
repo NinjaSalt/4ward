@@ -5,7 +5,7 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
-local thisLevel = 1
+local thisLevel 
 -- Array to store heroes
 hero = {}
 
@@ -156,13 +156,13 @@ local function gameLoop( event )
 				heroHealth = heroHealth - 1
 				updateHeroHealth(heroHealth)
 				if heroHealth <= 0 then
-					currentLevel:endLevel(false)
+					endLevel(currentLevel, false)
 					storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel}})
 
 				end
-				currentLevel:decrementEnemy()
+				decrementEnemy(currentLevel)
 				if currentLevel.totalNumberOfEnemies == 0 and #allEne == 0 then
-					currentLevel:endLevel(true)
+					endLevel(currentLevel, true)
 					storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel}})
 				end
 			end
@@ -178,9 +178,9 @@ local function gameLoop( event )
 					table.remove(allEne, i)
 					allEnemHealth[i]:removeSelf()
 					table.remove(allEnemHealth, i)
-					currentLevel:decrementEnemy()
+					decrementEnemy(currentLevel)
 					if currentLevel.totalNumberOfEnemies == 0 and #allEne == 0 then
-						currentLevel:endLevel(true)
+						endLevel(currentLevel, true)
 						storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel}})
 					end
 				end
@@ -248,14 +248,14 @@ local function gameLoop( event )
 							table.remove(allEne, i)
 							allEnemHealth[i]:removeSelf()
 							table.remove(allEnemHealth, i)
-							currentLevel:decrementEnemy()
+							decrementEnemy(currentLevel)
 						else
 							-- if i is greater than n, need to remove the enemy 1 less than where i orginally was before removing n since the whole list shifted
 							allEne[i-1]:removeSelf()
 							table.remove(allEne, i-1)
 							allEnemHealth[i-1]:removeSelf()
 							table.remove(allEnemHealth, i-1)
-							currentLevel:decrementEnemy()
+							decrementEnemy(currentLevel)
 						end
 					end
 				end
@@ -272,8 +272,10 @@ end
 function scene:createScene( event )
 
   --Create the group that hold all the objects in the scene
-  group = self.view
-
+  local group = self.view
+  local params = event.params
+  thisLevel = params.level
+  
   local options = {
     effect = "slideDown",
     time = 500
@@ -308,9 +310,9 @@ function scene:createScene( event )
     group:insert(hero[n])
 	group:insert(allHeroHealth[n])
   end
-  
   currentLevel = Level.load(thisLevel)
-  currentLevel:startLevel()
+  group:insert(currentLevel)
+  startLevel(currentLevel)
 
 	-- parameters for ---------------------> make_bullet (x,y, hero attack)
 	attackTimer = timer.performWithDelay( 2000, heroNormalAttacks, 0)
@@ -319,7 +321,7 @@ function scene:createScene( event )
 
 	local function onTap( event )
 		timer.pause(attackTimer)
-		timer.pause(currentLevel.spawnEneTimer)
+		timer.pause(spawnEneTimer)
 		transition.pause()
 	end
 
@@ -335,9 +337,7 @@ end
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
   local group = self.view
-  local params = event.params
-  thisLevel = params.level
-  print(thisLevel)
+ 
 end
  
 -- Called when scene is about to move offscreen:
@@ -346,7 +346,7 @@ function scene:exitScene( event )
   Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )
   timer.cancel(attackTimer)
-  timer.cancel(currentLevel.spawnEneTimer)
+  timer.cancel(spawnEneTimer)
 end
  
 -- Called AFTER scene has finished moving offscreen:

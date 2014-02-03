@@ -18,6 +18,7 @@ end
 function Level.load(levelID)
 	local level = {}
    setmetatable(level,Level)  -- make Level handle lookup
+   level = display.newRect(0,0,0,0)
 	level.levelID = levelID
    level.enemyIDQueue = {}
    level.enemyIDQueue = levels[levelID].enemyIDQueue
@@ -29,30 +30,31 @@ function Level.load(levelID)
    return level
 end
 
-function Level:startLevel()
-print("#enemies:"..self.totalNumberOfEnemies)
-	self.spawnEneTimer = timer.performWithDelay( self.timeBetweenEachSpawn, self, self.totalNumberOfEnemies )
+function startLevel(level)
+print("#enemies:"..level.totalNumberOfEnemies)
+	spawnEneTimer = timer.performWithDelay( level.timeBetweenEachSpawn, function() spawnNextEnemy(level) end, level.totalNumberOfEnemies )
+	spawnEneTimer.params = { myLevel = level}
 end
 
-function Level:endLevel(levelCompleted)
+function endLevel(level, levelCompleted)
 	if levelCompleted == true then
 		print("You win!")
 	else print("You lose!")
 	end
-	self.spawnCounter = 0
+	level.spawnCounter = 0
 end
 
-function Level:decrementEnemy()
-	if self.totalNumberOfEnemies ~= -1 then
-		self.totalNumberOfEnemies = self.totalNumberOfEnemies -1
+function decrementEnemy(level)
+	if level.totalNumberOfEnemies ~= -1 then
+		level.totalNumberOfEnemies = level.totalNumberOfEnemies -1
 	end
 end
 
 --function Level:spawnNextEnemy()
-function Level:timer(event)
-	self.spawnCounter = self.spawnCounter + 1
-	spawnEne(self.enemyIDQueue[self.spawnCounter])
-	self.timeBetweenEachSpawn = 500
+function spawnNextEnemy(level)
+	level.spawnCounter = level.spawnCounter + 1
+	spawnEne(level.enemyIDQueue[level.spawnCounter])
+	level.timeBetweenEachSpawn = 500
 end
 
 --use as reference to create enemies
