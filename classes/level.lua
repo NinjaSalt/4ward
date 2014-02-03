@@ -5,6 +5,7 @@ function Level.create(levelID, victoryCondition, enemyIDQueue, timeBetweenEachSp
    local level = {}             -- our new object
    setmetatable(level,Level)  -- make Level handle lookup
    level.levelID = levelID
+   level.victoryCondition = victoryCondition
    level.enemyIDQueue = {}
    level.enemyIDQueue = enemyIDQueue
    level.totalNumberOfEnemies = #(enemyIDQueue)
@@ -19,7 +20,8 @@ function Level.load(levelID)
 	local level = {}
    setmetatable(level,Level)  -- make Level handle lookup
    level = display.newRect(0,0,0,0)
-	level.levelID = levelID
+   level.levelID = levelID
+   level.victoryCondition = levels[levelID].victoryCondition
    level.enemyIDQueue = {}
    level.enemyIDQueue = levels[levelID].enemyIDQueue
    level.totalNumberOfEnemies = levels[levelID].totalNumberOfEnemies
@@ -68,7 +70,16 @@ end
 --myEnemies[5] = potato
 --myEnemies[6] = sugar
 -- end reference
-
+function makeSecondaryWin( enemy, amount )
+	local secondaryWin = {}
+	secondaryWin.enemy = pancake
+	secondaryWin.amount = 1
+	secondaryWin.memAmount = amount
+	secondaryWin.conditionMet = false
+	return secondaryWin
+end
 levels = {}
+-- the victoryCondition is either zero for a normal level or 1 for a secondary objective
+-- the secondary objective is made up of the food and then how many, for example {1,{1,1},false} means they have to make 1 pancake
 -- the time between signifies the time that the next enemy will take to spawn
-levels[1] = Level.create(1, 0, {1,4,1,0,5,2}, {2000,1000,1500,3000,4000,5000})
+levels[1] = Level.create(1, makeSecondaryWin(pancake,1), {1,4,1,0,5,2}, {2000,2000,2000,2000,2000,2000})

@@ -161,9 +161,19 @@ local function gameLoop( event )
 
 				end
 				decrementEnemy(currentLevel)
-				if currentLevel.totalNumberOfEnemies == 0 and #allEne == 0 then
-					endLevel(currentLevel, true)
-					storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel}})
+				if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
+					if(currentLevel.victoryCondition~=false) then
+						if(currentLevel.victoryCondition.conditionMet==true)then
+							endLevel(currentLevel, true)
+							storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel}})
+						else 
+							endLevel(currentLevel, false)
+							storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel}})
+						end
+					else	
+						endLevel(currentLevel, true)
+						storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel}})
+					end
 				end
 			end
 		end
@@ -179,9 +189,19 @@ local function gameLoop( event )
 					allEnemHealth[i]:removeSelf()
 					table.remove(allEnemHealth, i)
 					decrementEnemy(currentLevel)
-					if currentLevel.totalNumberOfEnemies == 0 and #allEne == 0 then
-						endLevel(currentLevel, true)
-						storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel}})
+					if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
+						if(currentLevel.victoryCondition~=false) then
+							if(currentLevel.victoryCondition.conditionMet==true)then
+								endLevel(currentLevel, true)
+								storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel}})
+							else 
+								endLevel(currentLevel, false)
+								storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel}})
+							end
+						else	
+							endLevel(currentLevel, true)
+							storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel}})
+						end
 					end
 				end
 				remove_bullet(bullet_array[n])
@@ -212,7 +232,18 @@ local function gameLoop( event )
 						allEne[#allEne + 1] = comboEnemies[j]
 						allEne[#allEne] = display.newImage(allEne[#allEne].image)
 						allEne[#allEne] = passValuesToNewEne(allEne[#allEne], comboEnemies[j])
-
+						-- Check for Secondary Win condition
+						if(currentLevel.victoryCondition~=false) then
+							if(currentLevel.victoryCondition.enemy.name==allEne[#allEne].name)then
+								currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
+								print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
+								if (currentLevel.victoryCondition.amount == 0) then
+									print("Condition Met")
+									currentLevel.victoryCondition.conditionMet = true
+								end
+							end
+						end
+						
 						-- add health bars to enemies.
 						allEnemHealth[#allEne] = #allEne
 						allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
@@ -311,6 +342,12 @@ function scene:createScene( event )
 	group:insert(allHeroHealth[n])
   end
   currentLevel = Level.load(thisLevel)
+  --initalize the current level's secondary objectives and print them
+  if(currentLevel.victoryCondition~=false)then
+	currentLevel.victoryCondition.amount = currentLevel.victoryCondition.memAmount
+	currentLevel.victoryCondition.conditionMet = false
+	print("Make " .. currentLevel.victoryCondition.amount .. " " .. currentLevel.victoryCondition.enemy.name)
+  end
   group:insert(currentLevel)
   startLevel(currentLevel)
 
