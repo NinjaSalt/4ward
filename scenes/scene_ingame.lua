@@ -18,9 +18,6 @@ lane3 = 240
 allEne = {} 
 allEnemHealth = {}
 
---Hero health
-allHeroHealth = {}
-
 -- Hero Attack Variables
 local bullet_speed = 50 
 local bullet_array = {}   -- Make an array to hold the bullets
@@ -61,14 +58,6 @@ function scene:createHeroes()
     end
     hero[n].height = 50; hero[n].width = 50
 	hero[n]:addEventListener( "touch", ability )
-	
-	-- add health bars to heroes
-	--allHeroHealth[n] = #allEne
-	allHeroHealth[n] = display.newImage( "images/enemhealth.jpg" )
-	allHeroHealth[n].height = 10 
-	allHeroHealth[n].width = heroHealth/3 * 50
-	allHeroHealth[n].x = 50; allHeroHealth[n].y = n * 80 + 50
-	--end health bar.
 	
   end
 end  
@@ -154,7 +143,6 @@ local function gameLoop( event )
 				allEnemHealth[i]:removeSelf()
 				table.remove(allEnemHealth, i)
 				heroHealth = heroHealth - 1
-				updateHeroHealth(heroHealth)
 				if heroHealth <= 0 then
 					endLevel(currentLevel, false)
 					storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel}})
@@ -339,7 +327,6 @@ function scene:createScene( event )
   scene.createHeroes()
   for n=0,2,1 do
     group:insert(hero[n])
-	group:insert(allHeroHealth[n])
   end
   currentLevel = Level.load(thisLevel)
   --initalize the current level's secondary objectives and print them

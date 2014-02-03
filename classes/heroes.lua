@@ -73,12 +73,6 @@ function makeHero( newH, oldH )
 	return newH
 end
 
-function updateHeroHealth(heroHealth)
-	for i=0, 2, 1 do
-		allHeroHealth[i].width = heroHealth/3 * 50
-	end
-end
-
 -- create and use an Hero
 chefB = Hero.create(1000, 1, "images/ramsey.png", "chefB")
 chefDin = Hero.create(1000, 1, "images/giada.png", "chefDin")
