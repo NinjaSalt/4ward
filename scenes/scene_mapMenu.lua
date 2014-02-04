@@ -63,6 +63,7 @@ function scene:createScene( event )
   local function onTapBack( event )
     storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )
+    storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
   end
   
   backButton:addEventListener( "tap", onTapBack )

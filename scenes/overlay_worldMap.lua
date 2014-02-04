@@ -18,45 +18,18 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  local levelList = {}
-
-  local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
-  bkg.height=display.contentHeight; bkg.width=display.contentWidth
-  group:insert (bkg)
-
-  local mapTitle = display.newText( "World 1", 0, 0, native.systemFontBold, 36 )
-  mapTitle:setFillColor(black)
-  mapTitle.x = display.contentCenterX
-  mapTitle.y = 50
-  group:insert( mapTitle )
-
-  local rightArrow = display.newImageRect( "images/rightArrow.png", 50, 50 )
-  rightArrow.x = 455
-  rightArrow.y = 153
- 
-  local function onTapLevel( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id}})
-  end
   
-  levelList[0] = display.newText( "Level 1", 0, 0, native.systemFont, 18 )
-  levelList[0]:setFillColor(black)
-  levelList[0].x = display.contentCenterX
-  levelList[0].y = mapTitle.y + 80
-  levelList[0].id = 1
+  local pauseButton = display.newImage("images/Pause.png",25,25 )
+  pauseButton.x = 466
+  pauseButton.y = 12
+  group:insert(pauseButton)
 
-  group:insert( levelList[0])
-  
-  levelList[0]:addEventListener( "tap", onTapLevel )
-  
-  local menu = display.newRect( 455, 25, 50, 50 )
-
-  local function onTapMenu( event )
+  local function onTapPause( event )
     storyboard.removeScene( scene )
     storyboard.showOverlay( "scenes.scene_mapMenu",{ effect = "slideDown", time = 500})
   end
-  group:insert( menu )
-  menu:addEventListener( "tap", onTapMenu )
+
+  pauseButton:addEventListener( "tap", onTapPause )
 end
  
 -- Called BEFORE scene has moved onscreen:

@@ -35,6 +35,7 @@ require("classes.collision")
 require("classes.level")
 require("classes.combo")
 require("classes.items")
+require("classes.globals")
 
 -- Clear previous scene
 storyboard.removeAll()
@@ -44,6 +45,7 @@ storyboard.removeAll()
 ---------------------------------------------------------------------------------
 -- BEGINNING OF YOUR IMPLEMENTATION
 ---------------------------------------------------------------------------------
+
 -- function to 
 function scene:createHeroes()
   for n=0, 2, 1 do
@@ -83,7 +85,7 @@ function make_bullet( hero )
   table.insert( bullet_array, bullet)
   bullet.attack = attack
   local bt = x * bullet_speed
-  bullet.transition = transition.to( bullet, {x=500, time=bt, onComplete=remove_bullet} )
+  bullet.transition = transition.to( bullet, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
   return bullet
 end
 
@@ -114,7 +116,7 @@ function scene:createEne(enemyID)
 	allEne[#allEne].x = 430; allEne[#allEne].y = lane
 
 	--set the move speedallEne
-	transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50) }  )
+	transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50) ,tag="animation"}  )
 	allEne[#allEne]:addEventListener( "touch", teleport ) 
 	eneAndBar[0]=allEne[#allEne]
 	eneAndBar[1]=allEnemHealth[#allEne]
@@ -247,7 +249,7 @@ local function gameLoop( event )
 						allEne[#allEne].x = allEne[n].x; allEne[#allEne].y = allEne[n].y
 
 						--set the move speedallEne
-						transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50) } )
+						transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50), tag="animation" } )
 						allEne[#allEne]:addEventListener( "touch", teleport ) 
 						eneAndBar[0]=allEne[#allEne]
 						eneAndBar[1]=allEnemHealth[#allEne]
@@ -321,6 +323,15 @@ function scene:createScene( event )
   pauseButton.x = 466
   pauseButton.y = 12
   group:insert(pauseButton)
+
+ local function onTapPause( event )
+  	storyboard.showOverlay("scenes.scene_pause", {effect = "slideDown", time=500})
+  	timer.pause(attackTimer)
+	timer.pause(spawnEneTimer)
+	transition.pause("animation")
+  end
+
+  pauseButton:addEventListener( "tap", onTapPause )
   
   --create the heroes
   scene.createHeroes()
@@ -342,13 +353,6 @@ function scene:createScene( event )
 	--Runtime:addEventListener( "enterFrame", updateEnemyHealth )
 	Runtime:addEventListener( "enterFrame", gameLoop )
 
-	local function onTap( event )
-		timer.pause(attackTimer)
-		timer.pause(spawnEneTimer)
-		transition.pause()
-	end
-
-    pauseButton:addEventListener( "tap", onTap )
 end
  
 -- Called BEFORE scene has moved onscreen:

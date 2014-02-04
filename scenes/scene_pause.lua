@@ -1,6 +1,7 @@
 ---------------------------------------------------------------------------------
--- SCENE NAME
+-- PAUSE SCENE
 -- Scene notes go here
+
 ---------------------------------------------------------------------------------
  
 local storyboard = require( "storyboard" )
@@ -18,20 +19,58 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  local rect = display.newRect(0,0,480,320)
-  rect:setFillColor( 0.5 )
-  group:insert(rect)
   
   local options = {
    effect = "fade",
    time = 500
 }
-
-  local function onTap( event )
+  local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
+  bkg:setFillColor( gray )
+  bkg.alpha = .5
+  group:insert (bkg)
+  
+  bkg:addEventListener("touch", function() return true end)
+  bkg:addEventListener("tap", function() return true end)
+  local menuBack = display.newRect( display.contentWidth/2, display.contentHeight/2, 250, 250)
+  group:insert (menuBack)
+  
+  local mainButton = display.newText( "Main Menu", display.contentWidth/2, (display.contentHeight/2) - 60, native.systemFont, 24 )
+  mainButton:setFillColor(black)
+  group:insert (mainButton)
+  
+  local function onTapMain( event )
+    storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_home",options)
   end
-  rect:addEventListener( "tap", onTap )
+  
+  mainButton:addEventListener( "tap", onTapMain )
+  
+  local storeButton = display.newText( "Store", display.contentWidth/2, (display.contentHeight/2) , native.systemFont, 24 )
+  storeButton:setFillColor(black)
+  group:insert (storeButton)
+  
+  local function onTapStore( event )
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_store",options)
+  end
+  
+  storeButton:addEventListener( "tap", onTapStore )
+  
+  local backButton = display.newText( "Back", display.contentWidth/2, (display.contentHeight/2) + 60, native.systemFont, 24 )
+  backButton:setFillColor(black)
+  group:insert (backButton)
 
+  local function onTapBack( event )
+    storyboard.hideOverlay( "slideDown", 500 )
+    storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
+    timer.resume(attackTimer)
+    timer.resume(spawnEneTimer)
+    transition.resume()
+  end
+  
+  backButton:addEventListener( "tap", onTapBack )
+
+  --startButton:addEventListener( "tap", onTap )
 end
  
 -- Called BEFORE scene has moved onscreen:

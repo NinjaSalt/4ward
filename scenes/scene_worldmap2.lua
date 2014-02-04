@@ -45,15 +45,21 @@ function scene:createScene( event )
   group:insert( levelList[0])
   
   levelList[0]:addEventListener( "tap", onTapLevel )
-  
-  local menu = display.newRect( 455, 25, 50, 50 )
 
-  local function onTapMenu( event )
+  local leftArrow = display.newImageRect( "images/leftArrow.png", 50, 50 )
+  leftArrow.x = 35
+  leftArrow.y = 153
+  group:insert(leftArrow)
+ 
+  local function onTapLeftArrow( event )
     storyboard.removeScene( scene )
-    storyboard.showOverlay( "scenes.scene_mapMenu",{ effect = "slideDown", time = 500})
+    storyboard.gotoScene( "scenes.scene_worldmap1", {effect = "slideRight", time = 500})
+    storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
   end
-  group:insert( menu )
-  menu:addEventListener( "tap", onTapMenu )
+
+  leftArrow:addEventListener("tap", onTapLeftArrow)
+  
+  storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
 end
  
 -- Called BEFORE scene has moved onscreen:

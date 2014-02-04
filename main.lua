@@ -15,7 +15,7 @@ local options = {
   local theme = audio.loadStream("audio/theme.wav")
 
   -- play music
-  local themeChannel = audio.play(theme,{channel =1, loops=-1})
+ -- local themeChannel = audio.play(theme,{channel =1, loops=-1})
 
 
 local storyboard = require( "storyboard" )
