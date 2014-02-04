@@ -52,7 +52,7 @@ function scene:createScene( event )
 
   local function onTapBack( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_map",{ effect = "slideDown", time = 500})
+    storyboard.gotoScene( "scenes.scene_worldmap1",{ effect = "slideDown", time = 500})
   end
   group:insert( back )
   back:addEventListener( "tap", onTapBack )
