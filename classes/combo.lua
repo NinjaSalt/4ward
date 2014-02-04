@@ -63,6 +63,26 @@ function newHealth (obj1, obj2)
   end
 end
 
+-- function for calculating damage based on what row the enemy is.
+-- again, damage numbers may need tweaking. it'd be nice to have globals for the location of heroes.
+-- let me know if you want this in a separate file- i didn't know where
+-- the best place to put this would be.
+function calculateDamage (enemy_obj, bullet_obj)
+  local damage = bullet_obj.attack
+  if (bullet_obj.y == hero[0].y and enemy_obj.category == "breakfast") then
+    damage = damage*2 -- double damage for now
+  end 
+  if (bullet_obj.y == hero[1].y and enemy_obj.category == "dinner") then
+    damage = damage*2
+  end 
+  if (bullet_obj.y == hero[2].y and enemy_obj.category == "dessert") then
+    damage = damage*2
+  end 
+  if (enemy_obj.type == "bad") then
+    damage = damage/2
+  end 
+    return damage
+end
 
 
    foodgroup = {}

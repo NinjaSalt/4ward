@@ -205,7 +205,9 @@ local function gameLoop( event )
 	for i = 0,table.maxn( allEne ) do
 		for n = 0,table.maxn( bullet_array  ) do
 			if ( hasCollidedCircle( bullet_array [n], allEne[i]) ) then
-				allEne[i].health=allEne[i].health-bullet_array[n].attack
+				-- allEne[i].health=allEne[i].health-bullet_array[n].attack old damage system
+				-- new damage check
+				allEne[i].health= allEne[i].health - calculateDamage(allEne[i], bullet_array[n]) 
 				if ( allEne[i].health <= 0 ) then
 					theScore.add(allEne[i].pointValue)
 					allEne[i]:removeSelf()
