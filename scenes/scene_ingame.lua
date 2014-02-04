@@ -36,19 +36,12 @@ require("classes.level")
 require("classes.combo")
 require("classes.items")
 require("classes.globals")
+local levelScore = 0
 local theScore = require( "classes.score" )
 --local currency = require( "classes.score" )
 
 
-local scoreText = theScore.init({
-	fontSize = 20,
-	font = "Helvetica",
-	x = display.contentCenterX,
-	y = 20,
-	maxDigits = 7,
-	leadingZeros = false,
-	filename = "currencyfile.txt",
-	})
+local scoreText
 
 --[[local currencyText = currency.init({
 	fontSize = 20,
@@ -161,12 +154,13 @@ function laneTimerDown(hero)
 
   -- function to calculate currency based on score
 function currencyCalc( score, currCurrency )
+	local newCurrency = 0
 	counter = 0
-	for i = 0, score, 5 do 
-		print(i)
+	for i = 5, score, 5 do 
 		counter = counter + 1
 	end
-	return (currCurrency + counter)
+	newCurrency = currCurrency + counter
+	return newCurrency
 end
 
 local function gameLoop( event )
@@ -209,7 +203,9 @@ local function gameLoop( event )
 				-- new damage check
 				allEne[i].health= allEne[i].health - calculateDamage(allEne[i], bullet_array[n]) 
 				if ( allEne[i].health <= 0 ) then
-					theScore.add(allEne[i].pointValue)
+					--theScore.add(allEne[i].pointValue) 		-- adding the amount to score
+					levelScore = levelScore + allEne[i].pointValue
+					print("score: ", levelScore)
 					allEne[i]:removeSelf()
 					table.remove(allEne, i)
 					allEnemHealth[i]:removeSelf()
@@ -326,6 +322,15 @@ end
 
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
+	scoreText = theScore.init({
+		fontSize = 20,
+		font = "Helvetica",
+		x = display.contentCenterX,
+		y = display.contentHeight - 16,
+		maxDigits = 7,
+		leadingZeros = false,
+		filename = "scorefile.txt",
+		})
 
   --Create the group that hold all the objects in the scene
   group = self.view
@@ -400,12 +405,18 @@ end
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
   local group = self.view
+  local prevScore = theScore.load()
+		if prevScore then
+			theScore.set(prevScore)
+		end
  
 end
  
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
+  theScore.set(currencyCalc(levelScore, theScore.get()))
+  theScore.save()
   scoreText:removeSelf()
   Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )
