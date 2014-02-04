@@ -16,7 +16,7 @@ filename — The local filename to save the score to.
 If any settings aren’t specified, then we fall back to the 
 reasonable defaults, in this case, 24-point Helvetica, centered 
 at the top of the screen, with a maximum of 6 digits. By default, 
-the local save file target is scorefile.txt, but this can be 
+the local save file target is scorefile.txt, but this can be
 changed to another file name.]]
 function M.init( options )
 	local customOptions = options or {}
