@@ -34,7 +34,7 @@ function scene:createScene( event )
   local menuBack = display.newRect( display.contentWidth/2, display.contentHeight/2, 250, 250)
   group:insert (menuBack)
   
-  local mainButton = display.newText( "Main Menu", display.contentWidth/2, (display.contentHeight/2) - 60, native.systemFont, 24 )
+  local mainButton = display.newText( "Main Menu", display.contentWidth/2, (display.contentHeight/2) - 30, native.systemFont, 24 )
   mainButton:setFillColor(black)
   group:insert (mainButton)
   
@@ -45,23 +45,12 @@ function scene:createScene( event )
   
   mainButton:addEventListener( "tap", onTapMain )
   
-  local storeButton = display.newText( "Store", display.contentWidth/2, (display.contentHeight/2) , native.systemFont, 24 )
-  storeButton:setFillColor(black)
-  group:insert (storeButton)
-  
-  local function onTapStore( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_store",options)
-  end
-  
-  storeButton:addEventListener( "tap", onTapStore )
-  
-  local backButton = display.newText( "Back", display.contentWidth/2, (display.contentHeight/2) + 60, native.systemFont, 24 )
+  local backButton = display.newText( "Back", display.contentWidth/2, (display.contentHeight/2) + 30, native.systemFont, 24 )
   backButton:setFillColor(black)
   group:insert (backButton)
 
   local function onTapBack( event )
-    storyboard.hideOverlay( "slideDown", 500 )
+    storyboard.hideOverlay( "slideUp", 500 )
     storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
     timer.resume(attackTimer)
     timer.resume(spawnEneTimer)
