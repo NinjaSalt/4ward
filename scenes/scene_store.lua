@@ -8,6 +8,7 @@ local scene = storyboard.newScene()
  
 require("classes.items")
 require("classes.heroes")
+local widget = require( "widget" )
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -26,27 +27,67 @@ function scene:createScene( event )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-  local storeTitle = display.newText( "Store", 0, 0, native.systemFontBold, 36 )
+  local storeTitle = display.newText( "The Pantry", 0, 0, native.systemFontBold, 36 )
   storeTitle:setFillColor(black)
   storeTitle.x = display.contentCenterX
   storeTitle.y = 50
  
   group:insert( storeTitle )
   
-  itemList[0] = display.newText( "Egg", 0, 0, native.systemFont, 24 )
-  itemList[0]:setFillColor(black)
-  itemList[0].x = display.contentCenterX
-  itemList[0].y = storeTitle.y + 80
-  itemList[0].id = 1
+	local function scrollListener( event )
 
+		local phase = event.phase
+		if ( phase == "began" ) then print( "Scroll view was touched" )
+		elseif ( phase == "moved" ) then print( "Scroll view was moved" )
+		elseif ( phase == "ended" ) then print( "Scroll view was released" )
+		end
+
+		-- In the event a scroll limit is reached...
+		if ( event.limitReached ) then
+			if ( event.direction == "up" ) then print( "Reached top limit" )
+			elseif ( event.direction == "down" ) then print( "Reached bottom limit" )
+			elseif ( event.direction == "left" ) then print( "Reached left limit" )
+			elseif ( event.direction == "right" ) then print( "Reached right limit" )
+			end
+		end
+
+		return true
+	end
+
+-- Create the widget
+	local scrollView = widget.newScrollView{
+		y = 190,
+		x = display.contentCenterX,
+		width = 300,
+		height = 200,
+		topPadding = 20,
+		horizontalScrollDisabled = true,
+		listener = scrollListener
+	}
+  group:insert( scrollView)
+  
   local function onTapItem( event )
 	--chefB.item = event.target.id
     storyboard.removeScene( scene )
     storyboard.showOverlay( "scenes.scene_storeChef",{ effect = "slideDown", time = 500, params = {item = event.target.id}})
   end
-  group:insert( itemList[0])
   
-  itemList[0]:addEventListener( "tap", onTapItem )
+  local myY = 0
+	for i = 1,table.maxn( items ) do
+	  itemList[i] = display.newText( items[i].name .. " " .. items[i].cost, 0, 0, native.systemFont, 24 )
+	  itemList[i]:setFillColor(black)
+	  itemList[i].x = scrollView.width/2--scrollView.contentBounds.xMin
+	  itemList[i].y = myY
+	  itemList[i].id = i
+	  scrollView:insert( itemList[i] )
+	  myY=myY+40
+	  itemList[i]:addEventListener( "tap", onTapItem )
+	end
+
+  
+  --group:insert( itemList[0])
+  
+  
   
   local back = display.newRect( 455, 25, 50, 50 )
 

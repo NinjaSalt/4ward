@@ -1,8 +1,10 @@
 require("classes.enemies")
 items = {}
 items[0] = nil
-items[1]=egg
-items[2]=flour
+for i = 1,table.maxn( myEnemies )+1 do
+	items[i] = myEnemies[i-1]
+	items[i].cost = 500
+end
 
 function useItem(hero)
 	local item = hero.item
