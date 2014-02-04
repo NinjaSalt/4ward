@@ -38,9 +38,30 @@ function replaceEnemy (obj1, obj2)
    end
 end
 
-
-
-
+-- function for creating a new health based on what the two combined enemies were.
+-- some adjusting of numbers may be necessary.
+function newHealth (obj1, obj2)
+  if (obj1~= nil and obj2~=nil) then
+    -- standard combos: average of the two healths combined.
+    newHealthTotal = (allEne[obj1].health + allEne[obj2].health)/2
+    -- if the current combination doesn't contain a bad ingredient but will make one:
+    if (foodgroup[allEne[obj1].type][allEne[obj2].type] == "bad") then
+      newHealthTotal= (allEne[obj1].health + allEne[obj2].health)
+    end
+    -- if one OR both of the items in the current combination already is a "bad":
+    if (allEne[obj1].type == "bad" and allEne[obj2].type == "bad") then
+      newHealthTotal= (allEne[obj1].health + allEne[obj2].health)*2
+    end
+    if (allEne[obj1].type == "bad" and allEne[obj2].type ~= "bad") then
+      newHealthTotal= (allEne[obj1].health + allEne[obj2].health)*1.5
+    end
+    if (allEne[obj1].type ~= "bad" and allEne[obj2].type == "bad") then
+      newHealthTotal= (allEne[obj1].health + allEne[obj2].health)*1.5
+    end
+    print (newHealthTotal)
+    return newHealthTotal
+  end
+end
 
 
 

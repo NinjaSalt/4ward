@@ -236,9 +236,8 @@ local function gameLoop( event )
 						allEnemHealth[#allEne] = #allEne
 						allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
 						allEnemHealth[#allEne].height = 10 
-						--allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
-						--need to work on the new health bar for the combo enemy
-						allEne[#allEne].health = (allEne[n].health + allEne[i].health)/2
+						-- creates a new health.
+						allEnemHealth[#allEne].health = newHealth(n,i)
 						allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
 						allEnemHealth[#allEne].x = allEnemHealth[n].x; allEnemHealth[#allEne].y = allEnemHealth[n].y
 						--end health bar.
