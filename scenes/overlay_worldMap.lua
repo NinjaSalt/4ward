@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------
--- SCENE NAME
+-- World Map Overlay
 -- Scene notes go here
 ---------------------------------------------------------------------------------
  
@@ -24,12 +24,15 @@ function scene:createScene( event )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-  local mapTitle = display.newText( "Level Select", 0, 0, native.systemFontBold, 36 )
+  local mapTitle = display.newText( "World 1", 0, 0, native.systemFontBold, 36 )
   mapTitle:setFillColor(black)
   mapTitle.x = display.contentCenterX
   mapTitle.y = 50
- 
   group:insert( mapTitle )
+
+  local rightArrow = display.newImageRect( "images/rightArrow.png", 50, 50 )
+  rightArrow.x = 455
+  rightArrow.y = 153
  
   local function onTapLevel( event )
     storyboard.removeScene( scene )

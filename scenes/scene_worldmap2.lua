@@ -18,38 +18,42 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  
-  local options = {
-   effect = "fade",
-   time = 500
-}
+  local levelList = {}
+
   local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-
- --local gameTitle = display.newText( "Now we're cooking!", 0, 0, native.systemFontBold, 36 )
-  gameTitle = display.newImage("images/mocklogo.png")
-  gameTitle.width = gameTitle.width*.2
-  gameTitle.height = gameTitle.height*.2
-  gameTitle.x = display.contentCenterX - 10
-  gameTitle.y = display.contentCenterY - 30
+  local mapTitle = display.newText( "World 2", 0, 0, native.systemFontBold, 36 )
+  mapTitle:setFillColor(black)
+  mapTitle.x = display.contentCenterX
+  mapTitle.y = 50
  
-  group:insert( gameTitle )
+  group:insert( mapTitle )
  
-  local startButton = display.newText( "Start", 0, 0, native.systemFont, 18 )
-  startButton:setFillColor(black)
-  startButton.x = display.contentCenterX
-  startButton.y = display.contentCenterY + 120
-
-  group:insert( startButton)
-
-  local function onTap( event )
+  local function onTapLevel( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_worldmap1",options)
+    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id}})
   end
+  
+  levelList[0] = display.newText( "Level 1", 0, 0, native.systemFont, 18 )
+  levelList[0]:setFillColor(black)
+  levelList[0].x = display.contentCenterX
+  levelList[0].y = mapTitle.y + 80
+  levelList[0].id = 1
 
-  startButton:addEventListener( "tap", onTap )
+  group:insert( levelList[0])
+  
+  levelList[0]:addEventListener( "tap", onTapLevel )
+  
+  local menu = display.newRect( 455, 25, 50, 50 )
+
+  local function onTapMenu( event )
+    storyboard.removeScene( scene )
+    storyboard.showOverlay( "scenes.scene_mapMenu",{ effect = "slideDown", time = 500})
+  end
+  group:insert( menu )
+  menu:addEventListener( "tap", onTapMenu )
 end
  
 -- Called BEFORE scene has moved onscreen:
