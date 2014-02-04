@@ -1,7 +1,7 @@
 Enemy = {}
 Enemy.__index = Enemy
 
-function Enemy.create(name, health, attack, speed, defense, image, maxHealth, type)
+function Enemy.create(name, health, attack, speed, defense, image, maxHealth, type, pointValue)
         local enemy = {}                                --new object
         setmetatable( enemy, Enemy )        --make Enemy
         enemy.name = name                                 --initialize object
@@ -13,6 +13,7 @@ function Enemy.create(name, health, attack, speed, defense, image, maxHealth, ty
         enemy.maxHealth = maxHealth
         enemy.class = "enemy"
         enemy.type = type
+        enemy.pointValue = pointValue
         return enemy
 end
 
@@ -47,6 +48,7 @@ function passValuesToNewEne(newE, oldE)
         newE.class = oldE.class
         newE.maxHealth= oldE.maxHealth
         newE.type = oldE.type
+        newE.pointValue = oldE.pointValue
         return newE
 end
 
@@ -86,31 +88,31 @@ end
 
 --create and use enemy
 -- basic ingredients
-egg = Enemy.create("egg", 5, 1, 1, 1, "images/egg.png", 5, "egg")
-steak = Enemy.create ("steak", 6, 1, 1, 1, "images/steak.png", 5, "steak")
-strawberry = Enemy.create("strawberry", 7, 1, .85, 3, "images/strawberry.png", 7, "strawberry")
+egg = Enemy.create("egg", 5, 1, 1, 1, "images/egg.png", 5, "egg", 5)
+steak = Enemy.create ("steak", 6, 1, 1, 1, "images/steak.png", 5, "steak", 5)
+strawberry = Enemy.create("strawberry", 7, 1, .85, 3, "images/strawberry.png", 7, "strawberry", 5)
 
 -- placeholders
-flour = Enemy.create("flour", 7, 2, .9, 2, "images/flour.png", 7, "flour")
-potato = Enemy.create("potato", 7, 2, .9, 2, "images/potato.png", 7, "potato")
-oil = Enemy.create("oil", 7, 2, .9, 2, "images/fryer.png", 7, "oil")
-sugar = Enemy.create("sugar", 7, 2, .9, 2, "images/sugar.png", 7, "sugar")
+flour = Enemy.create("flour", 7, 2, .9, 2, "images/flour.png", 7, "flour", 5)
+potato = Enemy.create("potato", 7, 2, .9, 2, "images/potato.png", 7, "potato", 5)
+oil = Enemy.create("oil", 7, 2, .9, 2, "images/fryer.png", 7, "oil", 5)
+sugar = Enemy.create("sugar", 7, 2, .9, 2, "images/sugar.png", 7, "sugar", 5)
 
 --combinations
-bad = Enemy.create("GreenBomb", 5, 2, 1.1, 3, "images/BombGreen.png", 5, "bad")
-pancake = Enemy.create("pancake", 5, 2, 1.1, 3, "images/pancake.png", 5, "pancake")
-donut = Enemy.create ("donut", 5, 2, 1.1, 3, "images/donut.png", 5, "donut")
-cake = Enemy.create ("cake", 5, 2, 1.1, 3, "images/Cake.png", 5, "cake")
-CFS = Enemy.create ("CFS", 5, 2, 1.1, 3, "images/CFS.png", 5, "CFS")
-croquette = Enemy.create ("croquette", 5, 2, 1.1, 3, "images/croquette.png", 5, "croquette")
-fries = Enemy.create ("fries", 5, 2, 1.1, 3, "images/fries.png", 5, "fries")
-mashed = Enemy.create ("mashed", 5, 2, 1.1, 3, "images/MashPotato.png", 5, "mashed")
-meringue = Enemy.create ("meringue", 5, 2, 1.1, 3, "images/meringue.png", 5, "meringue")
-scrambledPotato = Enemy.create ("scrambledPotato", 5, 2, 1.1, 3, "images/scrambledPotato.png", 5, "scrambledPotato")
-steakBaked = Enemy.create ("steakBaked", 5, 2, 1.1, 3, "images/steakbaked.png", 5, "steakBaked")
-steakOm = Enemy.create ("steakOm", 5, 2, 1.1, 3, "images/SteakOm.png", 5, "steakOm")
-strawberryCandy = Enemy.create ("strawberryCandy", 5, 2, 1.1, 3, "images/StrawberryCandy.png", 5, "strawberryCandy")
-strawberryTart = Enemy.create ("strawberryTart", 5, 2, 1.1, 3, "images/StrawberryTart.png", 5, "strawberryTart")
+bad = Enemy.create("GreenBomb", 5, 2, 1.1, 3, "images/BombGreen.png", 5, "bad", -3)
+pancake = Enemy.create("pancake", 5, 2, 1.1, 3, "images/pancake.png", 5, "pancake", 10)
+donut = Enemy.create ("donut", 5, 2, 1.1, 3, "images/donut.png", 5, "donut", 10)
+cake = Enemy.create ("cake", 5, 2, 1.1, 3, "images/Cake.png", 5, "cake", 10)
+CFS = Enemy.create ("CFS", 5, 2, 1.1, 3, "images/CFS.png", 5, "CFS", 10)
+croquette = Enemy.create ("croquette", 5, 2, 1.1, 3, "images/croquette.png", 5, "croquette",10)
+fries = Enemy.create ("fries", 5, 2, 1.1, 3, "images/fries.png", 5, "fries",10)
+mashed = Enemy.create ("mashed", 5, 2, 1.1, 3, "images/MashPotato.png", 5, "mashed",10)
+meringue = Enemy.create ("meringue", 5, 2, 1.1, 3, "images/meringue.png", 5, "meringue",10)
+scrambledPotato = Enemy.create ("scrambledPotato", 5, 2, 1.1, 3, "images/scrambledPotato.png", 5, "scrambledPotato",10)
+steakBaked = Enemy.create ("steakBaked", 5, 2, 1.1, 3, "images/steakbaked.png", 5, "steakBaked",10)
+steakOm = Enemy.create ("steakOm", 5, 2, 1.1, 3, "images/SteakOm.png", 5, "steakOm",10)
+strawberryCandy = Enemy.create ("strawberryCandy", 5, 2, 1.1, 3, "images/StrawberryCandy.png", 5, "strawberryCandy",10)
+strawberryTart = Enemy.create ("strawberryTart", 5, 2, 1.1, 3, "images/StrawberryTart.png", 5, "strawberryTart",10)
 
 myEnemies = {}
 myEnemies[0] = egg

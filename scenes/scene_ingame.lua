@@ -36,6 +36,29 @@ require("classes.level")
 require("classes.combo")
 require("classes.items")
 require("classes.globals")
+local theScore = require( "classes.score" )
+--local currency = require( "classes.score" )
+
+
+local scoreText = theScore.init({
+	fontSize = 20,
+	font = "Helvetica",
+	x = display.contentCenterX,
+	y = 20,
+	maxDigits = 7,
+	leadingZeros = false,
+	filename = "currencyfile.txt",
+	})
+
+--[[local currencyText = currency.init({
+	fontSize = 20,
+	font = "Helvetica",
+	x = display.contentCenterX,
+	y = display.contentHeight - 32/2,
+	maxDigits = 7,
+	leadingZeros = false,
+	filename = "currencyfile.txt",
+	})]]
 
 -- Clear previous scene
 storyboard.removeAll()
@@ -136,6 +159,16 @@ function laneTimerDown(hero)
 	
  end
 
+  -- function to calculate currency based on score
+function currencyCalc( score, currCurrency )
+	counter = 0
+	for i = 0, score, 5 do 
+		print(i)
+		counter = counter + 1
+	end
+	return (currCurrency + counter)
+end
+
 local function gameLoop( event )
 	for i = 0,table.maxn( allEne ) do
 		for n = 0,table.maxn( hero ) do
@@ -174,6 +207,7 @@ local function gameLoop( event )
 			if ( hasCollidedCircle( bullet_array [n], allEne[i]) ) then
 				allEne[i].health=allEne[i].health-bullet_array[n].attack
 				if ( allEne[i].health <= 0 ) then
+					theScore.add(allEne[i].pointValue)
 					allEne[i]:removeSelf()
 					table.remove(allEne, i)
 					allEnemHealth[i]:removeSelf()
@@ -370,6 +404,7 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
+  scoreText:removeSelf()
   Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )
   timer.cancel(attackTimer)
