@@ -3,6 +3,7 @@
 -- Scene notes go here
 ---------------------------------------------------------------------------------
  
+local globals = require("classes.globals") 
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
  
@@ -19,15 +20,29 @@ storyboard.removeAll()
 function scene:createScene( event )
   local group = self.view
 
+  globals.hearts[0].x = 15; globals.hearts[0].y = 15
+  group:insert(globals.hearts[0])
+
+  globals.hearts[1].x = 40; globals.hearts[1].y = 15
+  group:insert(globals.hearts[1])
+
+  globals.hearts[2].x = 65; globals.hearts[2].y = 15
+  group:insert(globals.hearts[2])
+     
+
   local pauseButton = display.newImage("images/Pause.png",25,25 )
   pauseButton.x = 466
   pauseButton.y = 12
   group:insert(pauseButton)
 
-  local function onTapPause( event )
-    storyboard.removeScene( scene )
-    storyboard.showOverlay( "scenes.scene_mapMenu",{ effect = "slideDown", time = 1000})
+ local function onTapPause( event )
+    storyboard.showOverlay("scenes.scene_pause", {effect = "slideDown", time=500})
+    timer.pause(attackTimer)
+    timer.pause(spawnEneTimer)
+    transition.pause("animation")
   end
+
+  pauseButton:addEventListener( "tap", onTapPause )
 end
  
 -- Called BEFORE scene has moved onscreen:

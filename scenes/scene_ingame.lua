@@ -35,7 +35,7 @@ require("classes.collision")
 require("classes.level")
 require("classes.combo")
 require("classes.items")
-require("classes.globals")
+local globals = require("classes.globals")
 local levelScore = 0
 local currency = require( "classes.score" )
 --local currency = require( "classes.score" )
@@ -173,6 +173,18 @@ local function gameLoop( event )
 				table.remove(allEne, i)
 				allEnemHealth[i]:removeSelf()
 				table.remove(allEnemHealth, i)
+
+				if(globals.hearts[2] ~= nil) then
+					globals.hearts[2]:removeSelf()
+					globals.hearts[2] = nil
+				elseif(globals.hearts[1] ~= nil) then
+						globals.hearts[1]:removeSelf()
+						globals.hearts[1] = nil
+				elseif(globals.hearts[0] ~= nil) then
+						globals.hearts[0]:removeSelf()
+						globals.hearts[0] = nil				
+				end
+
 				heroHealth = heroHealth - 1
 				if heroHealth <= 0 then
 					endLevel(currentLevel, false)
@@ -367,20 +379,6 @@ function scene:createScene( event )
   local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert(bkg)
-
-  local pauseButton = display.newImage("images/Pause.png",25,25 )
-  pauseButton.x = 466
-  pauseButton.y = 12
-  group:insert(pauseButton)
-
- local function onTapPause( event )
-  	storyboard.showOverlay("scenes.scene_pause", {effect = "slideDown", time=500})
-  	timer.pause(attackTimer)
-	timer.pause(spawnEneTimer)
-	transition.pause("animation")
-  end
-
-  pauseButton:addEventListener( "tap", onTapPause )
   
   --create the heroes
   scene.createHeroes()
@@ -401,6 +399,9 @@ function scene:createScene( event )
 	attackTimer = timer.performWithDelay( 2000, heroNormalAttacks, 0)
 	--Runtime:addEventListener( "enterFrame", updateEnemyHealth )
 	Runtime:addEventListener( "enterFrame", gameLoop )
+
+	-- scene.overlay hud
+	storyboard.showOverlay("scenes.scene_hud")
 end
  
 -- Called BEFORE scene has moved onscreen:
