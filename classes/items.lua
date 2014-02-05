@@ -4,6 +4,11 @@ items[0] = nil
 for i = 1,table.maxn( myEnemies )+1 do
 	items[i] = myEnemies[i-1]
 	items[i].cost = 500
+	if i < 4 then
+		items[i].unlocked = true
+	else
+		items[i].unlocked = false
+	end
 end
 
 function useItem(hero)

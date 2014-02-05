@@ -78,21 +78,23 @@ function scene:createScene( event )
   local myY = 0
   local costList = {}
 	for i = 1,table.maxn( items ) do
-	  itemList[i] = display.newText( items[i].name, 0, 0, native.systemFont, 24 )
-	  itemList[i].anchorX = 0
-	  --itemList[i]:setFillColor(white)
-	  itemList[i].x = 20--scrollView.contentBounds.xMin
-	  itemList[i].y = myY
-	  itemList[i].id = i
-	  costList[i] = display.newText( items[i].cost, 0, 0, native.systemFont, 24 )
-	  costList[i].anchorX = 0
-	  costList[i].y = myY
-	  costList[i].x = scrollView.width-20
-	  costList[i].anchorX = 1
-	  scrollView:insert( itemList[i] )
-	  scrollView:insert( costList[i] )
-	  myY=myY+40
-	  itemList[i]:addEventListener( "tap", onTapItem )
+		if ( items[i].unlocked ) then 
+		  itemList[i] = display.newText( items[i].name, 0, 0, native.systemFont, 24 )
+		  itemList[i].anchorX = 0
+		  --itemList[i]:setFillColor(white)
+		  itemList[i].x = 20--scrollView.contentBounds.xMin
+		  itemList[i].y = myY
+		  itemList[i].id = i
+		  costList[i] = display.newText( items[i].cost, 0, 0, native.systemFont, 24 )
+		  costList[i].anchorX = 0
+		  costList[i].y = myY
+		  costList[i].x = scrollView.width-20
+		  costList[i].anchorX = 1
+		  scrollView:insert( itemList[i] )
+		  scrollView:insert( costList[i] )
+		  myY=myY+40
+		  itemList[i]:addEventListener( "tap", onTapItem )
+		end
 	end
 
   
@@ -103,6 +105,7 @@ function scene:createScene( event )
   local back = display.newRect( 455, 25, 50, 50 )
 
   local function onTapBack( event )
+    items[4].unlocked = true
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_worldmap1",{ effect = "slideDown", time = 500})
   end
