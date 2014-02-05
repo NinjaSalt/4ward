@@ -6,6 +6,9 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
  
+require("classes.items")
+require("classes.heroes")
+local widget = require( "widget" )
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -18,59 +21,28 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  local levelList = {}
+  local itemList = {}
 
   local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-  local mapTitle = display.newText( "World 1", 0, 0, native.systemFontBold, 36 )
-  mapTitle:setFillColor(black)
-  mapTitle.x = display.contentCenterX
-  mapTitle.y = 50
-  group:insert( mapTitle )
+  local bookTitle = display.newText( "Recipe Book", 0, 0, native.systemFontBold, 36 )
+  bookTitle:setFillColor(black)
+  bookTitle.x = display.contentCenterX
+  bookTitle.y = 50
  
-  local function onTapLevel( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id}})
-  end
+  group:insert( bookTitle )
   
-  levelList[0] = display.newText( "Level 1", 0, 0, native.systemFont, 18 )
-  levelList[0]:setFillColor(black)
-  levelList[0].x = display.contentCenterX
-  levelList[0].y = mapTitle.y + 80
-  levelList[0].id = 1
 
-  group:insert( levelList[0])
-  
-  levelList[0]:addEventListener( "tap", onTapLevel )
+  local back = display.newRect( 455, 25, 50, 50 )
 
-  local rightArrow = display.newImageRect( "images/rightArrow.png", 50, 50 )
-  rightArrow.x = 455
-  rightArrow.y = 153
-  group:insert(rightArrow)
-
-  local bookIcon = display.newImageRect( "images/rightArrow.png", 30, 30 )
-  bookIcon.x = 30
-  bookIcon.y = 30
-  group:insert(bookIcon)
- 
-  local function onTapRightArrow( event )
+  local function onTapBack( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_worldmap2", {effect = "slideLeft", time = 500})
-    storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
+    storyboard.gotoScene( "scenes.scene_worldmap1",{ effect = "slideDown", time = 500})
   end
-  -- to get to recipe book.
-  local function onTapBookIcon( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_book", {effect = "fade", time = 500})
-    storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
-  end
-
-  rightArrow:addEventListener("tap", onTapRightArrow)
-  bookIcon:addEventListener("tap", onTapBookIcon)
-
-  storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
+  group:insert( back )
+  back:addEventListener( "tap", onTapBack )
 end
  
 -- Called BEFORE scene has moved onscreen:
