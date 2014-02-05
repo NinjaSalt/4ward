@@ -6,7 +6,7 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
  
-require("classes.items")
+require("classes.recipes")
 require("classes.heroes")
 local widget = require( "widget" )
 -- Clear previous scene
@@ -21,19 +21,68 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  local itemList = {}
+  local recipesList = {}
 
   local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-  local bookTitle = display.newText( "Recipe Book", 0, 0, native.systemFontBold, 36 )
+  local bookTitle = display.newText( "Recipe Book", 0, 0, native.systemFontBold, 25 )
   bookTitle:setFillColor(black)
   bookTitle.x = display.contentCenterX
   bookTitle.y = 50
  
   group:insert( bookTitle )
   
+  local function scrollListener( event )
+
+  local phase = event.phase
+  if ( phase == "began" ) then print( "Scroll view was touched" )
+  elseif ( phase == "moved" ) then print( "Scroll view was moved" )
+  elseif ( phase == "ended" ) then print( "Scroll view was released" )
+  end
+
+  -- In the event a scroll limit is reached...
+  if ( event.limitReached ) then
+    if ( event.direction == "up" ) then print( "Reached top limit" )
+    elseif ( event.direction == "down" ) then print( "Reached bottom limit" )
+    elseif ( event.direction == "left" ) then print( "Reached left limit" )
+    elseif ( event.direction == "right" ) then print( "Reached right limit" )
+    end
+  end
+
+  return true
+end
+
+-- Create the widget
+local scrollView = widget.newScrollView{
+  y = 190,
+  x = display.contentCenterX + display.contentWidth/4,
+  width = display.contentWidth/2 - 20,
+  height = display.contentHeight - 100,
+  topPadding = 20,
+  horizontalScrollDisabled = true,
+  listener = scrollListener
+  }
+  group:insert( scrollView)
+
+  local function onTapItem( event )
+  --chefB.item = event.target.id
+  --storyboard.removeScene( scene )
+  --storyboard.showOverlay( "scenes.scene_storeChef",{ effect = "slideDown", time = 500, params = {item = event.target.id}})
+  end
+
+  local myY = 0
+  for i = 1,table.maxn( recipes ) do
+    recipesList[i] = display.newText( recipes[i].name, 0, 0, native.systemFont, 24 )
+    recipesList[i]:setFillColor(black)
+    recipesList[i].x = scrollView.width/2--scrollView.contentBounds.xMin
+    recipesList[i].y = myY
+    recipesList[i].id = i
+    scrollView:insert( recipesList[i] )
+    myY=myY+40
+    recipesList[i]:addEventListener( "tap", onTapItem )
+  end
 
   local back = display.newRect( 455, 25, 50, 50 )
 
