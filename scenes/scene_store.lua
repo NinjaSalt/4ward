@@ -54,6 +54,7 @@ function scene:createScene( event )
 		return true
 	end
 
+	
 -- Create the widget
 	local scrollView = widget.newScrollView{
 		y = 190,
@@ -61,7 +62,9 @@ function scene:createScene( event )
 		width = 300,
 		height = 200,
 		topPadding = 20,
+		--hideBackground = true,
 		horizontalScrollDisabled = true,
+		backgroundColor = { 0.2, 0.2, 0.2 },
 		listener = scrollListener
 	}
   group:insert( scrollView)
@@ -73,13 +76,21 @@ function scene:createScene( event )
   end
   
   local myY = 0
+  local costList = {}
 	for i = 1,table.maxn( items ) do
-	  itemList[i] = display.newText( items[i].name .. " " .. items[i].cost, 0, 0, native.systemFont, 24 )
-	  itemList[i]:setFillColor(black)
-	  itemList[i].x = scrollView.width/2--scrollView.contentBounds.xMin
+	  itemList[i] = display.newText( items[i].name, 0, 0, native.systemFont, 24 )
+	  itemList[i].anchorX = 0
+	  --itemList[i]:setFillColor(white)
+	  itemList[i].x = 20--scrollView.contentBounds.xMin
 	  itemList[i].y = myY
 	  itemList[i].id = i
+	  costList[i] = display.newText( items[i].cost, 0, 0, native.systemFont, 24 )
+	  costList[i].anchorX = 0
+	  costList[i].y = myY
+	  costList[i].x = scrollView.width-20
+	  costList[i].anchorX = 1
 	  scrollView:insert( itemList[i] )
+	  scrollView:insert( costList[i] )
 	  myY=myY+40
 	  itemList[i]:addEventListener( "tap", onTapItem )
 	end
