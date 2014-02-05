@@ -20,6 +20,10 @@ storyboard.removeAll()
 function scene:createScene( event )
   local group = self.view
 
+  globals.hearts[0] = display.newImage("images/heart.png",20,20)
+  globals.hearts[1] = display.newImage("images/heart.png",20,20)
+  globals.hearts[2] = display.newImage("images/heart.png",20,20)
+
   globals.hearts[0].x = 15; globals.hearts[0].y = 15
   group:insert(globals.hearts[0])
 
