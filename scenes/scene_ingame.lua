@@ -37,11 +37,12 @@ require("classes.combo")
 require("classes.items")
 require("classes.globals")
 local levelScore = 0
-local theScore = require( "classes.score" )
+local currency = require( "classes.score" )
 --local currency = require( "classes.score" )
 
 
-local scoreText
+local currencyText
+--local scoreText
 
 --[[local currencyText = currency.init({
 	fontSize = 20,
@@ -156,9 +157,10 @@ function laneTimerDown(hero)
 function currencyCalc( score, currCurrency )
 	local newCurrency = 0
 	counter = 0
-	for i = 5, score, 5 do 
+	for i = 0, score, 5 do 
 		counter = counter + 1
 	end
+	print("counter:", counter)
 	newCurrency = currCurrency + counter
 	return newCurrency
 end
@@ -206,6 +208,7 @@ local function gameLoop( event )
 					--theScore.add(allEne[i].pointValue) 		-- adding the amount to score
 					levelScore = levelScore + allEne[i].pointValue
 					print("score: ", levelScore)
+					scoreText.text = (levelScore)
 					allEne[i]:removeSelf()
 					table.remove(allEne, i)
 					allEnemHealth[i]:removeSelf()
@@ -322,15 +325,20 @@ end
 
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
-	scoreText = theScore.init({
+	currencyText = currency.init({
 		fontSize = 20,
 		font = "Helvetica",
-		x = display.contentCenterX,
+		x = 10,
 		y = display.contentHeight - 16,
 		maxDigits = 7,
 		leadingZeros = false,
-		filename = "scorefile.txt",
+		filename = "currencyfile.txt",
 		})
+	currencyText:setFillColor( black )
+
+	scoreText = display.newText( levelScore, display.contentCenterX, 15, native.systemFontBold, 20 )
+
+	scoreText:setFillColor(black )
 
   --Create the group that hold all the objects in the scene
   group = self.view
@@ -393,30 +401,29 @@ function scene:createScene( event )
 	attackTimer = timer.performWithDelay( 2000, heroNormalAttacks, 0)
 	--Runtime:addEventListener( "enterFrame", updateEnemyHealth )
 	Runtime:addEventListener( "enterFrame", gameLoop )
-
 end
  
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
-  
+  local prevCurrency = currency.load()
+  if prevCurrency then
+  	currency.set(prevCurrency)
+  end
 end
  
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
-  local group = self.view
-  local prevScore = theScore.load()
-		if prevScore then
-			theScore.set(prevScore)
-		end
- 
+  local group = self.view 
 end
  
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  theScore.set(currencyCalc(levelScore, theScore.get()))
-  theScore.save()
+  currency.set(currencyCalc(levelScore, currency.get()))
+  currency.save()
+  print("currency: ", currency.get())
+  currencyText:removeSelf()
   scoreText:removeSelf()
   Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )
