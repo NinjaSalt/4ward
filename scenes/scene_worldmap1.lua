@@ -5,6 +5,8 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
+
+require("classes.levelUnlocking")
  
 -- Clear previous scene
 storyboard.removeAll()
@@ -32,18 +34,22 @@ function scene:createScene( event )
  
   local function onTapLevel( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id}})
+    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id, world = 1}})
   end
   
-  levelList[0] = display.newText( "Level 1", 0, 0, native.systemFont, 18 )
-  levelList[0]:setFillColor(black)
-  levelList[0].x = display.contentCenterX
-  levelList[0].y = mapTitle.y + 80
-  levelList[0].id = 1
-
-  group:insert( levelList[0])
-  
-  levelList[0]:addEventListener( "tap", onTapLevel )
+  for i = 1, LevelList.getNumOfLevels(1), 1 do
+	levelList[i] = display.newText( "Level "..i, 0, 0, native.systemFont, 18 )
+	if LevelList.isLevelUnlocked(1,i) == true then
+		levelList[i]:setFillColor(black)
+		levelList[i]:addEventListener( "tap", onTapLevel )
+	else
+		levelList[i]:setFillColor(1,.2,.2)
+	end
+	levelList[i].x = display.contentCenterX
+	levelList[i].y = mapTitle.y + 80 + (20 * i)
+	levelList[i].id = i
+	group:insert( levelList[i])
+  end
 
   local rightArrow = display.newImageRect( "images/rightArrow.png", 50, 50 )
   rightArrow.x = 455
@@ -56,9 +62,11 @@ function scene:createScene( event )
   group:insert(bookIcon)
  
   local function onTapRightArrow( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_worldmap2", {effect = "slideLeft", time = 500})
-    storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
+    if LevelList.worldUnlocked(2) == true then
+		storyboard.removeScene( scene )
+		storyboard.gotoScene( "scenes.scene_worldmap2", {effect = "slideLeft", time = 500})
+		storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
+	end
   end
   -- to get to recipe book.
   local function onTapBookIcon( event )

@@ -6,6 +6,7 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local thisLevel 
+local world
 -- Array to store heroes
 hero = {}
 
@@ -185,22 +186,25 @@ local function gameLoop( event )
 				heroHealth = heroHealth - 1
 				if heroHealth <= 0 then
 					endLevel(currentLevel, false)
-					storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel}})
+					storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 
 				end
 				decrementEnemy(currentLevel)
 				if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
 					if(currentLevel.victoryCondition~=false) then
 						if(currentLevel.victoryCondition.conditionMet==true)then
+							LevelList.unlockLevel(world, thisLevel+1)
 							endLevel(currentLevel, true)
-							storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel}})
+							storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 						else 
+							LevelList.unlockLevel(world, thisLevel+1)
 							endLevel(currentLevel, false)
-							storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel}})
+							storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 						end
 					else	
+						LevelList.unlockLevel(world, thisLevel+1)
 						endLevel(currentLevel, true)
-						storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel}})
+						storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 					end
 				end
 			end
@@ -226,15 +230,17 @@ local function gameLoop( event )
 					if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
 						if(currentLevel.victoryCondition~=false) then
 							if(currentLevel.victoryCondition.conditionMet==true)then
+								LevelList.unlockLevel(world, thisLevel+1)
 								endLevel(currentLevel, true)
-								storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel}})
+								storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 							else 
 								endLevel(currentLevel, false)
-								storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel}})
+								storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 							end
 						else	
+							LevelList.unlockLevel(world, thisLevel+1)
 							endLevel(currentLevel, true)
-							storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel}})
+							storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 						end
 					end
 				end
@@ -353,6 +359,7 @@ function scene:createScene( event )
   group = self.view
   local params = event.params
   thisLevel = params.level
+  world = params.world
   
   local options = {
     effect = "slideDown",

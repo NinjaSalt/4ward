@@ -85,4 +85,8 @@ levels = {}
 -- the victoryCondition is either zero for a normal level or 1 for a secondary objective
 -- the secondary objective is made up of the food and then how many, for example {1,{1,1},false} means they have to make 1 pancake
 -- the time between signifies the time that the next enemy will take to spawn
-levels[1] = Level.create(1, makeSecondaryWin(pancake,1), {1,4,1,0,5,2}, {2000,2000,2000,2000,2000,2000})
+--levels[1] = Level.create(1, makeSecondaryWin(pancake,1), {1,4,1,0,5,2}, {2000,2000,2000,2000,2000,2000})
+levels[1] = Level.create(1, false, {1,4}, {500,500})
+levels[2] = Level.create(2, false, {1,2}, {500,500})
+levels[3] = Level.create(3, false, {1,2}, {500,500})
+levels[4] = Level.create(4, false, {1,2}, {500,500})

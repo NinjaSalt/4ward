@@ -6,6 +6,7 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local nextLevel 
+local nextWorld
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -58,7 +59,7 @@ function scene:createScene( event )
 
   local function onTapReplay( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = nextLevel}})
+    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = nextLevel, world = nextWorld}})
   end
   
   local function onTapMap( event )
@@ -81,6 +82,7 @@ function scene:enterScene( event )
   local group = self.view
   local params = event.params
   nextLevel = params.level
+  nextWorld = params.world
 end
  
 -- Called when scene is about to move offscreen:
