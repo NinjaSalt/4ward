@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------
--- SCENE NAME
--- Scene notes go here
+-- RECIPE BOOK SCENE
+-- Displays the recipe book of unlocked combos
 ---------------------------------------------------------------------------------
  
 local storyboard = require( "storyboard" )
@@ -37,96 +37,107 @@ function scene:createScene( event )
   group:insert( bookTitle )
   
   local function scrollListener( event )
-
-  local phase = event.phase
-  if ( phase == "began" ) then print( "Scroll view was touched" )
-  elseif ( phase == "moved" ) then print( "Scroll view was moved" )
-  elseif ( phase == "ended" ) then print( "Scroll view was released" )
-  end
-
-  -- In the event a scroll limit is reached...
-  if ( event.limitReached ) then
-    if ( event.direction == "up" ) then print( "Reached top limit" )
-    elseif ( event.direction == "down" ) then print( "Reached bottom limit" )
-    elseif ( event.direction == "left" ) then print( "Reached left limit" )
-    elseif ( event.direction == "right" ) then print( "Reached right limit" )
+    local phase = event.phase
+    if ( phase == "began" ) then print( "Scroll view was touched" )
+    elseif ( phase == "moved" ) then print( "Scroll view was moved" )
+    elseif ( phase == "ended" ) then print( "Scroll view was released" )
     end
+
+    -- In the event a scroll limit is reached...
+    if ( event.limitReached ) then
+      if ( event.direction == "up" ) then print( "Reached top limit" )
+      elseif ( event.direction == "down" ) then print( "Reached bottom limit" )
+      elseif ( event.direction == "left" ) then print( "Reached left limit" )
+      elseif ( event.direction == "right" ) then print( "Reached right limit" )
+      end
+    end
+
+    return true
   end
 
-  return true
-end
-
--- Create the widget
-local scrollView = widget.newScrollView{
-  y = 180,
-  x = display.contentCenterX + display.contentWidth/5,
-  width = display.contentWidth/2 - 50,
-  height = display.contentHeight - 70,
-  topPadding = 20,
-  horizontalScrollDisabled = true,
-  listener = scrollListener
-  }
-  group:insert( scrollView)
+  -- Create the widget
+  local scrollView = widget.newScrollView{
+    y = 180,
+    x = display.contentCenterX + display.contentWidth/5,
+    width = display.contentWidth/2 - 50,
+    height = display.contentHeight - 70,
+    topPadding = 20,
+    horizontalScrollDisabled = true,
+    listener = scrollListener
+    }
+    group:insert( scrollView)
 
   local function onTapItem( event, params )
     local body = event.target
-    local phase = event.phase
-    print(body.name)
-    if (foodImage ~= nil and nameText ~= nil and basicText ~= nil) then
-    foodImage:removeSelf( )
-    nameText:removeSelf( )
-    basicText:removeSelf( )
-  end
+    if (body.unlocked and foodImage ~= nil and nameText ~= nil and basicText ~= nil) then
+      foodImage:removeSelf( )
+      nameText:removeSelf( )
+      basicText:removeSelf( )
+    elseif (body.unlocked and nameText ~= nil and basicText ~= nil and foodImage == nil) then
+      nameText:removeSelf( )
+      basicText:removeSelf( )
+    elseif (body.unlocked ==false and nameText ~= nil and basicText ~= nil and foodImage == nil) then
+      nameText:removeSelf( )
+      basicText:removeSelf( )
+    elseif (body.unlocked ==false and nameText ~= nil and basicText ~= nil and foodImage ~= nil) then
+      foodImage:removeSelf( )
+      nameText:removeSelf( )
+      basicText:removeSelf( )
+    end
+    -- Had to assign these as nil after removing them
+    -- since removing them does not make them nil, they still have a value and it causes problems when it comes back around
+    foodImage = nil
+    nameText = nil
+    basicText = nil
       --setting the images
-    foodImage = display.newImage( body.image )
-    foodImage.width = display.contentWidth/2 - 80
-    foodImage.height = display.contentWidth/2 - 80
-    foodImage.x = display.contentWidth/4
-    foodImage.y = 170
-    group:insert(foodImage)
-
+    if (body.unlocked) then
+      foodImage = display.newImage( body.image )
+      foodImage.width = display.contentWidth/2 - 80
+      foodImage.height = display.contentWidth/2 - 80
+      foodImage.x = display.contentWidth/4
+      foodImage.y = 170
+      group:insert(foodImage)
+    end
+    -- Displays the name of the combo
     nameText = display.newText( body.name, display.contentWidth/4, 80, native.systemFontBold, 20 )
     nameText:setFillColor(black )
     group:insert(nameText)
-
+    -- Displays the ingredients combination of the combo food
     basicText = display.newText( body.comboText, display.contentWidth/4, 260, native.systemFontBold, 20 )
     basicText:setFillColor(black )
     group:insert(basicText)
-end
-
-  local myY = 0
-  for i = 1,table.maxn( recipes ) do
-    recipesList[i] = display.newText( recipes[i].name, 0, 0, native.systemFont, 17 )
-    recipesList[i]:setFillColor(black)
-    recipesList[i].x = scrollView.width/2--scrollView.contentBounds.xMin
-    recipesList[i].y = myY
-    recipesList[i].id = i
-    recipesList[i].name = recipes[i].name
-    recipesList[i].image = recipes[i].image
-    recipesList[i].comboText = recipes[i].comboText
-    print(recipesList[i].id)
-    scrollView:insert( recipesList[i] )
-    myY=myY+40
-    recipesList[i]:addEventListener( "tap", onTapItem )
   end
 
---[[
-  --setting the images
-  local foodImage = display.newImage( "images/pancake.png" )
-  foodImage.width = display.contentWidth/2 - 80
-  foodImage.height = display.contentWidth/2 - 80
-  foodImage.x = display.contentWidth/4
-  foodImage.y = 170
-  group:insert(foodImage)
-
-  local nameText = display.newText( "Pancake", display.contentWidth/4, 80, native.systemFontBold, 20 )
-  nameText:setFillColor(black )
-  group:insert(nameText)
-
-  local basicText = display.newText( "Egg + Flour", display.contentWidth/4, 260, native.systemFontBold, 20 )
-  basicText:setFillColor(black )
-  group:insert(basicText)
-  ]]
+  local myY = 0
+    for i = 1,table.maxn( recipes ) do
+      if ( recipes[i].unlocked == false) then 
+      recipesList[i] = display.newText( "? ? ?", 0, 0, native.systemFont, 17 )
+      recipesList[i]:setFillColor(black)
+      recipesList[i].x = scrollView.width/2--scrollView.contentBounds.xMin
+      recipesList[i].y = myY
+      recipesList[i].id = i
+      recipesList[i].name = "? ? ?"
+      recipesList[i].image = nil
+      recipesList[i].comboText = "? ? + ? ?"
+      recipesList[i].unlocked = false
+      scrollView:insert( recipesList[i] )
+      myY=myY+40
+      recipesList[i]:addEventListener( "tap", onTapItem )
+      elseif ( recipes[i].unlocked ) then 
+      recipesList[i] = display.newText( recipes[i].name, 0, 0, native.systemFont, 17 )
+      recipesList[i]:setFillColor(black)
+      recipesList[i].x = scrollView.width/2--scrollView.contentBounds.xMin
+      recipesList[i].y = myY
+      recipesList[i].id = i
+      recipesList[i].name = recipes[i].name
+      recipesList[i].image = recipes[i].image
+      recipesList[i].comboText = recipes[i].comboText
+      recipesList[i].unlocked = true
+      scrollView:insert( recipesList[i] )
+      myY=myY+40
+      recipesList[i]:addEventListener( "tap", onTapItem )
+    end
+  end
 
   local back = display.newRect( 455, 25, 50, 50 )
 
