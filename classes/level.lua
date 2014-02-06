@@ -51,6 +51,10 @@ function decrementEnemy(level)
 	end
 end
 
+function incrementEnemy(level)
+	level.totalNumberOfEnemies = level.totalNumberOfEnemies -1
+end
+
 --function Level:spawnNextEnemy()
 function spawnNextEnemy(level)
 	level.spawnCounter = level.spawnCounter + 1

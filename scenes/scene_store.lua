@@ -72,7 +72,7 @@ function scene:createScene( event )
   local function onTapItem( event )
 	--chefB.item = event.target.id
     storyboard.removeScene( scene )
-    storyboard.showOverlay( "scenes.scene_storeChef",{ effect = "slideDown", time = 500, params = {item = event.target.id}})
+    storyboard.showOverlay( "scenes.scene_storeChef",{ effect = "slideDown", time = 500, params = {item = items[event.target.id]}})
   end
   
   local myY = 0

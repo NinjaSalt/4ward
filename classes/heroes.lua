@@ -13,7 +13,7 @@ function Hero.create(health, attack, image, name)
    hero.laneSpeed = 2
    hero.abilityUsed = false
    hero.timer = 50
-   hero.item = 0
+   hero.item = nil
    return hero
 end
 
