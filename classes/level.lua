@@ -42,7 +42,6 @@ function endLevel(level, levelCompleted)
 		print("You win!")
 	else print("You lose!")
 	end
-	level.spawnCounter = 0
 end
 
 function decrementEnemy(level)
@@ -61,7 +60,7 @@ function spawnNextEnemy(level)
 	spawnEne(level.enemyIDQueue[level.spawnCounter])
 	--See if there are more enemies, if so recursively call the timer
 	if ( #(level.enemyIDQueue)~= level.spawnCounter ) then
-		spawnEneTimer = timer.performWithDelay( level.timeBetweenEachSpawn[level.spawnCounter], function() spawnNextEnemy(level) end)
+		spawnEneTimer = timer.performWithDelay( level.timeBetweenEachSpawn[level.spawnCounter+1], function() spawnNextEnemy(level) end)
 	end
 end
 
