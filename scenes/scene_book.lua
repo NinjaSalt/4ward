@@ -22,6 +22,9 @@ storyboard.removeAll()
 function scene:createScene( event )
   local group = self.view
   local recipesList = {}
+  local foodImage
+  local nameText
+  local basicText
 
   local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
@@ -30,8 +33,7 @@ function scene:createScene( event )
   local bookTitle = display.newText( "Recipe Book", 0, 0, native.systemFontBold, 25 )
   bookTitle:setFillColor(black)
   bookTitle.x = display.contentCenterX
-  bookTitle.y = 50
- 
+  bookTitle.y = 50 
   group:insert( bookTitle )
   
   local function scrollListener( event )
@@ -56,33 +58,75 @@ end
 
 -- Create the widget
 local scrollView = widget.newScrollView{
-  y = 190,
-  x = display.contentCenterX + display.contentWidth/4,
-  width = display.contentWidth/2 - 20,
-  height = display.contentHeight - 100,
+  y = 180,
+  x = display.contentCenterX + display.contentWidth/5,
+  width = display.contentWidth/2 - 50,
+  height = display.contentHeight - 70,
   topPadding = 20,
   horizontalScrollDisabled = true,
   listener = scrollListener
   }
   group:insert( scrollView)
 
-  local function onTapItem( event )
-  --chefB.item = event.target.id
-  --storyboard.removeScene( scene )
-  --storyboard.showOverlay( "scenes.scene_storeChef",{ effect = "slideDown", time = 500, params = {item = event.target.id}})
+  local function onTapItem( event, params )
+    local body = event.target
+    local phase = event.phase
+    print(body.name)
+    if (foodImage ~= nil and nameText ~= nil and basicText ~= nil) then
+    foodImage:removeSelf( )
+    nameText:removeSelf( )
+    basicText:removeSelf( )
   end
+      --setting the images
+    foodImage = display.newImage( body.image )
+    foodImage.width = display.contentWidth/2 - 80
+    foodImage.height = display.contentWidth/2 - 80
+    foodImage.x = display.contentWidth/4
+    foodImage.y = 170
+    group:insert(foodImage)
+
+    nameText = display.newText( body.name, display.contentWidth/4, 80, native.systemFontBold, 20 )
+    nameText:setFillColor(black )
+    group:insert(nameText)
+
+    basicText = display.newText( body.comboText, display.contentWidth/4, 260, native.systemFontBold, 20 )
+    basicText:setFillColor(black )
+    group:insert(basicText)
+end
 
   local myY = 0
   for i = 1,table.maxn( recipes ) do
-    recipesList[i] = display.newText( recipes[i].name, 0, 0, native.systemFont, 24 )
+    recipesList[i] = display.newText( recipes[i].name, 0, 0, native.systemFont, 17 )
     recipesList[i]:setFillColor(black)
     recipesList[i].x = scrollView.width/2--scrollView.contentBounds.xMin
     recipesList[i].y = myY
     recipesList[i].id = i
+    recipesList[i].name = recipes[i].name
+    recipesList[i].image = recipes[i].image
+    recipesList[i].comboText = recipes[i].comboText
+    print(recipesList[i].id)
     scrollView:insert( recipesList[i] )
     myY=myY+40
     recipesList[i]:addEventListener( "tap", onTapItem )
   end
+
+--[[
+  --setting the images
+  local foodImage = display.newImage( "images/pancake.png" )
+  foodImage.width = display.contentWidth/2 - 80
+  foodImage.height = display.contentWidth/2 - 80
+  foodImage.x = display.contentWidth/4
+  foodImage.y = 170
+  group:insert(foodImage)
+
+  local nameText = display.newText( "Pancake", display.contentWidth/4, 80, native.systemFontBold, 20 )
+  nameText:setFillColor(black )
+  group:insert(nameText)
+
+  local basicText = display.newText( "Egg + Flour", display.contentWidth/4, 260, native.systemFontBold, 20 )
+  basicText:setFillColor(black )
+  group:insert(basicText)
+  ]]
 
   local back = display.newRect( 455, 25, 50, 50 )
 

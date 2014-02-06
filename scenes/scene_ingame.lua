@@ -36,10 +36,7 @@ require("classes.level")
 require("classes.combo")
 require("classes.items")
 local globals = require("classes.globals")
-local levelScore = 0
-local currency = require( "classes.score" )
---local currency = require( "classes.score" )
-
+globals.currency = require( "classes.score" )
 
 local currencyText
 --local scoreText
@@ -218,9 +215,9 @@ local function gameLoop( event )
 				allEne[i].health= allEne[i].health - calculateDamage(allEne[i], bullet_array[n]) 
 				if ( allEne[i].health <= 0 ) then
 					--theScore.add(allEne[i].pointValue) 		-- adding the amount to score
-					levelScore = levelScore + allEne[i].pointValue
-					print("score: ", levelScore)
-					scoreText.text = (levelScore)
+					globals.score = globals.score + allEne[i].pointValue
+					print("score: ", globals.score)
+					scoreText.text = (globals.score)
 					allEne[i]:removeSelf()
 					table.remove(allEne, i)
 					allEnemHealth[i]:removeSelf()
@@ -337,7 +334,7 @@ end
 
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
-	currencyText = currency.init({
+	currencyText = globals.currency.init({
 		fontSize = 20,
 		font = "Helvetica",
 		x = 10,
@@ -348,7 +345,7 @@ function scene:createScene( event )
 		})
 	currencyText:setFillColor( black )
 
-	scoreText = display.newText( levelScore, display.contentCenterX, 15, native.systemFontBold, 20 )
+	scoreText = display.newText( globals.score, display.contentCenterX, 15, native.systemFontBold, 20 )
 
 	scoreText:setFillColor(black )
 
@@ -407,9 +404,9 @@ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
-  local prevCurrency = currency.load()
+  local prevCurrency = globals.currency.load()
   if prevCurrency then
-  	currency.set(prevCurrency)
+  	globals.currency.set(prevCurrency)
   end
 end
  
@@ -421,9 +418,9 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  currency.set(currencyCalc(levelScore, currency.get()))
-  currency.save()
-  print("currency: ", currency.get())
+  globals.currency.set(currencyCalc(globals.score, globals.currency.get()))
+  globals.currency.save()
+  print("currency: ", globals.currency.get())
   currencyText:removeSelf()
   scoreText:removeSelf()
   Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
