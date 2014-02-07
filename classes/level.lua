@@ -92,7 +92,7 @@ levels[3] = {}
 --levels[1] = Level.create(1, makeSecondaryWin(pancake,1), {1,4,1,0,5,2}, {2000,2000,2000,2000,2000,2000})
 
 --world 1
-levels[1][1] = Level.create(1, false, {1,4,1,0,5,2}, {2000,4000,4000,3000,1000,1000})
+levels[1][1] = Level.create(1, false, {1,4,1,0,5,2}, {1000,4000,4000,3000,1000,1000})
 levels[1][2] = Level.create(2, false, {1,2}, {500,500})
 levels[1][3] = Level.create(3, false, {1,2}, {500,500})
 levels[1][4] = Level.create(4, false, {1,2}, {500,500})

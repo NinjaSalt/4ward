@@ -435,7 +435,7 @@ function scene:createScene( event )
     group:insert(hero[n])
   end
   currentLevel = Level.load(world, thisLevel)
-  --initalize the current level's secondary objectives and print them
+  --initialize the current level's secondary objectives and print them
   if(currentLevel.victoryCondition~=false)then
 	currentLevel.victoryCondition.amount = currentLevel.victoryCondition.memAmount
 	currentLevel.victoryCondition.conditionMet = false
@@ -446,6 +446,8 @@ function scene:createScene( event )
   timeLine = TimeLine.create(currentLevel.enemyIDQueue, currentLevel.timeBetweenEachSpawn)
   for i = 1, #timeLine.enemyQueue, 1 do
 	group:insert(timeLine.enemyQueue[i])
+	print(timeLine.spawnTimes[i])
+	transition.to( timeLine.enemyQueue[i], {x=-(timeLine.enemyQueue[i].x+timeLine.enemyQueue[i].width + 2), time=timeLine.spawnTimes[i] * 2, tag="animation"} )
   end
   
   startLevel(currentLevel)
