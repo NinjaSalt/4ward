@@ -66,7 +66,7 @@ function moveSpeed( x, speed, lane )
 			end
 		end
 	end
-	local timeComplete = ((2000*((x-50)/380))*speed)/speedMod
+	local timeComplete = ((7000*((x-50)/380))*speed)/speedMod
 	return timeComplete
 end
 

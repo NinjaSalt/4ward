@@ -163,6 +163,60 @@ function currencyCalc( score, currCurrency )
 	return newCurrency
 end
 
+function itemCombo( item , enemy )
+	for j = 0,table.maxn( comboEnemies ) do
+		if (comboEnemies[j].type == replaceEnemy(item, enemy)) then
+			print ("my new food: " .. comboEnemies[j].type)
+			allEne[#allEne + 1] = comboEnemies[j]
+			allEne[#allEne] = display.newImage(allEne[#allEne].image)
+			allEne[#allEne] = passValuesToNewEne(allEne[#allEne], comboEnemies[j])
+			-- Check for Secondary Win condition
+			if(currentLevel.victoryCondition~=false) then
+				if(currentLevel.victoryCondition.enemy.name==allEne[#allEne].name)then
+					currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
+					print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
+					if (currentLevel.victoryCondition.amount == 0) then
+					print("Condition Met")
+					currentLevel.victoryCondition.conditionMet = true
+					end
+				end
+			end
+							
+			-- add health bars to enemies.
+			allEnemHealth[#allEne] = #allEne
+			allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
+			allEnemHealth[#allEne].height = 10 
+			-- creates a new health.
+			allEnemHealth[#allEne].health = newHealth(n,i)
+			allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
+			allEnemHealth[#allEne].x = enemy.x; allEnemHealth[#allEne].y = enemy.y
+			--end health bar.
+
+			--define the enemy
+			allEne[#allEne].height = 50; allEne[#allEne].width = 50
+			allEne[#allEne].x = enemy.x; allEne[#allEne].y = enemy.y
+
+			--set the move speedallEne
+			transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50), tag="animation" } )
+			allEne[#allEne]:addEventListener( "touch", teleport ) 
+			eneAndBar[0]=allEne[#allEne]
+			eneAndBar[1]=allEnemHealth[#allEne]
+			group:insert(eneAndBar[0])
+			group:insert(eneAndBar[1])
+			
+			for n = 0,table.maxn( allEne ) do
+				if( allEne[n] == enemy ) then
+					allEne[n]: removeSelf()
+					table.remove(allEne, n)
+					allEnemHealth[n]:removeSelf()
+					table.remove(allEnemHealth, n)
+				end
+			end
+			item: removeSelf()
+		end
+	end
+end
+
 local function gameLoop( event )
 	for i = 0,table.maxn( allEne ) do
 		for n = 0,table.maxn( hero ) do
@@ -398,7 +452,15 @@ function scene:createScene( event )
   end
   group:insert(currentLevel)
   startLevel(currentLevel)
-
+  
+  local item1 = display.newImage(items[1].image)
+  passValuesToNewItem (item1, items[1])
+  item1.width = 50
+  item1.height = 50
+  item1:addEventListener( "touch", itemFoodDrag ) 
+  group:insert(item1)
+  
+  
 	-- parameters for ---------------------> make_bullet (x,y, hero attack)
 	attackTimer = timer.performWithDelay( 2000, heroNormalAttacks, 0)
 	--Runtime:addEventListener( "enterFrame", updateEnemyHealth )

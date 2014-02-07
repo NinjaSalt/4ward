@@ -94,6 +94,21 @@ function scene:createScene( event )
 		  scrollView:insert( costList[i] )
 		  myY=myY+40
 		  itemList[i]:addEventListener( "tap", onTapItem )
+		else
+		  itemList[i] = display.newText( "????", 0, 0, native.systemFont, 24 )
+		  itemList[i].anchorX = 0
+		  --itemList[i]:setFillColor(white)
+		  itemList[i].x = 20--scrollView.contentBounds.xMin
+		  itemList[i].y = myY
+		  itemList[i].id = i
+		  costList[i] = display.newText( "????", 0, 0, native.systemFont, 24 )
+		  costList[i].anchorX = 0
+		  costList[i].y = myY
+		  costList[i].x = scrollView.width-20
+		  costList[i].anchorX = 1
+		  scrollView:insert( itemList[i] )
+		  scrollView:insert( costList[i] )
+		  myY=myY+40
 		end
 	end
 
