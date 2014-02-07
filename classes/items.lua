@@ -1,5 +1,6 @@
 require("classes.enemies")
 require("classes.level")
+local storyboard = require( "storyboard" )
 --require("scenes.scene_ingame")
 Item = {}
 Item.__index = Item
@@ -57,27 +58,29 @@ function foodItem(item, hero)
 	hero.item = nil
 end
 
-function passValuesToNewItem ( newF, oldF )
-	newF = passValuesToNewEne( newF, oldF )
-	newF.cost = oldF.cost
-	newF.id = oldF.id
-	newF.foodId = oldF.foodId
-	newF.unlocked = newF.unlocked
-	return newF
+function passValuesToNewItem ( newItem, oldItem )
+	if ( oldItem.itemType == "foodType" ) then
+		newItem = passValuesToNewEne( newItem, oldItem )
+	end
+	newItem.name = oldItem.name
+	newItem.itemType = oldItem.itemType
+	newItem.image = oldItem.image
+	newItem.cost = oldItem.cost
+	newItem.id = oldItem.id
+	newItem.unlocked = oldItem.unlocked
+	return newItem
 end
 
 function commercialBreak()
-	storyboard.showOverlay("scenes.scene_pause", {effect = "slideDown", time=500})
+	storyboard.showOverlay("scenes.scene_break", {effect = "slideDown", time=500})
     timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
     transition.pause("animation")
 end
 
 function itemTap ( event )
-	for i = 0, table.maxn( items ) do
-		if (items[i].itemType == "break") then
-			commercialBreak()
-		end
+	if (event.target.itemType == "break") then
+		commercialBreak()
 	end
 end
 

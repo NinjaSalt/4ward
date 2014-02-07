@@ -457,7 +457,11 @@ function scene:createScene( event )
 		  gameItems[i].x = itemSpace
 		  gameItems[i].y = 25
 		  gameItems[i].myItemRef = i
-		  gameItems[i]:addEventListener( "touch", itemFoodDrag ) 
+		  if ( gameItems[i].itemType == "foodType" ) then
+			gameItems[i]:addEventListener( "touch", itemFoodDrag ) 
+		  elseif ( gameItems[i].itemType == "break" ) then
+			gameItems[i]:addEventListener( "tap", itemTap ) 
+		  end
 		  group:insert(gameItems[i])
 		end
 	  itemSpace = itemSpace+50
