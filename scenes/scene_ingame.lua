@@ -39,6 +39,7 @@ require("classes.items")
 require("classes.recipes")
 local globals = require("classes.globals")
 globals.currency = require( "classes.score" )
+require("classes.timeLine")
 
 local currencyText
 --local scoreText
@@ -445,6 +446,12 @@ function scene:createScene( event )
 	print("Make " .. currentLevel.victoryCondition.amount .. " " .. currentLevel.victoryCondition.enemy.name)
   end
   group:insert(currentLevel)
+  
+  timeLine = TimeLine.create(currentLevel.enemyIDQueue, currentLevel.timeBetweenEachSpawn)
+  for i = 1, #timeLine.enemyQueue, 1 do
+	group:insert(timeLine.enemyQueue[i])
+  end
+  
   startLevel(currentLevel)
   local gameItems = {}
   local itemSpace = 300
