@@ -389,21 +389,6 @@ end
 
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
-	currencyText = globals.currency.init({
-		fontSize = 20,
-		font = "Helvetica",
-		x = 10,
-		y = display.contentHeight - 16,
-		maxDigits = 7,
-		leadingZeros = false,
-		filename = "currencyfile.txt",
-		})
-	currencyText:setFillColor( black )
-
-	scoreText = display.newText( globals.score, display.contentCenterX, 15, native.systemFontBold, 20 )
-
-	scoreText:setFillColor(black )
-
   --Create the group that hold all the objects in the scene
   group = self.view
   local params = event.params
@@ -487,10 +472,6 @@ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
-  local prevCurrency = globals.currency.load()
-  if prevCurrency then
-  	globals.currency.set(prevCurrency)
-  end
 end
  
 -- Called immediately after scene has moved onscreen:
@@ -504,8 +485,6 @@ function scene:exitScene( event )
   globals.currency.set(currencyCalc(globals.score, globals.currency.get()))
   globals.currency.save()
   print("currency: ", globals.currency.get())
-  currencyText:removeSelf()
-  scoreText:removeSelf()
   Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )
   timer.cancel(attackTimer)

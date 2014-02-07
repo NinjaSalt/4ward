@@ -20,6 +20,26 @@ storyboard.removeAll()
 function scene:createScene( event )
   local group = self.view
 
+  currencyText = globals.currency.init({
+    fontSize = 20,
+    font = "Helvetica",
+    x = 84,
+    y = 14,
+    maxDigits = 7,
+    leadingZeros = false,
+    filename = "currencyfile.txt",
+    })
+  currencyText:setFillColor( black )
+
+  scoreText = display.newText( globals.score, 15, display.contentHeight-15, native.systemFontBold, 20 )
+
+  scoreText:setFillColor(black )
+
+  group:insert(currencyText)
+  group:insert(scoreText)
+
+
+-- NUMBER OF LIVES
   hearts = display.newImage("images/lives.png")
   hearts.width = 50
   hearts.height = 25
@@ -27,13 +47,16 @@ function scene:createScene( event )
   hearts.y = 15
   group:insert(hearts)
 
+-- PLAYERS CURRENCY
   money = display.newImage("images/money.png")
-  money.width = 50
-  money.height = 25
-  money.x = 80
-  money.y = 15  
+  money.width = 58
+  money.height = 28
+  money.x = 85
+  money.y = 14  
   group:insert(money)
 
+
+-- PLAYERS ITEM BELT
   items = {}
 
   items[0] = display.newImage("images/itemHolder.png")
@@ -57,9 +80,7 @@ function scene:createScene( event )
   items[0].y = 20
   group:insert(items[0])
   
-     
-     
-
+-- PAUSE BUTTON
   local pauseButton = display.newImage("images/Pause.png",25,25 )
   pauseButton.x = 466
   pauseButton.y = 12
@@ -78,6 +99,10 @@ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
+  local prevCurrency = globals.currency.load()
+  if prevCurrency then
+    globals.currency.set(prevCurrency)
+  end
  
 end
  
@@ -90,6 +115,8 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
+  currencyText:removeSelf()
+  scoreText:removeSelf()
  
 end
  
