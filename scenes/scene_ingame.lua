@@ -438,27 +438,6 @@ function scene:createScene( event )
   end
   
   startLevel(currentLevel)
-  local gameItems = {}
-  local itemSpace = 300
-  for i = 0,table.maxn( myItems ) do
-	  if ( myItems[i] ~= nil )then
-		  gameItems[i] = display.newImage(myItems[i].image)
-		  passValuesToNewItem (gameItems[i], myItems[i])
-		  gameItems[i].width = 50
-		  gameItems[i].height = 50
-		  gameItems[i].x = itemSpace
-		  gameItems[i].y = 25
-		  gameItems[i].myItemRef = i
-		  if ( gameItems[i].itemType == "foodType" ) then
-			gameItems[i]:addEventListener( "touch", itemFoodDrag ) 
-		  elseif ( gameItems[i].itemType == "break" ) then
-			gameItems[i]:addEventListener( "tap", itemTap ) 
-		  end
-		  group:insert(gameItems[i])
-		end
-	  itemSpace = itemSpace+50
-	end
-  
   
 	-- parameters for ---------------------> make_bullet (x,y, hero attack)
 	attackTimer = timer.performWithDelay( 2000, heroNormalAttacks, 0)

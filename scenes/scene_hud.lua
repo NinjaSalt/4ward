@@ -80,6 +80,27 @@ function scene:createScene( event )
   items[0].y = 20
   group:insert(items[0])
   
+  local gameItems = {}
+  local itemSpace = 200
+  for i = 0,table.maxn( myItems ) do
+    if ( myItems[i] ~= nil )then
+      gameItems[i] = display.newImage(myItems[i].image)
+      passValuesToNewItem (gameItems[i], myItems[i])
+      gameItems[i].width = 35
+      gameItems[i].height = 35
+      gameItems[i].x = itemSpace
+      gameItems[i].y = 25
+      gameItems[i].myItemRef = i
+      if ( gameItems[i].itemType == "foodType" ) then
+      gameItems[i]:addEventListener( "touch", itemFoodDrag ) 
+      elseif ( gameItems[i].itemType == "break" ) then
+      gameItems[i]:addEventListener( "tap", itemTap ) 
+      end
+      group:insert(gameItems[i])
+    end
+    itemSpace = itemSpace+50
+  end
+
 -- PAUSE BUTTON
   local pauseButton = display.newImage("images/Pause.png",25,25 )
   pauseButton.x = 466
