@@ -228,16 +228,7 @@ local function gameLoop( event )
 				allEnemHealth[i]:removeSelf()
 				table.remove(allEnemHealth, i)
 
-				if(globals.hearts[2] ~= nil) then
-					globals.hearts[2]:removeSelf()
-					globals.hearts[2] = nil
-				elseif(globals.hearts[1] ~= nil) then
-						globals.hearts[1]:removeSelf()
-						globals.hearts[1] = nil
-				elseif(globals.hearts[0] ~= nil) then
-						globals.hearts[0]:removeSelf()
-						globals.hearts[0] = nil				
-				end
+
 
 				heroHealth = heroHealth - 1
 				if heroHealth <= 0 then

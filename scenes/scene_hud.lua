@@ -20,18 +20,44 @@ storyboard.removeAll()
 function scene:createScene( event )
   local group = self.view
 
-  globals.hearts[0] = display.newImage("images/heart.png",20,20)
-  globals.hearts[1] = display.newImage("images/heart.png",20,20)
-  globals.hearts[2] = display.newImage("images/heart.png",20,20)
+  hearts = display.newImage("images/lives.png")
+  hearts.width = 50
+  hearts.height = 25
+  hearts.x = 30
+  hearts.y = 15
+  group:insert(hearts)
 
-  globals.hearts[0].x = 15; globals.hearts[0].y = 15
-  group:insert(globals.hearts[0])
+  money = display.newImage("images/money.png")
+  money.width = 50
+  money.height = 25
+  money.x = 80
+  money.y = 15  
+  group:insert(money)
 
-  globals.hearts[1].x = 40; globals.hearts[1].y = 15
-  group:insert(globals.hearts[1])
+  items = {}
 
-  globals.hearts[2].x = 65; globals.hearts[2].y = 15
-  group:insert(globals.hearts[2])
+  items[0] = display.newImage("images/itemHolder.png")
+  items[0].width = 40
+  items[0].height = 40
+  items[0].x = 250
+  items[0].y = 20
+  group:insert(items[0])
+
+  items[0] = display.newImage("images/itemHolder.png")
+  items[0].width = 40
+  items[0].height = 40
+  items[0].x = 200
+  items[0].y = 20
+  group:insert(items[0])
+
+  items[0] = display.newImage("images/itemHolder.png")
+  items[0].width = 40
+  items[0].height = 40
+  items[0].x = 300
+  items[0].y = 20
+  group:insert(items[0])
+  
+     
      
 
   local pauseButton = display.newImage("images/Pause.png",25,25 )
