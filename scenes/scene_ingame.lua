@@ -398,6 +398,15 @@ local function gameLoop( event )
    return true
 end
 
+
+local function goToIntro( )
+    storyboard.showOverlay("scenes.scene_intro", {effect = "slideDown", time=500})
+    timer.pause(attackTimer)
+    timer.pause(spawnEneTimer)
+    transition.pause("animation")
+end
+
+
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   --Create the group that hold all the objects in the scene
@@ -459,6 +468,7 @@ function scene:createScene( event )
 
 	-- scene.overlay hud
 	storyboard.showOverlay("scenes.scene_hud")
+	goToIntro()
 end
  
 -- Called BEFORE scene has moved onscreen:
