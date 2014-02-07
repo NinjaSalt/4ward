@@ -7,6 +7,7 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local itemToGive
+local notTouched = true
  
 require("classes.items")
 require("classes.heroes")
@@ -37,46 +38,64 @@ function scene:createScene( event )
   local menuBack = display.newRect( display.contentWidth/2, display.contentHeight/2, 250, 250)
   group:insert (menuBack)
   
-  local selChefB = display.newImage(chefB.image, display.contentWidth/2, (display.contentHeight/2) - 60)
-  selChefB.height = 50 
-  selChefB.width = 50 
-  group:insert (selChefB)
-  
-  local function onTapChefB( event )
-    chefB.item = itemToGive
+  local function giveItem1( event )
+	if (notTouched) then
+		print( "give 1")
+		myItems[0] = itemToGive
+		notTouched = false
+	end
+	storyboard.removeScene( scene )
+    storyboard.hideOverlay( "slideDown", 500 )
+  end
+  local function giveItem2( event )
+    if (notTouched) then
+		print( "give 2")
+		myItems[1] = itemToGive
+		notTouched = false
+	end
+	storyboard.removeScene( scene )
+    storyboard.hideOverlay( "slideDown", 500 )
+  end
+  local function giveItem3( event )
+    if (notTouched) then
+		print( "give 3")
+		myItems[2] = itemToGive
+		notTouched = false
+	end
 	storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )
   end
   
-  selChefB:addEventListener( "tap", onTapChefB )
+  local gameItems = {}
+  local spacing = -60
+  for i = 0, 2, 1 do
+	  	if ( myItems[i] ~= nil )then
+			gameItems[i] = display.newImage(myItems[i].image, display.contentWidth/2, (display.contentHeight/2) + spacing)
+			gameItems[i].height = 50 
+			gameItems[i].width = 50 
+			gameItems[i]:setStrokeColor("black")
+			gameItems[i].strokeWidth = 3
+			if ( i == 0 )then gameItems[i]:addEventListener( "touch", giveItem1 ) 
+			elseif ( i == 1 ) then gameItems[i]:addEventListener( "touch", giveItem2 )
+			elseif ( i == 2) then gameItems[i]:addEventListener( "touch", giveItem3 )
+			end
+			group:insert (gameItems[i])
+		else
+			gameItems[i] = display.newRect(display.contentWidth/2, (display.contentHeight/2) + spacing, 50, 50)
+			gameItems[i]:setStrokeColor("black")
+			gameItems[i].strokeWidth = 3
+			if ( i == 0 )then gameItems[i]:addEventListener( "touch", giveItem1 ) 
+			elseif  ( i == 1 ) then gameItems[i]:addEventListener( "touch", giveItem2 )
+			elseif ( i == 2) then gameItems[i]:addEventListener( "touch", giveItem3 )
+			end
+			group:insert (gameItems[i])
+		end
+		spacing = spacing+60
+	end
   
-  local selChefDin = display.newImage(chefDin.image, display.contentWidth/2, (display.contentHeight/2) )
-  selChefDin.height = 50 
-  selChefDin.width = 50 
-  group:insert (selChefDin)
   
-  local function onTapChefDin( event )
-    chefDin.item = itemToGive
-	storyboard.removeScene( scene )
-    storyboard.hideOverlay( "slideDown", 500 )
-  end
   
-  selChefDin:addEventListener( "tap", onTapChefDin )
   
-  local selChefDess = display.newImage(chefDess.image, display.contentWidth/2, (display.contentHeight/2) + 60)
-  selChefDess.height = 50 
-  selChefDess.width = 50 
-  group:insert (selChefDess)
-  
-  local function onTapChefDess( event )
-    chefDess.item = itemToGive
-	storyboard.removeScene( scene )
-    storyboard.hideOverlay( "slideDown", 500 )
-  end
-  
-  selChefDess:addEventListener( "tap", onTapChefDess )
-
-  --startButton:addEventListener( "tap", onTap )
 end
  
 -- Called BEFORE scene has moved onscreen:

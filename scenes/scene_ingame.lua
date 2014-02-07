@@ -213,6 +213,7 @@ function itemCombo( item , enemy )
 				end
 			end
 			item: removeSelf()
+			myItems[item.myItemRef] = nil
 		end
 	end
 end
@@ -452,13 +453,22 @@ function scene:createScene( event )
   end
   group:insert(currentLevel)
   startLevel(currentLevel)
-  
-  local item1 = display.newImage(items[1].image)
-  passValuesToNewItem (item1, items[1])
-  item1.width = 50
-  item1.height = 50
-  item1:addEventListener( "touch", itemFoodDrag ) 
-  group:insert(item1)
+  local gameItems = {}
+  local itemSpace = 300
+  for i = 0,table.maxn( myItems ) do
+	  if ( myItems[i] ~= nil )then
+		  gameItems[i] = display.newImage(myItems[i].image)
+		  passValuesToNewItem (gameItems[i], myItems[i])
+		  gameItems[i].width = 50
+		  gameItems[i].height = 50
+		  gameItems[i].x = itemSpace
+		  gameItems[i].y = 25
+		  gameItems[i].myItemRef = i
+		  gameItems[i]:addEventListener( "touch", itemFoodDrag ) 
+		  group:insert(gameItems[i])
+		end
+	  itemSpace = itemSpace+50
+	end
   
   
 	-- parameters for ---------------------> make_bullet (x,y, hero attack)

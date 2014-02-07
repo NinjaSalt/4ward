@@ -5,7 +5,6 @@ local startX = nil
 local startY = nil
 
 items = {}
-myItems = {}
 items[0] = nil
 for i = 1,table.maxn( myEnemies )+1 do
 	items[i] = myEnemies[i-1]
@@ -18,6 +17,10 @@ for i = 1,table.maxn( myEnemies )+1 do
 		items[i].unlocked = false
 	end
 end
+myItems = {}
+myItems[0] = nil
+myItems[1] = nil
+myItems[2] = nil
 
 function useItem(hero)
 	local item = hero.item
