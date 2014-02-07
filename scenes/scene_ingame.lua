@@ -165,6 +165,17 @@ function currencyCalc( score, currCurrency )
 	return newCurrency
 end
 
+-- function to calculate score for having the enemy in the correct lane
+function calcLaneScore (ene1)
+	local scoreInt = 0
+        if ((ene1.category == "breakfast" and ene1.y == lane1) or (ene1.category == "dinner" and ene1.y == lane2) or (ene1.category == "dessert" and ene1.y == lane3)) then
+        	scoreInt =  10
+        else
+        	scoreInt = 3
+        end
+        return scoreInt
+end
+
 function itemCombo( item , enemy )
 	for j = 0,table.maxn( comboEnemies ) do
 		if (comboEnemies[j].type == replaceEnemy(item, enemy)) then
@@ -267,7 +278,7 @@ local function gameLoop( event )
 				allEne[i].health= allEne[i].health - calculateDamage(allEne[i], bullet_array[n]) 
 				if ( allEne[i].health <= 0 ) then
 					--theScore.add(allEne[i].pointValue) 		-- adding the amount to score
-					globals.score = globals.score + allEne[i].pointValue
+					globals.score = globals.score + allEne[i].pointValue + calcLaneScore(allEne[i])
 					print("score: ", globals.score)
 					scoreText.text = (globals.score)
 					allEne[i]:removeSelf()
