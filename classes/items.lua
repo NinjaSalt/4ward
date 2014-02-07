@@ -1,22 +1,39 @@
 require("classes.enemies")
 require("classes.level")
 --require("scenes.scene_ingame")
+Item = {}
+Item.__index = Item
+
 local startX = nil
 local startY = nil
+local nextItem
+
+function Item.makeItem(name, itemType, image, cost, id, unlocked)
+	local item = {}             -- our new object
+	setmetatable(item,Item)
+	item.name = name
+	item.itemType = itemType
+	item.image = image
+	item.cost = cost
+	item.id = id
+	item.unlocked = unlocked
+	return item
+end
 
 items = {}
 items[0] = nil
 for i = 1,table.maxn( myEnemies )+1 do
 	items[i] = myEnemies[i-1]
+	items[i].itemType = "foodType"
 	items[i].cost = 500
 	items[i].id = i
 	items[i].foodId = i-1
-	if i < 4 then
-		items[i].unlocked = true
-	else
-		items[i].unlocked = false
-	end
+	items[i].unlocked = true
+	nextItem=i
 end
+nextItem=nextItem+1
+items[nextItem]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem, true)
+
 myItems = {}
 myItems[0] = nil
 myItems[1] = nil
@@ -47,6 +64,21 @@ function passValuesToNewItem ( newF, oldF )
 	newF.foodId = oldF.foodId
 	newF.unlocked = newF.unlocked
 	return newF
+end
+
+function commercialBreak()
+	storyboard.showOverlay("scenes.scene_pause", {effect = "slideDown", time=500})
+    timer.pause(attackTimer)
+    timer.pause(spawnEneTimer)
+    transition.pause("animation")
+end
+
+function itemTap ( event )
+	for i = 0, table.maxn( items ) do
+		if (items[i].itemType == "break") then
+			commercialBreak()
+		end
+	end
 end
 
 function itemFoodDrag( event )
