@@ -7,7 +7,7 @@ Item.__index = Item
 
 local startX = nil
 local startY = nil
-local nextItem
+
 
 function Item.makeItem(name, itemType, image, cost, id, unlocked)
 	local item = {}             -- our new object
@@ -22,19 +22,22 @@ function Item.makeItem(name, itemType, image, cost, id, unlocked)
 end
 
 items = {}
-items[0] = nil
-for i = 1,table.maxn( myEnemies )+1 do
-	items[i] = myEnemies[i-1]
-	items[i].itemType = "foodType"
-	items[i].cost = 500
-	items[i].id = i
-	items[i].foodId = i-1
-	items[i].unlocked = true
-	nextItem=i
+function makeItemArray ()
+	local nextItem
+	items[0] = nil
+	for i = 1,table.maxn( myEnemies )+1 do
+		items[i] = myEnemies[i-1]
+		items[i].itemType = "foodType"
+		items[i].cost = 500
+		items[i].id = i
+		items[i].foodId = i-1
+		items[i].unlocked = true
+		nextItem=i
+	end
+	nextItem=nextItem+1
+	items[nextItem]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem, true)
 end
-nextItem=nextItem+1
-items[nextItem]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem, true)
-
+makeItemArray()
 myItems = {}
 myItems[0] = nil
 myItems[1] = nil

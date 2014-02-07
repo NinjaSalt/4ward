@@ -489,6 +489,7 @@ function scene:exitScene( event )
   Runtime:removeEventListener( "enterFrame", gameLoop )
   timer.cancel(attackTimer)
   timer.cancel(spawnEneTimer)
+  makeItemArray()
 end
  
 -- Called AFTER scene has finished moving offscreen:
