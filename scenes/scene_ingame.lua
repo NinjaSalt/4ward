@@ -36,6 +36,7 @@ require("classes.collision")
 require("classes.level")
 require("classes.combo")
 require("classes.items")
+require("classes.recipes")
 local globals = require("classes.globals")
 globals.currency = require( "classes.score" )
 
@@ -327,6 +328,7 @@ local function gameLoop( event )
 						allEne[#allEne + 1] = comboEnemies[j]
 						allEne[#allEne] = display.newImage(allEne[#allEne].image)
 						allEne[#allEne] = passValuesToNewEne(allEne[#allEne], comboEnemies[j])
+						unlockCheck(j)
 						-- Check for Secondary Win condition
 						if(currentLevel.victoryCondition~=false) then
 							if(currentLevel.victoryCondition.enemy.name==allEne[#allEne].name)then

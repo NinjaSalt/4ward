@@ -11,4 +11,7 @@ globals.score = 0
 
 globals.currency = require( "classes.score" )
 
+globals.recipe = {}
+--globals.recipe = require ("classes.recipes")
+
 return globals

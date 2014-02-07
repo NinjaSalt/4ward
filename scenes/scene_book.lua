@@ -5,7 +5,8 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
- 
+local globals = require ("classes.globals")
+
 require("classes.recipes")
 require("classes.heroes")
 local widget = require( "widget" )
@@ -33,7 +34,7 @@ function scene:createScene( event )
   local bookTitle = display.newText( "Recipe Book", 0, 0, native.systemFontBold, 25 )
   bookTitle:setFillColor(black)
   bookTitle.x = display.contentCenterX
-  bookTitle.y = 50 
+  bookTitle.y = 35
   group:insert( bookTitle )
   
   local function scrollListener( event )
@@ -109,8 +110,8 @@ function scene:createScene( event )
   end
 
   local myY = 0
-    for i = 1,table.maxn( recipes ) do
-      if ( recipes[i].unlocked == false) then 
+    for i = 1,table.maxn( globals.recipes ) do
+      if ( globals.recipes[i].unlocked == false) then 
       recipesList[i] = display.newText( "? ? ?", 0, 0, native.systemFont, 17 )
       recipesList[i]:setFillColor(black)
       recipesList[i].x = scrollView.width/2--scrollView.contentBounds.xMin
@@ -123,15 +124,15 @@ function scene:createScene( event )
       scrollView:insert( recipesList[i] )
       myY=myY+40
       recipesList[i]:addEventListener( "tap", onTapItem )
-      elseif ( recipes[i].unlocked ) then 
-      recipesList[i] = display.newText( recipes[i].name, 0, 0, native.systemFont, 17 )
+      elseif ( globals.recipes[i].unlocked ) then 
+      recipesList[i] = display.newText( globals.recipes[i].name, 0, 0, native.systemFont, 17 )
       recipesList[i]:setFillColor(black)
       recipesList[i].x = scrollView.width/2--scrollView.contentBounds.xMin
       recipesList[i].y = myY
       recipesList[i].id = i
-      recipesList[i].name = recipes[i].name
-      recipesList[i].image = recipes[i].image
-      recipesList[i].comboText = recipes[i].comboText
+      recipesList[i].name = globals.recipes[i].name
+      recipesList[i].image = globals.recipes[i].image
+      recipesList[i].comboText = globals.recipes[i].comboText
       recipesList[i].unlocked = true
       scrollView:insert( recipesList[i] )
       myY=myY+40
