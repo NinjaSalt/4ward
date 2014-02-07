@@ -389,7 +389,7 @@ function scene:createScene( event )
   for n=0,2,1 do
     group:insert(hero[n])
   end
-  currentLevel = Level.load(thisLevel)
+  currentLevel = Level.load(world, thisLevel)
   --initalize the current level's secondary objectives and print them
   if(currentLevel.victoryCondition~=false)then
 	currentLevel.victoryCondition.amount = currentLevel.victoryCondition.memAmount

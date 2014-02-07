@@ -64,7 +64,7 @@ function scene:createScene( event )
   
   local function onTapMap( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_worldmap1",options)
+    storyboard.gotoScene( "scenes.scene_worldmap"..nextWorld,options)
   end
 
   replayButton:addEventListener( "tap", onTapReplay )

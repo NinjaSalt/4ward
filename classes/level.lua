@@ -16,17 +16,18 @@ function Level.create(levelID, victoryCondition, enemyIDQueue, timeBetweenEachSp
    return level
 end
 
-function Level.load(levelID)
+function Level.load(world, levelID)
 	local level = {}
    setmetatable(level,Level)  -- make Level handle lookup
    level = display.newRect(0,0,0,0)
    level.levelID = levelID
-   level.victoryCondition = levels[levelID].victoryCondition
+   print("levelID: "..levelID)
+   level.victoryCondition = (levels[world][levelID]).victoryCondition
    level.enemyIDQueue = {}
-   level.enemyIDQueue = levels[levelID].enemyIDQueue
-   level.totalNumberOfEnemies = levels[levelID].totalNumberOfEnemies
-   level.enemiesAlive = levels[levelID].enemiesAlive
-   level.timeBetweenEachSpawn = levels[levelID].timeBetweenEachSpawn
+   level.enemyIDQueue = levels[world][levelID].enemyIDQueue
+   level.totalNumberOfEnemies = levels[world][levelID].totalNumberOfEnemies
+   level.enemiesAlive = levels[world][levelID].enemiesAlive
+   level.timeBetweenEachSpawn = levels[world][levelID].timeBetweenEachSpawn
    level.spawnCounter = 0
    level.spawnEneTimer = {}
    return level
@@ -82,11 +83,28 @@ function makeSecondaryWin( enemy, amount )
 	return secondaryWin
 end
 levels = {}
+levels[1] = {}
+levels[2] = {}
+levels[3] = {}
 -- the victoryCondition is either zero for a normal level or 1 for a secondary objective
 -- the secondary objective is made up of the food and then how many, for example {1,{1,1},false} means they have to make 1 pancake
 -- the time between signifies the time that the next enemy will take to spawn
 --levels[1] = Level.create(1, makeSecondaryWin(pancake,1), {1,4,1,0,5,2}, {2000,2000,2000,2000,2000,2000})
-levels[1] = Level.create(1, false, {1,4}, {500,500})
-levels[2] = Level.create(2, false, {1,2}, {500,500})
-levels[3] = Level.create(3, false, {1,2}, {500,500})
-levels[4] = Level.create(4, false, {1,2}, {500,500})
+
+--world 1
+levels[1][1] = Level.create(1, false, {1,4}, {500,500})
+levels[1][2] = Level.create(2, false, {1,2}, {500,500})
+levels[1][3] = Level.create(3, false, {1,2}, {500,500})
+levels[1][4] = Level.create(4, false, {1,2}, {500,500})
+
+--world 2
+levels[2][1] = Level.create(1, false, {4,4}, {500,500})
+levels[2][2] = Level.create(2, false, {1,2}, {500,500})
+levels[2][3] = Level.create(3, false, {1,2}, {500,500})
+levels[2][4] = Level.create(4, false, {1,2}, {500,500})
+
+--world 3
+levels[3][1] = Level.create(1, false, {1,4}, {500,500})
+levels[3][2] = Level.create(2, false, {1,2}, {500,500})
+levels[3][3] = Level.create(3, false, {1,2}, {500,500})
+levels[3][4] = Level.create(4, false, {1,2}, {500,500})

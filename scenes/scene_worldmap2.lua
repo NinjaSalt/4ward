@@ -28,23 +28,26 @@ function scene:createScene( event )
   mapTitle:setFillColor(black)
   mapTitle.x = display.contentCenterX
   mapTitle.y = 50
- 
   group:insert( mapTitle )
  
   local function onTapLevel( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id}})
+    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id, world = 2}})
   end
   
-  levelList[0] = display.newText( "Level 1", 0, 0, native.systemFont, 18 )
-  levelList[0]:setFillColor(black)
-  levelList[0].x = display.contentCenterX
-  levelList[0].y = mapTitle.y + 80
-  levelList[0].id = 1
-
-  group:insert( levelList[0])
-  
-  levelList[0]:addEventListener( "tap", onTapLevel )
+  for i = 1, LevelList.getNumOfLevels(2), 1 do
+	levelList[i] = display.newText( "Level "..i, 0, 0, native.systemFont, 18 )
+	if LevelList.isLevelUnlocked(2,i) == true then
+		levelList[i]:setFillColor(black)
+		levelList[i]:addEventListener( "tap", onTapLevel )
+	else
+		levelList[i]:setFillColor(1,.2,.2)
+	end
+	levelList[i].x = display.contentCenterX
+	levelList[i].y = mapTitle.y + 80 + (20 * i)
+	levelList[i].id = i
+	group:insert( levelList[i])
+  end
 
   local leftArrow = display.newImageRect( "images/leftArrow.png", 50, 50 )
   leftArrow.x = 35
