@@ -1,5 +1,6 @@
 require("classes.enemies")
 require("classes.level")
+local globals = require("classes.globals")
 local storyboard = require( "storyboard" )
 --require("scenes.scene_ingame")
 Item = {}
@@ -34,8 +35,9 @@ function makeItemArray ()
 		items[i].unlocked = true
 		nextItem=i
 	end
-	nextItem=nextItem+1
-	items[nextItem]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem, true)
+	--nextItem=nextItem+1
+	items[nextItem+1]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem, true)
+	items[nextItem+2]= Item.makeItem("Compost","trash", "images/trash_item.png", 1200, nextItem+2, true)
 end
 makeItemArray()
 myItems = {}
@@ -62,6 +64,7 @@ function foodItem(item, hero)
 end
 
 function passValuesToNewItem ( newItem, oldItem )
+	-- if the new item is an enemy/foodtype, use the enemy's passing valurs function from the enemy class
 	if ( oldItem.itemType == "foodType" ) then
 		newItem = passValuesToNewEne( newItem, oldItem )
 	end
@@ -82,6 +85,7 @@ function commercialBreak()
 end
 
 function itemTap ( event )
+	-- if the item is "break", call the commercialBreak function
 	if (event.target.itemType == "break") then
 		commercialBreak()
 	end
@@ -109,9 +113,21 @@ function itemFoodDrag( event )
 
 		elseif "ended" == phase or "cancelled" == phase then
 			local hit = 0
+			print (body.itemType)
 			for n = 0,table.maxn( allEne  ) do
 				if ( hasCollidedCircle( body, allEne[n]) ) then
-					itemCombo( body, allEne[n] )
+					-- in game
+					if (body.itemType == "foodType") then
+						itemCombo( body, allEne[n] )
+					elseif (body.itemType == "trash") then
+						allEne[n]: removeSelf()
+						table.remove(allEne, n)
+						allEnemHealth[n]:removeSelf()
+						table.remove(allEnemHealth, n)
+						decrementEnemy(currentLevel)
+						body: removeSelf()
+						myItems[body.myItemRef] = nil
+					end
 					hit = 1
 				end
 			end

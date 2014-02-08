@@ -111,6 +111,7 @@ function scene:createScene( event )
 
   local myY = 0
     for i = 1,table.maxn( globals.recipes ) do
+      -- if recipes are still locked, display them as ???
       if ( globals.recipes[i].unlocked == false) then 
       recipesList[i] = display.newText( "? ? ?", 0, 0, native.systemFont, 17 )
       recipesList[i]:setFillColor(black)
@@ -124,6 +125,7 @@ function scene:createScene( event )
       scrollView:insert( recipesList[i] )
       myY=myY+40
       recipesList[i]:addEventListener( "tap", onTapItem )
+      -- if recipes are unlocked, assign them the names and images of the combos
       elseif ( globals.recipes[i].unlocked ) then 
       recipesList[i] = display.newText( globals.recipes[i].name, 0, 0, native.systemFont, 17 )
       recipesList[i]:setFillColor(black)
