@@ -32,6 +32,25 @@ function scene:createScene( event )
   bkg:addEventListener("touch", function() return true end)
   bkg:addEventListener("tap", function() return true end)
   
+  local comBack = display.newRect( centerX, centerY, display.contentWidth-(display.contentWidth/7), display.contentHeight - (display.contentHeight/5)  )
+  group:insert (comBack)
+  local title = display.newText( "We'll Be Right Back!", display.contentWidth/2, (display.contentHeight/2) - 30, native.systemFont, 24 )
+  title:setFillColor( "Black" )
+  group:insert (title)
+  
+  local function changeText()
+  
+    title.text = "And We're Back!"
+  
+  end
+  local function makeText()
+	
+	--title.alpha = 0
+	transition.to( comBack, { rotation=-360, time=1000, transition=easing.inOutCubic } )
+	transition.to( title, { rotation=-360, time=1000, transition=easing.inOutCubic } )
+	timer.performWithDelay( 500, changeText )
+	
+  end
 
   local function resume()
     storyboard.hideOverlay( "slideUp", 500 )
@@ -40,6 +59,7 @@ function scene:createScene( event )
     timer.resume(spawnEneTimer)
     transition.resume()
   end
+  timer.performWithDelay( 2000, makeText )
   timer.performWithDelay( 5000, resume )
 
   --startButton:addEventListener( "tap", onTap )
