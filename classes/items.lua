@@ -44,7 +44,7 @@ myItems = {}
 myItems[0] = nil
 myItems[1] = nil
 myItems[2] = nil
-
+--Not being used
 function useItem(hero)
 	local item = hero.item
 	if ( item == nil ) then emptyItem()
@@ -52,11 +52,11 @@ function useItem(hero)
 	end
 	
 end
-
+--not being used
 function emptyItem()
 	print ("You got nothin")
 end
-
+--not being used
 function foodItem(item, hero)
 	--createEne(item.foodId)
 	print(item.name)
@@ -85,9 +85,12 @@ function commercialBreak()
 end
 
 function itemTap ( event )
+	itemUsed = event.target
 	-- if the item is "break", call the commercialBreak function
-	if (event.target.itemType == "break") then
+	if (itemUsed.itemType == "break") then
 		commercialBreak()
+		itemUsed: removeSelf()
+		myItems[itemUsed.myItemRef] = nil
 	end
 end
 
@@ -118,7 +121,7 @@ function itemFoodDrag( event )
 				if ( hasCollidedCircle( body, allEne[n]) ) then
 					-- in game
 					if (body.itemType == "foodType") then
-						itemCombo( body, allEne[n] )
+						itemCombo( body, allEne[n], true )
 					elseif (body.itemType == "trash") then
 						allEne[n]: removeSelf()
 						table.remove(allEne, n)

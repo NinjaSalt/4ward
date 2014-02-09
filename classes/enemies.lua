@@ -74,7 +74,7 @@ function updateMoveSpeed (myHero)
 	for i = 1,table.maxn( allEne ) do
 		if (allEne[i].y==myHero.y) then
 			transition.cancel(allEne[i])
-			transition.to( allEne[i], { time=(moveSpeed(allEne[i].x, allEne[i].speed, allEne[i].y)), x=(50) } )
+			transition.to( allEne[i], { time=(moveSpeed(allEne[i].x, allEne[i].speed, allEne[i].y)), x=(50), tag = "animation" } )
 		end
 	end
 end

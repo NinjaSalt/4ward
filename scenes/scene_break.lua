@@ -3,7 +3,7 @@
 -- Scene notes go here
 
 ---------------------------------------------------------------------------------
- 
+require("classes.items")
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
  
@@ -60,7 +60,16 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
- 
+  if ( table.maxn( allEne ) > 0 ) then
+	  local numFoodItems
+	  for i = 1, table.maxn( items ) do
+		if(items[i].itemType ~= "foodType") then break end
+		numFoodItems = i
+	  end
+	  local randomEnemy = math.random(1, table.maxn( allEne ))
+	  local randomFoodItem = math.random(1, numFoodItems)
+	  itemCombo(items[randomFoodItem], allEne[randomEnemy], false)
+	end
 end
  
 -- Called AFTER scene has finished moving offscreen:

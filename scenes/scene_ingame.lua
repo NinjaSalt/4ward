@@ -176,7 +176,7 @@ function calcLaneScore (ene1)
         return scoreInt
 end
 
-function itemCombo( item , enemy )
+function itemCombo( item , enemy, fromFoodItem )
 	for j = 0,table.maxn( comboEnemies ) do
 		if (comboEnemies[j].type == replaceEnemy(item, enemy)) then
 			print ("my new food: " .. comboEnemies[j].type)
@@ -225,8 +225,10 @@ function itemCombo( item , enemy )
 					table.remove(allEnemHealth, n)
 				end
 			end
-			item: removeSelf()
-			myItems[item.myItemRef] = nil
+			if (fromFoodItem) then
+				item: removeSelf()
+				myItems[item.myItemRef] = nil
+			end
 		end
 	end
 end
@@ -491,7 +493,6 @@ function scene:exitScene( event )
   Runtime:removeEventListener( "enterFrame", gameLoop )
   timer.cancel(attackTimer)
   timer.cancel(spawnEneTimer)
-  makeItemArray()
 end
  
 -- Called AFTER scene has finished moving offscreen:

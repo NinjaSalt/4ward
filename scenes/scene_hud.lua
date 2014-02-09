@@ -57,28 +57,28 @@ function scene:createScene( event )
 
 
 -- PLAYERS ITEM BELT
-  items = {}
+  itemBelt = {}
 
-  items[0] = display.newImage("images/itemHolder.png")
-  items[0].width = 40
-  items[0].height = 40
-  items[0].x = 250
-  items[0].y = 20
-  group:insert(items[0])
+  itemBelt[0] = display.newImage("images/itemHolder.png")
+  itemBelt[0].width = 40
+  itemBelt[0].height = 40
+  itemBelt[0].x = 250
+  itemBelt[0].y = 20
+  group:insert(itemBelt[0])
 
-  items[0] = display.newImage("images/itemHolder.png")
-  items[0].width = 40
-  items[0].height = 40
-  items[0].x = 200
-  items[0].y = 20
-  group:insert(items[0])
+  itemBelt[0] = display.newImage("images/itemHolder.png")
+  itemBelt[0].width = 40
+  itemBelt[0].height = 40
+  itemBelt[0].x = 200
+  itemBelt[0].y = 20
+  group:insert(itemBelt[0])
 
-  items[0] = display.newImage("images/itemHolder.png")
-  items[0].width = 40
-  items[0].height = 40
-  items[0].x = 300
-  items[0].y = 20
-  group:insert(items[0])
+  itemBelt[0] = display.newImage("images/itemHolder.png")
+  itemBelt[0].width = 40
+  itemBelt[0].height = 40
+  itemBelt[0].x = 300
+  itemBelt[0].y = 20
+  group:insert(itemBelt[0])
   
   local gameItems = {}
   local itemSpace = 200
