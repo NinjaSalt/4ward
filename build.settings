@@ -8,3 +8,15 @@ settings = {
 		},
 	}
 }
+
+   iphone =
+    {
+        plist =
+        {
+            UIAppFonts =
+            {
+				"LobsterTwo-Regular.ttf"
+            },
+            UIApplicationExitsOnSuspend = true
+        },
+    }

@@ -6,7 +6,7 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
- 
+require("classes.level")
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -28,15 +28,45 @@ function scene:createScene( event )
   bkg:setFillColor( gray )
   bkg.alpha = .5
   group:insert (bkg)
-  
+
+
+  if "Win" == system.getInfo( "platformName" ) then
+    LOBSTERTWO = "Lobster Two"
+  elseif "Android" == system.getInfo( "platformName" ) then
+    LOBSTERTWO = "LobsterTwo-Regular"
+  else
+    -- Mac and iOS
+    LOBSTERTWO = "Lobster Two"
+  end
+
   local function makeText()
-	local title = display.newText( "NOW WE'RE COOKING!", display.contentWidth/2, (display.contentHeight/2) - 30, native.systemFont, 24 )
+	local title = display.newText( "Objectives:", display.contentWidth/2, (display.contentHeight/2) - 110, LOBSTERTWO, 30 )
 	group:insert (title)
   end
-  bkg:addEventListener("touch", function() return true end)
-  bkg:addEventListener("tap", function() return true end)
-  
+  --bkg:addEventListener("touch", function() return true end)
+  --bkg:addEventListener("tap", function() return true end)
 
+  local objBack = display.newRect( display.contentWidth/2, 170, 300, 200 )
+  group:insert(objBack)
+
+  local back = display.newRect( display.contentWidth/2, 290, 90, 30 )
+
+  local function onTapBack( event )
+    storyboard.hideOverlay( "slideUp", 500 )
+    storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
+    timer.resume(attackTimer)
+    timer.resume(spawnEneTimer)
+    transition.resume()
+  end
+  group:insert( back )
+  back:addEventListener( "tap", onTapBack )
+
+  local readyText= display.newText( "Ready!", display.contentWidth/2, 290, LOBSTERTWO, 25 )
+  readyText:setFillColor(black)
+  group:insert(readyText)
+
+
+  
   local function resume()
     storyboard.hideOverlay( "slideUp", 500 )
     storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
@@ -44,12 +74,11 @@ function scene:createScene( event )
     timer.resume(spawnEneTimer)
     transition.resume()
   end
-  timer.performWithDelay( 2000, makeText )
-  timer.performWithDelay( 5000, resume )
+  timer.performWithDelay( 1000, makeText )
+  --timer.performWithDelay( 5000, resume )
 
   --startButton:addEventListener( "tap", onTap )
 end
- 
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
