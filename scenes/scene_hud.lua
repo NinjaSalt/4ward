@@ -139,7 +139,6 @@ function scene:exitScene( event )
   local group = self.view
   currencyText:removeSelf()
   scoreText:removeSelf()
- globals.score = 0
 end
  
 -- Called AFTER scene has finished moving offscreen:

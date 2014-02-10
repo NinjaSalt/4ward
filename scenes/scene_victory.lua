@@ -4,6 +4,7 @@
 ---------------------------------------------------------------------------------
  
 local storyboard = require( "storyboard" )
+local globals = require("classes.globals")
 local scene = storyboard.newScene()
 local nextLevel 
 local nextWorld
@@ -36,7 +37,7 @@ function scene:createScene( event )
   
   group:insert( gameTitle )
   
-  local scoreTitle = display.newText( "Score: Over 9000", 0, 0, native.systemFontBold, 24 )
+  local scoreTitle = display.newText( "Score: " ..globals.score, 0, 0, native.systemFontBold, 24 )
   scoreTitle:setFillColor(black)
   scoreTitle.x = display.contentCenterX
   scoreTitle.y = gameTitle.y + 50

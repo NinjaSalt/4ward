@@ -172,9 +172,9 @@ end
 function calcLaneScore (ene1)
 	local scoreInt = 0
         if ((ene1.category == "breakfast" and ene1.y == lane1) or (ene1.category == "dinner" and ene1.y == lane2) or (ene1.category == "dessert" and ene1.y == lane3)) then
-        	scoreInt =  10
+        	scoreInt =  20
         else
-        	scoreInt = 3
+        	scoreInt = 10
         end
         return scoreInt
 end
@@ -480,6 +480,7 @@ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
+  globals.score = 0
 end
  
 -- Called immediately after scene has moved onscreen:

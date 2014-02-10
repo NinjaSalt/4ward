@@ -36,7 +36,7 @@ function scene:createScene( event )
   
   group:insert( gameTitle )
   
-  local scoreTitle = display.newText( "Enemies Left: Over 9000", 0, 0, native.systemFontBold, 24 )
+  local scoreTitle = display.newText( "Unable to met the objective", 0, 0, native.systemFontBold, 24 )
   scoreTitle:setFillColor(black)
   scoreTitle.x = display.contentCenterX
   scoreTitle.y = gameTitle.y + 50
