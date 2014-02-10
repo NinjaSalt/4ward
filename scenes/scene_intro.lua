@@ -19,7 +19,6 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  
   local options = {
    effect = "fade",
    time = 500
@@ -28,6 +27,8 @@ function scene:createScene( event )
   bkg:setFillColor( gray )
   bkg.alpha = .5
   group:insert (bkg)
+
+  local vicCond = event.params.vic
 
 
   if "Win" == system.getInfo( "platformName" ) then
@@ -64,8 +65,6 @@ function scene:createScene( event )
   local readyText= display.newText( "Ready!", display.contentWidth/2, 290, LOBSTERTWO, 25 )
   readyText:setFillColor(black)
   group:insert(readyText)
-
-
   
   local function resume()
     storyboard.hideOverlay( "slideUp", 500 )
@@ -78,6 +77,21 @@ function scene:createScene( event )
   --timer.performWithDelay( 5000, resume )
 
   --startButton:addEventListener( "tap", onTap )
+  --standard objective: survive!
+  local standardObj = display.newText("Survive!", display.contentWidth/2, (display.contentHeight/2) - 60, native.systemFontBold, 20)
+  standardObj: setFillColor(black)
+  group: insert(standardObj)
+
+  -- checks for and prints a second condition
+  if (vicCond ~= false) then
+    -- print second condition here.
+    local secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name, display.contentWidth/2, (display.contentHeight/2) - 30, native.systemFontBold, 20)
+    secObj: setFillColor(black)
+    group: insert(secObj)
+    --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)
+  end
+
+
 end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )

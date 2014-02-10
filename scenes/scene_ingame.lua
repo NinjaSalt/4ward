@@ -405,8 +405,8 @@ local function gameLoop( event )
 end
 
 
-local function goToIntro( )
-    storyboard.showOverlay("scenes.scene_intro", {effect = "slideDown", time=500})
+local function goToIntro(vicCond)
+    storyboard.showOverlay("scenes.scene_intro", {effect = "slideDown", time=500, params = {vic= vicCond}})
     timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
     transition.pause("animation")
@@ -455,6 +455,8 @@ function scene:createScene( event )
 	currentLevel.victoryCondition.amount = currentLevel.victoryCondition.memAmount
 	currentLevel.victoryCondition.conditionMet = false
 	print("Make " .. currentLevel.victoryCondition.amount .. " " .. currentLevel.victoryCondition.enemy.name)
+else
+	print ("No Second Condition")
   end
   group:insert(currentLevel)
   
@@ -474,7 +476,8 @@ function scene:createScene( event )
 
 	-- scene.overlay hud
 	storyboard.showOverlay("scenes.scene_hud")
-	goToIntro()
+	print (currentLevel.victoryCondition)
+	goToIntro(currentLevel.victoryCondition)
 end
  
 -- Called BEFORE scene has moved onscreen:
