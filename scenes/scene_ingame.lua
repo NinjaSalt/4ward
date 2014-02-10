@@ -164,7 +164,6 @@ function currencyCalc( score, currCurrency )
 	for i = 0, score, 5 do 
 		counter = counter + 1
 	end
-	print("counter:", counter)
 	newCurrency = currCurrency + counter
 	return newCurrency
 end
@@ -285,7 +284,6 @@ local function gameLoop( event )
 				if ( allEne[i].health <= 0 ) then
 					--theScore.add(allEne[i].pointValue) 		-- adding the amount to score
 					globals.score = globals.score + allEne[i].pointValue + calcLaneScore(allEne[i])
-					print("score: ", globals.score)
 					scoreText.text = (globals.score)
 					allEne[i]:removeSelf()
 					table.remove(allEne, i)
@@ -494,7 +492,6 @@ function scene:exitScene( event )
   local group = self.view
   globals.currency.set(currencyCalc(globals.score, globals.currency.get()))
   globals.currency.save()
-  print("currency: ", globals.currency.get())
   Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )
   timer.cancel(attackTimer)
