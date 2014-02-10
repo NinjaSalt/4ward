@@ -476,7 +476,6 @@ else
 
 	-- scene.overlay hud
 	storyboard.showOverlay("scenes.scene_hud")
-	print (currentLevel.victoryCondition)
 	goToIntro(currentLevel.victoryCondition)
 end
  
