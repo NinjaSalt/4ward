@@ -19,7 +19,9 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  
+  local redPaint = { .9, .9, .9 }
+  local bluePaint = { .75, .75, .75 }
+  local gradientPaint = { type="gradient", color1=redPaint, color2=bluePaint }
   local options = {
    effect = "fade",
    time = 500
@@ -33,6 +35,7 @@ function scene:createScene( event )
   bkg:addEventListener("tap", function() return true end)
   
   local comBack = display.newRect( centerX, centerY, display.contentWidth-(display.contentWidth/7), display.contentHeight - (display.contentHeight/5)  )
+  comBack:setFillColor(gradientPaint)
   group:insert (comBack)
   local title = display.newText( "We'll Be Right Back!", display.contentWidth/2, (display.contentHeight/2) - 30, native.systemFont, 24 )
   title:setFillColor( "Black" )
