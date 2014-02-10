@@ -14,4 +14,6 @@ globals.currency = require( "classes.score" )
 globals.recipe = {}
 --globals.recipe = require ("classes.recipes")
 
+globals.isPaused= false
+
 return globals

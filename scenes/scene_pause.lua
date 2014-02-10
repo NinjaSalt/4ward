@@ -5,6 +5,7 @@
 ---------------------------------------------------------------------------------
  
 local storyboard = require( "storyboard" )
+local globals = require("classes.globals")
 local scene = storyboard.newScene()
  
 -- Clear previous scene
@@ -54,6 +55,7 @@ function scene:createScene( event )
     storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
     timer.resume(attackTimer)
     timer.resume(spawnEneTimer)
+    globals.isPaused = false
     transition.resume()
   end
   

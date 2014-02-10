@@ -111,6 +111,7 @@ function scene:createScene( event )
     storyboard.showOverlay("scenes.scene_pause", {effect = "slideDown", time=500})
     timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
+    globals.isPaused = true
     transition.pause("animation")
   end
 

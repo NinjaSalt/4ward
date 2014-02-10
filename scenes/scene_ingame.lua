@@ -144,7 +144,11 @@ end
 function laneTimerDown(hero)
 	local laneSpeed
     currentTime = hero.timer
-	hero.timer = hero.timer - .5
+    if (globals.isPaused) then
+    	hero.timer = hero.timer
+    else
+		hero.timer = hero.timer - .5
+	end
 	if(hero.timer==0)then
     	currentTime = hero.timer
     	hero.abilityUsed = false
