@@ -16,4 +16,7 @@ globals.recipe = {}
 
 globals.isPaused= false
 
+--FONTS.
+globals.LOBSTERTWO = "blank"
+
 return globals

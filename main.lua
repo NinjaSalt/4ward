@@ -11,8 +11,10 @@ local options = {
    time = 500
 }
 
+
   -- load music
   local theme = audio.loadStream("audio/theme.wav")
+  local globals = require ("classes.globals")
 
   -- play music
  -- local themeChannel = audio.play(theme,{channel =1, loops=-1})
@@ -37,6 +39,16 @@ end
 local name = "pt"     -- part of the Font name we are looking for
 
 name = string.lower( name )
+
+if "Win" == system.getInfo( "platformName" ) then
+    globals.LOBSTERTWO = "Lobster Two"
+  elseif "Android" == system.getInfo( "platformName" ) then
+    globals.LOBSTERTWO = "LobsterTwo-Regular"
+  else
+    -- Mac and iOS
+    globals.LOBSTERTWO = "Lobster Two"
+  end
+
 
 -- Display each font in the terminal console
 for i, fontname in ipairs(fonts) do

@@ -7,6 +7,7 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 require("classes.level")
+local globals = require ("classes.globals")
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -29,19 +30,11 @@ function scene:createScene( event )
   group:insert (bkg)
 
   local vicCond = event.params.vic
+  local globals = require("classes.globals")
 
-
-  if "Win" == system.getInfo( "platformName" ) then
-    LOBSTERTWO = "Lobster Two"
-  elseif "Android" == system.getInfo( "platformName" ) then
-    LOBSTERTWO = "LobsterTwo-Regular"
-  else
-    -- Mac and iOS
-    LOBSTERTWO = "Lobster Two"
-  end
-
+ 
   local function makeText()
-	local title = display.newText( "Objectives:", display.contentWidth/2, (display.contentHeight/2) - 110, LOBSTERTWO, 30 )
+	local title = display.newText( "Objectives:", display.contentWidth/2, (display.contentHeight/2) - 110, globals.LOBSTERTWO, 30 )
 	group:insert (title)
   end
   --bkg:addEventListener("touch", function() return true end)
@@ -62,7 +55,7 @@ function scene:createScene( event )
   group:insert( back )
   back:addEventListener( "tap", onTapBack )
 
-  local readyText= display.newText( "Ready!", display.contentWidth/2, 290, LOBSTERTWO, 25 )
+  local readyText= display.newText( "Ready!", display.contentWidth/2, 290, globals.LOBSTERTWO, 25 )
   readyText:setFillColor(black)
   group:insert(readyText)
   

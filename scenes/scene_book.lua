@@ -31,16 +31,8 @@ function scene:createScene( event )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-  if "Win" == system.getInfo( "platformName" ) then
-    LOBSTERTWO = "Lobster Two"
-  elseif "Android" == system.getInfo( "platformName" ) then
-    LOBSTERTWO = "LobsterTwo-Regular"
-  else
-    -- Mac and iOS
-    LOBSTERTWO = "Lobster Two"
-  end
 
-  local bookTitle = display.newText( "Recipe Book", 0, 0, LOBSTERTWO, 25 )
+  local bookTitle = display.newText( "Recipe Book", 0, 0, globals.LOBSTERTWO, 25 )
   bookTitle:setFillColor(black)
   bookTitle.x = display.contentCenterX
   bookTitle.y = 35
