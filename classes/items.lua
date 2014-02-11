@@ -38,6 +38,7 @@ function makeItemArray ()
 	--nextItem=nextItem+1
 	items[nextItem+1]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem, true)
 	items[nextItem+2]= Item.makeItem("Compost","trash", "images/trash_item.png", 1200, nextItem+2, true)
+	items[nextItem+3]= Item.makeItem("Producer Swap","swap", "images/swap.png", 700, nextItem+3, true)
 end
 makeItemArray()
 myItems = {}
@@ -84,11 +85,51 @@ function commercialBreak()
     transition.pause("animation")
 end
 
+function producerSwap()
+	if ( table.maxn(allEne)>1 ) then
+		local randomEne1 = math.random(1, table.maxn( allEne  ) )
+		local randomEne2 = math.random(1, table.maxn( allEne  ) )
+		while (randomEne1 == randomEne2) do
+			randomEne1 = math.random(1, table.maxn( allEne  ) )
+			randomEne2 = math.random(1, table.maxn( allEne  ) )
+		end
+		local randomEne1X = allEne[randomEne1].x
+		local randomEne2X = allEne[randomEne2].x
+		print ("enemy1 x: " .. randomEne1X .. " enemy2 x: " .. randomEne2X)
+		local randomEne1BarX = allEnemHealth[randomEne1].x
+		local randomEne2BarX = allEnemHealth[randomEne2].x
+		local randomEne1Y = allEne[randomEne1].y
+		local randomEne2Y = allEne[randomEne2].y
+		local randomEne1BarY = allEnemHealth[randomEne1].y
+		local randomEne2BarY = allEnemHealth[randomEne2].y
+		
+		allEne[randomEne1].x = -100
+		allEne[randomEne2].x = 700
+		
+		allEne[randomEne1].x = randomEne2X
+		allEnemHealth[randomEne1].x = randomEne2BarX
+		allEne[randomEne2].x = randomEne1X
+		allEnemHealth[randomEne2].x = randomEne1BarX
+		
+		allEne[randomEne1].y = randomEne2Y
+		allEnemHealth[randomEne1].y = randomEne2BarY
+		allEne[randomEne2].y = randomEne1Y
+		allEnemHealth[randomEne2].y = randomEne1BarY
+		
+		transition.to( allEne[randomEne1], { time=(moveSpeed(allEne[randomEne1].x, allEne[randomEne1].speed, allEne[randomEne1].y)), x=(50) ,tag="animation"}  )
+		transition.to( allEne[randomEne2], { time=(moveSpeed(allEne[randomEne2].x, allEne[randomEne2].speed, allEne[randomEne2].y)), x=(50) ,tag="animation"}  )
+		print("Original x pos: " .. randomEne1X .. " Now: " .. allEne[randomEne1].x)
+	end
+end
 function itemTap ( event )
 	itemUsed = event.target
 	-- if the item is "break", call the commercialBreak function
 	if (itemUsed.itemType == "break") then
 		commercialBreak()
+		itemUsed: removeSelf()
+		myItems[itemUsed.myItemRef] = nil
+	elseif (itemUsed.itemType == "swap")then
+		producerSwap()
 		itemUsed: removeSelf()
 		myItems[itemUsed.myItemRef] = nil
 	end
