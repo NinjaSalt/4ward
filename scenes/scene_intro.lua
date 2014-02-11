@@ -34,7 +34,7 @@ function scene:createScene( event )
 
  
   local function makeText()
-	local title = display.newText( "Objectives:", display.contentWidth/2, (display.contentHeight/2) - 110, globals.LOBSTERTWO, 30 )
+	local title = display.newText( "Objectives:", display.contentWidth/2, (display.contentHeight/2) - 125, globals.LOBSTERTWO, 48 )
 	group:insert (title)
   end
   --bkg:addEventListener("touch", function() return true end)
@@ -71,7 +71,7 @@ function scene:createScene( event )
 
   --startButton:addEventListener( "tap", onTap )
   --standard objective: survive!
-  local standardObj = display.newText("Survive!", display.contentWidth/2, (display.contentHeight/2) - 60, globals.IMPRIMA, 20)
+  local standardObj = display.newText("Survive!", display.contentWidth/2, (display.contentHeight/2) - 60, globals.IMPRIMA, 24)
   standardObj: setFillColor(black)
   group: insert(standardObj)
 

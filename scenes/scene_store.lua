@@ -27,7 +27,7 @@ function scene:createScene( event )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-  local storeTitle = display.newText( "The Pantry", 0, 0, globals.LOBSTERTWO, 36 )
+  local storeTitle = display.newText( "The Pantry", 0, 0, globals.LOBSTERTWO, 48 )
   storeTitle:setFillColor(black)
   storeTitle.x = display.contentCenterX
   storeTitle.y = 50
@@ -92,7 +92,7 @@ function scene:createScene( event )
 		  costList[i].anchorX = 1
 		  scrollView:insert( itemList[i] )
 		  scrollView:insert( costList[i] )
-		  myY=myY+40
+		  myY=myY+35
 		  itemList[i]:addEventListener( "tap", onTapItem )
 		else
 		  itemList[i] = display.newText( "????", 0, 0, globals.IMPRIMA, 24 )
@@ -108,7 +108,7 @@ function scene:createScene( event )
 		  costList[i].anchorX = 1
 		  scrollView:insert( itemList[i] )
 		  scrollView:insert( costList[i] )
-		  myY=myY+40
+		  myY=myY+35
 		end
 	end
 

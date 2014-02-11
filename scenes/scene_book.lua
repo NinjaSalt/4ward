@@ -32,7 +32,7 @@ function scene:createScene( event )
   group:insert (bkg)
 
 
-  local bookTitle = display.newText( "Recipe Book", 0, 0, globals.LOBSTERTWO, 25 )
+  local bookTitle = display.newText( "Recipe Book", 0, 0, globals.LOBSTERTWO, 48 )
   bookTitle:setFillColor(black)
   bookTitle.x = display.contentCenterX
   bookTitle.y = 35
@@ -59,7 +59,7 @@ function scene:createScene( event )
 
   -- Create the widget
   local scrollView = widget.newScrollView{
-    y = 180,
+    y = 185,
     x = display.contentCenterX + display.contentWidth/5,
     width = display.contentWidth/2 - 50,
     height = display.contentHeight - 70,
@@ -101,11 +101,11 @@ function scene:createScene( event )
       group:insert(foodImage)
     end
     -- Displays the name of the combo
-    nameText = display.newText( body.name, display.contentWidth/4, 80, globals.IMPRIMA, 20 )
+    nameText = display.newText( body.name, display.contentWidth/4, 80, globals.IMPRIMA, 24 )
     nameText:setFillColor(black )
     group:insert(nameText)
     -- Displays the ingredients combination of the combo food
-    basicText = display.newText( body.comboText, display.contentWidth/4, 260, globals.IMPRIMA, 20 )
+    basicText = display.newText( body.comboText, display.contentWidth/4, 260, globals.IMPRIMA, 24 )
     basicText:setFillColor(black )
     group:insert(basicText)
   end

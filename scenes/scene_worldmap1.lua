@@ -26,7 +26,7 @@ function scene:createScene( event )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-  local mapTitle = display.newText( "World One", 0, 0, globals.LOBSTERTWO, 36 )
+  local mapTitle = display.newText( "World One", 0, 0, globals.LOBSTERTWO, 48 )
   mapTitle:setFillColor(black)
   mapTitle.x = display.contentCenterX
   mapTitle.y = 50
@@ -38,7 +38,7 @@ function scene:createScene( event )
   end
   
   for i = 1, LevelList.getNumOfLevels(1), 1 do
-	levelList[i] = display.newText( "Level "..i, 0, 0, globals.IMPRIMA, 18 )
+	levelList[i] = display.newText( "Level "..i, 0, 0, globals.IMPRIMA, 24 )
 	if LevelList.isLevelUnlocked(1,i) == true then
 		levelList[i]:setFillColor(black)
 		levelList[i]:addEventListener( "tap", onTapLevel )
@@ -46,7 +46,7 @@ function scene:createScene( event )
 		levelList[i]:setFillColor(1,.2,.2)
 	end
 	levelList[i].x = display.contentCenterX
-	levelList[i].y = mapTitle.y + 80 + (20 * i)
+	levelList[i].y = mapTitle.y + 40 + (30 * i)
 	levelList[i].id = i
 	group:insert( levelList[i])
   end
