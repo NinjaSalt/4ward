@@ -35,7 +35,7 @@ function scene:createScene( event )
   local menuBack = display.newRect( display.contentWidth/2, display.contentHeight/2, 250, 250)
   group:insert (menuBack)
   
-  local mainButton = display.newText( "Main Menu", display.contentWidth/2, (display.contentHeight/2) - 30, native.systemFont, 24 )
+  local mainButton = display.newText( "Main Menu", display.contentWidth/2, (display.contentHeight/2) - 30, globals.LOBSTERTWO, 24 )
   mainButton:setFillColor(black)
   group:insert (mainButton)
   
@@ -46,7 +46,7 @@ function scene:createScene( event )
   
   mainButton:addEventListener( "tap", onTapMain )
   
-  local backButton = display.newText( "Back", display.contentWidth/2, (display.contentHeight/2) + 30, native.systemFont, 24 )
+  local backButton = display.newText( "Back", display.contentWidth/2, (display.contentHeight/2) + 30, globals.LOBSTERTWO, 24 )
   backButton:setFillColor(black)
   group:insert (backButton)
 

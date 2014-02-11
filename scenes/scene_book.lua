@@ -101,11 +101,11 @@ function scene:createScene( event )
       group:insert(foodImage)
     end
     -- Displays the name of the combo
-    nameText = display.newText( body.name, display.contentWidth/4, 80, native.systemFontBold, 20 )
+    nameText = display.newText( body.name, display.contentWidth/4, 80, globals.IMPRIMA, 20 )
     nameText:setFillColor(black )
     group:insert(nameText)
     -- Displays the ingredients combination of the combo food
-    basicText = display.newText( body.comboText, display.contentWidth/4, 260, native.systemFontBold, 20 )
+    basicText = display.newText( body.comboText, display.contentWidth/4, 260, globals.IMPRIMA, 20 )
     basicText:setFillColor(black )
     group:insert(basicText)
   end
@@ -114,7 +114,7 @@ function scene:createScene( event )
     for i = 1,table.maxn( globals.recipes ) do
       -- if recipes are still locked, display them as ???
       if ( globals.recipes[i].unlocked == false) then 
-      recipesList[i] = display.newText( "? ? ?", 0, 0, native.systemFont, 17 )
+      recipesList[i] = display.newText( "? ? ?", 0, 0, globals.IMPRIMA, 17 )
       recipesList[i]:setFillColor(black)
       recipesList[i].x = scrollView.width/2--scrollView.contentBounds.xMin
       recipesList[i].y = myY
@@ -128,7 +128,7 @@ function scene:createScene( event )
       recipesList[i]:addEventListener( "tap", onTapItem )
       -- if recipes are unlocked, assign them the names and images of the combos
       elseif ( globals.recipes[i].unlocked ) then 
-      recipesList[i] = display.newText( globals.recipes[i].name, 0, 0, native.systemFont, 17 )
+      recipesList[i] = display.newText( globals.recipes[i].name, 0, 0, globals.IMPRIMA, 17 )
       recipesList[i]:setFillColor(black)
       recipesList[i].x = scrollView.width/2--scrollView.contentBounds.xMin
       recipesList[i].y = myY

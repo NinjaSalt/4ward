@@ -6,7 +6,7 @@
 require("classes.items")
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
- 
+local globals= require ("classes.globals") 
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -37,7 +37,7 @@ function scene:createScene( event )
   local comBack = display.newRect( centerX, centerY, display.contentWidth-(display.contentWidth/7), display.contentHeight - (display.contentHeight/5)  )
   comBack:setFillColor(gradientPaint)
   group:insert (comBack)
-  local title = display.newText( "We'll Be Right Back!", display.contentWidth/2, (display.contentHeight/2) - 30, native.systemFont, 24 )
+  local title = display.newText( "We'll Be Right Back!", display.contentWidth/2, (display.contentHeight/2) - 30, globals.LOBSTERTWO, 24 )
   title:setFillColor( "Black" )
   group:insert (title)
   

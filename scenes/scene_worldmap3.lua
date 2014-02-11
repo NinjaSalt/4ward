@@ -5,7 +5,7 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
- 
+local globals = require("classes.globals") 
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -24,7 +24,7 @@ function scene:createScene( event )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-  local mapTitle = display.newText( "World 3", 0, 0, native.systemFontBold, 36 )
+  local mapTitle = display.newText( "World Three", 0, 0, globals.LOBSTERTWO, 36 )
   mapTitle:setFillColor(black)
   mapTitle.x = display.contentCenterX
   mapTitle.y = 50
@@ -36,7 +36,7 @@ function scene:createScene( event )
     storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id}})
   end
   
-  levelList[0] = display.newText( "Level 1", 0, 0, native.systemFont, 18 )
+  levelList[0] = display.newText( "Level 1", 0, 0, globals.IMPRIMA, 18 )
   levelList[0]:setFillColor(black)
   levelList[0].x = display.contentCenterX
   levelList[0].y = mapTitle.y + 80

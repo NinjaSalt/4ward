@@ -31,7 +31,7 @@ function scene:createScene( event )
     })
   currencyText:setFillColor( black )
 
-  scoreText = display.newText( globals.score, 15, display.contentHeight-15, native.systemFontBold, 20 )
+  scoreText = display.newText( globals.score, 15, display.contentHeight-15, globals.IMPRIMA, 20 )
 
   scoreText:setFillColor(black )
 

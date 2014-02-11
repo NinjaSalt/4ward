@@ -5,7 +5,7 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
- 
+local globals = require ("classes.globals") 
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -37,7 +37,7 @@ function scene:createScene( event )
  
   group:insert( gameTitle )
  
-  local startButton = display.newText( "Start", 0, 0, native.systemFont, 18 )
+  local startButton = display.newText( "Start!", 0, 0, globals.LOBSTERTWO, 25 )
   startButton:setFillColor(black)
   startButton.x = display.contentCenterX
   startButton.y = display.contentCenterY + 120

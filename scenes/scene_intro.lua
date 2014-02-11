@@ -71,14 +71,14 @@ function scene:createScene( event )
 
   --startButton:addEventListener( "tap", onTap )
   --standard objective: survive!
-  local standardObj = display.newText("Survive!", display.contentWidth/2, (display.contentHeight/2) - 60, native.systemFontBold, 20)
+  local standardObj = display.newText("Survive!", display.contentWidth/2, (display.contentHeight/2) - 60, globals.IMPRIMA, 20)
   standardObj: setFillColor(black)
   group: insert(standardObj)
 
   -- checks for and prints a second condition
   if (vicCond ~= false) then
     -- print second condition here.
-    local secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name, display.contentWidth/2, (display.contentHeight/2) - 30, native.systemFontBold, 20)
+    local secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name, display.contentWidth/2, (display.contentHeight/2) - 30, globals.IMPRIMA, 20)
     secObj: setFillColor(black)
     group: insert(secObj)
     --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)

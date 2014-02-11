@@ -6,7 +6,7 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
- 
+local globals = require ("classes.globals") 
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -34,7 +34,7 @@ function scene:createScene( event )
   local menuBack = display.newRect( display.contentWidth/2, display.contentHeight/2, 250, 250)
   group:insert (menuBack)
   
-  local mainButton = display.newText( "Main Menu", display.contentWidth/2, (display.contentHeight/2) - 60, native.systemFont, 24 )
+  local mainButton = display.newText( "Main Menu", display.contentWidth/2, (display.contentHeight/2) - 60, globals.LOBSTERTWO, 24 )
   mainButton:setFillColor(black)
   group:insert (mainButton)
   
@@ -45,7 +45,7 @@ function scene:createScene( event )
   
   mainButton:addEventListener( "tap", onTapMain )
   
-  local storeButton = display.newText( "Store", display.contentWidth/2, (display.contentHeight/2) , native.systemFont, 24 )
+  local storeButton = display.newText( "Store", display.contentWidth/2, (display.contentHeight/2) , globals.LOBSTERTWO, 24 )
   storeButton:setFillColor(black)
   group:insert (storeButton)
   
@@ -56,7 +56,7 @@ function scene:createScene( event )
   
   storeButton:addEventListener( "tap", onTapStore )
   
-  local backButton = display.newText( "Back", display.contentWidth/2, (display.contentHeight/2) + 60, native.systemFont, 24 )
+  local backButton = display.newText( "Back", display.contentWidth/2, (display.contentHeight/2) + 60, globals.LOBSTERTWO, 24 )
   backButton:setFillColor(black)
   group:insert (backButton)
 

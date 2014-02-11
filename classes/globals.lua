@@ -18,5 +18,6 @@ globals.isPaused= false
 
 --FONTS.
 globals.LOBSTERTWO = "blank"
+globals.IMPRIMA = "blank"
 
 return globals

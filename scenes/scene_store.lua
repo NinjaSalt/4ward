@@ -5,7 +5,7 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
- 
+local globals= require("classes.globals") 
 require("classes.items")
 require("classes.heroes")
 local widget = require( "widget" )
@@ -27,7 +27,7 @@ function scene:createScene( event )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-  local storeTitle = display.newText( "The Pantry", 0, 0, native.systemFontBold, 36 )
+  local storeTitle = display.newText( "The Pantry", 0, 0, globals.LOBSTERTWO, 36 )
   storeTitle:setFillColor(black)
   storeTitle.x = display.contentCenterX
   storeTitle.y = 50
@@ -79,13 +79,13 @@ function scene:createScene( event )
   local costList = {}
 	for i = 1,table.maxn( items ) do
 		if ( items[i].unlocked ) then 
-		  itemList[i] = display.newText( items[i].name, 0, 0, native.systemFont, 24 )
+		  itemList[i] = display.newText( items[i].name, 0, 0, globals.IMPRIMA, 24 )
 		  itemList[i].anchorX = 0
 		  --itemList[i]:setFillColor(white)
 		  itemList[i].x = 20--scrollView.contentBounds.xMin
 		  itemList[i].y = myY
 		  itemList[i].id = i
-		  costList[i] = display.newText( items[i].cost, 0, 0, native.systemFont, 24 )
+		  costList[i] = display.newText( items[i].cost, 0, 0, globals.IMPRIMA, 24 )
 		  costList[i].anchorX = 0
 		  costList[i].y = myY
 		  costList[i].x = scrollView.width-20
@@ -95,13 +95,13 @@ function scene:createScene( event )
 		  myY=myY+40
 		  itemList[i]:addEventListener( "tap", onTapItem )
 		else
-		  itemList[i] = display.newText( "????", 0, 0, native.systemFont, 24 )
+		  itemList[i] = display.newText( "????", 0, 0, globals.IMPRIMA, 24 )
 		  itemList[i].anchorX = 0
 		  --itemList[i]:setFillColor(white)
 		  itemList[i].x = 20--scrollView.contentBounds.xMin
 		  itemList[i].y = myY
 		  itemList[i].id = i
-		  costList[i] = display.newText( "????", 0, 0, native.systemFont, 24 )
+		  costList[i] = display.newText( "????", 0, 0, globals.IMPRIMA, 24 )
 		  costList[i].anchorX = 0
 		  costList[i].y = myY
 		  costList[i].x = scrollView.width-20

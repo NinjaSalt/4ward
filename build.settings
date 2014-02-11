@@ -15,7 +15,8 @@ settings = {
         {
             UIAppFonts =
             {
-				"LobsterTwo-Regular.ttf"
+				"LobsterTwo-Regular.ttf",
+				"Imprima-Regular.ttf"
             },
             UIApplicationExitsOnSuspend = true
         },

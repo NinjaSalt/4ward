@@ -5,7 +5,7 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
-
+local globals = require("classes.globals")
 require("classes.levelUnlocking")
  
 -- Clear previous scene
@@ -26,7 +26,7 @@ function scene:createScene( event )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-  local mapTitle = display.newText( "World 1", 0, 0, native.systemFontBold, 36 )
+  local mapTitle = display.newText( "World One", 0, 0, globals.LOBSTERTWO, 36 )
   mapTitle:setFillColor(black)
   mapTitle.x = display.contentCenterX
   mapTitle.y = 50
@@ -38,7 +38,7 @@ function scene:createScene( event )
   end
   
   for i = 1, LevelList.getNumOfLevels(1), 1 do
-	levelList[i] = display.newText( "Level "..i, 0, 0, native.systemFont, 18 )
+	levelList[i] = display.newText( "Level "..i, 0, 0, globals.IMPRIMA, 18 )
 	if LevelList.isLevelUnlocked(1,i) == true then
 		levelList[i]:setFillColor(black)
 		levelList[i]:addEventListener( "tap", onTapLevel )

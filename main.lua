@@ -42,11 +42,14 @@ name = string.lower( name )
 
 if "Win" == system.getInfo( "platformName" ) then
     globals.LOBSTERTWO = "Lobster Two"
+    globals.IMPRIMA = "Imprima" 
   elseif "Android" == system.getInfo( "platformName" ) then
     globals.LOBSTERTWO = "LobsterTwo-Regular"
+    globals.IMPRIMA = "Imprima-Regular"
   else
     -- Mac and iOS
-    globals.LOBSTERTWO = "Lobster Two"
+    globals.LOBSTERTWO = "LobsterTwo"
+    globals.IMPRIMA = "Imprima"
   end
 
 

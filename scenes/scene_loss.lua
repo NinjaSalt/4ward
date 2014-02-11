@@ -7,6 +7,7 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local nextLevel 
 local nextWorld
+local globals = require ("classes.globals")
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -29,28 +30,28 @@ function scene:createScene( event )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
- local gameTitle = display.newText( "Defeat!", 0, 0, native.systemFontBold, 36 )
+ local gameTitle = display.newText( "Defeat!", 0, 0, globals.LOBSTERTWO, 36 )
   gameTitle:setFillColor(black)
   gameTitle.x = display.contentCenterX
   gameTitle.y = 80
   
   group:insert( gameTitle )
   
-  local scoreTitle = display.newText( "Unable to met the objective", 0, 0, native.systemFontBold, 24 )
+  local scoreTitle = display.newText( "Unable to meet the objective...", 0, 0, globals.IMPRIMA, 24 )
   scoreTitle:setFillColor(black)
   scoreTitle.x = display.contentCenterX
   scoreTitle.y = gameTitle.y + 50
  
   group:insert( scoreTitle )
  
-  local replayButton = display.newText( "Replay", 0, 0, native.systemFont, 18 )
+  local replayButton = display.newText( "Replay", 0, 0, globals.IMPRIMA, 18 )
   replayButton:setFillColor(black)
   replayButton.x = display.contentCenterX
   replayButton.y = scoreTitle.y + 50
 
   group:insert( replayButton)
   
-  local mapButton = display.newText( "Map", 0, 0, native.systemFont, 18 )
+  local mapButton = display.newText( "Map", 0, 0, globals.IMPRIMA, 18 )
   mapButton:setFillColor(black)
   mapButton.x = display.contentCenterX
   mapButton.y = replayButton.y + 50
