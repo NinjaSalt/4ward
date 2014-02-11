@@ -114,6 +114,9 @@ function scene:createScene( event )
     timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
     globals.isPaused = true
+    for n=0, 2, 1 do
+      globals.belts[n]:pause()
+  end
     transition.pause("animation")
   end
 

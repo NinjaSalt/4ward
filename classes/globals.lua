@@ -16,6 +16,11 @@ globals.recipe = {}
 
 globals.isPaused= false
 
+globals.belts = {}
+for n=0, 2, 1 do
+	globals.belts[n] = nil
+end
+
 --FONTS.
 globals.LOBSTERTWO = "blank"
 globals.IMPRIMA = "blank"

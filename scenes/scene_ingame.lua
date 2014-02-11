@@ -19,6 +19,11 @@ lane3 = 240
 allEne = {} 
 allEnemHealth = {}
 
+--conveyor belts locals
+local sheetSettings
+local sheet
+local sequenceData
+
 -- Hero Attack Variables
 local bullet_speed = 50 
 local bullet_array = {}   -- Make an array to hold the bullets
@@ -42,17 +47,8 @@ globals.currency = require( "classes.score" )
 require("classes.timeLine")
 
 local currencyText
---local scoreText
-
---[[local currencyText = currency.init({
-	fontSize = 20,
-	font = "Helvetica",
-	x = display.contentCenterX,
-	y = display.contentHeight - 32/2,
-	maxDigits = 7,
-	leadingZeros = false,
-	filename = "currencyfile.txt",
-	})]]
+ 
+--sprite.xScale, sprite.yScale = 3,3 --The image is a little small so we scale it up
 
 -- Clear previous scene
 storyboard.removeAll()
@@ -62,6 +58,46 @@ storyboard.removeAll()
 ---------------------------------------------------------------------------------
 -- BEGINNING OF YOUR IMPLEMENTATION
 ---------------------------------------------------------------------------------
+
+-- function to create conveyor belts
+function scene:createConveyorBelts()
+  sheetSettings =
+  	{
+  	 width = 379,
+  	 height = 55,
+ 	  numFrames = 2
+	}
+	sheet = graphics.newImageSheet("images/belt3.png",sheetSettings)
+	--[[local animationData =
+	{
+	 { start=1,count=2 } --start on frame one and loop 4 frames 1 to 4.
+	}	]]
+	sequenceData = {
+	--higher the time, slower it goes
+   { name = "normal", start=1, count=2, time=300, loopCount=0 },
+   { name = "slow", start=1, count=2, time=500,   loopCount=0 },   
+   { name = "fast", start=1, count=2, time=100, loopCount=0 }
+}
+
+	for n=0, 2, 1 do
+  		globals.belts[n] = display.newSprite(sheet,sequenceData)
+  		globals.belts[n].x = 280
+  		if (n==0) then
+			globals.belts[n].y = lane1+20
+		end
+		if (n==1) then
+			globals.belts[n].y = lane2+20
+		end
+		if (n==2) then
+			globals.belts[n].y = lane3+20
+		end
+		globals.belts[n]:setSequence( "normal" )
+		globals.belts[n]:play()
+		group:insert(globals.belts[n])
+	end
+	--return belt
+	
+end  
 
 -- function to 
 function scene:createHeroes()
@@ -151,6 +187,8 @@ function laneTimerDown(hero)
 	end
 	if(hero.timer==0)then
     	currentTime = hero.timer
+    	globals.belts[hero.num]:setSequence( "normal" )
+		globals.belts[hero.num]:play()
     	hero.abilityUsed = false
     	hero.laneSpeed = 2
 	end
@@ -397,6 +435,7 @@ local function gameLoop( event )
 		end
 	end
 
+
 	updateEnemyHealth()
 
    return true
@@ -407,6 +446,9 @@ local function goToIntro(vicCond)
     storyboard.showOverlay("scenes.scene_intro", {effect = "slideDown", time=500, params = {vic= vicCond}})
     timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
+    for n=0, 2, 1 do
+    	globals.belts[n]:pause()
+	end
     transition.pause("animation")
 end
 
@@ -418,11 +460,13 @@ function scene:createScene( event )
   local params = event.params
   thisLevel = params.level
   world = params.world
-  
+
+
   local options = {
     effect = "slideDown",
     time = 500
   }
+
   --create enemies and add them and their healthbar to the group
   function spawnEne(enemyID)
   	eneAndBar = scene:createEne(enemyID)
@@ -441,12 +485,15 @@ function scene:createScene( event )
   local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert(bkg)
-  
+
+  --adding the conveyor belts to the screen
+  scene.createConveyorBelts()
   --create the heroes
   scene.createHeroes()
   for n=0,2,1 do
     group:insert(hero[n])
   end
+
   currentLevel = Level.load(world, thisLevel)
   --initialize the current level's secondary objectives and print them
   if(currentLevel.victoryCondition~=false)then

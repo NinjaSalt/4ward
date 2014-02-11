@@ -60,6 +60,9 @@ function scene:createScene( event )
     storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
     timer.resume(attackTimer)
     timer.resume(spawnEneTimer)
+    for n=0, 2, 1 do
+      globals.belts[n]:play()
+  end
     transition.resume()
   end
   timer.performWithDelay( 2000, makeText )
