@@ -45,16 +45,16 @@ function scene:createScene( event )
   
   mainButton:addEventListener( "tap", onTapMain )
   
-  local storeButton = display.newText( "Store", display.contentWidth/2, (display.contentHeight/2) , globals.LOBSTERTWO, 36 )
-  storeButton:setFillColor(black)
-  group:insert (storeButton)
+  local worldButton = display.newText( "World Map", display.contentWidth/2, (display.contentHeight/2) , globals.LOBSTERTWO, 36 )
+  worldButton:setFillColor(black)
+  group:insert (worldButton)
   
-  local function onTapStore( event )
+  local function onTapWorld( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_store",options)
+    storyboard.gotoScene( "scenes.scene_worldmap1",options)
   end
   
-  storeButton:addEventListener( "tap", onTapStore )
+  worldButton:addEventListener( "tap", onTapWorld )
   
   local backButton = display.newText( "Back", display.contentWidth/2, (display.contentHeight/2) + 60, globals.LOBSTERTWO, 36 )
   backButton:setFillColor(black)

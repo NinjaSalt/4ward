@@ -142,15 +142,7 @@ function scene:createScene( event )
       recipesList[i]:addEventListener( "tap", onTapItem )
     end
   end
-
-  local back = display.newRect( 455, 25, 50, 50 )
-
-  local function onTapBack( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_worldmap1",{ effect = "slideDown", time = 500})
-  end
-  group:insert( back )
-  back:addEventListener( "tap", onTapBack )
+  
 end
  
 -- Called BEFORE scene has moved onscreen:

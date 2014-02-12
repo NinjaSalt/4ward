@@ -17,9 +17,10 @@ globals.recipe = {}
 globals.isPaused= false
 
 globals.belts = {}
-for n=0, 2, 1 do
-	globals.belts[n] = nil
-end
+
+globals.belts[0] = nil
+globals.belts[1] = nil
+globals.belts[2] = nil
 
 --FONTS.
 globals.LOBSTERTWO = "blank"
