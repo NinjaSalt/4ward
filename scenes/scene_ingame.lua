@@ -220,7 +220,15 @@ end
 function itemCombo( item , enemy, fromFoodItem )
 	for j = 0,table.maxn( comboEnemies ) do
 		if (comboEnemies[j].type == replaceEnemy(item, enemy)) then
+		------DO  A BREAK
+			print ("item: " .. item.name .. " enemy: " .. enemy.name)
 			print ("my new food: " .. comboEnemies[j].type)
+			
+			if (fromFoodItem) then
+				item: removeSelf()
+				myItems[item.myItemRef] = nil
+			end
+			
 			allEne[#allEne + 1] = comboEnemies[j]
 			allEne[#allEne] = display.newImage(allEne[#allEne].image)
 			allEne[#allEne] = passValuesToNewEne(allEne[#allEne], comboEnemies[j])
@@ -235,6 +243,7 @@ function itemCombo( item , enemy, fromFoodItem )
 					end
 				end
 			end
+		
 							
 			-- add health bars to enemies.
 			allEnemHealth[#allEne] = #allEne
@@ -265,11 +274,7 @@ function itemCombo( item , enemy, fromFoodItem )
 					allEnemHealth[n]:removeSelf()
 					table.remove(allEnemHealth, n)
 				end
-			end
-			if (fromFoodItem) then
-				item: removeSelf()
-				myItems[item.myItemRef] = nil
-			end
+			end 
 		end
 	end
 end

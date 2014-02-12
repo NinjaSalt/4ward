@@ -163,6 +163,7 @@ function itemFoodDrag( event )
 					-- in game
 					if (body.itemType == "foodType") then
 						itemCombo( body, allEne[n], true )
+						break
 					elseif (body.itemType == "trash") then
 						allEne[n]: removeSelf()
 						table.remove(allEne, n)
