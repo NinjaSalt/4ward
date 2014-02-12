@@ -4,8 +4,8 @@ TimeLine = {}
 TimeLine.__index = TimeLine
 
 
-local timeLineWidth = 480
-local enemySize = 20
+timeLineWidth = 240
+enemySize = 20
 
 function TimeLine.create(enemyIDQueue, timeBetweenEachSpawn)
 	local timeLine = {}
@@ -17,11 +17,10 @@ function TimeLine.create(enemyIDQueue, timeBetweenEachSpawn)
 		timeLine.spawnTimes[i] = timeBetweenEachSpawn[i]+timeLine.spawnTimes[i-1]
 	end
 	for i = 1, #enemyIDQueue, 1 do
-		print(timeLine.spawnTimes[i])
 		timeLine.enemyQueue[i] = display.newImage(myEnemies[enemyIDQueue[i]].image)
-		timeLine.enemyQueue[i].y = 306
-		--timeLine.enemyQueue[i].x = (480-timeLineWidth)/2 + (timeLine.spawnTimes[i]/timeLine.spawnTimes[#timeLine.spawnTimes])*timeLineWidth - enemySize/2
-		timeLine.enemyQueue[i].x = (timeLine.spawnTimes[i]/timeLine.spawnTimes[#timeLine.spawnTimes])*timeLineWidth - enemySize/2
+		timeLine.enemyQueue[i].y = 320-enemySize/2
+		timeLine.enemyQueue[i].x = 240-timeLineWidth/2 + (timeLine.spawnTimes[i]/timeLine.spawnTimes[#timeLine.spawnTimes])*timeLineWidth - enemySize/2
+		--timeLine.enemyQueue[i].x = (timeLine.spawnTimes[i]/timeLine.spawnTimes[#timeLine.spawnTimes])*timeLineWidth - enemySize/2
 		
 		timeLine.enemyQueue[i].width = enemySize
 		timeLine.enemyQueue[i].height = enemySize
@@ -29,7 +28,16 @@ function TimeLine.create(enemyIDQueue, timeBetweenEachSpawn)
 	return timeLine
 end
 
-
+function TimeLine.createTimeLineBar()
+	local bar = {}
+	bar[1] = display.newRect(240-timeLineWidth/2-enemySize/2,320-enemySize/2, enemySize, enemySize)
+	bar[1]:setFillColor(.5,.5,.5)
+	bar[2] = display.newRect(240+timeLineWidth/2+enemySize/2,320-enemySize/2, enemySize, enemySize)
+	bar[2]:setFillColor(.5,.5,.5)
+	bar[3] = display.newRect(240,320-enemySize*1.1, timeLineWidth+2*enemySize, enemySize*.2)
+	bar[3]:setFillColor(.4,.4,.4)
+	return bar
+end
 --480, 320     game dimensions
 
 

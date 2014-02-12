@@ -3,6 +3,7 @@
 
 local M = {} 	--create the local module table (this will hold our functions and data)
 M.score = 0 	--set the initial score to 0
+M.multiplier = 1
 
 
 --[[fontSize — The size of the displayed score text.
@@ -87,6 +88,23 @@ function M.load()
     end
     print("Could not read scores from ", M.filename, ".")
     return nil
+end
+
+function increaseMultiplier()
+	M.multiplier = M.multiplier + 1
+	if M.multiplier > 10 then
+		M.multiplier = 10
+	end
+	print("multiplier: "..M.multiplier)
+end
+
+function resetMultiplier()
+	M.multiplier = 1
+	print("multiplier: "..M.multiplier)
+end
+
+function getMultiplier()
+	return M.multiplier
 end
 
 return M

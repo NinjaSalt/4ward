@@ -1,5 +1,6 @@
 --circle-based collision detection
 require("classes.enemies")
+require("classes.score")
 
 function combination( obj1, obj2 )
    hasCollidied = false
@@ -23,6 +24,11 @@ function combination( obj1, obj2 )
    if ( distance < objectSize ) then
       print("has collided")
       newType = foodgroup[obj1.type][obj2.type]
+	  if newType == "bad" then
+		resetMultiplier()
+	  else
+		increaseMultiplier()
+	  end
       print(obj1.type)
       print(obj2.type)
       print(newType)

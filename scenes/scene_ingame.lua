@@ -213,6 +213,7 @@ function calcLaneScore (ene1)
         else
         	scoreInt = 10
         end
+		scoreInt = scoreInt * getMultiplier()
         return scoreInt
 end
 
@@ -489,6 +490,13 @@ function scene:createScene( event )
   local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert(bkg)
+  
+  function getxy( event )
+	--print("x: "..event.x)
+	--print("y: "..event.y)
+  end
+  
+  bkg:addEventListener( "touch", getxy )
 
   --adding the conveyor belts to the screen
   scene.createConveyorBelts()
@@ -499,6 +507,7 @@ function scene:createScene( event )
   end
 
   currentLevel = Level.load(world, thisLevel)
+  
   --initialize the current level's secondary objectives and print them
   if(currentLevel.victoryCondition~=false)then
 	currentLevel.victoryCondition.amount = currentLevel.victoryCondition.memAmount
@@ -512,9 +521,16 @@ else
   timeLine = TimeLine.create(currentLevel.enemyIDQueue, currentLevel.timeBetweenEachSpawn)
   for i = 1, #timeLine.enemyQueue, 1 do
 	group:insert(timeLine.enemyQueue[i])
-	print(timeLine.spawnTimes[i])
-	transition.to( timeLine.enemyQueue[i], {x=-(timeLine.enemyQueue[i].x+timeLine.enemyQueue[i].width + 2), time=timeLine.spawnTimes[i] * 2, tag="animation"} )
+	--transition.to( timeLine.enemyQueue[i], {x=((240-timeLineWidth/2)-timeLine.enemyQueue[i].x)/2, time=timeLine.spawnTimes[i] * 2, tag="animation"} )
+	transition.to( timeLine.enemyQueue[i], {x=(240-timeLineWidth/2)-enemySize/2, time=timeLine.spawnTimes[i], tag="animation"} )
   end
+  
+  
+  
+  bar = TimeLine.createTimeLineBar()
+  group:insert(bar[1])
+  group:insert(bar[2])
+  group:insert(bar[3])
   
   startLevel(currentLevel)
   
