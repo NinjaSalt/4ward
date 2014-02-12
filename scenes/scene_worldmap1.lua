@@ -56,7 +56,7 @@ function scene:createScene( event )
   rightArrow.y = 153
   group:insert(rightArrow)
 
-  local bookIcon = display.newImageRect( "images/rightArrow.png", 30, 30 )
+  local bookIcon = display.newImageRect( "images/bookIcon.png", 50, 50 )
   bookIcon.x = 30
   bookIcon.y = 30
   group:insert(bookIcon)
