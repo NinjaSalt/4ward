@@ -20,24 +20,31 @@ storyboard.removeAll()
 function scene:createScene( event )
   local group = self.view
 
-  currencyText = globals.currency.init({
+    currencyText = globals.currency.init({
     fontSize = 20,
     font = "Helvetica",
-    x = 84,
-    y = 14,
+    x = -84,
+    y = -14,
     maxDigits = 7,
     leadingZeros = false,
     filename = "currencyfile.txt",
     })
   currencyText:setFillColor( black )
-
-  scoreText = display.newText( globals.score, 15, display.contentHeight-15, globals.IMPRIMA, 20 )
-
-  scoreText:setFillColor(black )
-
   group:insert(currencyText)
-  group:insert(scoreText)
 
+  -- SCORE --
+  scoreGradient = display.newImage("images/scoreGradient2.png")
+  scoreGradient.x = 15
+  scoreGradient.y = display.contentHeight-10
+  group:insert(scoreGradient)
+
+  score = display.newText( "Score:", 30, display.contentHeight-15, globals.IMPRIMA, 18 )
+  score:setFillColor(1,1,1)
+  group:insert(score)
+
+  scoreText = display.newText( globals.score, 70, display.contentHeight-15, globals.IMPRIMA, 20 )
+  scoreText:setFillColor(1,1,1)
+  group:insert(scoreText)
 
 -- NUMBER OF LIVES
   hearts = display.newImage("images/lives.png")
@@ -47,13 +54,19 @@ function scene:createScene( event )
   hearts.y = 15
   group:insert(hearts)
 
--- PLAYERS CURRENCY
+  numLives = display.newText( globals.lives, 40, 15, globals.LOBSTERTWO, 20)
+  numLives:setFillColor(1,1,1)
+  group:insert(numLives)
+
+--PLAYERS CURRENCY
+--[[
   money = display.newImage("images/money.png")
   money.width = 58
   money.height = 28
   money.x = 85
   money.y = 14  
   group:insert(money)
+]]--
 
 
 -- PLAYERS ITEM BELT
@@ -104,6 +117,11 @@ function scene:createScene( event )
   end
 
 -- PAUSE BUTTON
+  scoreGradient = display.newImage("images/scoreGradient2.png")
+  scoreGradient.x = 523
+  scoreGradient.y = 4
+  group:insert(scoreGradient)
+
   local pauseButton = display.newImage("images/Pause.png",25,25 )
   pauseButton.x = 466
   pauseButton.y = 12
@@ -142,7 +160,6 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  currencyText:removeSelf()
   scoreText:removeSelf()
 end
  

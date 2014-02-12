@@ -8,6 +8,7 @@ globals.gamePaused = false;
 globals.hearts = {}
 
 globals.score = 0
+globals.lives = 3
 
 globals.currency = require( "classes.score" )
 

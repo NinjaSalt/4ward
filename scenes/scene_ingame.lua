@@ -28,9 +28,6 @@ local sequenceData
 local bullet_speed = 50 
 local bullet_array = {}   -- Make an array to hold the bullets
 
--- Temporary hero health
-local heroHealth = 3
-
 local eneAndBar = {}
 local group 
 
@@ -47,6 +44,8 @@ globals.currency = require( "classes.score" )
 require("classes.timeLine")
 
 local currencyText
+
+globals.lives = 3
  
 --sprite.xScale, sprite.yScale = 3,3 --The image is a little small so we scale it up
 
@@ -288,10 +287,10 @@ local function gameLoop( event )
 				allEnemHealth[i]:removeSelf()
 				table.remove(allEnemHealth, i)
 
+				globals.lives = globals.lives - 1
+				numLives.text = (globals.lives)
 
-
-				heroHealth = heroHealth - 1
-				if heroHealth <= 0 then
+				if globals.lives <= 0 then
 					endLevel(currentLevel, false)
 					storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 
