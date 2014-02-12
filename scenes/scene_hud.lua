@@ -35,7 +35,7 @@ function scene:createScene( event )
   -- SCORE --
   scoreGradient = display.newImage("images/scoreGradient2.png")
   scoreGradient.x = 15
-  scoreGradient.y = display.contentHeight-10
+  scoreGradient.y = display.contentHeight-5
   group:insert(scoreGradient)
 
   score = display.newText( "Score:", 30, display.contentHeight-15, globals.IMPRIMA, 18 )

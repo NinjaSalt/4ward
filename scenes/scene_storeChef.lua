@@ -46,6 +46,7 @@ function scene:createScene( event )
 	end
 	storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )
+    storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
     
   end
   local function giveItem2( event )
