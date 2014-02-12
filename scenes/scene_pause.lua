@@ -57,7 +57,7 @@ function scene:createScene( event )
     timer.resume(spawnEneTimer)
     globals.isPaused = false
     for n=0, 2, 1 do
-      globals.belt[n]:play()
+      globals.belts[n]:play()
     end
     transition.resume()
   end
