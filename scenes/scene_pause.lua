@@ -35,7 +35,7 @@ function scene:createScene( event )
   local menuBack = display.newRect( display.contentWidth/2, display.contentHeight/2, 250, 250)
   group:insert (menuBack)
   
-  local mainButton = display.newText( "Main Menu", display.contentWidth/2, (display.contentHeight/2) - 30, globals.LOBSTERTWO, 36 )
+  local mainButton = display.newText( "Main Menu", display.contentWidth/2, (display.contentHeight/2) - 60, globals.LOBSTERTWO, 36 )
   mainButton:setFillColor(black)
   group:insert (mainButton)
   
@@ -46,7 +46,18 @@ function scene:createScene( event )
   
   mainButton:addEventListener( "tap", onTapMain )
   
-  local backButton = display.newText( "Back", display.contentWidth/2, (display.contentHeight/2) + 30, globals.LOBSTERTWO, 36 )
+  local worldButton = display.newText( "World Map", display.contentWidth/2, (display.contentHeight/2) , globals.LOBSTERTWO, 36 )
+  worldButton:setFillColor(black)
+  group:insert (worldButton)
+  
+  local function onTapWorld( event )
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_worldmap1",options)
+  end
+  
+  worldButton:addEventListener( "tap", onTapWorld )
+
+  local backButton = display.newText( "Back", display.contentWidth/2, (display.contentHeight/2) + 60, globals.LOBSTERTWO, 36 )
   backButton:setFillColor(black)
   group:insert (backButton)
 

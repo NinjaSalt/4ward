@@ -111,21 +111,6 @@ function scene:createScene( event )
 		  myY=myY+35
 		end
 	end
-
-  
-  --group:insert( itemList[0])
-  
-  
-  
-  local back = display.newRect( 455, 25, 50, 50 )
-
-  local function onTapBack( event )
-    items[4].unlocked = true
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_worldmap1",{ effect = "slideDown", time = 500})
-  end
-  group:insert( back )
-  back:addEventListener( "tap", onTapBack )
 end
  
 -- Called BEFORE scene has moved onscreen:

@@ -69,7 +69,10 @@ function scene:createScene( event )
   bookIcon.x = 30
   bookIcon.y = 30
   group:insert(bookIcon)
- 
+
+  local storeButton = display.newRect(80,30,50,50)
+  group:insert(storeButton)
+
   local function onTapRightArrow( event )
     if LevelList.worldUnlocked(2) == true then
 		storyboard.removeScene( scene )
@@ -84,8 +87,16 @@ function scene:createScene( event )
     storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
   end
 
+  -- to get to the store
+  local function onTapStoreButton( event )
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_store", {effect = "fade", time = 500})
+    storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
+  end
+
   rightArrow:addEventListener("tap", onTapRightArrow)
   bookIcon:addEventListener("tap", onTapBookIcon)
+  storeButton:addEventListener("tap", onTapStoreButton)
 
   storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
 end
