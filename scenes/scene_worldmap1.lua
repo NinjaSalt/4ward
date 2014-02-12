@@ -51,10 +51,19 @@ function scene:createScene( event )
 	group:insert( levelList[i])
   end
 
+
   local rightArrow = display.newImageRect( "images/rightArrow.png", 50, 50 )
   rightArrow.x = 455
   rightArrow.y = 153
   group:insert(rightArrow)
+
+  if LevelList.worldUnlocked(2) ~= true then
+     local lock = display.newImageRect( "images/lock.png", 50, 50 )
+     lock.x = 455
+     lock.y = 153
+     group:insert(lock)
+   end
+
 
   local bookIcon = display.newImageRect( "images/bookIcon.png", 50, 50 )
   bookIcon.x = 30
