@@ -85,15 +85,19 @@ function scene:createScene( event )
   standardObj: setFillColor(black)
   group: insert(standardObj)
 
-  -- checks for and prints a second condition
+   -- checks for and prints a second condition
   if (vicCond ~= false) then
     -- print second condition here.
-    local secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name, display.contentWidth/2, (display.contentHeight/2) - 30, globals.IMPRIMA, 20)
+    local secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name.. ".", display.contentWidth/2, (display.contentHeight/2) - 30, globals.IMPRIMA, 20)
+    if (vicCond.amount ~= 1) then
+      secObj:removeSelf()
+      secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name .. "s.", display.contentWidth/2, (display.contentHeight/2) - 30, globals.IMPRIMA, 20)
+    end
+
     secObj: setFillColor(black)
     group: insert(secObj)
     --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)
   end
-
 
 end
 -- Called BEFORE scene has moved onscreen:
