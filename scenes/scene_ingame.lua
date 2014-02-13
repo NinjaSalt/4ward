@@ -457,9 +457,7 @@ local function goToIntro(vicCond)
     transition.pause("animation")
 end
 
-local function antgagShow()
-	storyboard.showOverlay("scenes.scene_antagonist", {effect = "slideLeft", time=500})
-end
+
 
 
 -- Called when the scene's view does not exist:
@@ -546,7 +544,6 @@ else
 	-- scene.overlay hud
 	storyboard.showOverlay("scenes.scene_hud")
 	goToIntro(currentLevel.victoryCondition)
-	--timer.performWithDelay ( 5000, antgagShow )
 end
  
 -- Called BEFORE scene has moved onscreen:

@@ -7,6 +7,8 @@ require("classes.items")
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals= require ("classes.globals") 
+
+local antagonistAbility = math.random(1,2)
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -20,13 +22,26 @@ storyboard.removeAll()
 function scene:createScene( event )
 storyboard.showOverlay("scenes.scene_hud")
   local group = self.view
-  local antgag = display.newImage( "images/antgag.png", 400, centerY, true )
-  antgag.height = 200
-  antgag.width = 150
-  group:insert(antgag)
+  local antagonist = display.newImage( "images/antgag.png", 400, centerY+40, true )
+  antagonist.height = 250
+  antagonist.width = 190
+  group:insert(antagonist)
+  local textBox = display.newRect( antagonist.x-120, antagonist.y-100, 130, 75 )
+  group:insert(textBox)
   
+  local speech = display.newText( "", 0, 0, globals.IMPRIMA, 36 )
+  if ( antagonistAbility == 1 ) then
+	speech.text = "COMBO!"
+  elseif ( antagonistAbility == 2 ) then
+    speech.text = "SWAP!"
+  end
+  
+  speech:setFillColor(black)
+  speech.x = textBox.x
+  speech.y = textBox.y
+  group:insert( speech )
   local function resume()
-	storyboard.hideOverlay( "fade", 800 )
+	storyboard.hideOverlay( "slideRight", 800 )
   end
   
   timer.performWithDelay( 2000, resume )
@@ -48,16 +63,21 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  if ( table.maxn( allEne ) > 0 ) then
-	  local numFoodItems
-	  for i = 1, table.maxn( items ) do
-		if(items[i].itemType ~= "foodType") then break end
-		numFoodItems = i
-	  end
-	  local randomEnemy = math.random(1, table.maxn( allEne ))
-	  local randomFoodItem = math.random(1, numFoodItems)
-	  itemCombo(items[randomFoodItem], allEne[randomEnemy], false)
+  if ( antagonistAbility == 1 ) then
+	  if ( table.maxn( allEne ) > 0 ) then
+		  local numFoodItems
+		  for i = 1, table.maxn( items ) do
+			if(items[i].itemType ~= "foodType") then break end
+			numFoodItems = i
+		  end
+		  local randomEnemy = math.random(1, table.maxn( allEne ))
+		  local randomFoodItem = math.random(1, numFoodItems)
+		  itemCombo(items[randomFoodItem], allEne[randomEnemy], false)
+		end
+	elseif ( antagonistAbility == 2 ) then
+		producerSwap()
 	end
+	
 	storyboard.showOverlay("scenes.scene_hud")
 end
  

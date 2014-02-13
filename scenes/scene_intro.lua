@@ -17,6 +17,10 @@ storyboard.removeAll()
 -- BEGINNING OF YOUR IMPLEMENTATION
 ---------------------------------------------------------------------------------
  
+local function antagonistShow()
+	storyboard.showOverlay("scenes.scene_antagonist", {effect = "slideLeft", time=500})
+end
+ 
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
@@ -107,7 +111,7 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
- 
+  timer.performWithDelay ( 5000, antagonistShow )
 end
  
 -- Called AFTER scene has finished moving offscreen:
