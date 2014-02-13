@@ -174,6 +174,38 @@ function make_bullet_pins( hero )
   return bullet
 end
 
+-- make spatula function
+function make_bullet_spatula( hero )
+  local x = hero.x
+  local y = hero.y
+  local attack = hero.attack
+    local spatulasheetSettings =
+  	{
+  	 width = 50,
+  	 height = 50,
+ 	  numFrames = 8
+	}
+	local spatulasheet = graphics.newImageSheet("images/spatulasheet.png",spatulasheetSettings)
+	--[[local animationData =
+	{
+	 { start=1,count=2 } --start on frame one and loop 4 frames 1 to 4.
+	}	]]
+	local spatulasequenceData = {
+	--higher the time, slower it goes
+   { name = "normal", start=1, count=8, time=300, loopCount=0 }
+}
+  local bullet2 = display.newSprite(spatulasheet,spatulasequenceData)
+  --scene.group:insert(bullet)
+  bullet2.x = x
+  bullet2.y = y
+  table.insert( globals.bullet_array, bullet2)
+  bullet2.attack = attack
+  local bt = x * bullet_speed/2
+  bullet2:play()
+  bullet2.transition = transition.to( bullet2, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
+  return bullet2
+end
+
 function scene:createEne(enemyID)
 	--local eneAndBar = {}
 	local lane = lane1
@@ -519,7 +551,7 @@ function scene:createScene( event )
   end
   local function heroNormalAttacks()
     createBullet(hero[0])
-	createBullet(hero[1])
+	group:insert(make_bullet_spatula(hero[1]))
 	group:insert(make_bullet_pins(hero[2]))
    end
   local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
