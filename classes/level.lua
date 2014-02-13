@@ -76,7 +76,7 @@ end
 -- end reference
 function makeSecondaryWin( enemy, amount )
 	local secondaryWin = {}
-	secondaryWin.enemy = pancake
+	secondaryWin.enemy = enemy
 	secondaryWin.amount = 1
 	secondaryWin.memAmount = amount
 	secondaryWin.conditionMet = false
@@ -92,9 +92,9 @@ levels[3] = {}
 --levels[1] = Level.create(1, makeSecondaryWin(pancake,1), {1,4,1,0,5,2}, {2000,2000,2000,2000,2000,2000})
 
 --world 1
-levels[1][1] = Level.create(1, false, {1,4,1,0,5,2}, {1000,4000,4000,3000,1000,1000})
-levels[1][2] = Level.create(1, makeSecondaryWin(cake,2), {1,6,1,6,1,6}, {2000,2000,2000,2000,2000,2000})
-levels[1][3] = Level.create(3, false, {1,2}, {500,500})
+levels[1][1] = Level.create(1, false, {1,4,1,0,5,2}, {1000,3000,3000,3000,3000,3000})
+levels[1][2] = Level.create(1, makeSecondaryWin(cake,2), {1,6,1,6,1,6,1,6,3}, {1000,3000,3000,3000,3000,3000,2600,2600,2600})
+levels[1][3] = Level.create(3, false, {0,6,4,4,3,2,5}, {500,3000,3000,3000,3000,3000,3000})
 levels[1][4] = Level.create(4, false, {1,2}, {500,500})
 
 --world 2
