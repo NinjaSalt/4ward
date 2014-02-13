@@ -94,13 +94,13 @@ end
 -- THE 5 CATEGORIES: BREAKFAST, DINNER, DESSERT, BASIC, BAD.
 --create and use enemy
 -- basic ingredients
-egg = Enemy.create("Egg", 10, 1, 1, 4, "images/egg.png", 5, "egg", 5, "basic", "Egg")
-steak = Enemy.create ("Steak", 10, 1, 1, 4, "images/steak.png", 5, "steak", 5, "basic", "Steak")
-strawberry = Enemy.create("Strawberry", 10, 1, .85, 4, "images/strawberry.png", 7, "strawberry", 5, "basic", "Strawberry")
-flour = Enemy.create("Flour", 10, 2, .9, 4, "images/flour.png", 7, "flour", 5, "basic", "Flour")
-potato = Enemy.create("Potato", 10, 2, .9, 4, "images/potato.png", 7, "potato", 5, "basic", "Potato")
-oil = Enemy.create("Oil", 10, 2, .9, 4, "images/fryer.png", 7, "oil", 5, "basic", "Oil")
-sugar = Enemy.create("Sugar", 10, 2, .9, 4, "images/sugar.png", 7, "sugar", 5, "basic", "Sugar")
+egg = Enemy.create("Egg", 10, 1, 1, 4, "images/egg.png", 10, "egg", 5, "basic", "Egg")
+steak = Enemy.create ("Steak", 10, 1, 1, 4, "images/steak.png", 10, "steak", 5, "basic", "Steak")
+strawberry = Enemy.create("Strawberry", 10, 1, .85, 4, "images/strawberry.png", 10, "strawberry", 5, "basic", "Strawberry")
+flour = Enemy.create("Flour", 10, 2, .9, 4, "images/flour.png", 10, "flour", 5, "basic", "Flour")
+potato = Enemy.create("Potato", 10, 2, .9, 4, "images/potato.png", 10, "potato", 5, "basic", "Potato")
+oil = Enemy.create("Oil", 10, 2, .9, 4, "images/fryer.png", 10, "oil", 5, "basic", "Oil")
+sugar = Enemy.create("Sugar", 10, 2, .9, 4, "images/sugar.png", 10, "sugar", 5, "basic", "Sugar")
 
 --combinations
 bad = Enemy.create("Bad", 5, 2, 1.1, 4, "images/BombGreen.png", 5, "bad", -3, "bad", "All bad combos")
