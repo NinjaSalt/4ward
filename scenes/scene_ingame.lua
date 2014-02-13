@@ -4,6 +4,7 @@
 ---------------------------------------------------------------------------------
  
 local storyboard = require( "storyboard" )
+local globals = require("classes.globals")
 local scene = storyboard.newScene()
 local thisLevel 
 local world
@@ -26,7 +27,7 @@ local sequenceData
 
 -- Hero Attack Variables
 local bullet_speed = 50 
-local bullet_array = {}   -- Make an array to hold the bullets
+--local bullet_array = {}   -- Make an array to hold the bullets
 
 local eneAndBar = {}
 local group 
@@ -39,7 +40,7 @@ require("classes.level")
 require("classes.combo")
 require("classes.items")
 require("classes.recipes")
-local globals = require("classes.globals")
+
 globals.currency = require( "classes.score" )
 require("classes.timeLine")
 
@@ -118,9 +119,9 @@ end
 
 -- function to remove the bullet off the array/off screen
 function remove_bullet( bullet )
-  local index = table.indexOf( bullet_array, bullet )
+  local index = table.indexOf( globals.bullet_array, bullet )
   transition.cancel( bullet.transition )
-  table.remove( bullet_array, index )
+  table.remove( globals.bullet_array, index )
   display.remove( bullet )
 end 
 
@@ -134,9 +135,41 @@ function make_bullet( hero )
   bullet:setFillColor( 0, 0, 0 )
   bullet.x = x
   bullet.y = y
-  table.insert( bullet_array, bullet)
+  table.insert( globals.bullet_array, bullet)
   bullet.attack = attack
   local bt = x * bullet_speed
+  bullet.transition = transition.to( bullet, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
+  return bullet
+end
+
+-- make bullet function
+function make_bullet_pins( hero )
+  local x = hero.x
+  local y = hero.y
+  local attack = hero.attack
+    local pinsheetSettings =
+  	{
+  	 width = 50,
+  	 height = 50,
+ 	  numFrames = 14
+	}
+	local pinsheet = graphics.newImageSheet("images/rollingpicsheet.png",pinsheetSettings)
+	--[[local animationData =
+	{
+	 { start=1,count=2 } --start on frame one and loop 4 frames 1 to 4.
+	}	]]
+	local pinsequenceData = {
+	--higher the time, slower it goes
+   { name = "normal", start=1, count=14, time=300, loopCount=0 }
+}
+  local bullet = display.newSprite(pinsheet,pinsequenceData)
+  --scene.group:insert(bullet)
+  bullet.x = x
+  bullet.y = y
+  table.insert( globals.bullet_array, bullet)
+  bullet.attack = attack
+  local bt = x * bullet_speed
+  bullet:play()
   bullet.transition = transition.to( bullet, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
   return bullet
 end
@@ -319,11 +352,11 @@ local function gameLoop( event )
 	end
 
 	for i = 0,table.maxn( allEne ) do
-		for n = 0,table.maxn( bullet_array  ) do
-			if ( hasCollidedCircle( bullet_array [n], allEne[i]) ) then
+		for n = 0,table.maxn( globals.bullet_array  ) do
+			if ( hasCollidedCircle( globals.bullet_array [n], allEne[i]) ) then
 				-- allEne[i].health=allEne[i].health-bullet_array[n].attack old damage system
 				-- new damage check
-				allEne[i].health= allEne[i].health - calculateDamage(allEne[i], bullet_array[n]) 
+				allEne[i].health= allEne[i].health - calculateDamage(allEne[i], globals.bullet_array[n]) 
 				if ( allEne[i].health <= 0 ) then
 					--theScore.add(allEne[i].pointValue) 		-- adding the amount to score
 					globals.score = globals.score + allEne[i].pointValue + calcLaneScore(allEne[i])
@@ -350,7 +383,7 @@ local function gameLoop( event )
 						end
 					end
 				end
-				remove_bullet(bullet_array[n])
+				remove_bullet(globals.bullet_array[n])
 			end
 		end
 	end
@@ -487,7 +520,7 @@ function scene:createScene( event )
   local function heroNormalAttacks()
     createBullet(hero[0])
 	createBullet(hero[1])
-	createBullet(hero[2])
+	group:insert(make_bullet_pins(hero[2]))
    end
   local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth

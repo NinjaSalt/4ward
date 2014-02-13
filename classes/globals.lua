@@ -18,6 +18,7 @@ globals.recipe = {}
 globals.isPaused= false
 
 globals.belts = {}
+globals.bullet_array = {}
 
 globals.belts[0] = nil
 globals.belts[1] = nil
