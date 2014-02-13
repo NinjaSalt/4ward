@@ -42,6 +42,7 @@ function scene:createScene( event )
   local function onTapMain( event )
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_home",options)
+	timer.cancel(antagonistTimer)
   end
   
   mainButton:addEventListener( "tap", onTapMain )
@@ -53,6 +54,7 @@ function scene:createScene( event )
   local function onTapWorld( event )
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_worldmap1",options)
+	timer.cancel(antagonistTimer)
   end
   
   worldButton:addEventListener( "tap", onTapWorld )
@@ -66,6 +68,7 @@ function scene:createScene( event )
     storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
     timer.resume(attackTimer)
     timer.resume(spawnEneTimer)
+	timer.resume(antagonistTimer)
     globals.isPaused = false
     for n=0, 2, 1 do
       globals.belts[n]:play()

@@ -131,6 +131,7 @@ function scene:createScene( event )
     storyboard.showOverlay("scenes.scene_pause", {effect = "slideDown", time=500})
     timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
+	timer.pause(antagonistTimer)
     globals.isPaused = true
     for n=0, 2, 1 do
       globals.belts[n]:pause()

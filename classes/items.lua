@@ -82,6 +82,7 @@ function commercialBreak()
 	storyboard.showOverlay("scenes.scene_break", {effect = "slideDown", time=500})
     timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
+	timer.pause(antagonistTimer)
     transition.pause("animation")
 end
 

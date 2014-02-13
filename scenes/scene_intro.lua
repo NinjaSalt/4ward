@@ -115,7 +115,7 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  timer.performWithDelay ( 5000, antagonistShow )
+  antagonistTimer = timer.performWithDelay ( 5000, antagonistShow )
 end
  
 -- Called AFTER scene has finished moving offscreen:
