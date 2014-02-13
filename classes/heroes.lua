@@ -39,17 +39,17 @@ function ability( event )
 			--checks if the touch moved either left or right
 			if (event.x - event.xStart ~= 0 and event.x - event.xStart < -7) then
 				if ( hero.laneSpeed ~=1 ) then
-					hero.laneSpeed = hero.laneSpeed-1
+					hero.laneSpeed = hero.laneSpeed+1
 					updateMoveSpeed(hero)
-					globals.belts[hero.num]:setSequence( "slow" )
+					globals.belts[hero.num]:setSequence( "fast" )
 					globals.belts[hero.num]:play()
 					hero.abilityUsed = true
 				end
 			elseif (event.x - event.xStart ~= 0 and event.x - event.xStart > 7) then
 				if ( hero.laneSpeed ~=3 ) then
-					hero.laneSpeed = hero.laneSpeed+1
+					hero.laneSpeed = hero.laneSpeed-1
 					updateMoveSpeed(hero)
-					globals.belts[hero.num]:setSequence( "fast" )
+					globals.belts[hero.num]:setSequence( "slow" )
 					globals.belts[hero.num]:play()
 					hero.abilityUsed = true
 				end
