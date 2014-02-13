@@ -99,10 +99,10 @@ function scene:createScene( event )
     if ( myItems[i] ~= nil )then
       gameItems[i] = display.newImage(myItems[i].image)
       passValuesToNewItem (gameItems[i], myItems[i])
-      gameItems[i].width = 35
-      gameItems[i].height = 35
+      gameItems[i].width = 25
+      gameItems[i].height = 25
       gameItems[i].x = itemSpace
-      gameItems[i].y = 25
+      gameItems[i].y = 20
       gameItems[i].myItemRef = i
       if ( gameItems[i].itemType == "foodType" or gameItems[i].itemType == "trash") then
       gameItems[i]:addEventListener( "touch", itemFoodDrag ) 
