@@ -125,6 +125,7 @@ function remove_bullet( bullet )
   display.remove( bullet )
 end 
 
+--[[
 -- make bullet function
 function make_bullet( hero )
   local x = hero.x
@@ -141,7 +142,7 @@ function make_bullet( hero )
   bullet.transition = transition.to( bullet, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
   return bullet
 end
-
+]]
 -- make bullet function
 function make_bullet_pins( hero )
   local x = hero.x
@@ -204,6 +205,38 @@ function make_bullet_spatula( hero )
   bullet2:play()
   bullet2.transition = transition.to( bullet2, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
   return bullet2
+end
+
+-- make spatula function
+function make_bullet_whisk( hero )
+  local x = hero.x
+  local y = hero.y
+  local attack = hero.attack
+    local whisksheetSettings =
+  	{
+  	 width = 50,
+  	 height = 50,
+ 	  numFrames = 8
+	}
+	local whisksheet = graphics.newImageSheet("images/whisksheet.png",whisksheetSettings)
+	--[[local animationData =
+	{
+	 { start=1,count=2 } --start on frame one and loop 4 frames 1 to 4.
+	}	]]
+	local whisksequenceData = {
+	--higher the time, slower it goes
+   { name = "normal", start=1, count=8, time=300, loopCount=0 }
+}
+  local bullet3 = display.newSprite(whisksheet,whisksequenceData)
+  --scene.group:insert(bullet)
+  bullet3.x = x
+  bullet3.y = y
+  table.insert( globals.bullet_array, bullet3)
+  bullet3.attack = attack
+  local bt = x * bullet_speed
+  bullet3:play()
+  bullet3.transition = transition.to( bullet3, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
+  return bullet3
 end
 
 function scene:createEne(enemyID)
@@ -550,9 +583,9 @@ function scene:createScene( event )
 	group:insert(make_bullet(hero))
   end
   local function heroNormalAttacks()
-    createBullet(hero[0])
+    group:insert(make_bullet_pins(hero[0]))
 	group:insert(make_bullet_spatula(hero[1]))
-	group:insert(make_bullet_pins(hero[2]))
+	group:insert(make_bullet_whisk(hero[2]))
    end
   local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
