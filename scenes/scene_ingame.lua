@@ -233,7 +233,7 @@ function make_bullet_whisk( hero )
   bullet3.y = y
   table.insert( globals.bullet_array, bullet3)
   bullet3.attack = attack
-  local bt = x * bullet_speed
+  local bt = (x * bullet_speed)*(3/4)
   bullet3:play()
   bullet3.transition = transition.to( bullet3, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
   return bullet3
