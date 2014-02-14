@@ -8,6 +8,7 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 require("classes.level")
 local globals = require ("classes.globals")
+local levelNumber
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -34,6 +35,7 @@ function scene:createScene( event )
   group:insert (bkg)
 
   local vicCond = event.params.vic
+  levelNumber = event.params.levelNumber
   local globals = require("classes.globals")
 
  
@@ -115,7 +117,12 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  antagonistTimer = timer.performWithDelay ( 5000, antagonistShow )
+  antagonistRandom = math.random(0, levelNumber)
+  local antTime = math.random(5000, 15000)
+  print (antagonistRandom)
+  if(antagonistRandom~=0)then
+	antagonistTimer = timer.performWithDelay ( antTime, antagonistShow )
+  end
 end
  
 -- Called AFTER scene has finished moving offscreen:

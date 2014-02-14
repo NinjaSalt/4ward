@@ -545,8 +545,8 @@ local function gameLoop( event )
 end
 
 
-local function goToIntro(vicCond)
-    storyboard.showOverlay("scenes.scene_intro", {effect = "slideDown", time=500, params = {vic= vicCond}})
+local function goToIntro(vicCond, id)
+	storyboard.showOverlay("scenes.scene_intro", {effect = "slideDown", time=500, params = {vic= vicCond, levelNumber=id}})
     timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
     for n=0, 2, 1 do
@@ -641,7 +641,7 @@ else
 
 	-- scene.overlay hud
 	storyboard.showOverlay("scenes.scene_hud")
-	goToIntro(currentLevel.victoryCondition)
+	goToIntro(currentLevel.victoryCondition, currentLevel.levelID)
 end
  
 -- Called BEFORE scene has moved onscreen:
@@ -664,6 +664,7 @@ function scene:exitScene( event )
   Runtime:removeEventListener( "enterFrame", gameLoop )
   timer.cancel(attackTimer)
   timer.cancel(spawnEneTimer)
+  timer.cancel(antagonistTimer)
 end
  
 -- Called AFTER scene has finished moving offscreen:
