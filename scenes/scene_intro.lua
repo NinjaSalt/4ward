@@ -94,9 +94,13 @@ function scene:createScene( event )
     -- print second condition here.
     local secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name.. ".", display.contentWidth/2, (display.contentHeight/2) - 30, globals.IMPRIMA, 20)
     if (vicCond.amount ~= 1) then
+      if (vicCond.enemy.name == "Fries") then
+      -- do nothing
+    else
       secObj:removeSelf()
       secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name .. "s.", display.contentWidth/2, (display.contentHeight/2) - 30, globals.IMPRIMA, 20)
     end
+  end
 
     secObj: setFillColor(black)
     group: insert(secObj)

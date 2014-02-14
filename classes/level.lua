@@ -94,8 +94,8 @@ levels[3] = {}
 --world 1
 levels[1][1] = Level.create(1, false, {1,4,1,0,5,2}, {1000,3000,3000,3000,3000,3000})
 levels[1][2] = Level.create(1, makeSecondaryWin(cake,2), {1,6,1,6,1,6,1,6,3}, {1000,3000,3000,3000,3000,3000,2600,2600,2600})
-levels[1][3] = Level.create(3, false, {0,6,4,4,3,2,5}, {500,3000,3000,3000,3000,3000,3000})
-levels[1][4] = Level.create(4, false, {1,2}, {500,500})
+levels[1][3] = Level.create(3, false, {0,6,2,4,3,6,2,0,5,0,2,1}, {500,3000,3000,3000,3000,3000,3000,3000,6000,2600,2600,2600})
+levels[1][4] = Level.create(4, makeSecondaryWin(fries,2), {6,5,2,4,5,4,5,4}, {500,3000,3000,3000,3000,3000,3000,3000})
 
 --world 2
 levels[2][1] = Level.create(1, false, {4,4}, {500,500})
