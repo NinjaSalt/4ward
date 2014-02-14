@@ -17,14 +17,19 @@ globals.recipe = {}
 
 globals.isPaused= false
 
+-- ARRAY FOR CONVERYER BELTS --
 globals.belts = {}
 globals.bullet_array = {}
-
 globals.belts[0] = nil
 globals.belts[1] = nil
 globals.belts[2] = nil
 
---FONTS.
+
+-- HUD MULTIPLIER -- 
+globals.multiplier = 0
+globals.multiplierText = nil
+
+-- FONTS --
 globals.LOBSTERTWO = "blank"
 globals.IMPRIMA = "blank"
 

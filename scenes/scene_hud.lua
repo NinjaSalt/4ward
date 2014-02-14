@@ -4,6 +4,7 @@
 ---------------------------------------------------------------------------------
  
 local globals = require("classes.globals") 
+local score = require("classes.score")
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
  
@@ -58,6 +59,24 @@ function scene:createScene( event )
   numLives:setFillColor(1,1,1)
   group:insert(numLives)
 
+-- PAUSE BUTTON
+  pauseGradient = display.newImage("images/scoreGradient2.png")
+  pauseGradient.x = 515
+  pauseGradient.y = 6
+  group:insert(pauseGradient)
+
+  local pauseButton = display.newImage("images/Pause.png")
+  pauseButton.x = 475
+  pauseButton.y = 24
+  pauseButton.width = 8
+  pauseButton.height = 8
+  group:insert(pauseButton)
+
+    -- MULTIPLIER --
+  globals.multiplierText = display.newText( globals.multiplier, 460, 12, globals.LOBSTERTWO, 24 )
+  globals.multiplierText:setFillColor(1,1,1)
+  group:insert(globals.multiplierText)
+
 --PLAYERS CURRENCY
 --[[
   money = display.newImage("images/money.png")
@@ -67,7 +86,6 @@ function scene:createScene( event )
   money.y = 14  
   group:insert(money)
 ]]--
-
 
 -- PLAYERS ITEM BELT
   itemBelt = {}
@@ -116,22 +134,11 @@ function scene:createScene( event )
     itemSpace = itemSpace+50
   end
 
--- PAUSE BUTTON
-  scoreGradient = display.newImage("images/scoreGradient2.png")
-  scoreGradient.x = 523
-  scoreGradient.y = 4
-  group:insert(scoreGradient)
-
-  local pauseButton = display.newImage("images/Pause.png",25,25 )
-  pauseButton.x = 466
-  pauseButton.y = 12
-  group:insert(pauseButton)
-
  local function onTapPause( event )
     storyboard.showOverlay("scenes.scene_pause", {effect = "slideDown", time=500})
     timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
-	timer.pause(antagonistTimer)
+  timer.pause(antagonistTimer)
     globals.isPaused = true
     for n=0, 2, 1 do
       globals.belts[n]:pause()
@@ -139,7 +146,7 @@ function scene:createScene( event )
     transition.pause("animation")
   end
 
-  pauseButton:addEventListener( "tap", onTapPause )
+  pauseGradient:addEventListener( "tap", onTapPause )
 end
  
 -- Called BEFORE scene has moved onscreen:

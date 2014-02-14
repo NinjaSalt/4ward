@@ -1,10 +1,8 @@
--- Score Module
---
+-- Score Module --
 
 local M = {} 	--create the local module table (this will hold our functions and data)
 M.score = 0 	--set the initial score to 0
 M.multiplier = 1
-
 
 --[[fontSize — The size of the displayed score text.
 font — The font used for the displayed score text.

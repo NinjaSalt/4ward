@@ -378,6 +378,8 @@ function itemCombo( item , enemy, fromFoodItem )
 end
 
 local function gameLoop( event )
+	globals.multiplier = getMultiplier()
+	globals.multiplierText.text = (globals.multiplier)
 	for i = 0,table.maxn( allEne ) do
 		for n = 0,table.maxn( hero ) do
 			if ( hasCollidedCircle( hero[n], allEne[i]) ) then

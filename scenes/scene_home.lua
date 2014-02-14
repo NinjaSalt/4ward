@@ -18,7 +18,7 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  
+
   local options = {
    effect = "fade",
    time = 300
