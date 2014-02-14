@@ -14,7 +14,6 @@ function Hero.create(health, attack, image, name, num)
    hero.num = num --for the conveyor belts
    hero.laneSpeed = 2
    hero.abilityUsed = false
-   hero.timer = 50
    hero.item = nil
    return hero
 end
@@ -37,30 +36,35 @@ function ability( event )
 			stage:setFocus( hero, nil )
 			hero.isFocus = false
 			--checks if the touch moved either left or right
+			--left swipe makes the lanes go faster
 			if (event.x - event.xStart ~= 0 and event.x - event.xStart < -7) then
 				if ( hero.laneSpeed ~=1 ) then
 					hero.laneSpeed = hero.laneSpeed+1
 					updateMoveSpeed(hero)
 					globals.belts[hero.num]:setSequence( "fast" )
 					globals.belts[hero.num]:play()
-					hero.abilityUsed = true
+				elseif ( hero.laneSpeed ~= 2 ) then
+					hero.laneSpeed = 2
+					updateMoveSpeed(hero)
+					globals.belts[hero.num]:setSequence( "normal" )
+					globals.belts[hero.num]:play()
 				end
+				--right swipe makes the lanes go slower
 			elseif (event.x - event.xStart ~= 0 and event.x - event.xStart > 7) then
 				if ( hero.laneSpeed ~=3 ) then
 					hero.laneSpeed = hero.laneSpeed-1
 					updateMoveSpeed(hero)
 					globals.belts[hero.num]:setSequence( "slow" )
 					globals.belts[hero.num]:play()
-					hero.abilityUsed = true
+				elseif ( hero.laneSpeed ~= 2 ) then
+					hero.laneSpeed = 2
+					updateMoveSpeed(hero)
+					globals.belts[hero.num]:setSequence( "normal" )
+					globals.belts[hero.num]:play()
 				end
 			--checks if the touch didn't move from original position. Meaning that it was a tap
 			elseif (event.x - event.xStart == 0) then
 				useItem(hero)
-				if (hero.abilityUsed == false) then
-					hero.abilityUsed = true
-				elseif (hero.abilityUsed == true) then
-					hero.abilityUsed = false
-				end
 			end
 		end
 	end

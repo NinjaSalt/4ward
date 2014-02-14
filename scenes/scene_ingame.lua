@@ -74,9 +74,9 @@ function scene:createConveyorBelts()
 	}	]]
 	sequenceData = {
 	--higher the time, slower it goes
-   { name = "normal", start=1, count=2, time=300, loopCount=0 },
-   { name = "slow", start=1, count=2, time=500,   loopCount=0 },   
-   { name = "fast", start=1, count=2, time=100, loopCount=0 }
+   { name = "normal", start=1, count=2, time=1150, loopCount=0 },
+   { name = "slow", start=1, count=2, time=2000,   loopCount=0 },   
+   { name = "fast", start=1, count=2, time=300, loopCount=0 }
 }
 
 	for n=0, 2, 1 do
@@ -109,7 +109,7 @@ function scene:createHeroes()
     if (n == 0) then hero[n].y = lane1
     elseif (n == 1) then hero[n].y = lane2
     elseif (n == 2) then hero[n].y = lane3
-    elseif (n == 3) then hero[n].y = lane4
+    --elseif (n == 3) then hero[n].y = lane4
     end
     hero[n].height = 70; hero[n].width = 70
 	hero[n]:addEventListener( "touch", ability )
@@ -155,10 +155,6 @@ function make_bullet_pins( hero )
  	  numFrames = 14
 	}
 	local pinsheet = graphics.newImageSheet("images/rollingpicsheet.png",pinsheetSettings)
-	--[[local animationData =
-	{
-	 { start=1,count=2 } --start on frame one and loop 4 frames 1 to 4.
-	}	]]
 	local pinsequenceData = {
 	--higher the time, slower it goes
    { name = "normal", start=1, count=14, time=300, loopCount=0 }
@@ -187,10 +183,6 @@ function make_bullet_spatula( hero )
  	  numFrames = 8
 	}
 	local spatulasheet = graphics.newImageSheet("images/spatulasheet.png",spatulasheetSettings)
-	--[[local animationData =
-	{
-	 { start=1,count=2 } --start on frame one and loop 4 frames 1 to 4.
-	}	]]
 	local spatulasequenceData = {
 	--higher the time, slower it goes
    { name = "normal", start=1, count=8, time=300, loopCount=0 }
@@ -201,7 +193,7 @@ function make_bullet_spatula( hero )
   bullet2.y = y
   table.insert( globals.bullet_array, bullet2)
   bullet2.attack = attack
-  local bt = x * bullet_speed/2
+  local bt = x * bullet_speed
   bullet2:play()
   bullet2.transition = transition.to( bullet2, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
   return bullet2
@@ -219,10 +211,6 @@ function make_bullet_whisk( hero )
  	  numFrames = 8
 	}
 	local whisksheet = graphics.newImageSheet("images/whisksheet.png",whisksheetSettings)
-	--[[local animationData =
-	{
-	 { start=1,count=2 } --start on frame one and loop 4 frames 1 to 4.
-	}	]]
 	local whisksequenceData = {
 	--higher the time, slower it goes
    { name = "normal", start=1, count=8, time=300, loopCount=0 }
@@ -233,7 +221,7 @@ function make_bullet_whisk( hero )
   bullet3.y = y
   table.insert( globals.bullet_array, bullet3)
   bullet3.attack = attack
-  local bt = (x * bullet_speed)*(3/4)
+  local bt = x * bullet_speed
   bullet3:play()
   bullet3.transition = transition.to( bullet3, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
   return bullet3
@@ -272,25 +260,6 @@ function scene:createEne(enemyID)
 	eneAndBar[1]=allEnemHealth[#allEne]
 	return eneAndBar
 end
-
--- countdown timer for the speed update
-function laneTimerDown(hero)
-	local laneSpeed
-    currentTime = hero.timer
-    if (globals.isPaused) then
-    	hero.timer = hero.timer
-    else
-		hero.timer = hero.timer - .5
-	end
-	if(hero.timer==0)then
-    	currentTime = hero.timer
-    	globals.belts[hero.num]:setSequence( "normal" )
-		globals.belts[hero.num]:play()
-    	hero.abilityUsed = false
-    	hero.laneSpeed = 2
-	end
-	
- end
 
   -- function to calculate currency based on score
 function currencyCalc( score, currCurrency )
@@ -455,7 +424,7 @@ local function gameLoop( event )
 		end
 	end
 
-	--countdown timer for hero speed
+	--[[--countdown timer for hero speed
 	for n = 0,table.maxn( hero ) do
 			if ( hero[n].abilityUsed == true ) then
 				laneTimerDown(hero[n])
@@ -464,7 +433,7 @@ local function gameLoop( event )
 					hero[n].timer = 50
 				end
 			end
-	end
+	end]]
 
 	-- this is the code for collision checking, and combining to make new enemies
 	for i = 1,table.maxn( allEne ) do
