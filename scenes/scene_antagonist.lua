@@ -8,7 +8,7 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals= require ("classes.globals") 
 
-local antagonistAbility = math.random(1,1)
+local antagonistAbility = math.random(1,2)
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -40,14 +40,25 @@ function scene:createScene( event )
   antagonist.height = 250
   antagonist.width = 190
   group:insert(antagonist)
-  local textBox = display.newRect( antagonist.x-120, antagonist.y-100, 130, 75 )
+  
+  
+  local textBoxOutline = display.newRect( centerX, 35, 130, 70 )
+  textBoxOutline:setFillColor( black )
+  group:insert(textBoxOutline)
+  local textBox = display.newRect( centerX, 35, 130, 60 )
   group:insert(textBox)
+  
+  --transition.to( textBox, { time= 2000, x= centerX, transition=easing.inCubic } )
   
   local speech = display.newText( "", 0, 0, globals.IMPRIMA, 36 )
   if ( antagonistAbility == 1 ) then
-	speech.text = "COMBO!"
+	speech.text = "SURPRISE COMBO!"
+	textBox.width=speech.width+10
+	textBoxOutline.width=speech.width+20
   elseif ( antagonistAbility == 2 ) then
-    speech.text = "SWAP!"
+    speech.text = "SURPRISE SWAP!"
+	textBox.width=speech.width+10
+	textBoxOutline.width=speech.width+20
   end
   
   speech:setFillColor(black)
@@ -69,18 +80,22 @@ function scene:createScene( event )
 		  local randomFoodItem = math.random(1, numFoodItems)
 		  local enemyX=allEne[randomEnemy].x
 		  local enemyY=allEne[randomEnemy].y
-		  
+		  local basicItem = display.newImage(items[randomFoodItem].image, centerX, centerY)
+		  basicItem.width = 50
+		  basicItem.height = 50
+		  basicItem.alpha = 0
+		  transition.to( basicItem, { time=1000, alpha=1 } )
 		  --Will be called when we want to end the scene after the enemy has made it to the center of the screen
 		  local function finish ()
 			--create smoke where the enemy is
 			local smoke = display.newImage( "images/smoke.png", allEne[randomEnemy].x, allEne[randomEnemy].y, true )
 			transition.to( smoke, { time=1500, alpha=0, onComplete=function() smoke:removeSelf()end } )
-			
+			basicItem:removeSelf()
 			--make the new enemy 
 			local newEnemy = itemCombo(items[randomFoodItem], allEne[randomEnemy], false)
 			--move the enemy back
 			local function moveBack()
-				transition.to( newEnemy, { time=1000, x=enemyX, y=enemyY, onComplete= function() 
+				transition.to( newEnemy, { time=2000, x=enemyX, y=enemyY, onComplete= function() 
 					transition.to( newEnemy, { time=(moveSpeed(newEnemy.x, newEnemy.speed, newEnemy.y)), x=(50), tag="animation" } )
 					transition.pause("animation")
 				end} )
@@ -89,14 +104,14 @@ function scene:createScene( event )
 			timer.performWithDelay( 500, moveBack  )
 		  end
 		  --Move the enemy to the center of the screen
-		  transition.to( allEne[randomEnemy], { time=1000, x=centerX, y=centerY, onComplete=finish } )
+		  transition.to( allEne[randomEnemy], { time=2500, x=centerX, y=centerY, onComplete=finish } )
 		end
 	elseif ( antagonistAbility == 2 ) then
 		producerSwap()
 	end
   
   
-  timer.performWithDelay( 5000, resume )
+  timer.performWithDelay( 6000, resume )
   --startButton:addEventListener( "tap", onTap )
 end
  

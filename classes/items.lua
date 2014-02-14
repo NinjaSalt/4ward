@@ -104,29 +104,23 @@ function producerSwap()
 		local randomEne1BarY = allEnemHealth[randomEne1].y
 		local randomEne2BarY = allEnemHealth[randomEne2].y
 		
-		allEne[randomEne1].x = -100
-		allEne[randomEne2].x = 700
-		
-		allEne[randomEne1].x = randomEne2X
-		allEnemHealth[randomEne1].x = randomEne2BarX
-		allEne[randomEne2].x = randomEne1X
-		allEnemHealth[randomEne2].x = randomEne1BarX
-		
-		allEne[randomEne1].y = randomEne2Y
-		allEnemHealth[randomEne1].y = randomEne2BarY
-		allEne[randomEne2].y = randomEne1Y
-		allEnemHealth[randomEne2].y = randomEne1BarY
-		
-		transition.to( allEne[randomEne1], { time=(moveSpeed(allEne[randomEne1].x, allEne[randomEne1].speed, allEne[randomEne1].y)), x=(50) ,tag="animation"}  )
-		transition.to( allEne[randomEne2], { time=(moveSpeed(allEne[randomEne2].x, allEne[randomEne2].speed, allEne[randomEne2].y)), x=(50) ,tag="animation"}  )
-		transition.pause("animation")
 		local smoke1 = display.newImage( "images/smoke.png", allEne[randomEne1].x, allEne[randomEne1].y, true )
 		transition.to( smoke1, { time=1500, alpha=0, onComplete=function() smoke1:removeSelf()end } )
 		
 		local smoke2 = display.newImage( "images/smoke.png", allEne[randomEne2].x, allEne[randomEne2].y, true )
 		transition.to( smoke2, { time=1500, alpha=0, onComplete=function() smoke2:removeSelf()end } )
+		local function resetMove()
+			transition.to( allEne[randomEne1], { time=(moveSpeed(allEne[randomEne1].x, allEne[randomEne1].speed, allEne[randomEne1].y)), x=(50) ,tag="animation"}  )
+			transition.to( allEne[randomEne2], { time=(moveSpeed(allEne[randomEne2].x, allEne[randomEne2].speed, allEne[randomEne2].y)), x=(50) ,tag="animation"}  )
+			transition.pause("animation")
+		end
+		transition.to(allEne[randomEne1], { time= 2000,  x = randomEne2X, y = randomEne2Y})
+		transition.to(allEne[randomEne2], { time= 2000,  x = randomEne1X, y = randomEne1Y, onComplete= resetMove })
 		
-		print("Original x pos: " .. randomEne1X .. " Now: " .. allEne[randomEne1].x)
+		
+		
+		
+		
 	end
 end
 function itemTap ( event )

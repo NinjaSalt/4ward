@@ -47,7 +47,7 @@ function teleport( event, params )
 				end
 			end
 			transition.cancel(body)
-			transition.to( body, { time=(moveSpeed(body.x, body.speed, body.y)), x=(50) } )
+			transition.to( body, { time=(moveSpeed(body.x, body.speed, body.y)), x=(50) , tag= "animation"} )
 
 		end
 	end
