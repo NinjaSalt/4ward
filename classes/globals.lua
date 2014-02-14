@@ -38,4 +38,7 @@ globals.multiplierText = nil
 globals.LOBSTERTWO = "blank"
 globals.IMPRIMA = "blank"
 
+-- CHECK DURNING ANTAGONIST --
+globals.notDurningAntagonist = true
+
 return globals

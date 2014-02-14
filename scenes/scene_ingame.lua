@@ -372,63 +372,29 @@ function itemCombo( item , enemy, fromFoodItem )
 			end 
 		end
 	end
+	return eneAndBar[0]
 end
 
 local function gameLoop( event )
 	globals.multiplier = getMultiplier()
 	globals.multiplierText.text = (globals.multiplier)
-	for i = 0,table.maxn( allEne ) do
-		for n = 0,table.maxn( hero ) do
-			if ( hasCollidedCircle( hero[n], allEne[i]) ) then
-				allEne[i]:removeSelf()
-				table.remove(allEne, i)
-				allEnemHealth[i]:removeSelf()
-				table.remove(allEnemHealth, i)
-
-				globals.lives = globals.lives - 1
-				numLives.text = (globals.lives)
-
-				if globals.lives <= 0 then
-					endLevel(currentLevel, false)
-					storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-
-				end
-				decrementEnemy(currentLevel)
-				if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
-					if(currentLevel.victoryCondition~=false) then
-						if(currentLevel.victoryCondition.conditionMet==true)then
-							LevelList.unlockLevel(world, thisLevel+1)
-							endLevel(currentLevel, true)
-							storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-						else 
-							LevelList.unlockLevel(world, thisLevel+1)
-							endLevel(currentLevel, false)
-							storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-						end
-					else	
-						LevelList.unlockLevel(world, thisLevel+1)
-						endLevel(currentLevel, true)
-						storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-					end
-				end
-			end
-		end
-	end
-
-	for i = 0,table.maxn( allEne ) do
-		for n = 0,table.maxn( globals.bullet_array  ) do
-			if ( hasCollidedCircle( globals.bullet_array [n], allEne[i]) ) then
-				-- allEne[i].health=allEne[i].health-bullet_array[n].attack old damage system
-				-- new damage check
-				allEne[i].health= allEne[i].health - calculateDamage(allEne[i], globals.bullet_array[n]) 
-				if ( allEne[i].health <= 0 ) then
-					--theScore.add(allEne[i].pointValue) 		-- adding the amount to score
-					globals.score = globals.score + allEne[i].pointValue + calcLaneScore(allEne[i])
-					scoreText.text = (globals.score)
+	if ( globals.notDurningAntagonist ) then
+		for i = 0,table.maxn( allEne ) do
+			for n = 0,table.maxn( hero ) do
+				if ( hasCollidedCircle( hero[n], allEne[i]) ) then
 					allEne[i]:removeSelf()
 					table.remove(allEne, i)
 					allEnemHealth[i]:removeSelf()
 					table.remove(allEnemHealth, i)
+
+					globals.lives = globals.lives - 1
+					numLives.text = (globals.lives)
+
+					if globals.lives <= 0 then
+						endLevel(currentLevel, false)
+						storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+
+					end
 					decrementEnemy(currentLevel)
 					if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
 						if(currentLevel.victoryCondition~=false) then
@@ -437,6 +403,7 @@ local function gameLoop( event )
 								endLevel(currentLevel, true)
 								storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 							else 
+								LevelList.unlockLevel(world, thisLevel+1)
 								endLevel(currentLevel, false)
 								storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 							end
@@ -447,97 +414,132 @@ local function gameLoop( event )
 						end
 					end
 				end
-				remove_bullet(globals.bullet_array[n])
 			end
 		end
-	end
 
-	--[[--countdown timer for hero speed
-	for n = 0,table.maxn( hero ) do
-			if ( hero[n].abilityUsed == true ) then
-				laneTimerDown(hero[n])
-				if (hero[n].abilityUsed == false) then
-					updateMoveSpeed(hero[n])
-					hero[n].timer = 50
-				end
-			end
-	end]]
-
-	-- this is the code for collision checking, and combining to make new enemies
-	for i = 1,table.maxn( allEne ) do
-		for n = 1,table.maxn( allEne ) do
-			if (i == n) then --"colliding with itself, ignore when this happens"
-			elseif(combination(allEne[i], allEne[n])) then
-				-- create a new emeny at the end of the list
-				for j = 0,table.maxn( comboEnemies ) do
-					if (comboEnemies[j].type == replaceEnemy(allEne[i], allEne[n])) then
-
-						allEne[#allEne + 1] = comboEnemies[j]
-						allEne[#allEne] = display.newImage(allEne[#allEne].image)
-						allEne[#allEne] = passValuesToNewEne(allEne[#allEne], comboEnemies[j])
-						unlockCheck(j)
-						-- Check for Secondary Win condition
-						if(currentLevel.victoryCondition~=false) then
-							if(currentLevel.victoryCondition.enemy.name==allEne[#allEne].name)then
-								currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
-								print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
-								if (currentLevel.victoryCondition.amount == 0) then
-									print("Condition Met")
-									currentLevel.victoryCondition.conditionMet = true
+		for i = 0,table.maxn( allEne ) do
+			for n = 0,table.maxn( globals.bullet_array  ) do
+				if ( hasCollidedCircle( globals.bullet_array [n], allEne[i]) ) then
+					-- allEne[i].health=allEne[i].health-bullet_array[n].attack old damage system
+					-- new damage check
+					allEne[i].health= allEne[i].health - calculateDamage(allEne[i], globals.bullet_array[n]) 
+					if ( allEne[i].health <= 0 ) then
+						--theScore.add(allEne[i].pointValue) 		-- adding the amount to score
+						globals.score = globals.score + allEne[i].pointValue + calcLaneScore(allEne[i])
+						scoreText.text = (globals.score)
+						allEne[i]:removeSelf()
+						table.remove(allEne, i)
+						allEnemHealth[i]:removeSelf()
+						table.remove(allEnemHealth, i)
+						decrementEnemy(currentLevel)
+						if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
+							if(currentLevel.victoryCondition~=false) then
+								if(currentLevel.victoryCondition.conditionMet==true)then
+									LevelList.unlockLevel(world, thisLevel+1)
+									endLevel(currentLevel, true)
+									storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+								else 
+									endLevel(currentLevel, false)
+									storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 								end
+							else	
+								LevelList.unlockLevel(world, thisLevel+1)
+								endLevel(currentLevel, true)
+								storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 							end
 						end
-						
-						-- add health bars to enemies.
-						allEnemHealth[#allEne] = #allEne
-						allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
-						allEnemHealth[#allEne].height = 10 
-						-- creates a new health.
-						allEnemHealth[#allEne].health = newHealth(n,i)
-						allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
-						allEnemHealth[#allEne].x = allEnemHealth[n].x; allEnemHealth[#allEne].y = allEnemHealth[n].y
-						--end health bar.
+					end
+					remove_bullet(globals.bullet_array[n])
+				end
+			end
+		end
 
-						--define the enemy
-						allEne[#allEne].height = 50; allEne[#allEne].width = 50
-						allEne[#allEne].x = allEne[n].x; allEne[#allEne].y = allEne[n].y
+		--[[--countdown timer for hero speed
+		for n = 0,table.maxn( hero ) do
+				if ( hero[n].abilityUsed == true ) then
+					laneTimerDown(hero[n])
+					if (hero[n].abilityUsed == false) then
+						updateMoveSpeed(hero[n])
+						hero[n].timer = 50
+					end
+				end
+		end]]
 
-						--set the move speedallEne
-						transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50), tag="animation" } )
-						allEne[#allEne]:addEventListener( "touch", teleport ) 
-						eneAndBar[0]=allEne[#allEne]
-						eneAndBar[1]=allEnemHealth[#allEne]
-						group:insert(eneAndBar[0])
-						group:insert(eneAndBar[1])
+		-- this is the code for collision checking, and combining to make new enemies
+		for i = 1,table.maxn( allEne ) do
+			for n = 1,table.maxn( allEne ) do
+				if (i == n) then --"colliding with itself, ignore when this happens"
+				elseif(combination(allEne[i], allEne[n])) then
+					-- create a new emeny at the end of the list
+					for j = 0,table.maxn( comboEnemies ) do
+						if (comboEnemies[j].type == replaceEnemy(allEne[i], allEne[n])) then
 
-						--remove the second enemy we want to replace
-						allEne[n]: removeSelf()
-						table.remove(allEne, n)
-						allEnemHealth[n]:removeSelf()
-						table.remove(allEnemHealth, n)
+							allEne[#allEne + 1] = comboEnemies[j]
+							allEne[#allEne] = display.newImage(allEne[#allEne].image)
+							allEne[#allEne] = passValuesToNewEne(allEne[#allEne], comboEnemies[j])
+							unlockCheck(j)
+							-- Check for Secondary Win condition
+							if(currentLevel.victoryCondition~=false) then
+								if(currentLevel.victoryCondition.enemy.name==allEne[#allEne].name)then
+									currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
+									print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
+									if (currentLevel.victoryCondition.amount == 0) then
+										print("Condition Met")
+										currentLevel.victoryCondition.conditionMet = true
+									end
+								end
+							end
+							
+							-- add health bars to enemies.
+							allEnemHealth[#allEne] = #allEne
+							allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
+							allEnemHealth[#allEne].height = 10 
+							-- creates a new health.
+							allEnemHealth[#allEne].health = newHealth(n,i)
+							allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
+							allEnemHealth[#allEne].x = allEnemHealth[n].x; allEnemHealth[#allEne].y = allEnemHealth[n].y
+							--end health bar.
 
-						if (n > i) then -- removes teleported enemy 
-							-- if i is less than n in the enemy list, remove i since i is not effect when n was removed
-							allEne[i]:removeSelf()
-							table.remove(allEne, i)
-							allEnemHealth[i]:removeSelf()
-							table.remove(allEnemHealth, i)
-							decrementEnemy(currentLevel)
-						else
-							-- if i is greater than n, need to remove the enemy 1 less than where i orginally was before removing n since the whole list shifted
-							allEne[i-1]:removeSelf()
-							table.remove(allEne, i-1)
-							allEnemHealth[i-1]:removeSelf()
-							table.remove(allEnemHealth, i-1)
-							decrementEnemy(currentLevel)
+							--define the enemy
+							allEne[#allEne].height = 50; allEne[#allEne].width = 50
+							allEne[#allEne].x = allEne[n].x; allEne[#allEne].y = allEne[n].y
+
+							--set the move speedallEne
+							transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50), tag="animation" } )
+							allEne[#allEne]:addEventListener( "touch", teleport ) 
+							eneAndBar[0]=allEne[#allEne]
+							eneAndBar[1]=allEnemHealth[#allEne]
+							group:insert(eneAndBar[0])
+							group:insert(eneAndBar[1])
+
+							--remove the second enemy we want to replace
+							allEne[n]: removeSelf()
+							table.remove(allEne, n)
+							allEnemHealth[n]:removeSelf()
+							table.remove(allEnemHealth, n)
+
+							if (n > i) then -- removes teleported enemy 
+								-- if i is less than n in the enemy list, remove i since i is not effect when n was removed
+								allEne[i]:removeSelf()
+								table.remove(allEne, i)
+								allEnemHealth[i]:removeSelf()
+								table.remove(allEnemHealth, i)
+								decrementEnemy(currentLevel)
+							else
+								-- if i is greater than n, need to remove the enemy 1 less than where i orginally was before removing n since the whole list shifted
+								allEne[i-1]:removeSelf()
+								table.remove(allEne, i-1)
+								allEnemHealth[i-1]:removeSelf()
+								table.remove(allEnemHealth, i-1)
+								decrementEnemy(currentLevel)
+							end
 						end
 					end
 				end
 			end
 		end
+
 	end
-
-
 	updateEnemyHealth()
 
    return true

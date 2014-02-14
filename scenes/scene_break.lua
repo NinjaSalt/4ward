@@ -62,7 +62,7 @@ function scene:createScene( event )
     timer.resume(spawnEneTimer)
     for n=0, 2, 1 do
       globals.belts[n]:play()
-  end
+	end
     transition.resume()
   end
   timer.performWithDelay( 2000, makeText )
