@@ -666,7 +666,9 @@ function scene:exitScene( event )
   Runtime:removeEventListener( "enterFrame", gameLoop )
   timer.cancel(attackTimer)
   timer.cancel(spawnEneTimer)
-  timer.cancel(antagonistTimer)
+  if ( antagonistTimer ~= nil) then
+	timer.cancel(antagonistTimer)
+  end
 end
  
 -- Called AFTER scene has finished moving offscreen:
