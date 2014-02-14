@@ -86,6 +86,8 @@ function scene:createScene( event )
   local standardObj = display.newText("Survive!", display.contentWidth/2, (display.contentHeight/2) - 60, globals.IMPRIMA, 24)
   standardObj: setFillColor(black)
   group: insert(standardObj)
+  
+
 
    -- checks for and prints a second condition
   if (vicCond ~= false) then
@@ -98,8 +100,15 @@ function scene:createScene( event )
 
     secObj: setFillColor(black)
     group: insert(secObj)
+
     --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)
   end
+  local antag = display.newImage("images/antag_01.png")
+  antag.width = antag.width/5
+  antag.height = antag.height/5
+  antag.x = display.contentWidth/5
+  antag.y = display.contentHeight/2
+  group: insert (antag)
 
 end
 -- Called BEFORE scene has moved onscreen:
