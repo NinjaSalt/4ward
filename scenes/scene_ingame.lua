@@ -427,6 +427,12 @@ local function gameLoop( event )
 						--theScore.add(allEne[i].pointValue) 		-- adding the amount to score
 						globals.score = globals.score + allEne[i].pointValue + calcLaneScore(allEne[i])
 						scoreText.text = (globals.score)
+						-- add visual poof of death.
+						local deathPoof = display.newImage( "images/death.png", allEne[i].x, allEne[i].y, true )
+						deathPoof.width = deathPoof.width/9
+						deathPoof.height = deathPoof.height/9
+						transition.to( deathPoof, { time=1500, alpha=0, onComplete=function() deathPoof:removeSelf() end } )
+						--end visual poof of death.
 						allEne[i]:removeSelf()
 						table.remove(allEne, i)
 						allEnemHealth[i]:removeSelf()
