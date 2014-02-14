@@ -19,11 +19,16 @@ globals.isPaused= false
 
 -- ARRAY FOR CONVERYER BELTS --
 globals.belts = {}
-globals.bullet_array = {}
 globals.belts[0] = nil
 globals.belts[1] = nil
 globals.belts[2] = nil
+globals.levers = {}
+globals.levers[0] = nil
+globals.levers[1] = nil
+globals.levers[2] = nil
 
+-- ARRAY FOR BULLETS --
+globals.bullet_array = {}
 
 -- HUD MULTIPLIER -- 
 globals.multiplier = 0

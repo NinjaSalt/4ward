@@ -68,7 +68,9 @@ function scene:createScene( event )
     storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
     timer.resume(attackTimer)
     timer.resume(spawnEneTimer)
-	timer.resume(antagonistTimer)
+    if ( antagonistTimer ~= nil) then
+	     timer.resume(antagonistTimer)
+    end
     globals.isPaused = false
     for n=0, 2, 1 do
       globals.belts[n]:play()

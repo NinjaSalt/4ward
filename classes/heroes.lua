@@ -43,11 +43,15 @@ function ability( event )
 					updateMoveSpeed(hero)
 					globals.belts[hero.num]:setSequence( "fast" )
 					globals.belts[hero.num]:play()
+					globals.levers[hero.num]:setSequence( "fast" )
+					globals.levers[hero.num]:play()
 				elseif ( hero.laneSpeed ~= 2 ) then
 					hero.laneSpeed = 2
 					updateMoveSpeed(hero)
 					globals.belts[hero.num]:setSequence( "normal" )
 					globals.belts[hero.num]:play()
+					globals.levers[hero.num]:setSequence( "normal" )
+					globals.levers[hero.num]:play()
 				end
 				--right swipe makes the lanes go slower
 			elseif (event.x - event.xStart ~= 0 and event.x - event.xStart > 7) then
@@ -56,11 +60,15 @@ function ability( event )
 					updateMoveSpeed(hero)
 					globals.belts[hero.num]:setSequence( "slow" )
 					globals.belts[hero.num]:play()
+					globals.levers[hero.num]:setSequence( "slow" )
+					globals.levers[hero.num]:play()
 				elseif ( hero.laneSpeed ~= 2 ) then
 					hero.laneSpeed = 2
 					updateMoveSpeed(hero)
 					globals.belts[hero.num]:setSequence( "normal" )
 					globals.belts[hero.num]:play()
+					globals.levers[hero.num]:setSequence( "normal" )
+					globals.levers[hero.num]:play()
 				end
 			--checks if the touch didn't move from original position. Meaning that it was a tap
 			elseif (event.x - event.xStart == 0) then

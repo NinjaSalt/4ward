@@ -24,6 +24,10 @@ allEnemHealth = {}
 local sheetSettings
 local sheet
 local sequenceData
+--lever locals
+local leversheetSettings
+local leversheet
+local leversequenceData
 
 -- Hero Attack Variables
 local bullet_speed = 50 
@@ -68,10 +72,6 @@ function scene:createConveyorBelts()
  	  numFrames = 2
 	}
 	sheet = graphics.newImageSheet("images/belt3.png",sheetSettings)
-	--[[local animationData =
-	{
-	 { start=1,count=2 } --start on frame one and loop 4 frames 1 to 4.
-	}	]]
 	sequenceData = {
 	--higher the time, slower it goes
    { name = "normal", start=1, count=2, time=1150, loopCount=0 },
@@ -95,7 +95,37 @@ function scene:createConveyorBelts()
 		globals.belts[n]:play()
 		group:insert(globals.belts[n])
 	end
-	--return belt
+	-- LEVER SETTINGS --
+	leversheetSettings =
+  	{
+  	 width = 50,
+  	 height = 50,
+ 	  numFrames = 3
+	}
+	leversheet = graphics.newImageSheet("images/leversheet.png",leversheetSettings)
+	leversequenceData = {
+	--higher the time, slower it goes
+   { name = "normal", start=2--[[, count=2]] },
+   { name = "slow", start=3--[[, count=1]] },   
+   { name = "fast", start=1--[[, count=3]] }
+}
+
+	for n=0, 2, 1 do
+  		globals.levers[n] = display.newSprite(leversheet,leversequenceData)
+  		globals.levers[n].x = 100
+  		if (n==0) then
+			globals.levers[n].y = lane1+20
+		end
+		if (n==1) then
+			globals.levers[n].y = lane2+20
+		end
+		if (n==2) then
+			globals.levers[n].y = lane3+20
+		end
+		globals.levers[n]:setSequence( "normal" )
+		globals.levers[n]:play()
+		group:insert(globals.levers[n])
+	end
 	
 end  
 
@@ -145,21 +175,19 @@ end
 ]]
 -- make bullet function
 function make_bullet_pins( hero )
-  local x = hero.x
-  local y = hero.y
-  local attack = hero.attack
-    local pinsheetSettings =
-  	{
-  	 width = 50,
-  	 height = 50,
- 	  numFrames = 14
-	}
+	local x = hero.x
+	local y = hero.y
+	local attack = hero.attack
+	local pinsheetSettings ={
+	width = 50,
+	height = 50,
+	numFrames = 14 }
 	local pinsheet = graphics.newImageSheet("images/rollingpicsheet.png",pinsheetSettings)
 	local pinsequenceData = {
 	--higher the time, slower it goes
-   { name = "normal", start=1, count=14, time=300, loopCount=0 }
+	{ name = "normal", start=1, count=14, time=300, loopCount=0 }
 }
-  local bullet = display.newSprite(pinsheet,pinsequenceData)
+local bullet = display.newSprite(pinsheet,pinsequenceData)
   --scene.group:insert(bullet)
   bullet.x = x
   bullet.y = y
@@ -173,30 +201,30 @@ end
 
 -- make spatula function
 function make_bullet_spatula( hero )
-  local x = hero.x
-  local y = hero.y
-  local attack = hero.attack
-    local spatulasheetSettings =
-  	{
-  	 width = 50,
-  	 height = 50,
- 	  numFrames = 8
-	}
-	local spatulasheet = graphics.newImageSheet("images/spatulasheet.png",spatulasheetSettings)
-	local spatulasequenceData = {
-	--higher the time, slower it goes
-   { name = "normal", start=1, count=8, time=300, loopCount=0 }
+	local x = hero.x
+	local y = hero.y
+	local attack = hero.attack
+	local spatulasheetSettings =
+	{
+	width = 50,
+	height = 50,
+	numFrames = 8
 }
-  local bullet2 = display.newSprite(spatulasheet,spatulasequenceData)
-  --scene.group:insert(bullet)
-  bullet2.x = x
-  bullet2.y = y
-  table.insert( globals.bullet_array, bullet2)
-  bullet2.attack = attack
-  local bt = x * bullet_speed
-  bullet2:play()
-  bullet2.transition = transition.to( bullet2, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
-  return bullet2
+local spatulasheet = graphics.newImageSheet("images/spatulasheet.png",spatulasheetSettings)
+local spatulasequenceData = {
+	--higher the time, slower it goes
+	{ name = "normal", start=1, count=8, time=300, loopCount=0 }
+}
+local bullet2 = display.newSprite(spatulasheet,spatulasequenceData)
+	--scene.group:insert(bullet)
+	bullet2.x = x
+	bullet2.y = y
+	table.insert( globals.bullet_array, bullet2)
+	bullet2.attack = attack
+	local bt = x * bullet_speed
+	bullet2:play()
+	bullet2.transition = transition.to( bullet2, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
+	return bullet2
 end
 
 -- make spatula function
