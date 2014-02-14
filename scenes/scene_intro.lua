@@ -29,8 +29,9 @@ function scene:createScene( event )
    effect = "fade",
    time = 500
 }
+
   local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
-  bkg:setFillColor( gray )
+  bkg:setFillColor( gray)
   bkg.alpha = .5
   group:insert (bkg)
 
@@ -46,10 +47,12 @@ function scene:createScene( event )
   --bkg:addEventListener("touch", function() return true end)
   --bkg:addEventListener("tap", function() return true end)
 
+  local objBorder = display.newRect( display.contentWidth/2, 170, 310, 210 )
+  objBorder:setFillColor(black)
+  group:insert (objBorder)
   local objBack = display.newRect( display.contentWidth/2, 170, 300, 200 )
   group:insert(objBack)
 
-  local back = display.newRect( display.contentWidth/2, 290, 90, 30 )
 
   local function onTapBack( event )
     storyboard.hideOverlay( "slideUp", 500 )
@@ -61,12 +64,22 @@ function scene:createScene( event )
   end
     transition.resume()
   end
-  group:insert( back )
-  back:addEventListener( "tap", onTapBack )
 
-  local readyText= display.newText( "Ready!", display.contentWidth/2, 290, globals.LOBSTERTWO, 25 )
-  readyText:setFillColor(black)
-  group:insert(readyText)
+   local function makeReady()
+
+    local backBorder = display.newRect( display.contentWidth/2, 295, 95, 35 )
+    backBorder: setFillColor (black)
+    group:insert(backBorder)
+
+    local back = display.newRect( display.contentWidth/2, 295, 90, 30 )
+    group:insert( back )
+    back:addEventListener( "tap", onTapBack )
+
+    local readyText= display.newText( "Ready!", display.contentWidth/2, 295, globals.LOBSTERTWO, 25 )
+    readyText:setFillColor(black)
+    group:insert(readyText)
+  end
+
   
   local function resume()
     storyboard.hideOverlay( "slideUp", 500 )
@@ -78,42 +91,58 @@ function scene:createScene( event )
   end
     transition.resume()
   end
-  timer.performWithDelay( 1000, makeText )
   --timer.performWithDelay( 5000, resume )
 
   --startButton:addEventListener( "tap", onTap )
   --standard objective: survive!
-  local standardObj = display.newText("Survive!", display.contentWidth/2, (display.contentHeight/2) - 60, globals.IMPRIMA, 24)
+  local function makeObj()
+  local standardObj = display.newText("Survive!", 400, (display.contentHeight/2) - 60, globals.IMPRIMA, 24)
   standardObj: setFillColor(black)
+  --standardObj.x = 400
+  --standardObj.y = (display.contentHeight/2) - 60
+  transition.to(standardObj, {time = 150, x= display.contentWidth/2})
   group: insert(standardObj)
-  
+  end
 
 
    -- checks for and prints a second condition
-  if (vicCond ~= false) then
+   local function makeSecCond()
+    if (vicCond ~= false) then
     -- print second condition here.
-    local secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name.. ".", display.contentWidth/2, (display.contentHeight/2) - 30, globals.IMPRIMA, 20)
+    local secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name.. ".", 400, (display.contentHeight/2) - 30, globals.IMPRIMA, 20)
     if (vicCond.amount ~= 1) then
       if (vicCond.enemy.name == "Fries") then
       -- do nothing
     else
       secObj:removeSelf()
-      secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name .. "s.", display.contentWidth/2, (display.contentHeight/2) - 30, globals.IMPRIMA, 20)
+      secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name .. "s.", 400, (display.contentHeight/2) - 30, globals.IMPRIMA, 20)
     end
-  end
-
+    transition.to(secObj, {time=150, x=display.contentWidth/2})
     secObj: setFillColor(black)
     group: insert(secObj)
 
+  end
+end
     --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)
   end
+
+  local function makeAnt()
   local antag = display.newImage("images/antag_01.png")
   antag.width = antag.width/5
   antag.height = antag.height/5
   antag.x = display.contentWidth/5
-  antag.y = display.contentHeight/2
+  antag.y = 400 
+  transition.to(antag,{time = 300,  y= display.contentHeight/2})
+  --antag.x = display.contentWidth/5
+  --antag.y = display.contentHeight/2
   group: insert (antag)
-
+end
+--perform all the fancy stuff.
+timer.performWithDelay(800, makeText )
+timer.performWithDelay(1200, makeAnt)
+timer.performWithDelay(1800, makeObj)
+timer.performWithDelay(2100, makeSecCond)
+timer.performWithDelay(2800, makeReady)
 end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
