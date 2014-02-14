@@ -81,9 +81,9 @@ function makeHero( newH, oldH )
 end
 
 -- create and use an Hero
-chefB = Hero.create(1000, 1, "images/ramsey.png", "chefB", 0)
-chefDin = Hero.create(1000, 1, "images/giada.png", "chefDin", 1)
-chefDess = Hero.create(1000, 1, "images/brown.png", "chefDess", 2)
+chefB = Hero.create(1000, 1, "images/Kit01.png", "chefB", 0)
+chefDin = Hero.create(1000, 1, "images/Jay02.png", "chefDin", 1)
+chefDess = Hero.create(1000, 1, "images/Fifi01.png", "chefDess", 2)
 --joe = Hero.create(1000, 1, "penguinknight1.png", "joe")
 myHeroes = {}
 myHeroes[0]=chefB

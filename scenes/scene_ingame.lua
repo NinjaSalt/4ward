@@ -111,7 +111,7 @@ function scene:createHeroes()
     elseif (n == 2) then hero[n].y = lane3
     elseif (n == 3) then hero[n].y = lane4
     end
-    hero[n].height = 50; hero[n].width = 50
+    hero[n].height = 70; hero[n].width = 70
 	hero[n]:addEventListener( "touch", ability )
 	
   end
