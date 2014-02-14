@@ -94,6 +94,8 @@ function scene:exitScene( event )
 	  end
 	  local randomEnemy = math.random(1, table.maxn( allEne ))
 	  local randomFoodItem = math.random(1, numFoodItems)
+	  local smoke = display.newImage( "images/smoke.png", allEne[randomEnemy].x, allEne[randomEnemy].y, true )
+		  transition.to( smoke, { time=1500, alpha=0, onComplete=function() smoke:removeSelf()end } )
 	  itemCombo(items[randomFoodItem], allEne[randomEnemy], false)
 	end
 end
