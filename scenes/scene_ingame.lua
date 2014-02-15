@@ -112,7 +112,7 @@ function scene:createConveyorBelts()
 
 	for n=0, 2, 1 do
   		globals.levers[n] = display.newSprite(leversheet,leversequenceData)
-  		globals.levers[n].x = 100
+  		globals.levers[n].x = 75
   		if (n==0) then
 			globals.levers[n].y = lane1+20
 		end
@@ -187,16 +187,16 @@ function make_bullet_pins( hero )
 	--higher the time, slower it goes
 	{ name = "normal", start=1, count=14, time=300, loopCount=0 }
 }
-local bullet = display.newSprite(pinsheet,pinsequenceData)
+globals.bullet[0] = display.newSprite(pinsheet,pinsequenceData)
   --scene.group:insert(bullet)
-  bullet.x = x
-  bullet.y = y
-  table.insert( globals.bullet_array, bullet)
-  bullet.attack = attack
+  globals.bullet[0].x = x
+  globals.bullet[0].y = y
+  table.insert( globals.bullet_array, globals.bullet[0])
+  globals.bullet[0].attack = attack
   local bt = x * bullet_speed
-  bullet:play()
-  bullet.transition = transition.to( bullet, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
-  return bullet
+  globals.bullet[0]:play()
+  globals.bullet[0].transition = transition.to( globals.bullet[0], {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
+  return globals.bullet[0]
 end
 
 -- make spatula function
@@ -215,16 +215,16 @@ local spatulasequenceData = {
 	--higher the time, slower it goes
 	{ name = "normal", start=1, count=8, time=300, loopCount=0 }
 }
-local bullet2 = display.newSprite(spatulasheet,spatulasequenceData)
+globals.bullet[1] = display.newSprite(spatulasheet,spatulasequenceData)
 	--scene.group:insert(bullet)
-	bullet2.x = x
-	bullet2.y = y
-	table.insert( globals.bullet_array, bullet2)
-	bullet2.attack = attack
+	globals.bullet[1].x = x
+	globals.bullet[1].y = y
+	table.insert( globals.bullet_array, globals.bullet[1])
+	globals.bullet[1].attack = attack
 	local bt = x * bullet_speed
-	bullet2:play()
-	bullet2.transition = transition.to( bullet2, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
-	return bullet2
+	globals.bullet[1]:play()
+	globals.bullet[1].transition = transition.to( globals.bullet[1], {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
+	return globals.bullet[1]
 end
 
 -- make spatula function
@@ -243,16 +243,16 @@ function make_bullet_whisk( hero )
 	--higher the time, slower it goes
    { name = "normal", start=1, count=8, time=300, loopCount=0 }
 }
-  local bullet3 = display.newSprite(whisksheet,whisksequenceData)
+  globals.bullet[2] = display.newSprite(whisksheet,whisksequenceData)
   --scene.group:insert(bullet)
-  bullet3.x = x
-  bullet3.y = y
-  table.insert( globals.bullet_array, bullet3)
-  bullet3.attack = attack
+  globals.bullet[2].x = x
+  globals.bullet[2].y = y
+  table.insert( globals.bullet_array, globals.bullet[2])
+  globals.bullet[2].attack = attack
   local bt = x * bullet_speed
-  bullet3:play()
-  bullet3.transition = transition.to( bullet3, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
-  return bullet3
+  globals.bullet[2]:play()
+  globals.bullet[2].transition = transition.to( globals.bullet[2], {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
+  return globals.bullet[2]
 end
 
 function scene:createEne(enemyID)
@@ -559,6 +559,13 @@ local function goToIntro(vicCond, id)
     for n=0, 2, 1 do
     	globals.belts[n]:pause()
 	end
+	if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
+      for i=0, #globals.bullet_array, 1 do
+        if (globals.bullet_array[i] ~= nil) then
+          globals.bullet_array[i]:pause()
+        end
+      end
+    end
     transition.pause("animation")
 end
 
@@ -605,13 +612,13 @@ function scene:createScene( event )
   
   bkg:addEventListener( "touch", getxy )
 
-  --adding the conveyor belts to the screen
-  scene.createConveyorBelts()
   --create the heroes
   scene.createHeroes()
   for n=0,2,1 do
     group:insert(hero[n])
   end
+  --adding the conveyor belts to the screen
+  scene.createConveyorBelts()
 
   currentLevel = Level.load(world, thisLevel)
   

@@ -29,6 +29,13 @@ function scene:createScene( event )
     for n=0, 2, 1 do
     	globals.belts[n]:pause()
 	end
+  if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
+      for i=0, #globals.bullet_array, 1 do
+        if (globals.bullet_array[i] ~= nil) then
+          globals.bullet_array[i]:pause()
+        end
+      end
+    end
     transition.pause("animation")
 
   local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
@@ -142,6 +149,13 @@ function scene:didExitScene( event )
   for n=0, 2, 1 do
       globals.belts[n]:play()
   end
+  if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
+      for i=0, #globals.bullet_array, 1 do
+        if (globals.bullet_array[i] ~= nil) then
+          globals.bullet_array[i]:play()
+        end
+      end
+    end
   transition.resume()
   globals.notDurningAntagonist = true
 end

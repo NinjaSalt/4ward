@@ -15,8 +15,6 @@ globals.currency = require( "classes.score" )
 globals.recipe = {}
 --globals.recipe = require ("classes.recipes")
 
-globals.isPaused= false
-
 -- ARRAY FOR CONVERYER BELTS --
 globals.belts = {}
 globals.belts[0] = nil
@@ -29,6 +27,10 @@ globals.levers[2] = nil
 
 -- ARRAY FOR BULLETS --
 globals.bullet_array = {}
+globals.bullet = {}
+globals.bullet[0] = nil
+globals.bullet[1] = nil
+globals.bullet[2] = nil
 
 -- HUD MULTIPLIER -- 
 globals.multiplier = 0

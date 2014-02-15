@@ -62,6 +62,13 @@ function scene:createScene( event )
     for n=0, 2, 1 do
       globals.belts[n]:play()
   end
+  if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
+      for i=0, #globals.bullet_array, 1 do
+        if (globals.bullet_array[i] ~= nil) then
+          globals.bullet_array[i]:play()
+        end
+      end
+    end
     transition.resume()
   end
 
@@ -89,6 +96,13 @@ function scene:createScene( event )
     for n=0, 2, 1 do
       globals.belts[n]:play()
   end
+  if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
+      for i=0, #globals.bullet_array, 1 do
+        if (globals.bullet_array[i] ~= nil) then
+          globals.bullet_array[i]:play()
+        end
+      end
+    end
     transition.resume()
   end
   --timer.performWithDelay( 5000, resume )

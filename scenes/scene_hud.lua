@@ -128,6 +128,8 @@ function scene:createScene( event )
       gameItems[i]:addEventListener( "tap", itemTap ) 
 	  elseif ( gameItems[i].itemType == "swap" ) then
       gameItems[i]:addEventListener( "tap", itemTap ) 
+      elseif ( gameItems[i].itemType == "boost" ) then
+      gameItems[i]:addEventListener( "touch", dragToHero ) 
       end
       group:insert(gameItems[i])
     end
@@ -138,11 +140,19 @@ function scene:createScene( event )
     storyboard.showOverlay("scenes.scene_pause", {effect = "slideDown", time=500})
     timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
-  timer.pause(antagonistTimer)
-    globals.isPaused = true
+    if ( antagonistTimer ~= nil) then
+     timer.cancel(antagonistTimer)
+     end
     for n=0, 2, 1 do
       globals.belts[n]:pause()
   end
+    if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
+      for i=0, #globals.bullet_array, 1 do
+        if (globals.bullet_array[i] ~= nil) then
+          globals.bullet_array[i]:pause()
+        end
+      end
+    end
     transition.pause("animation")
   end
 
