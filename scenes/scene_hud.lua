@@ -126,7 +126,7 @@ function scene:createScene( event )
       gameItems[i]:addEventListener( "touch", itemFoodDrag ) 
       elseif ( gameItems[i].itemType == "break" ) then
       gameItems[i]:addEventListener( "tap", itemTap ) 
-	  elseif ( gameItems[i].itemType == "swap" ) then
+	    elseif ( gameItems[i].itemType == "swap" ) then
       gameItems[i]:addEventListener( "tap", itemTap ) 
       elseif ( gameItems[i].itemType == "boost" ) then
       gameItems[i]:addEventListener( "touch", dragToHero ) 

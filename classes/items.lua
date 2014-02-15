@@ -1,5 +1,6 @@
 require("classes.enemies")
 require("classes.level")
+--equire("classes.heroes")
 local globals = require("classes.globals")
 local storyboard = require( "storyboard" )
 --require("scenes.scene_ingame")
@@ -39,6 +40,7 @@ function makeItemArray ()
 	items[nextItem+1]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem, true)
 	items[nextItem+2]= Item.makeItem("Compost","trash", "images/trash_item.png", 1200, nextItem+2, true)
 	items[nextItem+3]= Item.makeItem("Producer Swap","swap", "images/swap.png", 700, nextItem+3, true)
+	items[nextItem+4]= Item.makeItem("Attack Boost","boost", "images/attackboost.png", 800, nextItem+4, true)
 end
 makeItemArray()
 myItems = {}
@@ -82,7 +84,9 @@ function commercialBreak()
 	storyboard.showOverlay("scenes.scene_break", {effect = "slideDown", time=500})
     timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
-	timer.pause(antagonistTimer)
+    if (antagonistTimer ~= nil) then
+		timer.pause(antagonistTimer)
+	end
     transition.pause("animation")
 end
 
@@ -152,10 +156,10 @@ function itemFoodDrag( event )
 
 	elseif body.isFocus then
 		if "moved" == phase then
-		
-			-- Update the joint to track the touch
-			body.x = event.x
-			body.y = event.y 
+
+		-- Update the joint to track the touch
+		body.x = event.x
+		body.y = event.y 
 
 		elseif "ended" == phase or "cancelled" == phase then
 			local hit = 0
@@ -167,15 +171,15 @@ function itemFoodDrag( event )
 						itemCombo( body, allEne[n], true )
 						break
 					elseif (body.itemType == "trash") then
-						allEne[n]: removeSelf()
-						table.remove(allEne, n)
-						allEnemHealth[n]:removeSelf()
-						table.remove(allEnemHealth, n)
-						decrementEnemy(currentLevel)
-						body: removeSelf()
-						myItems[body.myItemRef] = nil
+					allEne[n]: removeSelf()
+					table.remove(allEne, n)
+					allEnemHealth[n]:removeSelf()
+					table.remove(allEnemHealth, n)
+					decrementEnemy(currentLevel)
+					body: removeSelf()
+					myItems[body.myItemRef] = nil
 					end
-					hit = 1
+				hit = 1
 				end
 			end
 			if ( hit == 0) then
@@ -186,10 +190,61 @@ function itemFoodDrag( event )
 			startY = nil
 			stage:setFocus( body, nil )
 			body.isFocus = false
-			
+
 		end
 	end
 
-	-- Stop further propagation of touch event
+-- Stop further propagation of touch event
+	return true
+end
+
+function dragToHero( event )
+	local body = event.target
+	local phase = event.phase
+	local stage = display.getCurrentStage()
+	if( startX == nil ) then
+		startX = body.x
+		startY = body.y
+	end
+
+	if "began" == phase then
+		stage:setFocus( body, event.id )
+		body.isFocus = true
+
+	elseif body.isFocus then
+		if "moved" == phase then
+
+		-- Update the joint to track the touch
+		body.x = event.x
+		body.y = event.y 
+
+		elseif "ended" == phase or "cancelled" == phase then
+			local hit = 0
+			print (body.itemType)
+			for n = 0,table.maxn( hero  ) do
+				if ( hasCollidedCircle( body, hero[n]) ) then
+					-- in game
+					if (body.itemType == "boost") then
+						hero[n].attack = hero[n].attack + 2
+						print(hero[n].attack)
+						body: removeSelf()
+						myItems[body.myItemRef] = nil
+					end
+				hit = 1
+				end
+			end
+			if ( hit == 0) then
+				print (body.x .. " " .. startX)
+				transition.to( body, { time=400, x = startX, y = startY} )
+			end
+			startX = nil
+			startY = nil
+			stage:setFocus( body, nil )
+			body.isFocus = false
+
+		end
+	end
+
+-- Stop further propagation of touch event
 	return true
 end

@@ -54,7 +54,9 @@ function scene:createScene( event )
   local function onTapWorld( event )
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_worldmap1",options)
+    if ( antagonistTimer ~= nil) then
 	timer.cancel(antagonistTimer)
+end
   end
   
   worldButton:addEventListener( "tap", onTapWorld )

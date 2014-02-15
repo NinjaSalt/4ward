@@ -563,6 +563,8 @@ local function goToIntro(vicCond, id)
       for i=0, #globals.bullet_array, 1 do
         if (globals.bullet_array[i] ~= nil) then
           globals.bullet_array[i]:pause()
+      else
+      	break
         end
       end
     end
@@ -579,7 +581,6 @@ function scene:createScene( event )
   local params = event.params
   thisLevel = params.level
   world = params.world
-
 
   local options = {
     effect = "slideDown",
