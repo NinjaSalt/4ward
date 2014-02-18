@@ -77,6 +77,7 @@ function scene:createScene( event )
   end
   
   if ( antagonistAbility == 1 ) then
+	  timer.performWithDelay( 6000, resume )
 	  if ( table.maxn( allEne ) > 0 ) then
 		  local numFoodItems
 		  for i = 1, table.maxn( items ) do
@@ -94,6 +95,7 @@ function scene:createScene( event )
 		  transition.to( basicItem, { time=1000, alpha=1 } )
 		  --Will be called when we want to end the scene after the enemy has made it to the center of the screen
 		  local function finish ()
+			transition.to( antagonist, { time=500, x=700 } )
 			--create smoke where the enemy is
 			local smoke = display.newImage( "images/smoke.png", allEne[randomEnemy].x, allEne[randomEnemy].y, true )
 			transition.to( smoke, { time=1500, alpha=0, onComplete=function() smoke:removeSelf()end } )
@@ -114,11 +116,16 @@ function scene:createScene( event )
 		  transition.to( allEne[randomEnemy], { time=2500, x=centerX, y=centerY, onComplete=finish } )
 		end
 	elseif ( antagonistAbility == 2 ) then
-		producerSwap()
+		local function moveAntagonist()
+			transition.to( antagonist, { time=500, x=700 } )
+		end
+		timer.performWithDelay( 1000, producerSwap  )
+		timer.performWithDelay( 2000, moveAntagonist  )
+		timer.performWithDelay( 4000, resume )
 	end
   
   
-  timer.performWithDelay( 6000, resume )
+  
   --startButton:addEventListener( "tap", onTap )
 end
  
