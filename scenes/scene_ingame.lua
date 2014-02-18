@@ -64,6 +64,8 @@ storyboard.removeAll()
 ---------------------------------------------------------------------------------
 
 -- function to create conveyor belts
+--OLD CONVEYOR BELTS CODE. WILL DELETE WHEN I AM DONE WORKING ON THE NEW ONE!!!!!--
+--[[
 function scene:createConveyorBelts()
   sheetSettings =
   	{
@@ -105,6 +107,85 @@ function scene:createConveyorBelts()
 	leversheet = graphics.newImageSheet("images/leversheet.png",leversheetSettings)
 	leversequenceData = {
 	--higher the time, slower it goes
+   { name = "normal", start=2, count=1 },
+   { name = "slow", start=3, count=1 },   
+   { name = "fast", start=1, count=1 }
+}
+
+	for n=0, 2, 1 do
+  		globals.levers[n] = display.newSprite(leversheet,leversequenceData)
+  		globals.levers[n].x = 75
+  		if (n==0) then
+			globals.levers[n].y = lane1+20
+		end
+		if (n==1) then
+			globals.levers[n].y = lane2+20
+		end
+		if (n==2) then
+			globals.levers[n].y = lane3+20
+		end
+		globals.levers[n]:setSequence( "normal" )
+		globals.levers[n]:play()
+		group:insert(globals.levers[n])
+	end
+	
+end  ]]
+
+--NEW CONVEYOR BELT CODE
+					function scene:createConveyorBelts()
+  sheetSettings =
+  	{
+  	 width = 403,
+  	 height = 60,
+ 	  numFrames = 3
+	}
+	sheet = graphics.newImageSheet("images/beltsheet.png",sheetSettings)
+	sequenceData = {
+	--higher the time, slower it goes
+	-- WILL WORK ON THIS LATER!!!! :( --
+   { name = "breakfast_normal", start=1, count=1, time=1150, loopCount=0 },
+   { name = "breakfast_slow", start=1, count=1, time=2000,   loopCount=0 },   
+   { name = "breakfast_fast", start=1, count=1, time=300, loopCount=0 },
+
+    { name = "dinner_normal", start=2, count=1, time=1150, loopCount=0 },
+   { name = "dinner_slow", start=2, count=1, time=2000,   loopCount=0 },   
+   { name = "dinner_fast", start=2,  count=1, time=300, loopCount=0 },
+
+    { name = "dessert_normal", start=3,  count=1, time=1150, loopCount=0 },
+   { name = "dessert_slow", start=3,  count=1, time=2000,   loopCount=0 },   
+   { name = "dessert_fast", start=3, count=1, time=300, loopCount=0 }
+}
+
+	for n=0, 2, 1 do
+  		globals.belts[n] = display.newSprite(sheet,sequenceData)
+  		globals.belts[n].x = 278
+  		if (n==0) then
+			globals.belts[n].y = lane1+20
+			globals.belts[n]:setSequence( "breakfast_normal" )
+			globals.belts[n]:play()
+		end
+		if (n==1) then
+			globals.belts[n].y = lane2+20
+			globals.belts[n]:setSequence( "dinner_normal" )
+			globals.belts[n]:play()
+		end
+		if (n==2) then
+			globals.belts[n].y = lane3+20
+			globals.belts[n]:setSequence( "dessert_normal" )
+			globals.belts[n]:play()
+		end
+		group:insert(globals.belts[n])
+	end
+	-- LEVER SETTINGS --
+	leversheetSettings =
+  	{
+  	 width = 50,
+  	 height = 50,
+ 	  numFrames = 3
+	}
+	leversheet = graphics.newImageSheet("images/leversheet.png",leversheetSettings)
+	leversequenceData = {
+	--higher the time, slower it goes
    { name = "normal", start=2--[[, count=2]] },
    { name = "slow", start=3--[[, count=1]] },   
    { name = "fast", start=1--[[, count=3]] }
@@ -128,6 +209,8 @@ function scene:createConveyorBelts()
 	end
 	
 end  
+
+
 
 -- function to 
 function scene:createHeroes()
@@ -433,6 +516,14 @@ local function gameLoop( event )
 					-- allEne[i].health=allEne[i].health-bullet_array[n].attack old damage system
 					-- new damage check
 					allEne[i].health= allEne[i].health - calculateDamage(allEne[i], globals.bullet_array[n]) 
+					--VISUAL EFFECTS WHEN BULLET HITS ENEMIES--
+					local goodText = display.newImage( "images/good_text.png", allEne[i].x, allEne[i].y, true )
+					if (goodText ~= nil) then
+						goodText.width = allEne[i].width
+						goodText.height = allEne[i].width
+						transition.to( goodText, { time=1500, alpha=0, onComplete=function() goodText:removeSelf() end } )
+					end
+					--VISUAL EFFECTS END--
 					if ( allEne[i].health <= 0 ) then
 						--theScore.add(allEne[i].pointValue) 		-- adding the amount to score
 						globals.score = globals.score + allEne[i].pointValue + calcLaneScore(allEne[i])

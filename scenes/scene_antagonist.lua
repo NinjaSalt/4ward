@@ -28,7 +28,7 @@ function scene:createScene( event )
 	timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
     for n=0, 2, 1 do
-    	globals.belts[n]:pause()
+    	--globals.belts[n]:pause()
 	end
   if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
       for i=0, #globals.bullet_array, 1 do
@@ -166,7 +166,7 @@ function scene:didExitScene( event )
   timer.resume(attackTimer)
   timer.resume(spawnEneTimer)
   for n=0, 2, 1 do
-      globals.belts[n]:play()
+      --globals.belts[n]:play()
   end
   if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
       for i=0, #globals.bullet_array, 1 do
