@@ -62,7 +62,7 @@ function scene:createScene( event )
     y = 185,
     x = display.contentCenterX + display.contentWidth/5,
     width = display.contentWidth/2 - 50,
-    height = display.contentHeight - 70,
+    height = display.contentHeight - 90,
     topPadding = 20,
     horizontalScrollDisabled = true,
     listener = scrollListener

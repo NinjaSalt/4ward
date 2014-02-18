@@ -387,6 +387,16 @@ local function gameLoop( event )
 					allEnemHealth[i]:removeSelf()
 					table.remove(allEnemHealth, i)
 
+					-- hero damage effect here.
+					local screenEffect = display.newRect( display.contentWidth/2, hero[n].y, display.contentWidth, hero[n].height)
+					local loseLife= display.newText( "-1 LIFE", hero[n].x+45, hero[n].y-20, globals.IMPRIMA, 18 )
+					--local screenEffect = display.newCircle( 40, 0, 80)
+					screenEffect:setFillColor(246,235,133)
+					loseLife:setFillColor(black)
+					transition.to( screenEffect, { time= 400, alpha=0, onComplete=function() screenEffect:removeSelf() end } )
+					transition.to( loseLife, { time= 800, alpha=0, onComplete=function() loseLife:removeSelf() end } )
+
+
 					globals.lives = globals.lives - 1
 					numLives.text = (globals.lives)
 
