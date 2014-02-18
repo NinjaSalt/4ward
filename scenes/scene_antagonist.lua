@@ -8,7 +8,8 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals= require ("classes.globals") 
 
-local antagonistAbility = math.random(1,2)
+local antagonistAbility = math.random(1,3)
+local isCake = false
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -43,10 +44,7 @@ function scene:createScene( event )
   bkg:addEventListener("touch", function() return true end)
   bkg:addEventListener("tap", function() return true end)
   group:insert (bkg)
-  local antagonist = display.newImage( "images/antag_Coat.png", 400, centerY+40, true )
-  antagonist.height = 250
-  antagonist.width = 190
-  group:insert(antagonist)
+  
   
   
   local textBoxOutline = display.newRect( centerX, 35, 130, 70 )
@@ -54,6 +52,11 @@ function scene:createScene( event )
   group:insert(textBoxOutline)
   local textBox = display.newRect( centerX, 35, 130, 60 )
   group:insert(textBox)
+  
+  local antagonist = display.newImage( "images/antag_Coat.png", 400, centerY+20, true )
+  antagonist.height = antagonist.height/5
+  antagonist.width = antagonist.width/5
+  group:insert(antagonist)
   
   --transition.to( textBox, { time= 2000, x= centerX, transition=easing.inCubic } )
   
@@ -64,6 +67,10 @@ function scene:createScene( event )
 	textBoxOutline.width=speech.width+20
   elseif ( antagonistAbility == 2 ) then
     speech.text = "SURPRISE SWAP!"
+	textBox.width=speech.width+10
+	textBoxOutline.width=speech.width+20
+  elseif ( antagonistAbility == 3 ) then
+    speech.text = "CAKE ATTACK!"
 	textBox.width=speech.width+10
 	textBoxOutline.width=speech.width+20
   end
@@ -122,7 +129,12 @@ function scene:createScene( event )
 		timer.performWithDelay( 1000, producerSwap  )
 		timer.performWithDelay( 2000, moveAntagonist  )
 		timer.performWithDelay( 4000, resume )
+	elseif ( antagonistAbility == 3 ) then
+		isCake = true
+		timer.performWithDelay( 2000, resume )
 	end
+	
+	
   
   
   
@@ -164,6 +176,7 @@ function scene:didExitScene( event )
       end
     end
   transition.resume()
+  if ( isCake ) then storyboard.showOverlay("scenes.scene_foodOnScreen") end
   globals.notDurningAntagonist = true
 end
  
