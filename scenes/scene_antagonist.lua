@@ -4,11 +4,12 @@
 
 ---------------------------------------------------------------------------------
 require("classes.items")
+require("classes.enemies")
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals= require ("classes.globals") 
 
-local antagonistAbility = math.random(1,3)
+local antagonistAbility = math.random(4,4)
 local isCake = false
 -- Clear previous scene
 storyboard.removeAll()
@@ -47,7 +48,7 @@ function scene:createScene( event )
   
   
   
-  local textBoxOutline = display.newRect( centerX, 35, 130, 70 )
+  local textBoxOutline = display.newRect( centerX, 35, 130, 65 )
   textBoxOutline:setFillColor( black )
   group:insert(textBoxOutline)
   local textBox = display.newRect( centerX, 35, 130, 60 )
@@ -71,6 +72,10 @@ function scene:createScene( event )
 	textBoxOutline.width=speech.width+20
   elseif ( antagonistAbility == 3 ) then
     speech.text = "CAKE ATTACK!"
+	textBox.width=speech.width+10
+	textBoxOutline.width=speech.width+20
+  elseif ( antagonistAbility == 4 ) then
+    speech.text = "MASH THAT POTATO!"
 	textBox.width=speech.width+10
 	textBoxOutline.width=speech.width+20
   end
@@ -132,6 +137,43 @@ function scene:createScene( event )
 	elseif ( antagonistAbility == 3 ) then
 		isCake = true
 		timer.performWithDelay( 2000, resume )
+	elseif ( antagonistAbility == 4 ) then
+		 local boxOutline = display.newRect( display.contentWidth/2, 170, 190, 160 )
+		 boxOutline:setFillColor( black )
+		 group:insert(boxOutline)
+		 local box = display.newRect( display.contentWidth/2, 170, 180, 150 )
+		 group:insert(box)
+		 local potato = display.newImage(myEnemies[5].image, centerX, centerY)
+		 potato.width = 50
+		 potato.height = 50
+		 group:insert(potato)
+		 local mashCount = 0
+		 potato:addEventListener("touch", function() mashCount=mashCount+1 end)
+		 potato:addEventListener("tap", function() mashCount=mashCount+1 end)
+		 
+		 local function checkMash()
+			if ( mashCount > 10 ) then
+				print ("Great Job!")
+				local smoke = display.newImage( "images/smoke.png", potato.x, potato.y, true )
+				transition.to( smoke, { time=1500, alpha=0, onComplete=function() smoke:removeSelf()end } )
+				potato:removeSelf()
+				mashedPotato = display.newImage(comboEnemies[7].image, centerX, centerY)
+				mashedPotato.width = 50
+				mashedPotato.height = 50
+				group:insert(mashedPotato)
+			else
+				print ("Fail!")
+				local smoke = display.newImage( "images/smoke.png", potato.x, potato.y, true )
+				transition.to( smoke, { time=1500, alpha=0, onComplete=function() smoke:removeSelf()end } )
+				potato:removeSelf()
+				bad = display.newImage(comboEnemies[0].image, centerX, centerY)
+				bad.width = 50
+				bad.height = 50
+				group:insert(bad)
+			end
+		 end
+		 timer.performWithDelay( 3000, checkMash )
+		 timer.performWithDelay( 5000, resume )
 	end
 	
 	
