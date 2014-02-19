@@ -32,12 +32,8 @@ function scene:createScene( event )
   group:insert (bkg)
 
 
-  local bookTitle = display.newText( "Recipe Book", 0, 0, globals.LOBSTERTWO, 48 )
-  bookTitle:setFillColor(black)
-  bookTitle.x = display.contentCenterX
-  bookTitle.y = 35
-  group:insert( bookTitle )
-  
+
+
   local function scrollListener( event )
     local phase = event.phase
     if ( phase == "began" ) then print( "Scroll view was touched" )
@@ -58,16 +54,17 @@ function scene:createScene( event )
   end
 
   -- Create the widget
-  local scrollView = widget.newScrollView{
+   local scrollView = widget.newScrollView{
     y = 185,
-    x = display.contentCenterX + display.contentWidth/5,
+    x = display.contentCenterX + display.contentWidth/6,
     width = display.contentWidth/2 - 50,
     height = display.contentHeight - 90,
     topPadding = 20,
     horizontalScrollDisabled = true,
     listener = scrollListener
     }
-    group:insert( scrollView)
+    group:insert(scrollView)
+
 
   local function onTapItem( event, params )
     local body = event.target
@@ -110,8 +107,95 @@ function scene:createScene( event )
     group:insert(basicText)
   end
 
+
+  -- function that allows tabbing to work (for breakfast, dinner, dessert.)
+  local function catSelect(event)
+    -- remove previous list
+    for a = 1, table.maxn(globals.recipes) do
+      if (recipesList[a]~= nil) then
+        recipesList[a]:removeSelf()
+      end
+    end
+
+    local myY = 0
+    for i = 1,table.maxn( globals.recipes ) do
+    --print (globals.recipes[i].category)
+    -- if recipes are still locked, display them as ???
+    if ( globals.recipes[i].unlocked == false) then 
+      if (globals.recipes[i].category == event.target.category) then
+      recipesList[i] = display.newText( "? ? ?", 0, 0, globals.IMPRIMA, 17 )
+      recipesList[i]:setFillColor(black)
+      recipesList[i].x = scrollView.width/2--scrollView.contentBounds.xMin
+      recipesList[i].y = myY
+      recipesList[i].id = i
+      recipesList[i].name = "? ? ?"
+      recipesList[i].image = nil
+      recipesList[i].comboText = "? ? + ? ?"
+      recipesList[i].unlocked = false
+      scrollView:insert( recipesList[i] )
+      myY=myY+40
+      recipesList[i]:addEventListener( "tap", onTapItem )
+    else
+      recipesList[i] = display.newText(" ", 0 ,0, globals.IMPRIMA, 1) --really strange way of going about this..
+      end
+      -- if recipes are unlocked, assign them the names and images of the combos
+      elseif ( globals.recipes[i].unlocked ) then 
+        if (globals.recipes[i].category == event.target.category) then
+        recipesList[i] = display.newText( globals.recipes[i].name, 0, 0, globals.IMPRIMA, 17 )
+        recipesList[i]:setFillColor(black)
+        recipesList[i].x = scrollView.width/2--scrollView.contentBounds.xMin
+        recipesList[i].y = myY
+        recipesList[i].id = i
+        recipesList[i].name = globals.recipes[i].name
+        recipesList[i].image = globals.recipes[i].image
+        recipesList[i].comboText = globals.recipes[i].comboText
+        recipesList[i].unlocked = true
+        scrollView:insert( recipesList[i] )
+        myY=myY+40
+        recipesList[i]:addEventListener( "tap", onTapItem )
+      else
+        recipesList[i] = display.newText(" ", 0 ,0, globals.IMPRIMA, 1)
+        end
+      end
+      end
+    end
+
+ -- new code for separating recipes into tabs. basic, breakfast, dinner, dessert.
+  --local currentTab = "basic"
+  local bookTitle = display.newText( "Recipe Book", 0, 0, globals.LOBSTERTWO, 48 )
+  bookTitle:setFillColor(black)
+  bookTitle.x = display.contentCenterX
+  bookTitle.y = 35
+  group:insert( bookTitle )
+
+  local currentTab = basicTab
+  
+  local basicTab = display.newRect(450, 100, 30, 50)
+  
+  local breakfastTab = display.newRect(450, 160, 30, 50)
+  breakfastTab: setFillColor (255,255,0)
+  breakfastTab.category = "breakfast"
+  
+  local dinnerTab = display.newRect(450, 220, 30, 50)
+  dinnerTab: setFillColor(0,0,255)
+  dinnerTab.category = "dinner"
+  
+  local dessertTab = display.newRect(450, 280, 30, 50)
+  dessertTab: setFillColor(0,255,0)
+  dessertTab.category = "dessert"
+
+  breakfastTab:addEventListener( "tap", catSelect )
+  dinnerTab:addEventListener( "tap", catSelect )
+  dessertTab:addEventListener( "tap", catSelect )
+  
+  group:insert(basicTab)
+  group:insert(breakfastTab)
+  group:insert(dinnerTab)
+  group:insert(dessertTab)
+
   local myY = 0
     for i = 1,table.maxn( globals.recipes ) do
+      --print (globals.recipes[i].category)
       -- if recipes are still locked, display them as ???
       if ( globals.recipes[i].unlocked == false) then 
       recipesList[i] = display.newText( "? ? ?", 0, 0, globals.IMPRIMA, 17 )

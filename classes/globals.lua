@@ -12,7 +12,7 @@ globals.lives = 3
 
 globals.currency = require( "classes.score" )
 
-globals.recipe = {}
+globals.recipes = {}
 --globals.recipe = require ("classes.recipes")
 
 -- ARRAY FOR CONVERYER BELTS --
