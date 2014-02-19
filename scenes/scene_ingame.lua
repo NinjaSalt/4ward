@@ -409,6 +409,7 @@ function itemCombo( item , enemy, fromFoodItem )
 			
 			allEne[#allEne + 1] = comboEnemies[j]
 			allEne[#allEne] = display.newImage(allEne[#allEne].image)
+
 			allEne[#allEne] = passValuesToNewEne(allEne[#allEne], comboEnemies[j])
 			-- Check for Secondary Win condition
 			if(currentLevel.victoryCondition~=false) then
@@ -625,6 +626,12 @@ local function gameLoop( event )
 						if (comboEnemies[j].type == replaceEnemy(allEne[i], allEne[n])) then
 
 							allEne[#allEne + 1] = comboEnemies[j]
+
+							local comboPoof = display.newImage( "images/death.png", allEne[i].x, allEne[i].y, true )
+							comboPoof.width = comboPoof.width/9
+							comboPoof.height = comboPoof.height/9
+							transition.to( comboPoof, { time=1500, alpha=0, onComplete=function() comboPoof:removeSelf() end } )
+
 							allEne[#allEne] = display.newImage(allEne[#allEne].image)
 							allEne[#allEne] = passValuesToNewEne(allEne[#allEne], comboEnemies[j])
 							unlockCheck(j)
