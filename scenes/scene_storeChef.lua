@@ -28,6 +28,7 @@ function scene:createScene( event )
    effect = "fade",
    time = 500
 }
+
   local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
   bkg:setFillColor( gray )
   bkg.alpha = .5
@@ -35,39 +36,38 @@ function scene:createScene( event )
   
   bkg:addEventListener("touch", function() return true end)
   bkg:addEventListener("tap", function() return true end)
-  local menuBack = display.newRect( display.contentWidth/2, display.contentHeight/2, 250, 250)
-  group:insert (menuBack)
   
   local function giveItem1( event )
-	if (notTouched) then
-		print( "give 1")
-		myItems[0] = itemToGive
-		notTouched = false
-	end
-	storyboard.removeScene( scene )
+  	if (notTouched) then
+  		print( "give 1")
+  		myItems[0] = itemToGive
+  		notTouched = false
+  	end
+	  storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )
-    storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
-    
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
+
   local function giveItem2( event )
     if (notTouched) then
-		print( "give 2")
-		myItems[1] = itemToGive
-		notTouched = false
-	end
-	storyboard.removeScene( scene )
+  		print( "give 2")
+  		myItems[1] = itemToGive
+  		notTouched = false
+  	end
+	  storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )
-    storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
+
   local function giveItem3( event )
     if (notTouched) then
-		print( "give 3")
-		myItems[2] = itemToGive
-		notTouched = false
-	end
-	storyboard.removeScene( scene )
+  		print( "give 3")
+  		myItems[2] = itemToGive
+  		notTouched = false
+  	end
+	  storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )
-    storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
   
   local gameItems = {}
@@ -96,10 +96,7 @@ function scene:createScene( event )
 		end
 		spacing = spacing+60
 	end
-  
-  
-  
-  
+   
 end
  
 -- Called BEFORE scene has moved onscreen:

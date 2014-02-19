@@ -77,28 +77,26 @@ function scene:createScene( event )
     if LevelList.worldUnlocked(2) == true then
 		storyboard.removeScene( scene )
 		storyboard.gotoScene( "scenes.scene_worldmap2", {effect = "slideLeft", time = 500})
-		storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
 	end
   end
   -- to get to recipe book.
   local function onTapBookIcon( event )
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_book", {effect = "fade", time = 500})
-    storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
 
   -- to get to the store
   local function onTapStoreButton( event )
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_store", {effect = "fade", time = 500})
-    storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
 
   rightArrow:addEventListener("tap", onTapRightArrow)
   bookIcon:addEventListener("tap", onTapBookIcon)
   storeButton:addEventListener("tap", onTapStoreButton)
 
-  storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
 end
  
 -- Called BEFORE scene has moved onscreen:

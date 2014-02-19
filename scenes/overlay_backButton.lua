@@ -19,17 +19,19 @@ storyboard.removeAll()
 function scene:createScene( event )
   local group = self.view
   
-  local pauseButton = display.newImage("images/Pause.png",25,25 )
-  pauseButton.x = 466
-  pauseButton.y = 12
-  group:insert(pauseButton)
+  local backButton = display.newImage("images/leftArrow.png")
+  backButton.x = 466 
+  backButton.y = 12
+  backButton.height = 20
+  backButton.width = 20
+  group:insert(backButton)
 
-  local function onTapPause( event )
+  local function onTapBack( event )
     storyboard.removeScene( scene )
-    storyboard.showOverlay( "scenes.scene_mapMenu",{ effect = "slideDown", time = 500})
+    storyboard.showOverlay( "scenes.scene_worldmap1",{ effect = "slideLeft", time = 500})
   end
 
-  pauseButton:addEventListener( "tap", onTapPause )
+  backButton:addEventListener("tap",onTapBack)
 end
  
 -- Called BEFORE scene has moved onscreen:

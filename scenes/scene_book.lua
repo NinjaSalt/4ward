@@ -31,9 +31,6 @@ function scene:createScene( event )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-
-
-
   local function scrollListener( event )
     local phase = event.phase
     if ( phase == "began" ) then print( "Scroll view was touched" )

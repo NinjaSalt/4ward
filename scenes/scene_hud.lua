@@ -33,19 +33,35 @@ function scene:createScene( event )
   currencyText:setFillColor( black )
   group:insert(currencyText)
 
-  -- SCORE --
   scoreGradient = display.newImage("images/scoreGradient2.png")
-  scoreGradient.x = 15
-  scoreGradient.y = display.contentHeight-5
+  scoreGradient.x = 460
+  scoreGradient.y = 2
   group:insert(scoreGradient)
 
-  score = display.newText( "Score:", 30, display.contentHeight-15, globals.IMPRIMA, 18 )
+  -- SCORE --
+  score = display.newText( "Score:", 420, 8, globals.IMPRIMA, 18 )
   score:setFillColor(1,1,1)
   group:insert(score)
 
-  scoreText = display.newText( globals.score, 70, display.contentHeight-15, globals.IMPRIMA, 20 )
+  scoreText = display.newText( globals.score, 460, 8, globals.IMPRIMA, 20 )
   scoreText:setFillColor(1,1,1)
-  group:insert(scoreText)
+  group:insert(scoreText)  
+
+  --[[ PAUSE BUTTON
+
+  local pauseButton = display.newImage("images/Pause.png")
+  pauseButton.x = 475
+  pauseButton.y = 24
+  pauseButton.width = 8
+  pauseButton.height = 8
+  group:insert(pauseButton) 
+
+  ]]--
+
+    -- MULTIPLIER --
+  globals.multiplierText = display.newText( globals.multiplier, 12, 460, globals.LOBSTERTWO, 24 )
+  globals.multiplierText:setFillColor(1,1,1)
+  group:insert(globals.multiplierText)
 
 -- NUMBER OF LIVES
   hearts = display.newImage("images/lives.png")
@@ -55,27 +71,9 @@ function scene:createScene( event )
   hearts.y = 15
   group:insert(hearts)
 
-  numLives = display.newText( globals.lives, 40, 15, globals.LOBSTERTWO, 20)
+  numLives = display.newText( globals.lives, 40, 12, globals.LOBSTERTWO, 20)
   numLives:setFillColor(1,1,1)
   group:insert(numLives)
-
--- PAUSE BUTTON
-  pauseGradient = display.newImage("images/scoreGradient2.png")
-  pauseGradient.x = 515
-  pauseGradient.y = 6
-  group:insert(pauseGradient)
-
-  local pauseButton = display.newImage("images/Pause.png")
-  pauseButton.x = 475
-  pauseButton.y = 24
-  pauseButton.width = 8
-  pauseButton.height = 8
-  group:insert(pauseButton)
-
-    -- MULTIPLIER --
-  globals.multiplierText = display.newText( globals.multiplier, 460, 12, globals.LOBSTERTWO, 24 )
-  globals.multiplierText:setFillColor(1,1,1)
-  group:insert(globals.multiplierText)
 
 --PLAYERS CURRENCY
 --[[
@@ -156,7 +154,7 @@ function scene:createScene( event )
     transition.pause("animation")
   end
 
-  pauseGradient:addEventListener( "tap", onTapPause )
+  scoreGradient:addEventListener( "tap", onTapPause )
 end
  
 -- Called BEFORE scene has moved onscreen:

@@ -47,7 +47,6 @@ function scene:createScene( event )
   local function onTap( event )
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_worldmap1",options)
-    storyboard.showOverlay("scenes.overlay_worldMap", {effect ="fade", time = 1000})
   end
 
   startButton:addEventListener( "tap", onTap )
