@@ -36,6 +36,9 @@ function scene:createScene( event )
   
   bkg:addEventListener("touch", function() return true end)
   bkg:addEventListener("tap", function() return true end)
+
+  local menuBack = display.newRect( display.contentWidth/2, display.contentHeight/2, 250, 250)
+  group:insert (menuBack) 
   
   local function giveItem1( event )
   	if (notTouched) then
