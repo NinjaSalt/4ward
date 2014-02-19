@@ -186,14 +186,14 @@ end  ]]
 	leversheet = graphics.newImageSheet("images/leversheet.png",leversheetSettings)
 	leversequenceData = {
 	--higher the time, slower it goes
-   { name = "normal", start=2--[[, count=2]] },
-   { name = "slow", start=3--[[, count=1]] },   
-   { name = "fast", start=1--[[, count=3]] }
+   { name = "normal", start=2,  count=1 },
+   { name = "slow", start=3,  count=1 },   
+   { name = "fast", start=1,  count=1 }
 }
 
 	for n=0, 2, 1 do
   		globals.levers[n] = display.newSprite(leversheet,leversequenceData)
-  		globals.levers[n].x = 75
+  		globals.levers[n].x = 73
   		if (n==0) then
 			globals.levers[n].y = lane1+20
 		end
@@ -421,8 +421,7 @@ function itemCombo( item , enemy, fromFoodItem )
 					end
 				end
 			end
-		
-							
+
 			-- add health bars to enemies.
 			allEnemHealth[#allEne] = #allEne
 			allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
@@ -456,6 +455,66 @@ function itemCombo( item , enemy, fromFoodItem )
 		end
 	end
 	return eneAndBar[0]
+end
+
+--function to call displaying "GOOD" text for enemy damage feedback
+local function goodText(enemy) 
+	local goodText = display.newImage( "images/good_text.png", enemy.x-10, enemy.y, true )
+	if (goodText ~= nil) then
+		goodText.width = enemy.width+20
+		goodText.height = enemy.width+20
+		transition.to( goodText, { time=1000, alpha=0, onComplete=function() goodText:removeSelf() end } )
+	end
+end
+
+--function to call displaying "CRITICAL" text for enemy damage feedback
+local function critText (enemy)
+	local critText = display.newImage( "images/critical_text.png", enemy.x-10, enemy.y, true )
+	if (critText ~= nil) then
+		critText.width = enemy.width+20
+		critText.height = enemy.width+20
+		transition.to( critText, { time=1000, alpha=0, onComplete=function() critText:removeSelf() end } )
+	end
+end
+
+--function to call displaying "OKAY" text for enemy damage feedback
+local function okayText (enemy)
+	local okText = display.newImage( "images/okay_text.png", enemy.x-10, enemy.y, true )
+	if (okText ~= nil) then
+		okText.width = enemy.width+20
+		okText.height = enemy.width+20
+		transition.to( okText, { time=1000, alpha=0, onComplete=function() okText:removeSelf() end } )
+	end	
+end
+
+--function to display the corresponding enemy damage feedback based on lanes and category
+local function textCheck(enemy, bullet)
+	if (enemy.y == lane1 and bullet.y == lane1) then
+		if (enemy.category == "breakfast") then
+			critText(enemy)
+		elseif (enemy.category == "bad") then
+			okayText(enemy)
+		else
+			goodText(enemy) 
+		end
+	elseif (enemy.y == lane2 and bullet.y == lane2) then
+		if (enemy.category == "dinner") then
+			critText(enemy)
+		elseif (enemy.category == "bad") then
+			okayText(enemy)
+		else
+			goodText(enemy) 
+		end
+	elseif (enemy.y == lane3 and bullet.y == lane3) then
+		if (enemy.category == "dessert") then
+			critText(enemy)
+		elseif (enemy.category == "bad") then
+			okayText(enemy)
+		else 
+			goodText(enemy) 
+		end
+	end
+
 end
 
 local function gameLoop( event )
@@ -517,12 +576,7 @@ local function gameLoop( event )
 					-- new damage check
 					allEne[i].health= allEne[i].health - calculateDamage(allEne[i], globals.bullet_array[n]) 
 					--VISUAL EFFECTS WHEN BULLET HITS ENEMIES--
-					local goodText = display.newImage( "images/good_text.png", allEne[i].x, allEne[i].y, true )
-					if (goodText ~= nil) then
-						goodText.width = allEne[i].width
-						goodText.height = allEne[i].width
-						transition.to( goodText, { time=1500, alpha=0, onComplete=function() goodText:removeSelf() end } )
-					end
+					textCheck(allEne[i], globals.bullet_array[n])
 					--VISUAL EFFECTS END--
 					if ( allEne[i].health <= 0 ) then
 						--theScore.add(allEne[i].pointValue) 		-- adding the amount to score
@@ -560,17 +614,6 @@ local function gameLoop( event )
 				end
 			end
 		end
-
-		--[[--countdown timer for hero speed
-		for n = 0,table.maxn( hero ) do
-				if ( hero[n].abilityUsed == true ) then
-					laneTimerDown(hero[n])
-					if (hero[n].abilityUsed == false) then
-						updateMoveSpeed(hero[n])
-						hero[n].timer = 50
-					end
-				end
-		end]]
 
 		-- this is the code for collision checking, and combining to make new enemies
 		for i = 1,table.maxn( allEne ) do
