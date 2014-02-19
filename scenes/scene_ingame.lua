@@ -627,9 +627,9 @@ local function gameLoop( event )
 
 							allEne[#allEne + 1] = comboEnemies[j]
 
-							local comboPoof = display.newImage( "images/death.png", allEne[i].x, allEne[i].y, true )
-							comboPoof.width = comboPoof.width/9
-							comboPoof.height = comboPoof.height/9
+							local comboPoof = display.newImage( "images/comboPoof.png", allEne[i].x, allEne[i].y, true )
+							comboPoof.width = comboPoof.width/3
+							comboPoof.height = comboPoof.height/3
 							transition.to( comboPoof, { time=1500, alpha=0, onComplete=function() comboPoof:removeSelf() end } )
 
 							allEne[#allEne] = display.newImage(allEne[#allEne].image)
