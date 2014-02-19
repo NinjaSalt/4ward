@@ -41,15 +41,17 @@ function ability( event )
 				if ( hero.laneSpeed ~=1 ) then
 					hero.laneSpeed = hero.laneSpeed+1
 					updateMoveSpeed(hero)
+					--[[
 					globals.belts[hero.num]:setSequence( "fast" )
-					globals.belts[hero.num]:play()
+					globals.belts[hero.num]:play()]]
 					globals.levers[hero.num]:setSequence( "fast" )
 					globals.levers[hero.num]:play()
 				elseif ( hero.laneSpeed ~= 2 ) then
 					hero.laneSpeed = 2
 					updateMoveSpeed(hero)
+					--[[
 					globals.belts[hero.num]:setSequence( "normal" )
-					globals.belts[hero.num]:play()
+					globals.belts[hero.num]:play()]]
 					globals.levers[hero.num]:setSequence( "normal" )
 					globals.levers[hero.num]:play()
 				end
@@ -58,15 +60,17 @@ function ability( event )
 				if ( hero.laneSpeed ~=3 ) then
 					hero.laneSpeed = hero.laneSpeed-1
 					updateMoveSpeed(hero)
+					--[[
 					globals.belts[hero.num]:setSequence( "slow" )
-					globals.belts[hero.num]:play()
+					globals.belts[hero.num]:play()]]
 					globals.levers[hero.num]:setSequence( "slow" )
 					globals.levers[hero.num]:play()
 				elseif ( hero.laneSpeed ~= 2 ) then
 					hero.laneSpeed = 2
 					updateMoveSpeed(hero)
+					--[[
 					globals.belts[hero.num]:setSequence( "normal" )
-					globals.belts[hero.num]:play()
+					globals.belts[hero.num]:play()]]
 					globals.levers[hero.num]:setSequence( "normal" )
 					globals.levers[hero.num]:play()
 				end

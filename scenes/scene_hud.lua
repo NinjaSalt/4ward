@@ -144,7 +144,7 @@ function scene:createScene( event )
      timer.cancel(antagonistTimer)
      end
     for n=0, 2, 1 do
-      --globals.belts[n]:pause()
+      globals.belts[n]:pause()
   end
     if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
       for i=0, #globals.bullet_array, 1 do

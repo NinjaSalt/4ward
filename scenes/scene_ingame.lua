@@ -137,23 +137,23 @@ end  ]]
   	{
   	 width = 403,
   	 height = 60,
- 	  numFrames = 3
+ 	  numFrames = 15
 	}
-	sheet = graphics.newImageSheet("images/beltsheet.png",sheetSettings)
+	sheet = graphics.newImageSheet("images/belts_sheet.png",sheetSettings)
 	sequenceData = {
 	--higher the time, slower it goes
 	-- WILL WORK ON THIS LATER!!!! :( --
-   { name = "breakfast_normal", start=1, count=1, time=1150, loopCount=0 },
-   { name = "breakfast_slow", start=1, count=1, time=2000,   loopCount=0 },   
-   { name = "breakfast_fast", start=1, count=1, time=300, loopCount=0 },
+   { name = "breakfast_normal", frames={1, 2, 3, 4, 5}, time=1150, loopCount=0 },
+   { name = "breakfast_slow", frames={1, 2, 3, 4, 5}, time=2000,   loopCount=0 },   
+   { name = "breakfast_fast", frames={1, 2, 3, 4, 5}, time=300, loopCount=0 },
 
-    { name = "dinner_normal", start=2, count=1, time=1150, loopCount=0 },
-   { name = "dinner_slow", start=2, count=1, time=2000,   loopCount=0 },   
-   { name = "dinner_fast", start=2,  count=1, time=300, loopCount=0 },
+    { name = "dinner_normal", frames={6, 7, 8, 9, 10}, time=1150, loopCount=0 },
+   { name = "dinner_slow", frames={6, 7, 8, 9, 10}, time=2000,   loopCount=0 },   
+   { name = "dinner_fast", frames={6, 7, 8, 9, 10}, time=300, loopCount=0 },
 
-    { name = "dessert_normal", start=3,  count=1, time=1150, loopCount=0 },
-   { name = "dessert_slow", start=3,  count=1, time=2000,   loopCount=0 },   
-   { name = "dessert_fast", start=3, count=1, time=300, loopCount=0 }
+    { name = "dessert_normal", frames={11, 12, 13, 14, 15}, time=1150, loopCount=0 },
+   { name = "dessert_slow", frames={11, 12, 13, 14, 15}, time=2000,   loopCount=0 },   
+   { name = "dessert_fast", frames={11, 12, 13, 14, 15}, time=300, loopCount=0 }
 }
 
 	for n=0, 2, 1 do
