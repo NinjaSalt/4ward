@@ -554,7 +554,7 @@ local function gameLoop( event )
 							if(currentLevel.victoryCondition.conditionMet==true)then
 								LevelList.unlockLevel(world, thisLevel+1)
 								endLevel(currentLevel, true)
-								storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+								storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 							else 
 								LevelList.unlockLevel(world, thisLevel+1)
 								endLevel(currentLevel, false)
@@ -563,7 +563,7 @@ local function gameLoop( event )
 						else	
 							LevelList.unlockLevel(world, thisLevel+1)
 							endLevel(currentLevel, true)
-							storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+							storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 						end
 					end
 				end
@@ -599,7 +599,7 @@ local function gameLoop( event )
 								if(currentLevel.victoryCondition.conditionMet==true)then
 									LevelList.unlockLevel(world, thisLevel+1)
 									endLevel(currentLevel, true)
-									storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+									storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 								else 
 									endLevel(currentLevel, false)
 									storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
@@ -607,7 +607,7 @@ local function gameLoop( event )
 							else	
 								LevelList.unlockLevel(world, thisLevel+1)
 								endLevel(currentLevel, true)
-								storyboard.gotoScene( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+								storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 							end
 						end
 					end

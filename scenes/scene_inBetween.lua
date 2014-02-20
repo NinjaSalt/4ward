@@ -20,15 +20,10 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  timer.pause(attackTimer)
-  timer.pause(spawnEneTimer)
-  if ( antagonistTimer ~= nil) then
-	timer.cancel(antagonistTimer)
-  end
-  for n=0, 2, 1 do
-    	globals.belts[n]:pause()
-	end
-	transition.pause("animation")
+  local params = event.params
+  nextLevel = params.level
+  nextWorld = params.world
+  
   local options = {
    effect = "fade",
    time = 500
@@ -36,50 +31,12 @@ function scene:createScene( event )
 
   local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
-  bkg.alpha=.01
   group:insert (bkg)
 
- local gameTitle = display.newText( "Victory!", 0, 0, globals.LOBSTERTWO, 48 )
-  gameTitle:setFillColor(black)
-  gameTitle.x = display.contentCenterX
-  gameTitle.y = 80
-  
-  group:insert( gameTitle )
-  
-  local scoreTitle = display.newText( "Score: " ..globals.score, 0, 0, globals.IMPRIMA, 36 )
-  scoreTitle:setFillColor(black)
-  scoreTitle.x = display.contentCenterX
-  scoreTitle.y = gameTitle.y + 50
+
  
-  group:insert( scoreTitle )
+	timer.performWithDelay(2000, function()storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = nextLevel, world = nextWorld}})end)
  
-  local replayButton = display.newText( "Replay", 0, 0, globals.IMPRIMA, 24 )
-  replayButton:setFillColor(black)
-  replayButton.x = display.contentCenterX
-  replayButton.y = scoreTitle.y + 50
-
-  group:insert( replayButton)
-  
-  local mapButton = display.newText( "Map", 0, 0, globals.IMPRIMA, 24 )
-  mapButton:setFillColor(black)
-  mapButton.x = display.contentCenterX
-  mapButton.y = replayButton.y + 50
-
-  group:insert( mapButton)
-
-  local function onTapReplay( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_inBetween",{ effect = "fade", time = 500, params = {level = nextLevel, world = nextWorld}})
-  end
-  
-  local function onTapMap( event )
-    storyboard.removeScene( scene )
-	
-    storyboard.gotoScene( "scenes.scene_worldmap"..nextWorld,options)
-  end
-
-  replayButton:addEventListener( "tap", onTapReplay )
-  mapButton:addEventListener( "tap", onTapMap )
 end
  
 -- Called BEFORE scene has moved onscreen:
@@ -125,7 +82,7 @@ end
 function scene:overlayEnded( event )
   local group = self.view
   local overlay_name = event.sceneName  -- name of the overlay scene
- 
+  
 end
  
 ---------------------------------------------------------------------------------
