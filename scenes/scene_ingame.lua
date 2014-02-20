@@ -44,6 +44,7 @@ require("classes.level")
 require("classes.combo")
 require("classes.items")
 require("classes.recipes")
+require("classes.basics")
 
 globals.currency = require( "classes.score" )
 require("classes.timeLine")
@@ -347,6 +348,9 @@ function scene:createEne(enemyID)
 	elseif (randomPos == 2) then lane = lane2
 	elseif (randomPos == 3) then lane = lane3
 	end
+
+	-- check to unlock basic enemies:
+	unlockBasicCheck(enemyID)
 	--local randomEne = math.random(0, 1)
 	allEne[#allEne + 1] = myEnemies[enemyID]
 	allEne[#allEne] = display.newImage(allEne[#allEne].image)

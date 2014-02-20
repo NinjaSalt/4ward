@@ -8,6 +8,7 @@ local scene = storyboard.newScene()
 local globals = require ("classes.globals")
 
 require("classes.recipes")
+require("classes.basics")
 require("classes.heroes")
 local widget = require( "widget" )
 -- Clear previous scene
@@ -26,10 +27,14 @@ function scene:createScene( event )
   local foodImage
   local nameText
   local basicText
+  local basicsList = {}
 
   local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
+
+
+
 
   local function scrollListener( event )
     local phase = event.phase
@@ -85,7 +90,7 @@ function scene:createScene( event )
     foodImage = nil
     nameText = nil
     basicText = nil
-      --setting the images
+      --setting the images 
     if (body.unlocked) then
       foodImage = display.newImage( body.image )
       foodImage.width = display.contentWidth/2 - 80
@@ -104,6 +109,53 @@ function scene:createScene( event )
     group:insert(basicText)
   end
 
+  local function basicSelect(event)
+    local bY = 0
+    -- clear recipes.
+     for a = 1, table.maxn(globals.recipes) do
+      if (recipesList[a]~= nil) then
+        recipesList[a]:removeSelf()
+      end
+    end
+    for i = 1,table.maxn( globals.recipes ) do
+      recipesList[i] = display.newText(" ", 0 ,0, globals.IMPRIMA, 1) 
+    end
+
+    -- end clear recipes.
+    for c=1, table.maxn (globals.basics) do
+      if (basicsList[c]~=nil) then
+        basicsList[c]: removeSelf()
+      end
+    end
+
+    for d= 1, table.maxn(globals.basics) do
+      if ( globals.basics[d].locker == false) then 
+      basicsList[d] = display.newText( "? ? ?", 0, 0, globals.IMPRIMA, 17 )
+      basicsList[d]:setFillColor(black)
+      basicsList[d].x = scrollView.width/2--scrollView.contentBounds.xMin
+      basicsList[d].y = bY
+      basicsList[d].id = d
+      basicsList[d].name = "? ? ?"
+      basicsList[d].image = nil
+      basicsList[d].locker = false
+      scrollView:insert( basicsList[d] )
+      bY=bY+40
+    else
+      basicsList[d] = display.newText( globals.basics[d].name, 0, 0, globals.IMPRIMA, 17 )
+      basicsList[d]:setFillColor(black)
+      basicsList[d].x = scrollView.width/2--scrollView.contentBounds.xMin
+      basicsList[d].y = bY
+      basicsList[d].id = d
+      basicsList[d].name = globals.basics[d].name
+      basicsList[d].image = nil
+      basicsList[d].locker = true
+      scrollView:insert( basicsList[d] )
+      bY=bY+40
+    end
+  end
+
+end
+
 
   -- function that allows tabbing to work (for breakfast, dinner, dessert.)
   local function catSelect(event)
@@ -113,6 +165,16 @@ function scene:createScene( event )
         recipesList[a]:removeSelf()
       end
     end
+    -- clear basic list.
+    for c=1, table.maxn (globals.basics) do
+      if (basicsList[c]~=nil) then
+        basicsList[c]: removeSelf()
+      end
+    end
+    for b = 1, table.maxn(globals.basics) do 
+      basicsList[b] = display.newText( " ", 0, 0, globals.IMPRIMA, 1 )
+    end
+    -- end clearing.
 
     local myY = 0
     for i = 1,table.maxn( globals.recipes ) do
@@ -181,6 +243,7 @@ function scene:createScene( event )
   dessertTab: setFillColor(0,255,0)
   dessertTab.category = "dessert"
 
+  basicTab:addEventListener( "tap", basicSelect )
   breakfastTab:addEventListener( "tap", catSelect )
   dinnerTab:addEventListener( "tap", catSelect )
   dessertTab:addEventListener( "tap", catSelect )
@@ -189,6 +252,11 @@ function scene:createScene( event )
   group:insert(breakfastTab)
   group:insert(dinnerTab)
   group:insert(dessertTab)
+
+  -- call basic items for the first time.
+  for b = 1, table.maxn(globals.basics) do
+    basicsList[b] = display.newText( " ", 0, 0, globals.IMPRIMA, 1 )
+  end
 
   local myY = 0
     for i = 1,table.maxn( globals.recipes ) do
