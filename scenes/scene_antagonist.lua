@@ -23,25 +23,29 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   storyboard.showOverlay("scenes.scene_hud")
-  globals.notDurningAntagonist = false
+  
   local group = self.view
   
-	timer.pause(attackTimer)
-    timer.pause(spawnEneTimer)
-    for n=0, 2, 1 do
-    	globals.belts[n]:pause()
+  if (antagonistAbility~=4) then
+	globals.notDurningAntagonist = false
+		timer.pause(attackTimer)
+		timer.pause(spawnEneTimer)
+		for n=0, 2, 1 do
+			globals.belts[n]:pause()
+		end
+	  if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
+		  for i=0, #globals.bullet_array, 1 do
+			if (globals.bullet_array[i] ~= nil) then
+			  globals.bullet_array[i]:pause()
+			end
+		  end
+		end
+		transition.pause("animation")
 	end
-  if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
-      for i=0, #globals.bullet_array, 1 do
-        if (globals.bullet_array[i] ~= nil) then
-          globals.bullet_array[i]:pause()
-        end
-      end
-    end
-    transition.pause("animation")
 
   local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
   bkg.alpha = 0.01
+  bkg:setFillColor( gray)
   bkg:addEventListener("touch", function() return true end)
   bkg:addEventListener("tap", function() return true end)
   group:insert (bkg)
@@ -138,6 +142,7 @@ function scene:createScene( event )
 		isCake = true
 		timer.performWithDelay( 2000, resume )
 	elseif ( antagonistAbility == 4 ) then
+		 transition.to( bkg, { time=500, alpha=.5 } )
 		 local boxOutline = display.newRect( display.contentWidth/2, 170, 190, 160 )
 		 boxOutline:setFillColor( black )
 		 group:insert(boxOutline)
@@ -148,32 +153,25 @@ function scene:createScene( event )
 		 potato.height = 50
 		 group:insert(potato)
 		 local mashCount = 0
-		 potato:addEventListener("touch", function() mashCount=mashCount+1 end)
-		 potato:addEventListener("tap", function() mashCount=mashCount+1 end)
 		 
-		 local function checkMash()
+		 
+		local function mash()
+			mashCount=mashCount+1
 			if ( mashCount > 10 ) then
 				print ("Great Job!")
 				local smoke = display.newImage( "images/smoke.png", potato.x, potato.y, true )
-				transition.to( smoke, { time=1500, alpha=0, onComplete=function() smoke:removeSelf()end } )
+				transition.to( smoke, { time=500, alpha=0, onComplete=function() smoke:removeSelf()end } )
 				potato:removeSelf()
 				mashedPotato = display.newImage(comboEnemies[7].image, centerX, centerY)
 				mashedPotato.width = 50
 				mashedPotato.height = 50
 				group:insert(mashedPotato)
-			else
-				print ("Fail!")
-				local smoke = display.newImage( "images/smoke.png", potato.x, potato.y, true )
-				transition.to( smoke, { time=1500, alpha=0, onComplete=function() smoke:removeSelf()end } )
-				potato:removeSelf()
-				bad = display.newImage(comboEnemies[0].image, centerX, centerY)
-				bad.width = 50
-				bad.height = 50
-				group:insert(bad)
+				timer.performWithDelay( 500, resume )
 			end
-		 end
-		 timer.performWithDelay( 3000, checkMash )
-		 timer.performWithDelay( 5000, resume )
+		end
+		potato:addEventListener("touch", mash)
+		potato:addEventListener("tap", mash)
+		 
 	end
 	
 	
