@@ -135,7 +135,7 @@ end  ]]
 					function scene:createConveyorBelts()
   sheetSettings =
   	{
-  	 width = 403,
+  	 width = 410,
   	 height = 60,
  	  numFrames = 15
 	}
@@ -143,17 +143,17 @@ end  ]]
 	sequenceData = {
 	--higher the time, slower it goes
 	-- WILL WORK ON THIS LATER!!!! :( --
-   { name = "breakfast_normal", frames={1, 2, 3, 4, 5}, time=1150, loopCount=0 },
-   { name = "breakfast_slow", frames={1, 2, 3, 4, 5}, time=2000,   loopCount=0 },   
-   { name = "breakfast_fast", frames={1, 2, 3, 4, 5}, time=300, loopCount=0 },
+   { name = "breakfast_normal", frames={1, 2, 3, 4, 5}, time=4000, loopCount=0 },
+   { name = "breakfast_slow", frames={1, 2, 3, 4, 5}, time=5000,   loopCount=0 },   
+   { name = "breakfast_fast", frames={1, 2, 3, 4, 5}, time=2000, loopCount=0 },
 
-    { name = "dinner_normal", frames={6, 7, 8, 9, 10}, time=1150, loopCount=0 },
-   { name = "dinner_slow", frames={6, 7, 8, 9, 10}, time=2000,   loopCount=0 },   
-   { name = "dinner_fast", frames={6, 7, 8, 9, 10}, time=300, loopCount=0 },
+    { name = "dinner_normal", frames={6, 7, 8, 9, 10}, time=4000, loopCount=0 },
+   { name = "dinner_slow", frames={6, 7, 8, 9, 10}, time=5000,   loopCount=0 },   
+   { name = "dinner_fast", frames={6, 7, 8, 9, 10}, time=2000, loopCount=0 },
 
-    { name = "dessert_normal", frames={11, 12, 13, 14, 15}, time=1150, loopCount=0 },
-   { name = "dessert_slow", frames={11, 12, 13, 14, 15}, time=2000,   loopCount=0 },   
-   { name = "dessert_fast", frames={11, 12, 13, 14, 15}, time=300, loopCount=0 }
+    { name = "dessert_normal", frames={11, 12, 13, 14, 15}, time=4000, loopCount=0 },
+   { name = "dessert_slow", frames={11, 12, 13, 14, 15}, time=5000,   loopCount=0 },   
+   { name = "dessert_fast", frames={11, 12, 13, 14, 15}, time=2000, loopCount=0 }
 }
 
 	for n=0, 2, 1 do
@@ -494,7 +494,7 @@ local function textCheck(enemy, bullet)
 			critText(enemy)
 		elseif (enemy.category == "bad") then
 			okayText(enemy)
-		else
+		elseif (enemy.category ~= "basic") then
 			goodText(enemy) 
 		end
 	elseif (enemy.y == lane2 and bullet.y == lane2) then
@@ -502,7 +502,7 @@ local function textCheck(enemy, bullet)
 			critText(enemy)
 		elseif (enemy.category == "bad") then
 			okayText(enemy)
-		else
+		elseif (enemy.category ~= "basic") then
 			goodText(enemy) 
 		end
 	elseif (enemy.y == lane3 and bullet.y == lane3) then
@@ -510,7 +510,7 @@ local function textCheck(enemy, bullet)
 			critText(enemy)
 		elseif (enemy.category == "bad") then
 			okayText(enemy)
-		else 
+		elseif (enemy.category ~= "basic") then
 			goodText(enemy) 
 		end
 	end

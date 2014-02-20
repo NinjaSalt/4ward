@@ -41,38 +41,66 @@ function ability( event )
 				if ( hero.laneSpeed ~=1 ) then
 					hero.laneSpeed = hero.laneSpeed+1
 					updateMoveSpeed(hero)
-					--[[
-					globals.belts[hero.num]:setSequence( "fast" )
-					globals.belts[hero.num]:play()]]
 					globals.levers[hero.num]:setSequence( "fast" )
 					globals.levers[hero.num]:play()
+					if (hero.num == 0) then
+						globals.belts[hero.num]:setSequence( "breakfast_fast" )
+						globals.belts[hero.num]:play()
+					elseif (hero.num == 1) then
+						globals.belts[hero.num]:setSequence( "dinner_fast" )
+						globals.belts[hero.num]:play()
+					elseif (hero.num == 2) then
+						globals.belts[hero.num]:setSequence( "dessert_fast" )
+						globals.belts[hero.num]:play()
+					end
 				elseif ( hero.laneSpeed ~= 2 ) then
 					hero.laneSpeed = 2
 					updateMoveSpeed(hero)
-					--[[
-					globals.belts[hero.num]:setSequence( "normal" )
-					globals.belts[hero.num]:play()]]
 					globals.levers[hero.num]:setSequence( "normal" )
 					globals.levers[hero.num]:play()
+					if (hero.num == 0) then
+						globals.belts[hero.num]:setSequence( "breakfast_normal" )
+						globals.belts[hero.num]:play()
+					elseif (hero.num == 1) then
+						globals.belts[hero.num]:setSequence( "dinner_normal" )
+						globals.belts[hero.num]:play()
+					elseif (hero.num == 2) then
+						globals.belts[hero.num]:setSequence( "dessert_normal" )
+						globals.belts[hero.num]:play()
+					end
 				end
 				--right swipe makes the lanes go slower
 			elseif (event.x - event.xStart ~= 0 and event.x - event.xStart > 7) then
 				if ( hero.laneSpeed ~=3 ) then
 					hero.laneSpeed = hero.laneSpeed-1
 					updateMoveSpeed(hero)
-					--[[
-					globals.belts[hero.num]:setSequence( "slow" )
-					globals.belts[hero.num]:play()]]
 					globals.levers[hero.num]:setSequence( "slow" )
 					globals.levers[hero.num]:play()
+					if (hero.num == 0) then
+						globals.belts[hero.num]:setSequence( "breakfast_slow" )
+						globals.belts[hero.num]:play()
+					elseif (hero.num == 1) then
+						globals.belts[hero.num]:setSequence( "dinner_slow" )
+						globals.belts[hero.num]:play()
+					elseif (hero.num == 2) then
+						globals.belts[hero.num]:setSequence( "dessert_slow" )
+						globals.belts[hero.num]:play()
+					end
 				elseif ( hero.laneSpeed ~= 2 ) then
 					hero.laneSpeed = 2
 					updateMoveSpeed(hero)
-					--[[
-					globals.belts[hero.num]:setSequence( "normal" )
-					globals.belts[hero.num]:play()]]
 					globals.levers[hero.num]:setSequence( "normal" )
 					globals.levers[hero.num]:play()
+					if (hero.num == 0) then
+						globals.belts[hero.num]:setSequence( "breakfast_normal" )
+						globals.belts[hero.num]:play()
+					elseif (hero.num == 1) then
+						globals.belts[hero.num]:setSequence( "dinner_normal" )
+						globals.belts[hero.num]:play()
+					elseif (hero.num == 2) then
+						globals.belts[hero.num]:setSequence( "dessert_normal" )
+						globals.belts[hero.num]:play()
+					end
 				end
 			--checks if the touch didn't move from original position. Meaning that it was a tap
 			elseif (event.x - event.xStart == 0) then
