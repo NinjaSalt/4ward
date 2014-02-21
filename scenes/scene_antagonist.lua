@@ -26,6 +26,10 @@ function scene:createScene( event )
   
   local group = self.view
   
+  if( table.maxn( allEne ) < 2 )then
+	antagonistAbility = math.random(3,4)
+  end
+  
   if (antagonistAbility~=4) then
 	globals.notDurningAntagonist = false
 		timer.pause(attackTimer)
@@ -58,11 +62,6 @@ function scene:createScene( event )
   local textBox = display.newRect( centerX, 35, 130, 60 )
   group:insert(textBox)
   
-  local antagonist = display.newImage( "images/antag_Coat.png", 400, centerY+20, true )
-  antagonist.height = antagonist.height/5
-  antagonist.width = antagonist.width/5
-  group:insert(antagonist)
-  
   --transition.to( textBox, { time= 2000, x= centerX, transition=easing.inCubic } )
   
   local speech = display.newText( "", 0, 0, globals.IMPRIMA, 36 )
@@ -88,6 +87,12 @@ function scene:createScene( event )
   speech.x = textBox.x
   speech.y = textBox.y
   group:insert( speech )
+  
+  local antagonist = display.newImage( "images/antag_Coat.png", 400, centerY+20, true )
+  antagonist.height = antagonist.height/5
+  antagonist.width = antagonist.width/5
+  group:insert(antagonist)
+  
   local function resume()
 	storyboard.hideOverlay( "slideRight", 800 )
   end
@@ -149,27 +154,28 @@ function scene:createScene( event )
 		 local box = display.newRect( display.contentWidth/2, 170, 180, 150 )
 		 group:insert(box)
 		 local potato = display.newImage(myEnemies[5].image, centerX, centerY)
-		 potato.width = 50
-		 potato.height = 50
+		 potato.width = 100
+		 potato.height = 100
 		 group:insert(potato)
 		 local mashCount = 0
 		 
 		 
 		local function mash()
 			mashCount=mashCount+1
+			print("mashed")
 			if ( mashCount > 10 ) then
 				print ("Great Job!")
 				local smoke = display.newImage( "images/smoke.png", potato.x, potato.y, true )
 				transition.to( smoke, { time=500, alpha=0, onComplete=function() smoke:removeSelf()end } )
 				potato:removeSelf()
 				mashedPotato = display.newImage(comboEnemies[7].image, centerX, centerY)
-				mashedPotato.width = 50
-				mashedPotato.height = 50
+				mashedPotato.width = 100
+				mashedPotato.height = 100
 				group:insert(mashedPotato)
 				timer.performWithDelay( 500, resume )
 			end
 		end
-		potato:addEventListener("touch", mash)
+		--potato:addEventListener("touch", mash)
 		potato:addEventListener("tap", mash)
 		 
 	end
@@ -197,7 +203,7 @@ end
 function scene:exitScene( event )
   local group = self.view
 	
-	storyboard.showOverlay("scenes.scene_hud")
+	
 end
  
 -- Called AFTER scene has finished moving offscreen:
@@ -216,6 +222,7 @@ function scene:didExitScene( event )
       end
     end
   transition.resume()
+  storyboard.showOverlay("scenes.scene_hud")
   if ( isCake ) then storyboard.showOverlay("scenes.scene_foodOnScreen") end
   globals.notDurningAntagonist = true
 end

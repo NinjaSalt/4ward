@@ -175,7 +175,7 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  antagonistRandom = math.random(0, levelNumber)
+  antagonistRandom = math.random(1, levelNumber)
   local antTime = math.random(5000, 15000)
   print (antagonistRandom)
   if(antagonistRandom~=0)then
