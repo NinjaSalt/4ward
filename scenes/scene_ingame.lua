@@ -65,75 +65,8 @@ storyboard.removeAll()
 ---------------------------------------------------------------------------------
 
 -- function to create conveyor belts
---OLD CONVEYOR BELTS CODE. WILL DELETE WHEN I AM DONE WORKING ON THE NEW ONE!!!!!--
---[[
-function scene:createConveyorBelts()
-  sheetSettings =
-  	{
-  	 width = 379,
-  	 height = 55,
- 	  numFrames = 2
-	}
-	sheet = graphics.newImageSheet("images/belt3.png",sheetSettings)
-	sequenceData = {
-	--higher the time, slower it goes
-   { name = "normal", start=1, count=2, time=1150, loopCount=0 },
-   { name = "slow", start=1, count=2, time=2000,   loopCount=0 },   
-   { name = "fast", start=1, count=2, time=300, loopCount=0 }
-}
-
-	for n=0, 2, 1 do
-  		globals.belts[n] = display.newSprite(sheet,sequenceData)
-  		globals.belts[n].x = 280
-  		if (n==0) then
-			globals.belts[n].y = lane1+20
-		end
-		if (n==1) then
-			globals.belts[n].y = lane2+20
-		end
-		if (n==2) then
-			globals.belts[n].y = lane3+20
-		end
-		globals.belts[n]:setSequence( "normal" )
-		globals.belts[n]:play()
-		group:insert(globals.belts[n])
-	end
-	-- LEVER SETTINGS --
-	leversheetSettings =
-  	{
-  	 width = 50,
-  	 height = 50,
- 	  numFrames = 3
-	}
-	leversheet = graphics.newImageSheet("images/leversheet.png",leversheetSettings)
-	leversequenceData = {
-	--higher the time, slower it goes
-   { name = "normal", start=2, count=1 },
-   { name = "slow", start=3, count=1 },   
-   { name = "fast", start=1, count=1 }
-}
-
-	for n=0, 2, 1 do
-  		globals.levers[n] = display.newSprite(leversheet,leversequenceData)
-  		globals.levers[n].x = 75
-  		if (n==0) then
-			globals.levers[n].y = lane1+20
-		end
-		if (n==1) then
-			globals.levers[n].y = lane2+20
-		end
-		if (n==2) then
-			globals.levers[n].y = lane3+20
-		end
-		globals.levers[n]:setSequence( "normal" )
-		globals.levers[n]:play()
-		group:insert(globals.levers[n])
-	end
-	
-end  ]]
-
 --NEW CONVEYOR BELT CODE
-					function scene:createConveyorBelts()
+function scene:createConveyorBelts()
   sheetSettings =
   	{
   	 width = 410,
@@ -143,7 +76,6 @@ end  ]]
 	sheet = graphics.newImageSheet("images/belts_sheet.png",sheetSettings)
 	sequenceData = {
 	--higher the time, slower it goes
-	-- WILL WORK ON THIS LATER!!!! :( --
    { name = "breakfast_normal", frames={1, 2, 3, 4, 5}, time=4000, loopCount=0 },
    { name = "breakfast_slow", frames={1, 2, 3, 4, 5}, time=5000,   loopCount=0 },   
    { name = "breakfast_fast", frames={1, 2, 3, 4, 5}, time=2000, loopCount=0 },
@@ -211,8 +143,6 @@ end  ]]
 	
 end  
 
-
-
 -- function to 
 function scene:createHeroes()
   for n=0, 2, 1 do
@@ -227,7 +157,6 @@ function scene:createHeroes()
     end
     hero[n].height = 70; hero[n].width = 70
 	hero[n]:addEventListener( "touch", ability )
-	
   end
 end  
 

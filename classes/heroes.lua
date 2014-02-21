@@ -38,8 +38,8 @@ function ability( event )
 			--checks if the touch moved either left or right
 			--left swipe makes the lanes go faster
 			if (event.x - event.xStart ~= 0 and event.x - event.xStart < -7) then
-				if ( hero.laneSpeed ~=1 ) then
-					hero.laneSpeed = hero.laneSpeed+1
+				if ( hero.laneSpeed == 2 ) then
+					hero.laneSpeed = 1
 					updateMoveSpeed(hero)
 					globals.levers[hero.num]:setSequence( "fast" )
 					globals.levers[hero.num]:play()
@@ -53,7 +53,7 @@ function ability( event )
 						globals.belts[hero.num]:setSequence( "dessert_fast" )
 						globals.belts[hero.num]:play()
 					end
-				elseif ( hero.laneSpeed ~= 2 ) then
+				elseif ( hero.laneSpeed == 3 ) then
 					hero.laneSpeed = 2
 					updateMoveSpeed(hero)
 					globals.levers[hero.num]:setSequence( "normal" )
@@ -71,8 +71,8 @@ function ability( event )
 				end
 				--right swipe makes the lanes go slower
 			elseif (event.x - event.xStart ~= 0 and event.x - event.xStart > 7) then
-				if ( hero.laneSpeed ~=3 ) then
-					hero.laneSpeed = hero.laneSpeed-1
+				if ( hero.laneSpeed == 2 ) then
+					hero.laneSpeed = 3
 					updateMoveSpeed(hero)
 					globals.levers[hero.num]:setSequence( "slow" )
 					globals.levers[hero.num]:play()
@@ -86,7 +86,7 @@ function ability( event )
 						globals.belts[hero.num]:setSequence( "dessert_slow" )
 						globals.belts[hero.num]:play()
 					end
-				elseif ( hero.laneSpeed ~= 2 ) then
+				elseif ( hero.laneSpeed == 1 ) then
 					hero.laneSpeed = 2
 					updateMoveSpeed(hero)
 					globals.levers[hero.num]:setSequence( "normal" )
@@ -125,9 +125,9 @@ function makeHero( newH, oldH )
 end
 
 -- create and use an Hero
-chefB = Hero.create(1000, 1, "images/Kit01.png", "chefB", 0)
-chefDin = Hero.create(1000, 1, "images/Jay02.png", "chefDin", 1)
-chefDess = Hero.create(1000, 1, "images/Fifi01.png", "chefDess", 2)
+chefB = Hero.create(1000, 1, "images/breakfast.png", "chefB", 0)
+chefDin = Hero.create(1000, 1, "images/dinner.png", "chefDin", 1)
+chefDess = Hero.create(1000, 1, "images/dessert.png", "chefDess", 2)
 --joe = Hero.create(1000, 1, "penguinknight1.png", "joe")
 myHeroes = {}
 myHeroes[0]=chefB
