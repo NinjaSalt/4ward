@@ -57,12 +57,12 @@ function scene:createScene( event )
   local function onTapLeftArrow( event )
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_worldmap1", {effect = "slideRight", time = 500})
-    storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
+    --storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
   end
 
   leftArrow:addEventListener("tap", onTapLeftArrow)
   
-  storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
+  --storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
 end
  
 -- Called BEFORE scene has moved onscreen:

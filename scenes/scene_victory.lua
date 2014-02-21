@@ -6,6 +6,7 @@
  
 local storyboard = require( "storyboard" )
 local globals = require("classes.globals")
+require("classes.levelUnlocking")
 local scene = storyboard.newScene()
 local nextLevel 
 local nextWorld
@@ -21,6 +22,11 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
+  
+  local params = event.params
+  nextLevel = params.level
+  nextWorld = params.world
+  
   timer.pause(attackTimer)
   timer.pause(spawnEneTimer)
   if ( antagonistTimer ~= nil) then
@@ -41,10 +47,20 @@ function scene:createScene( event )
    effect = "fade",
    time = 500
 }
-
+--[[
   local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   bkg.alpha=.01
+  group:insert (bkg)
+  ]]--
+  
+  local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
+  bkg:setFillColor( gray )
+  bkg.alpha = .5
+  group:insert (bkg)
+
+  local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
+  bkg.height=display.contentHeight*.7; bkg.width=display.contentWidth*.7
   group:insert (bkg)
 
  local gameTitle = display.newText( "Victory!", 0, 0, globals.LOBSTERTWO, 48 )
@@ -57,23 +73,50 @@ function scene:createScene( event )
   local scoreTitle = display.newText( "Score: " ..globals.score, 0, 0, globals.IMPRIMA, 36 )
   scoreTitle:setFillColor(black)
   scoreTitle.x = display.contentCenterX
-  scoreTitle.y = gameTitle.y + 50
+  scoreTitle.y = gameTitle.y + 45
  
   group:insert( scoreTitle )
+  
+  if nextLevel == LevelList.getNumOfLevels(params.world) then
+ nextWorldButton = display.newText( "Next World", 0, 0, globals.IMPRIMA, 24 )
+  nextWorldButton:setFillColor(black)
+  nextWorldButton.x = display.contentCenterX
+  nextWorldButton.y = scoreTitle.y + 40
+  group:insert( nextWorldButton)
+ 
+ else
+ nextLevelButton = display.newText( "Next Level", 0, 0, globals.IMPRIMA, 24 )
+  nextLevelButton:setFillColor(black)
+  nextLevelButton.x = display.contentCenterX
+  nextLevelButton.y = scoreTitle.y + 40
+
+  group:insert( nextLevelButton)
+  
+  end
  
   local replayButton = display.newText( "Replay", 0, 0, globals.IMPRIMA, 24 )
   replayButton:setFillColor(black)
   replayButton.x = display.contentCenterX
-  replayButton.y = scoreTitle.y + 50
+  replayButton.y = scoreTitle.y + 80
 
   group:insert( replayButton)
   
   local mapButton = display.newText( "Map", 0, 0, globals.IMPRIMA, 24 )
   mapButton:setFillColor(black)
   mapButton.x = display.contentCenterX
-  mapButton.y = replayButton.y + 50
+  mapButton.y = replayButton.y + 40
 
   group:insert( mapButton)
+  
+  local function onTapNextLevel( event )
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_inBetween",{ effect = "fade", time = 500, params = {level = nextLevel+1, world = nextWorld}})
+  end
+  
+  local function onTapNextWorld( event )
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_worldmap"..(nextWorld+1),options)
+  end
 
   local function onTapReplay( event )
     storyboard.removeScene( scene )
@@ -86,8 +129,15 @@ function scene:createScene( event )
     storyboard.gotoScene( "scenes.scene_worldmap"..nextWorld,options)
   end
 
+  if nextLevel == LevelList.getNumOfLevels(params.world) then
+	nextWorldButton:addEventListener( "tap", onTapNextWorld )
+  else
+	nextLevelButton:addEventListener( "tap", onTapNextLevel )
+  end
   replayButton:addEventListener( "tap", onTapReplay )
   mapButton:addEventListener( "tap", onTapMap )
+
+  
 end
  
 -- Called BEFORE scene has moved onscreen:
@@ -99,9 +149,11 @@ end
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
   local group = self.view
+  --[[
   local params = event.params
   nextLevel = params.level
   nextWorld = params.world
+  ]]--
 end
  
 -- Called when scene is about to move offscreen:
