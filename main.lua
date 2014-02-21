@@ -17,7 +17,7 @@ local options = {
   local globals = require ("classes.globals")
 
   -- play music
- -- local themeChannel = audio.play(theme,{channel =1, loops=-1})
+  local themeChannel = audio.play(theme,{channel =1, loops=-1})
 
 
 local storyboard = require( "storyboard" )

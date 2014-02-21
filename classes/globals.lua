@@ -5,11 +5,6 @@ local globals = {}
 -- global variable is game paused
 globals.gamePaused = false;
 
-globals.hearts = {}
-
-globals.score = 0
-globals.lives = 3
-
 globals.currency = require( "classes.score" )
 
 globals.recipes = {}
@@ -36,6 +31,14 @@ globals.bullet[2] = nil
 -- HUD MULTIPLIER -- 
 globals.multiplier = 0
 globals.multiplierText = nil
+
+-- HUD SCORE --
+globals.score = 0
+globals.scoreText = nil
+
+-- HUD LIVES --
+globals.lives = 3
+globals.numLives = nil
 
 -- FONTS --
 globals.LOBSTERTWO = "blank"

@@ -474,7 +474,7 @@ local function gameLoop( event )
 
 
 					globals.lives = globals.lives - 1
-					numLives.text = (globals.lives)
+					globals.numLives.text = (globals.lives)
 
 					if globals.lives <= 0 then
 						endLevel(currentLevel, false)
@@ -515,7 +515,7 @@ local function gameLoop( event )
 					if ( allEne[i].health <= 0 ) then
 						--theScore.add(allEne[i].pointValue) 		-- adding the amount to score
 						globals.score = globals.score + allEne[i].pointValue + calcLaneScore(allEne[i])
-						scoreText.text = (globals.score)
+						globals.scoreText.text = (globals.score)
 						-- add visual poof of death.
 						local deathPoof = display.newImage( "images/death.png", allEne[i].x, allEne[i].y, true )
 						deathPoof.width = deathPoof.width/9

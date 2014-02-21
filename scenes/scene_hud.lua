@@ -33,47 +33,55 @@ function scene:createScene( event )
   currencyText:setFillColor( black )
   group:insert(currencyText)
 
-  scoreGradient = display.newImage("images/scoreGradient2.png")
-  scoreGradient.x = 460
-  scoreGradient.y = 2
+  -- SCORE --
+
+  local scoreGradient = display.newImage("images/scoreGradient2.png")
+  scoreGradient.width = 70
+  scoreGradient.height = 25
+  scoreGradient.x = 440
+  scoreGradient.y = 15
   group:insert(scoreGradient)
 
-  -- SCORE --
-  score = display.newText( "Score:", 420, 8, globals.IMPRIMA, 18 )
-  score:setFillColor(1,1,1)
-  group:insert(score)
+  globals.scoreText = display.newText( globals.score, 440, 15, globals.LOBSTERTWO, 20 )
+  globals.scoreText:setFillColor(1,1,1)
+  group:insert(globals.scoreText)  
 
-  scoreText = display.newText( globals.score, 460, 8, globals.IMPRIMA, 20 )
-  scoreText:setFillColor(1,1,1)
-  group:insert(scoreText)  
-
-  --[[ PAUSE BUTTON
+  -- PAUSE BUTTON
 
   local pauseButton = display.newImage("images/Pause.png")
-  pauseButton.x = 475
-  pauseButton.y = 24
+  pauseButton.x = 468
+  pauseButton.y = 21
   pauseButton.width = 8
   pauseButton.height = 8
   group:insert(pauseButton) 
 
-  ]]--
-
     -- MULTIPLIER --
-  globals.multiplierText = display.newText( globals.multiplier, 12, 460, globals.LOBSTERTWO, 24 )
-  globals.multiplierText:setFillColor(1,1,1)
+  local multiplierGradient = display.newImage("images/multiplierGradient2.png")
+  multiplierGradient.width = 35
+  multiplierGradient.height = 25
+  multiplierGradient.x = 380
+  multiplierGradient.y = 15  
+  group:insert(multiplierGradient)
+
+  local multiplierX = display.newText("x",375,15, globals.IMPRIMA,20)
+  multiplierX:setFillColor(250,250,0)
+  group:insert(multiplierX)
+
+  globals.multiplierText = display.newText( globals.multiplier, 385, 15, globals.LOBSTERTWO, 20 )
+  globals.multiplierText:setFillColor(250,250,0)
   group:insert(globals.multiplierText)
 
 -- NUMBER OF LIVES
-  hearts = display.newImage("images/lives.png")
+  local hearts = display.newImage("images/lives.png")
   hearts.width = 50
   hearts.height = 25
   hearts.x = 30
   hearts.y = 15
   group:insert(hearts)
 
-  numLives = display.newText( globals.lives, 40, 12, globals.LOBSTERTWO, 20)
-  numLives:setFillColor(1,1,1)
-  group:insert(numLives)
+  globals.numLives = display.newText( globals.lives, 40, 14, globals.LOBSTERTWO, 20)
+  globals.numLives:setFillColor(1,1,1)
+  group:insert(globals.numLives)
 
 --PLAYERS CURRENCY
 --[[
@@ -178,7 +186,7 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  scoreText:removeSelf()
+  --scoreText:removeSelf()
 end
  
 -- Called AFTER scene has finished moving offscreen:
