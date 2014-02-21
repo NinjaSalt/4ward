@@ -176,6 +176,9 @@ end
 function scene:exitScene( event )
   local group = self.view
   antagonistRandom = math.random(1, levelNumber)
+  if ( levelNumber == 1 ) then
+	antagonistRandom = 0
+  end
   local antTime = math.random(5000, 15000)
   print (antagonistRandom)
   if(antagonistRandom~=0)then
