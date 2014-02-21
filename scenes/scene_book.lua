@@ -28,10 +28,27 @@ function scene:createScene( event )
   local nameText
   local basicText
   local basicsList = {}
+  local comboDescY = 275 
 
   local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
+
+  local bookBkg = display.newRect(display.contentWidth/2, display.contentHeight/2+20, display.contentWidth-40, display.contentHeight*.8)
+  bookBkg:setFillColor(0.980392, 0.921569, 0.843137)
+  group:insert(bookBkg)
+
+  local picBkg = display.newRect(display.contentWidth/4,  display.contentHeight/2+20, display.contentWidth/2.5, display.contentHeight*.7)
+  group:insert(picBkg)
+
+  local focalRect =display.newRect(display.contentWidth/4,  display.contentHeight/2+20, display.contentWidth/3, display.contentHeight/2 )
+  focalRect:setFillColor(1, 0.941176, 0.960784)
+  group:insert(focalRect)
+
+  --extended tabs.
+  local extendY = 500
+  local extendBasic = display.newRect(440, extendY, 20, 50)
+  group:insert(extendBasic)
 
 
 
@@ -93,19 +110,19 @@ function scene:createScene( event )
 
       if (body.locker) then
       foodImage = display.newImage( body.image )
-      foodImage.width = display.contentWidth/2 - 80
-      foodImage.height = display.contentWidth/2 - 80
+      foodImage.width = display.contentWidth/2 - 100
+      foodImage.height = display.contentWidth/2 - 100
       foodImage.x = display.contentWidth/4
-      foodImage.y = 170
+      foodImage.y = 180
       group:insert(foodImage)
     end
     -- Displays the name of the combo
-    nameText = display.newText( body.name, display.contentWidth/4, 80, globals.IMPRIMA, 20 )
+    nameText = display.newText( body.name, display.contentWidth/4, 85, globals.IMPRIMA, 20 )
     nameText:setFillColor(black )
     group:insert(nameText)
 
     -- Displays the ingredients combination of the combo food
-    basicText= display.newText( " ", display.contentWidth/4, 80, globals.IMPRIMA, 20 )
+    basicText=  display.newText( " ", display.contentWidth/4, 85, globals.IMPRIMA, 20 )
     group:insert(basicText)
 
   end
@@ -136,18 +153,18 @@ function scene:createScene( event )
       --setting the images 
     if (body.unlocked) then
       foodImage = display.newImage( body.image )
-      foodImage.width = display.contentWidth/2 - 80
-      foodImage.height = display.contentWidth/2 - 80
+      foodImage.width = display.contentWidth/2 - 100
+      foodImage.height = display.contentWidth/2 - 100
       foodImage.x = display.contentWidth/4
-      foodImage.y = 170
+      foodImage.y = 180
       group:insert(foodImage)
     end
     -- Displays the name of the combo
-    nameText = display.newText( body.name, display.contentWidth/4, 80, globals.IMPRIMA, 20 )
+    nameText = display.newText( body.name, display.contentWidth/4, 85, globals.IMPRIMA, 20 )
     nameText:setFillColor(black )
     group:insert(nameText)
     -- Displays the ingredients combination of the combo food
-    basicText = display.newText( body.comboText, display.contentWidth/4, 260, globals.IMPRIMA, 20 )
+    basicText = display.newText( body.comboText, display.contentWidth/4, comboDescY, globals.IMPRIMA, 20 )
     basicText:setFillColor(black )
     group:insert(basicText)
   end
@@ -170,6 +187,9 @@ function scene:createScene( event )
         basicsList[c]: removeSelf()
       end
     end
+
+    extendBasic.y = 100
+    extendBasic:setFillColor( 0.443137, 0.776471, 0.443137)
 
     for d= 1, table.maxn(globals.basics) do
       if ( globals.basics[d].locker == false) then 
@@ -220,6 +240,17 @@ end
       basicsList[b] = nil
     end
     -- end clearing.
+
+    if (event.target.category == "breakfast") then
+    extendBasic.y = 160
+    extendBasic:setFillColor(1, 0.980392, 0.803922)
+    elseif (event.target.category == "dinner") then
+    extendBasic.y = 220
+    extendBasic:setFillColor(0.27451, 0.509804, 0.705882)
+    else
+    extendBasic.y = 280
+    extendBasic:setFillColor( 1, 0.713725, 0.756863)
+    end
 
     local myY = 0
     for i = 1,table.maxn( globals.recipes ) do
@@ -274,18 +305,19 @@ end
 
   local currentTab = basicTab
   
-  local basicTab = display.newRect(450, 100, 30, 50)
+  local basicTab = display.newRect(460, 100, 30, 50)
+  basicTab:setFillColor( 0.443137, 0.776471, 0.443137)
   
-  local breakfastTab = display.newRect(450, 160, 30, 50)
-  breakfastTab: setFillColor (255,255,0)
+  local breakfastTab = display.newRect(460, 160, 30, 50)
+  breakfastTab: setFillColor (1, 0.980392, 0.803922)
   breakfastTab.category = "breakfast"
   
-  local dinnerTab = display.newRect(450, 220, 30, 50)
-  dinnerTab: setFillColor(0,0,255)
+  local dinnerTab = display.newRect(460, 220, 30, 50)
+  dinnerTab: setFillColor(0.27451, 0.509804, 0.705882)
   dinnerTab.category = "dinner"
   
-  local dessertTab = display.newRect(450, 280, 30, 50)
-  dessertTab: setFillColor(0,255,0)
+  local dessertTab = display.newRect(460, 280, 30, 50)
+  dessertTab: setFillColor( 1, 0.713725, 0.756863)
   dessertTab.category = "dessert"
 
   basicTab:addEventListener( "tap", basicSelect )
@@ -297,6 +329,8 @@ end
   group:insert(breakfastTab)
   group:insert(dinnerTab)
   group:insert(dessertTab)
+
+
 
   -- call basic items for the first time.
   for b = 1, table.maxn(globals.basics) do
