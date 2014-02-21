@@ -42,7 +42,9 @@ function scene:createScene( event )
   local function onTapMain( event )
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_home",options)
-	timer.cancel(antagonistTimer)
+	   if (antagonistTimer ~= nil) then
+        timer.pause(antagonistTimer)
+      end
   end
   
   mainButton:addEventListener( "tap", onTapMain )

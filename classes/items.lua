@@ -1,5 +1,7 @@
 require("classes.enemies")
 require("classes.level")
+require("classes.move")
+require("classes.chop")
 --equire("classes.heroes")
 local globals = require("classes.globals")
 local storyboard = require( "storyboard" )
@@ -41,6 +43,7 @@ function makeItemArray ()
 	items[nextItem+2]= Item.makeItem("Compost","trash", "images/trash_item.png", 1200, nextItem+2, true)
 	items[nextItem+3]= Item.makeItem("Producer Swap","swap", "images/swap.png", 700, nextItem+3, true)
 	items[nextItem+4]= Item.makeItem("Attack Boost","boost", "images/attackboost.png", 800, nextItem+4, true)
+	items[nextItem+5]= Item.makeItem("Chop Food","chop", "images/chop.png", 1000, nextItem+5, true)
 end
 makeItemArray()
 myItems = {}
@@ -120,13 +123,31 @@ function producerSwap()
 		end
 		transition.to(allEne[randomEne1], { time= 2000,  x = randomEne2X, y = randomEne2Y})
 		transition.to(allEne[randomEne2], { time= 2000,  x = randomEne1X, y = randomEne1Y, onComplete= resetMove })
-		
-		
-		
-		
-		
 	end
 end
+
+  local function resume()
+  	print("CHOP ENDING")
+		for i = 0,table.maxn( allEne ) do
+			if (allEne[i] ~= nil) then
+				allEne[i]:removeEventListener( "touch", chopping )
+    			allEne[i]:addEventListener( "touch", teleport )
+   			end
+		end
+  end
+
+function chopFood()
+	print("CHOP FOOD!!")
+	timer.performWithDelay( 6000, resume )
+   		for i = 0,table.maxn( allEne ) do
+   			if (allEne[i] ~= nil) then
+    			allEne[i]:removeEventListener( "touch", teleport )
+    			allEne[i]:addEventListener( "touch", chopping )
+    		end
+		end
+end
+
+
 function itemTap ( event )
 	itemUsed = event.target
 	-- if the item is "break", call the commercialBreak function
@@ -136,6 +157,10 @@ function itemTap ( event )
 		myItems[itemUsed.myItemRef] = nil
 	elseif (itemUsed.itemType == "swap")then
 		producerSwap()
+		itemUsed: removeSelf()
+		myItems[itemUsed.myItemRef] = nil
+	elseif (itemUsed.itemType == "chop")then
+		chopFood()
 		itemUsed: removeSelf()
 		myItems[itemUsed.myItemRef] = nil
 	end
