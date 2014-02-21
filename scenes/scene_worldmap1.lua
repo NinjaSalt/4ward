@@ -64,13 +64,12 @@ function scene:createScene( event )
      group:insert(lock)
    end
 
-
-  local bookIcon = display.newImageRect( "images/bookIcon.png", 50, 50 )
-  bookIcon.x = 30
-  bookIcon.y = 30
+  local bookIcon = display.newText( "Recipe Book", 80, 290, globals.LOBSTERTWO, 30 )
+  bookIcon: setFillColor (black)
   group:insert(bookIcon)
 
-  local storeButton = display.newRect(80,30,50,50)
+  local storeButton = display.newText("Item Store", 410, 290, globals.LOBSTERTWO, 30)
+  storeButton: setFillColor(black)
   group:insert(storeButton)
 
   local function onTapRightArrow( event )
