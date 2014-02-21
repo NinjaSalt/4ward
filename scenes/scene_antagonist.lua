@@ -161,11 +161,15 @@ function scene:createScene( event )
 		 
 		 
 		local function mash()
+			local flashPotato = display.newImage("images/flashPotato.png",potato.x, potato.y,true)
+			flashPotato.width = 100
+			flashPotato.height = 100
+			transition.to( flashPotato, { time=100, alpha=0, onComplete=function() flashPotato:removeSelf()end } )
 			mashCount=mashCount+1
 			print("mashed")
 			if ( mashCount > 10 ) then
 				print ("Great Job!")
-				local smoke = display.newImage( "images/smoke.png", potato.x, potato.y, true )
+				local smoke = display.newImage( "images/comboPoof.png", potato.x, potato.y, true )
 				transition.to( smoke, { time=500, alpha=0, onComplete=function() smoke:removeSelf()end } )
 				potato:removeSelf()
 				mashedPotato = display.newImage(comboEnemies[7].image, centerX, centerY)
