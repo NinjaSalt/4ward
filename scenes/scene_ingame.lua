@@ -500,8 +500,7 @@ local function gameLoop( event )
 
 					if globals.lives <= 0 then
 						endLevel(currentLevel, false)
-						storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-
+						storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 					end
 					decrementEnemy(currentLevel)
 					if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
@@ -513,7 +512,7 @@ local function gameLoop( event )
 							else 
 								LevelList.unlockLevel(world, thisLevel+1)
 								endLevel(currentLevel, false)
-								storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+								storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 							end
 						else	
 							LevelList.unlockLevel(world, thisLevel+1)
@@ -557,7 +556,7 @@ local function gameLoop( event )
 									storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 								else 
 									endLevel(currentLevel, false)
-									storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+									storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 								end
 							else	
 								LevelList.unlockLevel(world, thisLevel+1)

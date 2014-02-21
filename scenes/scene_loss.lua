@@ -20,14 +20,39 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
+  local params = event.params
+  nextLevel = params.level
+  nextWorld = params.world
+  
+  timer.pause(attackTimer)
+  timer.pause(spawnEneTimer)
+  if ( antagonistTimer ~= nil) then
+	timer.cancel(antagonistTimer)
+  end
+  for n=0, 2, 1 do
+    	globals.belts[n]:pause()
+	end
+  if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
+      for i=0, #globals.bullet_array, 1 do
+        if (globals.bullet_array[i] ~= nil) then
+          globals.bullet_array[i]:pause()
+        end
+      end
+    end
+	transition.pause("animation")
   
   local options = {
    effect = "fade",
    time = 500
 }
   
+  local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
+  bkg:setFillColor( gray )
+  bkg.alpha = .5
+  group:insert (bkg)
+
   local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
-  bkg.height=display.contentHeight; bkg.width=display.contentWidth
+  bkg.height=display.contentHeight*.7; bkg.width=display.contentWidth*.7
   group:insert (bkg)
 
  local gameTitle = display.newText( "Defeat!", 0, 0, globals.LOBSTERTWO, 48 )
@@ -60,7 +85,7 @@ function scene:createScene( event )
 
   local function onTapReplay( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = nextLevel, world = nextWorld}})
+    storyboard.gotoScene( "scenes.scene_inBetween",{ effect = "fade", time = 500, params = {level = nextLevel, world = nextWorld}})
   end
   
   local function onTapMap( event )
@@ -81,9 +106,6 @@ end
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
   local group = self.view
-  local params = event.params
-  nextLevel = params.level
-  nextWorld = params.world
 end
  
 -- Called when scene is about to move offscreen:
