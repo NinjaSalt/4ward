@@ -65,46 +65,70 @@ storyboard.removeAll()
 -- function to create conveyor belts
 --NEW CONVEYOR BELT CODE
 function scene:createConveyorBelts()
-  sheetSettings =
+  local breakfastsheetSettings =
   	{
   	 width = 410,
   	 height = 60,
- 	  numFrames = 15
+ 	  numFrames = 10
 	}
-	sheet = graphics.newImageSheet("images/belts_sheet.png",sheetSettings)
-	sequenceData = {
+	local breakfastsheet = graphics.newImageSheet("images/belts03sheet.png",breakfastsheetSettings)
+	local breakfastsequenceData = {
 	--higher the time, slower it goes
-   { name = "breakfast_normal", frames={1, 2, 3, 4, 5}, time=4000, loopCount=0 },
-   { name = "breakfast_slow", frames={1, 2, 3, 4, 5}, time=5000,   loopCount=0 },   
-   { name = "breakfast_fast", frames={1, 2, 3, 4, 5}, time=2000, loopCount=0 },
+   { name = "breakfast_normal", start = 1, count = 10, time=4000, loopCount=0 },
+   { name = "breakfast_slow", start = 1, count = 10, time=5000,   loopCount=0 },   
+   { name = "breakfast_fast", start = 1, count = 10, time=2000, loopCount=0 }
+}
 
-    { name = "dinner_normal", frames={6, 7, 8, 9, 10}, time=4000, loopCount=0 },
-   { name = "dinner_slow", frames={6, 7, 8, 9, 10}, time=5000,   loopCount=0 },   
-   { name = "dinner_fast", frames={6, 7, 8, 9, 10}, time=2000, loopCount=0 },
+local dinnersheetSettings =
+  	{
+  	 width = 410,
+  	 height = 60,
+ 	  numFrames = 10
+	}
+	local dinnersheet = graphics.newImageSheet("images/belts01sheet.png",dinnersheetSettings)
+	local dinnersequenceData = {
+	--higher the time, slower it goes
+   { name = "dinner_normal", start = 1, count = 10, time=4000, loopCount=0 },
+   { name = "dinner_slow", start = 1, count = 10, time=5000,   loopCount=0 },   
+   { name = "dinner_fast", start = 1, count = 10, time=2000, loopCount=0 }
+}
 
-    { name = "dessert_normal", frames={11, 12, 13, 14, 15}, time=4000, loopCount=0 },
-   { name = "dessert_slow", frames={11, 12, 13, 14, 15}, time=5000,   loopCount=0 },   
-   { name = "dessert_fast", frames={11, 12, 13, 14, 15}, time=2000, loopCount=0 }
+local dessertsheetSettings =
+  	{
+  	 width = 410,
+  	 height = 60,
+ 	  numFrames = 10
+	}
+	local dessertsheet = graphics.newImageSheet("images/belts02sheet.png",dessertsheetSettings)
+	local dessertsequenceData = {
+	--higher the time, slower it goes
+   { name = "dessert_normal", start = 1, count = 10, time=4000, loopCount=0 },
+   { name = "dessert_slow", start = 1, count = 10, time=5000,   loopCount=0 },   
+   { name = "dessert_fast", start = 1, count = 10, time=2000, loopCount=0 },
 }
 
 	for n=0, 2, 1 do
-  		globals.belts[n] = display.newSprite(sheet,sequenceData)
-  		globals.belts[n].x = 278
+  		--globals.belts[n] = display.newSprite(breakfastsheet,breakfastsequenceData)
   		if (n==0) then
+  			globals.belts[n] = display.newSprite(breakfastsheet,breakfastsequenceData)
+  			--globals.belts[n].x = 278
 			globals.belts[n].y = lane1+20
 			globals.belts[n]:setSequence( "breakfast_normal" )
 			globals.belts[n]:play()
 		end
 		if (n==1) then
+			globals.belts[n] = display.newSprite(dinnersheet,dinnersequenceData)
 			globals.belts[n].y = lane2+20
 			globals.belts[n]:setSequence( "dinner_normal" )
 			globals.belts[n]:play()
 		end
 		if (n==2) then
+			globals.belts[n] = display.newSprite(dessertsheet,dessertsequenceData)
 			globals.belts[n].y = lane3+20
 			globals.belts[n]:setSequence( "dessert_normal" )
 			globals.belts[n]:play()
 		end
+		globals.belts[n].x = 278
 		group:insert(globals.belts[n])
 	end
 	-- LEVER SETTINGS --
