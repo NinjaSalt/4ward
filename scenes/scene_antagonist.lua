@@ -9,7 +9,7 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals= require ("classes.globals") 
 
-local antagonistAbility = math.random(4,4)
+local antagonistAbility = math.random(1,4)
 local isCake = false
 -- Clear previous scene
 storyboard.removeAll()
