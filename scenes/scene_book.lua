@@ -67,6 +67,49 @@ function scene:createScene( event )
     }
     group:insert(scrollView)
 
+  local function onTapBasic(event,params)
+  local body = event.target
+
+    if (body.locker and foodImage ~= nil and nameText ~= nil and basicText ~= nil) then
+      foodImage:removeSelf( )
+      nameText:removeSelf( )
+      basicText:removeSelf( )
+    elseif (body.locker and nameText ~= nil and basicText ~= nil and foodImage == nil) then
+      nameText:removeSelf( )
+      basicText:removeSelf( )
+    elseif (body.locker ==false and nameText ~= nil and basicText ~= nil and foodImage == nil) then
+      nameText:removeSelf( )
+      basicText:removeSelf( )
+    elseif (body.locker ==false and nameText ~= nil and basicText ~= nil and foodImage ~= nil) then
+      foodImage:removeSelf( )
+      nameText:removeSelf( )
+      basicText:removeSelf( )
+    end
+    -- Had to assign these as nil after removing them
+    -- since removing them does not make them nil, they still have a value and it causes problems when it comes back around
+    foodImage = nil
+    nameText = nil
+    basicText = nil
+
+      if (body.locker) then
+      foodImage = display.newImage( body.image )
+      foodImage.width = display.contentWidth/2 - 80
+      foodImage.height = display.contentWidth/2 - 80
+      foodImage.x = display.contentWidth/4
+      foodImage.y = 170
+      group:insert(foodImage)
+    end
+    -- Displays the name of the combo
+    nameText = display.newText( body.name, display.contentWidth/4, 80, globals.IMPRIMA, 20 )
+    nameText:setFillColor(black )
+    group:insert(nameText)
+
+    -- Displays the ingredients combination of the combo food
+    basicText= display.newText( " ", display.contentWidth/4, 80, globals.IMPRIMA, 20 )
+    group:insert(basicText)
+
+  end
+
 
   local function onTapItem( event, params )
     local body = event.target
@@ -100,11 +143,11 @@ function scene:createScene( event )
       group:insert(foodImage)
     end
     -- Displays the name of the combo
-    nameText = display.newText( body.name, display.contentWidth/4, 80, globals.IMPRIMA, 24 )
+    nameText = display.newText( body.name, display.contentWidth/4, 80, globals.IMPRIMA, 20 )
     nameText:setFillColor(black )
     group:insert(nameText)
     -- Displays the ingredients combination of the combo food
-    basicText = display.newText( body.comboText, display.contentWidth/4, 260, globals.IMPRIMA, 24 )
+    basicText = display.newText( body.comboText, display.contentWidth/4, 260, globals.IMPRIMA, 20 )
     basicText:setFillColor(black )
     group:insert(basicText)
   end
@@ -118,7 +161,7 @@ function scene:createScene( event )
       end
     end
     for i = 1,table.maxn( globals.recipes ) do
-      recipesList[i] = display.newText(" ", 0 ,0, globals.IMPRIMA, 1) 
+      recipesList[i] = nil --display.newText(" ", 0 ,0, globals.IMPRIMA, 1) 
     end
 
     -- end clear recipes.
@@ -139,6 +182,7 @@ function scene:createScene( event )
       basicsList[d].image = nil
       basicsList[d].locker = false
       scrollView:insert( basicsList[d] )
+      basicsList[d]:addEventListener( "tap", onTapBasic )
       bY=bY+40
     else
       basicsList[d] = display.newText( globals.basics[d].name, 0, 0, globals.IMPRIMA, 17 )
@@ -147,9 +191,10 @@ function scene:createScene( event )
       basicsList[d].y = bY
       basicsList[d].id = d
       basicsList[d].name = globals.basics[d].name
-      basicsList[d].image = nil
+      basicsList[d].image = globals.basics[d].image
       basicsList[d].locker = true
       scrollView:insert( basicsList[d] )
+      basicsList[d]:addEventListener( "tap", onTapBasic )
       bY=bY+40
     end
   end
@@ -172,7 +217,7 @@ end
       end
     end
     for b = 1, table.maxn(globals.basics) do 
-      basicsList[b] = display.newText( " ", 0, 0, globals.IMPRIMA, 1 )
+      basicsList[b] = nil
     end
     -- end clearing.
 
@@ -195,12 +240,12 @@ end
       myY=myY+40
       recipesList[i]:addEventListener( "tap", onTapItem )
     else
-      recipesList[i] = display.newText(" ", 0 ,0, globals.IMPRIMA, 1) --really strange way of going about this..
+      recipesList[i] = nil --display.newText(" ", 0 ,0, globals.IMPRIMA, 1) --really strange way of going about this..
       end
       -- if recipes are unlocked, assign them the names and images of the combos
       elseif ( globals.recipes[i].unlocked ) then 
         if (globals.recipes[i].category == event.target.category) then
-        recipesList[i] = display.newText( globals.recipes[i].name, 0, 0, globals.IMPRIMA, 17 )
+        recipesList[i] = display.newText( globals.recipes[i].name, 0, 0, globals.IMPRIMA, 17)
         recipesList[i]:setFillColor(black)
         recipesList[i].x = scrollView.width/2--scrollView.contentBounds.xMin
         recipesList[i].y = myY
@@ -213,7 +258,7 @@ end
         myY=myY+40
         recipesList[i]:addEventListener( "tap", onTapItem )
       else
-        recipesList[i] = display.newText(" ", 0 ,0, globals.IMPRIMA, 1)
+        recipesList[i] = nil --display.newText(" ", 0 ,0, globals.IMPRIMA, 1)
         end
       end
       end
@@ -255,7 +300,7 @@ end
 
   -- call basic items for the first time.
   for b = 1, table.maxn(globals.basics) do
-    basicsList[b] = display.newText( " ", 0, 0, globals.IMPRIMA, 1 )
+    basicsList[b] = nil --display.newText( " ", 0, 0, globals.IMPRIMA, 1 )
   end
 
   local myY = 0
