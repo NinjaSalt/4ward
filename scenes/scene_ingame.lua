@@ -50,8 +50,6 @@ globals.currency = require( "classes.score" )
 require("classes.timeLine")
 
 local currencyText
-
-globals.lives = 3
  
 --sprite.xScale, sprite.yScale = 3,3 --The image is a little small so we scale it up
 
@@ -747,6 +745,8 @@ end
 function scene:willEnterScene( event )
   local group = self.view
   globals.score = 0
+  globals.lives = 3
+  globals.multiplier = resetMultiplier()
 end
  
 -- Called immediately after scene has moved onscreen:
