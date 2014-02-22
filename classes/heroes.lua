@@ -28,6 +28,7 @@ function ability( event )
 	local phase = event.phase
 	local stage = display.getCurrentStage()
 	local markY = hero.y
+	local frameNum1, frameNum2, frameNum3
 	if event.phase == "began" then
 		stage:setFocus( hero, event.id )
 		hero.isFocus = true
@@ -44,13 +45,23 @@ function ability( event )
 					globals.levers[hero.num]:setSequence( "fast" )
 					globals.levers[hero.num]:play()
 					if (hero.num == 0) then
+						frameNum1 = globals.belts[hero.num].frame
+						
+						print(frameNum1)
 						globals.belts[hero.num]:setSequence( "breakfast_fast" )
+						globals.belts[hero.num]:setFrame( frameNum1 )
 						globals.belts[hero.num]:play()
 					elseif (hero.num == 1) then
+						frameNum2 = globals.belts[hero.num].frame
+						
 						globals.belts[hero.num]:setSequence( "dinner_fast" )
+						globals.belts[hero.num]:setFrame( frameNum2 )
 						globals.belts[hero.num]:play()
 					elseif (hero.num == 2) then
+						frameNum3 = globals.belts[hero.num].frame
+						
 						globals.belts[hero.num]:setSequence( "dessert_fast" )
+						globals.belts[hero.num]:setFrame( frameNum3 )
 						globals.belts[hero.num]:play()
 					end
 				elseif ( hero.laneSpeed == 3 ) then
@@ -59,13 +70,19 @@ function ability( event )
 					globals.levers[hero.num]:setSequence( "normal" )
 					globals.levers[hero.num]:play()
 					if (hero.num == 0) then
+						frameNum1 = globals.belts[hero.num].frame
 						globals.belts[hero.num]:setSequence( "breakfast_normal" )
+						globals.belts[hero.num]:setFrame( frameNum1 )
 						globals.belts[hero.num]:play()
 					elseif (hero.num == 1) then
+						frameNum2 = globals.belts[hero.num].frame
 						globals.belts[hero.num]:setSequence( "dinner_normal" )
+						globals.belts[hero.num]:setFrame( frameNum2 )
 						globals.belts[hero.num]:play()
 					elseif (hero.num == 2) then
+						frameNum3 = globals.belts[hero.num].frame
 						globals.belts[hero.num]:setSequence( "dessert_normal" )
+						globals.belts[hero.num]:setFrame( frameNum3 )
 						globals.belts[hero.num]:play()
 					end
 				end
@@ -77,13 +94,19 @@ function ability( event )
 					globals.levers[hero.num]:setSequence( "slow" )
 					globals.levers[hero.num]:play()
 					if (hero.num == 0) then
+						frameNum1 = globals.belts[hero.num].frame
 						globals.belts[hero.num]:setSequence( "breakfast_slow" )
+						globals.belts[hero.num]:setFrame( frameNum1 )
 						globals.belts[hero.num]:play()
 					elseif (hero.num == 1) then
+						frameNum2 = globals.belts[hero.num].frame
 						globals.belts[hero.num]:setSequence( "dinner_slow" )
+						globals.belts[hero.num]:setFrame( frameNum2 )
 						globals.belts[hero.num]:play()
 					elseif (hero.num == 2) then
+						frameNum3 = globals.belts[hero.num].frame
 						globals.belts[hero.num]:setSequence( "dessert_slow" )
+						globals.belts[hero.num]:setFrame( frameNum3 )
 						globals.belts[hero.num]:play()
 					end
 				elseif ( hero.laneSpeed == 1 ) then
@@ -92,13 +115,19 @@ function ability( event )
 					globals.levers[hero.num]:setSequence( "normal" )
 					globals.levers[hero.num]:play()
 					if (hero.num == 0) then
+						frameNum1 = globals.belts[hero.num].frame
 						globals.belts[hero.num]:setSequence( "breakfast_normal" )
+						globals.belts[hero.num]:setFrame( frameNum1 )
 						globals.belts[hero.num]:play()
 					elseif (hero.num == 1) then
+						frameNum2 = globals.belts[hero.num].frame
 						globals.belts[hero.num]:setSequence( "dinner_normal" )
+						globals.belts[hero.num]:setFrame( frameNum2 )
 						globals.belts[hero.num]:play()
 					elseif (hero.num == 2) then
+						frameNum3 = globals.belts[hero.num].frame
 						globals.belts[hero.num]:setSequence( "dessert_normal" )
+						globals.belts[hero.num]:setFrame( frameNum3 )
 						globals.belts[hero.num]:play()
 					end
 				end

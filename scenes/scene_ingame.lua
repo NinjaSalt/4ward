@@ -69,42 +69,42 @@ function scene:createConveyorBelts()
   	{
   	 width = 410,
   	 height = 60,
- 	  numFrames = 10
+ 	  numFrames = 12
 	}
 	local breakfastsheet = graphics.newImageSheet("images/belts03sheet.png",breakfastsheetSettings)
 	local breakfastsequenceData = {
 	--higher the time, slower it goes
-   { name = "breakfast_normal", start = 1, count = 10, time=4000, loopCount=0 },
-   { name = "breakfast_slow", start = 1, count = 10, time=5000,   loopCount=0 },   
-   { name = "breakfast_fast", start = 1, count = 10, time=2000, loopCount=0 }
+   { name = "breakfast_normal", start = 1, count = 12, time=4000, loopCount=0 },
+   { name = "breakfast_slow", start = 1, count = 12, time=5000,   loopCount=0 },   
+   { name = "breakfast_fast", start = 1, count = 12, time=2200, loopCount=0 }
 }
 
 local dinnersheetSettings =
   	{
   	 width = 410,
   	 height = 60,
- 	  numFrames = 10
+ 	  numFrames = 12
 	}
 	local dinnersheet = graphics.newImageSheet("images/belts01sheet.png",dinnersheetSettings)
 	local dinnersequenceData = {
 	--higher the time, slower it goes
-   { name = "dinner_normal", start = 1, count = 10, time=4000, loopCount=0 },
-   { name = "dinner_slow", start = 1, count = 10, time=5000,   loopCount=0 },   
-   { name = "dinner_fast", start = 1, count = 10, time=2000, loopCount=0 }
+   { name = "dinner_normal", start = 1, count = 12, time=4000, loopCount=0 },
+   { name = "dinner_slow", start = 1, count = 12, time=5000,   loopCount=0 },   
+   { name = "dinner_fast", start = 1, count = 12, time=2200, loopCount=0 }
 }
 
 local dessertsheetSettings =
   	{
   	 width = 410,
   	 height = 60,
- 	  numFrames = 10
+ 	  numFrames = 12
 	}
 	local dessertsheet = graphics.newImageSheet("images/belts02sheet.png",dessertsheetSettings)
 	local dessertsequenceData = {
 	--higher the time, slower it goes
-   { name = "dessert_normal", start = 1, count = 10, time=4000, loopCount=0 },
-   { name = "dessert_slow", start = 1, count = 10, time=5000,   loopCount=0 },   
-   { name = "dessert_fast", start = 1, count = 10, time=2000, loopCount=0 },
+   { name = "dessert_normal", start = 1, count = 12, time=4000, loopCount=0 },
+   { name = "dessert_slow", start = 1, count = 12, time=5000,   loopCount=0 },   
+   { name = "dessert_fast", start = 1, count = 12, time=2200, loopCount=0 },
 }
 
 	for n=0, 2, 1 do
@@ -115,6 +115,7 @@ local dessertsheetSettings =
 			globals.belts[n].y = lane1+20
 			globals.belts[n]:setSequence( "breakfast_normal" )
 			globals.belts[n]:play()
+
 		end
 		if (n==1) then
 			globals.belts[n] = display.newSprite(dinnersheet,dinnersequenceData)
@@ -230,7 +231,7 @@ globals.bullet[0] = display.newSprite(pinsheet,pinsequenceData)
   globals.bullet[0].attack = attack
   local bt = x * bullet_speed
   globals.bullet[0]:play()
-  globals.bullet[0].transition = transition.to( globals.bullet[0], {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
+  globals.bullet[0].transition = transition.to( globals.bullet[0], {x=455, time=bt, onComplete=remove_bullet, tag="animation"} )
   return globals.bullet[0]
 end
 
@@ -258,7 +259,7 @@ globals.bullet[1] = display.newSprite(spatulasheet,spatulasequenceData)
 	globals.bullet[1].attack = attack
 	local bt = x * bullet_speed
 	globals.bullet[1]:play()
-	globals.bullet[1].transition = transition.to( globals.bullet[1], {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
+	globals.bullet[1].transition = transition.to( globals.bullet[1], {x=455, time=bt, onComplete=remove_bullet, tag="animation"} )
 	return globals.bullet[1]
 end
 
@@ -286,7 +287,7 @@ function make_bullet_whisk( hero )
   globals.bullet[2].attack = attack
   local bt = x * bullet_speed
   globals.bullet[2]:play()
-  globals.bullet[2].transition = transition.to( globals.bullet[2], {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
+  globals.bullet[2].transition = transition.to( globals.bullet[2], {x=455, time=bt, onComplete=remove_bullet, tag="animation"} )
   return globals.bullet[2]
 end
 
@@ -500,7 +501,8 @@ local function gameLoop( event )
 
 					if globals.lives <= 0 then
 						endLevel(currentLevel, false)
-						storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+						storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+
 					end
 					decrementEnemy(currentLevel)
 					if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
@@ -512,7 +514,7 @@ local function gameLoop( event )
 							else 
 								LevelList.unlockLevel(world, thisLevel+1)
 								endLevel(currentLevel, false)
-								storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+								storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 							end
 						else	
 							LevelList.unlockLevel(world, thisLevel+1)
@@ -556,7 +558,7 @@ local function gameLoop( event )
 									storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 								else 
 									endLevel(currentLevel, false)
-									storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+									storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 								end
 							else	
 								LevelList.unlockLevel(world, thisLevel+1)
