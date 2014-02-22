@@ -435,12 +435,12 @@ local function critText (enemy)
 end
 
 --function to call displaying "OKAY" text for enemy damage feedback
-local function okayText (enemy)
-	local okText = display.newImage( "images/okay_text.png", enemy.x-10, enemy.y, true )
-	if (okText ~= nil) then
-		okText.width = enemy.width+20
-		okText.height = enemy.width+20
-		transition.to( okText, { time=1000, alpha=0, onComplete=function() okText:removeSelf() end } )
+local function badText (enemy)
+	local badText = display.newImage( "images/bad_text.png", enemy.x-10, enemy.y, true )
+	if (badText ~= nil) then
+		badText.width = enemy.width+20
+		badText.height = enemy.width+20
+		transition.to( badText, { time=1000, alpha=0, onComplete=function() badText:removeSelf() end } )
 	end	
 end
 
@@ -450,7 +450,7 @@ local function textCheck(enemy, bullet)
 		if (enemy.category == "breakfast") then
 			critText(enemy)
 		elseif (enemy.category == "bad") then
-			okayText(enemy)
+			badText(enemy)
 		elseif (enemy.category ~= "basic") then
 			goodText(enemy) 
 		end
@@ -458,7 +458,7 @@ local function textCheck(enemy, bullet)
 		if (enemy.category == "dinner") then
 			critText(enemy)
 		elseif (enemy.category == "bad") then
-			okayText(enemy)
+			badText(enemy)
 		elseif (enemy.category ~= "basic") then
 			goodText(enemy) 
 		end
@@ -466,7 +466,7 @@ local function textCheck(enemy, bullet)
 		if (enemy.category == "dessert") then
 			critText(enemy)
 		elseif (enemy.category == "bad") then
-			okayText(enemy)
+			badText(enemy)
 		elseif (enemy.category ~= "basic") then
 			goodText(enemy) 
 		end
