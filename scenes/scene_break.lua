@@ -60,9 +60,10 @@ function scene:createScene( event )
     storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
     timer.resume(attackTimer)
     timer.resume(spawnEneTimer)
-    for n=0, 2, 1 do
-      globals.belts[n]:play()
-	end
+    globals.breakfastanimation:play()
+  for n=0, 2, 1 do
+    globals.belts[n]:play()
+  end
   if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
       for i=0, #globals.bullet_array, 1 do
         if (globals.bullet_array[i] ~= nil) then

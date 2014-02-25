@@ -34,6 +34,7 @@ function scene:createScene( event )
 	globals.notDurningAntagonist = false
 		timer.pause(attackTimer)
 		timer.pause(spawnEneTimer)
+    globals.breakfastanimation:pause()
 		for n=0, 2, 1 do
 			globals.belts[n]:pause()
 		end
@@ -215,6 +216,7 @@ function scene:didExitScene( event )
   local group = self.view
   timer.resume(attackTimer)
   timer.resume(spawnEneTimer)
+  globals.breakfastanimation:play()
   for n=0, 2, 1 do
       globals.belts[n]:play()
   end

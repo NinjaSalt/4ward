@@ -47,4 +47,7 @@ globals.IMPRIMA = "blank"
 -- CHECK DURNING ANTAGONIST --
 globals.notDurningAntagonist = true
 
+-- CHEF ANIMATION GLOBAL FUNCTIONS --
+globals.breakfastanimation = nil
+
 return globals

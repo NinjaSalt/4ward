@@ -72,6 +72,7 @@ end
     storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
     timer.resume(attackTimer)
     timer.resume(spawnEneTimer)
+    globals.breakfastanimation:play()
     if ( antagonistTimer ~= nil) then
 	     timer.resume(antagonistTimer)
     end

@@ -148,6 +148,8 @@ function scene:createScene( event )
     storyboard.showOverlay("scenes.scene_pause", {effect = "slideDown", time=500})
     timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
+    --pausing animation
+    globals.breakfastanimation:pause()
     if ( antagonistTimer ~= nil) then
      timer.cancel(antagonistTimer)
      end

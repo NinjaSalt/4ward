@@ -28,6 +28,11 @@ local sequenceData
 local leversheetSettings
 local leversheet
 local leversequenceData
+--breakfast chef locals
+local breakfastspriteSettings
+local breakfastspritesheet
+local breakfastspriteequenceData
+local breakfastanimation
 
 -- Hero Attack Variables
 local bullet_speed = 50 
@@ -182,6 +187,30 @@ function scene:createHeroes()
 	hero[n]:addEventListener( "touch", ability )
   end
 end  
+]
+--CREATING AN ANIMATED OVERLAY TO THE TRANSPARENT PLACEHOLDER IN HEROES.LUA--
+function scene:createBreakfastChef()
+	breakfastspriteSettings =
+  	{
+  	 width = 70,
+  	 height = 70,
+ 	 numFrames = 4,
+ 	 sheetContentWidth=280,
+	 sheetContentHeight=70,
+	}
+	breakfastspritesheet = graphics.newImageSheet("images/breakfast_sheet.png",breakfastspriteSettings)
+	breakfastspriteequenceData = {
+	--higher the time, slower it goes
+   		{ name = "idle", frames={1, 2, 3, 4, 3, 2}, time=1000, loopCount=0 }
+	}
+	globals.breakfastanimation = display.newSprite(breakfastspritesheet,breakfastspriteequenceData)
+    globals.breakfastanimation.x =50
+    globals.breakfastanimation.y = lane1    
+    globals.breakfastanimation.height = 70; globals.breakfastanimation.width = 70
+    globals.breakfastanimation:setSequence( "idle" )
+	globals.breakfastanimation:play()
+	group:insert(globals.breakfastanimation)
+end 
 
 -- function to remove the bullet off the array/off screen
 function remove_bullet( bullet )
@@ -663,6 +692,7 @@ local function goToIntro(vicCond, id)
 	storyboard.showOverlay("scenes.scene_intro", {effect = "slideDown", time=500, params = {vic= vicCond, levelNumber=id}})
     timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
+    globals.breakfastanimation:pause()
     for n=0, 2, 1 do
     	globals.belts[n]:pause()
 	end
@@ -721,6 +751,7 @@ function scene:createScene( event )
   bkg:addEventListener( "touch", getxy )
 
   --create the heroes
+  scene:createBreakfastChef()
   scene.createHeroes()
   for n=0,2,1 do
     group:insert(hero[n])

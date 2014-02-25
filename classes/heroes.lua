@@ -154,7 +154,7 @@ function makeHero( newH, oldH )
 end
 
 -- create and use an Hero
-chefB = Hero.create(1000, 1, "images/breakfast.png", "chefB", 0)
+chefB = Hero.create(1000, 1, "images/chefholder.png", "chefB", 0)
 chefDin = Hero.create(1000, 1, "images/dinner.png", "chefDin", 1)
 chefDess = Hero.create(1000, 1, "images/dessert.png", "chefDess", 2)
 --joe = Hero.create(1000, 1, "penguinknight1.png", "joe")
