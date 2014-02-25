@@ -187,7 +187,7 @@ function scene:createHeroes()
 	hero[n]:addEventListener( "touch", ability )
   end
 end  
-]
+
 --CREATING AN ANIMATED OVERLAY TO THE TRANSPARENT PLACEHOLDER IN HEROES.LUA--
 function scene:createBreakfastChef()
 	breakfastspriteSettings =
