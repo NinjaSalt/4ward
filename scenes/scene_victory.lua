@@ -29,6 +29,7 @@ function scene:createScene( event )
   
   timer.pause(attackTimer)
   timer.pause(spawnEneTimer)
+  globals.breakfastanimation:pause()
   if ( antagonistTimer ~= nil) then
 	timer.cancel(antagonistTimer)
   end
