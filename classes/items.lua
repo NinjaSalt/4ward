@@ -39,11 +39,11 @@ function makeItemArray ()
 		nextItem=i
 	end
 	--nextItem=nextItem+1
-	items[nextItem+1]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem, true)
-	items[nextItem+2]= Item.makeItem("Compost","trash", "images/trash_item.png", 1200, nextItem+2, true)
-	items[nextItem+3]= Item.makeItem("Producer Swap","swap", "images/swap.png", 700, nextItem+3, true)
-	items[nextItem+4]= Item.makeItem("Attack Boost","boost", "images/attackboost.png", 800, nextItem+4, true)
-	items[nextItem+5]= Item.makeItem("Chop Food","chop", "images/chop.png", 1000, nextItem+5, true)
+	items[nextItem+1]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem, false)
+	items[nextItem+2]= Item.makeItem("Compost","trash", "images/trash_item.png", 1200, nextItem+2, false)
+	items[nextItem+3]= Item.makeItem("Producer Swap","swap", "images/swap.png", 700, nextItem+3, false)
+	items[nextItem+4]= Item.makeItem("Attack Boost","boost", "images/attackboost.png", 800, nextItem+4, false)
+	items[nextItem+5]= Item.makeItem("Chop Food","chop", "images/chop.png", 1000, nextItem+5, false)
 end
 makeItemArray()
 myItems = {}
