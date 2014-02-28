@@ -118,21 +118,27 @@ local dessertsheetSettings =
   			globals.belts[n] = display.newSprite(breakfastsheet,breakfastsequenceData)
   			--globals.belts[n].x = 278
 			globals.belts[n].y = lane1+20
+			globals.belts[n].id = n
 			globals.belts[n]:setSequence( "breakfast_normal" )
 			globals.belts[n]:play()
+			globals.belts[n]:addEventListener( "touch", ability )
 
 		end
 		if (n==1) then
 			globals.belts[n] = display.newSprite(dinnersheet,dinnersequenceData)
 			globals.belts[n].y = lane2+20
+			globals.belts[n].id = n
 			globals.belts[n]:setSequence( "dinner_normal" )
 			globals.belts[n]:play()
+			globals.belts[n]:addEventListener( "touch", ability )
 		end
 		if (n==2) then
 			globals.belts[n] = display.newSprite(dessertsheet,dessertsequenceData)
 			globals.belts[n].y = lane3+20
+			globals.belts[n].id = n
 			globals.belts[n]:setSequence( "dessert_normal" )
 			globals.belts[n]:play()
+			globals.belts[n]:addEventListener( "touch", ability )
 		end
 		globals.belts[n].x = 278
 		group:insert(globals.belts[n])
@@ -184,7 +190,7 @@ function scene:createHeroes()
     --elseif (n == 3) then hero[n].y = lane4
     end
     hero[n].height = 70; hero[n].width = 70
-	hero[n]:addEventListener( "touch", ability )
+	--hero[n]:addEventListener( "touch", ability )
   end
 end  
 
