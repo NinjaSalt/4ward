@@ -70,7 +70,7 @@ end
   local function onTapBack( event )
     storyboard.hideOverlay( "slideUp", 500 )
     storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
-    timer.resume(attackTimer)
+    --timer.resume(attackTimer)
     timer.resume(spawnEneTimer)
     globals.breakfastanimation:play()
     if ( antagonistTimer ~= nil) then
@@ -79,7 +79,7 @@ end
     for n=0, 2, 1 do
       globals.belts[n]:play()
     end
-    if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
+    if (globals.bullet ~= nil or globals.bullet_array ~= nil) then
       for i=0, #globals.bullet_array, 1 do
         if (globals.bullet_array[i] ~= nil) then
           globals.bullet_array[i]:play()

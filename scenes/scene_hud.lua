@@ -146,7 +146,7 @@ function scene:createScene( event )
 
  local function onTapPause( event )
     storyboard.showOverlay("scenes.scene_pause", {effect = "slideDown", time=500})
-    timer.pause(attackTimer)
+    --timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
     --pausing animation
     globals.breakfastanimation:pause()
@@ -156,7 +156,7 @@ function scene:createScene( event )
     for n=0, 2, 1 do
       globals.belts[n]:pause()
   end
-    if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
+    if (globals.bullet ~= nil or globals.bullet_array ~= nil) then
       for i=0, #globals.bullet_array, 1 do
         if (globals.bullet_array[i] ~= nil) then
           globals.bullet_array[i]:pause()

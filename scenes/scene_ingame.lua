@@ -35,7 +35,7 @@ local breakfastspriteequenceData
 local breakfastanimation
 
 -- Hero Attack Variables
-local bullet_speed = 50 
+--local bullet_speed = 50 
 --local bullet_array = {}   -- Make an array to hold the bullets
 
 local eneAndBar = {}
@@ -50,6 +50,7 @@ require("classes.combo")
 require("classes.items")
 require("classes.recipes")
 require("classes.basics")
+require("classes.servingButtons")
 
 globals.currency = require( "classes.score" )
 require("classes.timeLine")
@@ -177,6 +178,37 @@ local dessertsheetSettings =
 	
 end  
 
+function throwAbility( event )
+	local targetHero = event.target
+	local heroX = event.x
+	local phase = event.phase
+	local stage = display.getCurrentStage()
+	local markY = targetHero.y
+	
+	if event.phase == "began" then
+		stage:setFocus( targetHero, event.id )
+		targetHero.isFocus = true
+		--checks if the touch didn't move from original position. Meaning that it was a tap
+			if (event.x - event.xStart == 0) then
+				--useItem(targetHero)
+				if (globals.attack) then
+					if (targetHero.num == 0) then
+						group:insert(make_bullet_pins(targetHero))
+					elseif (targetHero.num == 1) then
+						group:insert(make_bullet_spatula(targetHero))
+					elseif (targetHero.num == 2) then
+						group:insert(make_bullet_whisk(targetHero))
+					end
+				end
+			end
+	elseif targetHero.isFocus then
+		if "ended" == phase or "cancelled" == phase then
+			stage:setFocus( targetHero, nil )
+			targetHero.isFocus = false
+		end
+	end
+end
+
 -- function to 
 function scene:createHeroes()
   for n=0, 2, 1 do
@@ -190,7 +222,7 @@ function scene:createHeroes()
     --elseif (n == 3) then hero[n].y = lane4
     end
     hero[n].height = 70; hero[n].width = 70
-	--hero[n]:addEventListener( "touch", ability )
+	hero[n]:addEventListener( "touch", throwAbility )
   end
 end  
 
@@ -215,116 +247,9 @@ function scene:createBreakfastChef()
     globals.breakfastanimation.height = 70; globals.breakfastanimation.width = 70
     globals.breakfastanimation:setSequence( "idle" )
 	globals.breakfastanimation:play()
+	--globals.breakfastanimation:addEventListener( "touch", throwAbility )
 	group:insert(globals.breakfastanimation)
 end 
-
--- function to remove the bullet off the array/off screen
-function remove_bullet( bullet )
-  local index = table.indexOf( globals.bullet_array, bullet )
-  transition.cancel( bullet.transition )
-  table.remove( globals.bullet_array, index )
-  display.remove( bullet )
-end 
-
---[[
--- make bullet function
-function make_bullet( hero )
-  local x = hero.x
-  local y = hero.y
-  local attack = hero.attack
-  local bullet = display.newCircle( 0, 0, 5 )
-  --scene.group:insert(bullet)
-  bullet:setFillColor( 0, 0, 0 )
-  bullet.x = x
-  bullet.y = y
-  table.insert( globals.bullet_array, bullet)
-  bullet.attack = attack
-  local bt = x * bullet_speed
-  bullet.transition = transition.to( bullet, {x=500, time=bt, onComplete=remove_bullet, tag="animation"} )
-  return bullet
-end
-]]
--- make bullet function
-function make_bullet_pins( hero )
-	local x = hero.x
-	local y = hero.y
-	local attack = hero.attack
-	local pinsheetSettings ={
-	width = 50,
-	height = 50,
-	numFrames = 14 }
-	local pinsheet = graphics.newImageSheet("images/rollingpicsheet.png",pinsheetSettings)
-	local pinsequenceData = {
-	--higher the time, slower it goes
-	{ name = "normal", start=1, count=14, time=300, loopCount=0 }
-}
-globals.bullet[0] = display.newSprite(pinsheet,pinsequenceData)
-  --scene.group:insert(bullet)
-  globals.bullet[0].x = x
-  globals.bullet[0].y = y
-  table.insert( globals.bullet_array, globals.bullet[0])
-  globals.bullet[0].attack = attack
-  local bt = x * bullet_speed
-  globals.bullet[0]:play()
-  globals.bullet[0].transition = transition.to( globals.bullet[0], {x=455, time=bt, onComplete=remove_bullet, tag="animation"} )
-  return globals.bullet[0]
-end
-
--- make spatula function
-function make_bullet_spatula( hero )
-	local x = hero.x
-	local y = hero.y
-	local attack = hero.attack
-	local spatulasheetSettings =
-	{
-	width = 50,
-	height = 50,
-	numFrames = 8
-}
-local spatulasheet = graphics.newImageSheet("images/spatulasheet.png",spatulasheetSettings)
-local spatulasequenceData = {
-	--higher the time, slower it goes
-	{ name = "normal", start=1, count=8, time=300, loopCount=0 }
-}
-globals.bullet[1] = display.newSprite(spatulasheet,spatulasequenceData)
-	--scene.group:insert(bullet)
-	globals.bullet[1].x = x
-	globals.bullet[1].y = y
-	table.insert( globals.bullet_array, globals.bullet[1])
-	globals.bullet[1].attack = attack
-	local bt = x * bullet_speed
-	globals.bullet[1]:play()
-	globals.bullet[1].transition = transition.to( globals.bullet[1], {x=455, time=bt, onComplete=remove_bullet, tag="animation"} )
-	return globals.bullet[1]
-end
-
--- make spatula function
-function make_bullet_whisk( hero )
-  local x = hero.x
-  local y = hero.y
-  local attack = hero.attack
-    local whisksheetSettings =
-  	{
-  	 width = 50,
-  	 height = 50,
- 	  numFrames = 8
-	}
-	local whisksheet = graphics.newImageSheet("images/whisksheet.png",whisksheetSettings)
-	local whisksequenceData = {
-	--higher the time, slower it goes
-   { name = "normal", start=1, count=8, time=300, loopCount=0 }
-}
-  globals.bullet[2] = display.newSprite(whisksheet,whisksequenceData)
-  --scene.group:insert(bullet)
-  globals.bullet[2].x = x
-  globals.bullet[2].y = y
-  table.insert( globals.bullet_array, globals.bullet[2])
-  globals.bullet[2].attack = attack
-  local bt = x * bullet_speed
-  globals.bullet[2]:play()
-  globals.bullet[2].transition = transition.to( globals.bullet[2], {x=455, time=bt, onComplete=remove_bullet, tag="animation"} )
-  return globals.bullet[2]
-end
 
 function scene:createEne(enemyID)
 	--local eneAndBar = {}
@@ -361,29 +286,6 @@ function scene:createEne(enemyID)
 	eneAndBar[0]=allEne[#allEne]
 	eneAndBar[1]=allEnemHealth[#allEne]
 	return eneAndBar
-end
-
-  -- function to calculate currency based on score
-function currencyCalc( score, currCurrency )
-	local newCurrency = 0
-	counter = 0
-	for i = 0, score, 5 do 
-		counter = counter + 1
-	end
-	newCurrency = currCurrency + counter
-	return newCurrency
-end
-
--- function to calculate score for having the enemy in the correct lane
-function calcLaneScore (ene1)
-	local scoreInt = 0
-        if ((ene1.category == "breakfast" and ene1.y == lane1) or (ene1.category == "dinner" and ene1.y == lane2) or (ene1.category == "dessert" and ene1.y == lane3)) then
-        	scoreInt =  20
-        else
-        	scoreInt = 10
-        end
-		scoreInt = scoreInt * getMultiplier()
-        return scoreInt
 end
 
 function itemCombo( item , enemy, fromFoodItem )
@@ -455,7 +357,8 @@ local function goodText(enemy)
 	if (goodText ~= nil) then
 		goodText.width = enemy.width+20
 		goodText.height = enemy.width+20
-		transition.to( goodText, { time=1000, alpha=0, onComplete=function() goodText:removeSelf() end } )
+		group:insert(goodText)
+		transition.to( goodText, { time=1000, alpha=0, onComplete=function() goodText:removeSelf() end, tag="animation" } )
 	end
 end
 
@@ -465,7 +368,8 @@ local function critText (enemy)
 	if (critText ~= nil) then
 		critText.width = enemy.width+20
 		critText.height = enemy.width+20
-		transition.to( critText, { time=1000, alpha=0, onComplete=function() critText:removeSelf() end } )
+		group:insert(critText)
+		transition.to( critText, { time=1000, alpha=0, onComplete=function() critText:removeSelf() end, tag="animation" } )
 	end
 end
 
@@ -475,7 +379,8 @@ local function badText (enemy)
 	if (badText ~= nil) then
 		badText.width = enemy.width+20
 		badText.height = enemy.width+20
-		transition.to( badText, { time=1000, alpha=0, onComplete=function() badText:removeSelf() end } )
+		group:insert(badText)
+		transition.to( badText, { time=1000, alpha=0, onComplete=function() badText:removeSelf() end, tag="animation" } )
 	end	
 end
 
@@ -536,12 +441,14 @@ local function gameLoop( event )
 
 					if globals.lives <= 0 then
 						endLevel(currentLevel, false)
-						storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+						globals.attack = false
+						storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 
 					end
 					decrementEnemy(currentLevel)
 					if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
 						if(currentLevel.victoryCondition~=false) then
+							globals.attack = false
 							if(currentLevel.victoryCondition.conditionMet==true)then
 								LevelList.unlockLevel(world, thisLevel+1)
 								endLevel(currentLevel, true)
@@ -549,7 +456,7 @@ local function gameLoop( event )
 							else 
 								LevelList.unlockLevel(world, thisLevel+1)
 								endLevel(currentLevel, false)
-								storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+								storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 							end
 						else	
 							LevelList.unlockLevel(world, thisLevel+1)
@@ -578,7 +485,8 @@ local function gameLoop( event )
 						local deathPoof = display.newImage( "images/death.png", allEne[i].x, allEne[i].y, true )
 						deathPoof.width = deathPoof.width/9
 						deathPoof.height = deathPoof.height/9
-						transition.to( deathPoof, { time=1500, alpha=0, onComplete=function() deathPoof:removeSelf() end } )
+						group:insert(deathPoof)
+						transition.to( deathPoof, { time=1500, alpha=0, onComplete=function() deathPoof:removeSelf() end, tag="animation" } )
 						--end visual poof of death.
 						allEne[i]:removeSelf()
 						table.remove(allEne, i)
@@ -586,6 +494,7 @@ local function gameLoop( event )
 						table.remove(allEnemHealth, i)
 						decrementEnemy(currentLevel)
 						if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
+							globals.attack = false
 							if(currentLevel.victoryCondition~=false) then
 								if(currentLevel.victoryCondition.conditionMet==true)then
 									LevelList.unlockLevel(world, thisLevel+1)
@@ -593,7 +502,7 @@ local function gameLoop( event )
 									storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 								else 
 									endLevel(currentLevel, false)
-									storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+									storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 								end
 							else	
 								LevelList.unlockLevel(world, thisLevel+1)
@@ -686,9 +595,31 @@ local function gameLoop( event )
 				end
 			end
 		end
-
+		--CHECKS IF COMBO ENEMIES ARE IN THE CORRECT LANE--
+		for i = 1,table.maxn( allEne ) do
+			if (allEne[i].y == lane1) then
+				if (allEne[i].category == "breakfast") then
+					globals.breakfastServe = true
+					servingButtons()
+					group:insert( globals.breakfastButton )
+					--print("BREAKFAST")
+				end
+			elseif (allEne[i].y == lane2) then
+				if (allEne[i].category == "dinner") then
+					globals.dinnerServe = true
+					--print("DINNER")
+				end
+			elseif (allEne[i].y == lane3) then
+				if (allEne[i].category == "dessert") then
+					globals.dessertServe = true
+					--print("DESSERT")
+				end
+			end
+		end
 	end
 	updateEnemyHealth()
+
+
 
    return true
 end
@@ -696,13 +627,13 @@ end
 
 local function goToIntro(vicCond, id)
 	storyboard.showOverlay("scenes.scene_intro", {effect = "slideDown", time=500, params = {vic= vicCond, levelNumber=id}})
-    timer.pause(attackTimer)
+    --timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
     globals.breakfastanimation:pause()
     for n=0, 2, 1 do
     	globals.belts[n]:pause()
 	end
-	if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
+	if (globals.bullet ~= nil or globals.bullet_array ~= nil) then
       for i=0, #globals.bullet_array, 1 do
         if (globals.bullet_array[i] ~= nil) then
           globals.bullet_array[i]:pause()
@@ -729,6 +660,7 @@ function scene:createScene( event )
     effect = "slideDown",
     time = 500
   }
+  globals.attack = true
 
   --create enemies and add them and their healthbar to the group
   function spawnEne(enemyID)
@@ -736,15 +668,14 @@ function scene:createScene( event )
     group:insert(eneAndBar[0])
 	group:insert(eneAndBar[1])
   end
-  
-  local function createBullet(hero)
-	group:insert(make_bullet(hero))
-  end
-  local function heroNormalAttacks()
-    group:insert(make_bullet_pins(hero[0]))
-	group:insert(make_bullet_spatula(hero[1]))
-	group:insert(make_bullet_whisk(hero[2]))
-   end
+ --  local function createBullet(hero)
+	-- group:insert(make_bullet(hero))
+ --  end
+ --  local function heroNormalAttacks()
+ --    group:insert(make_bullet_pins(hero[0]))
+	-- group:insert(make_bullet_spatula(hero[1]))
+	-- group:insert(make_bullet_whisk(hero[2]))
+ --   end
   local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert(bkg)
@@ -794,7 +725,7 @@ else
   startLevel(currentLevel)
   
 	-- parameters for ---------------------> make_bullet (x,y, hero attack)
-	attackTimer = timer.performWithDelay( 2000, heroNormalAttacks, 0)
+	--attackTimer = timer.performWithDelay( 2000, heroNormalAttacks, 0)
 	--Runtime:addEventListener( "enterFrame", updateEnemyHealth )
 	Runtime:addEventListener( "enterFrame", gameLoop )
 
@@ -823,11 +754,16 @@ function scene:exitScene( event )
   globals.currency.save()
   Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )
-  timer.cancel(attackTimer)
+  --timer.cancel(attackTimer)
   timer.cancel(spawnEneTimer)
   if ( antagonistTimer ~= nil) then
 	timer.cancel(antagonistTimer)
   end
+  	for j = 0,table.maxn( globals.bullet_array  ) do
+		if globals.bullet_array[j] ~= nil then
+			globals.bullet_array[j]:removeSelf()
+		end
+	end
 end
  
 -- Called AFTER scene has finished moving offscreen:

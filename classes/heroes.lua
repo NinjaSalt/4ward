@@ -1,5 +1,6 @@
 require("classes.items")
 local globals = require("classes.globals" )
+local bullet_speed = 50 
 Hero = {}
 Hero.__index = Hero
 
@@ -20,6 +21,94 @@ end
 
 function Hero:changeItem( item )
    self.item = item
+end
+
+function remove_bullet( bullet )
+  local index = table.indexOf( globals.bullet_array, bullet )
+  transition.cancel( bullet.transition )
+  table.remove( globals.bullet_array, index )
+  display.remove( bullet )
+end 
+
+function make_bullet_pins( hero )
+	local x = hero.x
+	local y = hero.y
+	local attack = hero.attack
+	local pinsheetSettings ={
+	width = 50,
+	height = 50,
+	numFrames = 14 }
+	local pinsheet = graphics.newImageSheet("images/rollingpicsheet.png",pinsheetSettings)
+	local pinsequenceData = {
+	--higher the time, slower it goes
+	{ name = "normal", start=1, count=14, time=300, loopCount=0 }
+}
+globals.bullet[0] = display.newSprite(pinsheet,pinsequenceData)
+  --scene.group:insert(bullet)
+  globals.bullet[0].x = x
+  globals.bullet[0].y = y
+  table.insert( globals.bullet_array, globals.bullet[0])
+  globals.bullet[0].attack = attack
+  local bt = x * bullet_speed
+  globals.bullet[0]:play()
+  globals.bullet[0].transition = transition.to( globals.bullet[0], {x=455, time=bt, onComplete=remove_bullet, tag="animation"} )
+  return globals.bullet[0]
+end
+
+-- make spatula function
+function make_bullet_spatula( hero )
+	local x = hero.x
+	local y = hero.y
+	local attack = hero.attack
+	local spatulasheetSettings =
+	{
+	width = 50,
+	height = 50,
+	numFrames = 8
+}
+local spatulasheet = graphics.newImageSheet("images/spatulasheet.png",spatulasheetSettings)
+local spatulasequenceData = {
+	--higher the time, slower it goes
+	{ name = "normal", start=1, count=8, time=300, loopCount=0 }
+}
+globals.bullet[1] = display.newSprite(spatulasheet,spatulasequenceData)
+	--scene.group:insert(bullet)
+	globals.bullet[1].x = x
+	globals.bullet[1].y = y
+	table.insert( globals.bullet_array, globals.bullet[1])
+	globals.bullet[1].attack = attack
+	local bt = x * bullet_speed
+	globals.bullet[1]:play()
+	globals.bullet[1].transition = transition.to( globals.bullet[1], {x=455, time=bt, onComplete=remove_bullet, tag="animation"} )
+	return globals.bullet[1]
+end
+
+-- make spatula function
+function make_bullet_whisk( hero )
+  local x = hero.x
+  local y = hero.y
+  local attack = hero.attack
+    local whisksheetSettings =
+  	{
+  	 width = 50,
+  	 height = 50,
+ 	  numFrames = 8
+	}
+	local whisksheet = graphics.newImageSheet("images/whisksheet.png",whisksheetSettings)
+	local whisksequenceData = {
+	--higher the time, slower it goes
+   { name = "normal", start=1, count=8, time=300, loopCount=0 }
+}
+  globals.bullet[2] = display.newSprite(whisksheet,whisksequenceData)
+  --scene.group:insert(bullet)
+  globals.bullet[2].x = x
+  globals.bullet[2].y = y
+  table.insert( globals.bullet_array, globals.bullet[2])
+  globals.bullet[2].attack = attack
+  local bt = x * bullet_speed
+  globals.bullet[2]:play()
+  globals.bullet[2].transition = transition.to( globals.bullet[2], {x=455, time=bt, onComplete=remove_bullet, tag="animation"} )
+  return globals.bullet[2]
 end
 
 function ability( event )
@@ -139,7 +228,7 @@ function ability( event )
 				end
 			--checks if the touch didn't move from original position. Meaning that it was a tap
 			elseif (event.x - event.xStart == 0) then
-				useItem(targetHero)
+				--useItem(targetHero)
 			end
 		end
 	end
@@ -153,7 +242,6 @@ function makeHero( newH, oldH )
 	newH.class = oldH.class
 	newH.abilityUsed = oldH.abilityUsed
 	newH.laneSpeed = oldH.laneSpeed
-	newH.timer = oldH.timer
 	newH.item = oldH.item
 	newH.num = oldH.num
 	return newH

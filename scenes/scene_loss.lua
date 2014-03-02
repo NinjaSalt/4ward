@@ -24,8 +24,9 @@ function scene:createScene( event )
   nextLevel = params.level
   nextWorld = params.world
   
-  timer.pause(attackTimer)
+  --timer.pause(attackTimer)
   timer.pause(spawnEneTimer)
+  globals.breakfastanimation:pause()
   if ( antagonistTimer ~= nil) then
 	timer.cancel(antagonistTimer)
   end

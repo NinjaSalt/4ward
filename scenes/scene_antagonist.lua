@@ -32,13 +32,13 @@ function scene:createScene( event )
   
   if (antagonistAbility~=4) then
 	globals.notDurningAntagonist = false
-		timer.pause(attackTimer)
+		--timer.pause(attackTimer)
 		timer.pause(spawnEneTimer)
     globals.breakfastanimation:pause()
 		for n=0, 2, 1 do
 			globals.belts[n]:pause()
 		end
-	  if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
+	  if (globals.bullet ~= nil or globals.bullet_array ~= nil) then
 		  for i=0, #globals.bullet_array, 1 do
 			if (globals.bullet_array[i] ~= nil) then
 			  globals.bullet_array[i]:pause()
@@ -214,13 +214,13 @@ end
 -- Called AFTER scene has finished moving offscreen:
 function scene:didExitScene( event )
   local group = self.view
-  timer.resume(attackTimer)
+  --timer.resume(attackTimer)
   timer.resume(spawnEneTimer)
   globals.breakfastanimation:play()
   for n=0, 2, 1 do
       globals.belts[n]:play()
   end
-  if (globals.bullet ~= nil and globals.bullet_array ~= nil) then
+  if (globals.bullet ~= nil or globals.bullet_array ~= nil) then
       for i=0, #globals.bullet_array, 1 do
         if (globals.bullet_array[i] ~= nil) then
           globals.bullet_array[i]:play()

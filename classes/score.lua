@@ -105,4 +105,27 @@ function getMultiplier()
 	return M.multiplier
 end
 
+  -- function to calculate currency based on score
+function currencyCalc( score, currCurrency )
+	local newCurrency = 0
+	counter = 0
+	for i = 0, score, 5 do 
+		counter = counter + 1
+	end
+	newCurrency = currCurrency + counter
+	return newCurrency
+end
+
+-- function to calculate score for having the enemy in the correct lane
+function calcLaneScore (ene1)
+	local scoreInt = 0
+        if ((ene1.category == "breakfast" and ene1.y == lane1) or (ene1.category == "dinner" and ene1.y == lane2) or (ene1.category == "dessert" and ene1.y == lane3)) then
+        	scoreInt =  20
+        else
+        	scoreInt = 10
+        end
+		scoreInt = scoreInt * getMultiplier()
+        return scoreInt
+end
+
 return M
