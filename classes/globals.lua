@@ -60,6 +60,8 @@ globals.breakfastServe = false
 globals.dinnerServe = false
 globals.dessertServe = false
 
+--HOLD--
+globals.hold = nil
 
 
 return globals

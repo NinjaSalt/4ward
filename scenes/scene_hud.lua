@@ -143,6 +143,29 @@ function scene:createScene( event )
     end
     itemSpace = itemSpace+50
   end
+  
+  --Hold
+  
+  function makeHold(eneInHold)
+	if(globals.hold ~= nil) then globals.hold:removeSelf() end
+	local image
+	for n = 0,table.maxn( myEnemies ) do
+		if( myEnemies[n].type == eneInHold )then
+			image = myEnemies[n].image
+		end
+	end
+	for n = 0,table.maxn( comboEnemies ) do
+		if( comboEnemies[n].type == eneInHold )then
+			image = comboEnemies[n].image
+		end
+	end
+	  globals.hold = display.newImage(image)
+	  globals.hold.width = 25
+	  globals.hold.height = 25
+	  globals.hold.x = 100
+	  globals.hold.y = 20
+	  group:insert(globals.hold)
+  end
 
  local function onTapPause( event )
     storyboard.showOverlay("scenes.scene_pause", {effect = "slideDown", time=500})

@@ -8,6 +8,7 @@ local globals = require("classes.globals")
 local scene = storyboard.newScene()
 local thisLevel 
 local world
+local enemyInHold = nil
 -- Array to store heroes
 hero = {}
 
@@ -265,6 +266,28 @@ function moveToHold( event )
 	allEnemHealth[eneIndex]:removeSelf()
 	table.remove(allEnemHealth, eneIndex)
 	decrementEnemy(currentLevel)
+	local eneToMake
+	local isCombo = false
+	if ( eneInHold ~= nil ) then
+		print ( eneInHold )
+		for n = 0,table.maxn( myEnemies ) do
+			if( myEnemies[n].type == eneInHold )then
+				eneToMake = n
+			end
+		end
+		for n = 0,table.maxn( comboEnemies ) do
+			if( comboEnemies[n].type == eneInHold )then
+				eneToMake = n
+				isCombo = true
+			end
+		end
+		incrementEnemy(currentLevel)
+		eneAndBar = scene:createEne(eneToMake, isCombo)
+		group:insert(eneAndBar[0])
+		group:insert(eneAndBar[1])
+	end
+	eneInHold = enemyTapped.type
+	makeHold(eneInHold)
 	if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
 		if(currentLevel.victoryCondition~=false) then
 			if(currentLevel.victoryCondition.conditionMet==true)then
@@ -284,7 +307,7 @@ function moveToHold( event )
 
 end
 
-function scene:createEne(enemyID)
+function scene:createEne(enemyID, isCombo)
 	--local eneAndBar = {}
 	local lane = lane1
 	--set the lane it will spawn in
@@ -293,11 +316,15 @@ function scene:createEne(enemyID)
 	elseif (randomPos == 2) then lane = lane2
 	elseif (randomPos == 3) then lane = lane3
 	end
-
-	-- check to unlock basic enemies:
-	unlockBasicCheck(enemyID)
-	--local randomEne = math.random(0, 1)
-	allEne[#allEne + 1] = myEnemies[enemyID]
+	
+	if ( isCombo == false ) then
+		-- check to unlock basic enemies:
+		unlockBasicCheck(enemyID)
+		--local randomEne = math.random(0, 1)
+		allEne[#allEne + 1] = myEnemies[enemyID]
+	else 
+		allEne[#allEne + 1] = comboEnemies[enemyID]
+	end
 	allEne[#allEne] = display.newImage(allEne[#allEne].image)
 	allEne[#allEne] = passValuesToNewEne(allEne[#allEne], myEnemies[enemyID])
 
@@ -691,7 +718,9 @@ function scene:createScene( event )
   local params = event.params
   thisLevel = params.level
   world = params.world
-
+  
+  globals.hold = nil
+  
   local options = {
     effect = "slideDown",
     time = 500
@@ -700,7 +729,7 @@ function scene:createScene( event )
 
   --create enemies and add them and their healthbar to the group
   function spawnEne(enemyID)
-  	eneAndBar = scene:createEne(enemyID)
+  	eneAndBar = scene:createEne(enemyID, false)
     group:insert(eneAndBar[0])
 	group:insert(eneAndBar[1])
   end
