@@ -34,10 +34,11 @@ local breakfastspriteSettings
 local breakfastspritesheet
 local breakfastspriteequenceData
 local breakfastanimation
-
--- Hero Attack Variables
---local bullet_speed = 50 
---local bullet_array = {}   -- Make an array to hold the bullets
+--text locals
+local good_Text
+local crit_Text
+local bad_Text
+local deathPoof
 
 local eneAndBar = {}
 local group 
@@ -415,34 +416,61 @@ end
 
 --function to call displaying "GOOD" text for enemy damage feedback
 local function goodText(enemy) 
-	local goodText = display.newImage( "images/good_text.png", enemy.x-10, enemy.y, true )
-	if (goodText ~= nil) then
-		goodText.width = enemy.width+20
-		goodText.height = enemy.width+20
-		group:insert(goodText)
-		transition.to( goodText, { time=1000, alpha=0, onComplete=function() goodText:removeSelf() end, tag="animation" } )
+	good_Text = display.newImage( "images/good_text.png", enemy.x-10, enemy.y, true )
+	if (good_Text ~= nil) then
+		good_Text.width = enemy.width+20
+		good_Text.height = enemy.width+20
+		group:insert(good_Text)
+		table.insert( globals.goodTextArray, good_Text)
+		transition.to( good_Text, { time=1000, alpha=0, onComplete=
+		function() 
+			if (good_Text~= nil) then 
+				local index = table.indexOf( globals.goodTextArray, good_text )
+				--good_Text:removeSelf() 
+				table.remove( globals.goodTextArray, index )
+			end 
+		end, 
+		tag="animation" } )
 	end
 end
 
 --function to call displaying "CRITICAL" text for enemy damage feedback
 local function critText (enemy)
-	local critText = display.newImage( "images/critical_text.png", enemy.x-10, enemy.y, true )
-	if (critText ~= nil) then
-		critText.width = enemy.width+20
-		critText.height = enemy.width+20
-		group:insert(critText)
-		transition.to( critText, { time=1000, alpha=0, onComplete=function() critText:removeSelf() end, tag="animation" } )
+	crit_Text = display.newImage( "images/critical_text.png", enemy.x-10, enemy.y, true )
+	if (crit_Text ~= nil) then
+		crit_Text.width = enemy.width+20
+		crit_Text.height = enemy.width+20
+		group:insert(crit_Text)
+		table.insert( globals.critTextArray, crit_Text)
+		transition.to( crit_Text, { time=1000, alpha=0, onComplete=
+		function() 
+			if (crit_Text~= nil) then 
+				local index = table.indexOf( globals.critTextArray, crit_text )
+				--good_Text:removeSelf() 
+				table.remove( globals.critTextArray, index )
+			end 
+		end, 
+		tag="animation" } )
 	end
 end
 
 --function to call displaying "OKAY" text for enemy damage feedback
 local function badText (enemy)
-	local badText = display.newImage( "images/bad_text.png", enemy.x-10, enemy.y, true )
-	if (badText ~= nil) then
-		badText.width = enemy.width+20
-		badText.height = enemy.width+20
-		group:insert(badText)
-		transition.to( badText, { time=1000, alpha=0, onComplete=function() badText:removeSelf() end, tag="animation" } )
+	bad_Text = display.newImage( "images/bad_text.png", enemy.x-10, enemy.y, true )
+	if (bad_Text ~= nil) then
+		bad_Text.width = enemy.width+20
+		bad_Text.height = enemy.width+20
+		group:insert(bad_Text)
+		table.insert( globals.badTextArray, bad_Text)
+		transition.to( bad_Text, { time=1000, alpha=0, onComplete=
+		function() 
+			if (bad_Text~= nil) then 
+				local index = table.indexOf( globals.badTextArray, bad_text )
+				--good_Text:removeSelf() 
+				table.remove( globals.badTextArray, index )
+			end 
+		end, 
+		tag="animation" } )
 	end	
 end
 
@@ -544,11 +572,20 @@ local function gameLoop( event )
 						globals.score = globals.score + allEne[i].pointValue + calcLaneScore(allEne[i])
 						globals.scoreText.text = (globals.score)
 						-- add visual poof of death.
-						local deathPoof = display.newImage( "images/death.png", allEne[i].x, allEne[i].y, true )
+						deathPoof = display.newImage( "images/death.png", allEne[i].x, allEne[i].y, true )
 						deathPoof.width = deathPoof.width/9
 						deathPoof.height = deathPoof.height/9
 						group:insert(deathPoof)
-						transition.to( deathPoof, { time=1500, alpha=0, onComplete=function() deathPoof:removeSelf() end, tag="animation" } )
+						table.insert( globals.deathPoofArray, deathPoof)
+						transition.to( deathPoof, { time=1000, alpha=0, onComplete=
+							function() 
+								if (deathPoof~= nil) then 
+									local index = table.indexOf( globals.deathPoofArray, deathPoof )
+									--good_Text:removeSelf() 
+									table.remove( globals.deathPoofArray, index )
+								end 
+							end, 
+							tag="animation" } )
 						--end visual poof of death.
 						allEne[i]:removeSelf()
 						table.remove(allEne, i)
@@ -829,6 +866,10 @@ function scene:exitScene( event )
 			globals.bullet_array[j]:removeSelf()
 		end
 	end
+	good_Text = nil
+  crit_Text = nil
+  bad_Text = nil
+  deathPoof = nil
 end
  
 -- Called AFTER scene has finished moving offscreen:

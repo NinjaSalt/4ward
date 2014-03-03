@@ -63,5 +63,12 @@ globals.dessertServe = false
 --HOLD--
 globals.hold = nil
 
+-- IN GME VISUALS --
+globals.goodTextArray = {}
+globals.critTextArray = {}
+globals.badTextArray = {}
+globals.deathPoofArray = {}
+
+
 
 return globals
