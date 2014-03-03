@@ -251,6 +251,39 @@ function scene:createBreakfastChef()
 	group:insert(globals.breakfastanimation)
 end 
 
+function moveToHold( event )
+	local enemyTapped = event.target
+	local eneIndex
+	for i = 0,table.maxn( allEne ) do
+		if ( allEne[i] == enemyTapped ) then
+			eneIndex = i
+		end
+	end
+	print("HIIIII")
+	allEne[eneIndex]:removeSelf()
+	table.remove(allEne, eneIndex)
+	allEnemHealth[eneIndex]:removeSelf()
+	table.remove(allEnemHealth, eneIndex)
+	decrementEnemy(currentLevel)
+	if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
+		if(currentLevel.victoryCondition~=false) then
+			if(currentLevel.victoryCondition.conditionMet==true)then
+				LevelList.unlockLevel(world, thisLevel+1)
+				endLevel(currentLevel, true)
+				storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+			else 
+				endLevel(currentLevel, false)
+				storyboard.gotoScene( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+			end
+		else	
+		LevelList.unlockLevel(world, thisLevel+1)
+		endLevel(currentLevel, true)
+		storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+		end
+	end
+
+end
+
 function scene:createEne(enemyID)
 	--local eneAndBar = {}
 	local lane = lane1
@@ -283,6 +316,7 @@ function scene:createEne(enemyID)
 	--set the move speedallEne
 	transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50) ,tag="animation"}  )
 	allEne[#allEne]:addEventListener( "touch", teleport ) 
+	allEne[#allEne]:addEventListener( "tap", moveToHold ) 
 	eneAndBar[0]=allEne[#allEne]
 	eneAndBar[1]=allEnemHealth[#allEne]
 	return eneAndBar
@@ -333,6 +367,7 @@ function itemCombo( item , enemy, fromFoodItem )
 			--set the move speedallEne
 			transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50), tag="animation" } )
 			allEne[#allEne]:addEventListener( "touch", teleport ) 
+			allEne[#allEne]:addEventListener( "tap", moveToHold )
 			eneAndBar[0]=allEne[#allEne]
 			eneAndBar[1]=allEnemHealth[#allEne]
 			group:insert(eneAndBar[0])
@@ -564,6 +599,7 @@ local function gameLoop( event )
 							--set the move speedallEne
 							transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50), tag="animation" } )
 							allEne[#allEne]:addEventListener( "touch", teleport ) 
+							allEne[#allEne]:addEventListener( "tap", moveToHold )
 							eneAndBar[0]=allEne[#allEne]
 							eneAndBar[1]=allEnemHealth[#allEne]
 							group:insert(eneAndBar[0])
