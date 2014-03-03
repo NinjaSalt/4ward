@@ -6,8 +6,8 @@ settings = {
 		{
 			"landscapeLeft"
 		},
-	}
-}
+	},	
+
 
    iphone =
     {
@@ -20,4 +20,5 @@ settings = {
             },
             UIApplicationExitsOnSuspend = true
         },
-    }
+    },
+}
