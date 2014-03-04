@@ -504,6 +504,27 @@ local function textCheck(enemy, bullet)
 
 end
 
+
+function checkEnemy()
+if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
+    globals.attack = false
+    if(currentLevel.victoryCondition~=false) then
+      if(currentLevel.victoryCondition.conditionMet==true)then
+        LevelList.unlockLevel(world, thisLevel+1)
+        endLevel(currentLevel, true)
+        storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+      else 
+        endLevel(currentLevel, false)
+        storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+      end
+    else  
+      LevelList.unlockLevel(world, thisLevel+1)
+      endLevel(currentLevel, true)
+      storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+    end
+  end
+end
+
 local function gameLoop( event )
 	globals.multiplier = getMultiplier()
 	globals.multiplierText.text = (globals.multiplier)
@@ -536,24 +557,7 @@ local function gameLoop( event )
 
 					end
 					decrementEnemy(currentLevel)
-					if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
-						if(currentLevel.victoryCondition~=false) then
-							globals.attack = false
-							if(currentLevel.victoryCondition.conditionMet==true)then
-								LevelList.unlockLevel(world, thisLevel+1)
-								endLevel(currentLevel, true)
-								storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-							else 
-								LevelList.unlockLevel(world, thisLevel+1)
-								endLevel(currentLevel, false)
-								storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-							end
-						else	
-							LevelList.unlockLevel(world, thisLevel+1)
-							endLevel(currentLevel, true)
-							storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-						end
-					end
+					checkEnemy()
 				end
 			end
 		end
@@ -592,23 +596,7 @@ local function gameLoop( event )
 						allEnemHealth[i]:removeSelf()
 						table.remove(allEnemHealth, i)
 						decrementEnemy(currentLevel)
-						if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
-							globals.attack = false
-							if(currentLevel.victoryCondition~=false) then
-								if(currentLevel.victoryCondition.conditionMet==true)then
-									LevelList.unlockLevel(world, thisLevel+1)
-									endLevel(currentLevel, true)
-									storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-								else 
-									endLevel(currentLevel, false)
-									storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-								end
-							else	
-								LevelList.unlockLevel(world, thisLevel+1)
-								endLevel(currentLevel, true)
-								storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-							end
-						end
+						checkEnemy()
 					end
 					remove_bullet(globals.bullet_array[n])
 				end
@@ -702,16 +690,23 @@ local function gameLoop( event )
 					globals.breakfastServe = true
 					servingButtons()
 					group:insert( globals.breakfastButton )
+					checkEnemy()
 					--print("BREAKFAST")
 				end
 			elseif (allEne[i].y == lane2) then
 				if (allEne[i].category == "dinner") then
 					globals.dinnerServe = true
+					servingButtons()
+					group:insert( globals.dinnerButton )
+					checkEnemy()
 					--print("DINNER")
 				end
 			elseif (allEne[i].y == lane3) then
 				if (allEne[i].category == "dessert") then
 					globals.dessertServe = true
+					servingButtons()
+					group:insert( globals.dessertButton )
+					checkEnemy()
 					--print("DESSERT")
 				end
 			end
