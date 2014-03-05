@@ -28,7 +28,7 @@ function scene:createScene( event )
 
   local function onTapBack( event )
     storyboard.removeScene( scene )
-    storyboard.showOverlay( "scenes.scene_worldmap1",{ effect = "slideLeft", time = 500})
+    storyboard.gotoScene( "scenes.scene_worldmap1",{ effect = "slideLeft", time = 500})
   end
 
   backButton:addEventListener("tap",onTapBack)
