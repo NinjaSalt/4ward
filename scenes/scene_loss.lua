@@ -7,6 +7,7 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local nextLevel 
 local nextWorld
+local conditionsNotMet
 local globals = require ("classes.globals")
 -- Clear previous scene
 storyboard.removeAll()
@@ -23,6 +24,7 @@ function scene:createScene( event )
   local params = event.params
   nextLevel = params.level
   nextWorld = params.world
+  conditionsNotMet = params.condition
   
   --timer.pause(attackTimer)
   timer.pause(spawnEneTimer)
@@ -62,26 +64,34 @@ function scene:createScene( event )
   
   group:insert( gameTitle )
   
-  local scoreTitle = display.newText( "Unable to meet the objective...", 0, 0, globals.IMPRIMA, 36 )
-  scoreTitle:setFillColor(black)
-  scoreTitle.x = display.contentCenterX
-  scoreTitle.y = gameTitle.y + 50
+  if conditionsNotMet == true then
+	local scoreTitle = display.newText( "Unable to meet the objective...", 0, 0, globals.IMPRIMA, 24 )
+	scoreTitle:setFillColor(black)
+	scoreTitle.x = display.contentCenterX
+	scoreTitle.y = gameTitle.y + 50
+    group:insert( scoreTitle )
+  end
  
-  group:insert( scoreTitle )
  
   local replayButton = display.newText( "Replay", 0, 0, globals.IMPRIMA, 24 )
   replayButton:setFillColor(black)
-  replayButton.x = display.contentCenterX
-  replayButton.y = scoreTitle.y + 50
+  replayButton.x = display.contentWidth * 1.5
+  replayButton.y = gameTitle.y + 100
 
   group:insert( replayButton)
   
   local mapButton = display.newText( "Map", 0, 0, globals.IMPRIMA, 24 )
   mapButton:setFillColor(black)
-  mapButton.x = display.contentCenterX
+  mapButton.x = display.contentWidth * 1.5
   mapButton.y = replayButton.y + 50
 
   group:insert( mapButton)
+  
+  
+  
+  timer.performWithDelay(200, function() transition.to(replayButton, {time = 400, x= display.contentWidth/2}) end)
+  timer.performWithDelay(500, function() transition.to(mapButton, {time = 400, x= display.contentWidth/2}) end)
+
 
   local function onTapReplay( event )
     storyboard.removeScene( scene )

@@ -297,7 +297,7 @@ function moveToHold( event )
 				storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 			else 
 				endLevel(currentLevel, false)
-				storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+				storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world, condition = true}})
 			end
 		else	
 		LevelList.unlockLevel(world, thisLevel+1)
@@ -515,7 +515,7 @@ if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
         storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
       else 
         endLevel(currentLevel, false)
-        storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+        storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world, condition = true}})
       end
     else  
       LevelList.unlockLevel(world, thisLevel+1)

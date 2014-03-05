@@ -81,14 +81,14 @@ function scene:createScene( event )
   if nextLevel == LevelList.getNumOfLevels(params.world) then
  nextWorldButton = display.newText( "Next World", 0, 0, globals.IMPRIMA, 24 )
   nextWorldButton:setFillColor(black)
-  nextWorldButton.x = display.contentCenterX
+  nextWorldButton.x = display.contentWidth * 1.5
   nextWorldButton.y = scoreTitle.y + 40
   group:insert( nextWorldButton)
  
  else
  nextLevelButton = display.newText( "Next Level", 0, 0, globals.IMPRIMA, 24 )
   nextLevelButton:setFillColor(black)
-  nextLevelButton.x = display.contentCenterX
+  nextLevelButton.x = display.contentWidth * 1.5
   nextLevelButton.y = scoreTitle.y + 40
 
   group:insert( nextLevelButton)
@@ -97,17 +97,26 @@ function scene:createScene( event )
  
   local replayButton = display.newText( "Replay", 0, 0, globals.IMPRIMA, 24 )
   replayButton:setFillColor(black)
-  replayButton.x = display.contentCenterX
+  replayButton.x = display.contentWidth * 1.5
   replayButton.y = scoreTitle.y + 80
 
   group:insert( replayButton)
   
   local mapButton = display.newText( "Map", 0, 0, globals.IMPRIMA, 24 )
   mapButton:setFillColor(black)
-  mapButton.x = display.contentCenterX
+  mapButton.x = display.contentWidth * 1.5
   mapButton.y = replayButton.y + 40
 
   group:insert( mapButton)
+  
+  if nextLevel == LevelList.getNumOfLevels(params.world) then
+	timer.performWithDelay(200, function() transition.to(nextWorldButton, {time = 400, x= display.contentWidth/2}) end)
+  else
+    timer.performWithDelay(200, function() transition.to(nextLevelButton, {time = 400, x= display.contentWidth/2}) end)
+  end
+  timer.performWithDelay(400, function() transition.to(replayButton, {time = 400, x= display.contentWidth/2}) end)
+  timer.performWithDelay(600, function() transition.to(mapButton, {time = 400, x= display.contentWidth/2}) end)
+  
   
   local function onTapNextLevel( event )
     storyboard.removeScene( scene )
