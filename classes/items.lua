@@ -13,7 +13,7 @@ local startX = nil
 local startY = nil
 
 
-function Item.makeItem(name, itemType, image, cost, id, unlocked)
+function Item.makeItem(name, itemType, image, cost, id, unlocked, description, toUse, lockLevel)
 	local item = {}             -- our new object
 	setmetatable(item,Item)
 	item.name = name
@@ -22,6 +22,9 @@ function Item.makeItem(name, itemType, image, cost, id, unlocked)
 	item.cost = cost
 	item.id = id
 	item.unlocked = unlocked
+	item.description = description
+	item.toUse = toUse
+	item.lockLevel = lockLevel
 	return item
 end
 
@@ -36,14 +39,17 @@ function makeItemArray ()
 		items[i].id = i
 		items[i].foodId = i-1
 		items[i].unlocked = true
+		items[i].description = "A basic ingredient."
+		items[i].toUse = "Drag to another food on the belt."
+		items[i].lockLevel = 0
 		nextItem=i
 	end
 	--nextItem=nextItem+1
-	items[nextItem+1]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem, false)
-	items[nextItem+2]= Item.makeItem("Compost","trash", "images/trash_item.png", 1200, nextItem+2, false)
-	items[nextItem+3]= Item.makeItem("Producer Swap","swap", "images/swap.png", 700, nextItem+3, false)
-	items[nextItem+4]= Item.makeItem("Attack Boost","boost", "images/attackboost.png", 800, nextItem+4, false)
-	items[nextItem+5]= Item.makeItem("Chop Food","chop", "images/chop.png", 1000, nextItem+5, false)
+	items[nextItem+1]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem, false, "Pauses the game.", "Click to activate.", 4)
+	items[nextItem+2]= Item.makeItem("Compost","trash", "images/trash_item.png", 1200, nextItem+2, false, "Deletes an item on the belt.", "Drag to unwanted item.",4)
+	items[nextItem+3]= Item.makeItem("Producer Swap","swap", "images/swap.png", 700, nextItem+3, false, "Does producer swappy stuff.", "Click to activate.",4)
+	items[nextItem+4]= Item.makeItem("Attack Boost","boost", "images/attackboost.png", 800, nextItem+4, false, "Boosts your attack for 5 seconds.", "Click to activate.",4)
+	items[nextItem+5]= Item.makeItem("Chop Food","chop", "images/chop.png", 1000, nextItem+5, false, "Deal additional damge.", "Click to activate, then slash the enemies.",4)
 end
 makeItemArray()
 myItems = {}
