@@ -8,6 +8,7 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local itemToGive
 local notTouched = true
+local globals= require("classes.globals") 
  
 require("classes.items")
 require("classes.heroes")
@@ -37,9 +38,31 @@ function scene:createScene( event )
   bkg:addEventListener("touch", function() return true end)
   bkg:addEventListener("tap", function() return true end)
 
+  local menuBorder = display.newRect( display.contentWidth/2, display.contentHeight/2, 260, 260)
+  menuBorder:setFillColor(0)
+  group:insert(menuBorder)
+
   local menuBack = display.newRect( display.contentWidth/2, display.contentHeight/2, 250, 250)
+  menuBack: setFillColor( 0.980392, 0.921569, 0.843137 )
   group:insert (menuBack) 
   
+  local whichText = display.newText("Choose an item slot:", display.contentWidth/2, 55, globals.LOBSTERTWO, 20)
+  whichText:setFillColor( 0 )
+  group:insert(whichText)
+
+
+  local function cancel(event)
+    storyboard.removeScene( scene )
+    storyboard.hideOverlay( "slideUp", 500 )
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
+  end
+
+  local goBack = display.newText("Cancel", display.contentWidth/2, 265, globals.LOBSTERTWO, 20)
+  goBack:setFillColor( 0 )
+  goBack:addEventListener( "tap", cancel )
+  group:insert(goBack)
+
+
   local function giveItem1( event )
   	if (notTouched) then
   		print( "give 1")
