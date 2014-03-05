@@ -35,8 +35,12 @@ function scene:createScene( event )
     storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id, world = 2}})
   end
   
+  levelList[1] = display.newText( "Step 1: ", 0, 0, globals.IMPRIMA, 24 )
+  levelList[2] = display.newText( "Step 2: ", 0, 0, globals.IMPRIMA, 24 )
+  levelList[3] = display.newText( "Step 3: ", 0, 0, globals.IMPRIMA, 24 )
+  levelList[4] = display.newText( "Step 4: ", 0, 0, globals.IMPRIMA, 24 )
+
   for i = 1, LevelList.getNumOfLevels(2), 1 do
-	levelList[i] = display.newText( "Level "..i, 0, 0, globals.IMPRIMA, 18 )
 	if LevelList.isLevelUnlocked(2,i) == true then
 		levelList[i]:setFillColor(black)
 		levelList[i]:addEventListener( "tap", onTapLevel )

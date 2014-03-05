@@ -26,19 +26,30 @@ function scene:createScene( event )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-  local mapTitle = display.newText( "World One", 0, 0, globals.LOBSTERTWO, 48 )
+  local mapTitle = display.newText( "Challenge 1:", 0, 0, globals.LOBSTERTWO, 48 )
   mapTitle:setFillColor(black)
   mapTitle.x = display.contentCenterX
-  mapTitle.y = 50
+  mapTitle.y = 40
   group:insert( mapTitle )
+
+  local mapTitle2 = display.newText( "The Basics", 0, 0, globals.IMPRIMA, 18 )
+  mapTitle2:setFillColor(black)
+  mapTitle2.x = display.contentCenterX
+  mapTitle2.y = 80
+  group:insert( mapTitle2 )
  
   local function onTapLevel( event )
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id, world = 1}})
   end
   
+  -- LEVEL NAMES --    
+  levelList[1] = display.newText( "Step 1: Can you... Cook?", 0, 0, globals.IMPRIMA, 24 )
+  levelList[2] = display.newText( "Step 2: Cake and Bake", 0, 0, globals.IMPRIMA, 24 )
+  levelList[3] = display.newText( "Step 3: Food Suprise", 0, 0, globals.IMPRIMA, 24 )
+  levelList[4] = display.newText( "Step 4: Certified Chef", 0, 0, globals.IMPRIMA, 24 )
+
   for i = 1, LevelList.getNumOfLevels(1), 1 do
-	levelList[i] = display.newText( "Level "..i, 0, 0, globals.IMPRIMA, 24 )
 	if LevelList.isLevelUnlocked(1,i) == true then
 		levelList[i]:setFillColor(black)
 		levelList[i]:addEventListener( "tap", onTapLevel )
