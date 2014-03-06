@@ -159,7 +159,7 @@ function scene:createScene( event )
 
 
   	-- description for locked:
-  	desc = display.newText(body.description, display.contentWidth/4, 200, globals.IMPRIMA, 16)
+  	desc = display.newText(body.description, display.contentWidth/4, 200, globals.IMPRIMA, 12)
   	desc:setFillColor(0)
   	group:insert(desc)
 
@@ -169,7 +169,7 @@ function scene:createScene( event )
   	group:insert(toUseText)
 
   	--description for toUse (for locked it's the level)
-  	toUse = display.newText (body.toUse, display.contentWidth/4, 245, globals.IMPRIMA, 14)
+  	toUse = display.newText (body.toUse, display.contentWidth/4, 245, globals.IMPRIMA, 12)
   	toUse: setFillColor(0)
   	group:insert(toUse)
 

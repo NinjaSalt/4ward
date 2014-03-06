@@ -54,24 +54,47 @@ function scene:createScene( event )
   bkg.alpha=.01
   group:insert (bkg)
   ]]--
+
   
   local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
   bkg:setFillColor( gray )
   bkg.alpha = .5
   group:insert (bkg)
 
+  local border = display.newRect(centerX, centerY, display.contentWidth*.72, display.contentHeight*.72)
+  border:setFillColor(0)
+  group:insert(border)
+
   local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
+  --local bkg = display.newRect(centerX, centerY, display.contentWidth*.7, display.contentHeight*.7 )
   bkg.height=display.contentHeight*.7; bkg.width=display.contentWidth*.7
   group:insert (bkg)
 
- local gameTitle = display.newText( "Victory!", 0, 0, globals.LOBSTERTWO, 48 )
+  local gameTitleb = display.newText( "Victory!", 0, 0, globals.LOBSTERTWO, 50 )
+  gameTitleb:setFillColor( 0.866667, 0.627451, 0.866667)
+  gameTitleb.x = display.contentCenterX-2
+  gameTitleb.y = 78
+
+  group:insert(gameTitleb)
+
+  local function callSparkles()
+    local sparkles = display.newImage( "images/sparkles.png", centerX, centerY-60, true )
+    sparkles.width = sparkles.width/4
+    sparkles.height = sparkles.height/4
+    group:insert(sparkles)
+    transition.to( sparkles, { time=1500, alpha=0, onComplete=function() sparkles:removeSelf()end } )
+  end
+
+  timer.performWithDelay(500, callSparkles )
+
+ local gameTitle = display.newText( "Victory!", 0, 0, globals.LOBSTERTWO, 50 )
   gameTitle:setFillColor(black)
   gameTitle.x = display.contentCenterX
   gameTitle.y = 80
   
   group:insert( gameTitle )
   
-  local scoreTitle = display.newText( "Score: " ..globals.score, 0, 0, globals.IMPRIMA, 36 )
+  local scoreTitle = display.newText( "SCORE: " ..globals.score, 0, 0, globals.IMPRIMA, 26)
   scoreTitle:setFillColor(black)
   scoreTitle.x = display.contentCenterX
   scoreTitle.y = gameTitle.y + 45
