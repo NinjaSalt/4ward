@@ -195,11 +195,23 @@ function throwAbility( event )
 				--useItem(targetHero)
 				if (globals.attack) then
 					if (targetHero.num == 0) then
-						group:insert(make_bullet_pins(targetHero))
+						if (globals.attack_bkft==false) then
+							group:insert(make_bullet_pins(targetHero))
+						elseif (globals.attack_bkft) then
+							--do nothing 
+						end
 					elseif (targetHero.num == 1) then
-						group:insert(make_bullet_spatula(targetHero))
+						if(globals.attack_dnr==false) then
+							group:insert(make_bullet_spatula(targetHero))
+						elseif(globals.attack_dnr) then
+							--do nothing
+						end
 					elseif (targetHero.num == 2) then
-						group:insert(make_bullet_whisk(targetHero))
+						if (globals.attack_dst == false) then
+							group:insert(make_bullet_whisk(targetHero))
+						elseif(globals.attack_dst) then
+							--do nothing
+						end
 					end
 				end
 			end

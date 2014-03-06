@@ -28,6 +28,9 @@ globals.bullet = {}
 globals.bullet[0] = nil
 globals.bullet[1] = nil
 globals.bullet[2] = nil
+globals.attack_bkft= false
+globals.attack_dnr = false
+globals.attack_dst = false
 
 -- HUD MULTIPLIER -- 
 globals.multiplier = 0
@@ -63,7 +66,7 @@ globals.dessertServe = false
 --HOLD--
 globals.hold = nil
 
--- IN GME VISUALS --
+-- IN GAME VISUALS --
 globals.goodTextArray = {}
 globals.critTextArray = {}
 globals.badTextArray = {}

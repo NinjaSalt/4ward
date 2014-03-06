@@ -1,6 +1,9 @@
 require("classes.items")
 local globals = require("classes.globals" )
 local bullet_speed = 50 
+local attackTimer_bfst = false
+local attackTimer_dnr = false
+local attackTimer_dst = false
 Hero = {}
 Hero.__index = Hero
 
@@ -15,6 +18,7 @@ function Hero.create(health, attack, image, name, num)
    hero.num = num --for the conveyor belts
    hero.laneSpeed = 2
    hero.abilityUsed = false
+   hero.timer = 3
    hero.item = nil
    return hero
 end
@@ -23,6 +27,69 @@ function Hero:changeItem( item )
    self.item = item
 end
 
+-- ATTACK TIMER FUNCTIONS --
+function attackTimer_bkft()
+	if (globals.attack_bkft) then
+		hero[0].timer = hero[0].timer - 1
+		if(hero1TimerText~=nil) then
+			hero1TimerText:removeSelf()
+		end
+		hero1TimerText = display.newText( hero[0].timer, hero[0].x, hero[0].y-hero[0].width/2, globals.LOBSTERTWO, 16 )
+		hero1TimerText:setFillColor(0,0,0)
+		print(hero[0].timer)
+		if (hero[0].timer == 0) then
+			globals.attack_bkft = false
+			hero[0].timer = 3
+			if(hero1TimerText~=nil) then
+				hero1TimerText:removeSelf()
+				hero1TimerText=nil
+			end
+			--hero[0].abilityUsed=false
+		end
+	end
+end
+function attackTimer_dnr()
+	if (globals.attack_dnr) then
+		hero[1].timer = hero[1].timer - 1
+		if(hero2TimerText~=nil) then
+			hero2TimerText:removeSelf()
+		end
+		hero2TimerText = display.newText( hero[1].timer, hero[1].x, hero[1].y-hero[1].width/2, globals.LOBSTERTWO, 16 )
+		hero2TimerText:setFillColor(0,0,0)
+		print(hero[1].timer)
+		if (hero[1].timer == 0) then
+			globals.attack_dnr = false
+			hero[1].timer = 3
+			if(hero2TimerText~=nil) then
+				hero2TimerText:removeSelf()
+				hero2TimerText=nil
+			end
+			--hero[1].abilityUsed=false
+		end
+	end
+end
+function attackTimer_dst()
+	if (globals.attack_dst) then
+		hero[2].timer = hero[2].timer - 1
+		if(hero3TimerText~=nil) then
+			hero3TimerText:removeSelf()
+		end
+		hero3TimerText = display.newText( hero[2].timer, hero[2].x, hero[2].y-hero[2].width/2, globals.LOBSTERTWO, 16 )
+		hero3TimerText:setFillColor(0,0,0)
+		print(hero[2].timer)
+		if (hero[2].timer == 0) then
+			globals.attack_dst = false
+			hero[2].timer = 3
+			if(hero3TimerText~=nil) then
+				hero3TimerText:removeSelf()
+				hero3TimerText=nil
+			end
+			--hero[2].abilityUsed=false
+		end
+	end
+end
+-- END OF ATTACK TIMER FUNCTIONS --
+
 function remove_bullet( bullet )
   local index = table.indexOf( globals.bullet_array, bullet )
   transition.cancel( bullet.transition )
@@ -30,29 +97,32 @@ function remove_bullet( bullet )
   display.remove( bullet )
 end 
 
+-- CREATING PROJECTILE FUNCTIONS --
 function make_bullet_pins( hero )
-	local x = hero.x
-	local y = hero.y
-	local attack = hero.attack
-	local pinsheetSettings ={
-	width = 50,
-	height = 50,
-	numFrames = 14 }
-	local pinsheet = graphics.newImageSheet("images/rollingpicsheet.png",pinsheetSettings)
-	local pinsequenceData = {
-	--higher the time, slower it goes
-	{ name = "normal", start=1, count=14, time=300, loopCount=0 }
-}
-globals.bullet[0] = display.newSprite(pinsheet,pinsequenceData)
-  --scene.group:insert(bullet)
-  globals.bullet[0].x = x
-  globals.bullet[0].y = y
-  table.insert( globals.bullet_array, globals.bullet[0])
-  globals.bullet[0].attack = attack
-  local bt = x * bullet_speed
-  globals.bullet[0]:play()
-  globals.bullet[0].transition = transition.to( globals.bullet[0], {x=455, time=bt, onComplete=remove_bullet, tag="animation"} )
-  return globals.bullet[0]
+		local x = hero.x
+		local y = hero.y
+		local attack = hero.attack
+		local pinsheetSettings ={
+		width = 50,
+		height = 50,
+		numFrames = 14 }
+		local pinsheet = graphics.newImageSheet("images/rollingpicsheet.png",pinsheetSettings)
+		local pinsequenceData = {
+		--higher the time, slower it goes
+		{ name = "normal", start=1, count=14, time=300, loopCount=0 }
+	}
+		globals.bullet[0] = display.newSprite(pinsheet,pinsequenceData)
+		--scene.group:insert(bullet)
+		globals.bullet[0].x = x
+		globals.bullet[0].y = y
+		table.insert( globals.bullet_array, globals.bullet[0])
+		globals.bullet[0].attack = attack
+		local bt = x * bullet_speed
+		globals.bullet[0]:play()
+		globals.bullet[0].transition = transition.to( globals.bullet[0], {x=455, time=bt, onComplete=remove_bullet, tag="animation"} )
+		globals.attack_bkft=true
+		timer.performWithDelay( 1000, attackTimer_bkft, 3)
+		return globals.bullet[0]
 end
 
 -- make spatula function
@@ -71,7 +141,7 @@ local spatulasequenceData = {
 	--higher the time, slower it goes
 	{ name = "normal", start=1, count=8, time=300, loopCount=0 }
 }
-globals.bullet[1] = display.newSprite(spatulasheet,spatulasequenceData)
+	globals.bullet[1] = display.newSprite(spatulasheet,spatulasequenceData)
 	--scene.group:insert(bullet)
 	globals.bullet[1].x = x
 	globals.bullet[1].y = y
@@ -80,6 +150,10 @@ globals.bullet[1] = display.newSprite(spatulasheet,spatulasequenceData)
 	local bt = x * bullet_speed
 	globals.bullet[1]:play()
 	globals.bullet[1].transition = transition.to( globals.bullet[1], {x=455, time=bt, onComplete=remove_bullet, tag="animation"} )
+	globals.attack_dnr = true
+	--hero.abilityUsed=true
+	--attackTimer(hero)
+	timer.performWithDelay( 1000, attackTimer_dnr, 3)
 	return globals.bullet[1]
 end
 
@@ -99,18 +173,24 @@ function make_bullet_whisk( hero )
 	--higher the time, slower it goes
    { name = "normal", start=1, count=8, time=300, loopCount=0 }
 }
-  globals.bullet[2] = display.newSprite(whisksheet,whisksequenceData)
-  --scene.group:insert(bullet)
-  globals.bullet[2].x = x
-  globals.bullet[2].y = y
-  table.insert( globals.bullet_array, globals.bullet[2])
-  globals.bullet[2].attack = attack
-  local bt = x * bullet_speed
-  globals.bullet[2]:play()
-  globals.bullet[2].transition = transition.to( globals.bullet[2], {x=455, time=bt, onComplete=remove_bullet, tag="animation"} )
-  return globals.bullet[2]
+	globals.bullet[2] = display.newSprite(whisksheet,whisksequenceData)
+	--scene.group:insert(bullet)
+	globals.bullet[2].x = x
+	globals.bullet[2].y = y
+	table.insert( globals.bullet_array, globals.bullet[2])
+	globals.bullet[2].attack = attack
+	local bt = x * bullet_speed
+	globals.bullet[2]:play()
+	globals.bullet[2].transition = transition.to( globals.bullet[2], {x=455, time=bt, onComplete=remove_bullet, tag="animation"} )
+	globals.attack_dst=true
+	--hero.abilityUsed=true
+	--attackTimer(hero)
+	timer.performWithDelay( 1000, attackTimer_dst, 3)
+	return globals.bullet[2]
 end
+-- END OF CREATING PROJECTILE FUNCTIONS --
 
+-- SWIPING LANES FUNCTIONS --
 function ability( event )
 	local belt = event.target
 	local targetHero
@@ -233,6 +313,7 @@ function ability( event )
 		end
 	end
 end
+-- END OF SWIPING LANES FUNCTIONS --
 
 function makeHero( newH, oldH )
 	newH.health = oldH.health      
@@ -244,6 +325,7 @@ function makeHero( newH, oldH )
 	newH.laneSpeed = oldH.laneSpeed
 	newH.item = oldH.item
 	newH.num = oldH.num
+	newH.timer = oldH.timer
 	return newH
 end
 
