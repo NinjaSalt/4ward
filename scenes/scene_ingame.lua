@@ -8,7 +8,7 @@ local globals = require("classes.globals")
 local scene = storyboard.newScene()
 local thisLevel 
 local world
-local enemyInHold = nil
+local eneInHold = nil
 -- Array to store heroes
 hero = {}
 
@@ -265,6 +265,28 @@ function scene:createBreakfastChef()
 	group:insert(globals.breakfastanimation)
 end 
 
+function makeHoldEne()
+	local eneToMake
+	local isCombo = false
+	print ( eneInHold )
+	for n = 0,table.maxn( myEnemies ) do
+		if( myEnemies[n].type == eneInHold )then
+			eneToMake = n
+		end
+	end
+	for n = 0,table.maxn( comboEnemies ) do
+		if( comboEnemies[n].type == eneInHold )then
+			eneToMake = n
+			isCombo = true
+		end
+	end
+	incrementEnemy(currentLevel)
+	eneAndBar = scene:createEne(eneToMake, isCombo)
+	group:insert(eneAndBar[0])
+	group:insert(eneAndBar[1])
+	removeHold()
+end
+--The function to move something into the hold
 function moveToHold( event )
 	local enemyTapped = event.target
 	local eneIndex
@@ -273,31 +295,13 @@ function moveToHold( event )
 			eneIndex = i
 		end
 	end
-	print("HIIIII")
 	allEne[eneIndex]:removeSelf()
 	table.remove(allEne, eneIndex)
 	allEnemHealth[eneIndex]:removeSelf()
 	table.remove(allEnemHealth, eneIndex)
 	decrementEnemy(currentLevel)
-	local eneToMake
-	local isCombo = false
-	if ( eneInHold ~= nil ) then
-		print ( eneInHold )
-		for n = 0,table.maxn( myEnemies ) do
-			if( myEnemies[n].type == eneInHold )then
-				eneToMake = n
-			end
-		end
-		for n = 0,table.maxn( comboEnemies ) do
-			if( comboEnemies[n].type == eneInHold )then
-				eneToMake = n
-				isCombo = true
-			end
-		end
-		incrementEnemy(currentLevel)
-		eneAndBar = scene:createEne(eneToMake, isCombo)
-		group:insert(eneAndBar[0])
-		group:insert(eneAndBar[1])
+	if ( globals.hold ~= nil ) then
+		makeHoldEne()
 	end
 	eneInHold = enemyTapped.type
 	makeHold(eneInHold)

@@ -145,7 +145,11 @@ function scene:createScene( event )
   end
   
   --Hold
-  
+  function removeHold()
+	if(globals.hold ~= nil) then globals.hold:removeSelf() end
+	globals.hold = nil
+  end
+
   function makeHold(eneInHold)
 	if(globals.hold ~= nil) then globals.hold:removeSelf() end
 	local image
@@ -164,6 +168,7 @@ function scene:createScene( event )
 	  globals.hold.height = 25
 	  globals.hold.x = 100
 	  globals.hold.y = 20
+	  globals.hold:addEventListener( "tap", makeHoldEne )
 	  group:insert(globals.hold)
   end
 
