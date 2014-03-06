@@ -150,7 +150,7 @@ function scene:createScene( event )
 	globals.hold = nil
   end
 
-  function makeHold(eneInHold)
+  function makeHold(eneInHold, eneX, eneY)
 	if(globals.hold ~= nil) then globals.hold:removeSelf() end
 	local image
 	for n = 0,table.maxn( myEnemies ) do
@@ -163,11 +163,15 @@ function scene:createScene( event )
 			image = comboEnemies[n].image
 		end
 	end
+	  
 	  globals.hold = display.newImage(image)
 	  globals.hold.width = 25
 	  globals.hold.height = 25
 	  globals.hold.x = 100
 	  globals.hold.y = 20
+	  print(eneInHold.x)
+	  globals.hold.eneX = eneX
+	  globals.hold.eneY = eneY
 	  globals.hold:addEventListener( "tap", makeHoldEne )
 	  group:insert(globals.hold)
   end

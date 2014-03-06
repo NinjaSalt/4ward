@@ -66,6 +66,9 @@ globals.dessertServe = false
 --HOLD--
 globals.hold = nil
 
+--SPOT--
+globals.spot = nil
+
 -- IN GAME VISUALS --
 globals.goodTextArray = {}
 globals.critTextArray = {}

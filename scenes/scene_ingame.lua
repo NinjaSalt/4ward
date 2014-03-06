@@ -9,6 +9,7 @@ local scene = storyboard.newScene()
 local thisLevel 
 local world
 local eneInHold = nil
+globals.spot = nil
 -- Array to store heroes
 hero = {}
 
@@ -281,7 +282,7 @@ function makeHoldEne()
 		end
 	end
 	incrementEnemy(currentLevel)
-	eneAndBar = scene:createEne(eneToMake, isCombo)
+	eneAndBar = scene:createEne(eneToMake, isCombo, globals.hold.eneX, globals.hold.eneY)
 	group:insert(eneAndBar[0])
 	group:insert(eneAndBar[1])
 	removeHold()
@@ -290,6 +291,8 @@ end
 function moveToHold( event )
 	local enemyTapped = event.target
 	local eneIndex
+	local eneX = enemyTapped.x
+	local eneY = enemyTapped.y
 	for i = 0,table.maxn( allEne ) do
 		if ( allEne[i] == enemyTapped ) then
 			eneIndex = i
@@ -304,7 +307,14 @@ function moveToHold( event )
 		makeHoldEne()
 	end
 	eneInHold = enemyTapped.type
-	makeHold(eneInHold)
+	makeHold(eneInHold, eneX, eneY)
+	---VERY TEMPORARY WILL REMOVE
+	if(globals.spot ~= nil) then 
+		globals.spot:removeSelf() 
+		globals.spot = nil
+	end
+	globals.spot = display.newRect( eneX, eneY, 30, 30 )
+	group:insert(globals.spot)
 	if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
 		if(currentLevel.victoryCondition~=false) then
 			if(currentLevel.victoryCondition.conditionMet==true)then
@@ -324,14 +334,15 @@ function moveToHold( event )
 
 end
 
-function scene:createEne(enemyID, isCombo)
+function scene:createEne(enemyID, isCombo, x, lane)
 	--local eneAndBar = {}
-	local lane = lane1
 	--set the lane it will spawn in
-	local randomPos = math.random(1, 3)
-	if (randomPos == 1) then lane = lane1
-	elseif (randomPos == 2) then lane = lane2
-	elseif (randomPos == 3) then lane = lane3
+	if ( lane == nil ) then
+		local randomPos = math.random(1, 3)
+		if (randomPos == 1) then lane = lane1
+		elseif (randomPos == 2) then lane = lane2
+		elseif (randomPos == 3) then lane = lane3
+		end
 	end
 	
 	if ( isCombo == false ) then
@@ -350,12 +361,12 @@ function scene:createEne(enemyID, isCombo)
 	allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
 	allEnemHealth[#allEne].height = 10 
 	allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
-	allEnemHealth[#allEne].x = 430; allEnemHealth[#allEne].y = lane - 25
+	allEnemHealth[#allEne].x = x; allEnemHealth[#allEne].y = lane - 25
 	--end health bar.
 
 	--define the enemy
 	allEne[#allEne].height = 50; allEne[#allEne].width = 50
-	allEne[#allEne].x = 430; allEne[#allEne].y = lane
+	allEne[#allEne].x = x; allEne[#allEne].y = lane
 
 	--set the move speedallEne
 	transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50) ,tag="animation"}  )
@@ -777,7 +788,7 @@ function scene:createScene( event )
 
   --create enemies and add them and their healthbar to the group
   function spawnEne(enemyID)
-  	eneAndBar = scene:createEne(enemyID, false)
+  	eneAndBar = scene:createEne(enemyID, false, 430, nil)
     group:insert(eneAndBar[0])
 	group:insert(eneAndBar[1])
   end
