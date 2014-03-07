@@ -716,7 +716,7 @@ local function gameLoop( event )
 				if (allEne[i].category == "breakfast") then
 					globals.breakfastServe = true
 					servingButtons()
-					group:insert( globals.breakfastButton )
+					--group:insert( globals.breakfastButton )
 					checkEnemy()
 					--print("BREAKFAST")
 				end
@@ -724,7 +724,7 @@ local function gameLoop( event )
 				if (allEne[i].category == "dinner") then
 					globals.dinnerServe = true
 					servingButtons()
-					group:insert( globals.dinnerButton )
+					--group:insert( globals.dinnerButton )
 					checkEnemy()
 					--print("DINNER")
 				end
@@ -732,7 +732,7 @@ local function gameLoop( event )
 				if (allEne[i].category == "dessert") then
 					globals.dessertServe = true
 					servingButtons()
-					group:insert( globals.dessertButton )
+					--group:insert( globals.dessertButton )
 					checkEnemy()
 					--print("DESSERT")
 				end
