@@ -23,7 +23,6 @@ function bkftbuttonPressed()
             allEnemHealth[i]:removeSelf()
             table.remove(allEnemHealth, i)
             decrementEnemy(currentLevel)
-            checkEnemy()
           end
         end
       end
@@ -35,6 +34,7 @@ function bkftbuttonPressed()
     globals.breakfastButton = nil
     counter = 0
     enemyCounter = 0
+    checkEnemy()
   end
   return
 end
@@ -52,7 +52,6 @@ function dnrbuttonPressed()
             allEnemHealth[i]:removeSelf()
             table.remove(allEnemHealth, i)
             decrementEnemy(currentLevel)
-            checkEnemy()
           end
         end
       end
@@ -64,6 +63,7 @@ function dnrbuttonPressed()
     globals.dinnerButton = nil
     dcounter = 0
     denemy = 0
+    checkEnemy()
   end
   return
 end
@@ -81,7 +81,6 @@ function dstbuttonPressed()
             allEnemHealth[i]:removeSelf()
             table.remove(allEnemHealth, i)
             decrementEnemy(currentLevel)
-            checkEnemy()
           end
         end
       end
@@ -93,6 +92,7 @@ function dstbuttonPressed()
     globals.dessertButton = nil
     dtcounter = 0
     dtenemy = 0
+    checkEnemy()
   end
   return
 end
