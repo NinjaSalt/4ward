@@ -46,7 +46,7 @@ function scene:createScene( event )
   -- LEVEL NAMES --    
   levelList[1] = display.newText( "Step 1: Can you... Cook?", 0, 0, globals.IMPRIMA, 24 )
   levelList[2] = display.newText( "Step 2: Cake and Bake", 0, 0, globals.IMPRIMA, 24 )
-  levelList[3] = display.newText( "Step 3: Food Suprise", 0, 0, globals.IMPRIMA, 24 )
+  levelList[3] = display.newText( "Step 3: Food Surprise", 0, 0, globals.IMPRIMA, 24 )
   levelList[4] = display.newText( "Step 4: Certi-fried Chef", 0, 0, globals.IMPRIMA, 24 )
 
   for i = 1, LevelList.getNumOfLevels(1), 1 do

@@ -82,10 +82,14 @@ function scene:createScene( event )
     sparkles.width = sparkles.width/4
     sparkles.height = sparkles.height/4
     group:insert(sparkles)
-    transition.to( sparkles, { time=1500, alpha=0, onComplete=function() sparkles:removeSelf()end } )
+    transition.to( sparkles, { time=1500, alpha=0, onComplete=function()
+      if (sparkles ~= nil) then
+        sparkles:removeSelf()
+      end
+      end } )
   end
 
-  timer.performWithDelay(500, callSparkles )
+  timer.performWithDelay(300, callSparkles )
 
  local gameTitle = display.newText( "Victory!", 0, 0, globals.LOBSTERTWO, 50 )
   gameTitle:setFillColor(black)
@@ -192,6 +196,9 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
+   if (sparkles ~= nil) then
+        sparkles:removeSelf()
+      end
  
 end
  
