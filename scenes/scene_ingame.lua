@@ -371,7 +371,7 @@ function scene:createEne(enemyID, isCombo, x, lane)
 	--set the move speedallEne
 	transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50) ,tag="animation"}  )
 	allEne[#allEne]:addEventListener( "touch", teleport ) 
-	allEne[#allEne]:addEventListener( "tap", moveToHold ) 
+	--allEne[#allEne]:addEventListener( "tap", moveToHold ) 
 	eneAndBar[0]=allEne[#allEne]
 	eneAndBar[1]=allEnemHealth[#allEne]
 	return eneAndBar
@@ -422,7 +422,7 @@ function itemCombo( item , enemy, fromFoodItem )
 			--set the move speedallEne
 			transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50), tag="animation" } )
 			allEne[#allEne]:addEventListener( "touch", teleport ) 
-			allEne[#allEne]:addEventListener( "tap", moveToHold )
+			--allEne[#allEne]:addEventListener( "tap", moveToHold )
 			eneAndBar[0]=allEne[#allEne]
 			eneAndBar[1]=allEnemHealth[#allEne]
 			group:insert(eneAndBar[0])
