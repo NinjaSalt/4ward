@@ -36,7 +36,6 @@ function attackTimer_bkft()
 		end
 		hero1TimerText = display.newText( hero[0].timer, hero[0].x, hero[0].y-hero[0].width/2, globals.LOBSTERTWO, 16 )
 		hero1TimerText:setFillColor(0,0,0)
-		print(hero[0].timer)
 		if (hero[0].timer == 0) then
 			globals.attack_bkft = false
 			hero[0].timer = 3
@@ -56,7 +55,6 @@ function attackTimer_dnr()
 		end
 		hero2TimerText = display.newText( hero[1].timer, hero[1].x, hero[1].y-hero[1].width/2, globals.LOBSTERTWO, 16 )
 		hero2TimerText:setFillColor(0,0,0)
-		print(hero[1].timer)
 		if (hero[1].timer == 0) then
 			globals.attack_dnr = false
 			hero[1].timer = 3
@@ -76,7 +74,6 @@ function attackTimer_dst()
 		end
 		hero3TimerText = display.newText( hero[2].timer, hero[2].x, hero[2].y-hero[2].width/2, globals.LOBSTERTWO, 16 )
 		hero3TimerText:setFillColor(0,0,0)
-		print(hero[2].timer)
 		if (hero[2].timer == 0) then
 			globals.attack_dst = false
 			hero[2].timer = 3

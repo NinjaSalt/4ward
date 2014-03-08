@@ -104,11 +104,9 @@ function servingButtons()
         globals.breakfastButton = display.newImage("images/breakfast_serveButton.png")
         globals.breakfastButton.width = 36
         globals.breakfastButton.height = 65
-        --globals.breakfastButton.x = globals.breakfastButton.width/2 - 3
         globals.breakfastButton.y = lane1
         transition.to( globals.breakfastButton, { x=globals.breakfastButton.width/2-3, tag="animation" } )
         globals.breakfastButton:addEventListener("tap", bkftbuttonPressed)
-        --group:insert( globals.breakfastButton )
       end
     end
 
@@ -118,11 +116,9 @@ function servingButtons()
         globals.dinnerButton = display.newImage("images/dinner_serveButton.png")
         globals.dinnerButton.width = 36
         globals.dinnerButton.height = 65
-        --globals.breakfastButton.x = globals.breakfastButton.width/2 - 3
         globals.dinnerButton.y = lane2
         transition.to( globals.dinnerButton, { x=globals.dinnerButton.width/2-3, tag="animation" } )
         globals.dinnerButton:addEventListener("tap", dnrbuttonPressed)
-        --group:insert( globals.breakfastButton )
       end
     end
 
@@ -132,11 +128,9 @@ function servingButtons()
         globals.dessertButton = display.newImage("images/dessert_serveButton.png")
         globals.dessertButton.width = 36
         globals.dessertButton.height = 65
-        --globals.breakfastButton.x = globals.breakfastButton.width/2 - 3
         globals.dessertButton.y = lane3
         transition.to( globals.dessertButton, { x=globals.dessertButton.width/2-3, tag="animation" } )
         globals.dessertButton:addEventListener("tap", dstbuttonPressed)
-        --group:insert( globals.breakfastButton )
       end
     end
 end

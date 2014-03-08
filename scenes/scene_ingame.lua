@@ -716,25 +716,28 @@ local function gameLoop( event )
 				if (allEne[i].category == "breakfast") then
 					globals.breakfastServe = true
 					servingButtons()
-					--group:insert( globals.breakfastButton )
+					if (globals.breakfastServe) then
+						group:insert( globals.breakfastButton )
+					end
 					checkEnemy()
-					--print("BREAKFAST")
 				end
 			elseif (allEne[i].y == lane2) then
 				if (allEne[i].category == "dinner") then
 					globals.dinnerServe = true
 					servingButtons()
-					--group:insert( globals.dinnerButton )
+					if (globals.dinnerServe) then
+						group:insert( globals.dinnerButton )
+					end
 					checkEnemy()
-					--print("DINNER")
 				end
 			elseif (allEne[i].y == lane3) then
 				if (allEne[i].category == "dessert") then
 					globals.dessertServe = true
 					servingButtons()
-					--group:insert( globals.dessertButton )
+					if (globals.dessertServe) then
+						group:insert( globals.dessertButton )
+					end
 					checkEnemy()
-					--print("DESSERT")
 				end
 			end
 		end
@@ -892,6 +895,18 @@ function scene:exitScene( event )
   crit_Text = nil
   bad_Text = nil
   deathPoof = nil
+	if (globals.breakfastButton~= nil) then
+		globals.breakfastButton:removeSelf()
+		globals.breakfastButton = nil
+	end
+	if (globals.dinnerButton~= nil) then
+		globals.dinnerButton:removeSelf()
+		globals.dinnerButton = nil
+	end
+	if (globals.dessertButton~= nil) then
+		globals.dessertButton:removeSelf()
+		globals.dessertButton = nil
+	end
 end
  
 -- Called AFTER scene has finished moving offscreen:
