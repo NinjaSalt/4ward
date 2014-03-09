@@ -237,7 +237,7 @@ function scene:createHeroes()
     --elseif (n == 3) then hero[n].y = lane4
     end
     hero[n].height = 70; hero[n].width = 70
-	hero[n]:addEventListener( "touch", throwAbility )
+	--hero[n]:addEventListener( "touch", throwAbility )
   end
 end  
 
@@ -394,6 +394,7 @@ function itemCombo( item , enemy, fromFoodItem )
 
 			allEne[#allEne] = passValuesToNewEne(allEne[#allEne], comboEnemies[j])
 			-- Check for Secondary Win condition
+			
 			if(currentLevel.victoryCondition~=false) then
 				if(currentLevel.victoryCondition.enemy.name==allEne[#allEne].name)then
 					currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
