@@ -32,6 +32,36 @@ function scene:createScene( event )
     })
   currencyText:setFillColor( black )
   group:insert(currencyText)
+  
+  -- OBJECTIVE --
+  
+	function getObjectiveProgress()
+		local numer = currentLevel.victoryCondition.memAmount-currentLevel.victoryCondition.amount
+		local denom = currentLevel.victoryCondition.memAmount
+		if numer > denom then return (denom.."/"..denom)
+		else return (numer.."/"..denom) end
+	end
+	
+	if (currentLevel.victoryCondition ~= false) then
+		local objectiveGradient = display.newImage("images/scoreGradient.png")
+		objectiveGradient.width = 70
+		objectiveGradient.height = 25
+		objectiveGradient.x = 120
+		objectiveGradient.y = 15
+		group:insert(objectiveGradient)
+  
+		local objectiveIcon = display.newImage(currentLevel.victoryCondition.enemy.image)
+		objectiveIcon.width = 25
+		objectiveIcon.height = 25
+		objectiveIcon.x = 85
+		objectiveIcon.y = 14
+		group:insert(objectiveIcon)
+		
+		globals.objectiveText = display.newText( getObjectiveProgress(), 127, 14, globals.LOBSTERTWO, 20 )
+		globals.objectiveText:setFillColor(1,1,1)
+		group:insert(globals.objectiveText)  
+	end
+	
 
   -- SCORE --
 

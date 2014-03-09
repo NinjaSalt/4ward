@@ -32,6 +32,9 @@ globals.attack_bkft= false
 globals.attack_dnr = false
 globals.attack_dst = false
 
+-- HUD OBJECTIVE --
+globals.objectiveText = nil
+
 -- HUD MULTIPLIER -- 
 globals.multiplier = 0
 globals.multiplierText = nil

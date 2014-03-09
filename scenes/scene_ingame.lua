@@ -555,6 +555,9 @@ end
 local function gameLoop( event )
 	globals.multiplier = getMultiplier()
 	globals.multiplierText.text = (globals.multiplier)
+	if currentLevel.victoryCondition ~=false then
+		globals.objectiveText.text = getObjectiveProgress()
+	end
 	if ( globals.notDurningAntagonist ) then
 		for i = 0,table.maxn( allEne ) do
 			for n = 0,table.maxn( hero ) do
