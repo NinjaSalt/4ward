@@ -553,6 +553,25 @@ if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
   end
 end
 
+function makeDeathPoof(allEne)
+	-- add visual poof of death.
+	deathPoof = display.newImage( "images/death.png", allEne.x, allEne.y, true )
+	deathPoof.width = deathPoof.width/9
+	deathPoof.height = deathPoof.height/9
+	group:insert(deathPoof)
+	table.insert( globals.deathPoofArray, deathPoof)
+	transition.to( deathPoof, { time=1200, alpha=0, onComplete=
+		function() 
+			if (deathPoof~= nil) then 
+				local index = table.indexOf( globals.deathPoofArray, deathPoof )
+				--good_Text:removeSelf() 
+				table.remove( globals.deathPoofArray, index )
+			end 
+		end, 
+		tag="animation" } )
+	--end visual poof of death.
+end
+
 local function gameLoop( event )
 	globals.multiplier = getMultiplier()
 	globals.multiplierText.text = (globals.multiplier)
@@ -593,46 +612,32 @@ local function gameLoop( event )
 			end
 		end
 
-		for i = 0,table.maxn( allEne ) do
-			for n = 0,table.maxn( globals.bullet_array  ) do
-				if ( hasCollidedCircle( globals.bullet_array [n], allEne[i]) ) then
-					-- allEne[i].health=allEne[i].health-bullet_array[n].attack old damage system
-					-- new damage check
-					allEne[i].health= allEne[i].health - calculateDamage(allEne[i], globals.bullet_array[n]) 
-					--VISUAL EFFECTS WHEN BULLET HITS ENEMIES--
-					textCheck(allEne[i], globals.bullet_array[n])
-					--VISUAL EFFECTS END--
-					if ( allEne[i].health <= 0 ) then
-						--theScore.add(allEne[i].pointValue) 		-- adding the amount to score
-						globals.score = globals.score + allEne[i].pointValue + calcLaneScore(allEne[i])
-						globals.scoreText.text = (globals.score)
-						-- add visual poof of death.
-						deathPoof = display.newImage( "images/death.png", allEne[i].x, allEne[i].y, true )
-						deathPoof.width = deathPoof.width/9
-						deathPoof.height = deathPoof.height/9
-						group:insert(deathPoof)
-						table.insert( globals.deathPoofArray, deathPoof)
-						transition.to( deathPoof, { time=1000, alpha=0, onComplete=
-							function() 
-								if (deathPoof~= nil) then 
-									local index = table.indexOf( globals.deathPoofArray, deathPoof )
-									--good_Text:removeSelf() 
-									table.remove( globals.deathPoofArray, index )
-								end 
-							end, 
-							tag="animation" } )
-						--end visual poof of death.
-						allEne[i]:removeSelf()
-						table.remove(allEne, i)
-						allEnemHealth[i]:removeSelf()
-						table.remove(allEnemHealth, i)
-						decrementEnemy(currentLevel)
-						checkEnemy()
-					end
-					remove_bullet(globals.bullet_array[n])
-				end
-			end
-		end
+--CHECKING FOR BULLET COLLISON
+		-- for i = 0,table.maxn( allEne ) do
+		-- 	for n = 0,table.maxn( globals.bullet_array  ) do
+		-- 		if ( hasCollidedCircle( globals.bullet_array [n], allEne[i]) ) then
+		-- 			-- allEne[i].health=allEne[i].health-bullet_array[n].attack old damage system
+		-- 			-- new damage check
+		-- 			allEne[i].health= allEne[i].health - calculateDamage(allEne[i], globals.bullet_array[n]) 
+		-- 			--VISUAL EFFECTS WHEN BULLET HITS ENEMIES--
+		-- 			textCheck(allEne[i], globals.bullet_array[n])
+		-- 			--VISUAL EFFECTS END--
+		-- 			if ( allEne[i].health <= 0 ) then
+		-- 				--theScore.add(allEne[i].pointValue) 		-- adding the amount to score
+		-- 				globals.score = globals.score + allEne[i].pointValue + calcLaneScore(allEne[i])
+		-- 				globals.scoreText.text = (globals.score)
+		-- 				makeDeathPoof()
+		-- 				allEne[i]:removeSelf()
+		-- 				table.remove(allEne, i)
+		-- 				allEnemHealth[i]:removeSelf()
+		-- 				table.remove(allEnemHealth, i)
+		-- 				decrementEnemy(currentLevel)
+		-- 				checkEnemy()
+		-- 			end
+		-- 			remove_bullet(globals.bullet_array[n])
+		-- 		end
+		-- 	end
+		-- end
 
 		-- this is the code for collision checking, and combining to make new enemies
 		for i = 1,table.maxn( allEne ) do
@@ -682,7 +687,7 @@ local function gameLoop( event )
 							--set the move speedallEne
 							transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50), tag="animation" } )
 							allEne[#allEne]:addEventListener( "touch", teleport ) 
-							allEne[#allEne]:addEventListener( "tap", moveToHold )
+							--allEne[#allEne]:addEventListener( "tap", moveToHold )
 							eneAndBar[0]=allEne[#allEne]
 							eneAndBar[1]=allEnemHealth[#allEne]
 							group:insert(eneAndBar[0])
@@ -720,11 +725,19 @@ local function gameLoop( event )
 				if (allEne[i].category == "breakfast") then
 					globals.breakfastServe = true
 					servingButtons()
-					if (globals.breakfastServe) then
+					if (globals.breakfastServe and globals.breakfastButton~=nil) then
 						group:insert( globals.breakfastButton )
 					end
-					checkEnemy()
 				end
+				-- elseif (globals.breakfastServe and allEne[i].category ~= "breakfast") then
+				-- 	--if (allEne[i].category ~= "breakfast") then
+				-- 		print("i'm here")
+				-- 		if(globals.breakfastButton ~= nil) then
+				-- 			globals.breakfastButton:removeSelf()
+				-- 			--globals.breakfastButton = nil
+				-- 		end
+				-- 	--end
+				-- end
 			elseif (allEne[i].y == lane2) then
 				if (allEne[i].category == "dinner") then
 					globals.dinnerServe = true
@@ -732,7 +745,6 @@ local function gameLoop( event )
 					if (globals.dinnerServe) then
 						group:insert( globals.dinnerButton )
 					end
-					checkEnemy()
 				end
 			elseif (allEne[i].y == lane3) then
 				if (allEne[i].category == "dessert") then

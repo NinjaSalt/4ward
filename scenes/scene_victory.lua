@@ -83,9 +83,10 @@ function scene:createScene( event )
     sparkles.height = sparkles.height/4
     group:insert(sparkles)
     transition.to( sparkles, { time=1500, alpha=0, onComplete=function()
-      if (sparkles ~= nil) then
-        sparkles:removeSelf()
-      end
+        if (sparkles ~= nil) then
+          sparkles:removeSelf()
+          sparkles=nil
+        end
       end } )
   end
 
@@ -198,6 +199,7 @@ function scene:exitScene( event )
   local group = self.view
    if (sparkles ~= nil) then
         sparkles:removeSelf()
+        sparkles=nil
       end
  
 end
