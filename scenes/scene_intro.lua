@@ -115,12 +115,12 @@ function scene:createScene( event )
   --startButton:addEventListener( "tap", onTap )
   --standard objective: survive!
   local function makeObj()
-  local standardObj = display.newText("Survive!", 400, (display.contentHeight/2) - 60, globals.IMPRIMA, 24)
-  standardObj: setFillColor(black)
+  --local standardObj = display.newText("Survive!", 400, (display.contentHeight/2) - 60, globals.IMPRIMA, 24)
+ -- standardObj: setFillColor(black)
   --standardObj.x = 400
   --standardObj.y = (display.contentHeight/2) - 60
-  transition.to(standardObj, {time = 150, x= display.contentWidth/2})
-  group: insert(standardObj)
+ -- transition.to(standardObj, {time = 150, x= display.contentWidth/2})
+ -- group: insert(standardObj)
   end
 
 
@@ -128,13 +128,19 @@ function scene:createScene( event )
    local function makeSecCond()
     if (vicCond ~= false) then
     -- print second condition here.
-    local secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name.. ".", 400, (display.contentHeight/2) - 30, globals.IMPRIMA, 20)
+    local secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name.. ".", 400, (display.contentHeight/2) - 60, globals.IMPRIMA, 20)
+    secObj: setFillColor(black)
+    group: insert(secObj)
+    transition.to(secObj, {time=150, x=display.contentWidth/2})
     if (vicCond.amount ~= 1) then
       if (vicCond.enemy.name == "Fries") then
       -- do nothing
     else
       secObj:removeSelf()
-      secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name .. "s.", 400, (display.contentHeight/2) - 30, globals.IMPRIMA, 20)
+      secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name .. "s.", 400, (display.contentHeight/2) - 60, globals.IMPRIMA, 20)
+       secObj: setFillColor(black)
+       group: insert(secObj)
+       transition.to(secObj, {time=150, x=display.contentWidth/2})
     end
     transition.to(secObj, {time=150, x=display.contentWidth/2})
     secObj: setFillColor(black)
