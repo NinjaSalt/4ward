@@ -21,7 +21,7 @@ function scene:createScene( event )
 
   local options = {
    effect = "fade",
-   time = 300
+   time = 250
 }
   local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
@@ -46,7 +46,7 @@ function scene:createScene( event )
 
   local function onTap( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_worldmap1",options)
+    storyboard.gotoScene( "scenes.scene_worldmap",options)
   end
 
   startButton:addEventListener( "tap", onTap )

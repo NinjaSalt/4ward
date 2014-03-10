@@ -1,12 +1,12 @@
 ---------------------------------------------------------------------------------
--- PAUSE SCENE
+-- SCENE NAME
 -- Scene notes go here
-
 ---------------------------------------------------------------------------------
  
 local storyboard = require( "storyboard" )
-local globals = require("classes.globals")
 local scene = storyboard.newScene()
+local globals = require("classes.globals")
+require("classes.levelUnlocking")
  
 -- Clear previous scene
 storyboard.removeAll()
@@ -20,78 +20,88 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  
-  local options = {
-   effect = "fade",
-   time = 500
-}
-  local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
-  bkg:setFillColor( gray )
-  bkg.alpha = .5
+  local levelList = {}
+
+  local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
+  bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
-  
-  bkg:addEventListener("touch", function() return true end)
-  bkg:addEventListener("tap", function() return true end)
-  local menuBack = display.newRect( display.contentWidth/2, display.contentHeight/2, 250, 250)
-  group:insert (menuBack)
-  
-  local mainButton = display.newText( "Main Menu", display.contentWidth/2, (display.contentHeight/2) - 60, globals.LOBSTERTWO, 36 )
-  mainButton:setFillColor(black)
-  group:insert (mainButton)
-  
-  local function onTapMain( event )
+
+  local function onTapLevel( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_home",options)
-	   if (antagonistTimer ~= nil) then
-        timer.pause(antagonistTimer)
-      end
+    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id, world = 1}})
   end
-  
-  mainButton:addEventListener( "tap", onTapMain )
-  
-  local worldButton = display.newText( "World Map", display.contentWidth/2, (display.contentHeight/2) , globals.LOBSTERTWO, 36 )
-  worldButton:setFillColor(black)
-  group:insert (worldButton)
-  
-  local function onTapWorld( event )
+
+  local bookIcon = display.newImageRect("images/bookIcon.png", 100,100)
+  bookIcon.x = 51
+  bookIcon.y = 54
+  group:insert(bookIcon)
+
+  local storeButton = display.newImageRect("images/shop.png",100,100)
+  storeButton.x = 53
+  storeButton.y = 155
+  group:insert(storeButton)
+
+  local backArrow = display.newImageRect("images/backArrow.png",75,75)
+  backArrow.x = 50
+  backArrow.y = 270
+  group:insert(backArrow)
+
+  local banner1 = display.newImageRect( "images/bannerBlue.png", 325, 100 )
+  banner1.x = 300
+  banner1.y = 60
+  group:insert(banner1)
+
+  local banner2 = display.newImageRect( "images/bannerPink.png", 325, 100 )
+  banner2.x = 300
+  banner2.y = 155
+  group:insert(banner2)
+
+  local banner3 = display.newImageRect( "images/bannerYellow.png", 325, 100 )
+  banner3.x = 300
+  banner3.y = 245
+  group:insert(banner3)
+
+  local banner2Text = display.newText( "? ? ?", 0, 0, globals.LOBSTERTWO, 48 )
+  banner2Text:setFillColor(black)
+  banner2Text.x = 300
+  banner2Text.y = 155
+  group:insert( banner2Text )
+
+  local banner3Text = display.newText( "? ? ?", 0, 0, globals.LOBSTERTWO, 48 )
+  banner3Text:setFillColor(black)
+  banner3Text.x = 300
+  banner3Text.y = 245
+  group:insert( banner3Text )
+
+  local function onTapBackArrow(event)
+    storyboard.removeScene(scene)
+    storyboard.gotoScene("scenes.scene_home", {effect = "fade", time = 250})
+  end
+
+  -- to get to recipe book.
+  local function onTapBookIcon( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_worldmap",options)
-    if ( antagonistTimer ~= nil) then
-	timer.cancel(antagonistTimer)
-end
+    storyboard.gotoScene( "scenes.scene_book", {effect = "fade", time = 500})
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
-  
-  worldButton:addEventListener( "tap", onTapWorld )
 
-  local backButton = display.newText( "Back", display.contentWidth/2, (display.contentHeight/2) + 60, globals.LOBSTERTWO, 36 )
-  backButton:setFillColor(black)
-  group:insert (backButton)
-
-  local function onTapBack( event )
-    storyboard.hideOverlay( "slideUp", 500 )
-    storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
-    --timer.resume(attackTimer)
-    timer.resume(spawnEneTimer)
-    globals.breakfastanimation:play()
-    if ( antagonistTimer ~= nil) then
-	     timer.resume(antagonistTimer)
-    end
-    for n=0, 2, 1 do
-      globals.belts[n]:play()
-    end
-    if (globals.bullet ~= nil or globals.bullet_array ~= nil) then
-      for i=0, #globals.bullet_array, 1 do
-        if (globals.bullet_array[i] ~= nil) then
-          globals.bullet_array[i]:play()
-        end
-      end
-    end
-    transition.resume()
+  -- to get to the store
+  local function onTapStoreButton( event )
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_store", {effect = "fade", time = 500})
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
-  
-  backButton:addEventListener( "tap", onTapBack )
 
-  --startButton:addEventListener( "tap", onTap )
+  local function onTapBanner1( event )
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_worldmap1Test", {effect = "fade", time = 500})
+  end
+
+  bookIcon:addEventListener("tap", onTapBookIcon)
+  storeButton:addEventListener("tap", onTapStoreButton)
+  backArrow:addEventListener("tap", onTapBackArrow)
+  banner1:addEventListener("tap", onTapBanner1)
+
 end
  
 -- Called BEFORE scene has moved onscreen:

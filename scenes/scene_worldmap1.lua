@@ -40,7 +40,7 @@ function scene:createScene( event )
  
   local function onTapLevel( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id, world = 1}})
+    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 250, params = {level = event.target.id, world = 1}})
   end
   
   -- LEVEL NAMES --    

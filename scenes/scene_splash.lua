@@ -21,7 +21,7 @@ function scene:createScene( event )
   
   local options = {
    effect = "fade",
-   time = 300	
+   time = 250	
 }
 
   local splashScreen = display.newImage("images/4wardlogo.png", centerX,centerY,true)
