@@ -26,10 +26,6 @@ allEnemHealth = {}
 local sheetSettings
 local sheet
 local sequenceData
---lever locals
-local leversheetSettings
-local leversheet
-local leversequenceData
 --breakfast chef locals
 local breakfastspriteSettings
 local breakfastspritesheet
@@ -148,31 +144,86 @@ local dessertsheetSettings =
 		group:insert(globals.belts[n])
 	end
 	-- LEVER SETTINGS --
-	leversheetSettings =
+	-- leversheetSettings =
+ --  	{
+ --  	 width = 50,
+ --  	 height = 50,
+ -- 	  numFrames = 3
+	-- }
+	-- leversheet = graphics.newImageSheet("images/leversheet.png",leversheetSettings)
+	-- leversequenceData = {
+	-- --higher the time, slower it goes
+ --   { name = "normal", start=2,  count=1 },
+ --   { name = "slow", start=3,  count=1 },   
+ --   { name = "fast", start=1,  count=1 }
+	-- }
+
+	eggsheetSettings =
   	{
-  	 width = 50,
-  	 height = 50,
- 	  numFrames = 3
+  	 width = 60,
+  	 height = 20,
+ 	 numFrames = 3,
+ 	 sheetContentWidth=60,
+	 sheetContentHeight=60,
 	}
-	leversheet = graphics.newImageSheet("images/leversheet.png",leversheetSettings)
-	leversequenceData = {
+	eggsheet = graphics.newImageSheet("images/egg_sheet.png",eggsheetSettings)
+	eggsequenceData = {
 	--higher the time, slower it goes
    { name = "normal", start=2,  count=1 },
-   { name = "slow", start=3,  count=1 },   
-   { name = "fast", start=1,  count=1 }
-}
+   { name = "slow", start=1,  count=1 },   
+   { name = "fast", start=3,  count=1 }
+	}
+
+	fishsheetSettings =
+  	{
+  	 width = 48,
+  	 height = 16,
+ 	 numFrames = 3,
+ 	 sheetContentWidth=48,
+	 sheetContentHeight=48,
+	}
+	fishsheet = graphics.newImageSheet("images/fish_sheet.png",fishsheetSettings)
+	fishsequenceData = {
+	--higher the time, slower it goes
+   { name = "normal", start=2,  count=1 },
+   { name = "slow", start=1,  count=1 },   
+   { name = "fast", start=3,  count=1 }
+	}
+
+	macaronsheetSettings =
+  	{
+  	 width = 60,
+  	 height = 20,
+ 	 numFrames = 3,
+ 	 sheetContentWidth=60,
+	 sheetContentHeight=60,
+	}
+	macaronsheet = graphics.newImageSheet("images/macaron_sheet.png",macaronsheetSettings)
+	macaronsequenceData = {
+	--higher the time, slower it goes
+   { name = "normal", start=2,  count=1 },
+   { name = "slow", start=1,  count=1 },   
+   { name = "fast", start=3,  count=1 }
+	}
+
 
 	for n=0, 2, 1 do
-  		globals.levers[n] = display.newSprite(leversheet,leversequenceData)
-  		globals.levers[n].x = 73
+  		--globals.levers[n] = display.newSprite(leversheet,leversequenceData)
+  		--globals.levers[n].x = 73
   		if (n==0) then
-			globals.levers[n].y = lane1+20
+  			globals.levers[n] = display.newSprite(eggsheet,eggsequenceData)
+  		globals.levers[n].x = display.contentWidth/3
+			globals.levers[n].y = lane1+39
 		end
 		if (n==1) then
-			globals.levers[n].y = lane2+20
+			globals.levers[n] = display.newSprite(fishsheet,fishsequenceData)
+  			globals.levers[n].x = display.contentWidth/3
+			globals.levers[n].y = lane2+39
 		end
 		if (n==2) then
-			globals.levers[n].y = lane3+20
+			globals.levers[n] = display.newSprite(macaronsheet,macaronsequenceData)
+  			globals.levers[n].x = display.contentWidth/3
+			globals.levers[n].y = lane3+38
 		end
 		globals.levers[n]:setSequence( "normal" )
 		globals.levers[n]:play()
