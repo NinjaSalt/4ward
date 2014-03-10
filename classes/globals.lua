@@ -44,8 +44,8 @@ globals.score = 0
 globals.scoreText = nil
 
 -- HUD LIVES --
-globals.lives = 3
-globals.numLives = nil
+--globals.lives = 3
+--globals.numLives = nil
 
 -- FONTS --
 globals.LOBSTERTWO = "blank"

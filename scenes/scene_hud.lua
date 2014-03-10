@@ -102,7 +102,7 @@ function scene:createScene( event )
   group:insert(globals.multiplierText)
 
 -- NUMBER OF LIVES
-  local hearts = display.newImage("images/lives.png")
+  --[[local hearts = display.newImage("images/lives.png")
   hearts.width = 50
   hearts.height = 25
   hearts.x = 30
@@ -112,7 +112,7 @@ function scene:createScene( event )
   globals.numLives = display.newText( globals.lives, 40, 14, globals.LOBSTERTWO, 20)
   globals.numLives:setFillColor(1,1,1)
   group:insert(globals.numLives)
-
+]]
 --PLAYERS CURRENCY
 --[[
   money = display.newImage("images/money.png")

@@ -640,7 +640,9 @@ local function gameLoop( event )
 
 					-- hero damage effect here.
 					local screenEffect = display.newRect( display.contentWidth/2, hero[n].y, display.contentWidth, hero[n].height)
-					local loseLife= display.newText( "-1 LIFE", hero[n].x+45, hero[n].y-20, globals.IMPRIMA, 18 )
+					local loseLife= display.newText( "-100 SCORE", hero[n].x+45, hero[n].y-20, globals.IMPRIMA, 18 )
+					globals.score = globals.score - 100
+					globals.scoreText.text = (globals.score)
 					--local screenEffect = display.newCircle( 40, 0, 80)
 					screenEffect:setFillColor(246,235,133)
 					loseLife:setFillColor(black)
@@ -648,15 +650,15 @@ local function gameLoop( event )
 					transition.to( loseLife, { time= 800, alpha=0, onComplete=function() loseLife:removeSelf() end } )
 
 
-					globals.lives = globals.lives - 1
-					globals.numLives.text = (globals.lives)
+					--globals.lives = globals.lives - 1
+					--globals.numLives.text = (globals.lives)
 
-					if globals.lives <= 0 then
+					--[[if globals.lives <= 0 then
 						endLevel(currentLevel, false)
 						globals.attack = false
 						storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 
-					end
+					end]]
 					decrementEnemy(currentLevel)
 					checkEnemy()
 				end
@@ -932,7 +934,7 @@ end
 function scene:willEnterScene( event )
   local group = self.view
   globals.score = 0
-  globals.lives = 3
+  --globals.lives = 3
   globals.multiplier = resetMultiplier()
 end
  
