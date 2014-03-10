@@ -120,7 +120,6 @@ function servingButtons()
       if(counter<2) then
         counter = counter + 1
       end
-      print(counter)
       if (counter ==1) then
         globals.breakfastButton = display.newImage("images/breakfast_serveButton.png")
         globals.breakfastButton.width = 36
