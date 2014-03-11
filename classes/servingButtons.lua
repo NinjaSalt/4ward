@@ -10,6 +10,10 @@ local enemyCounter = 0
 local denemy = 0
 local dtenemy = 0
 
+
+-- Check for Secondary Win condition
+      
+
 function bkftbuttonPressed()
   if (globals.breakfastServe) then
     globals.breakfastServe = false
@@ -20,6 +24,21 @@ function bkftbuttonPressed()
             enemyCounter = enemyCounter + 1
             print(enemyCounter)
             makeDeathPoof(allEne[i])
+
+
+            -- NEW SECONDARY CONDITION CHECK
+            if(currentLevel.victoryCondition~=false) then
+              if(currentLevel.victoryCondition.enemy.name==allEne[i].name)then
+                currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
+                print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
+                if (currentLevel.victoryCondition.amount == 0) then
+                  print("Condition Met")
+                  currentLevel.victoryCondition.conditionMet = true
+                end
+              end
+            end
+            -- END NEW SECONDARY CONDITION CHECK
+
             allEne[i]:removeSelf()
             table.remove(allEne, i)
             allEnemHealth[i]:removeSelf()
@@ -56,6 +75,21 @@ function dnrbuttonPressed()
           if (allEne[i].category == "dinner") then
             denemy = denemy + 1
             makeDeathPoof(allEne[i])
+
+            -- NEW SECONDARY CONDITION CHECK
+            if(currentLevel.victoryCondition~=false) then
+              if(currentLevel.victoryCondition.enemy.name==allEne[i].name)then
+                currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
+                print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
+                if (currentLevel.victoryCondition.amount == 0) then
+                  print("Condition Met")
+                  currentLevel.victoryCondition.conditionMet = true
+                end
+              end
+            end
+            -- END NEW SECONDARY CONDITION CHECK
+
+
             allEne[i]:removeSelf()
             table.remove(allEne, i)
             allEnemHealth[i]:removeSelf()
@@ -90,6 +124,20 @@ function dstbuttonPressed()
           if (allEne[i].category == "dessert") then
             dtenemy = dtenemy + 1
             makeDeathPoof(allEne[i])
+
+            -- NEW SECONDARY CONDITION CHECK
+            if(currentLevel.victoryCondition~=false) then
+              if(currentLevel.victoryCondition.enemy.name==allEne[i].name)then
+                currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
+                print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
+                if (currentLevel.victoryCondition.amount == 0) then
+                  print("Condition Met")
+                  currentLevel.victoryCondition.conditionMet = true
+                end
+              end
+            end
+            -- END NEW SECONDARY CONDITION CHECK
+
             allEne[i]:removeSelf()
             table.remove(allEne, i)
             allEnemHealth[i]:removeSelf()

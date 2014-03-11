@@ -446,16 +446,16 @@ function itemCombo( item , enemy, fromFoodItem )
 			allEne[#allEne] = passValuesToNewEne(allEne[#allEne], comboEnemies[j])
 			-- Check for Secondary Win condition
 			
-			if(currentLevel.victoryCondition~=false) then
-				if(currentLevel.victoryCondition.enemy.name==allEne[#allEne].name)then
-					currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
-					print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
-					if (currentLevel.victoryCondition.amount == 0) then
-					print("Condition Met")
-					currentLevel.victoryCondition.conditionMet = true
-					end
-				end
-			end
+			--if(currentLevel.victoryCondition~=false) then
+			--	if(currentLevel.victoryCondition.enemy.name==allEne[#allEne].name)then
+			--		currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
+			--		print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
+			--		if (currentLevel.victoryCondition.amount == 0) then
+			--		print("Condition Met")
+			--		currentLevel.victoryCondition.conditionMet = true
+			--		end
+			--	end
+			--end
 
 			-- add health bars to enemies.
 			allEnemHealth[#allEne] = #allEne
@@ -712,16 +712,16 @@ local function gameLoop( event )
 							allEne[#allEne] = passValuesToNewEne(allEne[#allEne], comboEnemies[j])
 							unlockCheck(j)
 							-- Check for Secondary Win condition
-							if(currentLevel.victoryCondition~=false) then
-								if(currentLevel.victoryCondition.enemy.name==allEne[#allEne].name)then
-									currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
-									print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
-									if (currentLevel.victoryCondition.amount == 0) then
-										print("Condition Met")
-										currentLevel.victoryCondition.conditionMet = true
-									end
-								end
-							end
+							--if(currentLevel.victoryCondition~=false) then
+							--	if(currentLevel.victoryCondition.enemy.name==allEne[#allEne].name)then
+							--		currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
+							--		print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
+							--		if (currentLevel.victoryCondition.amount == 0) then
+							--			print("Condition Met")
+							--			currentLevel.victoryCondition.conditionMet = true
+							--		end
+							--	end
+							--end
 							
 							-- add health bars to enemies.
 							allEnemHealth[#allEne] = #allEne

@@ -34,8 +34,30 @@ function scene:createScene( event )
   group:insert (bkg)
 
 
- 
-	timer.performWithDelay(2000, function()storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = nextLevel, world = nextWorld}})end)
+  local loadText = display.newText("Now Loading", display.contentWidth/2-30, display.contentHeight/2, globals.LOBSTERTWO, 40)
+  loadText:setFillColor( 0 )
+  group:insert(loadText)
+
+  local dotOne = display.newImage("images/sugar.png", 800, display.contentHeight/2+10,30,30)
+  dotOne.width = 15
+  dotOne.height = 15
+  group:insert(dotOne)
+
+  local dotTwo = display.newImage("images/flour.png", 800, display.contentHeight/2+10,30,30)
+  dotTwo.width = 15
+  dotTwo.height = 15
+  group:insert(dotTwo)
+
+  local dotThree = display.newImage("images/sugar.png", 800, display.contentHeight/2+10,30,30)
+  dotThree.width = 15
+  dotThree.height = 15
+  group:insert(dotThree)
+
+
+	timer.performWithDelay(400, function() transition.to(dotOne, {time=300, x= display.contentWidth/2+80}) end)
+  timer.performWithDelay(800, function() transition.to(dotTwo, {time=300, x= display.contentWidth/2+ 100}) end)
+  timer.performWithDelay(1200, function() transition.to(dotThree, {time=300, x= display.contentWidth/2+ 120}) end)
+  timer.performWithDelay(2200, function()storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = nextLevel, world = nextWorld}})end)
  
 end
  

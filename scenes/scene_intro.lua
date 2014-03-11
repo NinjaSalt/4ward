@@ -128,7 +128,7 @@ function scene:createScene( event )
    local function makeSecCond()
     if (vicCond ~= false) then
     -- print second condition here.
-    local secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name.. ".", 400, (display.contentHeight/2) - 60, globals.IMPRIMA, 20)
+    local secObj = display.newText("Serve " .. vicCond.amount .. " " .. vicCond.enemy.name.. ".", 400, (display.contentHeight/2) - 60, globals.IMPRIMA, 20)
     secObj: setFillColor(black)
     group: insert(secObj)
     transition.to(secObj, {time=150, x=display.contentWidth/2})
@@ -137,7 +137,7 @@ function scene:createScene( event )
       -- do nothing
     else
       secObj:removeSelf()
-      secObj = display.newText("Make " .. vicCond.amount .. " " .. vicCond.enemy.name .. "s.", 400, (display.contentHeight/2) - 60, globals.IMPRIMA, 20)
+      secObj = display.newText("Serve " .. vicCond.amount .. " " .. vicCond.enemy.name .. "s.", 400, (display.contentHeight/2) - 60, globals.IMPRIMA, 20)
        secObj: setFillColor(black)
        group: insert(secObj)
        transition.to(secObj, {time=150, x=display.contentWidth/2})
