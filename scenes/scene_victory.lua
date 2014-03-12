@@ -138,12 +138,12 @@ function scene:createScene( event )
   group:insert( mapButton)
   
   if nextLevel == LevelList.getNumOfLevels(params.world) then
-	timer.performWithDelay(200, function() transition.to(nextWorldButton, {time = 400, x= display.contentWidth/2}) end)
+	timer.performWithDelay(600, function() transition.to(nextWorldButton, {time = 700, x= display.contentWidth/2}) end)
   else
-    timer.performWithDelay(200, function() transition.to(nextLevelButton, {time = 400, x= display.contentWidth/2}) end)
+    timer.performWithDelay(600, function() transition.to(nextLevelButton, {time = 700, x= display.contentWidth/2}) end)
   end
-  timer.performWithDelay(400, function() transition.to(replayButton, {time = 400, x= display.contentWidth/2}) end)
-  timer.performWithDelay(600, function() transition.to(mapButton, {time = 400, x= display.contentWidth/2}) end)
+  timer.performWithDelay(800, function() transition.to(replayButton, {time = 700, x= display.contentWidth/2}) end)
+  timer.performWithDelay(1000, function() transition.to(mapButton, {time = 700, x= display.contentWidth/2}) end)
   
   
   local function onTapNextLevel( event )
@@ -166,15 +166,17 @@ function scene:createScene( event )
 	
     storyboard.gotoScene( "scenes.scene_worldmap"..nextWorld,options)
   end
+  
+  timer.performWithDelay(1900, function()
 
-  if nextLevel == LevelList.getNumOfLevels(params.world) then
-	nextWorldButton:addEventListener( "tap", onTapNextWorld )
-  else
-	nextLevelButton:addEventListener( "tap", onTapNextLevel )
-  end
-  replayButton:addEventListener( "tap", onTapReplay )
-  mapButton:addEventListener( "tap", onTapMap )
-
+	if nextLevel == LevelList.getNumOfLevels(params.world) then
+		nextWorldButton:addEventListener( "tap", onTapNextWorld )
+	else
+		nextLevelButton:addEventListener( "tap", onTapNextLevel )
+	end
+	replayButton:addEventListener( "tap", onTapReplay )
+	mapButton:addEventListener( "tap", onTapMap )
+	end )
   
 end
  
