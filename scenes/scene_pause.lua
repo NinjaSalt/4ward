@@ -35,19 +35,19 @@ function scene:createScene( event )
   local menuBack = display.newRect( display.contentWidth/2, display.contentHeight/2, 250, 250)
   group:insert (menuBack)
   
-  local mainButton = display.newText( "Main Menu", display.contentWidth/2, (display.contentHeight/2) - 60, globals.LOBSTERTWO, 36 )
-  mainButton:setFillColor(black)
-  group:insert (mainButton)
+  local replayButton = display.newText( "Replay", display.contentWidth/2, (display.contentHeight/2) - 60, globals.LOBSTERTWO, 36 )
+  replayButton:setFillColor(black)
+  group:insert (replayButton)
   
-  local function onTapMain( event )
+  local function onTapReplay( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_home",options)
 	   if (antagonistTimer ~= nil) then
         timer.pause(antagonistTimer)
       end
+	 replayLevel()
   end
   
-  mainButton:addEventListener( "tap", onTapMain )
+  replayButton:addEventListener( "tap", onTapReplay )
   
   local worldButton = display.newText( "World Map", display.contentWidth/2, (display.contentHeight/2) , globals.LOBSTERTWO, 36 )
   worldButton:setFillColor(black)
