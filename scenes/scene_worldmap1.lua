@@ -20,92 +20,135 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  local levelList = {}
 
-  local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
+  local levelSelected = 1
+  
+  local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-  local mapTitle = display.newText( "Challenge 1:", 0, 0, globals.LOBSTERTWO, 48 )
-  mapTitle:setFillColor(black)
-  mapTitle.x = display.contentCenterX
-  mapTitle.y = 40
-  group:insert( mapTitle )
+  local banner = display.newImageRect( "images/bannerBlue.png", 300, 100 )
+  banner.x = 236
+  banner.y = 50
+  group:insert(banner)
 
-  local mapTitle2 = display.newText( "The Basics", 0, 0, globals.IMPRIMA, 18 )
-  mapTitle2:setFillColor(black)
-  mapTitle2.x = display.contentCenterX
-  mapTitle2.y = 80
-  group:insert( mapTitle2 )
- 
-  local function onTapLevel( event )
+  local level1 = display.newImageRect( "images/Cake.png", 50, 50 )
+  level1.x = 56
+  level1.y = 119
+  group:insert(level1)
+
+  local level2 = display.newImageRect( "images/egg.png", 60, 60 )
+  level2.x = 144
+  level2.y = 122
+  group:insert(level2)
+
+  local level3 = display.newImageRect( "images/flour.png", 50, 50 )
+  level3.x = 237
+  level3.y = 123
+  group:insert(level3)
+
+  local level4 = display.newImageRect( "images/fries.png", 65, 65 )
+  level4.x = 335
+  level4.y = 122
+  group:insert(level4)
+
+  local level5 = display.newImageRect( "images/lockedLevel.png", 60, 60 )
+  level5.x = 425
+  level5.y = 121
+  group:insert(level5)
+
+  local infoGradient = display.newImageRect( "images/score.png", 300, 175 )
+  infoGradient.x = 237
+  infoGradient.y = 238
+  group:insert(infoGradient)
+
+  local backArrow = display.newImageRect( "images/backArrow.png", 75, 75 )
+  backArrow.x = 41
+  backArrow.y = 282
+  group:insert(backArrow)
+
+  local levelStart = display.newImageRect( "images/startButton.png", 65, 65 )
+  levelStart.x = 444
+  levelStart.y = 285
+  group:insert(levelStart)
+
+  local objectivesText = {
+    text = "Objectives: Make a pancake!",     
+    x = 250,
+    y = 240,
+    width = 256,     --required for multi-line and alignment
+    font = globals.IMPRIMA,   
+    fontSize = 18,
+    align = "Left"  --new alignment parameter
+  }
+
+  local objectives = display.newText(objectivesText)
+  group:insert(objectives)
+
+  local levelTitleText = {
+    text = "Step 1: Can you... Cook?",     
+    x = 250,
+    y = 195,
+    width = 270,     --required for multi-line and alignment
+    font = globals.LOBSTERTWO,   
+    fontSize = 28,
+    align = "Left"  --new alignment parameter
+  }
+
+  local levelTitle = display.newText(levelTitleText)
+  group:insert(levelTitle)
+
+  local function onTapLevel1 ( event )
+    levelTitle.text = "Step 1: Cake you... Cook?"
+    objectives.text = "Objectives: Make a Pancake."
+    levelSelect = 1
+   -- level1.strokeWidth = 3
+   -- level1.stroke.effect = "generator.marchingAnts"
+  end
+
+  local function onTapLevel2 ( event )
+    levelTitle.text = "Step 2: Cake and Bake!"
+    objectives.text = "Objectives: Make two Cakes."
+    levelSelect = 2
+  end
+
+  local function onTapLevel3 ( event )
+    levelTitle.text = "Step 3: Food Surprise"
+    objectives.text = "Objectives: Make one Steak Omelette"
+    levelSelect = 3
+  end
+
+  local function onTapLevel4 ( event )
+    levelTitle.text = "Step 4: Certi-fried Chef"
+    objectives.text = "Objectives: Make two Fries"
+    levelSelect = 4
+  end
+
+  local function onTapLevel5 ( event )
+    levelTitle.text = "Secret Level: ???"
+    objectives.text = "Objectives: ???"
+    levelSelect = 5
+  end  
+
+  level1:addEventListener("tap", onTapLevel1)
+  level2:addEventListener("tap", onTapLevel2)
+  level3:addEventListener("tap", onTapLevel3)
+  level4:addEventListener("tap", onTapLevel4)
+  level5:addEventListener("tap", onTapLevel5)
+
+  local function onTapStartLevel (event)
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 250, params = {level = event.target.id, world = 1}})
-  end
-  
-  -- LEVEL NAMES --    
-  levelList[1] = display.newText( "Step 1: Can you... Cook?", 0, 0, globals.IMPRIMA, 24 )
-  levelList[2] = display.newText( "Step 2: Cake and Bake", 0, 0, globals.IMPRIMA, 24 )
-  levelList[3] = display.newText( "Step 3: Food Surprise", 0, 0, globals.IMPRIMA, 24 )
-  levelList[4] = display.newText( "Step 4: Certi-fried Chef", 0, 0, globals.IMPRIMA, 24 )
-
-  for i = 1, LevelList.getNumOfLevels(1), 1 do
-	if LevelList.isLevelUnlocked(1,i) == true then
-		levelList[i]:setFillColor(black)
-		levelList[i]:addEventListener( "tap", onTapLevel )
-	else
-		levelList[i]:setFillColor(1,.2,.2)
-	end
-	levelList[i].x = display.contentCenterX
-	levelList[i].y = mapTitle.y + 40 + (30 * i)
-	levelList[i].id = i
-	group:insert( levelList[i])
+    storyboard.gotoScene( "scenes.scene_ingame", { effect = "fade", time = 250, params = {level = levelSelect, world = 1}})
   end
 
+  levelStart:addEventListener("tap", onTapStartLevel)
 
-  local rightArrow = display.newImageRect( "images/rightArrow.png", 50, 50 )
-  rightArrow.x = 455
-  rightArrow.y = 153
-  group:insert(rightArrow)
-
-  if LevelList.worldUnlocked(2) ~= true then
-     local lock = display.newImageRect( "images/lock.png", 50, 50 )
-     lock.x = 455
-     lock.y = 153
-     group:insert(lock)
-   end
-
-  local bookIcon = display.newText( "Recipe Book", 80, 290, globals.LOBSTERTWO, 30 )
-  bookIcon: setFillColor (black)
-  group:insert(bookIcon)
-
-  local storeButton = display.newText("Item Store", 410, 290, globals.LOBSTERTWO, 30)
-  storeButton: setFillColor(black)
-  group:insert(storeButton)
-
-  local function onTapRightArrow( event )
-    if LevelList.worldUnlocked(2) == true then
-		storyboard.removeScene( scene )
-		storyboard.gotoScene( "scenes.scene_worldmap2", {effect = "slideLeft", time = 500})
-	end
-  end
-  -- to get to recipe book.
-  local function onTapBookIcon( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_book", {effect = "fade", time = 500})
-    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
+  local function onTapBackArrow (event)
+    storyboard.removeScene(scene)
+    storyboard.gotoScene("scenes.scene_worldmap", {effect = "fade", time = 250})
   end
 
-  -- to get to the store
-  local function onTapStoreButton( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_store", {effect = "fade", time = 500})
-    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
-  end
-
-  rightArrow:addEventListener("tap", onTapRightArrow)
-  bookIcon:addEventListener("tap", onTapBookIcon)
-  storeButton:addEventListener("tap", onTapStoreButton)
+  backArrow:addEventListener("tap", onTapBackArrow)
 
 end
  

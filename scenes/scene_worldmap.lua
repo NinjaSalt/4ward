@@ -94,7 +94,7 @@ function scene:createScene( event )
 
   local function onTapBanner1( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_worldmap1Test", {effect = "fade", time = 500})
+    storyboard.gotoScene( "scenes.scene_worldmap1", {effect = "fade", time = 500})
   end
 
   bookIcon:addEventListener("tap", onTapBookIcon)
