@@ -21,7 +21,7 @@ storyboard.removeAll()
 function scene:createScene( event )
   local group = self.view
 
-  local levelSelected = 1
+  local levelSelect = 1
   
   local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
@@ -99,7 +99,7 @@ function scene:createScene( event )
   group:insert(levelTitle)
 
   local function onTapLevel1 ( event )
-    levelTitle.text = "Step 1: Cake you... Cook?"
+    levelTitle.text = "Step 1: Can you... Cook?"
     objectives.text = "Objectives: Make a Pancake."
     levelSelect = 1
    -- level1.strokeWidth = 3

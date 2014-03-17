@@ -60,9 +60,9 @@ function moveSpeed( x, speed, lane )
 	local laneSpeed
 	for i = 0,table.maxn( hero ) do
 		if ( hero[i].y == lane ) then
-			if (hero[i].laneSpeed == 1) then speedMod = 2
-			elseif (hero[i].laneSpeed == 2) then speedMod = 1
-			elseif (hero[i].laneSpeed == 3) then speedMod = .5
+			if (hero[i].laneSpeed == 1) then speedMod = 6
+			elseif (hero[i].laneSpeed == 2) then speedMod = 2.5
+			elseif (hero[i].laneSpeed == 3) then speedMod = .25
 			end
 		end
 	end
