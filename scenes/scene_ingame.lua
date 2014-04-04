@@ -50,6 +50,7 @@ require("classes.items")
 require("classes.recipes")
 require("classes.basics")
 require("classes.servingButtons")
+require("classes.beltsAnimation")
 
 globals.currency = require( "classes.score" )
 require("classes.timeLine")
@@ -70,53 +71,9 @@ storyboard.removeAll()
 -- function to create conveyor belts
 --NEW CONVEYOR BELT CODE
 function scene:createConveyorBelts()
-  local breakfastsheetSettings =
-  	{
-  	 width = 410,
-  	 height = 60,
- 	  numFrames = 12
-	}
-	local breakfastsheet = graphics.newImageSheet("images/belts03sheet.png",breakfastsheetSettings)
-	local breakfastsequenceData = {
-	--higher the time, slower it goes
-   { name = "breakfast_normal", start = 1, count = 12, time=4000, loopCount=0 },
-   { name = "breakfast_slow", start = 1, count = 12, time=5000,   loopCount=0 },   
-   { name = "breakfast_fast", start = 1, count = 12, time=2200, loopCount=0 }
-}
-
-local dinnersheetSettings =
-  	{
-  	 width = 410,
-  	 height = 60,
- 	  numFrames = 12
-	}
-	local dinnersheet = graphics.newImageSheet("images/belts01sheet.png",dinnersheetSettings)
-	local dinnersequenceData = {
-	--higher the time, slower it goes
-   { name = "dinner_normal", start = 1, count = 12, time=4000, loopCount=0 },
-   { name = "dinner_slow", start = 1, count = 12, time=5000,   loopCount=0 },   
-   { name = "dinner_fast", start = 1, count = 12, time=2200, loopCount=0 }
-}
-
-local dessertsheetSettings =
-  	{
-  	 width = 410,
-  	 height = 60,
- 	  numFrames = 12
-	}
-	local dessertsheet = graphics.newImageSheet("images/belts02sheet.png",dessertsheetSettings)
-	local dessertsequenceData = {
-	--higher the time, slower it goes
-   { name = "dessert_normal", start = 1, count = 12, time=4000, loopCount=0 },
-   { name = "dessert_slow", start = 1, count = 12, time=5000,   loopCount=0 },   
-   { name = "dessert_fast", start = 1, count = 12, time=2200, loopCount=0 },
-}
-
 	for n=0, 2, 1 do
-  		--globals.belts[n] = display.newSprite(breakfastsheet,breakfastsequenceData)
   		if (n==0) then
   			globals.belts[n] = display.newSprite(breakfastsheet,breakfastsequenceData)
-  			--globals.belts[n].x = 278
 			globals.belts[n].y = lane1+20
 			globals.belts[n].id = n
 			globals.belts[n]:setSequence( "breakfast_normal" )
@@ -143,21 +100,6 @@ local dessertsheetSettings =
 		globals.belts[n].x = 278
 		group:insert(globals.belts[n])
 	end
-	-- LEVER SETTINGS --
-	-- leversheetSettings =
- --  	{
- --  	 width = 50,
- --  	 height = 50,
- -- 	  numFrames = 3
-	-- }
-	-- leversheet = graphics.newImageSheet("images/leversheet.png",leversheetSettings)
-	-- leversequenceData = {
-	-- --higher the time, slower it goes
- --   { name = "normal", start=2,  count=1 },
- --   { name = "slow", start=3,  count=1 },   
- --   { name = "fast", start=1,  count=1 }
-	-- }
-
 	eggsheetSettings =
   	{
   	 width = 60,
@@ -903,7 +845,7 @@ function scene:createScene( event )
   end
   
   bkg:addEventListener( "touch", getxy )
-
+  
   --create the heroes
   scene:createBreakfastChef()
   scene.createHeroes()
@@ -911,7 +853,7 @@ function scene:createScene( event )
     group:insert(hero[n])
   end
   --adding the conveyor belts to the screen
-  scene.createConveyorBelts()
+scene.createConveyorBelts()
 
   currentLevel = Level.load(world, thisLevel)
   
