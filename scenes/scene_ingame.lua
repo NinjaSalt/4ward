@@ -600,7 +600,7 @@ local function gameLoop( event )
 					-- hero damage effect here.
 					local screenEffect = display.newRect( display.contentWidth/2, hero[n].y, display.contentWidth, hero[n].height)
 					local loseLife= display.newText( "-100 SCORE", hero[n].x+45, hero[n].y-20, globals.IMPRIMA, 18 )
-					globals.score = globals.score - 100
+					globals.score = globals.score - 10
 					globals.scoreText.text = (globals.score)
 					--local screenEffect = display.newCircle( 40, 0, 80)
 					screenEffect:setFillColor(246,235,133)
@@ -956,6 +956,14 @@ function scene:exitScene( event )
 		globals.dessertButton:removeSelf()
 		globals.dessertButton = nil
 	end
+	levels[world][thisLevel].stars=1
+	if (globals.score > 50) then
+		levels[1][1].stars=2
+	end
+	if (globals.score > 100) then
+		levels[1][1].stars=3
+	end
+	print ("Stars: " .. levels[world][thisLevel].stars)
 end
  
 -- Called AFTER scene has finished moving offscreen:

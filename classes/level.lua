@@ -12,6 +12,7 @@ function Level.create(levelID, victoryCondition, enemyIDQueue, timeBetweenEachSp
    level.enemiesAlive = level.totalNumberOfEnemies
    level.timeBetweenEachSpawn = timeBetweenEachSpawn
    level.spawnCounter = 0
+   level.stars = 0
    level.spawnEneTimer = {}
    return level
 end
@@ -29,6 +30,7 @@ function Level.load(world, levelID)
    level.enemiesAlive = levels[world][levelID].enemiesAlive
    level.timeBetweenEachSpawn = levels[world][levelID].timeBetweenEachSpawn
    level.spawnCounter = 0
+   level.stars = levels[world][levelID].stars
    level.spawnEneTimer = {}
    return level
 end
