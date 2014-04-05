@@ -331,7 +331,24 @@ function scene:createEne(enemyID, isCombo, x, lane)
 	--local eneAndBar = {}
 	--set the lane it will spawn in
 	if ( lane == nil ) then
-		local randomPos = math.random(1, 3)
+		local randomPos
+		if #allEne == 0 then 
+			randomPos = math.random(1, 3)
+		else
+			local rightmostEnemy = allEne[1]
+			for i = 2,table.maxn( allEne ) do
+				if allEne[i].x > rightmostEnemy.x then
+					rightmostEnemy = allEne[i]
+				end
+			end
+			if rightmostEnemy.y == lane1 then randomPos = 1
+			elseif rightmostEnemy.y == lane2 then randomPos = 2
+			elseif rightmostEnemy.y == lane3 then randomPos = 3
+			end
+			randomPos = randomPos + math.random(1, 2)
+			if randomPos > 3 then randomPos = randomPos - 3 end
+		end
+		
 		if (randomPos == 1) then lane = lane1
 		elseif (randomPos == 2) then lane = lane2
 		elseif (randomPos == 3) then lane = lane3
