@@ -39,6 +39,19 @@ function bkftbuttonPressed()
             end
             -- END NEW SECONDARY CONDITION CHECK
 
+            -- TYPE CONDITION CHECK
+            if(currentLevel.categoryCondition~=false) then
+              if(currentLevel.categoryCondition.type==allEne[i].category)then
+                currentLevel.categoryCondition.amount = currentLevel.categoryCondition.amount-1
+                print(currentLevel.categoryCondition.type .. "left: " .. currentLevel.categoryCondition.amount)
+                if (currentLevel.categoryCondition.amount == 0) then
+                  print("Category Condition Met")
+                  currentLevel.categoryCondition.success = true
+                end
+              end
+            end
+            -- END TYPE CONDITION CHECK
+
             allEne[i]:removeSelf()
             table.remove(allEne, i)
             allEnemHealth[i]:removeSelf()
@@ -89,6 +102,19 @@ function dnrbuttonPressed()
             end
             -- END NEW SECONDARY CONDITION CHECK
 
+             -- TYPE CONDITION CHECK
+             if(currentLevel.categoryCondition~=false) then
+              if(currentLevel.categoryCondition.type==allEne[i].category)then
+                currentLevel.categoryCondition.amount = currentLevel.categoryCondition.amount-1
+                print(currentLevel.categoryCondition.type .. "left: " .. currentLevel.categoryCondition.amount)
+                if (currentLevel.categoryCondition.amount == 0) then
+                  print("Category Condition Met")
+                  currentLevel.categoryCondition.success = true
+                end
+              end
+            end
+            -- END TYPE CONDITION CHECK
+
 
             allEne[i]:removeSelf()
             table.remove(allEne, i)
@@ -137,6 +163,19 @@ function dstbuttonPressed()
               end
             end
             -- END NEW SECONDARY CONDITION CHECK
+
+            -- TYPE CONDITION CHECK
+            if(currentLevel.categoryCondition~=false) then
+              if(currentLevel.categoryCondition.type==allEne[i].category)then
+                currentLevel.categoryCondition.amount = currentLevel.categoryCondition.amount-1
+                print(currentLevel.categoryCondition.type .. "left: " .. currentLevel.categoryCondition.amount)
+                if (currentLevel.categoryCondition.amount == 0) then
+                  print("Category Condition Met")
+                  currentLevel.categoryCondition.success = true
+                end
+              end
+            end
+            -- END TYPE CONDITION CHECK
 
             allEne[i]:removeSelf()
             table.remove(allEne, i)
