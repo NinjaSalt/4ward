@@ -957,12 +957,13 @@ function scene:exitScene( event )
 		globals.dessertButton = nil
 	end
 	levels[world][thisLevel].stars=1
-	if (globals.score > 50) then
-		levels[1][1].stars=2
+	if(currentLevel.victoryCondition.conditionMet==true) then
+		levels[world][thisLevel].stars=2
+		if (globals.score > 100) then
+			levels[world][thisLevel].stars=3
+		end
 	end
-	if (globals.score > 100) then
-		levels[1][1].stars=3
-	end
+	
 	print ("Stars: " .. levels[world][thisLevel].stars)
 end
  
