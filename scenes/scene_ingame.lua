@@ -873,15 +873,39 @@ function scene:createScene( event )
 scene.createConveyorBelts()
 
   currentLevel = Level.load(world, thisLevel)
-  
+ 
+ local numCond = 0 -- temporary, counts number of conditions in the level (later there will alawys be 2.)
+
   --initialize the current level's secondary objectives and print them
   if(currentLevel.victoryCondition~=false)then
 	currentLevel.victoryCondition.amount = currentLevel.victoryCondition.memAmount
 	currentLevel.victoryCondition.conditionMet = false
+	numCond = numCond +1 
 	print("Make " .. currentLevel.victoryCondition.amount .. " " .. currentLevel.victoryCondition.enemy.name)
 else
 	print ("No Second Condition")
   end
+
+ if(currentLevel.categoryCondition~=false)then
+	currentLevel.categoryCondition.amount = currentLevel.categoryCondition.memAmount
+	currentLevel.categoryCondition.success = false
+	numCond = numCond +1 
+	print("Make " .. currentLevel.categoryCondition.amount .. " " .. currentLevel.categoryCondition.type .. " item(s).")
+else
+	print ("No Category Condition")
+  end
+
+--minimum score
+if(currentLevel.scoreCondition~=false)then
+	currentLevel.scoreCondition.score = currentLevel.scoreCondition.memScore
+	currentLevel.scoreCondition.success = false
+	numCond = numCond +1 
+	print("Reach " .. currentLevel.scoreCondition.score .. " points.")
+else
+	print ("No Score Condition")
+  end
+
+
   group:insert(currentLevel)
   
   timeLine = TimeLine.create(currentLevel.enemyIDQueue, currentLevel.timeBetweenEachSpawn)
