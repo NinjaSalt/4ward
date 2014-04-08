@@ -118,6 +118,8 @@ levels[3] = {}
 -- the time between signifies the time that the next enemy will take to spawn
 --levels[1] = Level.create(1, makeSecondaryWin(pancake,1), {1,4,1,0,5,2}, {2000,2000,2000,2000,2000,2000})
 
+-- Note: Enemies must be spaced out at least 2545 ms to prevent automatic collisions
+
 --world 1
 levels[1][1] = Level.create(1, makeSecondaryWin(pancake,1), {1,4,1,0,5,2}, {1000,3000,3000,3000,3000,3000}, makeCatWin("breakfast",4), makeScoreWin(120))
 levels[1][2] = Level.create(1, makeSecondaryWin(cake,2), {1,6,1,6,1,6,1,6,3}, {1000,3000,3000,3000,3000,3000,2600,2600,2600}, false, false)

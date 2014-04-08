@@ -62,7 +62,7 @@ function moveSpeed( x, speed, lane )
 		if ( hero[i].y == lane ) then
 			if (hero[i].laneSpeed == 1) then speedMod = 6
 			elseif (hero[i].laneSpeed == 2) then speedMod = 2.5
-			elseif (hero[i].laneSpeed == 3) then speedMod = .25
+			elseif (hero[i].laneSpeed == 3) then speedMod = .5
 			end
 		end
 	end
