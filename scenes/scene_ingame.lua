@@ -841,8 +841,8 @@ timer.pause(spawnEneTimer)
 	
 end
 
-local function goToIntro(vicCond, id)
-	storyboard.showOverlay("scenes.scene_intro", {effect = "slideDown", time=500, params = {vic= vicCond, levelNumber=id}})
+local function goToIntro(vicCond, id, catCond, scoreCond)
+	storyboard.showOverlay("scenes.scene_intro", {effect = "slideDown", time=500, params = {vic= vicCond, levelNumber=id, cat=catCond, scr = scoreCond}})
     --timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
     globals.breakfastanimation:pause()
@@ -973,7 +973,7 @@ else
 
 	-- scene.overlay hud
 	storyboard.showOverlay("scenes.scene_hud")
-	goToIntro(currentLevel.victoryCondition, currentLevel.levelID)
+	goToIntro(currentLevel.victoryCondition, currentLevel.levelID, currentLevel.categoryCondition, currentLevel.scoreCondition)
 end
  
 -- Called BEFORE scene has moved onscreen:
