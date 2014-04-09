@@ -544,8 +544,48 @@ end
 
 
 function checkEnemy()
+
+	-- turns score condition success true/false.
+	if (currentLevel.scoreCondition.score-1 < globals.score) then
+		currentLevel.scoreCondition.success = true
+	end
+
 if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
     globals.attack = false
+
+    local totalCond = 0
+
+    -- accounts for two conditions now.
+    if (currentLevel.victoryCondition~=false) then
+    	if(currentLevel.victoryCondition.conditionMet==true)then
+    		totalCond = totalCond + 1
+    	end
+    end
+    if (currentLevel.categoryCondition~=false) then
+    	if(currentLevel.categoryCondition.success==true)then
+    		totalCond = totalCond + 1
+    	end
+    end
+    if (currentLevel.scoreCondition~=false) then
+    	if(currentLevel.scoreCondition.success==true)then
+    		totalCond = totalCond + 1
+    	end
+    end
+    -- end account check
+
+    -- NOW YOU WIN WIN WIN (Unless your score is negative.)
+
+    if (globals.score > 0) then
+    	LevelList.unlockLevel(world, thisLevel+1)
+        endLevel(currentLevel, true)
+        storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+    else
+    	endLevel(currentLevel, false)
+        storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world, condition = true}})
+    end
+
+    --[[
+    OLD CONDITION CHECK
     if(currentLevel.victoryCondition~=false) then
       if(currentLevel.victoryCondition.conditionMet==true)then
         LevelList.unlockLevel(world, thisLevel+1)
@@ -560,6 +600,8 @@ if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
       endLevel(currentLevel, true)
       storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
     end
+    ]]--
+
   end
 end
 
@@ -980,6 +1022,7 @@ function scene:exitScene( event )
 		globals.dessertButton:removeSelf()
 		globals.dessertButton = nil
 	end
+
 	levels[world][thisLevel].stars=1
 	if(currentLevel.victoryCondition.conditionMet==true) then
 		levels[world][thisLevel].stars=2
