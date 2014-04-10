@@ -19,6 +19,7 @@ storyboard.removeAll()
 ---------------------------------------------------------------------------------
  -- for objective spacing purposes. 
 local spacer = (display.contentHeight/2) - 60
+local moveText = 40
 
 local function antagonistShow()
 	storyboard.showOverlay("scenes.scene_antagonist", {effect = "slideLeft", time=500})
@@ -128,17 +129,17 @@ function scene:createScene( event )
   end
 
   local function introText()
-    local introT = display.newText("Serve all the food!", 400, spacer, globals.IMPRIMA, 20)
+    local introT = display.newText("Serve all the food!", 400, spacer, globals.IMPRIMA, 16)
     introT: setFillColor(black)
     group: insert(introT)
     spacer  = spacer + 35
-    transition.to(introT, {time=150, x=display.contentWidth/2})
+    transition.to(introT, {time=150, x=display.contentWidth/2 + moveText})
 
-    local bonus = display.newText("Bonus!:", 400, spacer, globals.LOBSTERTWO, 30)
+    local bonus = display.newText("Bonuses!:", 400, spacer, globals.LOBSTERTWO, 30)
     bonus: setFillColor(black)
     group: insert(bonus)
-    spacer  = spacer + 25
-    transition.to(bonus, {time=150, x=display.contentWidth/2})
+    spacer  = spacer + 35
+    transition.to(bonus, {time=150, x=display.contentWidth/2+ moveText})
 
   end
 
@@ -147,21 +148,21 @@ function scene:createScene( event )
    local function makeSecCond()
     if (vicCond ~= false) then
     -- print second condition here.
-    local secObj = display.newText("Serve " .. vicCond.amount .. " " .. vicCond.enemy.name.. ".", 400, spacer, globals.IMPRIMA, 20)
+    local secObj = display.newText("Serve " .. vicCond.amount .. " " .. vicCond.enemy.name.. ".", 400, spacer, globals.IMPRIMA, 16)
     secObj: setFillColor(black)
     group: insert(secObj)
-    transition.to(secObj, {time=150, x=display.contentWidth/2})
+    transition.to(secObj, {time=150, x=display.contentWidth/2+ moveText})
     if (vicCond.amount ~= 1) then
       if (vicCond.enemy.name == "Fries") then
       -- do nothing
     else
       secObj:removeSelf()
-      secObj = display.newText("Serve " .. vicCond.amount .. " " .. vicCond.enemy.name .. "s.", 400, spacer, globals.IMPRIMA, 20)
+      secObj = display.newText("Serve " .. vicCond.amount .. " " .. vicCond.enemy.name .. "s.", 400, spacer, globals.IMPRIMA, 16)
        secObj: setFillColor(black)
        group: insert(secObj)
-       transition.to(secObj, {time=150, x=display.contentWidth/2})
+       transition.to(secObj, {time=150, x=display.contentWidth/2+ moveText})
     end
-    transition.to(secObj, {time=150, x=display.contentWidth/2})
+    transition.to(secObj, {time=150, x=display.contentWidth/2+ moveText})
     secObj: setFillColor(black)
     group: insert(secObj)
 
@@ -174,16 +175,16 @@ end
 local function makeCatCond()
     if (catCond ~= false) then
     -- print category condition here.
-    local catObj = display.newText("Serve " .. catCond.amount .. " " .. catCond.type.. " items.", 400, spacer, globals.IMPRIMA, 20)
+    local catObj = display.newText("Serve " .. catCond.amount .. " " .. catCond.type.. " items.", 400, spacer, globals.IMPRIMA, 16)
     catObj: setFillColor(black)
     group: insert(catObj)
-    transition.to(catObj, {time=150, x=display.contentWidth/2})
+    transition.to(catObj, {time=150, x=display.contentWidth/2+ moveText})
     if (catCond.amount == 1) then
       catObj:removeSelf()
-      catObj = display.newText("Serve 1 " .. catCond.type .. " item.", 400, spacer, globals.IMPRIMA, 20)
+      catObj = display.newText("Serve 1 " .. catCond.type .. " item.", 400, spacer, globals.IMPRIMA, 16)
       catObj: setFillColor(black)
       group: insert(catObj)
-      transition.to(catObj, {time=150, x=display.contentWidth/2})
+      transition.to(catObj, {time=150, x=display.contentWidth/2+ moveText})
   end
    spacer  = spacer + 25
 end
@@ -193,20 +194,47 @@ end
 local function makeScoreCond()
     if (scoreCond ~= false) then
     -- print category condition here.
-    local scoreObj = display.newText("Score over " .. scoreCond.score .. " points.", 400, spacer, globals.IMPRIMA, 20)
+    local scoreObj = display.newText("Score over " .. scoreCond.score .. " points.", 400, spacer, globals.IMPRIMA, 16)
     scoreObj: setFillColor(black)
     group: insert(scoreObj)
-    transition.to(scoreObj, {time=150, x=display.contentWidth/2})
+    transition.to(scoreObj, {time=150, x=display.contentWidth/2+ moveText})
     spacer  = spacer + 25
 end    --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)
   end  
 
+local function makeStars()
+  local firstStar = display.newImage("images/star.png")
+  firstStar.width = 18
+  firstStar.height = 18
+  firstStar.x = -200
+  firstStar.y = 100
+  group:insert(firstStar)
+  transition.to(firstStar, {time=150, x=185})
+
+  local twoStar = display.newImage("images/star.png")
+  twoStar.width = 18
+  twoStar.height = 18
+  twoStar.x = -200
+  twoStar.y = 170
+  group:insert(twoStar)
+  transition.to(twoStar, {time=150, x=185})
+
+  local threeStar = display.newImage("images/star.png")
+  threeStar.width = 18
+  threeStar.height = 18
+  threeStar.x = -200
+  threeStar.y = 195
+  group:insert(threeStar)
+  transition.to(threeStar, {time=150, x=185})
+
+
+end
 
   local function makeAnt()
   local antag = display.newImage("images/antag_01.png")
   antag.width = antag.width/5
   antag.height = antag.height/5
-  antag.x = display.contentWidth/5
+  antag.x = display.contentWidth/5 - 20
   antag.y = 400 
   transition.to(antag,{time = 300,  y= display.contentHeight/2})
   --antag.x = display.contentWidth/5
@@ -221,6 +249,7 @@ timer.performWithDelay(1900, introText)
 timer.performWithDelay(2100, makeSecCond)
 timer.performWithDelay(2101, makeCatCond)
 timer.performWithDelay(2102, makeScoreCond)
+timer.performWithDelay(2100, makeStars)
 timer.performWithDelay(2800, makeReady)
 end
 -- Called BEFORE scene has moved onscreen:
