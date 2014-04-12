@@ -1033,7 +1033,14 @@ function scene:exitScene( event )
 	end
 	
 	print ("Stars: " .. levels[world][thisLevel].stars)
-	if(levels[world][thisLevel].stars>0) then
+	local stars = 0
+	for i = 0,table.maxn( levels[world] ) do
+		if ( levels[world][thisLevel].stars ~= nil ) then	
+			stars = stars + levels[world][thisLevel].stars
+		end
+	end
+	print (stars)
+	if(stars>0) then
 		LevelList.unlockLevel(world, 5)
 	end
 end
