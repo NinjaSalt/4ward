@@ -1022,16 +1022,20 @@ function scene:exitScene( event )
 		globals.dessertButton:removeSelf()
 		globals.dessertButton = nil
 	end
-
-	levels[world][thisLevel].stars=1
-	if(currentLevel.victoryCondition.conditionMet==true) then
-		levels[world][thisLevel].stars=2
-		if (globals.score > 100) then
-			levels[world][thisLevel].stars=3
+	if(globals.score > 0) then
+		levels[world][thisLevel].stars=1
+		if(currentLevel.victoryCondition.conditionMet==true) then
+			levels[world][thisLevel].stars=2
+			if (globals.score > 100) then
+				levels[world][thisLevel].stars=3
+			end
 		end
 	end
 	
 	print ("Stars: " .. levels[world][thisLevel].stars)
+	if(levels[world][thisLevel].stars>0) then
+		LevelList.unlockLevel(world, 5)
+	end
 end
  
 -- Called AFTER scene has finished moving offscreen:

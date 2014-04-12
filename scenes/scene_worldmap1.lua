@@ -19,6 +19,7 @@ storyboard.removeAll()
  
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
+  print(worlds[1].levelsUnlocked[2])
   local group = self.view
 
   local levelSelect = 1
@@ -137,8 +138,10 @@ function scene:createScene( event )
   level5:addEventListener("tap", onTapLevel5)
 
   local function onTapStartLevel (event)
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_ingame", { effect = "fade", time = 250, params = {level = levelSelect, world = 1}})
+	if( levelSelect < 5 or ( levelSelect == 5  and worlds[1].levelsUnlocked[5] ) ) then
+		storyboard.removeScene( scene )
+		storyboard.gotoScene( "scenes.scene_ingame", { effect = "fade", time = 250, params = {level = levelSelect, world = 1}})
+	end
   end
 
   levelStart:addEventListener("tap", onTapStartLevel)
