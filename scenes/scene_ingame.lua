@@ -546,8 +546,10 @@ end
 function checkEnemy()
 
 	-- turns score condition success true/false.
+	if (currentLevel.scoreCondition~=false) then
 	if (currentLevel.scoreCondition.score-1 < globals.score) then
 		currentLevel.scoreCondition.success = true
+		end
 	end
 
 if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
@@ -555,7 +557,7 @@ if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
 
     local totalCond = 0
 
-    -- accounts for two conditions now.
+    --[[-- accounts for two conditions now.
     if (currentLevel.victoryCondition~=false) then
     	if(currentLevel.victoryCondition.conditionMet==true)then
     		totalCond = totalCond + 1
@@ -572,6 +574,7 @@ if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
     	end
     end
     -- end account check
+    ]]--
 
     -- NOW YOU WIN WIN WIN (Unless your score is negative.)
 
