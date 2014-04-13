@@ -446,7 +446,7 @@ function itemCombo( item , enemy, fromFoodItem )
 					allEnemHealth[n]:removeSelf()
 					table.remove(allEnemHealth, n)
 				end
-			end 
+			end
 		end
 	end
 	return eneAndBar[0]
@@ -694,8 +694,12 @@ local function gameLoop( event )
 		-- end
 
 		-- this is the code for collision checking, and combining to make new enemies
+                local foundComboFlag = false
+                --when this flag is true it will break all for loops so no other enemies combine
 		for i = 1,table.maxn( allEne ) do
+                        if foundComboFlag == true then break end
 			for n = 1,table.maxn( allEne ) do
+                                if foundComboFlag == true then break end
 				if (i == n) then --"colliding with itself, ignore when this happens"
 				elseif(combination(allEne[i], allEne[n])) then
 					-- create a new emeny at the end of the list
@@ -768,6 +772,8 @@ local function gameLoop( event )
 								table.remove(allEnemHealth, i-1)
 								decrementEnemy(currentLevel)
 							end
+                                                        foundComboFlag = true
+                                                        break
 						end
 					end
 				end
