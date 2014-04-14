@@ -1033,10 +1033,13 @@ function scene:exitScene( event )
 	end
 	if(globals.score > 0) then
 		levels[world][thisLevel].stars=1
+		globals.stars[world][thisLevel] = 1
 		if(currentLevel.victoryCondition.conditionMet==true) then
 			levels[world][thisLevel].stars=2
+			globals.stars[world][thisLevel] = 2
 			if (globals.score > 100) then
 				levels[world][thisLevel].stars=3
+				globals.stars[world][thisLevel] = 3
 			end
 		end
 	end

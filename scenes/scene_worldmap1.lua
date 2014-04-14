@@ -7,6 +7,7 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals = require("classes.globals")
 require("classes.levelUnlocking")
+
  
 -- Clear previous scene
 storyboard.removeAll()
@@ -99,10 +100,57 @@ function scene:createScene( event )
   local levelTitle = display.newText(levelTitleText)
   group:insert(levelTitle)
 
+  local starsText = {
+    text = "Stars: ",     
+    x = 250,
+    y = 280,
+    width = 256,     --required for multi-line and alignment
+    font = globals.IMPRIMA,   
+    fontSize = 18,
+    align = "Left"  --new alignment parameter
+  }
+
+  local stars = display.newText(starsText)
+  group:insert(stars)
+  
+  local star1 = display.newImageRect( "images/star.png", 30, 30 )
+  star1.x = 200
+  star1.y = 280
+  star1.alpha = 0
+  group:insert(star1)
+  
+  local star2 = display.newImageRect( "images/star.png", 30, 30 )
+  star2.x = 230
+  star2.y = 280
+  star2.alpha = 0
+  group:insert(star2)
+  
+  local star3 = display.newImageRect( "images/star.png", 30, 30 )
+  star3.x = 260
+  star3.y = 280
+  star3.alpha = 0
+  group:insert(star3)
+  
+  local function setStars (thisLevel)
+	star1.alpha = 0
+	star2.alpha = 0
+	star3.alpha = 0
+	if (globals.stars[1][thisLevel] >= 1) then
+		star1.alpha = 1
+	end
+	if (globals.stars[1][thisLevel] >= 2) then
+		star2.alpha = 1
+	end
+	if (globals.stars[1][thisLevel] >= 3) then
+		star3.alpha = 1
+	end
+  end
+  
   local function onTapLevel1 ( event )
     levelTitle.text = "Step 1: Can you... Cook?"
     objectives.text = "Objectives: Make a Pancake."
     levelSelect = 1
+	setStars(levelSelect)
    -- level1.strokeWidth = 3
    -- level1.stroke.effect = "generator.marchingAnts"
   end
@@ -111,24 +159,28 @@ function scene:createScene( event )
     levelTitle.text = "Step 2: Cake and Bake!"
     objectives.text = "Objectives: Make two Cakes."
     levelSelect = 2
+	setStars(levelSelect)
   end
 
   local function onTapLevel3 ( event )
     levelTitle.text = "Step 3: Food Surprise"
     objectives.text = "Objectives: Make one Steak Omelette"
     levelSelect = 3
+	setStars(levelSelect)
   end
 
   local function onTapLevel4 ( event )
     levelTitle.text = "Step 4: Certi-fried Chef"
     objectives.text = "Objectives: Make two Fries"
     levelSelect = 4
+	setStars(levelSelect)
   end
 
   local function onTapLevel5 ( event )
     levelTitle.text = "Secret Level: ???"
     objectives.text = "Objectives: ???"
     levelSelect = 5
+	setStars(levelSelect)
   end  
 
   level1:addEventListener("tap", onTapLevel1)
@@ -143,7 +195,7 @@ function scene:createScene( event )
 		storyboard.gotoScene( "scenes.scene_ingame", { effect = "fade", time = 250, params = {level = levelSelect, world = 1}})
 	end
   end
-
+  
   levelStart:addEventListener("tap", onTapStartLevel)
 
   local function onTapBackArrow (event)
