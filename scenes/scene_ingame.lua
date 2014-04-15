@@ -330,6 +330,7 @@ end
 function scene:createEne(enemyID, isCombo, x, lane)
 	--local eneAndBar = {}
 	--set the lane it will spawn in
+	local tutorialCounter = 1
 	if ( lane == nil ) then
 		local randomPos
 		if #allEne == 0 then 
@@ -349,6 +350,13 @@ function scene:createEne(enemyID, isCombo, x, lane)
 			if randomPos > 3 then randomPos = randomPos - 3 end
 		end
 		
+		if ( thisLevel == 1 and world == 1 ) then
+			if (#allEne == 0) then
+				randomPos = 1
+			else
+				randomPos = 2
+			end
+		end
 		if (randomPos == 1) then lane = lane1
 		elseif (randomPos == 2) then lane = lane2
 		elseif (randomPos == 3) then lane = lane3
