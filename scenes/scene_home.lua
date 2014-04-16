@@ -27,15 +27,39 @@ function scene:createScene( event )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
+ local splashSheetSettings =
+    {
+   --  width = 1107,
+  --   height = 781,
+    width = 420,
+    height = 296,
+   -- sheetContentWidth=280,
+  -- sheetContentHeight=70,
+  sheetContentWidth=840,
+  sheetContentHeight=1480,
+  numFrames = 10
+  }
+  local splashSheet = graphics.newImageSheet("images/nwc_logo.png",splashSheetSettings)
+  local splashSheetSsequenceData = {
+      {name = "splash", frames={1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 10, 1, 10, 1, 10, 1}, time=3000, loopCount=0}
+    }
+
+  --local splashScreen = display.newImage("images/4wardlogo.png", centerX,centerY,true)
+  local splashScreen = display.newSprite(splashSheet,splashSheetSsequenceData)
+  splashScreen.x =display.contentCenterX - 10
+    splashScreen.y = display.contentCenterY - 20  
+  --splashScreen.height = splashScreen.height*.2; splashScreen.width = splashScreen.width*.2
+  splashScreen:setSequence( "splash" )
+  splashScreen:play()
 
  --local gameTitle = display.newText( "Now we're cooking!", 0, 0, native.systemFontBold, 36 )
-  gameTitle = display.newImage("images/mocklogo.png")
-  gameTitle.width = gameTitle.width*.2
-  gameTitle.height = gameTitle.height*.2
-  gameTitle.x = display.contentCenterX - 10
-  gameTitle.y = display.contentCenterY - 30
+  --gameTitle = display.newImage("images/mocklogo.png")
+  --gameTitle.width = gameTitle.width*.2
+  --gameTitle.height = gameTitle.height*.2
+  --gameTitle.x = display.contentCenterX - 10
+  --gameTitle.y = display.contentCenterY - 30
  
-  group:insert( gameTitle )
+  group:insert( splashScreen )
  
   local startButton = display.newText( "Start!", 0, 0, globals.LOBSTERTWO, 48 )
   startButton:setFillColor(black)
