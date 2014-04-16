@@ -79,7 +79,7 @@ function updateMoveSpeed (myHero)
 	end
 end
 
-function updateEnemyHealth()
+--[[function updateEnemyHealth()
 	for i=1, table.maxn( allEne ) do
 		if ( allEnemHealth[i].y == nil ) then  --make sure the first object exists
 		  break
@@ -88,7 +88,7 @@ function updateEnemyHealth()
 		allEnemHealth[i].y = allEne[i].y - 25
 		allEnemHealth[i].x = allEne[i].x
 	end
-end
+end]]--
 
 
 -- THE 5 CATEGORIES: BREAKFAST, DINNER, DESSERT, BASIC, BAD.

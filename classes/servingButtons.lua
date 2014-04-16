@@ -54,8 +54,8 @@ function bkftbuttonPressed()
 
             allEne[i]:removeSelf()
             table.remove(allEne, i)
-            allEnemHealth[i]:removeSelf()
-            table.remove(allEnemHealth, i)
+            --allEnemHealth[i]:removeSelf()
+            --table.remove(allEnemHealth, i)
             decrementEnemy(currentLevel)
 
           end
@@ -118,8 +118,8 @@ function dnrbuttonPressed()
 
             allEne[i]:removeSelf()
             table.remove(allEne, i)
-            allEnemHealth[i]:removeSelf()
-            table.remove(allEnemHealth, i)
+            --allEnemHealth[i]:removeSelf()
+            --table.remove(allEnemHealth, i)
             decrementEnemy(currentLevel)
           end
         end
@@ -179,8 +179,8 @@ function dstbuttonPressed()
 
             allEne[i]:removeSelf()
             table.remove(allEne, i)
-            allEnemHealth[i]:removeSelf()
-            table.remove(allEnemHealth, i)
+            --allEnemHealth[i]:removeSelf()
+            --table.remove(allEnemHealth, i)
             decrementEnemy(currentLevel)
           end
         end

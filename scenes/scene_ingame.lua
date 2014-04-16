@@ -20,7 +20,7 @@ lane3 = 240
 
 --Enemy varis
 allEne = {} 
-allEnemHealth = {}
+--allEnemHealth = {}
 
 --conveyor belts locals
 local sheetSettings
@@ -277,7 +277,7 @@ function makeHoldEne()
 	incrementEnemy(currentLevel)
 	eneAndBar = scene:createEne(eneToMake, isCombo, globals.hold.eneX, globals.hold.eneY)
 	group:insert(eneAndBar[0])
-	group:insert(eneAndBar[1])
+	--group:insert(eneAndBar[1])
 	removeHold()
 end
 --The function to move something into the hold
@@ -293,8 +293,8 @@ function moveToHold( event )
 	end
 	allEne[eneIndex]:removeSelf()
 	table.remove(allEne, eneIndex)
-	allEnemHealth[eneIndex]:removeSelf()
-	table.remove(allEnemHealth, eneIndex)
+	--allEnemHealth[eneIndex]:removeSelf()
+	--table.remove(allEnemHealth, eneIndex)
 	decrementEnemy(currentLevel)
 	if ( globals.hold ~= nil ) then
 		makeHoldEne()
@@ -375,11 +375,11 @@ function scene:createEne(enemyID, isCombo, x, lane)
 	allEne[#allEne] = passValuesToNewEne(allEne[#allEne], myEnemies[enemyID])
 
 	-- add health bars to enemies.
-	allEnemHealth[#allEne] = #allEne
-	allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
-	allEnemHealth[#allEne].height = 10 
-	allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
-	allEnemHealth[#allEne].x = x; allEnemHealth[#allEne].y = lane - 25
+	--allEnemHealth[#allEne] = #allEne
+	--allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
+	--allEnemHealth[#allEne].height = 10 
+	--allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
+	--allEnemHealth[#allEne].x = x; allEnemHealth[#allEne].y = lane - 25
 	--end health bar.
 
 	--define the enemy
@@ -391,7 +391,7 @@ function scene:createEne(enemyID, isCombo, x, lane)
 	allEne[#allEne]:addEventListener( "touch", teleport ) 
 	--allEne[#allEne]:addEventListener( "tap", moveToHold ) 
 	eneAndBar[0]=allEne[#allEne]
-	eneAndBar[1]=allEnemHealth[#allEne]
+	--eneAndBar[1]=allEnemHealth[#allEne]
 	return eneAndBar
 end
 
@@ -425,13 +425,13 @@ function itemCombo( item , enemy, fromFoodItem )
 			--end
 
 			-- add health bars to enemies.
-			allEnemHealth[#allEne] = #allEne
-			allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
-			allEnemHealth[#allEne].height = 10 
+			--allEnemHealth[#allEne] = #allEne
+			--allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
+			--allEnemHealth[#allEne].height = 10 
 			-- creates a new health.
-			allEnemHealth[#allEne].health = newHealth(n,i)
-			allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
-			allEnemHealth[#allEne].x = enemy.x; allEnemHealth[#allEne].y = enemy.y
+			--allEnemHealth[#allEne].health = newHealth(n,i)
+			--allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
+			--allEnemHealth[#allEne].x = enemy.x; allEnemHealth[#allEne].y = enemy.y
 			--end health bar.
 
 			--define the enemy
@@ -443,16 +443,16 @@ function itemCombo( item , enemy, fromFoodItem )
 			allEne[#allEne]:addEventListener( "touch", teleport ) 
 			--allEne[#allEne]:addEventListener( "tap", moveToHold )
 			eneAndBar[0]=allEne[#allEne]
-			eneAndBar[1]=allEnemHealth[#allEne]
+			--eneAndBar[1]=allEnemHealth[#allEne]
 			group:insert(eneAndBar[0])
-			group:insert(eneAndBar[1])
+			--group:insert(eneAndBar[1])
 			
 			for n = 0,table.maxn( allEne ) do
 				if( allEne[n] == enemy ) then
 					allEne[n]: removeSelf()
 					table.remove(allEne, n)
-					allEnemHealth[n]:removeSelf()
-					table.remove(allEnemHealth, n)
+					--allEnemHealth[n]:removeSelf()
+					--table.remove(allEnemHealth, n)
 				end
 			end
 		end
@@ -647,8 +647,8 @@ local function gameLoop( event )
 				if ( hasCollidedCircle( hero[n], allEne[i]) ) then
 					allEne[i]:removeSelf()
 					table.remove(allEne, i)
-					allEnemHealth[i]:removeSelf()
-					table.remove(allEnemHealth, i)
+					--allEnemHealth[i]:removeSelf()
+					--table.remove(allEnemHealth, i)
 
 					-- hero damage effect here.
 					local screenEffect = display.newRect( display.contentWidth/2, hero[n].y, display.contentWidth, hero[n].height)
@@ -740,13 +740,13 @@ local function gameLoop( event )
 							--end
 							
 							-- add health bars to enemies.
-							allEnemHealth[#allEne] = #allEne
-							allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
-							allEnemHealth[#allEne].height = 10 
+							--allEnemHealth[#allEne] = #allEne
+							--allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
+							--allEnemHealth[#allEne].height = 10 
 							-- creates a new health.
-							allEnemHealth[#allEne].health = newHealth(n,i)
-							allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
-							allEnemHealth[#allEne].x = allEnemHealth[n].x; allEnemHealth[#allEne].y = allEnemHealth[n].y
+							--allEnemHealth[#allEne].health = newHealth(n,i)
+							--allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
+							--allEnemHealth[#allEne].x = allEnemHealth[n].x; allEnemHealth[#allEne].y = allEnemHealth[n].y
 							--end health bar.
 
 							--define the enemy
@@ -758,29 +758,29 @@ local function gameLoop( event )
 							allEne[#allEne]:addEventListener( "touch", teleport ) 
 							--allEne[#allEne]:addEventListener( "tap", moveToHold )
 							eneAndBar[0]=allEne[#allEne]
-							eneAndBar[1]=allEnemHealth[#allEne]
+							--eneAndBar[1]=allEnemHealth[#allEne]
 							group:insert(eneAndBar[0])
-							group:insert(eneAndBar[1])
+							--group:insert(eneAndBar[1])
 
 							--remove the second enemy we want to replace
 							allEne[n]: removeSelf()
 							table.remove(allEne, n)
-							allEnemHealth[n]:removeSelf()
-							table.remove(allEnemHealth, n)
+							--allEnemHealth[n]:removeSelf()
+							--table.remove(allEnemHealth, n)
 
 							if (n > i) then -- removes teleported enemy 
 								-- if i is less than n in the enemy list, remove i since i is not effect when n was removed
 								allEne[i]:removeSelf()
 								table.remove(allEne, i)
-								allEnemHealth[i]:removeSelf()
-								table.remove(allEnemHealth, i)
+								--allEnemHealth[i]:removeSelf()
+								--table.remove(allEnemHealth, i)
 								decrementEnemy(currentLevel)
 							else
 								-- if i is greater than n, need to remove the enemy 1 less than where i orginally was before removing n since the whole list shifted
 								allEne[i-1]:removeSelf()
 								table.remove(allEne, i-1)
-								allEnemHealth[i-1]:removeSelf()
-								table.remove(allEnemHealth, i-1)
+								--allEnemHealth[i-1]:removeSelf()
+								--table.remove(allEnemHealth, i-1)
 								decrementEnemy(currentLevel)
 							end
                                                         foundComboFlag = true
@@ -829,7 +829,8 @@ local function gameLoop( event )
 			end
 		end
 	end
-	updateEnemyHealth()
+
+	-- updateEnemyHealth()
 
 
 
@@ -901,7 +902,7 @@ function scene:createScene( event )
   function spawnEne(enemyID)
   	eneAndBar = scene:createEne(enemyID, false, 430, nil)
     group:insert(eneAndBar[0])
-	group:insert(eneAndBar[1])
+	--group:insert(eneAndBar[1])
   end
  --  local function createBullet(hero)
 	-- group:insert(make_bullet(hero))
@@ -1011,7 +1012,7 @@ function scene:exitScene( event )
   local group = self.view
   globals.currency.set(currencyCalc(globals.score, globals.currency.get()))
   globals.currency.save()
-  Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
+  --Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )
   --timer.cancel(attackTimer)
   timer.cancel(spawnEneTimer)
