@@ -110,12 +110,12 @@ function producerSwap()
 		local randomEne1X = allEne[randomEne1].x
 		local randomEne2X = allEne[randomEne2].x
 		print ("enemy1 x: " .. randomEne1X .. " enemy2 x: " .. randomEne2X)
-		local randomEne1BarX = allEnemHealth[randomEne1].x
-		local randomEne2BarX = allEnemHealth[randomEne2].x
+		--local randomEne1BarX = allEnemHealth[randomEne1].x
+		--local randomEne2BarX = allEnemHealth[randomEne2].x
 		local randomEne1Y = allEne[randomEne1].y
 		local randomEne2Y = allEne[randomEne2].y
-		local randomEne1BarY = allEnemHealth[randomEne1].y
-		local randomEne2BarY = allEnemHealth[randomEne2].y
+		--local randomEne1BarY = allEnemHealth[randomEne1].y
+		--local randomEne2BarY = allEnemHealth[randomEne2].y
 		
 		local smoke1 = display.newImage( "images/smoke.png", allEne[randomEne1].x, allEne[randomEne1].y, true )
 		transition.to( smoke1, { time=1500, alpha=0, onComplete=function() smoke1:removeSelf()end } )
@@ -204,8 +204,8 @@ function itemFoodDrag( event )
 					elseif (body.itemType == "trash") then
 					allEne[n]: removeSelf()
 					table.remove(allEne, n)
-					allEnemHealth[n]:removeSelf()
-					table.remove(allEnemHealth, n)
+					--allEnemHealth[n]:removeSelf()
+					--table.remove(allEnemHealth, n)
 					decrementEnemy(currentLevel)
 					body: removeSelf()
 					myItems[body.myItemRef] = nil

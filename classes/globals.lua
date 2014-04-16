@@ -34,6 +34,8 @@ globals.attack_dst = false
 
 -- HUD OBJECTIVE --
 globals.objectiveText = nil
+globals.categoryText = nil
+globals.scoreObjText = nil
 
 -- HUD MULTIPLIER -- 
 globals.multiplier = 0

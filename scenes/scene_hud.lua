@@ -34,33 +34,86 @@ function scene:createScene( event )
   group:insert(currencyText)
   
   -- OBJECTIVE --
+  -- for spacing out objectives
+  local spacer = 40
+  local imgSpacer = 15
+  local textSpacer = 50
   
 	function getObjectiveProgress()
 		local numer = currentLevel.victoryCondition.memAmount-currentLevel.victoryCondition.amount
 		local denom = currentLevel.victoryCondition.memAmount
 		if numer > denom then return (denom.."/"..denom)
-		else return (numer.."/"..denom) end
+		else return (numer.."/"..denom) 
+    end
 	end
+  -- returns progress of category conditions
+  function getCatNumbers()
+    local catNum = currentLevel.categoryCondition.memAmount-currentLevel.categoryCondition.amount
+    local catDen = currentLevel.categoryCondition.memAmount
+    if (canNum > catDen) then 
+      return (catDen.."/"..catDen)
+    else 
+      return (catNum.."/"..canDen) 
+    end
+  end
+
+  -- returns progress #s of score conditions
+  function getScoreNumbers()
+    local scoreNum = currentLevel.scoreCondition.memScore - currentLevel.scoreCondition.score
+    local scoreDen = currentLevel.scoreCondition.memScore
+    if (scoreNum > scoreDen) then
+      return (scoreDen .. "/" .. scoreDen)
+    else
+      return (scoreNum .. "/" .. scoreDen)
+    end
+  end
+
+  local function showItemObj()
+    local objectiveGradient = display.newImage("images/scoreGradient.png")
+    objectiveGradient.width = 70
+    objectiveGradient.height = 25
+
+    objectiveGradient.x = spacer
+    spacer = spacer + 40
+    objectiveGradient.y = 15
+    
+    group:insert(objectiveGradient)  
+    
+    local objectiveIcon = display.newImage(currentLevel.victoryCondition.enemy.image)
+    objectiveIcon.width = 25
+    objectiveIcon.height = 25
+    
+    objectiveIcon.x = imgSpacer
+    imgSpacer = imgSpacer + 40 
+    objectiveIcon.y = 14
+    
+    group:insert(objectiveIcon)
+    
+    globals.objectiveText = display.newText( getObjectiveProgress(), textSpacer, 14, globals.LOBSTERTWO, 20 )
+    textSpacer = textSpacer + 40
+    globals.objectiveText:setFillColor(1,1,1)
+    group:insert(globals.objectiveText)  
+
+  end
+
+  -- Visual representation of category objectives.
+  local function showCategoryObj()
+
+  end
+
+  -- Visual representation of score objectives.
+  local function showScoreObj()
+
+  end
+
+   if (currentLevel.victoryCondition ~= false) then
+    showItemObj()
+   end
 	
-	if (currentLevel.victoryCondition ~= false) then
-		local objectiveGradient = display.newImage("images/scoreGradient.png")
-		objectiveGradient.width = 70
-		objectiveGradient.height = 25
-		objectiveGradient.x = 120
-		objectiveGradient.y = 15
-		group:insert(objectiveGradient)
-  
-		local objectiveIcon = display.newImage(currentLevel.victoryCondition.enemy.image)
-		objectiveIcon.width = 25
-		objectiveIcon.height = 25
-		objectiveIcon.x = 85
-		objectiveIcon.y = 14
-		group:insert(objectiveIcon)
-		
-		globals.objectiveText = display.newText( getObjectiveProgress(), 127, 14, globals.LOBSTERTWO, 20 )
-		globals.objectiveText:setFillColor(1,1,1)
-		group:insert(globals.objectiveText)  
-	end
+
+  -- function for score objective.
+
+  -- function for category objective. 
 	
 
   -- SCORE --

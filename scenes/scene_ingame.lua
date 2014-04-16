@@ -638,9 +638,20 @@ end
 local function gameLoop( event )
 	globals.multiplier = getMultiplier()
 	globals.multiplierText.text = (globals.multiplier)
+
+	-- CHECKS FOR OBJECTIVES (visual representations) HERE --
 	if currentLevel.victoryCondition ~=false then
 		globals.objectiveText.text = getObjectiveProgress()
 	end
+
+	if (currentLevel.categoryCondition ~= false) then
+		globals.categoryText = getCatNumbers()
+	end
+	if  (currentLevel.scoreCondition ~= false) then
+		globals.scoreObjText = getScoreNumbers()
+	end
+	-- end objectives text. 
+
 	if ( globals.notDurningAntagonist ) then
 		for i = 0,table.maxn( allEne ) do
 			for n = 0,table.maxn( hero ) do
