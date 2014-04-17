@@ -51,7 +51,6 @@ function scene:createScene( event )
 
     local catNum = currentLevel.categoryCondition.memAmount - currentLevel.categoryCondition.amount
     local catDen = currentLevel.categoryCondition.memAmount
-    print (catNum .. "/" .. catDen)
     if (catNum > catDen) then return (catDen.."/"..catDen)
     else return (catNum .."/" .. catDen) 
     end
@@ -61,7 +60,6 @@ function scene:createScene( event )
   function getScoreNumbers()
     local scoreNum = globals.score
     local scoreDen = currentLevel.scoreCondition.memScore
-    print (scoreNum)
     if (scoreNum > scoreDen) then return (scoreDen .. "/" .. scoreDen)
     else
       return (scoreNum .. "/" .. scoreDen)
