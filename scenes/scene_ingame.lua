@@ -549,10 +549,11 @@ local function gameLoop( event )
 	end
 
 	if (currentLevel.categoryCondition ~= false) then
-		globals.categoryText = getCatNumbers()
+		globals.categoryText.text = getCatNumbers()
 	end
+
 	if  (currentLevel.scoreCondition ~= false) then
-		globals.scoreObjText = getScoreNumbers()
+		globals.scoreObjText.text = getScoreNumbers()
 	end
 	-- end objectives text. 
 

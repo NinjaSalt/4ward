@@ -38,7 +38,7 @@ function scene:createScene( event )
   local spacer = 40
   local imgSpacer = 15
   local textSpacer = 50
-  
+  local between =  85
 	function getObjectiveProgress()
 		local numer = currentLevel.victoryCondition.memAmount-currentLevel.victoryCondition.amount
 		local denom = currentLevel.victoryCondition.memAmount
@@ -48,21 +48,21 @@ function scene:createScene( event )
 	end
   -- returns progress of category conditions
   function getCatNumbers()
-    local catNum = currentLevel.categoryCondition.memAmount-currentLevel.categoryCondition.amount
+
+    local catNum = currentLevel.categoryCondition.memAmount - currentLevel.categoryCondition.amount
     local catDen = currentLevel.categoryCondition.memAmount
-    if (canNum > catDen) then 
-      return (catDen.."/"..catDen)
-    else 
-      return (catNum.."/"..canDen) 
+    print (catNum .. "/" .. catDen)
+    if (catNum > catDen) then return (catDen.."/"..catDen)
+    else return (catNum .."/" .. catDen) 
     end
   end
 
   -- returns progress #s of score conditions
   function getScoreNumbers()
-    local scoreNum = currentLevel.scoreCondition.memScore - currentLevel.scoreCondition.score
+    local scoreNum = globals.score
     local scoreDen = currentLevel.scoreCondition.memScore
-    if (scoreNum > scoreDen) then
-      return (scoreDen .. "/" .. scoreDen)
+    print (scoreNum)
+    if (scoreNum > scoreDen) then return (scoreDen .. "/" .. scoreDen)
     else
       return (scoreNum .. "/" .. scoreDen)
     end
@@ -74,7 +74,7 @@ function scene:createScene( event )
     objectiveGradient.height = 25
 
     objectiveGradient.x = spacer
-    spacer = spacer + 40
+    spacer = spacer + between
     objectiveGradient.y = 15
     
     group:insert(objectiveGradient)  
@@ -84,13 +84,13 @@ function scene:createScene( event )
     objectiveIcon.height = 25
     
     objectiveIcon.x = imgSpacer
-    imgSpacer = imgSpacer + 40 
+    imgSpacer = imgSpacer + between
     objectiveIcon.y = 14
     
     group:insert(objectiveIcon)
     
     globals.objectiveText = display.newText( getObjectiveProgress(), textSpacer, 14, globals.LOBSTERTWO, 20 )
-    textSpacer = textSpacer + 40
+    textSpacer = textSpacer + between
     globals.objectiveText:setFillColor(1,1,1)
     group:insert(globals.objectiveText)  
 
@@ -98,23 +98,73 @@ function scene:createScene( event )
 
   -- Visual representation of category objectives.
   local function showCategoryObj()
+    local catBack = display.newImage("images/scoreGradient.png")
+    catBack.width = 70
+    catBack.height = 25
+
+    catBack.x = spacer
+    spacer = spacer + between
+    catBack.y = 15
+    
+    group:insert(catBack)  
+    
+    --local catFace = display.newImage(ADD_FACE_HERE)
+    --catFace.width = 25
+    --catFace.height = 25
+    
+    --catFace.x = imgSpacer
+    imgSpacer = imgSpacer + between
+    --catFace.y = 14
+    
+    --group:insert(catFace)
+    
+    globals.categoryText = display.newText( getCatNumbers(), textSpacer, 14, globals.LOBSTERTWO, 20 )
+    textSpacer = textSpacer + between
+    globals.categoryText:setFillColor(1,1,1)
+    group:insert(globals.categoryText)  
 
   end
 
   -- Visual representation of score objectives.
   local function showScoreObj()
+     local scoreBack = display.newImage("images/scoreGradient.png")
+    scoreBack.width = 85
+    scoreBack.height = 25
+
+    scoreBack.x = spacer
+    spacer = spacer + between
+    scoreBack.y = 15
+    
+    group:insert(scoreBack)  
+    
+    --local catFace = display.newImage(ADD_FACE_HERE)
+    --catFace.width = 25
+    --catFace.height = 25
+    
+    --catFace.x = imgSpacer
+    imgSpacer = imgSpacer + between
+    --catFace.y = 14
+    
+    --group:insert(catFace)
+    
+    globals.scoreObjText = display.newText( getScoreNumbers(), textSpacer, 14, globals.LOBSTERTWO, 20 )
+    textSpacer = textSpacer + between
+    globals.scoreObjText:setFillColor(1,1,1)
+    group:insert(globals.scoreObjText)  
 
   end
 
-   if (currentLevel.victoryCondition ~= false) then
+  if (currentLevel.victoryCondition ~= false) then
     showItemObj()
    end
-	
-
-  -- function for score objective.
-
   -- function for category objective. 
-	
+  if (currentLevel.categoryCondition ~= false) then
+    showCategoryObj()
+  end
+  -- function for score objective.
+  if (currentLevel.scoreCondition ~= false) then
+    showScoreObj()
+  end
 
   -- SCORE --
 
