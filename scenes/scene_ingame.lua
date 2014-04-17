@@ -944,6 +944,7 @@ function scene:exitScene( event )
 	if(globals.score > 0) then
 		levels[world][thisLevel].stars=1
 		globals.stars[world][thisLevel] = 1
+		if (currentLevel.victoryCondition~= false) then
 		if(currentLevel.victoryCondition.conditionMet==true) then
 			levels[world][thisLevel].stars=2
 			globals.stars[world][thisLevel] = 2
@@ -952,6 +953,7 @@ function scene:exitScene( event )
 				globals.stars[world][thisLevel] = 3
 			end
 		end
+	end
 	end
 	
 	print ("Stars: " .. levels[world][thisLevel].stars)
