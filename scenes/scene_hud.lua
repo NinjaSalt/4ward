@@ -104,17 +104,30 @@ function scene:createScene( event )
     spacer = spacer + between
     catBack.y = 15
     
-    group:insert(catBack)  
+    group:insert(catBack)
+
+    local catIcon = "none"
+
+    -- determines which icon to use.
+    if (currentLevel.categoryCondition.type == "breakfast") then
+      catIcon = "images/brIcon.png"
+    end
+    if (currentLevel.categoryCondition.type == "dinner") then
+        catIcon = "images/diIcon.png"
+    end
+    if (currentLevel.categoryCondition.type == "dessert") then
+      catIcon = "images/deIcon.png"
+    end
+
+    local catFace = display.newImage(catIcon)
+    catFace.width = 30
+    catFace.height = 30
     
-    --local catFace = display.newImage(ADD_FACE_HERE)
-    --catFace.width = 25
-    --catFace.height = 25
-    
-    --catFace.x = imgSpacer
+    catFace.x = imgSpacer
     imgSpacer = imgSpacer + between
-    --catFace.y = 14
+    catFace.y = 14
     
-    --group:insert(catFace)
+    group:insert(catFace)
     
     globals.categoryText = display.newText( getCatNumbers(), textSpacer, 14, globals.LOBSTERTWO, 20 )
     textSpacer = textSpacer + between

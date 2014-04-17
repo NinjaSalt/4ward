@@ -122,7 +122,7 @@ levels[3] = {}
 
 --world 1
 levels[1][1] = Level.create(1, makeSecondaryWin(pancake,1), {1,4}, {1000,2000}, false, makeScoreWin(10))
-levels[1][2] = Level.create(2, makeSecondaryWin(cake,2), {1,6,1,6,1,6,1,6,3}, {1000,3000,3000,3000,3000,3000,2600,2600,2600}, false, false)
+levels[1][2] = Level.create(2, false, {1,6,1,6,1,6,1,6,3}, {1000,3000,3000,3000,3000,3000,2600,2600,2600}, makeCatWin("dessert", 3), makeScoreWin(80))
 levels[1][3] = Level.create(3, makeSecondaryWin(steakOm,1), {0,6,2,4,3,6,2,0,5,0,2,1}, {500,3000,3000,3000,3000,3000,3000,3000,6000,2600,2600,2600}, false, makeScoreWin(150))
 levels[1][4] = Level.create(4, makeSecondaryWin(fries,2), {6,5,2,4,5,4,5,4}, {500,3000,3000,3000,3000,3000,3000,3000}, makeCatWin("dinner",2), false)
 levels[1][5] = Level.create(5, makeSecondaryWin(pancake,1), {1,4,1,0,5,2}, {1000,3000,3000,3000,3000,3000}, false, makeScoreWin(120))
