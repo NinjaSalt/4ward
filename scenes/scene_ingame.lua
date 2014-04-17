@@ -635,9 +635,44 @@ function makeDeathPoof(allEne)
 	--end visual poof of death.
 end
 
+function validCombosRemaining()
+    if ( #(currentLevel.enemyIDQueue)~= currentLevel.spawnCounter ) then
+        return true
+    end
+    
+    for i = 1,table.maxn( allEne ) do
+        local basicItemFlag = false
+        for j = 0,table.maxn( myEnemies ) do
+            if allEne[i].type == myEnemies[j].type then
+            basicItemFlag = true
+            break
+            end
+        end
+        if basicItemFlag == false then
+            if allEne[i].type ~= "bad" then
+                return true
+            end
+        end
+    end
+    
+    for i = 1,table.maxn( allEne ) do
+        for j = i+1,table.maxn( allEne ) do
+            if foodgroup[allEne[i].type][allEne[j].type] ~= "bad" then
+                return true
+            end
+        end
+    end
+    return false
+    
+end
+
 local function gameLoop( event )
 	globals.multiplier = getMultiplier()
 	globals.multiplierText.text = (globals.multiplier)
+        
+        if validCombosRemaining() == false then
+            --print("NO COMBOS REMAINING!!!!!!!!!!!!!!!!")
+        end
 
 	-- CHECKS FOR OBJECTIVES (visual representations) HERE --
 	if currentLevel.victoryCondition ~=false then
