@@ -62,7 +62,7 @@ function bkftbuttonPressed()
         end
       end
     end
-    globals.score = globals.score + ((20*enemyCounter)*globals.multiplier)
+    globals.score = calcServingScore (enemyCounter, globals.score, globals.multiplier)
     globals.scoreText.text = (globals.score)
     transition.to( globals.breakfastButton, { x=-globals.breakfastButton.width,onComplete=function() 
         if(globals.breakfastButton~=nil) then
@@ -125,7 +125,7 @@ function dnrbuttonPressed()
         end
       end
     end
-    globals.score = globals.score + ((20*denemy)*globals.multiplier)
+    globals.score = calcServingScore (denemy, globals.score, globals.multiplier)
     globals.scoreText.text = (globals.score)
     transition.to( globals.dinnerButton, { x=-globals.dinnerButton.width, onComplete=function() 
         if(globals.dinnerButton~=nil) then
@@ -186,7 +186,7 @@ function dstbuttonPressed()
         end
       end
     end
-    globals.score = globals.score + ((20*dtenemy)*globals.multiplier)
+    globals.score = calcServingScore (dtenemy, globals.score, globals.multiplier)
     globals.scoreText.text = (globals.score)
     transition.to( globals.dessertButton, { x=-globals.dessertButton.width, onComplete=function() 
         if(globals.dessertButton~=nil) then

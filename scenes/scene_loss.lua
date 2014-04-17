@@ -35,13 +35,6 @@ function scene:createScene( event )
   for n=0, 2, 1 do
     	globals.belts[n]:pause()
 	end
-  if (globals.bullet ~= nil or globals.bullet_array ~= nil) then
-      for i=0, #globals.bullet_array, 1 do
-        if (globals.bullet_array[i] ~= nil) then
-          globals.bullet_array[i]:pause()
-        end
-      end
-    end
 	transition.pause("animation")
   local options = {
    effect = "fade",

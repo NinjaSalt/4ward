@@ -31,10 +31,6 @@ local breakfastspriteSettings
 local breakfastspritesheet
 local breakfastspriteequenceData
 local breakfastanimation
---text locals
-local good_Text
-local crit_Text
-local bad_Text
 local deathPoof
 
 local eneAndBar = {}
@@ -460,97 +456,6 @@ function itemCombo( item , enemy, fromFoodItem )
 	return eneAndBar[0]
 end
 
---function to call displaying "GOOD" text for enemy damage feedback
-local function goodText(enemy) 
-	good_Text = display.newImage( "images/good_text.png", enemy.x-10, enemy.y, true )
-	if (good_Text ~= nil) then
-		good_Text.width = enemy.width+20
-		good_Text.height = enemy.width+20
-		group:insert(good_Text)
-		table.insert( globals.goodTextArray, good_Text)
-		transition.to( good_Text, { time=1000, alpha=0, onComplete=
-		function() 
-			if (good_Text~= nil) then 
-				local index = table.indexOf( globals.goodTextArray, good_text )
-				--good_Text:removeSelf() 
-				table.remove( globals.goodTextArray, index )
-			end 
-		end, 
-		tag="animation" } )
-	end
-end
-
---function to call displaying "CRITICAL" text for enemy damage feedback
-local function critText (enemy)
-	crit_Text = display.newImage( "images/critical_text.png", enemy.x-10, enemy.y, true )
-	if (crit_Text ~= nil) then
-		crit_Text.width = enemy.width+20
-		crit_Text.height = enemy.width+20
-		group:insert(crit_Text)
-		table.insert( globals.critTextArray, crit_Text)
-		transition.to( crit_Text, { time=1000, alpha=0, onComplete=
-		function() 
-			if (crit_Text~= nil) then 
-				local index = table.indexOf( globals.critTextArray, crit_text )
-				--good_Text:removeSelf() 
-				table.remove( globals.critTextArray, index )
-			end 
-		end, 
-		tag="animation" } )
-	end
-end
-
---function to call displaying "OKAY" text for enemy damage feedback
-local function badText (enemy)
-	bad_Text = display.newImage( "images/bad_text.png", enemy.x-10, enemy.y, true )
-	if (bad_Text ~= nil) then
-		bad_Text.width = enemy.width+20
-		bad_Text.height = enemy.width+20
-		group:insert(bad_Text)
-		table.insert( globals.badTextArray, bad_Text)
-		transition.to( bad_Text, { time=1000, alpha=0, onComplete=
-		function() 
-			if (bad_Text~= nil) then 
-				local index = table.indexOf( globals.badTextArray, bad_text )
-				--good_Text:removeSelf() 
-				table.remove( globals.badTextArray, index )
-			end 
-		end, 
-		tag="animation" } )
-	end	
-end
-
---function to display the corresponding enemy damage feedback based on lanes and category
-local function textCheck(enemy, bullet)
-	if (enemy.y == lane1 and bullet.y == lane1) then
-		if (enemy.category == "breakfast") then
-			critText(enemy)
-		elseif (enemy.category == "bad") then
-			badText(enemy)
-		elseif (enemy.category ~= "basic") then
-			goodText(enemy) 
-		end
-	elseif (enemy.y == lane2 and bullet.y == lane2) then
-		if (enemy.category == "dinner") then
-			critText(enemy)
-		elseif (enemy.category == "bad") then
-			badText(enemy)
-		elseif (enemy.category ~= "basic") then
-			goodText(enemy) 
-		end
-	elseif (enemy.y == lane3 and bullet.y == lane3) then
-		if (enemy.category == "dessert") then
-			critText(enemy)
-		elseif (enemy.category == "bad") then
-			badText(enemy)
-		elseif (enemy.category ~= "basic") then
-			goodText(enemy) 
-		end
-	end
-
-end
-
-
 function checkEnemy()
 
 	-- turns score condition success true/false.
@@ -627,7 +532,6 @@ function makeDeathPoof(allEne)
 		function() 
 			if (deathPoof~= nil) then 
 				local index = table.indexOf( globals.deathPoofArray, deathPoof )
-				--good_Text:removeSelf() 
 				table.remove( globals.deathPoofArray, index )
 			end 
 		end, 
@@ -680,10 +584,11 @@ local function gameLoop( event )
 	end
 
 	if (currentLevel.categoryCondition ~= false) then
-		globals.categoryText = getCatNumbers()
+		globals.categoryText.text = getCatNumbers()
 	end
+
 	if  (currentLevel.scoreCondition ~= false) then
-		globals.scoreObjText = getScoreNumbers()
+		globals.scoreObjText.text = getScoreNumbers()
 	end
 	-- end objectives text. 
 
@@ -722,33 +627,6 @@ local function gameLoop( event )
 				end
 			end
 		end
-
---CHECKING FOR BULLET COLLISON
-		-- for i = 0,table.maxn( allEne ) do
-		-- 	for n = 0,table.maxn( globals.bullet_array  ) do
-		-- 		if ( hasCollidedCircle( globals.bullet_array [n], allEne[i]) ) then
-		-- 			-- allEne[i].health=allEne[i].health-bullet_array[n].attack old damage system
-		-- 			-- new damage check
-		-- 			allEne[i].health= allEne[i].health - calculateDamage(allEne[i], globals.bullet_array[n]) 
-		-- 			--VISUAL EFFECTS WHEN BULLET HITS ENEMIES--
-		-- 			textCheck(allEne[i], globals.bullet_array[n])
-		-- 			--VISUAL EFFECTS END--
-		-- 			if ( allEne[i].health <= 0 ) then
-		-- 				--theScore.add(allEne[i].pointValue) 		-- adding the amount to score
-		-- 				globals.score = globals.score + allEne[i].pointValue + calcLaneScore(allEne[i])
-		-- 				globals.scoreText.text = (globals.score)
-		-- 				makeDeathPoof()
-		-- 				allEne[i]:removeSelf()
-		-- 				table.remove(allEne, i)
-		-- 				allEnemHealth[i]:removeSelf()
-		-- 				table.remove(allEnemHealth, i)
-		-- 				decrementEnemy(currentLevel)
-		-- 				checkEnemy()
-		-- 			end
-		-- 			remove_bullet(globals.bullet_array[n])
-		-- 		end
-		-- 	end
-		-- end
 
 		-- this is the code for collision checking, and combining to make new enemies
                 local foundComboFlag = false
@@ -892,13 +770,6 @@ timer.pause(spawnEneTimer)
   for n=0, 2, 1 do
     	globals.belts[n]:pause()
 	end
-  if (globals.bullet ~= nil or globals.bullet_array ~= nil) then
-      for i=0, #globals.bullet_array, 1 do
-        if (globals.bullet_array[i] ~= nil) then
-          globals.bullet_array[i]:pause()
-        end
-      end
-    end
 	transition.pause("animation")
 	storyboard.removeScene(scene)
     storyboard.gotoScene( "scenes.scene_inBetween",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
@@ -913,15 +784,6 @@ local function goToIntro(vicCond, id, catCond, scoreCond)
     for n=0, 2, 1 do
     	globals.belts[n]:pause()
 	end
-	if (globals.bullet ~= nil or globals.bullet_array ~= nil) then
-      for i=0, #globals.bullet_array, 1 do
-        if (globals.bullet_array[i] ~= nil) then
-          globals.bullet_array[i]:pause()
-      else
-      	break
-        end
-      end
-    end
     transition.pause("animation")
 end
 
@@ -1056,7 +918,7 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  globals.currency.set(currencyCalc(globals.score, globals.currency.get()))
+  globals.currency.set(globals.score)
   globals.currency.save()
   --Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )
@@ -1065,14 +927,7 @@ function scene:exitScene( event )
   if ( antagonistTimer ~= nil) then
 	timer.cancel(antagonistTimer)
   end
-  	for j = 0,table.maxn( globals.bullet_array  ) do
-		if globals.bullet_array[j] ~= nil then
-			globals.bullet_array[j]:removeSelf()
-		end
-	end
-	good_Text = nil
-  crit_Text = nil
-  bad_Text = nil
+
   deathPoof = nil
 	if (globals.breakfastButton~= nil) then
 		globals.breakfastButton:removeSelf()

@@ -21,17 +21,6 @@ globals.levers[0] = nil
 globals.levers[1] = nil
 globals.levers[2] = nil
 
--- ARRAY FOR BULLETS --
-globals.attack = true
-globals.bullet_array = {}
-globals.bullet = {}
-globals.bullet[0] = nil
-globals.bullet[1] = nil
-globals.bullet[2] = nil
-globals.attack_bkft= false
-globals.attack_dnr = false
-globals.attack_dst = false
-
 -- HUD OBJECTIVE --
 globals.objectiveText = nil
 globals.categoryText = nil
