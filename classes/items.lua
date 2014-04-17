@@ -46,10 +46,7 @@ function makeItemArray ()
 	end
 	--nextItem=nextItem+1
 	items[nextItem+1]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem, false, "Pauses the game.", "Click to activate.", 4)
-	items[nextItem+2]= Item.makeItem("Compost","trash", "images/trash_item.png", 1200, nextItem+2, false, "Deletes an item on the belt.", "Drag to unwanted item.",4)
-	items[nextItem+3]= Item.makeItem("Producer Swap","swap", "images/swap.png", 700, nextItem+3, false, "Swaps two items.", "Click to activate.",4)
-	items[nextItem+4]= Item.makeItem("Attack Boost","boost", "images/attackboost.png", 800, nextItem+4, true, "Boosts one hero's attack for 5 seconds.", "Drag to hero to activate.",4)
-	items[nextItem+5]= Item.makeItem("Chop Food","chop", "images/chop.png", 1000, nextItem+5, true, "Deal additional damge.", "Click to activate, then slash enemies.",4)
+	items[nextItem+2]= Item.makeItem("Producer Swap","swap", "images/swap.png", 700, nextItem+3, false, "Swaps two items.", "Click to activate.",4)
 end
 makeItemArray()
 myItems = {}
@@ -142,17 +139,6 @@ end
 		end
   end
 
-function chopFood()
-	print("CHOP FOOD!!")
-	timer.performWithDelay( 6000, resume )
-   		for i = 0,table.maxn( allEne ) do
-   			if (allEne[i] ~= nil) then
-    			allEne[i]:removeEventListener( "touch", teleport )
-    			allEne[i]:addEventListener( "touch", chopping )
-    		end
-		end
-end
-
 
 function itemTap ( event )
 	itemUsed = event.target
@@ -163,10 +149,6 @@ function itemTap ( event )
 		myItems[itemUsed.myItemRef] = nil
 	elseif (itemUsed.itemType == "swap")then
 		producerSwap()
-		itemUsed: removeSelf()
-		myItems[itemUsed.myItemRef] = nil
-	elseif (itemUsed.itemType == "chop")then
-		chopFood()
 		itemUsed: removeSelf()
 		myItems[itemUsed.myItemRef] = nil
 	end
@@ -209,57 +191,6 @@ function itemFoodDrag( event )
 					decrementEnemy(currentLevel)
 					body: removeSelf()
 					myItems[body.myItemRef] = nil
-					end
-				hit = 1
-				end
-			end
-			if ( hit == 0) then
-				print (body.x .. " " .. startX)
-				transition.to( body, { time=400, x = startX, y = startY} )
-			end
-			startX = nil
-			startY = nil
-			stage:setFocus( body, nil )
-			body.isFocus = false
-
-		end
-	end
-
--- Stop further propagation of touch event
-	return true
-end
-
-function dragToHero( event )
-	local body = event.target
-	local phase = event.phase
-	local stage = display.getCurrentStage()
-	if( startX == nil ) then
-		startX = body.x
-		startY = body.y
-	end
-
-	if "began" == phase then
-		stage:setFocus( body, event.id )
-		body.isFocus = true
-
-	elseif body.isFocus then
-		if "moved" == phase then
-
-		-- Update the joint to track the touch
-		body.x = event.x
-		body.y = event.y 
-
-		elseif "ended" == phase or "cancelled" == phase then
-			local hit = 0
-			print (body.itemType)
-			for n = 0,table.maxn( hero  ) do
-				if ( hasCollidedCircle( body, hero[n]) ) then
-					-- in game
-					if (body.itemType == "boost") then
-						hero[n].attack = hero[n].attack + 2
-						print(hero[n].attack)
-						body: removeSelf()
-						myItems[body.myItemRef] = nil
 					end
 				hit = 1
 				end
