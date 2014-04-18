@@ -4,8 +4,9 @@
 -- Code to have Corona display the font names found
 --
 local fonts = native.getFontNames()
-
 count = 0
+
+
 
 -- Count the number of total fonts
 for i,fontname in ipairs(fonts) do
@@ -93,5 +94,82 @@ for i, fontname in ipairs(fonts) do
 
     end
 end
+
+local loadsave = require("classes.loadsave")
+
+gameSettings = loadsave.loadTable("gamesettings.json")
+ 
+-- check if gameSettings exists. If not create and initialise starting data
+if (gameSettings == nil) then --comment this to reset the saving
+    -- creating new table to save data
+    gameSettings  = {}
+    --world
+    gameSettings[1] = {}
+    gameSettings[2] = {}
+    gameSettings[3] = {}
+
+    --levels
+    gameSettings[1][1] = {}
+    gameSettings[1][2] = {}
+    gameSettings[1][3] = {}
+    gameSettings[1][4] = {}
+    gameSettings[1][5] = {}
+
+    gameSettings[2][1] = {}
+    gameSettings[2][2] = {}
+    gameSettings[2][3] = {}
+    gameSettings[2][4] = {}
+    gameSettings[2][5] = {}
+
+    gameSettings[3][1] = {}
+    gameSettings[3][2] = {}
+    gameSettings[3][3] = {}
+    gameSettings[3][4] = {}
+    gameSettings[3][5] = {}
+
+    --score
+    gameSettings[1][1][1] = 0
+    gameSettings[1][2][1] = 0
+    gameSettings[1][3][1] = 0
+    gameSettings[1][4][1] = 0
+    gameSettings[1][5][1] = 0
+
+    gameSettings[2][1][1] = 0
+    gameSettings[2][2][1] = 0
+    gameSettings[2][3][1] = 0
+    gameSettings[2][4][1] = 0
+    gameSettings[2][5][1] = 0
+
+    gameSettings[3][1][1] = 0
+    gameSettings[3][2][1] = 0
+    gameSettings[3][3][1] = 0
+    gameSettings[3][4][1] = 0
+    gameSettings[3][5][1] = 0
+
+    --stars
+    gameSettings[1][1][2] = 0
+    gameSettings[1][2][2] = 0
+    gameSettings[1][3][2] = 0
+    gameSettings[1][4][2] = 0
+    gameSettings[1][5][2] = 0
+
+    gameSettings[2][1][2] = 0
+    gameSettings[2][2][2] = 0
+    gameSettings[2][3][2] = 0
+    gameSettings[2][4][2] = 0
+    gameSettings[2][5][2] = 0
+
+    gameSettings[3][1][2] = 0
+    gameSettings[3][2][2] = 0
+    gameSettings[3][3][2] = 0
+    gameSettings[3][4][2] = 0
+    gameSettings[3][5][2] = 0
+
+ 
+    loadsave.saveTable(gameSettings , "gamesettings.json")
+    print("First Time Data Initialisation") --comment this to reset the saving
+else --comment this to reset the saving
+    print("Main Data Loaded") --comment this to reset the saving
+end --comment this to reset the saving
 ---------------------------------------------------------
 

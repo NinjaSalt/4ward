@@ -93,10 +93,13 @@ function scene:createScene( event )
   group:insert( gameTitle )
   
   local scoreTitle = display.newText( "SCORE: " ..globals.score, 0, 0, globals.IMPRIMA, 26)
+   
   scoreTitle:setFillColor(black)
   scoreTitle.x = display.contentCenterX
   scoreTitle.y = gameTitle.y + 45
- 
+  --adding the score integer into the currency  
+  globals.currency.add(globals.score)
+  globals.currency.save()
   group:insert( scoreTitle )
   
   if nextLevel == LevelList.getNumOfLevels(params.world) then

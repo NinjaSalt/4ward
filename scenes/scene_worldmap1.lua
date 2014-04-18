@@ -6,7 +6,10 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals = require("classes.globals")
+local loadsave = require("classes.loadsave")
 require("classes.levelUnlocking")
+
+gameSettings = loadsave.loadTable("gamesettings.json")
 
  
 -- Clear previous scene
@@ -20,6 +23,7 @@ storyboard.removeAll()
  
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
+
   print(worlds[1].levelsUnlocked[2])
   local group = self.view
 
@@ -132,34 +136,56 @@ function scene:createScene( event )
   group:insert(star3)
   
   local function setStars (thisLevel)
-	star1.alpha = 0
-	star2.alpha = 0
-	star3.alpha = 0
-	if (globals.stars[1][thisLevel] >= 1) then
-		star1.alpha = 1
-	end
-	if (globals.stars[1][thisLevel] >= 2) then
-		star2.alpha = 1
-	end
-	if (globals.stars[1][thisLevel] >= 3) then
-		star3.alpha = 1
-	end
+    star1.alpha = 0
+    star2.alpha = 0
+    star3.alpha = 0
+    if (globals.stars[1][thisLevel] >= 1) then
+    	star1.alpha = 1
+    end
+    if (globals.stars[1][thisLevel] >= 2) then
+    	star2.alpha = 1
+    end
+    if (globals.stars[1][thisLevel] >= 3) then
+    	star3.alpha = 1
+    end
+  end
+
+    local function setSavedStars (thisLevel)
+    star1.alpha = 0
+    star2.alpha = 0
+    star3.alpha = 0
+    --print("STARS: " .. gameSettings[1][levelSelect][2])
+    if (thisLevel >= 1) then
+      star1.alpha = 1
+    end
+    if (thisLevel >= 2) then
+      star2.alpha = 1
+    end
+    if (thisLevel >= 3) then
+      star3.alpha = 1
+    end
   end
   
   local function onTapLevel1 ( event )
     levelTitle.text = "Step 1: Can you... Cook?"
     objectives.text = "Objectives: Make a Pancake."
     levelSelect = 1
-	setStars(levelSelect)
+	 setStars(levelSelect)
+   if (gameSettings[1][levelSelect][2] ~= 0 and gameSettings[1][levelSelect][2] ~= nil) then
+    setSavedStars (gameSettings[1][levelSelect][2])
+  end
    -- level1.strokeWidth = 3
    -- level1.stroke.effect = "generator.marchingAnts"
   end
 
   local function onTapLevel2 ( event )
     levelTitle.text = "Step 2: Cake and Bake!"
-    objectives.text = "Objectives: Make two Cakes."
+    objectives.text = "Objectives: Serve 3 Dessert Items."
     levelSelect = 2
 	setStars(levelSelect)
+    if (gameSettings[1][levelSelect][2] ~= 0 and gameSettings[1][levelSelect][2] ~= nil) then
+    setSavedStars (gameSettings[1][levelSelect][2])
+  end
   end
 
   local function onTapLevel3 ( event )
@@ -167,6 +193,9 @@ function scene:createScene( event )
     objectives.text = "Objectives: Make one Steak Omelette"
     levelSelect = 3
 	setStars(levelSelect)
+    if (gameSettings[1][levelSelect][2] ~= 0 and gameSettings[1][levelSelect][2] ~= nil) then
+    setSavedStars (gameSettings[1][levelSelect][2])
+  end
   end
 
   local function onTapLevel4 ( event )
@@ -174,6 +203,9 @@ function scene:createScene( event )
     objectives.text = "Objectives: Make two Fries"
     levelSelect = 4
 	setStars(levelSelect)
+    if (gameSettings[1][levelSelect][2] ~= 0 and gameSettings[1][levelSelect][2] ~= nil) then
+    setSavedStars (gameSettings[1][levelSelect][2])
+  end
   end
 
   local function onTapLevel5 ( event )
@@ -181,6 +213,9 @@ function scene:createScene( event )
     objectives.text = "Objectives: ???"
     levelSelect = 5
 	setStars(levelSelect)
+    if (gameSettings[1][levelSelect][2] ~= 0 and gameSettings[1][levelSelect][2] ~= nil) then
+    setSavedStars (gameSettings[1][levelSelect][2])
+  end
   end  
 
   level1:addEventListener("tap", onTapLevel1)

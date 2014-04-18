@@ -7,6 +7,31 @@ globals.gamePaused = false;
 
 globals.currency = require( "classes.score" )
 
+globals.numWorlds = 3
+globals.numLevels = 5
+globals.numStorage = 2
+-- globals.gameSavedValues = {}
+-- for n = 1,table.maxn( numWorlds+1 ) do
+-- 	globals.gameSavedValues[n] = {}
+-- end
+-- for n = 1,table.maxn( numWorlds+1 ) do
+-- 	for j = 1,table.maxn( numLevels+1 ) do
+-- 	globals.gameSavedValues[n][j] = {}
+-- 	end
+-- end
+-- for n = 1,table.maxn( numWorlds+1 ) do
+-- 	for j = 1,table.maxn( numLevels+1 ) do
+-- 		for h = 1,table.maxn( numStorage+1 ) do
+-- 			globals.gameSavedValues[n][j][h] = 0
+-- 		end
+-- 	end
+-- end
+globals.loadgame = false
+globals.loadsave=  nil
+globals.level = 0
+globals.world = 0
+
+
 globals.recipes = {}
 globals.basics = {}
 --globals.recipe = require ("classes.recipes")
@@ -64,9 +89,6 @@ globals.hold = nil
 globals.spot = nil
 
 -- IN GAME VISUALS --
-globals.goodTextArray = {}
-globals.critTextArray = {}
-globals.badTextArray = {}
 globals.deathPoofArray = {}
 
 globals.stars = {}

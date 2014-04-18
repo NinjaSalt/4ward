@@ -78,6 +78,26 @@ function scene:createScene( event )
   storeTitle.x = display.contentCenterX
   storeTitle.y = 30
   group:insert( storeTitle )
+
+
+local currencyGradient = display.newImage("images/money.png")
+  currencyGradient.width = 80
+  currencyGradient.height = 40
+  currencyGradient.x = currencyGradient.width/2+5
+  currencyGradient.y = currencyGradient.height/2+5
+  group:insert(currencyGradient)
+
+  currenyText = globals.currency.init({
+    fontSize = 20,
+    font = "Helvetica",
+    x = currencyGradient.width/2+5,
+    y = currencyGradient.height/2+5,
+    maxDigits = 7,
+    leadingZeros = false,
+    filename = "currencyfile.txt",
+    })
+ -- currenyText:setFillColor( black )
+  group:insert(currenyText)
   
 	local function scrollListener( event )
 
@@ -279,6 +299,8 @@ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
+  local prevScore = globals.currency.load()
+  globals.currency.set(prevScore)
  
 end
  

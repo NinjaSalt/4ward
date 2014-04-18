@@ -6,6 +6,7 @@
 local storyboard = require( "storyboard" )
 local globals = require("classes.globals")
 local scene = storyboard.newScene()
+local loadsave = require("classes.loadsave")
 local thisLevel 
 local world
 local eneInHold = nil
@@ -945,15 +946,17 @@ function scene:exitScene( event )
 		levels[world][thisLevel].stars=1
 		globals.stars[world][thisLevel] = 1
 		if (currentLevel.victoryCondition~= false) then
-		if(currentLevel.victoryCondition.conditionMet==true) then
-			levels[world][thisLevel].stars=2
-			globals.stars[world][thisLevel] = 2
-			if (globals.score > 100) then
-				levels[world][thisLevel].stars=3
-				globals.stars[world][thisLevel] = 3
+			if(currentLevel.victoryCondition.conditionMet==true) then
+				levels[world][thisLevel].stars=2
+				globals.stars[world][thisLevel] = 2
+				if (globals.score > 100) then
+					levels[world][thisLevel].stars=3
+					globals.stars[world][thisLevel] = 3
+				end
 			end
 		end
-	end
+		gameSettings[world][thisLevel][2] = globals.stars[world][thisLevel]
+		loadsave.saveTable(gameSettings , "gamesettings.json")
 	end
 	
 	print ("Stars: " .. levels[world][thisLevel].stars)
