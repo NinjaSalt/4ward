@@ -919,7 +919,7 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  globals.currency.set(globals.score)
+  globals.currency.add(globals.score)
   globals.currency.save()
   --Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )

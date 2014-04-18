@@ -97,9 +97,7 @@ function scene:createScene( event )
   scoreTitle:setFillColor(black)
   scoreTitle.x = display.contentCenterX
   scoreTitle.y = gameTitle.y + 45
-  --adding the score integer into the currency  
-  globals.currency.add(globals.score)
-  globals.currency.save()
+  --adding the score integer into the currency
   group:insert( scoreTitle )
   
   if nextLevel == LevelList.getNumOfLevels(params.world) then
@@ -179,6 +177,8 @@ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
+  local prevScore = globals.currency.load()
+  globals.currency.set(prevScore)
  
 end
  
