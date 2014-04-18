@@ -176,6 +176,7 @@ function scene:createScene( event )
   end
    -- level1.strokeWidth = 3
    -- level1.stroke.effect = "generator.marchingAnts"
+   print("level high score: " .. gameSettings[1][levelSelect][1])
   end
 
   local function onTapLevel2 ( event )
@@ -186,6 +187,7 @@ function scene:createScene( event )
     if (gameSettings[1][levelSelect][2] ~= 0 and gameSettings[1][levelSelect][2] ~= nil) then
     setSavedStars (gameSettings[1][levelSelect][2])
   end
+  print("level high score: " .. gameSettings[1][levelSelect][1])
   end
 
   local function onTapLevel3 ( event )
@@ -196,6 +198,7 @@ function scene:createScene( event )
     if (gameSettings[1][levelSelect][2] ~= 0 and gameSettings[1][levelSelect][2] ~= nil) then
     setSavedStars (gameSettings[1][levelSelect][2])
   end
+  print("level high score: " .. gameSettings[1][levelSelect][1])
   end
 
   local function onTapLevel4 ( event )
@@ -206,6 +209,7 @@ function scene:createScene( event )
     if (gameSettings[1][levelSelect][2] ~= 0 and gameSettings[1][levelSelect][2] ~= nil) then
     setSavedStars (gameSettings[1][levelSelect][2])
   end
+  print("level high score: " .. gameSettings[1][levelSelect][1])
   end
 
   local function onTapLevel5 ( event )
@@ -216,6 +220,7 @@ function scene:createScene( event )
     if (gameSettings[1][levelSelect][2] ~= 0 and gameSettings[1][levelSelect][2] ~= nil) then
     setSavedStars (gameSettings[1][levelSelect][2])
   end
+  print("level high score: " .. gameSettings[1][levelSelect][1])
   end  
 
   level1:addEventListener("tap", onTapLevel1)

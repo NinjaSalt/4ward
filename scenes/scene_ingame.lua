@@ -921,6 +921,13 @@ function scene:exitScene( event )
   local group = self.view
   globals.currency.add(globals.score)
   globals.currency.save()
+  --saving high score
+	if (globals.score > gameSettings[world][thisLevel][1]) then
+		gameSettings[world][thisLevel][1] = globals.score
+		loadsave.saveTable(gameSettings , "gamesettings.json")
+		print("new high score: " .. gameSettings[world][thisLevel][1])
+	end
+	print("saved score: " .. gameSettings[world][thisLevel][1])
   --Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )
   --timer.cancel(attackTimer)
@@ -955,8 +962,11 @@ function scene:exitScene( event )
 				end
 			end
 		end
-		gameSettings[world][thisLevel][2] = globals.stars[world][thisLevel]
-		loadsave.saveTable(gameSettings , "gamesettings.json")
+		--saving stars of the level
+		if (globals.stars[world][thisLevel] > gameSettings[world][thisLevel][2]) then
+			gameSettings[world][thisLevel][2] = globals.stars[world][thisLevel]
+			loadsave.saveTable(gameSettings , "gamesettings.json")
+		end
 	end
 	
 	print ("Stars: " .. levels[world][thisLevel].stars)

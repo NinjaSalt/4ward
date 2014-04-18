@@ -177,9 +177,6 @@ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
-  local prevScore = globals.currency.load()
-  globals.currency.set(prevScore)
- 
 end
  
 -- Called immediately after scene has moved onscreen:

@@ -39,7 +39,6 @@ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
- 
 end
  
 -- Called immediately after scene has moved onscreen:

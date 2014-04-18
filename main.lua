@@ -95,6 +95,22 @@ for i, fontname in ipairs(fonts) do
     end
 end
 
+----- HOW TO RESET THE SAVED TABLE ------
+--[[I know it looks ugly but when I tried to make a for-loop to do it for me, it wouldn't let me so
+I ended up with this. I tried putting it in the splash scene but it still gave me an error.
+
+1. Comment out everything that has -- * -- commented above/below it and the lines indicated to be commented out
+2. To reset the recipe book, you need to have gameSettings[4] and gameSettings[5] = nil and run the game.
+3. You don't have to play the game, just run it and then close it.
+4. Then set gameSettings[4] and gameSettings[5] = {} again and uncomment the huge chuck with the -- * --
+    but keep the indicated lines still commented out.
+5. Run the game again
+6. Close the game and then uncomment out the lines.
+7. Now when you run the game, everything should been resetted!
+
+]]--
+
+
 local loadsave = require("classes.loadsave")
 
 gameSettings = loadsave.loadTable("gamesettings.json")
@@ -107,7 +123,15 @@ if (gameSettings == nil) then --comment this to reset the saving
     gameSettings[1] = {}
     gameSettings[2] = {}
     gameSettings[3] = {}
+    --recipe book unlocking
+    --basic
+    gameSettings[4] = {}
+    --recipe
+    gameSettings[5] = {}
+    --item belt saving
+    --gameSettings[6] = {}
 
+    -- * --
     --levels
     gameSettings[1][1] = {}
     gameSettings[1][2] = {}
@@ -164,8 +188,8 @@ if (gameSettings == nil) then --comment this to reset the saving
     gameSettings[3][3][2] = 0
     gameSettings[3][4][2] = 0
     gameSettings[3][5][2] = 0
+    -- * --
 
- 
     loadsave.saveTable(gameSettings , "gamesettings.json")
     print("First Time Data Initialisation") --comment this to reset the saving
 else --comment this to reset the saving
