@@ -32,18 +32,18 @@ function scene:createScene( event )
   
   bkg:addEventListener("touch", function() return true end)
   bkg:addEventListener("tap", function() return true end)
-  local swipe = display.newRect( globals.belts[1].x+20, globals.belts[1].y, 360, 60)
+  local swipe = display.newRect( allEne[#allEne].x, allEne[#allEne].y, 50, 50)
   swipe.alpha = .01
   group:insert (swipe)
   
-  local toDo = display.newText( "Swipe the middle lane left!", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
+  local toDo = display.newText( "Swipe the eggs up!", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
   toDo:setFillColor(black)
   group:insert (toDo)
 
   local function onTapBack( event )
 	local phase = event.phase
 	if "ended" == phase or "cancelled" == phase then
-		if(event.x - event.xStart ~= 0 and event.x - event.xStart < -7)then
+		if(event.y - event.yStart ~= 0 and event.y - event.yStart < -7)then
 			storyboard.hideOverlay( "slideUp", 500 )
 			storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
 			--timer.resume(attackTimer)
@@ -55,13 +55,10 @@ function scene:createScene( event )
 			for n=0, 2, 1 do
 			  globals.belts[n]:play()
 			end
-			hero[1].laneSpeed = 1
-			updateMoveSpeed(hero[1])
-			globals.levers[hero[1].num]:setSequence( "fast" )
-			globals.levers[hero[1].num]:play()
-			transition.resume()
 		end
+		allEne[#allEne].y = allEne[#allEne].y - (lane2-lane1)
 	end
+	
   end
   
   swipe:addEventListener( "touch", onTapBack )
@@ -84,7 +81,7 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  timer.performWithDelay(1700, tutorialCombo )
+ 
 end
  
 -- Called AFTER scene has finished moving offscreen:
