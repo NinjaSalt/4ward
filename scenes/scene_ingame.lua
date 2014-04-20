@@ -324,6 +324,16 @@ function moveToHold( event )
 
 end
 
+function tutorial()
+  storyboard.showOverlay( "scenes.scene_tutorial",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+  timer.pause(spawnEneTimer)
+    globals.breakfastanimation:pause()
+    for n=0, 2, 1 do
+    	globals.belts[n]:pause()
+	end
+    transition.pause("animation")
+end
+
 function scene:createEne(enemyID, isCombo, x, lane)
 	--local eneAndBar = {}
 	--set the lane it will spawn in
@@ -352,6 +362,7 @@ function scene:createEne(enemyID, isCombo, x, lane)
 				randomPos = 1
 			else
 				randomPos = 2
+				timer.performWithDelay(800, tutorial )
 			end
 		end
 		if (randomPos == 1) then lane = lane1
