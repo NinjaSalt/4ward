@@ -599,6 +599,16 @@ function validCombosRemaining()
             end
         end
     end
+    
+    for i = 0, 2 do
+        if myItems[i] ~= nil and myItems[i].itemType == "foodType" then
+            for j = 1, table.maxn( allEne ) do
+                if foodgroup[myItems[i].type][allEne[j].type] ~= "bad" then
+                    return true
+                end
+            end
+        end
+    end
     return false
     
 end
