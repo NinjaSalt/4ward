@@ -96,18 +96,15 @@ for i, fontname in ipairs(fonts) do
 end
 
 ----- HOW TO RESET THE SAVED TABLE ------
---[[I know it looks ugly but when I tried to make a for-loop to do it for me, it wouldn't let me so
-I ended up with this. I tried putting it in the splash scene but it still gave me an error.
-
-1. Comment out everything that has -- * -- commented above/below it and the lines indicated to be commented out
+--[[
+1. Comment out the lines indicated to be commented out
 2. To reset the recipe book, you need to have gameSettings[4] and gameSettings[5] = nil and run the game.
 3. You don't have to play the game, just run it and then close it.
-4. Then set gameSettings[4] and gameSettings[5] = {} again and uncomment the huge chuck with the -- * --
-    but keep the indicated lines still commented out.
+4. Then set gameSettings[4] and gameSettings[5] = {} again but keep the indicated lines still commented out.
+    *** You might/might not need to do this step. I just did it to make sure that it clears the table.
 5. Run the game again
 6. Close the game and then uncomment out the lines.
 7. Now when you run the game, everything should been resetted!
-
 ]]--
 
 
@@ -116,84 +113,52 @@ local loadsave = require("classes.loadsave")
 gameSettings = loadsave.loadTable("gamesettings.json")
  
 -- check if gameSettings exists. If not create and initialise starting data
-if (gameSettings == nil) then --comment this to reset the saving
+if (gameSettings == nil) then --comment this to reset the saving ***
     -- creating new table to save data
     gameSettings  = {}
     --world
-    gameSettings[1] = {}
-    gameSettings[2] = {}
-    gameSettings[3] = {}
-    --recipe book unlocking
-    --basic
-    gameSettings[4] = {}
-    --recipe
-    gameSettings[5] = {}
-    --item belt saving
+    for n=1, globals.numWorlds+3, 1 do
+        print("n: " .. n)
+        gameSettings[n] = {}
+    end
+    --worlds:
+    -- gameSettings[1] = {}
+    -- gameSettings[2] = {}
+    -- gameSettings[3] = {}
+    -- --recipe book unlocking:
+    -- --basic
+    -- gameSettings[4] = {}
+    -- --recipe
+    -- gameSettings[5] = {}
+    --item belt saving:
     --gameSettings[6] = {}
 
     -- * --
     --levels
-    gameSettings[1][1] = {}
-    gameSettings[1][2] = {}
-    gameSettings[1][3] = {}
-    gameSettings[1][4] = {}
-    gameSettings[1][5] = {}
+    for n=1, globals.numWorlds, 1 do
+        for j=1, globals.numLevels, 1 do
+            gameSettings[n][j] = {}
+        end
+    end
 
-    gameSettings[2][1] = {}
-    gameSettings[2][2] = {}
-    gameSettings[2][3] = {}
-    gameSettings[2][4] = {}
-    gameSettings[2][5] = {}
-
-    gameSettings[3][1] = {}
-    gameSettings[3][2] = {}
-    gameSettings[3][3] = {}
-    gameSettings[3][4] = {}
-    gameSettings[3][5] = {}
+    for n=1, globals.numWorlds, 1 do
+        for j=1, globals.numLevels, 1 do
+            for i=1, globals.numStorage, 1 do
+            gameSettings[n][j][i] = 0
+        end
+        end
+    end
 
     --score
-    gameSettings[1][1][1] = 0
-    gameSettings[1][2][1] = 0
-    gameSettings[1][3][1] = 0
-    gameSettings[1][4][1] = 0
-    gameSettings[1][5][1] = 0
+    -- gameSettings[n][j][1] = 0
 
-    gameSettings[2][1][1] = 0
-    gameSettings[2][2][1] = 0
-    gameSettings[2][3][1] = 0
-    gameSettings[2][4][1] = 0
-    gameSettings[2][5][1] = 0
-
-    gameSettings[3][1][1] = 0
-    gameSettings[3][2][1] = 0
-    gameSettings[3][3][1] = 0
-    gameSettings[3][4][1] = 0
-    gameSettings[3][5][1] = 0
-
-    --stars
-    gameSettings[1][1][2] = 0
-    gameSettings[1][2][2] = 0
-    gameSettings[1][3][2] = 0
-    gameSettings[1][4][2] = 0
-    gameSettings[1][5][2] = 0
-
-    gameSettings[2][1][2] = 0
-    gameSettings[2][2][2] = 0
-    gameSettings[2][3][2] = 0
-    gameSettings[2][4][2] = 0
-    gameSettings[2][5][2] = 0
-
-    gameSettings[3][1][2] = 0
-    gameSettings[3][2][2] = 0
-    gameSettings[3][3][2] = 0
-    gameSettings[3][4][2] = 0
-    gameSettings[3][5][2] = 0
-    -- * --
+    -- --stars
+    -- gameSettings[n][j][2] = 0
 
     loadsave.saveTable(gameSettings , "gamesettings.json")
-    print("First Time Data Initialisation") --comment this to reset the saving
-else --comment this to reset the saving
-    print("Main Data Loaded") --comment this to reset the saving
-end --comment this to reset the saving
+    print("First Time Data Initialisation") --comment this to reset the saving ***
+else --comment this to reset the saving ***
+    print("Main Data Loaded") --comment this to reset the saving ***
+end --comment this to reset the saving ***
 ---------------------------------------------------------
 
