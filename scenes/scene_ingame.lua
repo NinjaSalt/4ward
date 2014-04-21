@@ -588,6 +588,17 @@ function validCombosRemaining()
             end
         end
     end
+    
+	
+    for i = 0, 2 do
+        if myItems[i] ~= nil and myItems[i].itemType == "foodType" then
+            for j = 1, table.maxn( allEne ) do
+                if foodgroup[myItems[i].type][allEne[j].type] ~= "bad" then
+                    return true
+                end
+            end
+        end
+    end
     return false
     
 end
@@ -597,7 +608,7 @@ local function gameLoop( event )
 	globals.multiplierText.text = (globals.multiplier)
         
         if validCombosRemaining() == false then
-            --print("NO COMBOS REMAINING!!!!!!!!!!!!!!!!")
+            print("NO COMBOS REMAINING!!!!!!!!!!!!!!!!")
         end
 
 	-- CHECKS FOR OBJECTIVES (visual representations) HERE --
