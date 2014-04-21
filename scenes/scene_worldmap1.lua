@@ -38,6 +38,16 @@ function scene:createScene( event )
   banner.y = 50
   group:insert(banner)
 
+  local itemShop = display.newImageRect( "images/shop.png", 50, 50 )
+  itemShop.x = 30
+  itemShop.y = 30
+  group:insert(itemShop)
+
+  local recipeBook = display.newImageRect( "images/bookIcon.png", 50, 50 )
+  recipeBook.x = 450
+  recipeBook.y = 30
+  group:insert(recipeBook)
+
   local level1 = display.newImageRect( "images/Cake.png", 50, 50 )
   level1.x = 56
   level1.y = 119
