@@ -98,13 +98,10 @@ end
 ----- HOW TO RESET THE SAVED TABLE ------
 --[[
 1. Comment out the lines indicated to be commented out
-2. To reset the recipe book, you need to have gameSettings[4] and gameSettings[5] = nil and run the game.
-3. You don't have to play the game, just run it and then close it.
-4. Then set gameSettings[4] and gameSettings[5] = {} again but keep the indicated lines still commented out.
-    *** You might/might not need to do this step. I just did it to make sure that it clears the table.
-5. Run the game again
-6. Close the game and then uncomment out the lines.
-7. Now when you run the game, everything should been resetted!
+2. You don't have to play the game, just run it and then close it.
+3. Uncomment out the lines.
+4. Run the game again
+5. Now when you run the game, everything should been resetted!
 ]]--
 
 
