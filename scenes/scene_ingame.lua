@@ -11,6 +11,7 @@ local thisLevel
 local world
 local eneInHold = nil
 globals.spot = nil
+local levelEnded = false
 -- Array to store heroes
 hero = {}
 
@@ -305,8 +306,8 @@ function moveToHold( event )
 	end
 	globals.spot = display.newRect( eneX, eneY, 30, 30 )
 	group:insert(globals.spot)
-	if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
-		if(currentLevel.victoryCondition~=false) then
+	if ((currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) or levelEnded == true) then
+		if(currentLevel.victoryCondition~=false or levelEnded == true) then
 			if(currentLevel.victoryCondition.conditionMet==true)then
 				LevelList.unlockLevel(world, thisLevel+1)
 				endLevel(currentLevel, true)
@@ -487,7 +488,7 @@ function checkEnemy()
 		end
 	end
 
-if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
+if ((currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) or levelEnded == true) then
     globals.attack = false
 
     local totalCond = 0
@@ -618,7 +619,9 @@ local function gameLoop( event )
 	globals.multiplierText.text = (globals.multiplier)
         
         if validCombosRemaining() == false then
-            print("NO COMBOS REMAINING!!!!!!!!!!!!!!!!")
+			levelEnded = true
+			--print("LEVEL ENDED!!!!!!!!!!!!!!")
+                        --checkEnemy()
         end
 
 	-- CHECKS FOR OBJECTIVES (visual representations) HERE --
@@ -646,7 +649,7 @@ local function gameLoop( event )
 
 					-- hero damage effect here.
 					local screenEffect = display.newRect( display.contentWidth/2, hero[n].y, display.contentWidth, hero[n].height)
-					local loseLife= display.newText( "-100 SCORE", hero[n].x+45, hero[n].y-20, globals.IMPRIMA, 18 )
+					local loseLife= display.newText( "-10 SCORE", hero[n].x+45, hero[n].y-20, globals.IMPRIMA, 18 )
 					globals.score = globals.score - 10
 					globals.scoreText.text = (globals.score)
 					--local screenEffect = display.newCircle( 40, 0, 80)
@@ -666,6 +669,11 @@ local function gameLoop( event )
 
 					end]]
 					decrementEnemy(currentLevel)
+                                        
+                                        if validCombosRemaining() == false then
+                                            levelEnded = true
+                                            print("LEVEL ENDED")
+                                        end
 					checkEnemy()
 				end
 			end
