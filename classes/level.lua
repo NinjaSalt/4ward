@@ -44,6 +44,13 @@ print("#enemies:"..level.totalNumberOfEnemies)
 	spawnEneTimer = timer.performWithDelay( level.timeBetweenEachSpawn[1], function() spawnNextEnemy(level) end)
 end
 
+function endLevel(level, levelCompleted)
+	if levelCompleted == true then
+		print("You win!")
+	else print("You lose!")
+	end
+end
+
 function decrementEnemy(level)
 	if level.totalNumberOfEnemies ~= -1 then
 		level.totalNumberOfEnemies = level.totalNumberOfEnemies -1

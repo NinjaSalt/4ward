@@ -310,12 +310,15 @@ function moveToHold( event )
 		if(currentLevel.victoryCondition~=false or levelEnded == true) then
 			if(currentLevel.victoryCondition.conditionMet==true)then
 				LevelList.unlockLevel(world, thisLevel+1)
+				endLevel(currentLevel, true)
 				storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 			else 
+				endLevel(currentLevel, false)
 				storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world, condition = true}})
 			end
 		else	
 		LevelList.unlockLevel(world, thisLevel+1)
+		endLevel(currentLevel, true)
 		storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 		end
 	end
@@ -543,8 +546,10 @@ if ((currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) or levelEnded == t
 
     if (globals.score > 0) then
     	LevelList.unlockLevel(world, thisLevel+1)
+        endLevel(currentLevel, true)
         storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
     else
+    	endLevel(currentLevel, false)
         storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world, condition = true}})
     end
 
@@ -553,17 +558,19 @@ if ((currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) or levelEnded == t
     if(currentLevel.victoryCondition~=false) then
       if(currentLevel.victoryCondition.conditionMet==true)then
         LevelList.unlockLevel(world, thisLevel+1)
+        endLevel(currentLevel, true)
         storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
       else 
+        endLevel(currentLevel, false)
         storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world, condition = true}})
       end
     else  
       LevelList.unlockLevel(world, thisLevel+1)
+      endLevel(currentLevel, true)
       storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
     end
     ]]--
 
-    --Runtime:removeEventListener( "enterFrame", gameLoop )
   end
 end
 
@@ -586,7 +593,6 @@ function makeDeathPoof(allEne)
 end
 
 function validCombosRemaining()
-    if currentLevel.totalNumberOfEnemies == 0 then return false end
     if ( #(currentLevel.enemyIDQueue)~= currentLevel.spawnCounter ) then
         return true
     end
@@ -642,15 +648,11 @@ local function gameLoop( event )
 	globals.multiplier = getMultiplier()
 	globals.multiplierText.text = (globals.multiplier)
         
-        --[[
         if validCombosRemaining() == false then
 			levelEnded = true
-                        checkEnemy()
-                        --Runtime:removeEventListener( "enterFrame", gameLoop )
-                        print("No combos remaining")
-                        return
+			--print("LEVEL ENDED!!!!!!!!!!!!!!")
+                        --checkEnemy()
         end
-        ]]--
 
 	-- CHECKS FOR OBJECTIVES (visual representations) HERE --
 	if currentLevel.victoryCondition ~=false then
@@ -691,12 +693,17 @@ local function gameLoop( event )
 					--globals.numLives.text = (globals.lives)
 
 					--[[if globals.lives <= 0 then
+						endLevel(currentLevel, false)
 						globals.attack = false
 						storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 
 					end]]
 					decrementEnemy(currentLevel)
                                         
+                                        if validCombosRemaining() == false then
+                                            levelEnded = true
+                                            print("LEVEL ENDED")
+                                        end
 					checkEnemy()
 				end
 			end
@@ -822,6 +829,7 @@ local function gameLoop( event )
 					if (globals.dessertServe) then
 						group:insert( globals.dessertButton )
 					end
+					checkEnemy()
 				end
 			end
 		end
