@@ -365,6 +365,16 @@ function tutorialCombo()
 	transition.pause("animation")
 end
 
+function tutorialServe()
+  storyboard.showOverlay( "scenes.scene_tutorialServe",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+  timer.pause(spawnEneTimer)
+    globals.breakfastanimation:pause()
+    for n=0, 2, 1 do
+    	globals.belts[n]:pause()
+	end
+    transition.pause("animation")
+end
+
 function scene:createEne(enemyID, isCombo, x, lane)
 	--local eneAndBar = {}
 	--set the lane it will spawn in

@@ -32,31 +32,21 @@ function scene:createScene( event )
   
   bkg:addEventListener("touch", function() return true end)
   bkg:addEventListener("tap", function() return true end)
-  local swipe = display.newRect( allEne[#allEne].x, allEne[#allEne].y, 50, 50)
-  swipe.alpha = .01
+  local swipe = display.newRect( 15, lane1, 36, 65)
+  swipe.alpha = 1
   group:insert (swipe)
   
-  local toDo = display.newText( "Swipe the eggs up!", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
+  local toDo = display.newText( "Tap the serve button!", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
   toDo:setFillColor(black)
   group:insert (toDo)
 
   local function onTapBack( event )
 	local phase = event.phase
 	if "ended" == phase or "cancelled" == phase then
-		if(event.y - event.yStart ~= 0 and event.y - event.yStart < -7)then
 			storyboard.hideOverlay( "slideUp", 500 )
 			storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
 			--timer.resume(attackTimer)
 			timer.resume(spawnEneTimer)
-    if (globals.breakfastButton~=nil) then
-      globals.breakfastButton:play()
-    end
-      if (globals.dinnerButton~=nil) then
-      globals.dinnerButton:play()
-    end
-      if (globals.dessertButton~=nil) then
-      globals.dessertButton:play()
-    end
 			globals.breakfastanimation:play()
 			if ( antagonistTimer ~= nil) then
 				 timer.resume(antagonistTimer)
@@ -64,9 +54,7 @@ function scene:createScene( event )
 			for n=0, 2, 1 do
 			  globals.belts[n]:play()
 			end
-			allEne[#allEne].y = allEne[#allEne].y - (lane2-lane1)
-		end
-		
+			timer.performWithDelay(400, bkftbuttonPressed )
 	end
 	
   end
@@ -91,7 +79,6 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  timer.performWithDelay(1700, tutorialServe )
 end
  
 -- Called AFTER scene has finished moving offscreen:
