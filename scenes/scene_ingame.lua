@@ -69,6 +69,10 @@ storyboard.removeAll()
 -- function to create conveyor belts
 --NEW CONVEYOR BELT CODE
 function scene:createConveyorBelts()
+	local notTutorial = true
+	if ( thisLevel == 1 and world == 1 ) then
+		notTutorial = false
+	end
 	for n=0, 2, 1 do
   		if (n==0) then
   			globals.belts[n] = display.newSprite(breakfastsheet,breakfastsequenceData)
@@ -76,7 +80,9 @@ function scene:createConveyorBelts()
 			globals.belts[n].id = n
 			globals.belts[n]:setSequence( "breakfast_normal" )
 			globals.belts[n]:play()
-			globals.belts[n]:addEventListener( "touch", ability )
+			if ( notTutorial ) then
+				globals.belts[n]:addEventListener( "touch", ability )
+			end
 
 		end
 		if (n==1) then
@@ -85,7 +91,9 @@ function scene:createConveyorBelts()
 			globals.belts[n].id = n
 			globals.belts[n]:setSequence( "dinner_normal" )
 			globals.belts[n]:play()
-			globals.belts[n]:addEventListener( "touch", ability )
+			if ( notTutorial ) then
+				globals.belts[n]:addEventListener( "touch", ability )
+			end
 		end
 		if (n==2) then
 			globals.belts[n] = display.newSprite(dessertsheet,dessertsequenceData)
@@ -93,7 +101,9 @@ function scene:createConveyorBelts()
 			globals.belts[n].id = n
 			globals.belts[n]:setSequence( "dessert_normal" )
 			globals.belts[n]:play()
-			globals.belts[n]:addEventListener( "touch", ability )
+			if ( notTutorial ) then
+				globals.belts[n]:addEventListener( "touch", ability )
+			end
 		end
 		globals.belts[n].x = 278
 		group:insert(globals.belts[n])
@@ -375,6 +385,10 @@ end
 function scene:createEne(enemyID, isCombo, x, lane)
 	--local eneAndBar = {}
 	--set the lane it will spawn in
+	local notTutorial = true
+	if ( thisLevel == 1 and world == 1 ) then
+		notTutorial = false
+	end
 	local tutorialCounter = 1
 	if ( lane == nil ) then
 		local randomPos
@@ -434,7 +448,12 @@ function scene:createEne(enemyID, isCombo, x, lane)
 
 	--set the move speedallEne
 	transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50) ,tag="animation"}  )
-	allEne[#allEne]:addEventListener( "touch", teleport ) 
+	
+	if ( notTutorial ) then
+		allEne[#allEne]:addEventListener( "touch", teleport ) 
+	end
+			
+	
 	--allEne[#allEne]:addEventListener( "tap", moveToHold ) 
 	eneAndBar[0]=allEne[#allEne]
 	--eneAndBar[1]=allEnemHealth[#allEne]
