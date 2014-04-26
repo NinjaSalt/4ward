@@ -370,24 +370,41 @@ end
       recipesList[i]:addEventListener( "tap", onTapItem )
     end
   end
+
+  local backButton = display.newImage("images/leftArrow.png")
+  backButton.x = 466 
+  backButton.y = 12
+  backButton.height = 20
+  backButton.width = 20
+  group:insert(backButton)
   
+  local function onTapBack( event )
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_worldmap",{ effect = "fade", time = 250})
+  end
+
+  backButton:addEventListener("tap",onTapBack)
+
+
+
 end
  
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
- 
+  if (globals.completedBook ~= true) then
+  storyboard.showOverlay( "scenes.scene_recipeTutorial" , {effect = "slideDown", time = 500 })
+  end
 end
  
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
   local group = self.view
- 
 end
  
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
-  local group = self.view
+  local group = self.viewf
  
 end
  

@@ -106,4 +106,8 @@ globals.stars[1] = {0,0,0,0,0}
 globals.stars[2] = {0,0,0,0,0}
 globals.stars[3] = {0,0,0,0,0}
 
+-- globals for shop/book tutorial (needs to be saved)
+globals.completedBook = false
+globals.completedShop = false
+
 return globals
