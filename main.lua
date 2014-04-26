@@ -1,4 +1,4 @@
--- main.lua
+--main.lua
  
 
 -- Code to have Corona display the font names found
