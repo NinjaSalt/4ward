@@ -128,7 +128,7 @@ if (gameSettings == nil) then --comment this to reset the saving ***
     -- gameSettings[3] = {}
     -- --recipe book unlocking:
     -- --basic
-    -- gameSettings[4] = {}
+    --gameSettings[4] = {}
     -- --recipe
     -- gameSettings[5] = {}
     --item belt saving:

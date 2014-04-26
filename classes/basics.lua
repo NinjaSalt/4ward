@@ -8,10 +8,10 @@ globals.basics[0] = nil
 for i = 1,table.maxn( myEnemies )+1 do
 	globals.basics[i] = myEnemies[i-1]
 	globals.basics[i].locker = false
-	if (gameSettings[4][i]~=nil) then
-		print("loading basic " .. i)
-		globals.basics[i].locker = gameSettings[4][i]
-	end
+	--if (gameSettings[4][i]~=nil) then
+	--	print("loading basic " .. i)
+	--	globals.basics[i].locker = gameSettings[4][i]
+	--end
 end
 
 -- assigns the new combine recipes as unlocked when player creates a combo
