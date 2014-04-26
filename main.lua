@@ -100,10 +100,12 @@ end
 1. Comment out the lines indicated to be commented out
 2. You don't have to play the game, just run it and then close it.
 3. Uncomment out the lines.
-4. Run the game again
-5. Now when you run the game, everything should been resetted!
+7. Now when you run the game, everything should been resetted!
 ]]--
 
+----UNCOMMENT TO RESET SCORE -------
+-- globals.currency.set(0)
+--   globals.currency.save()
 
 local loadsave = require("classes.loadsave")
 
@@ -118,6 +120,8 @@ if (gameSettings == nil) then --comment this to reset the saving ***
         print("n: " .. n)
         gameSettings[n] = {}
     end
+
+    --- FOR REFERENCE ---
     --worlds:
     -- gameSettings[1] = {}
     -- gameSettings[2] = {}
@@ -129,6 +133,7 @@ if (gameSettings == nil) then --comment this to reset the saving ***
     -- gameSettings[5] = {}
     --item belt saving:
     --gameSettings[6] = {}
+    --- FOR REFERENCE ---
 
     -- * --
     --levels
@@ -146,11 +151,13 @@ if (gameSettings == nil) then --comment this to reset the saving ***
         end
     end
 
+    --- FOR REFERENCE ---
     --score
     -- gameSettings[n][j][1] = 0
 
     -- --stars
     -- gameSettings[n][j][2] = 0
+    --- FOR REFERENCE ---
 
     loadsave.saveTable(gameSettings , "gamesettings.json")
     print("First Time Data Initialisation") --comment this to reset the saving ***
