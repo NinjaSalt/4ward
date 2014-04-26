@@ -202,17 +202,40 @@ function dstbuttonPressed()
   return
 end
 
+local bellSheetSettings =
+    {
+   --  width = 1107,
+  --   height = 781,
+    width = 54,
+    height = 54,
+   -- sheetContentWidth=280,
+  -- sheetContentHeight=70,
+  sheetContentWidth=108,
+  sheetContentHeight=162,
+  numFrames = 6
+  }
+  local bellSheet = graphics.newImageSheet("images/bellsheet.png",bellSheetSettings)
+  local bellSheetSsequenceData = {
+      {name = "breakfast", frames={1, 2}, time=1000, loopCount=0},
+      {name = "dinner", frames={3, 4}, time=1000, loopCount=0},
+      {name = "dessert", frames={5, 6}, time=1000, loopCount=0}
+    }
+
 function servingButtons()
     if (globals.breakfastServe) then
       if(counter<2) then
         counter = counter + 1
       end
       if (counter ==1) then
-        globals.breakfastButton = display.newImage("images/breakfast_serveButton.png")
-        globals.breakfastButton.width = 36
-        globals.breakfastButton.height = 65
-        globals.breakfastButton.y = lane1
-        transition.to( globals.breakfastButton, { x=globals.breakfastButton.width/2-3, tag="animation" } )
+        --globals.breakfastButton = display.newImage("images/breakfast_serveButton.png")
+        globals.breakfastButton = display.newSprite(bellSheet,bellSheetSsequenceData)
+        --globals.breakfastButton.width = 36
+        --globals.breakfastButton.height = 65
+        globals.breakfastButton.y = lane1-(25)
+        globals.breakfastButton.x = 95
+        globals.breakfastButton:setSequence( "breakfast" )
+        globals.breakfastButton:play()
+        --transition.to( globals.breakfastButton, { x=globals.breakfastButton.width/2-3, tag="animation" } )
         globals.breakfastButton:addEventListener("tap", bkftbuttonPressed)
       end
     end
@@ -222,11 +245,15 @@ function servingButtons()
         dcounter = dcounter +1
       end
       if (dcounter ==1) then
-        globals.dinnerButton = display.newImage("images/dinner_serveButton.png")
-        globals.dinnerButton.width = 36
-        globals.dinnerButton.height = 65
-        globals.dinnerButton.y = lane2
-        transition.to( globals.dinnerButton, { x=globals.dinnerButton.width/2-3, tag="animation" } )
+        globals.dinnerButton = display.newSprite(bellSheet,bellSheetSsequenceData)
+        -- globals.dinnerButton.width = 36
+        -- globals.dinnerButton.height = 65
+        -- globals.dinnerButton.y = lane2
+        globals.dinnerButton.y = lane2-(25)
+        globals.dinnerButton.x = 95
+        globals.dinnerButton:setSequence( "dinner" )
+        globals.dinnerButton:play()
+        --transition.to( globals.dinnerButton, { x=globals.dinnerButton.width/2-3, tag="animation" } )
         globals.dinnerButton:addEventListener("tap", dnrbuttonPressed)
       end
     end
@@ -236,11 +263,16 @@ function servingButtons()
         dtcounter = dtcounter + 1
       end
       if (dtcounter == 1) then
-        globals.dessertButton = display.newImage("images/dessert_serveButton.png")
-        globals.dessertButton.width = 36
-        globals.dessertButton.height = 65
-        globals.dessertButton.y = lane3
-        transition.to( globals.dessertButton, { x=globals.dessertButton.width/2-3, tag="animation" } )
+        --globals.dessertButton = display.newImage("images/dessert_serveButton.png")
+        globals.dessertButton = display.newSprite(bellSheet,bellSheetSsequenceData)
+        -- globals.dessertButton.width = 36
+        -- globals.dessertButton.height = 65
+        --globals.dessertButton.y = lane3
+        globals.dessertButton.y = lane3-(25)
+        globals.dessertButton.x = 95
+        globals.dessertButton:setSequence( "dessert" )
+        globals.dessertButton:play()
+        --transition.to( globals.dessertButton, { x=globals.dessertButton.width/2-3, tag="animation" } )
         globals.dessertButton:addEventListener("tap", dstbuttonPressed)
       end
     end

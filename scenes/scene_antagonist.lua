@@ -30,13 +30,22 @@ function scene:createScene( event )
 	antagonistAbility = math.random(3,4)
   end
   
-  if (antagonistAbility~=4) then
-	globals.notDurningAntagonist = false
+	if (antagonistAbility~=4) then
+		globals.notDurningAntagonist = false
 		--timer.pause(attackTimer)
 		timer.pause(spawnEneTimer)
-    globals.breakfastanimation:pause()
+	if (globals.breakfastButton~=nil) then
+		globals.breakfastButton:pause()
+	end
+		if (globals.dinnerButton~=nil) then
+		globals.dinnerButton:pause()
+	end
+		if (globals.dessertButton~=nil) then
+		globals.dessertButton:pause()
+	end
+		globals.breakfastanimation:pause()
 		for n=0, 2, 1 do
-			globals.belts[n]:pause()
+		globals.belts[n]:pause()
 		end
 		transition.pause("animation")
 	end
@@ -209,6 +218,15 @@ function scene:didExitScene( event )
   local group = self.view
   --timer.resume(attackTimer)
   timer.resume(spawnEneTimer)
+	if (globals.breakfastButton~=nil) then
+		globals.breakfastButton:play()
+	end
+		if (globals.dinnerButton~=nil) then
+		globals.dinnerButton:play()
+	end
+		if (globals.dessertButton~=nil) then
+		globals.dessertButton:play()
+	end
   globals.breakfastanimation:play()
   for n=0, 2, 1 do
       globals.belts[n]:play()

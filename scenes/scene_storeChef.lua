@@ -7,13 +7,16 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local itemToGive
-local notTouched = true
+ notTouched = true
 local globals= require("classes.globals") 
+local loadsave = require("classes.loadsave")
  
 require("classes.items")
 require("classes.heroes")
 -- Clear previous scene
 storyboard.removeAll()
+
+gameSettings = loadsave.loadTable("gamesettings.json")
  
 -- local forward references should go here --
  
@@ -50,7 +53,6 @@ function scene:createScene( event )
   whichText:setFillColor( 0 )
   group:insert(whichText)
 
-
   local function cancel(event)
     storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideUp", 500 )
@@ -67,7 +69,12 @@ function scene:createScene( event )
   	if (notTouched) then
   		print( "give 1")
   		myItems[0] = itemToGive
+      gameSettings[6][1]=myItems[0]
+      loadsave.saveTable(gameSettings , "gamesettings.json")
   		notTouched = false
+      --negativeNum = (-1)*myItems[0].cost
+      globals.currency.add((-1)*myItems[0].cost)
+      globals.currency.save()
   	end
 	  storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )
@@ -78,7 +85,12 @@ function scene:createScene( event )
     if (notTouched) then
   		print( "give 2")
   		myItems[1] = itemToGive
+      gameSettings[6][2]=myItems[1]
+      loadsave.saveTable(gameSettings , "gamesettings.json")
   		notTouched = false
+      --negativeNum = (-1)*myItems[1].cost
+      globals.currency.add((-1)*myItems[1].cost)
+      globals.currency.save()
   	end
 	  storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )
@@ -89,31 +101,46 @@ function scene:createScene( event )
     if (notTouched) then
   		print( "give 3")
   		myItems[2] = itemToGive
+      gameSettings[6][3]=myItems[2]
+      loadsave.saveTable(gameSettings , "gamesettings.json")
   		notTouched = false
+      --negativeNum = (-1)*myItems[2].cost
+      globals.currency.add((-1)*myItems[2].cost)
+      globals.currency.save()
   	end
 	  storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )
     storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
-  
+
+  -- for i = 0, 2, 1 do
+  --   if (gameSettings[6][i+1]~=nil) then
+  --     myItems[i] = gameSettings[6][i+1]
+  --   end
+  -- end
+
   local gameItems = {}
   local spacing = -60
   for i = 0, 2, 1 do
-	  	if ( myItems[i] ~= nil )then
-			gameItems[i] = display.newImage(myItems[i].image, display.contentWidth/2, (display.contentHeight/2) + spacing)
-			gameItems[i].height = 50 
-			gameItems[i].width = 50 
-			gameItems[i]:setStrokeColor("black")
-			gameItems[i].strokeWidth = 3
-			if ( i == 0 )then gameItems[i]:addEventListener( "touch", giveItem1 ) 
-			elseif ( i == 1 ) then gameItems[i]:addEventListener( "touch", giveItem2 )
-			elseif ( i == 2) then gameItems[i]:addEventListener( "touch", giveItem3 )
+	  	if ( gameSettings[6][i+1] ~= nil)then
+  			gameItems[i] = display.newImage(gameSettings[6][i+1].image, display.contentWidth/2, (display.contentHeight/2) + spacing)
+  			gameItems[i].height = 50 
+  			gameItems[i].width = 50 
+  			gameItems[i]:setStrokeColor("black")
+  			gameItems[i].strokeWidth = 3
+        -- gameSettings[6][i+1]=myItems[i]
+        -- loadsave.saveTable(gameSettings , "gamesettings.json")
+  			if ( i == 0 )then gameItems[i]:addEventListener( "touch", giveItem1 ) 
+  			elseif ( i == 1 ) then gameItems[i]:addEventListener( "touch", giveItem2 )
+  			elseif ( i == 2) then gameItems[i]:addEventListener( "touch", giveItem3 )
 			end
 			group:insert (gameItems[i])
 		else
 			gameItems[i] = display.newRect(display.contentWidth/2, (display.contentHeight/2) + spacing, 50, 50)
 			gameItems[i]:setStrokeColor("black")
 			gameItems[i].strokeWidth = 3
+      gameSettings[6][i+1]=nil
+      loadsave.saveTable(gameSettings , "gamesettings.json")
 			if ( i == 0 )then gameItems[i]:addEventListener( "touch", giveItem1 ) 
 			elseif  ( i == 1 ) then gameItems[i]:addEventListener( "touch", giveItem2 )
 			elseif ( i == 2) then gameItems[i]:addEventListener( "touch", giveItem3 )
@@ -128,6 +155,11 @@ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
+  for i = 0, 2, 1 do
+    --if (gameSettings[6][i+1] ~= nil) then
+     myItems[i] = gameSettings[6][i+1]
+    --end
+    end
  
 end
  

@@ -326,23 +326,43 @@ function moveToHold( event )
 end
 
 function tutorial()
-  storyboard.showOverlay( "scenes.scene_tutorial",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-  timer.pause(spawnEneTimer)
-    globals.breakfastanimation:pause()
-    for n=0, 2, 1 do
-    	globals.belts[n]:pause()
+	storyboard.showOverlay( "scenes.scene_tutorial",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+	timer.pause(spawnEneTimer)
+	if (globals.breakfastButton~=nil) then
+		globals.breakfastButton:pause()
 	end
-    transition.pause("animation")
+		if (globals.dinnerButton~=nil) then
+		globals.dinnerButton:pause()
+	end
+		if (globals.dessertButton~=nil) then
+		globals.dessertButton:pause()
+	end
+
+	globals.breakfastanimation:pause()
+	for n=0, 2, 1 do
+	globals.belts[n]:pause()
+	end
+	transition.pause("animation")
 end
 
 function tutorialCombo()
-  storyboard.showOverlay( "scenes.scene_tutorialCombo",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-  timer.pause(spawnEneTimer)
-    globals.breakfastanimation:pause()
-    for n=0, 2, 1 do
-    	globals.belts[n]:pause()
+	storyboard.showOverlay( "scenes.scene_tutorialCombo",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+	timer.pause(spawnEneTimer)
+	if (globals.breakfastButton~=nil) then
+		globals.breakfastButton:pause()
 	end
-    transition.pause("animation")
+		if (globals.dinnerButton~=nil) then
+		globals.dinnerButton:pause()
+	end
+		if (globals.dessertButton~=nil) then
+		globals.dessertButton:pause()
+	end
+
+	globals.breakfastanimation:pause()
+	for n=0, 2, 1 do
+	globals.belts[n]:pause()
+	end
+	transition.pause("animation")
 end
 
 function scene:createEne(enemyID, isCombo, x, lane)
@@ -813,29 +833,49 @@ local function gameLoop( event )
 end
 
 function replayLevel()
-timer.pause(spawnEneTimer)
-  globals.breakfastanimation:pause()
-  if ( antagonistTimer ~= nil) then
-	timer.cancel(antagonistTimer)
-  end
-  for n=0, 2, 1 do
-    	globals.belts[n]:pause()
+	timer.pause(spawnEneTimer)
+	if (globals.breakfastButton~=nil) then
+		globals.breakfastButton:pause()
+	end
+		if (globals.dinnerButton~=nil) then
+		globals.dinnerButton:pause()
+	end
+		if (globals.dessertButton~=nil) then
+		globals.dessertButton:pause()
+	end
+
+	globals.breakfastanimation:pause()
+	if ( antagonistTimer ~= nil) then
+		timer.cancel(antagonistTimer)
+	end
+	for n=0, 2, 1 do
+		globals.belts[n]:pause()
 	end
 	transition.pause("animation")
 	storyboard.removeScene(scene)
-    storyboard.gotoScene( "scenes.scene_inBetween",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-	
+	storyboard.gotoScene( "scenes.scene_inBetween",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+
 end
 
 local function goToIntro(vicCond, id, catCond, scoreCond)
 	storyboard.showOverlay("scenes.scene_intro", {effect = "slideDown", time=500, params = {vic= vicCond, levelNumber=id, cat=catCond, scr = scoreCond}})
-    --timer.pause(attackTimer)
-    timer.pause(spawnEneTimer)
-    globals.breakfastanimation:pause()
-    for n=0, 2, 1 do
-    	globals.belts[n]:pause()
+	--timer.pause(attackTimer)
+	timer.pause(spawnEneTimer)
+	if (globals.breakfastButton~=nil) then
+		globals.breakfastButton:pause()
 	end
-    transition.pause("animation")
+		if (globals.dinnerButton~=nil) then
+		globals.dinnerButton:pause()
+	end
+		if (globals.dessertButton~=nil) then
+		globals.dessertButton:pause()
+	end
+
+	globals.breakfastanimation:pause()
+	for n=0, 2, 1 do
+		globals.belts[n]:pause()
+	end
+	transition.pause("animation")
 end
 
 
@@ -843,6 +883,7 @@ end
 
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
+	
   --Create the group that hold all the objects in the scene
   group = self.view
   local params = event.params

@@ -72,6 +72,15 @@ end
     storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
     --timer.resume(attackTimer)
     timer.resume(spawnEneTimer)
+  if (globals.breakfastButton~=nil) then
+    globals.breakfastButton:play()
+  end
+    if (globals.dinnerButton~=nil) then
+    globals.dinnerButton:play()
+  end
+    if (globals.dessertButton~=nil) then
+    globals.dessertButton:play()
+  end
     globals.breakfastanimation:play()
     if ( antagonistTimer ~= nil) then
 	     timer.resume(antagonistTimer)

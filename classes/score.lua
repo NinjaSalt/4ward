@@ -27,7 +27,7 @@ function M.init( options )
 	opt.y = customOptions.y or opt.fontSize * 0.5
 	opt.maxDigits = customOptions.maxDigits or 6
 	opt.leadingZeros = customOptions.leadingZeros or false
-	M.filename = customOptions.filename or "scorefile.txt"
+	M.filename = customOptions.filename or "currencyfile.txt"
 
 	local prefix = ""
 	if opt.leadingZeros then 

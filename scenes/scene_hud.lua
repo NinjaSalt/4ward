@@ -7,9 +7,12 @@ local globals = require("classes.globals")
 local score = require("classes.score")
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
+local loadsave = require("classes.loadsave")
  
 -- Clear previous scene
 storyboard.removeAll()
+
+gameSettings = loadsave.loadTable("gamesettings.json")
  
 -- local forward references should go here --
  
@@ -21,17 +24,17 @@ storyboard.removeAll()
 function scene:createScene( event )
   local group = self.view
 
-    currencyText = globals.currency.init({
-    fontSize = 20,
-    font = "Helvetica",
-    x = -84,
-    y = -14,
-    maxDigits = 7,
-    leadingZeros = false,
-    filename = "currencyfile.txt",
-    })
-  currencyText:setFillColor( black )
-  group:insert(currencyText)
+  --   currencyText = globals.currency.init({
+  --   fontSize = 20,
+  --   font = "Helvetica",
+  --   x = -84,
+  --   y = -14,
+  --   maxDigits = 7,
+  --   leadingZeros = false,
+  --   filename = "currencyfile.txt",
+  --   })
+  -- currencyText:setFillColor( black )
+  -- group:insert(currencyText)
   
   -- OBJECTIVE --
   -- for spacing out objectives
@@ -260,8 +263,15 @@ function scene:createScene( event )
   itemBelt[0].x = 300
   itemBelt[0].y = 20
   group:insert(itemBelt[0])
-  
+
+  for i = 0, 2, 1 do
+    --if (gameSettings[6][i+1] ~= nil) then
+      myItems[i] = gameSettings[6][i+1]
+    --end
+    end
+    
   local gameItems = {}
+
   local itemSpace = 200
   for i = 0,table.maxn( myItems ) do
     if ( myItems[i] ~= nil )then
@@ -272,16 +282,12 @@ function scene:createScene( event )
       gameItems[i].x = itemSpace
       gameItems[i].y = 20
       gameItems[i].myItemRef = i
-      if ( gameItems[i].itemType == "foodType" or gameItems[i].itemType == "trash") then
+      if ( gameItems[i].itemType == "foodType") then
       gameItems[i]:addEventListener( "touch", itemFoodDrag ) 
       elseif ( gameItems[i].itemType == "break" ) then
       gameItems[i]:addEventListener( "tap", itemTap ) 
 	    elseif ( gameItems[i].itemType == "swap" ) then
       gameItems[i]:addEventListener( "tap", itemTap )
-      elseif ( gameItems[i].itemType == "chop" ) then
-      gameItems[i]:addEventListener( "tap", itemTap )  
-      elseif ( gameItems[i].itemType == "boost" ) then
-      gameItems[i]:addEventListener( "touch", dragToHero ) 
       end
       group:insert(gameItems[i])
     end
@@ -325,6 +331,15 @@ function scene:createScene( event )
     --timer.pause(attackTimer)
     timer.pause(spawnEneTimer)
     --pausing animation
+  if (globals.breakfastButton~=nil) then
+    globals.breakfastButton:pause()
+  end
+    if (globals.dinnerButton~=nil) then
+    globals.dinnerButton:pause()
+  end
+    if (globals.dessertButton~=nil) then
+    globals.dessertButton:pause()
+  end
     globals.breakfastanimation:pause()
     if ( antagonistTimer ~= nil) then
      timer.cancel(antagonistTimer)
@@ -341,10 +356,10 @@ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
-  local prevCurrency = globals.currency.load()
-  if prevCurrency then
-    globals.currency.set(prevCurrency)
-  end
+  -- local prevCurrency = globals.currency.load()
+  -- if prevCurrency then
+  --   globals.currency.set(prevCurrency)
+  -- end
  
 end
  

@@ -20,7 +20,7 @@ function unlockBasicCheck(number)
 		globals.basics[number+1].locker = true
 		if (gameSettings[number+1]~=nil) then
 			print("saving basic " .. number+1)
-			gameSettings[4][number+1] = true
+			gameSettings[4][number+1] = globals.basics[number+1].locker
 		end
 	end
 end

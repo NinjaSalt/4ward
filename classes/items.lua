@@ -5,12 +5,15 @@ require("classes.chop")
 --equire("classes.heroes")
 local globals = require("classes.globals")
 local storyboard = require( "storyboard" )
+local loadsave = require("classes.loadsave")
 --require("scenes.scene_ingame")
 Item = {}
 Item.__index = Item
 
 local startX = nil
 local startY = nil
+
+gameSettings = loadsave.loadTable("gamesettings.json")
 
 
 function Item.makeItem(name, itemType, image, cost, id, unlocked, description, toUse, lockLevel)
@@ -35,7 +38,7 @@ function makeItemArray ()
 	for i = 1,table.maxn( myEnemies )+1 do
 		items[i] = myEnemies[i-1]
 		items[i].itemType = "foodType"
-		items[i].cost = 500
+		items[i].cost = 300
 		items[i].id = i
 		items[i].foodId = i-1
 		items[i].unlocked = true
@@ -147,10 +150,14 @@ function itemTap ( event )
 		commercialBreak()
 		itemUsed: removeSelf()
 		myItems[itemUsed.myItemRef] = nil
+		gameSettings[6][itemUsed.myItemRef+1] = nil
+		loadsave.saveTable(gameSettings , "gamesettings.json")
 	elseif (itemUsed.itemType == "swap")then
 		producerSwap()
 		itemUsed: removeSelf()
 		myItems[itemUsed.myItemRef] = nil
+		gameSettings[6][itemUsed.myItemRef+1] = nil
+		loadsave.saveTable(gameSettings , "gamesettings.json")
 	end
 end
 
@@ -183,18 +190,13 @@ function itemFoodDrag( event )
 					if (body.itemType == "foodType") then
 						itemCombo( body, allEne[n], true )
 						break
-					elseif (body.itemType == "trash") then
-					allEne[n]: removeSelf()
-					table.remove(allEne, n)
-					--allEnemHealth[n]:removeSelf()
-					--table.remove(allEnemHealth, n)
-					decrementEnemy(currentLevel)
-					body: removeSelf()
-					myItems[body.myItemRef] = nil
 					end
 				hit = 1
 				end
 			end
+			gameSettings[6][body.myItemRef+1] = nil
+			loadsave.saveTable(gameSettings , "gamesettings.json")
+			print("food used!")
 			if ( hit == 0) then
 				print (body.x .. " " .. startX)
 				transition.to( body, { time=400, x = startX, y = startY} )

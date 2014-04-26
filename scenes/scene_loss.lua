@@ -28,6 +28,15 @@ function scene:createScene( event )
   
   --timer.pause(attackTimer)
   timer.pause(spawnEneTimer)
+  if (globals.breakfastButton~=nil) then
+    globals.breakfastButton:pause()
+  end
+    if (globals.dinnerButton~=nil) then
+    globals.dinnerButton:pause()
+  end
+    if (globals.dessertButton~=nil) then
+    globals.dessertButton:pause()
+  end
   globals.breakfastanimation:pause()
   if ( antagonistTimer ~= nil) then
 	timer.cancel(antagonistTimer)

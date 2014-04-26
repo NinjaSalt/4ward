@@ -21,7 +21,7 @@ function unlockCheck(number)
 		globals.recipes[number+1].unlocked = true
 		if (gameSettings[number+1]~=nil) then
 			print("saving recipe " .. number+1)
-			gameSettings[5][number+1] = true
+			gameSettings[5][number+1] = globals.recipes[number+1].unlocked
 		end
 	end
 end

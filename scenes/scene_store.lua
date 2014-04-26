@@ -87,7 +87,7 @@ local currencyGradient = display.newImage("images/money.png")
   currencyGradient.y = currencyGradient.height/2+5
   group:insert(currencyGradient)
 
-  currenyText = globals.currency.init({
+  globals.currenyText = globals.currency.init({
     fontSize = 20,
     font = "Helvetica",
     x = currencyGradient.width/2+5,
@@ -97,7 +97,7 @@ local currencyGradient = display.newImage("images/money.png")
     filename = "currencyfile.txt",
     })
  -- currenyText:setFillColor( black )
-  group:insert(currenyText)
+  group:insert(globals.currenyText)
   
 	local function scrollListener( event )
 
@@ -137,6 +137,7 @@ local currencyGradient = display.newImage("images/money.png")
   local function onTapBuy( event )
     storyboard.removeScene( scene )
     storyboard.showOverlay( "scenes.scene_storeChef",{ effect = "slideDown", time = 500, params = {item = items[event.target.id]}})
+    --globals.negativeNum = (-1)*items[event.target.id].cost
   end
 
   --local buyButton
