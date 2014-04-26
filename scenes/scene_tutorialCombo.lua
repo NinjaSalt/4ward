@@ -41,31 +41,53 @@ function scene:createScene( event )
   group:insert (toDo)
 
   local function onTapBack( event )
+    local body = event.target
 	local phase = event.phase
-	if "ended" == phase or "cancelled" == phase then
-		if(event.y - event.yStart ~= 0 and event.y - event.yStart < -7)then
-			storyboard.hideOverlay( "slideUp", 500 )
-			storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
-			--timer.resume(attackTimer)
-			timer.resume(spawnEneTimer)
-    if (globals.breakfastButton~=nil) then
-      globals.breakfastButton:play()
-    end
-      if (globals.dinnerButton~=nil) then
-      globals.dinnerButton:play()
-    end
-      if (globals.dessertButton~=nil) then
-      globals.dessertButton:play()
-    end
-			globals.breakfastanimation:play()
-			if ( antagonistTimer ~= nil) then
-				 timer.resume(antagonistTimer)
+	local stage = display.getCurrentStage()
+	local markY = body.y
+	local oneLaneAtATime = true
+	
+	if "began" == phase then
+		stage:setFocus( body, event.id )
+		body.isFocus = true
+	elseif body.isFocus then
+		if "moved" == phase then
+			--when the object have been dragged set myY to where the finger ended
+			myY = (event.y - event.yStart) + markY
+
+		elseif "ended" == phase or "cancelled" == phase then
+			stage:setFocus( body, nil )
+			body.isFocus = false
+			if oneLaneAtATime == true then
+				--if where the finger ended is less than where the enemy began move it up if it not already in lane 1
+				--if myY ~= nil and myY<markY then
+				if event.y - event.yStart < -7 then
+					if body.y ~= lane1 then
+						storyboard.hideOverlay( "slideUp", 500 )
+						storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
+						--timer.resume(attackTimer)
+						timer.resume(spawnEneTimer)
+						if (globals.breakfastButton~=nil) then
+						  globals.breakfastButton:play()
+						end
+						  if (globals.dinnerButton~=nil) then
+						  globals.dinnerButton:play()
+						end
+						  if (globals.dessertButton~=nil) then
+						  globals.dessertButton:play()
+						end
+						globals.breakfastanimation:play()
+						if ( antagonistTimer ~= nil) then
+							 timer.resume(antagonistTimer)
+						end
+						for n=0, 2, 1 do
+						  globals.belts[n]:play()
+						end
+						allEne[#allEne].y = allEne[#allEne].y - (lane2-lane1)
+					end
+				end
 			end
-			for n=0, 2, 1 do
-			  globals.belts[n]:play()
-			end
-			allEne[#allEne].y = allEne[#allEne].y - (lane2-lane1)
-		end
+		end	
 		
 	end
 	
