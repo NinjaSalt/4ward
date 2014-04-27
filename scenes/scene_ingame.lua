@@ -581,7 +581,6 @@ if ((currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) or levelEnded == t
       storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
     end
     ]]--
-
   end
 end
 
@@ -659,12 +658,13 @@ local function gameLoop( event )
 	globals.multiplier = getMultiplier()
 	globals.multiplierText.text = (globals.multiplier)
         
-        --[[
+        
+        if levelEnded == true then return end
         if validCombosRemaining() == false then
 			levelEnded = true
-                        --checkEnemy()
+                        checkEnemy()
+                        return
         end
-        ]]--
 
 	-- CHECKS FOR OBJECTIVES (visual representations) HERE --
 	if currentLevel.victoryCondition ~=false then
