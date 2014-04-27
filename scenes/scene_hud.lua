@@ -264,11 +264,11 @@ function scene:createScene( event )
   itemBelt[0].y = 20
   group:insert(itemBelt[0])
 
-  for i = 0, 2, 1 do
-    --if (gameSettings[6][i+1] ~= nil) then
-     -- myItems[i] = gameSettings[6][i+1]
-    --end
-    end
+	for i = 0, 2, 1 do
+		if (gameSettings[6][i+1] ~= nil) then
+			myItems[i] = gameSettings[6][i+1]
+		end
+	end
     
   local gameItems = {}
 

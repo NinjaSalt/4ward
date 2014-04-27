@@ -64,7 +64,7 @@ function bkftbuttonPressed()
     end
     globals.score = calcServingScore (enemyCounter, globals.score, globals.multiplier)
     globals.scoreText.text = (globals.score)
-    transition.to( globals.breakfastButton, { x=-globals.breakfastButton.width,onComplete=function() 
+    transition.to( globals.breakfastButton, { time=500, alpha=0,onComplete=function() 
         if(globals.breakfastButton~=nil) then
           globals.breakfastButton:removeSelf() 
           globals.breakfastButton = nil
@@ -127,7 +127,7 @@ function dnrbuttonPressed()
     end
     globals.score = calcServingScore (denemy, globals.score, globals.multiplier)
     globals.scoreText.text = (globals.score)
-    transition.to( globals.dinnerButton, { x=-globals.dinnerButton.width, onComplete=function() 
+    transition.to( globals.dinnerButton, { time=500, alpha=0, onComplete=function() 
         if(globals.dinnerButton~=nil) then
           globals.dinnerButton:removeSelf() 
           globals.dinnerButton = nil
@@ -188,7 +188,7 @@ function dstbuttonPressed()
     end
     globals.score = calcServingScore (dtenemy, globals.score, globals.multiplier)
     globals.scoreText.text = (globals.score)
-    transition.to( globals.dessertButton, { x=-globals.dessertButton.width, onComplete=function() 
+    transition.to( globals.dessertButton, { time=500, alpha=0, onComplete=function() 
         if(globals.dessertButton~=nil) then
           globals.dessertButton:removeSelf() 
           globals.dessertButton = nil
@@ -244,6 +244,16 @@ function servingButtons()
         --transition.to( globals.breakfastButton, { x=globals.breakfastButton.width/2-3, tag="animation" } )
         globals.breakfastButton:addEventListener("tap", bkftbuttonPressed)
       end
+    elseif (globals.breakfastServe == false) then
+      if (globals.breakfastButton ~= nil) then
+          transition.to( globals.breakfastButton, { time=500, alpha=0,onComplete=function() 
+            if (globals.breakfastButton ~= nil) then
+              globals.breakfastButton:removeSelf() 
+              globals.breakfastButton = nil
+            end
+            counter = 0
+          end, tag="animation" } )
+      end
     end
 
     if (globals.dinnerServe) then
@@ -262,6 +272,16 @@ function servingButtons()
         --transition.to( globals.dinnerButton, { x=globals.dinnerButton.width/2-3, tag="animation" } )
         globals.dinnerButton:addEventListener("tap", dnrbuttonPressed)
       end
+    elseif (globals.dinnerServe == false) then
+        if (globals.dinnerButton ~= nil) then
+            transition.to( globals.dinnerButton, { time=500, alpha=0,onComplete=function() 
+              if (globals.dinnerButton ~= nil) then
+                globals.dinnerButton:removeSelf() 
+                globals.dinnerButton = nil
+              end
+              dcounter = 0
+              end, tag="animation" } )
+        end
     end
 
     if (globals.dessertServe) then
@@ -281,5 +301,15 @@ function servingButtons()
         --transition.to( globals.dessertButton, { x=globals.dessertButton.width/2-3, tag="animation" } )
         globals.dessertButton:addEventListener("tap", dstbuttonPressed)
       end
+    elseif (globals.dessertServe == false) then
+        if (globals.dessertButton ~= nil) then
+            transition.to( globals.dessertButton, { time=500, alpha=0,onComplete=function() 
+              if (globals.dessertButton ~= nil) then
+                globals.dessertButton:removeSelf() 
+                globals.dessertButton = nil
+              end
+              dtcounter = 0
+              end, tag="animation" } )
+        end
     end
 end

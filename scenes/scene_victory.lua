@@ -79,20 +79,20 @@ function scene:createScene( event )
 
   group:insert(gameTitleb)
 
-  local function callSparkles()
-    local sparkles = display.newImage( "images/sparkles.png", centerX, centerY-60, true )
-    sparkles.width = sparkles.width/4
-    sparkles.height = sparkles.height/4
-    group:insert(sparkles)
-    transition.to( sparkles, { time=1500, alpha=0, onComplete=function()
-        if (sparkles ~= nil) then
-          sparkles:removeSelf()
-          sparkles=nil
-        end
-      end } )
-  end
+  -- local function callSparkles()
+  --   local sparkles = display.newImage( "images/sparkles.png", centerX, centerY-60, true )
+  --   sparkles.width = sparkles.width/4
+  --   sparkles.height = sparkles.height/4
+  --   group:insert(sparkles)
+  --   transition.to( sparkles, { time=1500, alpha=0, onComplete=function()
+  --       if (sparkles ~= nil) then
+  --         sparkles:removeSelf()
+  --         sparkles=nil
+  --       end
+  --     end } )
+  -- end
 
-  timer.performWithDelay(300, callSparkles )
+ -- timer.performWithDelay(300, callSparkles )
 
  local gameTitle = display.newText( "Victory!", 0, 0, globals.LOBSTERTWO, 50 )
   gameTitle:setFillColor(black)
@@ -141,12 +141,12 @@ function scene:createScene( event )
   group:insert( mapButton)
   
   if nextLevel == LevelList.getNumOfLevels(params.world) then
-	timer.performWithDelay(600, function() transition.to(nextWorldButton, {time = 700, x= display.contentWidth/2}) end)
+	timer.performWithDelay(800, function() transition.to(nextWorldButton, {time = 700, x= display.contentWidth/2}) end)
   else
-    timer.performWithDelay(600, function() transition.to(nextLevelButton, {time = 700, x= display.contentWidth/2}) end)
+    timer.performWithDelay(800, function() transition.to(nextLevelButton, {time = 700, x= display.contentWidth/2}) end)
   end
-  timer.performWithDelay(800, function() transition.to(replayButton, {time = 700, x= display.contentWidth/2}) end)
-  timer.performWithDelay(1000, function() transition.to(mapButton, {time = 700, x= display.contentWidth/2}) end)
+  timer.performWithDelay(900, function() transition.to(replayButton, {time = 700, x= display.contentWidth/2}) end)
+  timer.performWithDelay(1200, function() transition.to(mapButton, {time = 700, x= display.contentWidth/2}) end)
   
   
   local function onTapNextLevel( event )
@@ -177,7 +177,9 @@ function scene:createScene( event )
 	else
 		nextLevelButton:addEventListener( "tap", onTapNextLevel )
 	end
-	replayButton:addEventListener( "tap", onTapReplay )
+  if (onTapReplay~=nil or replayButton~=nil) then
+  	replayButton:addEventListener( "tap", onTapReplay )
+  end
 	mapButton:addEventListener( "tap", onTapMap )
 	end )
   
@@ -201,10 +203,10 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-   if (sparkles ~= nil) then
-        sparkles:removeSelf()
-        sparkles=nil
-      end
+   -- if (sparkles ~= nil) then
+   --      sparkles:removeSelf()
+   --      sparkles=nil
+   --    end
 end
  
 -- Called AFTER scene has finished moving offscreen:

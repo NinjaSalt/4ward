@@ -320,13 +320,13 @@ function moveToHold( event )
 		if(currentLevel.victoryCondition~=false or levelEnded == true) then
 			if(currentLevel.victoryCondition.conditionMet==true)then
 				LevelList.unlockLevel(world, thisLevel+1)
-				storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+				storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 700, params = {level = thisLevel, world = world}})
 			else 
 				storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world, condition = true}})
 			end
 		else	
 		LevelList.unlockLevel(world, thisLevel+1)
-		storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+		storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 700, params = {level = thisLevel, world = world}})
 		end
 	end
 
@@ -529,59 +529,59 @@ function checkEnemy()
 
 	-- turns score condition success true/false.
 	if (currentLevel.scoreCondition~=false) then
-	if (currentLevel.scoreCondition.score-1 < globals.score) then
-		currentLevel.scoreCondition.success = true
+		if (currentLevel.scoreCondition.score-1 < globals.score) then
+			currentLevel.scoreCondition.success = true
 		end
 	end
 
-if ((currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) or levelEnded == true) then
-    globals.attack = false
+	if ((currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) or levelEnded == true) then
+    	globals.attack = false
 
-    local totalCond = 0
+    	local totalCond = 0
 
-    --[[-- accounts for two conditions now.
-    if (currentLevel.victoryCondition~=false) then
-    	if(currentLevel.victoryCondition.conditionMet==true)then
-    		totalCond = totalCond + 1
-    	end
-    end
-    if (currentLevel.categoryCondition~=false) then
-    	if(currentLevel.categoryCondition.success==true)then
-    		totalCond = totalCond + 1
-    	end
-    end
-    if (currentLevel.scoreCondition~=false) then
-    	if(currentLevel.scoreCondition.success==true)then
-    		totalCond = totalCond + 1
-    	end
-    end
-    -- end account check
-    ]]--
+    	--[[-- accounts for two conditions now.
+		if (currentLevel.victoryCondition~=false) then
+			if(currentLevel.victoryCondition.conditionMet==true)then
+				totalCond = totalCond + 1
+			end
+		end
+		if (currentLevel.categoryCondition~=false) then
+			if(currentLevel.categoryCondition.success==true)then
+				totalCond = totalCond + 1
+			end
+		end
+		if (currentLevel.scoreCondition~=false) then
+			if(currentLevel.scoreCondition.success==true)then
+				totalCond = totalCond + 1
+			end
+		end
+		-- end account check
+		]]--
 
-    -- NOW YOU WIN WIN WIN (Unless your score is negative.)
+		-- NOW YOU WIN WIN WIN (Unless your score is negative.)
 
-    if (globals.score > 0) then
-    	LevelList.unlockLevel(world, thisLevel+1)
-        storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-    else
-        storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world, condition = true}})
-    end
+		if (globals.score > 0) then
+			LevelList.unlockLevel(world, thisLevel+1)
+		    storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 700, params = {level = thisLevel, world = world}})
+		else
+		    storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world, condition = true}})
+		end
 
-    --[[
-    OLD CONDITION CHECK
-    if(currentLevel.victoryCondition~=false) then
-      if(currentLevel.victoryCondition.conditionMet==true)then
-        LevelList.unlockLevel(world, thisLevel+1)
-        storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-      else 
-        storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world, condition = true}})
-      end
-    else  
-      LevelList.unlockLevel(world, thisLevel+1)
-      storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
-    end
-    ]]--
-  end
+		--[[
+		OLD CONDITION CHECK
+		if(currentLevel.victoryCondition~=false) then
+		  if(currentLevel.victoryCondition.conditionMet==true)then
+		    LevelList.unlockLevel(world, thisLevel+1)
+		    storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+		  else 
+		    storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world, condition = true}})
+		  end
+		else  
+		  LevelList.unlockLevel(world, thisLevel+1)
+		  storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+		end
+		]]--
+		end
 end
 
 function makeDeathPoof(allEne)
@@ -684,6 +684,21 @@ local function gameLoop( event )
 		for i = 0,table.maxn( allEne ) do
 			for n = 0,table.maxn( hero ) do
 				if ( hasCollidedCircle( hero[n], allEne[i]) ) then
+
+					-- CHECKS IF A COMBO ITEM CRASHES INTO THE CHEF AND TURNS THE BUTTON OFF --
+					if (hero[0] and allEne[i].category=="breakfast" and globals.breakfastServe == true) then
+						globals.breakfastServe = false
+						servingButtons()
+					end
+					if (hero[1] and allEne[i].category=="dinner" and globals.dinnerServe == true) then
+						globals.dinnertServe = false
+						servingButtons()
+					end
+					if (hero[2] and allEne[i].category=="dessert" and globals.dessertServe == true) then
+						globals.dessertServe = false
+						servingButtons()
+					end
+					
 					allEne[i]:removeSelf()
 					table.remove(allEne, i)
 					--allEnemHealth[i]:removeSelf()
@@ -795,8 +810,8 @@ local function gameLoop( event )
 								--table.remove(allEnemHealth, i-1)
 								decrementEnemy(currentLevel)
 							end
-                                                        foundComboFlag = true
-                                                        break
+                            foundComboFlag = true
+                            break
 						end
 					end
 				end
@@ -804,41 +819,102 @@ local function gameLoop( event )
 		end
 		--CHECKS IF COMBO ENEMIES ARE IN THE CORRECT LANE--
 		for i = 1,table.maxn( allEne ) do
-			if (allEne[i].y == lane1) then
-				if (allEne[i].category == "breakfast") then
-					globals.breakfastServe = true
-					servingButtons()
-					if (globals.breakfastServe and globals.breakfastButton~=nil) then
-						group:insert( globals.breakfastButton )
+			--CHECKS IF A FOOD IS BREAKFAST
+			if (allEne[i].category == "breakfast") then
+				--CHECKS IF THE BREAKFAST ITEM IS IN LANE1
+				if (allEne[i].y == lane1) then
+					if (globals.breakfastServe == false) then
+						globals.breakfastServe = true
 					end
-				end
-				-- elseif (globals.breakfastServe and allEne[i].category ~= "breakfast") then
-				-- 	--if (allEne[i].category ~= "breakfast") then
-				-- 		print("i'm here")
-				-- 		if(globals.breakfastButton ~= nil) then
-				-- 			globals.breakfastButton:removeSelf()
-				-- 			--globals.breakfastButton = nil
-				-- 		end
-				-- 	--end
-				-- end
-			elseif (allEne[i].y == lane2) then
-				if (allEne[i].category == "dinner") then
-					globals.dinnerServe = true
-					servingButtons()
-					if (globals.dinnerServe) then
-						group:insert( globals.dinnerButton )
+					--CHECKS IF THE BREAKFAST IS IN EITHER LANE2 OR LANE3
+				elseif (allEne[i].y == lane2 or allEne[i].y == lane3) then
+					if (globals.breakfastServe == true) then
+						globals.breakfastServe = false
+						--CHECKS IF BREAKFAST IS IN BOTH LANE 1 AND LAME2/LANE3 TO KEEP THE BUTTON TRUE (flashes the button though. need a more efficient way for this)
+					elseif ((allEne[i].y == lane2 or allEne[i].y == lane3) and allEne[i].y == lane1) then
+						globals.breakfastServe = true
 					end
-				end
-			elseif (allEne[i].y == lane3) then
-				if (allEne[i].category == "dessert") then
-					globals.dessertServe = true
-					servingButtons()
-					if (globals.dessertServe) then
-						group:insert( globals.dessertButton )
-					end
-					checkEnemy()
 				end
 			end
+			if (allEne[i].category == "dinner") then
+				if (allEne[i].y == lane2) then
+					if (globals.dinnerServe == false) then
+						globals.dinnerServe = true
+					end
+				elseif (allEne[i].y == lane1 or allEne[i].y == lane3) then
+					if (globals.dinnerServe == true) then
+						globals.dinnerServe = false
+					elseif ((allEne[i].y == lane1 or allEne[i].y == lane3) and allEne[i].y == lane2) then
+						globals.dinnerServe = true
+					end
+				end
+			end
+			if (allEne[i].category == "dessert") then
+				if (allEne[i].y == lane3) then
+					if (globals.dessertServe == false) then
+						globals.dessertServe = true
+					end
+				elseif (allEne[i].y == lane1 or allEne[i].y == lane2) then
+					if (globals.dessertServe == true) then
+						globals.dessertServe = false
+					elseif ((allEne[i].y == lane1 or allEne[i].y == lane2) and allEne[i].y == lane3) then
+						globals.dessertServe = true
+					end
+				end
+			end
+			servingButtons()
+			if (globals.breakfastServe and globals.breakfastButton~=nil) then
+				group:insert( globals.breakfastButton )
+			end
+			if (globals.dinnerServe and globals.dinnerButton~=nil) then
+				group:insert( globals.dinnerButton )
+			end
+			if (globals.dessertServe and globals.dessertButton~=nil) then
+				group:insert( globals.dessertButton )
+			end
+			-- if (allEne[i].y == lane2) then
+			-- 	if (allEne[i].category == "dinner") then
+			-- 		globals.dinnerServe = true
+			-- 		servingButtons()
+			-- 		if (globals.dinnerServe) then
+			-- 			group:insert( globals.dinnerButton )
+			-- 		end
+			-- 	end
+			-- end
+			-- if (allEne[i].y == lane3) then
+			-- 	if (allEne[i].category == "dessert") then
+			-- 		globals.dessertServe = true
+			-- 		servingButtons()
+			-- 		if (globals.dessertServe) then
+			-- 			group:insert( globals.dessertButton )
+			-- 		end
+			-- 	end
+			-- end
+			-- if (allEne[i].y == lane1) then
+			-- 	if (allEne[i].category == "breakfast") then
+			-- 		globals.breakfastServe = true
+			-- 		servingButtons()
+			-- 		if (globals.breakfastServe and globals.breakfastButton~=nil) then
+			-- 			group:insert( globals.breakfastButton )
+			-- 		end
+			-- 	end
+			-- elseif (allEne[i].y == lane2) then
+			-- 	if (allEne[i].category == "dinner") then
+			-- 		globals.dinnerServe = true
+			-- 		servingButtons()
+			-- 		if (globals.dinnerServe) then
+			-- 			group:insert( globals.dinnerButton )
+			-- 		end
+			-- 	end
+			-- elseif (allEne[i].y == lane3) then
+			-- 	if (allEne[i].category == "dessert") then
+			-- 		globals.dessertServe = true
+			-- 		servingButtons()
+			-- 		if (globals.dessertServe) then
+			-- 			group:insert( globals.dessertButton )
+			-- 		end
+			-- 	end
+			-- end
 		end
 	end
 
@@ -921,14 +997,6 @@ function scene:createScene( event )
     group:insert(eneAndBar[0])
 	--group:insert(eneAndBar[1])
   end
- --  local function createBullet(hero)
-	-- group:insert(make_bullet(hero))
- --  end
- --  local function heroNormalAttacks()
- --    group:insert(make_bullet_pins(hero[0]))
-	-- group:insert(make_bullet_spatula(hero[1]))
-	-- group:insert(make_bullet_whisk(hero[2]))
- --   end
   local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert(bkg)
@@ -1088,7 +1156,7 @@ function scene:exitScene( event )
 	if(stars>0) then
 		LevelList.unlockLevel(world, 5)
 	end
-        resetServeCounters()
+	resetServeCounters()
 end
  
 -- Called AFTER scene has finished moving offscreen:
