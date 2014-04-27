@@ -221,6 +221,12 @@ local bellSheetSettings =
       {name = "dessert", frames={5, 6}, time=1000, loopCount=0}
     }
 
+function resetServeCounters()
+    counter = 0
+    dcounter = 0
+    dtcounter = 0
+end
+
 function servingButtons()
     if (globals.breakfastServe) then
       if(counter<2) then

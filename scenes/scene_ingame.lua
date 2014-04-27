@@ -1088,6 +1088,7 @@ function scene:exitScene( event )
 	if(stars>0) then
 		LevelList.unlockLevel(world, 5)
 	end
+        resetServeCounters()
 end
  
 -- Called AFTER scene has finished moving offscreen:
