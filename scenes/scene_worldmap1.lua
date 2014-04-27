@@ -24,7 +24,6 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
 
-  print(worlds[1].levelsUnlocked[2])
   local group = self.view
 
   local levelSelect = 1
@@ -254,7 +253,7 @@ function scene:createScene( event )
   end
 
   backArrow:addEventListener("tap", onTapBackArrow)
-
+  onTapLevel1()
 end
  
 -- Called BEFORE scene has moved onscreen:
