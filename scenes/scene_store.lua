@@ -295,6 +295,23 @@ local currencyGradient = display.newImage("images/money.png")
 		  myY=myY+35
 		end
 	end
+
+  local backButton = display.newImage("images/leftArrow.png")
+  backButton.x = 466 
+  backButton.y = 12
+  backButton.height = 20
+  backButton.width = 20
+  group:insert(backButton)
+  
+  local function onTapBack( event )
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_worldmap",{ effect = "fade", time = 250})
+  end
+
+  backButton:addEventListener("tap",onTapBack)
+
+
+
 end
  
 -- Called BEFORE scene has moved onscreen:
@@ -308,7 +325,11 @@ end
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
   local group = self.view
- 
+
+-- goes to pantry tutorial page.
+if (globals.completedShop ~= true) then
+  storyboard.showOverlay( "scenes.scene_pantryTutorial" , {effect = "slideDown", time = 500 })
+ end
 end
  
 -- Called when scene is about to move offscreen:
