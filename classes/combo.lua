@@ -93,92 +93,110 @@ end
 
    foodgroup = {}
 
+
    foodgroup = {
       egg = {egg = "bad", flour = "pancake", potato = "scrambledPotato", strawberry = "bad", oil = "bad", steak = "steakOm", sugar = "meringue", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad" , sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
       flour = {egg = "pancake", flour = "bad", potato = "croquette", strawberry = "strawberryTart", oil = "donut", steak = "CFS", sugar = "cake", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
       potato = {egg = "scrambledPotato", flour = "croquette", potato = "mashed", strawberry = "bad", oil = "fries", steak = "steakBaked", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
-      strawberry = {egg = "bad", flour = "strawberryTart", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "strawberryCandy", pancake = "bad",
-       scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+      strawberry = {egg = "bad", flour = "strawberryTart", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "strawberryCandy", pancake = "strawPancake",
+       scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "strawberryCake", mashed = "bad",
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
       oil = {egg = "bad", flour = "donut", potato = "fries", strawberry = "bad", oil = "bad", steak = "CFS", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
       steak = {egg = "steakOm", flour = "CFS", potato = "steakBaked", strawberry = "bad", oil = "CFS", steak = "bad", sugar = "bad", pancake = "bad",
-       scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "sheperdsPie",
+       fries = "steakFries", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
       sugar = {egg = "meringue", flour = "cake", potato = "bad", strawberry = "strawberryCandy", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
-      pancake = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
+      pancake = {egg = "bad", flour = "bad", potato = "bad", strawberry = "strawPancake", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
        fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
 
       scrambledPotato = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
       steakOm = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
       meringue = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
       croquette = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
        bad = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
       strawberryTart = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
       donut = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
       CFS = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
-      cake = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
+      cake = {egg = "bad", flour = "bad", potato = "bad", strawberry = "strawberryCake", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
-      mashed = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
+      mashed = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "sheperdsPie", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
-      fries = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
+      fries = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "steakFries", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
       steakBaked = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
       strawberryCandy = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
       strawberryTart = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
        
       bad = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"}
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
+
+      sheperdsPie = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
+       scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
+
+      strawberryCake = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
+       scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
+
+      steakFries = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
+       scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
+
+      strawPancake = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
+       scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"}
+
    }

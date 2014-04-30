@@ -117,6 +117,12 @@ steakOm = Enemy.create ("Steak Omelette", 5, 2, speed, 4, "images/SteakOm.png", 
 strawberryCandy = Enemy.create ("Strawberry Candy", 5, 2, speed, 4, "images/StrawberryCandy.png", 5, "strawberryCandy","dessert", "Strawberry + Sugar")
 strawberryTart = Enemy.create ("Strawberry Tart", 5, 2, speed, 4, "images/StrawberryTart.png", 5, "strawberryTart","dessert", "Strawberry + Sugar")
 
+-- TRIPLE COMBOS
+sheperdsPie = Enemy.create("Sheperd's Pie", 5, 2, speed, 4, "images/shepPie.png", 10, "sheperdsPie", "dinner", "Mashed Potato + Steak" )
+strawberryCake = Enemy.create("Strawberry Cake", 5, 2, speed, 4, "images/strawberryCake.png", 10, "strawberryCake", "dessert", "Cake + Strawberry" )
+steakFries = Enemy.create("Steak and Fries", 5, 2, speed, 4, "images/steakFries.png", 10, "steakFries", "dinner", "Steak + Fries")
+strawPancake = Enemy.create("Strawberry Jam Pancake", 5, 2, speed, 4, "images/strJamPancake.png", 10, "strawPancake", "breakfast", "Pancake + Strawberry")
+
 myEnemies = {}
 myEnemies[0] = egg
 myEnemies[1] = flour
@@ -144,3 +150,9 @@ comboEnemies[10] = steakBaked
 comboEnemies[11] = steakOm
 comboEnemies[12] = strawberryCandy
 comboEnemies[13] = strawberryTart
+
+-- triple combos
+comboEnemies[14] = sheperdsPie
+comboEnemies[15] = strawberryCake
+comboEnemies[16] = steakFries
+comboEnemies[17] = strawPancake 
