@@ -1,6 +1,7 @@
 require("classes.enemies")
 require("classes.level")
 require("classes.score")
+require("classes.audioClass")
 local globals = require("classes.globals")
 local storyboard = require( "storyboard" )
 local counter = 0
@@ -57,7 +58,7 @@ function bkftbuttonPressed()
             --allEnemHealth[i]:removeSelf()
             --table.remove(allEnemHealth, i)
             decrementEnemy(currentLevel)
-
+			playSFX (audioServeFood, 1)
           end
         end
       end
@@ -121,6 +122,7 @@ function dnrbuttonPressed()
             --allEnemHealth[i]:removeSelf()
             --table.remove(allEnemHealth, i)
             decrementEnemy(currentLevel)
+			playSFX (audioServeFood, 1)
           end
         end
       end
@@ -182,6 +184,7 @@ function dstbuttonPressed()
             --allEnemHealth[i]:removeSelf()
             --table.remove(allEnemHealth, i)
             decrementEnemy(currentLevel)
+			playSFX (audioServeFood, 1)
           end
         end
       end

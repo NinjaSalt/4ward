@@ -754,6 +754,16 @@ local function gameLoop( event )
 							allEne[#allEne] = display.newImage(allEne[#allEne].image)
 							allEne[#allEne] = passValuesToNewEne(allEne[#allEne], comboEnemies[j])
 							unlockCheck(j)
+							if( j ~= 0 ) then
+								local audioGoodCombos = {audioGoodCombo1, audioGoodCombo2, audioGoodCombo3, audioGoodCombo4, audioGoodCombo5, audioGoodCombo6}
+								soundToPlay = math.random(0, 5)
+								playSFX (audioGoodCombos[soundToPlay], 1)
+							end
+							if( j == 0 ) then
+								local audioBadCombos = {audioBadCombo, audioBadCombo1, audioBadCombo2, audioBadCombo3}
+								soundToPlay = math.random(0, 3)
+								playSFX (audioBadCombos[soundToPlay], 1)
+							end
 							-- Check for Secondary Win condition
 							--if(currentLevel.victoryCondition~=false) then
 							--	if(currentLevel.victoryCondition.enemy.name==allEne[#allEne].name)then

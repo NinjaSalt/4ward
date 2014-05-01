@@ -7,6 +7,7 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 require("classes.level")
+require("classes.audioClass")
 local globals = require ("classes.globals")
 local levelNumber
 -- Clear previous scene
@@ -94,6 +95,7 @@ function scene:createScene( event )
     local readyText= display.newText( "Ready!", display.contentWidth/2, 295, globals.LOBSTERTWO, 25 )
     readyText:setFillColor(black)
     group:insert(readyText)
+	playSFX (audioReady, 1)
   end
 
   
