@@ -1,11 +1,11 @@
 require("classes.enemies")
 require("classes.level")
 require("classes.move")
-require("classes.chop")
+-- require("classes.chop")
 --equire("classes.heroes")
 local globals = require("classes.globals")
 local storyboard = require( "storyboard" )
-local loadsave = require("classes.loadsave")
+--local loadsave = require("classes.loadsave")
 --require("scenes.scene_ingame")
 Item = {}
 Item.__index = Item
@@ -13,7 +13,7 @@ Item.__index = Item
 local startX = nil
 local startY = nil
 
-gameSettings = loadsave.loadTable("gamesettings.json")
+--gameSettings = loadsave.loadTable("gamesettings.json")
 
 
 function Item.makeItem(name, itemType, image, cost, id, unlocked, description, toUse, lockLevel)
@@ -48,8 +48,8 @@ function makeItemArray ()
 		nextItem=i
 	end
 	--nextItem=nextItem+1
-	items[nextItem+1]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem, false, "Pauses the game.", "Click to activate.", 4)
-	items[nextItem+2]= Item.makeItem("Producer Swap","swap", "images/swap.png", 700, nextItem+3, false, "Swaps two items.", "Click to activate.",4)
+	items[nextItem+1]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem+1, false, "Pauses the game.", "Click to activate.", 4)
+	items[nextItem+2]= Item.makeItem("Producer Swap","swap", "images/swap.png", 700, nextItem+2, false, "Swaps two items.", "Click to activate.",4)
 end
 makeItemArray()
 myItems = {}
@@ -150,14 +150,14 @@ function itemTap ( event )
 		commercialBreak()
 		itemUsed: removeSelf()
 		myItems[itemUsed.myItemRef] = nil
-		gameSettings[6][itemUsed.myItemRef+1] = nil
-		loadsave.saveTable(gameSettings , "gamesettings.json")
+		-- gameSettings[6][itemUsed.myItemRef+1] = nil
+		-- loadsave.saveTable(gameSettings , "gamesettings.json")
 	elseif (itemUsed.itemType == "swap")then
 		producerSwap()
 		itemUsed: removeSelf()
 		myItems[itemUsed.myItemRef] = nil
-		gameSettings[6][itemUsed.myItemRef+1] = nil
-		loadsave.saveTable(gameSettings , "gamesettings.json")
+		-- gameSettings[6][itemUsed.myItemRef+1] = nil
+		-- loadsave.saveTable(gameSettings , "gamesettings.json")
 	end
 end
 
@@ -194,8 +194,8 @@ function itemFoodDrag( event )
 				hit = 1
 				end
 			end
-			gameSettings[6][body.myItemRef+1] = nil
-			loadsave.saveTable(gameSettings , "gamesettings.json")
+			-- gameSettings[6][body.myItemRef+1] = nil
+			-- loadsave.saveTable(gameSettings , "gamesettings.json")
 			print("food used!")
 			if ( hit == 0) then
 				print (body.x .. " " .. startX)

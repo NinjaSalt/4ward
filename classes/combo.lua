@@ -125,7 +125,7 @@ end
 
       pancake = {egg = "bad", flour = "bad", potato = "bad", strawberry = "strawPancake", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad"},
+       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
 
       scrambledPotato = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",

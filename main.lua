@@ -48,7 +48,7 @@ local options = {
   local globals = require ("classes.globals")
 
   -- play music
- -- local themeChannel = audio.play(theme,{channel =1, loops=-1})
+  local themeChannel = audio.play(theme,{channel =1, loops=-1})
 
 
 local storyboard = require( "storyboard" )
@@ -81,7 +81,7 @@ if "Win" == system.getInfo( "platformName" ) then
     -- Mac and iOS
     globals.LOBSTERTWO = "Lobster Two"
     globals.IMPRIMA = "Imprima"
-  end
+end
 
 
 -- Display each font in the terminal console
@@ -93,6 +93,15 @@ for i, fontname in ipairs(fonts) do
         --print( "fontname = " .. tostring( fontname ) )
 
     end
+end
+
+local lfs = require "lfs"
+
+local doc_path = system.pathForFile( "", system.DocumentsDirectory )
+
+for file in lfs.dir(doc_path) do
+   --file is the current file or directory name
+   print( "Found file: " .. file )
 end
 
 ----- HOW TO RESET THE SAVED TABLE ------
@@ -107,62 +116,62 @@ end
 -- globals.currency.set(0)
 --   globals.currency.save()
 
-local loadsave = require("classes.loadsave")
+-- local loadsave = require("classes.loadsave")
 
-gameSettings = loadsave.loadTable("gamesettings.json")
+-- gameSettings = loadsave.loadTable("gamesettings.json")
  
--- check if gameSettings exists. If not create and initialise starting data
-if (gameSettings == nil) then --comment this to reset the saving ***
-    -- creating new table to save data
-    gameSettings  = {}
-    --world
-    for n=1, globals.numWorlds+3, 1 do
-        print("n: " .. n)
-        gameSettings[n] = {}
-    end
+-- -- check if gameSettings exists. If not create and initialise starting data
+-- --if (gameSettings == nil) then --comment this to reset the saving ***
+--     -- creating new table to save data
+--     gameSettings  = {}
+--     --world
+--     for n=1, globals.numWorlds+3, 1 do
+--         print("n: " .. n)
+--         gameSettings[n] = {}
+--     end
 
-    --- FOR REFERENCE ---
-    --worlds:
-    -- gameSettings[1] = {}
-    -- gameSettings[2] = {}
-    -- gameSettings[3] = {}
-    -- --recipe book unlocking:
-    -- --basic
-    --gameSettings[4] = {}
-    -- --recipe
-    -- gameSettings[5] = {}
-    --item belt saving:
-    --gameSettings[6] = {}
-    --- FOR REFERENCE ---
+--     --- FOR REFERENCE ---
+--     --worlds:
+--     -- gameSettings[1] = {}
+--     -- gameSettings[2] = {}
+--     -- gameSettings[3] = {}
+--     -- --recipe book unlocking:
+--     -- --basic
+--     --gameSettings[4] = {}
+--     -- --recipe
+--     -- gameSettings[5] = {}
+--     --item belt saving:
+--     --gameSettings[6] = {}
+--     --- FOR REFERENCE ---
 
-    -- * --
-    --levels
-    for n=1, globals.numWorlds, 1 do
-        for j=1, globals.numLevels, 1 do
-            gameSettings[n][j] = {}
-        end
-    end
+--     -- * --
+--     --levels
+--     for n=1, globals.numWorlds, 1 do
+--         for j=1, globals.numLevels, 1 do
+--             gameSettings[n][j] = {}
+--         end
+--     end
 
-    for n=1, globals.numWorlds, 1 do
-        for j=1, globals.numLevels, 1 do
-            for i=1, globals.numStorage, 1 do
-            gameSettings[n][j][i] = 0
-        end
-        end
-    end
+--     for n=1, globals.numWorlds, 1 do
+--         for j=1, globals.numLevels, 1 do
+--             for i=1, globals.numStorage, 1 do
+--             gameSettings[n][j][i] = 0
+--         end
+--         end
+--     end
 
-    --- FOR REFERENCE ---
-    --score
-    -- gameSettings[n][j][1] = 0
+--     --- FOR REFERENCE ---
+--     --score
+--     -- gameSettings[n][j][1] = 0
 
-    -- --stars
-    -- gameSettings[n][j][2] = 0
-    --- FOR REFERENCE ---
+--     -- --stars
+--     -- gameSettings[n][j][2] = 0
+--     --- FOR REFERENCE ---
 
-    loadsave.saveTable(gameSettings , "gamesettings.json")
-    print("First Time Data Initialisation") --comment this to reset the saving ***
-else --comment this to reset the saving ***
-    print("Main Data Loaded") --comment this to reset the saving ***
-end --comment this to reset the saving ***
+--     loadsave.saveTable(gameSettings , "gamesettings.json")
+--     print("First Time Data Initialisation") --comment this to reset the saving ***
+-- else --comment this to reset the saving ***
+--     print("Main Data Loaded") --comment this to reset the saving ***
+-- end --comment this to reset the saving ***
 ---------------------------------------------------------
 

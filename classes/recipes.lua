@@ -1,8 +1,8 @@
 require("classes.enemies")
 local globals = require ("classes.globals")
-local loadsave = require("classes.loadsave")
+-- local loadsave = require("classes.loadsave")
 
-gameSettings = loadsave.loadTable("gamesettings.json")
+-- gameSettings = loadsave.loadTable("gamesettings.json")
 
 globals.recipes = {}
 globals.recipes[0] = nil
@@ -19,9 +19,9 @@ end
 function unlockCheck(number)
 	if (globals.recipes[number+1]~= nil) then
 		globals.recipes[number+1].unlocked = true
-		if (gameSettings[number+1]~=nil) then
-			print("saving recipe " .. number+1)
-			gameSettings[5][number+1] = globals.recipes[number+1].unlocked
-		end
+		-- if (gameSettings[number+1]~=nil) then
+		-- 	print("saving recipe " .. number+1)
+		-- 	-- gameSettings[5][number+1] = globals.recipes[number+1].unlocked
+		-- end
 	end
 end

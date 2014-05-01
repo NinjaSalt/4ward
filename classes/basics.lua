@@ -1,8 +1,8 @@
 require("classes.enemies")
 local globals = require ("classes.globals")
-local loadsave = require("classes.loadsave")
+-- local loadsave = require("classes.loadsave")
 
-gameSettings = loadsave.loadTable("gamesettings.json")
+-- gameSettings = loadsave.loadTable("gamesettings.json")
 globals.basics = {}
 globals.basics[0] = nil
 for i = 1,table.maxn( myEnemies )+1 do
@@ -18,9 +18,9 @@ end
 function unlockBasicCheck(number)
 	if (globals.basics[number+1]~= nil) then
 		globals.basics[number+1].locker = true
-		if (gameSettings[number+1]~=nil) then
-			print("saving basic " .. number+1)
-			gameSettings[4][number+1] = globals.basics[number+1].locker
-		end
+		-- if (gameSettings[number+1]~=nil) then
+		-- 	print("saving basic " .. number+1)
+		-- 	-- gameSettings[4][number+1] = globals.basics[number+1].locker
+		-- end
 	end
 end

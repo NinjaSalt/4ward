@@ -115,7 +115,7 @@ scrambledPotato = Enemy.create ("Scrambled Eggs & Potato", 5, 2, speed, 3, "imag
 steakBaked = Enemy.create ("Steak & Baked Potato", 5, 2, speed, 4, "images/steakbaked.png", 5, "steakBaked","dinner", "Steak + Potato")
 steakOm = Enemy.create ("Steak Omelette", 5, 2, speed, 4, "images/SteakOm.png", 5, "steakOm","breakfast", "Egg + Steak")
 strawberryCandy = Enemy.create ("Strawberry Candy", 5, 2, speed, 4, "images/StrawberryCandy.png", 5, "strawberryCandy","dessert", "Strawberry + Sugar")
-strawberryTart = Enemy.create ("Strawberry Tart", 5, 2, speed, 4, "images/StrawberryTart.png", 5, "strawberryTart","dessert", "Strawberry + Sugar")
+strawberryTart = Enemy.create ("Strawberry Tart", 5, 2, speed, 4, "images/StrawberryTart.png", 5, "strawberryTart","dessert", "Strawberry + Flour")
 
 -- TRIPLE COMBOS
 sheperdsPie = Enemy.create("Sheperd's Pie", 5, 2, speed, 4, "images/shepPie.png", 10, "sheperdsPie", "dinner", "Mashed Potato + Steak" )
