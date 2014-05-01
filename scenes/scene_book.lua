@@ -29,6 +29,7 @@ function scene:createScene( event )
   local basicText
   local basicsList = {}
   local comboDescY = 275 
+  local tabsX = 445
 
   local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
@@ -47,7 +48,7 @@ function scene:createScene( event )
 
   --extended tabs.
   local extendY = 500
-  local extendBasic = display.newRect(440, extendY, 20, 50)
+  local extendBasic = display.newRect(440, extendY, 25, 50)
   group:insert(extendBasic)
 
 
@@ -188,6 +189,26 @@ function scene:createScene( event )
       end
     end
 
+    -- TAB ADJUSTMENTS CLEARING
+    breakfastRep: removeSelf()
+    dinnerRep: removeSelf()
+    dessertRep: removeSelf()
+
+    breakfastRep = display.newImage("images/brHalfTab.png", tabsX, 160, true)
+    breakfastRep.width = 40
+    breakfastRep.height = 40
+    group:insert(breakfastRep)
+
+    dinnerRep = display.newImage("images/diHalfTab.png", tabsX, 220, true)
+    dinnerRep.width = 40
+    dinnerRep.height = 40
+    group:insert(dinnerRep)
+
+    dessertRep = display.newImage("images/deHalfTab.png", tabsX, 280, true)
+    dessertRep.width = 40
+    dessertRep.height = 40
+    group:insert(dessertRep)
+
     extendBasic.y = 100
     extendBasic:setFillColor( 0.443137, 0.776471, 0.443137)
 
@@ -241,13 +262,66 @@ end
     end
     -- end clearing.
 
+    -- TAB ADJUSTMENTS CLEARING
+    breakfastRep: removeSelf()
+    dinnerRep: removeSelf()
+    dessertRep: removeSelf()
+
+    -- TAB ADJUSMENTS DEPENDING ON WHICH CATEGORY WAS CHOSEN
     if (event.target.category == "breakfast") then
+
+    breakfastRep = display.newImage("images/brFullTab.png", tabsX, 160, true)
+    breakfastRep.width = 40
+    breakfastRep.height = 40
+    group:insert(breakfastRep)
+
+    dinnerRep = display.newImage("images/diHalfTab.png", tabsX, 220, true)
+    dinnerRep.width = 40
+    dinnerRep.height = 40
+    group:insert(dinnerRep)
+
+    dessertRep = display.newImage("images/deHalfTab.png", tabsX, 280, true)
+    dessertRep.width = 40
+    dessertRep.height = 40
+    group:insert(dessertRep)
+
     extendBasic.y = 160
     extendBasic:setFillColor(1, 0.980392, 0.803922)
     elseif (event.target.category == "dinner") then
+
+    breakfastRep = display.newImage("images/brHalfTab.png", tabsX, 160, true)
+    breakfastRep.width = 40
+    breakfastRep.height = 40
+    group:insert(breakfastRep)
+
+    dinnerRep = display.newImage("images/diFullTab.png", tabsX, 220, true)
+    dinnerRep.width = 40
+    dinnerRep.height = 40
+    group:insert(dinnerRep)
+
+    dessertRep = display.newImage("images/deHalfTab.png", tabsX, 280, true)
+    dessertRep.width = 40
+    dessertRep.height = 40
+    group:insert(dessertRep)
+
     extendBasic.y = 220
     extendBasic:setFillColor(0.27451, 0.509804, 0.705882)
     else
+    breakfastRep = display.newImage("images/brHalfTab.png", tabsX, 160, true)
+    breakfastRep.width = 40
+    breakfastRep.height = 40
+    group:insert(breakfastRep)
+
+    dinnerRep = display.newImage("images/diHalfTab.png", tabsX, 220, true)
+    dinnerRep.width = 40
+    dinnerRep.height = 40
+    group:insert(dinnerRep)
+
+    dessertRep = display.newImage("images/deFullTab.png", tabsX, 280, true)
+    dessertRep.width = 40
+    dessertRep.height = 40
+    group:insert(dessertRep)
+
     extendBasic.y = 280
     extendBasic:setFillColor( 1, 0.713725, 0.756863)
     end
@@ -329,6 +403,24 @@ end
   group:insert(breakfastTab)
   group:insert(dinnerTab)
   group:insert(dessertTab)
+
+
+  --TAB ICON IMAGES 
+  breakfastRep = display.newImage("images/brHalfTab.png", tabsX, 160, true)
+  breakfastRep.width = 40
+  breakfastRep.height = 40
+  group:insert(breakfastRep)
+
+  dinnerRep = display.newImage("images/diHalfTab.png", tabsX, 220, true)
+  dinnerRep.width = 40
+  dinnerRep.height = 40
+  group:insert(dinnerRep)
+
+  dessertRep = display.newImage("images/deHalfTab.png", tabsX, 280, true)
+  dessertRep.width = 40
+  dessertRep.height = 40
+  group:insert(dessertRep)
+
 
 
 
