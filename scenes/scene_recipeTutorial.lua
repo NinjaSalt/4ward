@@ -50,7 +50,7 @@ function scene:createScene( event )
 
   tutThree = display.newRect( centerX, centerY+ 20, display.contentWidth, display.contentHeight/5 )
   tutThree.alpha = .85
-  tutThree:addEventListener( "touch", tutorialFour )
+  tutThree:addEventListener( "tap", tutorialFour )
   group:insert(tutThree)
 
   threeText = display.newText("Tap on side tabs to filter your recipes.", display.contentWidth/2, 185, globals.IMPRIMA, 20)
@@ -69,7 +69,7 @@ function scene:createScene( event )
 
   tutTwo = display.newRect( centerX, centerY+ 20, display.contentWidth, display.contentHeight/5 )
   tutTwo.alpha = .85
-  tutTwo:addEventListener( "touch", tutorialThree )
+  tutTwo:addEventListener( "tap", tutorialThree )
   group:insert(tutTwo)
 
   twoText = display.newText("See all your unlocked recipes here.", display.contentWidth/2, 185, globals.IMPRIMA, 20)
@@ -84,7 +84,7 @@ function scene:createScene( event )
   print ("one")
   tutOne = display.newRect( centerX, centerY+ 20, display.contentWidth, display.contentHeight/5 )
   tutOne.alpha = .85
-  tutOne:addEventListener( "touch", tutorialTwo )
+  tutOne:addEventListener( "tap", tutorialTwo )
   group:insert(tutOne)
   
   oneText = display.newText( "Welcome to the Recipe Book!", display.contentWidth/2, 185, globals.IMPRIMA, 20 )
