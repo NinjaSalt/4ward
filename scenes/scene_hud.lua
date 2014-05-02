@@ -206,15 +206,15 @@ function scene:createScene( event )
   local multiplierGradient = display.newImage("images/multiplierGradient2.png")
   multiplierGradient.width = 35
   multiplierGradient.height = 25
-  multiplierGradient.x = 380
-  multiplierGradient.y = 15  
+  multiplierGradient.x = 460
+  multiplierGradient.y = 305  
   group:insert(multiplierGradient)
 
-  local multiplierX = display.newText("x",375,15, globals.IMPRIMA,20)
+  local multiplierX = display.newText("x",455, 305, globals.IMPRIMA,20)
   multiplierX:setFillColor(250,250,0)
   group:insert(multiplierX)
 
-  globals.multiplierText = display.newText( globals.multiplier, 385, 15, globals.LOBSTERTWO, 20 )
+  globals.multiplierText = display.newText( globals.multiplier, 465, 305, globals.LOBSTERTWO, 20 )
   globals.multiplierText:setFillColor(250,250,0)
   group:insert(globals.multiplierText)
 
@@ -247,21 +247,21 @@ function scene:createScene( event )
   itemBelt[0].width = 40
   itemBelt[0].height = 40
   itemBelt[0].x = 250
-  itemBelt[0].y = 20
+  itemBelt[0].y = 300
   group:insert(itemBelt[0])
 
   itemBelt[0] = display.newImage("images/itemHolder.png")
   itemBelt[0].width = 40
   itemBelt[0].height = 40
   itemBelt[0].x = 200
-  itemBelt[0].y = 20
+  itemBelt[0].y = 300
   group:insert(itemBelt[0])
 
   itemBelt[0] = display.newImage("images/itemHolder.png")
   itemBelt[0].width = 40
   itemBelt[0].height = 40
   itemBelt[0].x = 300
-  itemBelt[0].y = 20
+  itemBelt[0].y = 300
   group:insert(itemBelt[0])
 
 	-- for i = 0, 2, 1 do
@@ -280,7 +280,7 @@ function scene:createScene( event )
       gameItems[i].width = 25
       gameItems[i].height = 25
       gameItems[i].x = itemSpace
-      gameItems[i].y = 20
+      gameItems[i].y = 300
       gameItems[i].myItemRef = i
       if ( gameItems[i].itemType == "foodType") then
       gameItems[i]:addEventListener( "touch", itemFoodDrag ) 

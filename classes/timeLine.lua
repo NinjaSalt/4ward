@@ -4,8 +4,8 @@ TimeLine = {}
 TimeLine.__index = TimeLine
 
 
-timeLineWidth = 240
-enemySize = 20
+timeLineWidth = 200
+enemySize = 25
 
 function TimeLine.create(enemyIDQueue, timeBetweenEachSpawn)
 	local timeLine = {}
@@ -18,8 +18,8 @@ function TimeLine.create(enemyIDQueue, timeBetweenEachSpawn)
 	end
 	for i = 1, #enemyIDQueue, 1 do
 		timeLine.enemyQueue[i] = display.newImage(myEnemies[enemyIDQueue[i]].image)
-		timeLine.enemyQueue[i].y = 320-enemySize/2
-		timeLine.enemyQueue[i].x = 240-timeLineWidth/2 + (timeLine.spawnTimes[i]/timeLine.spawnTimes[#timeLine.spawnTimes])*timeLineWidth - enemySize/2
+		timeLine.enemyQueue[i].y = 17--320-enemySize/2
+		timeLine.enemyQueue[i].x = 380 --240-timeLineWidth/2 + (timeLine.spawnTimes[i]/timeLine.spawnTimes[#timeLine.spawnTimes])*timeLineWidth - enemySize/2
 		--timeLine.enemyQueue[i].x = (timeLine.spawnTimes[i]/timeLine.spawnTimes[#timeLine.spawnTimes])*timeLineWidth - enemySize/2
 		
 		timeLine.enemyQueue[i].width = enemySize

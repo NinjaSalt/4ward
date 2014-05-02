@@ -936,6 +936,7 @@ local function gameLoop( event )
 end
 
 function replayLevel()
+
 	timer.pause(spawnEneTimer)
 	if (globals.breakfastButton~=nil) then
 		globals.breakfastButton:pause()
@@ -1060,22 +1061,38 @@ else
 	print ("No Score Condition")
   end
 
-
   group:insert(currentLevel)
+
+  --timeline background
+  local timeBack = display.newImage( "images/scoreGradient.png", 290, 17, true )
+  timeBack.width = 200
+  timeBack.height = 30
+  group:insert (timeBack)
+
+  -- where item in timeline disappears then spawns.
+  local spawnNotice = display.newImage( "images/star.png", 200, 15, true )
+  spawnNotice.width = 30
+  spawnNotice.height = 30
+  group:insert (spawnNotice)
   
+  -- timeline creation.
   timeLine = TimeLine.create(currentLevel.enemyIDQueue, currentLevel.timeBetweenEachSpawn)
   for i = 1, #timeLine.enemyQueue, 1 do
 	group:insert(timeLine.enemyQueue[i])
-	--transition.to( timeLine.enemyQueue[i], {x=((240-timeLineWidth/2)-timeLine.enemyQueue[i].x)/2, time=timeLine.spawnTimes[i] * 2, tag="animation"} )
-	transition.to( timeLine.enemyQueue[i], {x=(240-timeLineWidth/2)-enemySize/2, time=timeLine.spawnTimes[i], tag="animation"} )
+	-- previous speed: (240-timeLineWidth/2)-enemySize/2
+	transition.to( timeLine.enemyQueue[i], {x=200, time=timeLine.spawnTimes[i], tag="animation", 
+		onComplete= function()
+		if (timeLine.enemyQueue[i] ~= nil) then
+			--timeLine.enemyQueue[i]: removeSelf()
+		end
+		end} )
   end
   
   
-  
-  bar = TimeLine.createTimeLineBar()
-  group:insert(bar[1])
-  group:insert(bar[2])
-  group:insert(bar[3])
+  --bar = TimeLine.createTimeLineBar()
+  --group:insert(bar[1])
+  --group:insert(bar[2])
+  --group:insert(bar[3])
   
   startLevel(currentLevel)
   
