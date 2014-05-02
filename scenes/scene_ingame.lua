@@ -537,8 +537,8 @@ function checkEnemy()
 			currentLevel.scoreCondition.success = true
 		end
 	end
-
-	if ((currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) or levelEnded == true) then
+        if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then levelEnded = true end
+	if (levelEnded) then
     	globals.attack = false
 
     	local totalCond = 0
@@ -690,15 +690,15 @@ local function gameLoop( event )
 				if ( hasCollidedCircle( hero[n], allEne[i]) ) then
 
 					-- CHECKS IF A COMBO ITEM CRASHES INTO THE CHEF AND TURNS THE BUTTON OFF --
-					if (hero[0] and allEne[i].category=="breakfast" and globals.breakfastServe == true) then
+					if (n == 0 and allEne[i].category=="breakfast" and globals.breakfastServe == true) then
 						globals.breakfastServe = false
 						servingButtons()
 					end
-					if (hero[1] and allEne[i].category=="dinner" and globals.dinnerServe == true) then
+					if (n == 1 and allEne[i].category=="dinner" and globals.dinnerServe == true) then
 						globals.dinnertServe = false
 						servingButtons()
 					end
-					if (hero[2] and allEne[i].category=="dessert" and globals.dessertServe == true) then
+					if (n == 2 and allEne[i].category=="dessert" and globals.dessertServe == true) then
 						globals.dessertServe = false
 						servingButtons()
 					end

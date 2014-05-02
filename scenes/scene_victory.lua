@@ -177,7 +177,7 @@ function scene:createScene( event )
 	else
 		nextLevelButton:addEventListener( "tap", onTapNextLevel )
 	end
-  if (onTapReplay~=nil or replayButton~=nil) then
+  if (onTapReplay~=nil and replayButton~=nil) then
   	replayButton:addEventListener( "tap", onTapReplay )
   end
 	mapButton:addEventListener( "tap", onTapMap )

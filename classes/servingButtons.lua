@@ -16,53 +16,53 @@ local dtenemy = 0
       
 
 function bkftbuttonPressed()
+  local enemiesRemoved = 0 --keeps track of how many enemies have been removed from allEne
   if (globals.breakfastServe) then
     globals.breakfastServe = false
     for i = 1,table.maxn( allEne ) do
-      if (allEne[i] ~= nil) then
-        if (allEne[i].y == lane1) then
-          if (allEne[i].category == "breakfast") then
+      i = i - enemiesRemoved --counts backwards from i the number of enemies that were removed to make sure we don't skip any enemies
+      --if (allEne[i] ~= nil) then  --we shouldn't need this check anymore. We won't access any nil values
+        if (allEne[i].y == lane1 and allEne[i].category == "breakfast") then
             enemyCounter = enemyCounter + 1
             print(enemyCounter)
             makeDeathPoof(allEne[i])
 
 
             -- NEW SECONDARY CONDITION CHECK
-            if(currentLevel.victoryCondition~=false) then
-              if(currentLevel.victoryCondition.enemy.name==allEne[i].name)then
+            if currentLevel.victoryCondition~=false and
+            currentLevel.victoryCondition.enemy.name==allEne[i].name then
                 currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
                 print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
                 if (currentLevel.victoryCondition.amount == 0) then
                   print("Condition Met")
                   currentLevel.victoryCondition.conditionMet = true
                 end
-              end
+              
             end
             -- END NEW SECONDARY CONDITION CHECK
 
             -- TYPE CONDITION CHECK
-            if(currentLevel.categoryCondition~=false) then
-              if(currentLevel.categoryCondition.type==allEne[i].category)then
+            if currentLevel.categoryCondition~=false and
+            currentLevel.categoryCondition.type==allEne[i].category then
                 currentLevel.categoryCondition.amount = currentLevel.categoryCondition.amount-1
                 print(currentLevel.categoryCondition.type .. "left: " .. currentLevel.categoryCondition.amount)
                 if (currentLevel.categoryCondition.amount == 0) then
                   print("Category Condition Met")
                   currentLevel.categoryCondition.success = true
                 end
-              end
+            
             end
             -- END TYPE CONDITION CHECK
 
             allEne[i]:removeSelf()
             table.remove(allEne, i)
+            enemiesRemoved = enemiesRemoved + 1
             --allEnemHealth[i]:removeSelf()
             --table.remove(allEnemHealth, i)
             decrementEnemy(currentLevel)
 			playSFX (audioServeFood, 1)
           end
         end
-      end
-    end
     globals.score = calcServingScore (enemyCounter, globals.score, globals.multiplier)
     globals.scoreText.text = (globals.score)
     transition.to( globals.breakfastButton, { time=500, alpha=0,onComplete=function() 
@@ -81,9 +81,11 @@ function bkftbuttonPressed()
 end
 
 function dnrbuttonPressed()
+  local enemiesRemoved = 0 --keeps track of how many enemies have been removed from allEne
   if (globals.dinnerServe) then
     globals.dinnerServe = false
     for i = 1,table.maxn( allEne ) do
+      i = i - enemiesRemoved --counts backwards from i the number of enemies that were removed to keep in order
       if (allEne[i] ~= nil) then
         if (allEne[i].y == lane2) then
           if (allEne[i].category == "dinner") then
@@ -119,6 +121,7 @@ function dnrbuttonPressed()
 
             allEne[i]:removeSelf()
             table.remove(allEne, i)
+            enemiesRemoved = enemiesRemoved + 1
             --allEnemHealth[i]:removeSelf()
             --table.remove(allEnemHealth, i)
             decrementEnemy(currentLevel)
@@ -144,9 +147,11 @@ function dnrbuttonPressed()
 end
 
 function dstbuttonPressed()
+  local enemiesRemoved = 0
   if (globals.dessertServe) then
     globals.dessertServe = false
     for i = 1,table.maxn( allEne ) do
+        i = i - enemiesRemoved
       if (allEne[i] ~= nil) then
         if (allEne[i].y == lane3) then
           if (allEne[i].category == "dessert") then
@@ -181,6 +186,7 @@ function dstbuttonPressed()
 
             allEne[i]:removeSelf()
             table.remove(allEne, i)
+            enemiesRemoved = enemiesRemoved + 1
             --allEnemHealth[i]:removeSelf()
             --table.remove(allEnemHealth, i)
             decrementEnemy(currentLevel)
