@@ -66,7 +66,7 @@ globals.currenyText = globals.currency.init({
     })
 globals.currency.set(0)
 
--- HUG ITEM BELT --
+-- HUD ITEM BELT --
 globals.loadItemBelt = false
 
 -- HUD LIVES --
@@ -82,6 +82,8 @@ globals.notDurningAntagonist = true
 
 -- CHEF ANIMATION GLOBAL FUNCTIONS --
 globals.breakfastanimation = nil
+globals.dinneranimation = nil
+globals.dessertanimation = nil
 
 --SERVING BUTTONS--
 globals.breakfastButton = nil

@@ -72,9 +72,10 @@ function scene:createScene( event )
       -- gameSettings[6][1]=myItems[0]
       -- loadsave.saveTable(gameSettings , "gamesettings.json")
   		notTouched = false
-      --negativeNum = (-1)*myItems[0].cost
-      globals.currency.add((-1)*myItems[0].cost)
-      globals.currency.save()
+      if (globals.currency > 0) then
+        globals.currency.add((-1)*myItems[0].cost)
+        globals.currency.save()
+      end
   	end
 	  storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )
@@ -88,9 +89,10 @@ function scene:createScene( event )
       -- gameSettings[6][2]=myItems[1]
       -- loadsave.saveTable(gameSettings , "gamesettings.json")
   		notTouched = false
-      --negativeNum = (-1)*myItems[1].cost
-      globals.currency.add((-1)*myItems[1].cost)
-      globals.currency.save()
+      if (globals.currency > 0) then
+        globals.currency.add((-1)*myItems[0].cost)
+        globals.currency.save()
+      end
   	end
 	  storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )
@@ -104,9 +106,10 @@ function scene:createScene( event )
       -- gameSettings[6][3]=myItems[2]
       -- loadsave.saveTable(gameSettings , "gamesettings.json")
   		notTouched = false
-      --negativeNum = (-1)*myItems[2].cost
-      globals.currency.add((-1)*myItems[2].cost)
-      globals.currency.save()
+      if (globals.currency > 0) then
+        globals.currency.add((-1)*myItems[0].cost)
+        globals.currency.save()
+      end
   	end
 	  storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )

@@ -182,49 +182,6 @@ function scene:createConveyorBelts()
 	
 end  
 
-function throwAbility( event )
-	local targetHero = event.target
-	local heroX = event.x
-	local phase = event.phase
-	local stage = display.getCurrentStage()
-	local markY = targetHero.y
-	
-	if event.phase == "began" then
-		stage:setFocus( targetHero, event.id )
-		targetHero.isFocus = true
-		--checks if the touch didn't move from original position. Meaning that it was a tap
-			if (event.x - event.xStart == 0) then
-				--useItem(targetHero)
-				if (globals.attack) then
-					if (targetHero.num == 0) then
-						if (globals.attack_bkft==false) then
-							group:insert(make_bullet_pins(targetHero))
-						elseif (globals.attack_bkft) then
-							--do nothing 
-						end
-					elseif (targetHero.num == 1) then
-						if(globals.attack_dnr==false) then
-							group:insert(make_bullet_spatula(targetHero))
-						elseif(globals.attack_dnr) then
-							--do nothing
-						end
-					elseif (targetHero.num == 2) then
-						if (globals.attack_dst == false) then
-							group:insert(make_bullet_whisk(targetHero))
-						elseif(globals.attack_dst) then
-							--do nothing
-						end
-					end
-				end
-			end
-	elseif targetHero.isFocus then
-		if "ended" == phase or "cancelled" == phase then
-			stage:setFocus( targetHero, nil )
-			targetHero.isFocus = false
-		end
-	end
-end
-
 -- function to 
 function scene:createHeroes()
   for n=0, 2, 1 do
@@ -244,7 +201,8 @@ end
 
 --CREATING AN ANIMATED OVERLAY TO THE TRANSPARENT PLACEHOLDER IN HEROES.LUA--
 function scene:createBreakfastChef()
-	breakfastspriteSettings =
+-- BREAKFAST --
+	local breakfastspriteSettings =
   	{
   	 width = 70,
   	 height = 70,
@@ -252,8 +210,8 @@ function scene:createBreakfastChef()
  	 sheetContentWidth=280,
 	 sheetContentHeight=70,
 	}
-	breakfastspritesheet = graphics.newImageSheet("images/breakfast_sheet.png",breakfastspriteSettings)
-	breakfastspriteequenceData = {
+	local breakfastspritesheet = graphics.newImageSheet("images/breakfast_sheet.png",breakfastspriteSettings)
+	local breakfastspriteequenceData = {
 	--higher the time, slower it goes
    		{ name = "idle", frames={1, 2, 3, 4, 3, 2}, time=1000, loopCount=0 }
 	}
@@ -265,6 +223,52 @@ function scene:createBreakfastChef()
 	globals.breakfastanimation:play()
 	--globals.breakfastanimation:addEventListener( "touch", throwAbility )
 	group:insert(globals.breakfastanimation)
+
+-- DINNER --
+	local dinnerspriteSettings =
+  	{
+  	 width = 70,
+  	 height = 70,
+ 	 numFrames = 4,
+ 	 sheetContentWidth=280,
+	 sheetContentHeight=70,
+	}
+	local dinnerspritesheet = graphics.newImageSheet("images/dinner_sheet.png",dinnerspriteSettings)
+	local dinnerspriteequenceData = {
+	--higher the time, slower it goes
+   		{ name = "idle", frames={1, 2, 3, 4, 3, 2}, time=1000, loopCount=0 }
+	}
+	globals.dinneranimation = display.newSprite(dinnerspritesheet,dinnerspriteequenceData)
+    globals.dinneranimation.x =50
+    globals.dinneranimation.y = lane2   
+    globals.dinneranimation.height = 70; globals.dinneranimation.width = 70
+    globals.dinneranimation:setSequence( "idle" )
+	globals.dinneranimation:play()
+	--globals.breakfastanimation:addEventListener( "touch", throwAbility )
+	group:insert(globals.dinneranimation)
+
+-- DESSERT --
+	local dessertspriteSettings =
+  	{
+  	 width = 70,
+  	 height = 70,
+ 	 numFrames = 4,
+ 	 sheetContentWidth=280,
+	 sheetContentHeight=70,
+	}
+	local dessertspritesheet = graphics.newImageSheet("images/dessert_sheet.png",dessertspriteSettings)
+	local dessertspriteequenceData = {
+	--higher the time, slower it goes
+   		{ name = "idle", frames={1, 2, 3, 4, 3, 2}, time=1000, loopCount=0 }
+	}
+	globals.dessertanimation = display.newSprite(dessertspritesheet,dessertspriteequenceData)
+    globals.dessertanimation.x =45
+    globals.dessertanimation.y = lane3   
+    globals.dessertanimation.height = 70; globals.dessertanimation.width = 70
+    globals.dessertanimation:setSequence( "idle" )
+	globals.dessertanimation:play()
+	--globals.breakfastanimation:addEventListener( "touch", throwAbility )
+	group:insert(globals.dessertanimation)
 end 
 
 function makeHoldEne()
