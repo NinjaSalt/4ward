@@ -76,6 +76,8 @@ function scene:createScene( event )
     globals.dessertButton:play()
   end
     globals.breakfastanimation:play()
+    globals.dinneranimation:play()
+  globals.dessertanimation:play()
     for n=0, 2, 1 do
       globals.belts[n]:play()
   end
@@ -114,6 +116,8 @@ function scene:createScene( event )
     globals.dessertButton:play()
   end
     globals.breakfastanimation:play()
+    globals.dinneranimation:play()
+  globals.dessertanimation:play()
     for n=0, 2, 1 do
       globals.belts[n]:play()
   end

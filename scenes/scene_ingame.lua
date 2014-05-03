@@ -16,9 +16,12 @@ local levelEnded = false
 hero = {}
 
 -- Lanes y positions
-lane1 = 80
-lane2 = 160
-lane3 = 240
+-- lane1 = 80
+-- lane2 = 160
+-- lane3 = 240
+lane1 = 85
+lane2 = 155
+lane3 = 225
 
 --Enemy varis
 allEne = {} 
@@ -29,10 +32,10 @@ local sheetSettings
 local sheet
 local sequenceData
 --breakfast chef locals
-local breakfastspriteSettings
-local breakfastspritesheet
-local breakfastspriteequenceData
-local breakfastanimation
+-- local breakfastspriteSettings
+-- local breakfastspritesheet
+-- local breakfastspriteequenceData
+-- local breakfastanimation
 local deathPoof
 
 local eneAndBar = {}
@@ -350,6 +353,8 @@ function tutorial()
 	end
 
 	globals.breakfastanimation:pause()
+	globals.dinneranimation:pause()
+	globals.dessertanimation:pause()
 	for n=0, 2, 1 do
 	globals.belts[n]:pause()
 	end
@@ -370,6 +375,8 @@ function tutorialCombo()
 	end
 
 	globals.breakfastanimation:pause()
+	globals.dinneranimation:pause()
+	globals.dessertanimation:pause()
 	for n=0, 2, 1 do
 	globals.belts[n]:pause()
 	end
@@ -380,6 +387,8 @@ function tutorialServe()
   storyboard.showOverlay( "scenes.scene_tutorialServe",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
   timer.pause(spawnEneTimer)
     globals.breakfastanimation:pause()
+    globals.dinneranimation:pause()
+	globals.dessertanimation:pause()
     for n=0, 2, 1 do
     	globals.belts[n]:pause()
 	end
@@ -953,6 +962,8 @@ function replayLevel()
 	end
 
 	globals.breakfastanimation:pause()
+	globals.dinneranimation:pause()
+	globals.dessertanimation:pause()
 	if ( antagonistTimer ~= nil) then
 		timer.cancel(antagonistTimer)
 	end
@@ -980,6 +991,8 @@ local function goToIntro(vicCond, id, catCond, scoreCond)
 	end
 
 	globals.breakfastanimation:pause()
+	globals.dinneranimation:pause()
+	globals.dessertanimation:pause()
 	for n=0, 2, 1 do
 		globals.belts[n]:pause()
 	end
@@ -1012,7 +1025,11 @@ function scene:createScene( event )
     group:insert(eneAndBar[0])
 	--group:insert(eneAndBar[1])
   end
-  local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
+  if (world == 1) then
+  	bkg = display.newImage( "images/floor02.png", centerX, centerY, true )
+  else 
+  	bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
+  end
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert(bkg)
   

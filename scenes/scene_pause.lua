@@ -82,6 +82,8 @@ end
     globals.dessertButton:play()
   end
     globals.breakfastanimation:play()
+    globals.dinneranimation:play()
+  globals.dessertanimation:play()
     if ( antagonistTimer ~= nil) then
 	     timer.resume(antagonistTimer)
     end

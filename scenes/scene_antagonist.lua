@@ -45,6 +45,8 @@ function scene:createScene( event )
 		globals.dessertButton:pause()
 	end
 		globals.breakfastanimation:pause()
+		globals.dinneranimation:pause()
+	globals.dessertanimation:pause()
 		for n=0, 2, 1 do
 		globals.belts[n]:pause()
 		end
@@ -232,6 +234,8 @@ function scene:didExitScene( event )
 		globals.dessertButton:play()
 	end
   globals.breakfastanimation:play()
+  globals.dinneranimation:play()
+	globals.dessertanimation:play()
   for n=0, 2, 1 do
       globals.belts[n]:play()
   end

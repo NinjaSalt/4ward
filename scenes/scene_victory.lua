@@ -44,6 +44,8 @@ function scene:createScene( event )
     globals.dessertButton:pause()
   end
   globals.breakfastanimation:pause()
+  globals.dinneranimation:pause()
+  globals.dessertanimation:pause()
   if ( antagonistTimer ~= nil) then
 	timer.cancel(antagonistTimer)
   end

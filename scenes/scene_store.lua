@@ -9,6 +9,7 @@ local globals= require("classes.globals")
 require("classes.items")
 require("classes.heroes")
 local widget = require( "widget" )
+globals.currency = require( "classes.score" )
 -- Clear previous scene
 storyboard.removeAll()
  

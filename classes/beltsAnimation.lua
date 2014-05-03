@@ -8,10 +8,20 @@ local fastSpeed = 1100
   	 width = 410,
   	 height = 60,
  	  numFrames = 12
+  --        width = 410,
+  --   height = 60,
+  --    numFrames = 1,
+  -- sheetContentWidth=410,
+  -- sheetContentHeight=60
 	}
 	 breakfastsheet = graphics.newImageSheet("images/belts03sheet.png",breakfastsheetSettings)
 	 breakfastsequenceData = {
 	--higher the time, slower it goes
+   --    { name = "breakfast_normal", frames={1}, time=normalSpeed, loopCount=0 },
+
+   -- { name = "breakfast_fast", frames={1}, time=fastSpeed, loopCount=0 },
+
+   -- { name = "breakfast_slow", frames={1}, time=slowSpeed, loopCount=0 }
 	{ name = "breakfast_normal", frames={1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}, time=normalSpeed, loopCount=0 },
    { name = "breakfast_normal2", frames={2, 3, 4 ,5 ,6 ,7 ,8 ,9 ,10, 11, 12, 1}, time=normalSpeed, loopCount=0 },
    { name = "breakfast_normal3", frames={3, 4, 5 ,6 ,7 ,8 ,9 ,10, 11, 12, 1, 2}, time=normalSpeed, loopCount=0 },
@@ -58,9 +68,22 @@ local dinnersheetSettings =
   	 height = 60,
  	  numFrames = 12
 	}
+-- local dinnersheetSettings =
+--    {
+--     width = 410,
+--     height = 60,
+--      numFrames = 1,
+--   sheetContentWidth=410,
+--   sheetContentHeight=60
+--    }
 	 dinnersheet = graphics.newImageSheet("images/belts01sheet.png",dinnersheetSettings)
 	 dinnersequenceData = {
 	--higher the time, slower it goes
+   --    { name = "dinner_normal", frames={1}, time=normalSpeed, loopCount=0 },
+
+   -- { name = "dinner_fast", frames={1}, time=fastSpeed, loopCount=0 },
+
+   -- { name = "dinner_slow", frames={1}, time=slowSpeed, loopCount=0 }
    { name = "dinner_normal", frames={1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}, time=normalSpeed, loopCount=0 },
    { name = "dinner_normal2", frames={2, 3, 4 ,5 ,6 ,7 ,8 ,9 ,10, 11, 12, 1}, time=normalSpeed, loopCount=0 },
    { name = "dinner_normal3", frames={3, 4, 5 ,6 ,7 ,8 ,9 ,10, 11, 12, 1, 2}, time=normalSpeed, loopCount=0 },
@@ -106,10 +129,20 @@ local dessertsheetSettings =
   	 width = 410,
   	 height = 60,
  	  numFrames = 12
+  --        width = 410,
+  --   height = 60,
+  --    numFrames = 1,
+  -- sheetContentWidth=410,
+  -- sheetContentHeight=60
 	}
 	 dessertsheet = graphics.newImageSheet("images/belts02sheet.png",dessertsheetSettings)
 	 dessertsequenceData = {
 	--higher the time, slower it goes
+   --    { name = "dessert_normal", frames={1}, time=normalSpeed, loopCount=0 },
+
+   -- { name = "dessert_fast", frames={1}, time=fastSpeed, loopCount=0 },
+
+   -- { name = "dessert_slow", frames={1}, time=slowSpeed, loopCount=0 }
    { name = "dessert_normal", frames={1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}, time=normalSpeed, loopCount=0 },
    { name = "dessert_normal2", frames={2, 3, 4 ,5 ,6 ,7 ,8 ,9 ,10, 11, 12, 1}, time=normalSpeed, loopCount=0 },
    { name = "dessert_normal3", frames={3, 4, 5 ,6 ,7 ,8 ,9 ,10, 11, 12, 1, 2}, time=normalSpeed, loopCount=0 },
