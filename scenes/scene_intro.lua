@@ -271,6 +271,11 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
+  
+  local audioStartLevels = {audioStartLevel1, audioStartLevel2, audioStartLevel3, audioStartLevel4}
+  soundToPlay = math.random(1, 4)
+  playSFX (audioStartLevels[soundToPlay], 1)
+  
   antagonistRandom = math.random(1, levelNumber)
   if ( levelNumber == 1 ) then
 	antagonistRandom = 0

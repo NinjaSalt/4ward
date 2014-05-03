@@ -9,6 +9,7 @@ local nextLevel
 local nextWorld
 local conditionsNotMet
 local globals = require ("classes.globals")
+require("classes.audioClass")
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -21,6 +22,11 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
+  
+  local audioDefeats = {audioDefeat1, audioDefeat2, audioDefeat3, audioDefeat4}
+  soundToPlay = math.random(1, 4)
+  playSFX (audioDefeats[soundToPlay], 1)
+  
   local params = event.params
   nextLevel = params.level
   nextWorld = params.world

@@ -760,12 +760,12 @@ local function gameLoop( event )
 							unlockCheck(j)
 							if( j ~= 0 ) then
 								local audioGoodCombos = {audioGoodCombo1, audioGoodCombo2, audioGoodCombo3, audioGoodCombo4, audioGoodCombo5, audioGoodCombo6}
-								soundToPlay = math.random(0, 5)
+								soundToPlay = math.random(1, 6)
 								playSFX (audioGoodCombos[soundToPlay], 1)
 							end
 							if( j == 0 ) then
 								local audioBadCombos = {audioBadCombo, audioBadCombo1, audioBadCombo2, audioBadCombo3}
-								soundToPlay = math.random(0, 3)
+								soundToPlay = math.random(1, 4)
 								playSFX (audioBadCombos[soundToPlay], 1)
 							end
 							-- Check for Secondary Win condition
