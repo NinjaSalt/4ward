@@ -31,21 +31,25 @@ function scene:createScene( event )
   local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
+  -- local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
+  -- bkg:setFillColor( gray )
+  -- bkg.alpha = .5
+  -- group:insert (bkg)
 
   local banner = display.newImageRect( "images/bannerBlue.png", 300, 100 )
   banner.x = 236
   banner.y = 50
   group:insert(banner)
 
-  local itemShop = display.newImageRect( "images/shop.png", 50, 50 )
-  itemShop.x = 30
-  itemShop.y = 30
-  group:insert(itemShop)
+  -- local itemShop = display.newImageRect( "images/shop.png", 50, 50 )
+  -- itemShop.x = 30
+  -- itemShop.y = 30
+  -- group:insert(itemShop)
 
-  local recipeBook = display.newImageRect( "images/bookIcon.png", 50, 50 )
-  recipeBook.x = 450
-  recipeBook.y = 30
-  group:insert(recipeBook)
+  -- local recipeBook = display.newImageRect( "images/book.png", 75, 75 )
+  -- recipeBook.x = 400
+  -- recipeBook.y = 30
+  -- group:insert(recipeBook)
 
   local level1 = display.newImageRect( "images/Cake.png", 50, 50 )
   level1.x = 56
@@ -77,10 +81,10 @@ function scene:createScene( event )
   infoGradient.y = 238
   group:insert(infoGradient)
 
-  local backArrow = display.newImageRect( "images/backArrow.png", 75, 75 )
-  backArrow.x = 41
-  backArrow.y = 282
-  group:insert(backArrow)
+  -- local backArrow = display.newImageRect( "images/backArrow.png", 75, 75 )
+  -- backArrow.x = 41
+  -- backArrow.y = 282
+  -- group:insert(backArrow)
 
   local levelStart = display.newImageRect( "images/startButton.png", 65, 65 )
   levelStart.x = 444
@@ -247,12 +251,12 @@ function scene:createScene( event )
   
   levelStart:addEventListener("tap", onTapStartLevel)
 
-  local function onTapBackArrow (event)
-    storyboard.removeScene(scene)
-    storyboard.gotoScene("scenes.scene_worldmap", {effect = "fade", time = 250})
-  end
+  -- local function onTapBackArrow (event)
+  --   storyboard.removeScene(scene)
+  --   storyboard.gotoScene("scenes.scene_worldmap", {effect = "fade", time = 250})
+  -- end
 
-  backArrow:addEventListener("tap", onTapBackArrow)
+  -- backArrow:addEventListener("tap", onTapBackArrow)
   onTapLevel1()
 end
  

@@ -31,14 +31,14 @@ function scene:createScene( event )
     storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id, world = 1}})
   end
 
-  local bookIcon = display.newImageRect("images/bookIcon.png", 100,100)
-  bookIcon.x = 51
-  bookIcon.y = 54
+  local bookIcon = display.newImageRect("images/book.png", 100,100)
+  bookIcon.x = 53
+  bookIcon.y = 138
   group:insert(bookIcon)
 
-  local storeButton = display.newImageRect("images/shop.png",100,100)
-  storeButton.x = 53
-  storeButton.y = 155
+  local storeButton = display.newImageRect("images/pantry.png",100,100)
+  storeButton.x = 55
+  storeButton.y = 53
   group:insert(storeButton)
 
   local backArrow = display.newImageRect("images/backArrow.png",75,75)
@@ -80,21 +80,41 @@ function scene:createScene( event )
 
   -- to get to recipe book.
   local function onTapBookIcon( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_book", {effect = "fade", time = 500})
+    bookIcon: removeSelf()
+    bookIcon = display.newImageRect("images/book2.png", 100,100)
+    bookIcon.x = 53
+    bookIcon.y = 138
+    group:insert(bookIcon)
+    timer.performWithDelay(700, function()
+      storyboard.removeScene( scene )
+      storyboard.gotoScene( "scenes.scene_book", {effect = "fade", time = 500})
     storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
+      end)
+    --storyboard.removeScene( scene )
+    -- storyboard.gotoScene( "scenes.scene_book", {effect = "fade", time = 500})
+    -- storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
 
   -- to get to the store
   local function onTapStoreButton( event )
+    storeButton = display.newImageRect("images/pantry2.png",100,100)
+  storeButton.x = 55
+  storeButton.y = 53
+  group:insert(storeButton)
+  timer.performWithDelay(700, function()
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_store", {effect = "fade", time = 500})
     storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
+      end)
+    -- storyboard.removeScene( scene )
+    -- storyboard.gotoScene( "scenes.scene_store", {effect = "fade", time = 500})
+    -- storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
 
   local function onTapBanner1( event )
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_worldmap1", {effect = "fade", time = 500})
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
 
   bookIcon:addEventListener("tap", onTapBookIcon)
