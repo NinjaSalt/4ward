@@ -20,13 +20,6 @@ storyboard.removeAll()
 ---------------------------------------------------------------------------------
 -- BEGINNING OF YOUR IMPLEMENTATION
 ---------------------------------------------------------------------------------
- 
- local levelonepressed = false
- local leveltwopressed = false
- local levelthreepressed = false
- local levelfourpressed = false
- local levelfivepressed = false
-
 
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
