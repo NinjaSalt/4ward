@@ -97,6 +97,8 @@ function scene:createScene( event )
 
   -- to get to the store
   local function onTapStoreButton( event )
+    storeButton: removeSelf( )
+    storeButton = nil
     storeButton = display.newImageRect("images/pantry2.png",100,100)
   storeButton.x = 55
   storeButton.y = 53

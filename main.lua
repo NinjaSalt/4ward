@@ -95,14 +95,23 @@ for i, fontname in ipairs(fonts) do
     end
 end
 
-local lfs = require "lfs"
+-- local lfs = require "lfs"
 
-local doc_path = system.pathForFile( "", system.DocumentsDirectory )
+-- local doc_path = system.pathForFile( "", system.DocumentsDirectory )
 
-for file in lfs.dir(doc_path) do
-   --file is the current file or directory name
-   print( "Found file: " .. file )
-end
+-- for file in lfs.dir(doc_path) do
+--    --file is the current file or directory name
+--    print( "Found file: " .. file )
+-- end
+
+-- local destDir = system.DocumentsDirectory  -- where the file is stored
+-- local results, reason = os.remove( system.pathForFile( "currencyfile.txt", destDir  ) )
+
+-- if results then
+--    print( "file removed" )
+-- else
+--    print( "file does not exist", reason )
+-- end
 
 ----- HOW TO RESET THE SAVED TABLE ------
 --[[

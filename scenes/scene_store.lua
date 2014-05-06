@@ -9,7 +9,7 @@ local globals= require("classes.globals")
 require("classes.items")
 require("classes.heroes")
 local widget = require( "widget" )
-globals.currency = require( "classes.score" )
+--globals.currency = require( "classes.score" )
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -320,6 +320,10 @@ function scene:willEnterScene( event )
   local group = self.view
   local prevScore = globals.currency.load()
   globals.currency.set(prevScore)
+
+  if (prevScore==nil) then
+    globals.currency.set(0)
+  end
  
 end
  
