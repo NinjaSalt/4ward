@@ -22,7 +22,6 @@ function combination( obj1, obj2 )
    local objectSize = (obj2.contentWidth/4) + (obj1.contentWidth/4)
 
    if ( distance < objectSize ) then
-      print("has collided")
       newType = foodgroup[obj1.type][obj2.type]
 	  if newType == "bad" then
 		resetMultiplier()

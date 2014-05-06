@@ -840,60 +840,20 @@ local function gameLoop( event )
 				end
 			end
 		end
+                --We will assume enemies are in the wrong lane until proven otherwise
+                globals.breakfastServe = false
+                globals.dinnerServe = false
+                globals.dessertServe = false
 		--CHECKS IF COMBO ENEMIES ARE IN THE CORRECT LANE--
 		for i = 1,table.maxn( allEne ) do
-			--CHECKS IF A FOOD IS BREAKFAST
-			if (allEne[i].category == "breakfast") then
-				--CHECKS IF THE BREAKFAST ITEM IS IN LANE1
-				if (allEne[i].y == lane1) then
-					if (globals.breakfastServe == false) then
-						globals.breakfastServe = true
-					end
-					--CHECKS IF THE BREAKFAST IS IN EITHER LANE2 OR LANE3
-				elseif (allEne[i].y == lane2 or allEne[i].y == lane3) then
-					if (globals.breakfastServe == true) then
-						globals.breakfastServe = false
-						--CHECKS IF BREAKFAST IS IN BOTH LANE 1 AND LAME2/LANE3 TO KEEP THE BUTTON TRUE (flashes the button though. need a more efficient way for this)
-					elseif ((allEne[i].y == lane2 or allEne[i].y == lane3) and allEne[i].y == lane1) then
-						globals.breakfastServe = true
-					end
-				end
+			if (allEne[i].category == "breakfast" and allEne[i].y == lane1) then
+				globals.breakfastServe = true
 			end
-			if (allEne[i].category == "dinner") then
-				if (allEne[i].y == lane2) then
-					if (globals.dinnerServe == false) then
-						globals.dinnerServe = true
-					end
-				elseif (allEne[i].y == lane1 or allEne[i].y == lane3) then
-					if (globals.dinnerServe == true) then
-						globals.dinnerServe = false
-					elseif ((allEne[i].y == lane1 or allEne[i].y == lane3) and allEne[i].y == lane2) then
-						globals.dinnerServe = true
-					end
-				end
+			if (allEne[i].category == "dinner" and allEne[i].y == lane2) then
+				globals.dinnerServe = true
 			end
-			if (allEne[i].category == "dessert") then
-				if (allEne[i].y == lane3) then
-					if (globals.dessertServe == false) then
-						globals.dessertServe = true
-					end
-				elseif (allEne[i].y == lane1 or allEne[i].y == lane2) then
-					if (globals.dessertServe == true) then
-						globals.dessertServe = false
-					elseif ((allEne[i].y == lane1 or allEne[i].y == lane2) and allEne[i].y == lane3) then
-						globals.dessertServe = true
-					end
-				end
-			end
-			servingButtons()
-			if (globals.breakfastServe and globals.breakfastButton~=nil) then
-				group:insert( globals.breakfastButton )
-			end
-			if (globals.dinnerServe and globals.dinnerButton~=nil) then
-				group:insert( globals.dinnerButton )
-			end
-			if (globals.dessertServe and globals.dessertButton~=nil) then
-				group:insert( globals.dessertButton )
+			if (allEne[i].category == "dessert" and allEne[i].y == lane3) then
+				globals.dessertServe = true
 			end
 			-- if (allEne[i].y == lane2) then
 			-- 	if (allEne[i].category == "dinner") then
@@ -939,6 +899,16 @@ local function gameLoop( event )
 			-- 	end
 			-- end
 		end
+                servingButtons()
+			if (globals.breakfastServe and globals.breakfastButton~=nil) then
+				group:insert( globals.breakfastButton )
+			end
+			if (globals.dinnerServe and globals.dinnerButton~=nil) then
+				group:insert( globals.dinnerButton )
+			end
+			if (globals.dessertServe and globals.dessertButton~=nil) then
+				group:insert( globals.dessertButton )
+			end
 	end
 
 	-- updateEnemyHealth()
