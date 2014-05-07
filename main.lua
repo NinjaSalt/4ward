@@ -73,14 +73,20 @@ name = string.lower( name )
 
 if "Win" == system.getInfo( "platformName" ) then
     globals.LOBSTERTWO = "Lobster Two"
-    globals.IMPRIMA = "Imprima" 
+    --globals.IMPRIMA = "Imprima"
+    globals.IMPRIMA = "Josefin Sans" --horrible lazy programming, but not ready to replace all Imprima texts by hand yet.
+    globals.JOSEFIN = "Josefin Sans" 
   elseif "Android" == system.getInfo( "platformName" ) then
     globals.LOBSTERTWO = "LobsterTwo-Regular"
-    globals.IMPRIMA = "Imprima-Regular"
+    --globals.IMPRIMA = "Imprima-Regular"
+    globals.IMPRIMA = "JosefinSans-Regular"
+    globals.JOSEFIN = "JosefinSans-Regular"
   else
     -- Mac and iOS
     globals.LOBSTERTWO = "Lobster Two"
-    globals.IMPRIMA = "Imprima"
+    --globals.IMPRIMA = "Imprima"
+    globals.IMPRIMA = "Josefin Sans"
+    globals.JOSEFIN = "Josefin Sans"
 end
 
 

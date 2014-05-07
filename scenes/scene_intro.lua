@@ -47,16 +47,18 @@ function scene:createScene( event )
 
  
   local function makeText()
-	local title = display.newText( "Objectives:", display.contentWidth/2, (display.contentHeight/2) - 125, globals.LOBSTERTWO, 48 )
+	local title = display.newText( "Objectives:", display.contentWidth/2, (display.contentHeight/2) - 115, globals.LOBSTERTWO, 48 )
+  title:setFillColor( black )
 	group:insert (title)
   end
   --bkg:addEventListener("touch", function() return true end)
   --bkg:addEventListener("tap", function() return true end)
 
-  local objBorder = display.newRect( display.contentWidth/2, 170, 310, 210 )
+  --local objBorder = display.newRect( display.contentWidth/2, 170, 310, 210 )
+  local objBorder = display.newRect( display.contentWidth/2, 160, 310, display.contentHeight )
   objBorder:setFillColor(black)
   group:insert (objBorder)
-  local objBack = display.newRect( display.contentWidth/2, 170, 300, 200 )
+  local objBack = display.newRect( display.contentWidth/2, 160, 300, display.contentHeight-10 )
   group:insert(objBack)
 
 

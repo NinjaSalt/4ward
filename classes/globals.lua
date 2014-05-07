@@ -76,6 +76,7 @@ globals.loadItemBelt = false
 -- FONTS --
 globals.LOBSTERTWO = "blank"
 globals.IMPRIMA = "blank"
+globals.JOSEFIN = "blank"
 
 -- CHECK DURNING ANTAGONIST --
 globals.notDurningAntagonist = true
