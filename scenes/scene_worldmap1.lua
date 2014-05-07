@@ -121,6 +121,11 @@ function scene:createScene( event )
   levelStart.y = display.contentHeight-levelStart.height/2
   group:insert(levelStart)
 
+  local resetScreen = display.newImageRect( "images/return.png", 65/2, 65/2 )
+  resetScreen.x = resetScreen.width/2
+  resetScreen.y = resetScreen.height/2
+  group:insert(resetScreen)
+
   local objectivesText = {
     text = "Objectives: Make a pancake!",     
     x = -250,
@@ -181,21 +186,24 @@ function scene:createScene( event )
   local function setStars (thisLevel, x)
     -- star1.alpha = 0
     -- star2.alpha = 0
-    -- star3.alpha = 0
-    star1.x = x
+    -- star3.alpha = 0   
+     star1.alpha = 1
+    star2.alpha = 1
+    star3.alpha = 1
+    star1.x = x - 35
     star2.x = x
-    star3.x = x
+    star3.x = x + 35
 
-    star1.y = display.contentHeight/2
-    star2.y = display.contentHeight/2+35
-    star3.y = display.contentHeight/2+70
+    star1.y = 200
+    star2.y = 200
+    star3.y = 200
 
     if (globals.stars[1][thisLevel] >= 1) then
       star1:removeSelf( )
       star1 = nil
     	star1 = display.newImageRect( "images/star.png", 30, 30 )
-      star1.x = x
-      star1.y = display.contentHeight/2
+      star1.x = x - 35
+      star1.y = display.contentWidth-80
       group:insert(star1)
     end
     if (globals.stars[1][thisLevel] >= 2) then
@@ -203,15 +211,15 @@ function scene:createScene( event )
       star2 = nil
     	star2 = display.newImageRect( "images/star.png", 30, 30 )
       star2.x = x
-      star2.y = display.contentHeight/2+35
+      star2.y = display.contentWidth-80
       group:insert(star2)
     end
     if (globals.stars[1][thisLevel] >= 3) then
       star3:removeSelf( )
       star3 = nil
     	star3 = display.newImageRect( "images/star.png", 30, 30 )
-      star3.x = x
-      star3.y = display.contentHeight/2+65
+      star3.x = x + 35
+      star3.y = display.contentWidth-80
       group:insert(star3)
     end
   end
@@ -239,6 +247,9 @@ function scene:createScene( event )
   -- end
   
   local function onTapLevel1 ( event )
+    star1.alpha = 0
+    star2.alpha = 0
+    star3.alpha = 0 
     if (levelTitle ~= nil and objectives ~= nil) then
       transition.to( levelTitle, { time=200, alpha=0} )
       transition.to( objectives, { time=200, alpha=0} )
@@ -261,6 +272,7 @@ function scene:createScene( event )
         objectives.x = display.contentWidth/2-48
         objectives.y = 150
         levelSelect = 1
+        setStars(levelSelect, display.contentWidth/2-48)
       end, tag="animation" } )
 
     --moving the other levels to the side
@@ -303,6 +315,9 @@ function scene:createScene( event )
   end
 
   local function onTapLevel2 ( event )
+    star1.alpha = 0
+    star2.alpha = 0
+    star3.alpha = 0 
     if (levelTitle ~= nil and objectives ~= nil) then
       transition.to( levelTitle, { time=200, alpha=0} )
       transition.to( objectives, { time=200, alpha=0} )
@@ -332,6 +347,7 @@ function scene:createScene( event )
         objectives.x = display.contentWidth/2-24
         objectives.y = 150
         levelSelect = 2
+        setStars(levelSelect, display.contentWidth/2-24)
       end, tag="animation" } )
 
     transition.to( levelThreeBlack, { time=500, x = display.contentWidth-84, width = 22,onComplete=function() 
@@ -363,6 +379,9 @@ function scene:createScene( event )
   end
 
   local function onTapLevel3 ( event )
+    star1.alpha = 0
+    star2.alpha = 0
+    star3.alpha = 0 
         if (levelTitle ~= nil and objectives ~= nil) then
       transition.to( levelTitle, { time=200, alpha=0} )
       transition.to( objectives, { time=200, alpha=0} )
@@ -399,7 +418,8 @@ function scene:createScene( event )
     objectives:setFillColor( black )
     objectives.x = display.contentWidth/2
     objectives.y = 150
-    levelSelect = 3    
+    levelSelect = 3   
+    setStars(levelSelect, display.contentWidth/2) 
       end, tag="animation" } )
 
     transition.to( levelFourBlack, { time=500, x = display.contentWidth-60, width = 22,onComplete=function() 
@@ -424,6 +444,9 @@ function scene:createScene( event )
   end
 
   local function onTapLevel4 ( event )
+    star1.alpha = 0
+    star2.alpha = 0
+    star3.alpha = 0 
     if (levelTitle ~= nil and objectives ~= nil) then
       transition.to( levelTitle, { time=200, alpha=0} )
       transition.to( objectives, { time=200, alpha=0} )
@@ -468,6 +491,7 @@ function scene:createScene( event )
     objectives.x = display.contentWidth/2+24
     objectives.y = 150
     levelSelect = 4 
+    setStars(levelSelect, display.contentWidth/2+24)
       end, tag="animation" } )
 
     transition.to( levelFiveBlack, { time=500, x = display.contentWidth-36, width = 22,onComplete=function() 
@@ -484,6 +508,9 @@ function scene:createScene( event )
   end
 
   local function onTapLevel5 ( event )
+    star1.alpha = 0
+    star2.alpha = 0
+    star3.alpha = 0 
     if (levelTitle ~= nil and objectives ~= nil) then
       transition.to( levelTitle, { time=200, alpha=0} )
       transition.to( objectives, { time=200, alpha=0} )
@@ -535,6 +562,7 @@ function scene:createScene( event )
     objectives.x = display.contentWidth/2+50
     objectives.y = 150
     levelSelect = 5
+    setStars(levelSelect, display.contentWidth/2+50)
       end, tag="animation" } )
 
 	--setStars(levelSelect, 425)
@@ -580,6 +608,52 @@ function scene:createScene( event )
     -- storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
 
+-- RETURNS ALL GRADIENTS ON THE SCREEN TO THE ORIGINAL SIZE--
+  local function resetlevelSelect ( event )
+    if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end
+    star1.alpha = 0
+    star2.alpha = 0
+    star3.alpha = 0
+
+    transition.to( levelOneBlack, { time=500, x = 56, width = 62, y = display.contentHeight*(3/5), height = display.contentHeight-98, onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelOneGradient, { time=500, x = 56, width = 60, y = display.contentHeight*(3/5), height = display.contentHeight-100, onComplete=function() 
+        --levelonepressed = true
+      end, tag="animation" } )
+
+    transition.to( levelTwoBlack, { time=500, x = 144, width = 62, y = display.contentHeight*(3/5), height = display.contentHeight-98, onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelTwoGradient, { time=500, x = 144, width = 60, y = display.contentHeight*(3/5), height = display.contentHeight-100, onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+
+    transition.to( levelThreeBlack, { time=500, x = 237, width = 62, y = display.contentHeight*(3/5), height = display.contentHeight-98, onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelThreeGradient, { time=500, x = 237, width = 60, y = display.contentHeight*(3/5), height = display.contentHeight-100, onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+
+    transition.to( levelFourBlack, { time=500, x = 335, width = 62, y = display.contentHeight*(3/5), height = display.contentHeight-98,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelFourGradient, { time=500, x = 335, width = 60, y = display.contentHeight*(3/5), height = display.contentHeight-100,onComplete=function() 
+       -- print("done")
+      end, tag="animation" } )
+
+    transition.to( levelFiveBlack, { time=500, x = 425, width = 62, y = display.contentHeight*(3/5), height = display.contentHeight-98,onComplete=function() 
+       -- print("done")
+      end, tag="animation" } )
+    transition.to( levelFiveGradient, { time=500, x = 425, width = 60, y = display.contentHeight*(3/5), height = display.contentHeight-100,onComplete=function() 
+      end, tag="animation" } )
+
+  end  
+
 
 --ADD EVENT LISTENERS --
   levelOneGradient:addEventListener("tap", onTapLevel1)
@@ -590,6 +664,7 @@ function scene:createScene( event )
 
   recipeBook:addEventListener( "tap", onTapBookIcon )
   itemShop:addEventListener( "tap", onTapStoreButton )
+  resetScreen:addEventListener( "tap", resetlevelSelect )
 
 
 
