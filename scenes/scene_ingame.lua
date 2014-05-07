@@ -1073,9 +1073,10 @@ else
 	-- previous speed: (240-timeLineWidth/2)-enemySize/2
 	transition.to( timeLine.enemyQueue[i], {x=200, time=timeLine.spawnTimes[i], tag="animation", 
 		onComplete= function()
-		if (timeLine.enemyQueue[i] ~= nil) then
-			--timeLine.enemyQueue[i]: removeSelf()
-		end
+		transition.to( timeLine.enemyQueue[i], {alpha = 0} )
+		--if (timeLine.enemyQueue[i] ~= nil) then
+		--	timeLine.enemyQueue[i]: removeSelf()
+		--end
 		end} )
   end
   
@@ -1112,7 +1113,10 @@ end
  
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
+
+
   local group = self.view
+
   globals.currency.add(globals.score)
   globals.currency.save()
   --saving high score

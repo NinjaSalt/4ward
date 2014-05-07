@@ -28,6 +28,7 @@ function TimeLine.create(enemyIDQueue, timeBetweenEachSpawn)
 	return timeLine
 end
 
+
 function TimeLine.createTimeLineBar()
 	local bar = {}
 	bar[1] = display.newRect(240-timeLineWidth/2-enemySize/2,320-enemySize/2, enemySize, enemySize)
