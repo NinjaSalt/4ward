@@ -62,10 +62,12 @@ function scene:createScene( event )
   
   
   
-  local textBoxOutline = display.newRect( centerX, 35, 130, 65 )
-  textBoxOutline:setFillColor( black )
-  group:insert(textBoxOutline)
-  local textBox = display.newRect( centerX, 35, 130, 60 )
+  --local textBoxOutline = display.newRect( centerX, 35, 130, 65 )
+  --textBoxOutline:setFillColor( black )
+  --group:insert(textBoxOutline)
+  --local textBox = display.newRect( centerX, 35, 130, 60 )
+  local textBox = display.newImage("images/speechBubble.png", centerX-20, 45, true)
+  textBox.height = 80
   group:insert(textBox)
   
   --transition.to( textBox, { time= 2000, x= centerX, transition=easing.inCubic } )
@@ -73,23 +75,23 @@ function scene:createScene( event )
   local speech = display.newText( "", 0, 0, globals.IMPRIMA, 36 )
   if ( antagonistAbility == 1 ) then
 	speech.text = "SURPRISE COMBO!"
-	textBox.width=speech.width+10
-	textBoxOutline.width=speech.width+20
+	textBox.width=speech.width+30
+	--textBoxOutline.width=speech.width+20
   elseif ( antagonistAbility == 2 ) then
     playSFX (audioSupriseSwap, 1)
     speech.text = "SURPRISE SWAP!"
-	textBox.width=speech.width+10
-	textBoxOutline.width=speech.width+20
+	textBox.width=speech.width+30
+	--textBoxOutline.width=speech.width+20
   elseif ( antagonistAbility == 3 ) then
     playSFX (audioCakeAttack, 1)
     speech.text = "CAKE ATTACK!"
-	textBox.width=speech.width+10
-	textBoxOutline.width=speech.width+20
+	textBox.width=speech.width+30
+	--textBoxOutline.width=speech.width+20
   elseif ( antagonistAbility == 4 ) then
     playSFX (audioMashPotato, 1)
     speech.text = "MASH THAT POTATO!"
-	textBox.width=speech.width+10
-	textBoxOutline.width=speech.width+20
+	textBox.width=speech.width+30
+	--textBoxOutline.width=speech.width+20
   end
   
   speech:setFillColor(black)

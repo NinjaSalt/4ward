@@ -116,20 +116,33 @@ levels[3] = {}
 -- end reference
 
 
---world 1
+-- WORLDS ARE "EPISODES", LEVELS ARE "CHALLENGES"
+
+-- EPISODE ONE: On the Set of Now We're Cooking!
+-- Can you Cook? (2 items)
 levels[1][1] = Level.create(1, makeSecondaryWin(pancake,1), {1,0}, {1000,3000}, false, makeScoreWin(10))
-levels[1][2] = Level.create(2, false, {1,6,1,6,1,6,1,6,3}, {1000,3000,3000,3000,3000,3000,2600,2600,2600}, makeCatWin("dessert", 3), makeScoreWin(80))
-levels[1][3] = Level.create(3, makeSecondaryWin(steakOm,1), {0,1,3,4,3,6,2,0,5,0,2,1}, {500,3000,3000,3000,3000,3000,3000,3000,6000,2600,2600,2600}, false, makeScoreWin(150))
-levels[1][4] = Level.create(4, makeSecondaryWin(fries,2), {2,5,4,5,5,2,5,4}, {500,3000,3000,3000,3000,3000,3000,3000}, makeCatWin("dinner",2), false)
-levels[1][5] = Level.create(5, makeSecondaryWin(pancake,1), {1,4,1,0,5,2}, {1000,3000,3000,3000,3000,3000}, false, makeScoreWin(120))
+-- Your Life is at Steak! (8 items)
+levels[1][2] = Level.create(3, makeSecondaryWin(steakOm,1), {0,2,0,1,1,4,2,0}, {500,3000,3000,3000,3000,3000,3000,3000}, false, makeScoreWin(40))
+-- The Most Important Meal of the Day (10 items)
+levels[1][3] = Level.create(3, false, {0,1,5,0,5,1,2,0,5,0}, {500,3000,3000,3000,3000,3000,3000,3000,2600,2600}, makeCatWin("breakfast", 2), makeScoreWin(60))
+-- I Say Potato (10 items)
+levels[1][4] = Level.create(4, makeSecondaryWin(mashed,2), {2,5,4,5,5,2,5,4,0,5}, {500,3000,3000,2600,3000,2600,3000,3000,2600,3100}, makeCatWin("dinner", 3), false)
+-- Certi-fried Chef! (14 items)
+levels[1][5] = Level.create(5, makeSecondaryWin(fries, 4), {1,4,5,5,0,1,4,2,5,4,2,4,1,5}, {300,2600,2600,3100,3100,3000,3000,2800,3100,3000,3000,3200,2600,2600}, false, makeScoreWin(100))
 
---world 2
-levels[2][1] = Level.create(1, false, {4,4}, {500,500}, false, false)
+-- EPISODE TWO: CANDY STORE CRAZE
+-- Taste Test
+levels[2][1] = Level.create(1, false, {4,4}, {500,500}, makeCatWin("dessert", 2), makeScoreWin(70))
+-- Cake and Bake
 levels[2][2] = Level.create(2, false, {1,2}, {500,500}, false, false)
+-- Super Sugar Rush!
 levels[2][3] = Level.create(3, false, {1,2}, {500,500}, false, false)
+-- Strawberries of Wrath
 levels[2][4] = Level.create(4, false, {1,2}, {500,500}, false, false)
+-- The Sweetest Treat!
+levels[2][5] = Level.create(4, makeSecondaryWin(strawberryCake, 3), {1,2}, {500,500}, makeCatWin("dessert", 6), false)
 
---world 3
+--EPISODE
 levels[3][1] = Level.create(1, false, {1,4}, {500,500}, false, false)
 levels[3][2] = Level.create(2, false, {1,2}, {500,500}, false, false)
 levels[3][3] = Level.create(3, false, {1,2}, {500,500}, false, false)
