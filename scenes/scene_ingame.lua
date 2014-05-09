@@ -538,6 +538,28 @@ function itemCombo( item , enemy, fromFoodItem )
 	return eneAndBar[0]
 end
 
+local function noComboPause()
+  timer.pause(spawnEneTimer)
+  --pausing animation
+  if (globals.breakfastButton~=nil) then
+	globals.breakfastButton:pause()
+  end
+ if (globals.dinnerButton~=nil) then
+	globals.dinnerButton:pause()
+ end
+ if (globals.dessertButton~=nil) then
+	globals.dessertButton:pause()
+ end
+
+ if ( antagonistTimer ~= nil) then
+	timer.cancel(antagonistTimer)
+ end
+ for n=0, 2, 1 do
+	globals.belts[n]:pause()
+ end
+ transition.pause("animation")
+end
+
 function checkEnemy()
 
 	-- turns score condition success true/false.
@@ -572,12 +594,49 @@ function checkEnemy()
 		]]--
 
 		-- NOW YOU WIN WIN WIN (Unless your score is negative.)
-
+		
 		if (globals.score > 0) then
 			LevelList.unlockLevel(world, thisLevel+1)
-		    storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 700, params = {level = thisLevel, world = world}})
+			local backBorder = display.newRect( display.contentWidth/2, -100, 155, 65 )
+			backBorder: setFillColor (black)
+			transition.to( backBorder, { time=700, y=(display.contentHeight/2) } )
+			group:insert (backBorder)
+			
+			--the white background
+			local back = display.newRect( display.contentWidth/2, -100, 150, 60 )
+			transition.to( back, { time=700,y=(display.contentHeight/2)} )
+			group:insert (back)
+			
+			local noComboText = display.newText( "No More Combos", display.contentWidth/2, -100, globals.LOBSTERTWO, 36 )
+			noComboText:setFillColor(black)
+			group:insert (noComboText)
+			backBorder.width = noComboText.width+20
+			back.width = noComboText.width+15
+			
+			noComboPause()
+			transition.to( noComboText, { time=(700), y=(display.contentHeight/2) } )
+			timer.performWithDelay(3000, function()storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 700, params = {level = thisLevel, world = world}})end )
+		    
 		else
-		    storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world, condition = true}})
+		    local backBorder = display.newRect( display.contentWidth/2, -100, 155, 65 )
+			backBorder: setFillColor (black)
+			transition.to( backBorder, { time=700, y=(display.contentHeight/2) } )
+			group:insert (backBorder)
+			
+			--the white background
+			local back = display.newRect( display.contentWidth/2, -100, 150, 60 )
+			transition.to( back, { time=700,y=(display.contentHeight/2)} )
+			group:insert (back)
+			
+			local noComboText = display.newText( "No More Combos", display.contentWidth/2, -100, globals.LOBSTERTWO, 36 )
+			noComboText:setFillColor(black)
+			group:insert (noComboText)
+			backBorder.width = noComboText.width+20
+			back.width = noComboText.width+15
+			
+			noComboPause()
+			transition.to( noComboText, { time=(700), y=(display.contentHeight/2) } )
+			timer.performWithDelay(3000, function()storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 700, params = {level = thisLevel, world = world}})end )
 		end
 
 		--[[
