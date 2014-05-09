@@ -131,18 +131,18 @@ levels[1][4] = Level.create(4, makeSecondaryWin(mashed,2), {2,5,4,5,5,2,5,4,0,5}
 levels[1][5] = Level.create(5, makeSecondaryWin(fries, 4), {1,4,5,5,0,1,4,2,5,4,2,4,1,5}, {300,2600,2600,3100,3100,3000,3000,2800,3100,3000,3000,3200,2600,2600}, false, makeScoreWin(100))
 
 -- EPISODE TWO: CANDY STORE CRAZE
--- Taste Test
-levels[2][1] = Level.create(1, false, {4,4}, {500,500}, makeCatWin("dessert", 2), makeScoreWin(70))
--- Cake and Bake
-levels[2][2] = Level.create(2, false, {1,2}, {500,500}, false, false)
--- Super Sugar Rush!
-levels[2][3] = Level.create(3, false, {1,2}, {500,500}, false, false)
--- Strawberries of Wrath
-levels[2][4] = Level.create(4, false, {1,2}, {500,500}, false, false)
--- The Sweetest Treat!
-levels[2][5] = Level.create(4, makeSecondaryWin(strawberryCake, 3), {1,2}, {500,500}, makeCatWin("dessert", 6), false)
+-- Taste Test (10 items)
+levels[2][1] = Level.create(1, false, {0,6,1,6,5,1,0,6,6,1}, {300,2600,2600,4000,3000,3000,2600,2600,2600, 2600}, makeCatWin("dessert", 3), makeScoreWin(70)) 120
+-- Cake and Bake (10 items)
+levels[2][2] = Level.create(2, makeSecondaryWin(cake,3), {5,1,6,4,6,6,1,1,6,0}, {300,3100,3100,2600,4500,2600,2600,2600,3000,3000}, false, makeScoreWin(90)) 140
+-- Super Sugar Rush! (14 items)
+levels[2][3] = Level.create(3, makeSecondaryWin(strawberryCandy,2), {0,3,2,6,6,1,3,6,1,5,1,3,0,6}, {300,3100,3100,2600,4500,2600,2600,2600,3000,3000,3000,100,3000,3000}, makeCatWin("dessert", 4), false)
+-- Strawberries of Wrath (14 items)
+levels[2][4] = Level.create(4, makeSecondaryWin(strawberryTart, 4), {1,3,3,1,2,1,6,3,3,6,6,1,1,1}, {300,2600,2700,2600,2600,2700,2700,2600,2600,2600,2600,2600,2600,2600}, false, makeScoreWin(120))
+-- The Sweetest Treat! (20 items)
+levels[2][5] = Level.create(4, makeSecondaryWin(strawberryCake, 3), {0,3,6,1,2,0,1,3,6,6,3,5,1,3,6,3,1,6,0,1}, {300,2600,2600,3500,3500,3500,2600,2600,3500,3200,3000,3000,2800,2800,2800,2800,3100,3000,3000,2600}, makeCatWin("dessert", 7), false)
 
---EPISODE
+--EPISODE 3
 levels[3][1] = Level.create(1, false, {1,4}, {500,500}, false, false)
 levels[3][2] = Level.create(2, false, {1,2}, {500,500}, false, false)
 levels[3][3] = Level.create(3, false, {1,2}, {500,500}, false, false)
