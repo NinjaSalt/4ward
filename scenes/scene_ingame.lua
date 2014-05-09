@@ -1023,6 +1023,7 @@ scene.createConveyorBelts()
  
  local numCond = 0 -- temporary, counts number of conditions in the level (later there will alawys be 2.)
 
+
   --initialize the current level's secondary objectives and print them
   if(currentLevel.victoryCondition~=false)then
 	currentLevel.victoryCondition.amount = currentLevel.victoryCondition.memAmount
@@ -1147,34 +1148,76 @@ function scene:exitScene( event )
 		globals.dessertButton:removeSelf()
 		globals.dessertButton = nil
 	end
-	if(globals.score > 0) then
-		levels[world][thisLevel].stars=1
-		globals.stars[world][thisLevel] = 1
-		if (currentLevel.victoryCondition~= false) then
-			if(currentLevel.victoryCondition.conditionMet==true) then
-				levels[world][thisLevel].stars=2
-				globals.stars[world][thisLevel] = 2
-				if (globals.score > 100) then
-					levels[world][thisLevel].stars=3
-					globals.stars[world][thisLevel] = 3
-				end
+
+
+
+	--if(globals.score > 0) then
+	--	levels[world][thisLevel].stars=1
+	--	globals.stars[world][thisLevel] = 1
+	--	if (currentLevel.victoryCondition~= false) then
+	--		if(currentLevel.victoryCondition.conditionMet==true) then
+	--			levels[world][thisLevel].stars=2
+	--			globals.stars[world][thisLevel] = 2
+	--			if (globals.score > 100) then
+	--				levels[world][thisLevel].stars=3
+	----				globals.stars[world][thisLevel] = 3
+    --		end
+	--		end
+	--	end
+
+	local totalStars = 0
+
+	-- CHECK TO SEE HOW MANY STARS WE HAVE.
+
+	if (globals.score > 0) then
+
+		totalStars = 1 -- get one star for completing with a positive score 
+
+		if (currentLevel.victoryCondition ~= false) then
+			if (currentLevel.conditionmet ~= false) then
+				totalStars = totalStars +1 
 			end
 		end
+
+		if (currentLevel.categoryCondition ~= false) then
+			if (currentLevel.categoryCondition.success~= false) then
+				totalStars = totalStars + 1
+			end
+		end
+
+		if (currentLevel.scoreCondition~= false) then
+			if (globals.score >= currentLevel.scoreCondition.score) then
+				totalStars = totalStars +1
+			end
+		end
+
+		-- only replaces stars when you beat the level.
+
+		if (totalStars > globals.stars[world][thisLevel]) then
+			globals.stars[world][thisLevel] = totalStars
+		end
+	end
+
+	-- END STAR CHECKS 
+
+
 		--saving stars of the level
 		-- if (globals.stars[world][thisLevel] > gameSettings[world][thisLevel][2]) then
 		-- 	gameSettings[world][thisLevel][2] = globals.stars[world][thisLevel]
 		-- 	loadsave.saveTable(gameSettings , "gamesettings.json")
 		-- end
-	end
 	
 	print ("Stars: " .. levels[world][thisLevel].stars)
+
 	local stars = 0
 	for i = 0,table.maxn( levels[world] ) do
 		if ( levels[world][thisLevel].stars ~= nil ) then	
 			stars = stars + levels[world][thisLevel].stars
 		end
 	end
+
 	print (stars)
+
 	if(stars>0) then
 		LevelList.unlockLevel(world, 5)
 	end
