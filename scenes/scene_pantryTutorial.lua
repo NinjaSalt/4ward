@@ -38,8 +38,8 @@ function scene:createScene( event )
     tutFour:removeSelf()
     fourText:removeSelf()
     globals.completedShop = true
-    storyboard.hideOverlay( "slideUp", 500 )
-
+    storyboard.hideOverlay("scenes.overlay_pantryTutorial", "slideUp", 500 )
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
    end
 
 

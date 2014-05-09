@@ -6,6 +6,12 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals = require("classes.globals")
+-- local loadsave = require("classes.loadsave")
+require("classes.levelUnlocking")
+
+-- gameSettings = loadsave.loadTable("gamesettings.json")
+
+ 
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -14,59 +20,707 @@ storyboard.removeAll()
 ---------------------------------------------------------------------------------
 -- BEGINNING OF YOUR IMPLEMENTATION
 ---------------------------------------------------------------------------------
- 
+
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
-  local group = self.view
-  local levelList = {}
 
-  local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
+  local group = self.view
+
+  local levelSelect = 1
+  
+  local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
+  -- local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
+  -- bkg:setFillColor( gray )
+  -- bkg.alpha = .5
+  -- group:insert (bkg)
 
-  local mapTitle = display.newText( "World Two", 0, 0, globals.LOBSTERTWO, 36 )
-  mapTitle:setFillColor(black)
-  mapTitle.x = display.contentCenterX
-  mapTitle.y = 50
-  group:insert( mapTitle )
- 
-  local function onTapLevel( event )
+  -- local banner = display.newImageRect( "images/bannerBlue.png", 200, 80 )
+  -- banner.x = 236
+  -- banner.y = 45
+  -- group:insert(banner)
+
+  local titleText = {
+    text = "Candy Store Craze!",   
+    x = 236,
+    y = 40,
+    width = display.contentWidth-152,     --required for multi-line and alignment
+    font = globals.LOBSTERTWO,   
+    fontSize = 27,
+    align = "center"  --new alignment parameter
+  }
+
+  local title = display.newText(titleText)
+  title:setFillColor( black )  
+  group:insert(title)
+
+  local itemShop = display.newImageRect( "images/pantry.png", 80, 80 )
+  itemShop.x = 370
+  itemShop.y = 40
+  group:insert(itemShop)
+
+  local recipeBook = display.newImageRect( "images/book.png", 75, 75 )
+  recipeBook.x = 100
+  recipeBook.y = 40
+  group:insert(recipeBook)
+
+  local coralgradient = graphics.newGradient(
+  { 1, 1, 1 },
+  { 1, 0.4980392156862745, 0.3137254901960784 },
+  "down" )
+
+  local lightcoralgradient = graphics.newGradient(
+  { 1, 1, 1 },
+  { 0.9412, 0.502, 0.502 },
+  "down" )
+
+  local hotpinkgradient = graphics.newGradient(
+  { 1, 1, 1 },
+  { 1, 0.4117647058823529, 0.7058823529411765 },
+  "down" )
+
+  local fuchsiagradient = graphics.newGradient(
+  { 1, 1, 1 },
+  { 1, 0, 1 },
+  "down" )
+
+  local deeppinkgradient = graphics.newGradient(
+  { 1, 1, 1 },
+  { 1, 0.0784313725490196, 0.5764705882352941 },
+  "down" )
+
+--LEVEL ONE --
+  local levelOneBlack = display.newRect( 56, display.contentHeight*(3/5), 62, display.contentHeight-98 )
+  levelOneBlack:setFillColor( black )
+  group:insert(levelOneBlack)
+  local levelOneGradient = display.newRect( 56, display.contentHeight*(3/5), 60, display.contentHeight-100 )
+  levelOneGradient:setFillColor( lightcoralgradient )
+  group:insert(levelOneGradient)
+
+--LEVEL TWO --
+  local levelTwoBlack = display.newRect( 144, display.contentHeight*(3/5), 62, display.contentHeight-98 )
+  levelTwoBlack:setFillColor( black )
+  group:insert(levelTwoBlack)
+  local levelTwoGradient = display.newRect( 144, display.contentHeight*(3/5), 60, display.contentHeight-100 )
+  levelTwoGradient:setFillColor( coralgradient )
+  group:insert(levelTwoGradient)
+
+-- LEVEL THREE --
+  local levelThreeBlack = display.newRect( 237, display.contentHeight*(3/5), 62, display.contentHeight-98 )
+  levelThreeBlack:setFillColor( black )
+  group:insert(levelThreeBlack)
+  local levelThreeGradient = display.newRect( 237, display.contentHeight*(3/5), 60, display.contentHeight-100 )
+  levelThreeGradient:setFillColor( hotpinkgradient )
+  group:insert(levelThreeGradient)
+
+-- LEVEL FOUR --
+  local levelFourBlack = display.newRect( 335, display.contentHeight*(3/5), 62, display.contentHeight-98 )
+  levelFourBlack:setFillColor( black )
+  group:insert(levelFourBlack)
+  local levelFourGradient = display.newRect( 335, display.contentHeight*(3/5), 60, display.contentHeight-100 )
+  levelFourGradient:setFillColor( fuchsiagradient )
+  group:insert(levelFourGradient)
+
+-- LEVEL FIVE --
+  local levelFiveBlack = display.newRect( 425, display.contentHeight*(3/5), 62, display.contentHeight-98 )
+  levelFiveBlack:setFillColor( black )
+  group:insert(levelFiveBlack)
+  local levelFiveGradient = display.newRect( 425, display.contentHeight*(3/5), 60, display.contentHeight-100 )
+  levelFiveGradient:setFillColor( deeppinkgradient )
+  group:insert(levelFiveGradient)
+
+  local levelStart = display.newImageRect( "images/startButton.png", 65/2, 65/2 )
+  levelStart.x = display.contentWidth-levelStart.width/2
+  levelStart.y = display.contentHeight-levelStart.height/2
+  group:insert(levelStart)
+
+  local resetScreen = display.newImageRect( "images/return.png", 25, 25 )
+  resetScreen.x = resetScreen.width/2
+  resetScreen.y = display.contentHeight-resetScreen.height/2
+  resetScreen.alpha = 1
+  group:insert(resetScreen)
+
+  local objectivesText = {
+    text = "Objectives: Make a pancake!",     
+    x = -250,
+    y = -240,
+    width = display.contentWidth-152,     --required for multi-line and alignment
+    font = globals.IMPRIMA,   
+    fontSize = 18,
+    align = "center"  --new alignment parameter
+  }
+
+  local objectives = display.newText(objectivesText)
+  group:insert(objectives)
+
+  local levelTitleText = {
+    text = "Step 1: Can you... Cook?",     
+    x = -250,
+    y = -195,
+    width = display.contentWidth-152,     --required for multi-line and alignment
+    font = globals.LOBSTERTWO,   
+    fontSize = 28,
+    align = "center"  --new alignment parameter
+  }
+
+  local levelTitle = display.newText(levelTitleText)
+  group:insert(levelTitle)
+
+  -- local starsText = {
+  --   text = "Stars: ",     
+  --   x = 250,
+  --   y = 280,
+  --   width = 256,     --required for multi-line and alignment
+  --   font = globals.IMPRIMA,   
+  --   fontSize = 18,
+  --   align = "Left"  --new alignment parameter
+  -- }
+
+  -- local stars = display.newText(starsText)
+  -- group:insert(stars)
+  
+  local star1 = display.newImageRect( "images/star.png", 30, 30 )
+  -- star1.x = 200
+  -- star1.y = 280
+   star1.alpha = 0
+  group:insert(star1)
+  
+  local star2 = display.newImageRect( "images/star.png", 30, 30 )
+  -- star2.x = 230
+  -- star2.y = 280
+   star2.alpha = 0
+  group:insert(star2)
+  
+  local star3 = display.newImageRect( "images/star.png", 30, 30 )
+  -- star3.x = 260
+  -- star3.y = 280
+   star3.alpha = 0
+  group:insert(star3)
+  
+  local function setStars (thisLevel, x)
+    print("stars " .. globals.stars[1][thisLevel])
+    -- star1.alpha = 0
+    -- star2.alpha = 0
+    -- star3.alpha = 0   
+    -- star1.alpha = 1
+    -- star2.alpha = 1
+    -- star3.alpha = 1
+    star1.x = x - 35
+    star2.x = x
+    star3.x = x + 35
+
+    star1.y = 200
+    star2.y = 200
+    star3.y = 200
+
+    if (globals.stars[1][thisLevel] >= 1) then
+     --  star1:removeSelf( )
+      -- star1 = display.newImageRect( "images/star.png", 30, 30 )
+     --  star1.x = x - 35
+     --  star1.y = display.contentWidth-80
+      star1.alpha = 1
+      -- group:insert(star1)
+    end
+    if (globals.stars[1][thisLevel] >= 2) then
+     --  star2:removeSelf( )
+      -- star2 = display.newImageRect( "images/star.png", 30, 30 )
+     --  star2.x = x
+     --  star2.y = display.contentWidth-80
+      star2.alpha = 1
+      -- group:insert(star2)
+    end
+    if (globals.stars[1][thisLevel] >= 3) then
+     --  star3:removeSelf( )
+      -- star3 = display.newImageRect( "images/star.png", 30, 30 )
+     --  star3.x = x + 35
+     --  star3.y = display.contentWidth-80
+      star3.alpha = 1
+      -- group:insert(star3)
+    end
+  end
+
+  --   local function setSavedStars (thisLevel)
+  --   star1.alpha = 0
+  --   star2.alpha = 0
+  --   star3.alpha = 0
+  --   --print("STARS: " .. gameSettings[1][levelSelect][2])
+  --   if (thisLevel >= 1) then
+  --     star1.alpha = 1
+  --   end
+  --   if (thisLevel >= 2) then
+  --     star2.alpha = 1
+  --   end
+  --   if (thisLevel >= 3) then
+  --     star3.alpha = 1
+  --   end
+  -- end
+
+  -- RETURNS ALL GRADIENTS ON THE SCREEN TO THE ORIGINAL SIZE--
+    local function resetlevelSelect ( event )
+    if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end
+
+    if (star1 ~= nil and star2 ~= nil and star3 ~= nil) then
+      star1.alpha = 0
+      star2.alpha = 0
+      star3.alpha = 0
+    end
+
+    transition.to( levelOneBlack, { time=500, x = 56, width = 62, y = display.contentHeight*(3/5), height = display.contentHeight-98, onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelOneGradient, { time=500, x = 56, width = 60, y = display.contentHeight*(3/5), height = display.contentHeight-100, onComplete=function() 
+        --levelonepressed = true
+      end, tag="animation" } )
+
+    transition.to( levelTwoBlack, { time=500, x = 144, width = 62, y = display.contentHeight*(3/5), height = display.contentHeight-98, onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelTwoGradient, { time=500, x = 144, width = 60, y = display.contentHeight*(3/5), height = display.contentHeight-100, onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+
+    transition.to( levelThreeBlack, { time=500, x = 237, width = 62, y = display.contentHeight*(3/5), height = display.contentHeight-98, onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelThreeGradient, { time=500, x = 237, width = 60, y = display.contentHeight*(3/5), height = display.contentHeight-100, onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+
+    transition.to( levelFourBlack, { time=500, x = 335, width = 62, y = display.contentHeight*(3/5), height = display.contentHeight-98,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelFourGradient, { time=500, x = 335, width = 60, y = display.contentHeight*(3/5), height = display.contentHeight-100,onComplete=function() 
+       -- print("done")
+      end, tag="animation" } )
+
+    transition.to( levelFiveBlack, { time=500, x = 425, width = 62, y = display.contentHeight*(3/5), height = display.contentHeight-98,onComplete=function() 
+       -- print("done")
+      end, tag="animation" } )
+    transition.to( levelFiveGradient, { time=500, x = 425, width = 60, y = display.contentHeight*(3/5), height = display.contentHeight-100,onComplete=function() 
+      end, tag="animation" } )
+
+    -- PUTTING ALL EVENT LISTENERS BACK
+  -- levelOneGradient:addEventListener("tap", onTapLevel1)
+  -- levelTwoGradient:addEventListener("tap", onTapLevel2)
+  -- levelThreeGradient:addEventListener("tap", onTapLevel3)
+  -- levelFourGradient:addEventListener("tap", onTapLevel4)
+  -- levelFiveGradient:addEventListener("tap", onTapLevel5)
+
+  end  
+
+  local function onTapLevel1 ( event )
+    star1.alpha = 0
+    star2.alpha = 0
+    star3.alpha = 0 
+    if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end
+
+    transition.to( levelOneBlack, { time=500, x = display.contentWidth/2-48, width = display.contentWidth-150,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelOneGradient, { time=500, x = display.contentWidth/2-48, width = display.contentWidth-152,onComplete=function() 
+          if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=1} )
+      transition.to( objectives, { time=200, alpha=1} )
+    end
+        levelTitle.text = "Step 1: Taste Test"
+        levelTitle:setFillColor( black )
+        levelTitle.x = display.contentWidth/2-48
+        levelTitle.y = 100
+        objectives.text = "Objectives: Serve 3 Dessert items."
+        objectives:setFillColor( black )
+        objectives.x = display.contentWidth/2-48
+        objectives.y = 150
+        levelSelect = 1
+        setStars(1, display.contentWidth/2-48)
+
+        -- resetScreen = display.newImageRect( "images/return.png", 25, 25 )
+        -- resetScreen.x = display.contentWidth/2-48 - (display.contentWidth-152)/2 + resetScreen.width/2
+        -- resetScreen.y = (display.contentWidth-152)/3 + display.contentHeight*(3/5) - resetScreen.width/2
+        -- resetScreen.alpha = 1
+        -- resetScreen:addEventListener( "tap", resetlevelSelect )
+
+        -- levelOneGradient:removeEventListener("tap", onTapLevel1)
+
+      end, tag="animation" } )
+
+    --moving the other levels to the side
+    transition.to( levelTwoBlack, { time=500, x = display.contentWidth-108, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelTwoGradient, { time=500, x = display.contentWidth-108, width = 20,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+
+    transition.to( levelThreeBlack, { time=500, x = display.contentWidth-84, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelThreeGradient, { time=500, x = display.contentWidth-84, width = 20,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+
+    transition.to( levelFourBlack, { time=500, x = display.contentWidth-60, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelFourGradient, { time=500, x = display.contentWidth-60, width = 20,onComplete=function() 
+       -- print("done")
+      end, tag="animation" } )
+
+    transition.to( levelFiveBlack, { time=500, x = display.contentWidth-36, width = 22,onComplete=function() 
+       -- print("done")
+      end, tag="animation" } )
+    transition.to( levelFiveGradient, { time=500, x = display.contentWidth-36, width = 20,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+
+   --setStars(levelSelect, 56)
+   print("level1")
+  --  if (gameSettings[1][levelSelect][2] ~= 0 and gameSettings[1][levelSelect][2] ~= nil) then
+  --   setSavedStars (gameSettings[1][levelSelect][2])
+  -- end
+   -- level1.strokeWidth = 3
+   -- level1.stroke.effect = "generator.marchingAnts"
+   -- print("level high score: " .. gameSettings[1][levelSelect][1])
+  end
+
+  local function onTapLevel2 ( event )
+    star1.alpha = 0
+    star2.alpha = 0
+    star3.alpha = 0 
+    if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end
+
+    transition.to( levelOneBlack, { time=500, x = 38, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelOneGradient, { time=500, x = 38, width = 20,onComplete=function() 
+        --levelonepressed = true
+      end, tag="animation" } )
+
+    transition.to( levelTwoBlack, { time=500, x = display.contentWidth/2-24, width = display.contentWidth-150,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelTwoGradient, { time=500, x = display.contentWidth/2-24, width = display.contentWidth-152,onComplete=function()
+        if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=1} )
+      transition.to( objectives, { time=200, alpha=1} )
+    end 
+        levelTitle.text = "Step 2: Cake and Bake"
+        levelTitle:setFillColor( black )
+        levelTitle.x = display.contentWidth/2-24
+        levelTitle.y = 100
+        objectives.text = "Objectives: Serve 3 Cakes"
+        objectives:setFillColor( black )
+        objectives.x = display.contentWidth/2-24
+        objectives.y = 150
+        levelSelect = 2
+        setStars(2, display.contentWidth/2-24)
+      end, tag="animation" } )
+
+    transition.to( levelThreeBlack, { time=500, x = display.contentWidth-84, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelThreeGradient, { time=500, x = display.contentWidth-84, width = 20,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+
+    transition.to( levelFourBlack, { time=500, x = display.contentWidth-60, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelFourGradient, { time=500, x = display.contentWidth-60, width = 20,onComplete=function() 
+       -- print("done")
+      end, tag="animation" } )
+
+    transition.to( levelFiveBlack, { time=500, x = display.contentWidth-36, width = 22,onComplete=function() 
+       -- print("done")
+      end, tag="animation" } )
+    transition.to( levelFiveGradient, { time=500, x = display.contentWidth-36, width = 20,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+
+  --setStars(levelSelect, 144)
+  --   if (gameSettings[1][levelSelect][2] ~= 0 and gameSettings[1][levelSelect][2] ~= nil) then
+  --   setSavedStars (gameSettings[1][levelSelect][2])
+  -- end
+  -- print("level high score: " .. gameSettings[1][levelSelect][1])
+  end
+
+  local function onTapLevel3 ( event )
+    star1.alpha = 0
+    star2.alpha = 0
+    star3.alpha = 0 
+        if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end
+
+    transition.to( levelOneBlack, { time=500, x = 38, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelOneGradient, { time=500, x = 38, width = 20,onComplete=function() 
+        --levelonepressed = true
+      end, tag="animation" } )
+
+    transition.to( levelTwoBlack, { time=500, x = 62, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelTwoGradient, { time=500, x = 62, width = 20,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+
+    transition.to( levelThreeBlack, { time=500, x = display.contentWidth/2, width = display.contentWidth-150,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelThreeGradient, { time=500, x = display.contentWidth/2, width = display.contentWidth-152,onComplete=function() 
+    if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=1} )
+      transition.to( objectives, { time=200, alpha=1} )
+    end
+
+    levelTitle.text = "Step 3: Super Sugar Rush!"
+    levelTitle:setFillColor( black )
+    levelTitle.x = display.contentWidth/2
+    levelTitle.y = 100
+    objectives.text = "Objectives: Serve 2 Strawberry Candies"
+    objectives:setFillColor( black )
+    objectives.x = display.contentWidth/2
+    objectives.y = 150
+    levelSelect = 3   
+    setStars(3, display.contentWidth/2) 
+      end, tag="animation" } )
+
+    transition.to( levelFourBlack, { time=500, x = display.contentWidth-60, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelFourGradient, { time=500, x = display.contentWidth-60, width = 20,onComplete=function() 
+       -- print("done")
+      end, tag="animation" } )
+
+    transition.to( levelFiveBlack, { time=500, x = display.contentWidth-36, width = 22,onComplete=function() 
+       -- print("done")
+      end, tag="animation" } )
+    transition.to( levelFiveGradient, { time=500, x = display.contentWidth-36, width = 20,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+
+  --setStars(levelSelect, 237)
+  --   if (gameSettings[1][levelSelect][2] ~= 0 and gameSettings[1][levelSelect][2] ~= nil) then
+  --   setSavedStars (gameSettings[1][levelSelect][2])
+  -- end
+  -- print("level high score: " .. gameSettings[1][levelSelect][1])
+  end
+
+  local function onTapLevel4 ( event )
+    star1.alpha = 0
+    star2.alpha = 0
+    star3.alpha = 0 
+    if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end
+
+    transition.to( levelOneBlack, { time=500, x = 38, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelOneGradient, { time=500, x = 38, width = 20,onComplete=function() 
+        --levelonepressed = true
+      end, tag="animation" } )
+
+    transition.to( levelTwoBlack, { time=500, x = 62, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelTwoGradient, { time=500, x = 62, width = 20,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+
+    transition.to( levelThreeBlack, { time=500, x = 86, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelThreeGradient, { time=500, x = 86, width = 20,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+
+    transition.to( levelFourBlack, { time=500, x = display.contentWidth/2+24, width = display.contentWidth-150,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelFourGradient, { time=500, x = display.contentWidth/2+24, width = display.contentWidth-152,onComplete=function() 
+    if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=1} )
+      transition.to( objectives, { time=200, alpha=1} )
+    end
+
+    levelTitle.text = "Step 4: Strawberries of Wrath"
+    levelTitle:setFillColor( black )
+    levelTitle.x = display.contentWidth/2+24
+    levelTitle.y = 100
+    objectives.text = "Objectives: Serve 4 Strawberry Tarts"
+    objectives:setFillColor( black )
+    objectives.x = display.contentWidth/2+24
+    objectives.y = 150
+    levelSelect = 4 
+    setStars(4, display.contentWidth/2+24)
+      end, tag="animation" } )
+
+    transition.to( levelFiveBlack, { time=500, x = display.contentWidth-36, width = 22,onComplete=function() 
+       -- print("done")
+      end, tag="animation" } )
+    transition.to( levelFiveGradient, { time=500, x = display.contentWidth-36, width = 20,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+  --setStars(levelSelect, 335)
+  --   if (gameSettings[1][levelSelect][2] ~= 0 and gameSettings[1][levelSelect][2] ~= nil) then
+  --   setSavedStars (gameSettings[1][levelSelect][2])
+  -- end
+  -- print("level high score: " .. gameSettings[1][levelSelect][1])
+  end
+
+  local function onTapLevel5 ( event )
+    star1.alpha = 0
+    star2.alpha = 0
+    star3.alpha = 0 
+    if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end
+
+    transition.to( levelOneBlack, { time=500, x = 38, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelOneGradient, { time=500, x = 38, width = 20,onComplete=function() 
+        --levelonepressed = true
+      end, tag="animation" } )
+
+    transition.to( levelTwoBlack, { time=500, x = 62, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelTwoGradient, { time=500, x = 62, width = 20,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+
+    transition.to( levelThreeBlack, { time=500, x = 86, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelThreeGradient, { time=500, x = 86, width = 20,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+
+    transition.to( levelFourBlack, { time=500, x = 110, width = 22,onComplete=function() 
+        --print("done")
+      end, tag="animation" } )
+    transition.to( levelFourGradient, { time=500, x = 110, width = 20,onComplete=function() 
+       -- print("done")
+      end, tag="animation" } )
+
+    transition.to( levelFiveBlack, { time=500, x = display.contentWidth/2+50, width = display.contentWidth-150,onComplete=function() 
+       -- print("done")
+      end, tag="animation" } )
+    transition.to( levelFiveGradient, { time=500, x = display.contentWidth/2+50, width = display.contentWidth-152,onComplete=function() 
+    if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=1} )
+      transition.to( objectives, { time=200, alpha=1} )
+    end
+
+    levelTitle.text = "Secret Level: ???"
+    levelTitle:setFillColor( black )
+    levelTitle.x = display.contentWidth/2+50
+    levelTitle.y = 100
+    objectives.text = "Objectives: ???"
+    objectives:setFillColor( black )
+    objectives.x = display.contentWidth/2+50
+    objectives.y = 150
+    levelSelect = 5
+    setStars(5, display.contentWidth/2+50)
+      end, tag="animation" } )
+
+  --setStars(levelSelect, 425)
+  --   if (gameSettings[1][levelSelect][2] ~= 0 and gameSettings[1][levelSelect][2] ~= nil) then
+  --   setSavedStars (gameSettings[1][levelSelect][2])
+  -- end
+  -- print("level high score: " .. gameSettings[1][levelSelect][1])
+  end  
+
+
+      -- to get to recipe book.
+  local function onTapBookIcon( event )
+    recipeBook: removeSelf()
+    recipeBook = nil
+    recipeBook = display.newImageRect( "images/book2.png", 75, 75 )
+    recipeBook.x = 100
+    recipeBook.y = 40
+  group:insert(recipeBook)
+    timer.performWithDelay(700, function()
+      storyboard.removeScene( scene )
+      storyboard.gotoScene( "scenes.scene_book", {effect = "fade", time = 500})
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
+      end)
+  end
+
+  -- to get to the store
+  local function onTapStoreButton( event )
+    itemShop: removeSelf( )
+    itemShop = nil
+    itemShop = display.newImageRect( "images/pantry2.png", 80, 80 )
+    itemShop.x = 370
+    itemShop.y = 40
+    group:insert(itemShop)
+  timer.performWithDelay(700, function()
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = event.target.id, world = 2}})
+    storyboard.gotoScene( "scenes.scene_store", {effect = "fade", time = 500})
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
+      end)
+  end
+
+
+--ADD EVENT LISTENERS --
+  levelOneGradient:addEventListener("tap", onTapLevel1)
+  levelTwoGradient:addEventListener("tap", onTapLevel2)
+  levelThreeGradient:addEventListener("tap", onTapLevel3)
+  levelFourGradient:addEventListener("tap", onTapLevel4)
+  levelFiveGradient:addEventListener("tap", onTapLevel5)
+
+  recipeBook:addEventListener( "tap", onTapBookIcon )
+  itemShop:addEventListener( "tap", onTapStoreButton )
+  resetScreen:addEventListener( "tap", resetlevelSelect )
+
+  local backButton = display.newImage("images/leftArrow.png")
+  backButton.x = 466 
+  backButton.y = 12
+  backButton.height = 20
+  backButton.width = 20
+  group:insert(backButton)
+  
+  local function onTapBack( event )
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_worldmap",{ effect = "fade", time = 250})
+  end
+
+  backButton:addEventListener("tap",onTapBack)
+
+
+  local function onTapStartLevel (event)
+  if( levelSelect < 5 or ( levelSelect == 5  and worlds[2].levelsUnlocked[5] ) ) then
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_ingame", { effect = "fade", time = 250, params = {level = levelSelect, world = 2}})
+  end
   end
   
-  levelList[1] = display.newText( "Step 1: ", 0, 0, globals.IMPRIMA, 24 )
-  levelList[2] = display.newText( "Step 2: ", 0, 0, globals.IMPRIMA, 24 )
-  levelList[3] = display.newText( "Step 3: ", 0, 0, globals.IMPRIMA, 24 )
-  levelList[4] = display.newText( "Step 4: ", 0, 0, globals.IMPRIMA, 24 )
+  levelStart:addEventListener("tap", onTapStartLevel)
 
-  for i = 1, LevelList.getNumOfLevels(2), 1 do
-	if LevelList.isLevelUnlocked(2,i) == true then
-		levelList[i]:setFillColor(black)
-		levelList[i]:addEventListener( "tap", onTapLevel )
-	else
-		levelList[i]:setFillColor(1,.2,.2)
-	end
-	levelList[i].x = display.contentCenterX
-	levelList[i].y = mapTitle.y + 80 + (20 * i)
-	levelList[i].id = i
-	group:insert( levelList[i])
-  end
+  -- local function onTapBackArrow (event)
+  --   storyboard.removeScene(scene)
+  --   storyboard.gotoScene("scenes.scene_worldmap", {effect = "fade", time = 250})
+  -- end
 
-  local leftArrow = display.newImageRect( "images/leftArrow.png", 50, 50 )
-  leftArrow.x = 35
-  leftArrow.y = 153
-  group:insert(leftArrow)
- 
-  local function onTapLeftArrow( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_worldmap1", {effect = "slideRight", time = 500})
-    --storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
-  end
-
-  leftArrow:addEventListener("tap", onTapLeftArrow)
-  
-  --storyboard.showOverlay("scenes.overlay_worldMap", {effect = "fade", time = 500})
+  -- backArrow:addEventListener("tap", onTapBackArrow)
+  --onTapLevel1()
 end
  
 -- Called BEFORE scene has moved onscreen:

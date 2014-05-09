@@ -32,13 +32,13 @@ function scene:createScene( event )
   end
 
   local bookIcon = display.newImageRect("images/book.png", 100,100)
-  bookIcon.x = 53
-  bookIcon.y = 138
+  bookIcon.x = display.contentWidth/3
+  bookIcon.y = display.contentHeight-bookIcon.width/2
   group:insert(bookIcon)
 
   local storeButton = display.newImageRect("images/pantry.png",100,100)
-  storeButton.x = 55
-  storeButton.y = 53
+  storeButton.x = display.contentWidth - display.contentWidth/3
+  storeButton.y = display.contentHeight-storeButton.width/2 - storeButton.width/4
   group:insert(storeButton)
 
   local backArrow = display.newImageRect("images/backArrow.png",75,75)
@@ -46,32 +46,32 @@ function scene:createScene( event )
   backArrow.y = 270
   group:insert(backArrow)
 
-  local banner1 = display.newImageRect( "images/bannerBlue.png", 325, 100 )
-  banner1.x = 300
-  banner1.y = 60
+  local banner1 = display.newImageRect( "images/worldbuttons1.png", 150, 200 )
+  banner1.x = banner1.width/2
+  banner1.y = display.contentHeight/3
   group:insert(banner1)
 
-  local banner2 = display.newImageRect( "images/bannerPink.png", 325, 100 )
-  banner2.x = 300
-  banner2.y = 155
+  local banner2 = display.newImageRect( "images/worldbuttons2.png", 150, 200 )
+  banner2.x = display.contentWidth/2
+  banner2.y = display.contentHeight/3
   group:insert(banner2)
 
-  local banner3 = display.newImageRect( "images/bannerYellow.png", 325, 100 )
-  banner3.x = 300
-  banner3.y = 245
+  local banner3 = display.newImageRect( "images/worldbuttons3.png", 150, 200 )
+  banner3.x = display.contentWidth -banner3.width/2
+  banner3.y = display.contentHeight/3
   group:insert(banner3)
 
-  local banner2Text = display.newText( "? ? ?", 0, 0, globals.LOBSTERTWO, 48 )
-  banner2Text:setFillColor(black)
-  banner2Text.x = 300
-  banner2Text.y = 155
-  group:insert( banner2Text )
+  -- local banner2Text = display.newText( "? ? ?", 0, 0, globals.LOBSTERTWO, 48 )
+  -- banner2Text:setFillColor(black)
+  -- banner2Text.x = 300
+  -- banner2Text.y = 155
+  -- group:insert( banner2Text )
 
-  local banner3Text = display.newText( "? ? ?", 0, 0, globals.LOBSTERTWO, 48 )
-  banner3Text:setFillColor(black)
-  banner3Text.x = 300
-  banner3Text.y = 245
-  group:insert( banner3Text )
+  -- local banner3Text = display.newText( "? ? ?", 0, 0, globals.LOBSTERTWO, 48 )
+  -- banner3Text:setFillColor(black)
+  -- banner3Text.x = 300
+  -- banner3Text.y = 245
+  -- group:insert( banner3Text )
 
   local function onTapBackArrow(event)
     storyboard.removeScene(scene)
@@ -82,8 +82,8 @@ function scene:createScene( event )
   local function onTapBookIcon( event )
     bookIcon: removeSelf()
     bookIcon = display.newImageRect("images/book2.png", 100,100)
-    bookIcon.x = 53
-    bookIcon.y = 138
+    bookIcon.x = display.contentWidth/3
+    bookIcon.y = display.contentHeight-bookIcon.width/2
     group:insert(bookIcon)
     timer.performWithDelay(700, function()
       storyboard.removeScene( scene )
@@ -100,8 +100,8 @@ function scene:createScene( event )
     storeButton: removeSelf( )
     storeButton = nil
     storeButton = display.newImageRect("images/pantry2.png",100,100)
-  storeButton.x = 55
-  storeButton.y = 53
+  storeButton.x = display.contentWidth - display.contentWidth/3
+  storeButton.y = display.contentHeight-storeButton.width/2 - storeButton.width/4
   group:insert(storeButton)
   timer.performWithDelay(700, function()
     storyboard.removeScene( scene )
@@ -119,10 +119,17 @@ function scene:createScene( event )
     storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
 
+  local function onTapBanner2( event )
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_worldmap2", {effect = "fade", time = 500})
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
+  end
+
   bookIcon:addEventListener("tap", onTapBookIcon)
   storeButton:addEventListener("tap", onTapStoreButton)
   backArrow:addEventListener("tap", onTapBackArrow)
   banner1:addEventListener("tap", onTapBanner1)
+  banner2:addEventListener("tap", onTapBanner2)
 
 end
  

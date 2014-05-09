@@ -1056,6 +1056,8 @@ function scene:createScene( event )
   end
   if (world == 1) then
   	bkg = display.newImage( "images/floor02.png", centerX, centerY, true )
+  	elseif (world == 2) then
+  	bkg = display.newImage( "images/floor03.png", centerX, centerY, true )
   else 
   	bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
   end

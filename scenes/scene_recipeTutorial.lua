@@ -38,7 +38,9 @@ function scene:createScene( event )
     tutThree:removeSelf()
     threeText:removeSelf()
     globals.completedBook = true
-    storyboard.hideOverlay( "slideUp", 500 )
+    --storyboard.hideOverlay( "slideUp", 500 )
+    storyboard.hideOverlay("scenes.overlay_recipeTutorial", "slideUp", 500 )
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
 
   end
 

@@ -5,7 +5,7 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
- 
+ local previousScene=storyboard.getPrevious()
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -18,8 +18,12 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
+
+
+  --storyboard.gotoScene(previousScene)
   
   local backButton = display.newImage("images/leftArrow.png")
+  print(scene)
   backButton.x = 466 
   backButton.y = 12
   backButton.height = 20
@@ -28,7 +32,8 @@ function scene:createScene( event )
 
   local function onTapBack( event )
     storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_worldmap",{ effect = "fade", time = 250})
+   -- storyboard.gotoScene( "scenes.scene_worldmap",{ effect = "fade", time = 250})
+   storyboard.gotoScene( previousScene,{ effect = "fade", time = 250})
   end
 
   backButton:addEventListener("tap",onTapBack)
