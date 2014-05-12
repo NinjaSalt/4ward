@@ -12,6 +12,7 @@ local world
 local eneInHold = nil
 globals.spot = nil
 local levelEnded = false
+local noCombos = false
 -- Array to store heroes
 hero = {}
 
@@ -560,6 +561,27 @@ local function noComboPause()
  transition.pause("animation")
 end
 
+local function noMoreCombos()
+    local backBorder = display.newRect( display.contentWidth/2, -100, 155, 65 )
+			backBorder: setFillColor (black)
+			transition.to( backBorder, { time=700, y=(display.contentHeight/2) } )
+			group:insert (backBorder)
+			
+			--the white background
+			local back = display.newRect( display.contentWidth/2, -100, 150, 60 )
+			transition.to( back, { time=700,y=(display.contentHeight/2)} )
+			group:insert (back)
+			
+			local noComboText = display.newText( "No More Combos", display.contentWidth/2, -100, globals.LOBSTERTWO, 36 )
+			noComboText:setFillColor(black)
+			group:insert (noComboText)
+			backBorder.width = noComboText.width+20
+			back.width = noComboText.width+15
+                        transition.to( noComboText, { time=(700), y=(display.contentHeight/2) } )
+			
+			noComboPause()
+end
+
 function checkEnemy()
 
 	-- turns score condition success true/false.
@@ -594,52 +616,20 @@ function checkEnemy()
 		]]--
 
 		-- NOW YOU WIN WIN WIN (Unless your score is negative.)
-		
+		local delayTime = 100
+                if noCombos == true then
+                    noMoreCombos()
+                    delayTime = 3000
+                end
 		if (globals.score > 0) then
 			LevelList.unlockLevel(world, thisLevel+1)
-			local backBorder = display.newRect( display.contentWidth/2, -100, 155, 65 )
-			backBorder: setFillColor (black)
-			transition.to( backBorder, { time=700, y=(display.contentHeight/2) } )
-			group:insert (backBorder)
-			
-			--the white background
-			local back = display.newRect( display.contentWidth/2, -100, 150, 60 )
-			transition.to( back, { time=700,y=(display.contentHeight/2)} )
-			group:insert (back)
-			
-			local noComboText = display.newText( "No More Combos", display.contentWidth/2, -100, globals.LOBSTERTWO, 36 )
-			noComboText:setFillColor(black)
-			group:insert (noComboText)
-			backBorder.width = noComboText.width+20
-			back.width = noComboText.width+15
-			
-			noComboPause()
 			transition.to( noComboText, { time=(700), y=(display.contentHeight/2) } )
-			timer.performWithDelay(3000, function()storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 700, params = {level = thisLevel, world = world}})end )
-		    
+			timer.performWithDelay(delayTime, function()storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 700, params = {level = thisLevel, world = world}})end )
+    
 		else
-		    local backBorder = display.newRect( display.contentWidth/2, -100, 155, 65 )
-			backBorder: setFillColor (black)
-			transition.to( backBorder, { time=700, y=(display.contentHeight/2) } )
-			group:insert (backBorder)
-			
-			--the white background
-			local back = display.newRect( display.contentWidth/2, -100, 150, 60 )
-			transition.to( back, { time=700,y=(display.contentHeight/2)} )
-			group:insert (back)
-			
-			local noComboText = display.newText( "No More Combos", display.contentWidth/2, -100, globals.LOBSTERTWO, 36 )
-			noComboText:setFillColor(black)
-			group:insert (noComboText)
-			backBorder.width = noComboText.width+20
-			back.width = noComboText.width+15
-			
-			noComboPause()
-			transition.to( noComboText, { time=(700), y=(display.contentHeight/2) } )
-			timer.performWithDelay(3000, function()storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 700, params = {level = thisLevel, world = world}})end )
-		end
-
-		--[[
+                timer.performWithDelay(delayTime, function()storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 700, params = {level = thisLevel, world = world}})end )
+                end
+                --[[
 		OLD CONDITION CHECK
 		if(currentLevel.victoryCondition~=false) then
 		  if(currentLevel.victoryCondition.conditionMet==true)then
@@ -732,8 +722,13 @@ local function gameLoop( event )
         
         
         if levelEnded == true then return end
-        if validCombosRemaining() == false then
+        if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
+            levelEnded = true
+            checkEnemy()
+            return
+        elseif validCombosRemaining() == false then
 			levelEnded = true
+                        noCombos = true
                         checkEnemy()
                         return
         end

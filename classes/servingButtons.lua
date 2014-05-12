@@ -70,12 +70,11 @@ function bkftbuttonPressed()
           globals.breakfastButton:removeSelf() 
           globals.breakfastButton = nil
           counter = 0
-          checkEnemy()
+          --checkEnemy()
         end
       end, tag="animation" } )
     
     enemyCounter = 0
-    --checkEnemy()
   end
   return
 end
@@ -137,7 +136,6 @@ function dnrbuttonPressed()
           globals.dinnerButton:removeSelf() 
           globals.dinnerButton = nil
           dcounter = 0
-          checkEnemy()
         end
       end, tag="animation" } )
     
@@ -202,7 +200,6 @@ function dstbuttonPressed()
           globals.dessertButton:removeSelf() 
           globals.dessertButton = nil
           dtcounter = 0
-          checkEnemy()
         end
       end, tag="animation" } )
     
