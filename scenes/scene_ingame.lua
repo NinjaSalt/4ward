@@ -406,6 +406,50 @@ function tutorialCombo()
 	transition.pause("animation")
 end
 
+function tutorialMoveToLane()
+	storyboard.showOverlay( "scenes.scene_tutorialMoveToLane",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+	timer.pause(spawnEneTimer)
+	if (globals.breakfastButton~=nil) then
+		globals.breakfastButton:pause()
+	end
+		if (globals.dinnerButton~=nil) then
+		globals.dinnerButton:pause()
+	end
+		if (globals.dessertButton~=nil) then
+		globals.dessertButton:pause()
+	end
+
+	globals.breakfastanimation:pause()
+	globals.dinneranimation:pause()
+	globals.dessertanimation:pause()
+	for n=0, 2, 1 do
+	globals.belts[n]:pause()
+	end
+	transition.pause("animation")
+end
+
+function tutorialLanes()
+	storyboard.showOverlay( "scenes.scene_tutorialLanes",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+	timer.pause(spawnEneTimer)
+	if (globals.breakfastButton~=nil) then
+		globals.breakfastButton:pause()
+	end
+		if (globals.dinnerButton~=nil) then
+		globals.dinnerButton:pause()
+	end
+		if (globals.dessertButton~=nil) then
+		globals.dessertButton:pause()
+	end
+
+	globals.breakfastanimation:pause()
+	globals.dinneranimation:pause()
+	globals.dessertanimation:pause()
+	for n=0, 2, 1 do
+	globals.belts[n]:pause()
+	end
+	transition.pause("animation")
+end
+
 function tutorialServe()
   storyboard.showOverlay( "scenes.scene_tutorialServe",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
   timer.pause(spawnEneTimer)
@@ -447,10 +491,10 @@ function scene:createEne(enemyID, isCombo, x, lane)
 		
 		if ( thisLevel == 1 and world == 1 ) then
 			if (#allEne == 0) then
-				randomPos = 1
+				randomPos = 2
 				timer.performWithDelay(3900, tutorialSlowDown )
 			else
-				randomPos = 2
+				randomPos = 3
 				
 			end
 		end

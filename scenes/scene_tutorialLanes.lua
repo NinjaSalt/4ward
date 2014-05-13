@@ -32,69 +32,91 @@ function scene:createScene( event )
   
   bkg:addEventListener("touch", function() return true end)
   bkg:addEventListener("tap", function() return true end)
-  local swipe = display.newRect( allEne[#allEne].x, allEne[#allEne].y, 50, 50)
+  local swipe = display.newRect( 95, lane1-20, 54, 54)
   swipe.alpha = .01
   group:insert (swipe)
   
-  local toDo = display.newText( "Swipe the eggs up!", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
+  local toDo = display.newText( "Chefs serve one type of food", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
   toDo:setFillColor(black)
   group:insert (toDo)
-
+  
+  local breakfast = display.newText( "Breakfast", -100,lane1+10, globals.IMPRIMA, 36 )
+  breakfast:setFillColor(black)
+  group:insert (breakfast)
+  
+  local dinner = display.newText( "Dinner", -100 , lane2+10, globals.IMPRIMA, 36 )
+  dinner:setFillColor(black)
+  group:insert (dinner)
+  
+  local dessert = display.newText( "Dessert", -100, lane3+10, globals.IMPRIMA, 36 )
+  dessert:setFillColor(black)
+  group:insert (dessert)
+  
   local function onTapBack( event )
-    local body = event.target
 	local phase = event.phase
-	local stage = display.getCurrentStage()
-	local markY = body.y
-	local oneLaneAtATime = true
-	
-	if "began" == phase then
-		stage:setFocus( body, event.id )
-		body.isFocus = true
-	elseif body.isFocus then
-		if "moved" == phase then
-			--when the object have been dragged set myY to where the finger ended
-			myY = (event.y - event.yStart) + markY
-
-		elseif "ended" == phase or "cancelled" == phase then
-			stage:setFocus( body, nil )
-			body.isFocus = false
-			if oneLaneAtATime == true then
-				--if where the finger ended is less than where the enemy began move it up if it not already in lane 1
-				--if myY ~= nil and myY<markY then
-				if event.y - event.yStart < -7 then
-					if body.y ~= lane1 then
-						storyboard.hideOverlay( "slideUp", 500 )
-						storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
-						--timer.resume(attackTimer)
-						timer.resume(spawnEneTimer)
-						if (globals.breakfastButton~=nil) then
-						  globals.breakfastButton:play()
-						end
-						  if (globals.dinnerButton~=nil) then
-						  globals.dinnerButton:play()
-						end
-						  if (globals.dessertButton~=nil) then
-						  globals.dessertButton:play()
-						end
-						globals.breakfastanimation:play()
-						if ( antagonistTimer ~= nil) then
-							 timer.resume(antagonistTimer)
-						end
-						for n=0, 2, 1 do
-						  globals.belts[n]:play()
-						end
-						allEne[#allEne].y = allEne[#allEne].y - (lane2-lane1)
-					end
-				end
+	if "ended" == phase or "cancelled" == phase then
+			storyboard.hideOverlay( "slideUp", 500 )
+			storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
+			--timer.resume(attackTimer)
+			timer.resume(spawnEneTimer)
+			globals.breakfastanimation:play()
+			if ( antagonistTimer ~= nil) then
+				 timer.resume(antagonistTimer)
 			end
-		end	
-		
+			for n=0, 2, 1 do
+			  globals.belts[n]:play()
+			end
+			timer.performWithDelay(400, bkftbuttonPressed )
 	end
 	
   end
   
-  swipe:addEventListener( "touch", onTapBack )
-
+  local function step1()
+	transition.to( breakfast, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
+  end
+  local function step2()
+	transition.to( dinner, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
+  end
+  local function step3()
+	transition.to( dessert, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
+  end
+  local function step4()
+    storyboard.hideOverlay( "slideUp", 500 )
+	storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
+	--timer.resume(attackTimer)
+	timer.resume(spawnEneTimer)
+	if (globals.breakfastButton~=nil) then
+	  globals.breakfastButton:play()
+	end
+	if (globals.dinnerButton~=nil) then
+	  globals.dinnerButton:play()
+	end
+	if (globals.dessertButton~=nil) then
+	  globals.dessertButton:play()
+	end
+	globals.breakfastanimation:play()
+	if ( antagonistTimer ~= nil) then
+	 timer.resume(antagonistTimer)
+	end
+	for n=0, 2, 1 do
+	  globals.belts[n]:play()
+	end
+	transition.resume()
+	--toDo.text = "Now let's serve the pancake"
+	--transition.to( breakfast, { time=(400), x=(-100) , tag= "animation"} )
+	--transition.to( dinner, { time=(400), x=(-100) , tag= "animation"} )
+	--transition.to( dessert, { time=(400), x=(-100) , tag= "animation"} )
+  end
+  local function step5()
+	toDo.text = "Tap the serve button"
+	swipe:addEventListener( "touch", onTapBack )
+  end
+  
+  timer.performWithDelay(1500, step1 )
+  timer.performWithDelay(3000, step2 )
+  timer.performWithDelay(4500, step3 )
+  timer.performWithDelay(6000, step4 )
+  --timer.performWithDelay(7500, step5 )
   --startButton:addEventListener( "tap", onTap )
 end
  
@@ -113,7 +135,7 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  timer.performWithDelay(1700, tutorialLanes )
+  timer.performWithDelay(1000, tutorialMoveToLane )
 end
  
 -- Called AFTER scene has finished moving offscreen:

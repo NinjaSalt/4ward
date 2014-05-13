@@ -36,21 +36,10 @@ function scene:createScene( event )
   swipe.alpha = .01
   group:insert (swipe)
   
-  local toDo = display.newText( "Chefs serve one type of food", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
+  local toDo = display.newText( "Now let's serve the pancake", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
   toDo:setFillColor(black)
   group:insert (toDo)
   
-  local breakfast = display.newText( "Breakfast", -100,lane1+10, globals.IMPRIMA, 36 )
-  breakfast:setFillColor(black)
-  group:insert (breakfast)
-  
-  local dinner = display.newText( "Dinner", -100 , lane2+10, globals.IMPRIMA, 36 )
-  dinner:setFillColor(black)
-  group:insert (dinner)
-  
-  local dessert = display.newText( "Dessert", -100, lane3+10, globals.IMPRIMA, 36 )
-  dessert:setFillColor(black)
-  group:insert (dessert)
   
   local function onTapBack( event )
 	local phase = event.phase
@@ -70,33 +59,13 @@ function scene:createScene( event )
 	end
 	
   end
-  
+
   local function step1()
-	transition.to( breakfast, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
-  end
-  local function step2()
-	transition.to( dinner, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
-  end
-  local function step3()
-	transition.to( dessert, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
-  end
-  local function step4()
-	toDo.text = "Now let's serve the pancake"
-	transition.to( breakfast, { time=(400), x=(-100) , tag= "animation"} )
-	transition.to( dinner, { time=(400), x=(-100) , tag= "animation"} )
-	transition.to( dessert, { time=(400), x=(-100) , tag= "animation"} )
-  end
-  local function step5()
 	toDo.text = "Tap the serve button"
 	swipe:addEventListener( "touch", onTapBack )
   end
   
-  timer.performWithDelay(1500, step1 )
-  timer.performWithDelay(3000, step2 )
-  timer.performWithDelay(4500, step3 )
-  timer.performWithDelay(6000, step4 )
-  timer.performWithDelay(7500, step5 )
-  --startButton:addEventListener( "tap", onTap )
+  timer.performWithDelay(2000, step1 )
 end
  
 -- Called BEFORE scene has moved onscreen:

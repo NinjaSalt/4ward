@@ -36,7 +36,7 @@ function scene:createScene( event )
   swipe.alpha = .01
   group:insert (swipe)
   
-  local toDo = display.newText( "Swipe the eggs up!", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
+  local toDo = display.newText( "Swipe the pancake up!", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
   toDo:setFillColor(black)
   group:insert (toDo)
 
@@ -84,6 +84,7 @@ function scene:createScene( event )
 						  globals.belts[n]:play()
 						end
 						allEne[#allEne].y = allEne[#allEne].y - (lane2-lane1)
+						transition.resume()
 					end
 				end
 			end
@@ -113,7 +114,7 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  timer.performWithDelay(1700, tutorialLanes )
+  timer.performWithDelay(1700, tutorialServe )
 end
  
 -- Called AFTER scene has finished moving offscreen:

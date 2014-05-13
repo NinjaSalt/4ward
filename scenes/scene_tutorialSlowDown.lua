@@ -32,11 +32,11 @@ function scene:createScene( event )
   
   bkg:addEventListener("touch", function() return true end)
   bkg:addEventListener("tap", function() return true end)
-  local swipe = display.newRect( globals.belts[1].x+20, globals.belts[0].y, 360, 60)
+  local swipe = display.newRect( globals.belts[1].x+20, globals.belts[1].y, 360, 60)
   swipe.alpha = .01
   group:insert (swipe)
   
-  local toDo = display.newText( "Swipe the top lane right!", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
+  local toDo = display.newText( "Let's slow down a lane", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
   toDo:setFillColor(black)
   group:insert (toDo)
 
@@ -64,17 +64,20 @@ function scene:createScene( event )
 			for n=0, 2, 1 do
 			  globals.belts[n]:play()
 			end
-			hero[0].laneSpeed = 3
-			updateMoveSpeed(hero[0])
-			globals.levers[hero[0].num]:setSequence( "slow" )
-			globals.levers[hero[0].num]:play()
+			hero[1].laneSpeed = 3
+			updateMoveSpeed(hero[1])
+			globals.levers[hero[1].num]:setSequence( "slow" )
+			globals.levers[hero[1].num]:play()
 			transition.resume()
 		end
 	end
   end
+  local function step1 ()
+	toDo.text = "Swipe the middle lane right"
+	swipe:addEventListener( "touch", onTapBack )
+  end
   
-  swipe:addEventListener( "touch", onTapBack )
-
+  timer.performWithDelay(2000, step1 )
   --startButton:addEventListener( "tap", onTap )
 end
  
