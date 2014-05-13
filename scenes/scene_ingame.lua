@@ -362,6 +362,28 @@ function tutorial()
 	transition.pause("animation")
 end
 
+function tutorialSlowDown()
+	storyboard.showOverlay( "scenes.scene_tutorialSlowDown",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
+	timer.pause(spawnEneTimer)
+	if (globals.breakfastButton~=nil) then
+		globals.breakfastButton:pause()
+	end
+		if (globals.dinnerButton~=nil) then
+		globals.dinnerButton:pause()
+	end
+		if (globals.dessertButton~=nil) then
+		globals.dessertButton:pause()
+	end
+
+	globals.breakfastanimation:pause()
+	globals.dinneranimation:pause()
+	globals.dessertanimation:pause()
+	for n=0, 2, 1 do
+	globals.belts[n]:pause()
+	end
+	transition.pause("animation")
+end
+
 function tutorialCombo()
 	storyboard.showOverlay( "scenes.scene_tutorialCombo",{ effect = "fade", time = 500, params = {level = thisLevel, world = world}})
 	timer.pause(spawnEneTimer)
@@ -426,9 +448,10 @@ function scene:createEne(enemyID, isCombo, x, lane)
 		if ( thisLevel == 1 and world == 1 ) then
 			if (#allEne == 0) then
 				randomPos = 1
+				timer.performWithDelay(3900, tutorialSlowDown )
 			else
 				randomPos = 2
-				timer.performWithDelay(800, tutorial )
+				
 			end
 		end
 		if (randomPos == 1) then lane = lane1

@@ -120,7 +120,7 @@ levels[3] = {}
 
 -- EPISODE ONE: On the Set of Now We're Cooking!
 -- Can you Cook? (2 items)
-levels[1][1] = Level.create(1, makeSecondaryWin(pancake,1), {1,0}, {1000,3000}, false, makeScoreWin(10))
+levels[1][1] = Level.create(1, makeSecondaryWin(pancake,1), {1,0}, {1000,6000}, false, makeScoreWin(10))
 -- Your Life is at Steak! (8 items)
 levels[1][2] = Level.create(3, makeSecondaryWin(steakOm,1), {0,2,0,1,1,4,2,0}, {500,3000,3000,3000,3000,3000,3000,3000}, false, makeScoreWin(40))
 -- The Most Important Meal of the Day (10 items)
