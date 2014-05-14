@@ -64,7 +64,7 @@ globals.currenyText = globals.currency.init({
     leadingZeros = false,
     filename = "currencyfile.txt",
     })
-globals.currency.set(0)
+--globals.currency.set(0)
 
 -- HUD ITEM BELT --
 globals.loadItemBelt = false

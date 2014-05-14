@@ -31,7 +31,10 @@ function scene:createScene( event )
   local options = {
    effect = "fade",
    time = 500
-}
+  }
+  local prevScore = globals.currency.load()
+  globals.currency.set(prevScore)
+
 
   local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
   bkg:setFillColor( gray )
@@ -72,9 +75,11 @@ function scene:createScene( event )
       -- gameSettings[6][1]=myItems[0]
       -- loadsave.saveTable(gameSettings , "gamesettings.json")
   		notTouched = false
-      if (globals.currency > 0) then
+      if (prevScore > 300) then
         globals.currency.add((-1)*myItems[0].cost)
         globals.currency.save()
+        prevScore = globals.currency.load()
+        globals.currency.set(prevScore)
       end
   	end
 	  storyboard.removeScene( scene )
@@ -89,9 +94,11 @@ function scene:createScene( event )
       -- gameSettings[6][2]=myItems[1]
       -- loadsave.saveTable(gameSettings , "gamesettings.json")
   		notTouched = false
-      if (globals.currency > 0) then
+      if (prevScore > 300) then
         globals.currency.add((-1)*myItems[0].cost)
         globals.currency.save()
+        prevScore = globals.currency.load()
+        globals.currency.set(prevScore)
       end
   	end
 	  storyboard.removeScene( scene )
@@ -106,14 +113,17 @@ function scene:createScene( event )
       -- gameSettings[6][3]=myItems[2]
       -- loadsave.saveTable(gameSettings , "gamesettings.json")
   		notTouched = false
-      if (globals.currency > 0) then
+      if (prevScore > 300) then
         globals.currency.add((-1)*myItems[0].cost)
         globals.currency.save()
+        prevScore = globals.currency.load()
+        globals.currency.set(prevScore)
       end
   	end
 	  storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )
     storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
+    
   end
 
   -- for i = 0, 2, 1 do

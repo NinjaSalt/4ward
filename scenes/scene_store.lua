@@ -22,6 +22,13 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
+  local prevScore = globals.currency.load()
+  print("prevScore " .. prevScore)
+  globals.currency.set(prevScore)
+
+  -- if (prevScore==nil or globals.currency ~= nil) then
+  --   globals.currency.set(0)
+  -- end
   local itemList = {}
 
   local buyButton
@@ -95,7 +102,7 @@ local currencyGradient = display.newImage("images/money.png")
     y = currencyGradient.height/2+5,
     maxDigits = 7,
     leadingZeros = false,
-    filename = "currencyfile.txt",
+    filename = "currencyfile.txt"
     })
  -- currenyText:setFillColor( black )
   group:insert(globals.currenyText)
@@ -197,9 +204,15 @@ local currencyGradient = display.newImage("images/money.png")
 
   	--buy button
   	buyButton = display.newText ("Buy for ".. body.cost, display.contentWidth/4, 278, globals.LOBSTERTWO, 25)
-  	buyButton: setFillColor(0.282353, 0.819608, 0.8)
+  	buyButton: setFillColor(0.502, 0, 0)
+
+    buyButton.alpha = 0.2
   	buyButton.id = body.id
-  	buyButton:addEventListener( "tap", onTapBuy )
+    if (prevScore > 300) then
+      buyButton.alpha = 1
+      buyButton: setFillColor(0.282353, 0.819608, 0.8)
+      buyButton:addEventListener( "tap", onTapBuy )
+    end
   	group:insert(buyButton)
 
   end
@@ -318,18 +331,14 @@ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
-  local prevScore = globals.currency.load()
-  globals.currency.set(prevScore)
-
-  if (prevScore==nil) then
-    globals.currency.set(0)
-  end
  
 end
  
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
   local group = self.view
+  prevScore = globals.currency.load()
+        globals.currency.set(prevScore)
 
 -- goes to pantry tutorial page.
 if (globals.completedShop ~= true) then

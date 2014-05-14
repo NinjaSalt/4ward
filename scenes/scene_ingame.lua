@@ -210,14 +210,15 @@ function scene:createBreakfastChef()
   	{
   	 width = 70,
   	 height = 70,
- 	 numFrames = 4,
+ 	 numFrames = 5,
  	 sheetContentWidth=280,
-	 sheetContentHeight=70,
+	 sheetContentHeight=140,
 	}
 	local breakfastspritesheet = graphics.newImageSheet("images/breakfast_sheet.png",breakfastspriteSettings)
 	local breakfastspriteequenceData = {
 	--higher the time, slower it goes
-   		{ name = "idle", frames={1, 2, 3, 4, 3, 2}, time=1000, loopCount=0 }
+   		{ name = "idle", frames={1, 2, 3, 4, 3, 2}, time=1000, loopCount=0 },
+   		{ name = "hurt", frames={5}, time=1000, loopCount=0 }
 	}
 	globals.breakfastanimation = display.newSprite(breakfastspritesheet,breakfastspriteequenceData)
     globals.breakfastanimation.x =50
@@ -233,14 +234,15 @@ function scene:createBreakfastChef()
   	{
   	 width = 70,
   	 height = 70,
- 	 numFrames = 4,
+ 	 numFrames = 5,
  	 sheetContentWidth=280,
-	 sheetContentHeight=70,
+	 sheetContentHeight=140,
 	}
 	local dinnerspritesheet = graphics.newImageSheet("images/dinner_sheet.png",dinnerspriteSettings)
 	local dinnerspriteequenceData = {
 	--higher the time, slower it goes
-   		{ name = "idle", frames={1, 2, 3, 4, 3, 2}, time=1000, loopCount=0 }
+   		{ name = "idle", frames={1, 2, 3, 4, 3, 2}, time=1000, loopCount=0 },
+   		{ name = "hurt", frames={5}, time=1000, loopCount=0 }
 	}
 	globals.dinneranimation = display.newSprite(dinnerspritesheet,dinnerspriteequenceData)
     globals.dinneranimation.x =50
@@ -256,14 +258,15 @@ function scene:createBreakfastChef()
   	{
   	 width = 70,
   	 height = 70,
- 	 numFrames = 4,
+ 	 numFrames = 5,
  	 sheetContentWidth=280,
-	 sheetContentHeight=70,
+	 sheetContentHeight=140,
 	}
 	local dessertspritesheet = graphics.newImageSheet("images/dessert_sheet.png",dessertspriteSettings)
 	local dessertspriteequenceData = {
 	--higher the time, slower it goes
-   		{ name = "idle", frames={1, 2, 3, 4, 3, 2}, time=1000, loopCount=0 }
+   		{ name = "idle", frames={1, 2, 3, 4, 3, 2}, time=1000, loopCount=0 },
+   		{ name = "hurt", frames={5}, time=1000, loopCount=0 }
 	}
 	globals.dessertanimation = display.newSprite(dessertspritesheet,dessertspriteequenceData)
     globals.dessertanimation.x =45
@@ -846,6 +849,30 @@ local function gameLoop( event )
 					--local screenEffect = display.newCircle( 40, 0, 80)
 					screenEffect:setFillColor(246,235,133)
 					loseLife:setFillColor(black)
+					if (n==0) then
+						globals.breakfastanimation:setSequence( "hurt" )
+						globals.breakfastanimation:play()
+						timer.performWithDelay(500, function() 
+							globals.breakfastanimation:setSequence( "idle" )
+							globals.breakfastanimation:play() 
+							end )
+					end
+					if (n==1) then
+							globals.dinneranimation:setSequence( "hurt" )
+							globals.dinneranimation:play()
+							timer.performWithDelay(500, function() 
+								globals.dinneranimation:setSequence( "idle" )
+								globals.dinneranimation:play() 
+								end )
+					end
+					if (n==2) then
+							globals.dessertanimation:setSequence( "hurt" )
+							globals.dessertanimation:play()
+							timer.performWithDelay(500, function() 
+								globals.dessertanimation:setSequence( "idle" )
+								globals.dessertanimation:play() 
+								end )
+					end
 					transition.to( screenEffect, { time= 400, alpha=0, onComplete=function() screenEffect:removeSelf() end } )
 					transition.to( loseLife, { time= 800, alpha=0, onComplete=function() loseLife:removeSelf() end } )
 
@@ -1241,8 +1268,10 @@ function scene:exitScene( event )
 
   local group = self.view
 
-  globals.currency.add(globals.score)
-  globals.currency.save()
+	if (globals.score > 0) then
+	  globals.currency.add(globals.score)
+	  globals.currency.save()
+	end
   --saving high score
 	-- if (globals.score > gameSettings[world][thisLevel][1]) then
 	-- 	gameSettings[world][thisLevel][1] = globals.score
