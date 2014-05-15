@@ -121,14 +121,24 @@ levels[3] = {}
 -- EPISODE ONE: On the Set of Now We're Cooking!
 -- Can you Cook? (2 items)
 levels[1][1] = Level.create(1, makeSecondaryWin(pancake,1), {1,0}, {1000,6001}, false, makeScoreWin(10))
+-- Can You Really Cook? (2 items)
+levels[1][2] = Level.create(2, makeSecondaryWin(pancake,1), {1,0}, {200,6500}, false, makeScoreWin(10))
+-- Meal Maker (2 Items)
+levels[1][3] = Level.create(3, makeSecondaryWin(steakBaked,1), {2,5}, {200,6300}, false, makeScoreWin(10))
+-- Rise and Shine (3 Items)
+levels[1][4] = Level.create(4, false, {1,5,1}, {300,2600,2600}, makeCatWin("breakfast",1), makeScoreWin(10))
+-- Donut Mess Up! (4 Items)
+levels[1][5] = Level.create (5, makeSecondaryWin(donut, 1), {1,4,1,0}, {300,3000,3000,3000}, makeCatWin("breakfast",2), false)
+-- [Unnammed Level] (6 Items)
+levels[1][6] = Level.create (6, false, {1,2,3,4,5,6}, {1,2,3,4,5,6}, makeCatWin("dinner",1), makeScoreWin(40))
 -- Your Life is at Steak! (8 items)
-levels[1][2] = Level.create(3, makeSecondaryWin(steakOm,1), {0,2,0,1,1,4,2,0}, {500,3000,3000,3000,3000,3000,3000,3000}, false, makeScoreWin(40))
+levels[1][7] = Level.create(7, makeSecondaryWin(steakOm,1), {0,2,0,1,1,4,2,0}, {500,3000,3000,3000,3000,3000,3000,3000}, false, makeScoreWin(40))
 -- The Most Important Meal of the Day (10 items)
-levels[1][3] = Level.create(3, false, {0,1,5,0,5,1,2,0,5,0}, {500,3000,3000,3000,3000,3000,3000,3000,2600,2600}, makeCatWin("breakfast", 2), makeScoreWin(60))
+levels[1][8] = Level.create(8, false, {0,1,5,0,5,1,2,0,5,0}, {500,3000,3000,3000,3000,3000,3000,3000,2600,2600}, makeCatWin("breakfast", 2), makeScoreWin(60))
 -- I Say Potato (10 items)
-levels[1][4] = Level.create(4, makeSecondaryWin(mashed,2), {2,5,4,5,5,2,5,4,0,5}, {500,3000,3000,2600,3000,2600,3000,3000,2600,3100}, makeCatWin("dinner", 3), false)
+levels[1][9] = Level.create(9, makeSecondaryWin(mashed,2), {2,5,4,5,5,2,5,4,0,5}, {500,3000,3000,2600,3000,2600,3000,3000,2600,3100}, makeCatWin("dinner", 3), false)
 -- Certi-fried Chef! (14 items)
-levels[1][5] = Level.create(5, makeSecondaryWin(fries, 4), {1,4,5,5,0,1,4,2,5,4,2,4,1,5}, {300,2600,2600,3100,3100,3000,3000,2800,3100,3000,3000,3200,2600,2600}, false, makeScoreWin(100))
+levels[1][10] = Level.create(10, makeSecondaryWin(fries, 4), {1,4,5,5,0,1,4,2,5,4,2,4,1,5}, {300,2600,2600,3100,3100,3000,3000,2800,3100,3000,3000,3200,2600,2600}, false, makeScoreWin(100))
 
 -- EPISODE TWO: CANDY STORE CRAZE
 -- Taste Test (10 items)
@@ -140,7 +150,7 @@ levels[2][3] = Level.create(3, makeSecondaryWin(strawberryCandy,2), {0,3,2,6,6,1
 -- Strawberries of Wrath (14 items)
 levels[2][4] = Level.create(4, makeSecondaryWin(strawberryTart, 4), {1,3,3,1,2,1,6,3,3,6,6,1,1,1}, {300,2600,2700,2600,2600,2700,2700,2600,2600,2600,2600,2600,2600,2600}, false, makeScoreWin(250))
 -- The Sweetest Treat! (20 items)
-levels[2][5] = Level.create(4, makeSecondaryWin(strawberryCake, 3), {0,3,6,1,2,0,1,3,6,6,3,5,1,3,6,3,1,6,0,1}, {300,2600,2600,3500,3500,3500,2600,2600,3500,3200,3000,3000,2800,2800,2800,2800,3100,3000,3000,2600}, makeCatWin("dessert", 7), false)
+levels[2][5] = Level.create(5, makeSecondaryWin(strawberryCake, 3), {0,3,6,1,2,0,1,3,6,6,3,5,1,3,6,3,1,6,0,1}, {300,2600,2600,3500,3500,3500,2600,2600,3500,3200,3000,3000,2800,2800,2800,2800,3100,3000,3000,2600}, makeCatWin("dessert", 7), false)
 
 --EPISODE 3
 levels[3][1] = Level.create(1, false, {1,4}, {500,500}, false, false)

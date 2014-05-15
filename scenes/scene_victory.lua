@@ -70,21 +70,20 @@ function scene:createScene( event )
   bkg.alpha = .5
   group:insert (bkg)
 
-  local border = display.newRect(centerX, centerY, display.contentWidth*.72, display.contentHeight*.72)
-  border:setFillColor(0)
-  group:insert(border)
+  --local border = display.newRect(centerX, centerY, display.contentWidth*.72, display.contentHeight*.72)
+  --border:setFillColor(0)
+  --group:insert(border)
 
-  local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
+  local bkg = display.newImage( "images/pauseBack.png", centerX, centerY, true )
   --local bkg = display.newRect(centerX, centerY, display.contentWidth*.7, display.contentHeight*.7 )
   bkg.height=display.contentHeight*.7; bkg.width=display.contentWidth*.7
   group:insert (bkg)
 
-  local gameTitleb = display.newText( "Victory!", 0, 0, globals.LOBSTERTWO, 50 )
-  gameTitleb:setFillColor( 0.866667, 0.627451, 0.866667)
-  gameTitleb.x = display.contentCenterX-2
-  gameTitleb.y = 78
-
-  group:insert(gameTitleb)
+  --local gameTitleb = display.newText( "Victory!", 0, 0, globals.LOBSTERTWO, 50 )
+  --gameTitleb:setFillColor( 0.866667, 0.627451, 0.866667)
+  --gameTitleb.x = display.contentCenterX-2
+  --gameTitleb.y = 78
+  --group:insert(gameTitleb)
 
   -- local function callSparkles()
   --   local sparkles = display.newImage( "images/sparkles.png", centerX, centerY-60, true )
@@ -101,7 +100,7 @@ function scene:createScene( event )
 
  -- timer.performWithDelay(300, callSparkles )
 
- local gameTitle = display.newText( "Victory!", 0, 0, globals.LOBSTERTWO, 50 )
+ local gameTitle = display.newText( "Level Cleared!", 0, 0, globals.IMPRIMA, 30 )
   gameTitle:setFillColor(black)
   gameTitle.x = display.contentCenterX
   gameTitle.y = 80
@@ -116,44 +115,58 @@ function scene:createScene( event )
   --adding the score integer into the currency
   group:insert( scoreTitle )
   
+  local buttonY = scoreTitle.y + 60
+
   if nextLevel == LevelList.getNumOfLevels(params.world) then
- nextWorldButton = display.newText( "Next World", 0, 0, globals.IMPRIMA, 24 )
-  nextWorldButton:setFillColor(black)
-  nextWorldButton.x = display.contentWidth * 1.5
-  nextWorldButton.y = scoreTitle.y + 40
+  --nextWorldButton = display.newText( "Next World", 0, 0, globals.IMPRIMA, 24 )
+  --nextWorldButton:setFillColor(black)
+  --nextWorldButton.x = display.contentWidth * 1.5
+  nextWorldButton = display.newImage( "images/buttonNext.png", 150,150, true )
+  nextWorldButton.width = 50
+  nextWorldButton.height = 50
+  nextWorldButton.x = 800
+  nextWorldButton.y = buttonY
   group:insert( nextWorldButton)
  
  else
- nextLevelButton = display.newText( "Next Level", 0, 0, globals.IMPRIMA, 24 )
-  nextLevelButton:setFillColor(black)
-  nextLevelButton.x = display.contentWidth * 1.5
-  nextLevelButton.y = scoreTitle.y + 40
+  --nextLevelButton = display.newText( "Next Level", 0, 0, globals.IMPRIMA, 24 )
+  --nextLevelButton:setFillColor(black)
+  nextLevelButton = display.newImage( "images/buttonNext.png", 150,150, true )
+  nextLevelButton.width = 50
+  nextLevelButton.height = 50
+  nextLevelButton.x = 800
+  nextLevelButton.y = buttonY
 
   group:insert( nextLevelButton)
   
   end
  
-  local replayButton = display.newText( "Replay", 0, 0, globals.IMPRIMA, 24 )
-  replayButton:setFillColor(black)
-  replayButton.x = display.contentWidth * 1.5
-  replayButton.y = scoreTitle.y + 80
+  -- local replayButton = display.newText( "Replay", 0, 0, globals.IMPRIMA, 24 )
+  --replayButton:setFillColor(black)
+  local replayButton= display.newImage( "images/buttonReplay.png", 150,150, true )
+  replayButton.width = 50
+  replayButton.height = 50
+  replayButton.x = 800--display.contentWidth/2 - 60
+  replayButton.y = buttonY
 
   group:insert( replayButton)
   
-  local mapButton = display.newText( "Map", 0, 0, globals.IMPRIMA, 24 )
-  mapButton:setFillColor(black)
-  mapButton.x = display.contentWidth * 1.5
-  mapButton.y = replayButton.y + 40
-
+  --local mapButton = display.newText( "Map", 0, 0, globals.IMPRIMA, 24 )
+  --mapButton:setFillColor(black)
+  local mapButton = display.newImage("images/buttonMenu.png", 150,150, true)
+  mapButton.width =50
+  mapButton.height= 50
+  mapButton.x = 800 --display.contentWidth/2
+  mapButton.y = buttonY
   group:insert( mapButton)
   
   if nextLevel == LevelList.getNumOfLevels(params.world) then
-	timer.performWithDelay(800, function() transition.to(nextWorldButton, {time = 700, x= display.contentWidth/2}) end)
+	timer.performWithDelay(800, function() transition.to(nextWorldButton, {time = 700, x= display.contentWidth/2 + 60}) end)
   else
-    timer.performWithDelay(800, function() transition.to(nextLevelButton, {time = 700, x= display.contentWidth/2}) end)
+    timer.performWithDelay(800, function() transition.to(nextLevelButton, {time = 700, x= display.contentWidth/2 + 60}) end)
   end
-  timer.performWithDelay(900, function() transition.to(replayButton, {time = 700, x= display.contentWidth/2}) end)
-  timer.performWithDelay(1200, function() transition.to(mapButton, {time = 700, x= display.contentWidth/2}) end)
+  timer.performWithDelay(800, function() transition.to(replayButton, {time = 700, x= display.contentWidth/2 - 60}) end)
+  timer.performWithDelay(800, function() transition.to(mapButton, {time = 700, x= display.contentWidth/2}) end)
   
   
   local function onTapNextLevel( event )

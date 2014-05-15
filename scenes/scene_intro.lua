@@ -213,7 +213,7 @@ end    --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)
   end  
 
 local function makeStars()
-  local firstStar = display.newImage("images/star.png")
+  local firstStar = display.newImage("images/starg.png")
   firstStar.width = 18
   firstStar.height = 18
   firstStar.x = -200
@@ -221,7 +221,7 @@ local function makeStars()
   group:insert(firstStar)
   transition.to(firstStar, {time=150, x=185})
 
-  local twoStar = display.newImage("images/star.png")
+  local twoStar = display.newImage("images/starg.png")
   twoStar.width = 18
   twoStar.height = 18
   twoStar.x = -200
@@ -229,7 +229,7 @@ local function makeStars()
   group:insert(twoStar)
   transition.to(twoStar, {time=150, x=185})
 
-  local threeStar = display.newImage("images/star.png")
+  local threeStar = display.newImage("images/starg.png")
   threeStar.width = 18
   threeStar.height = 18
   threeStar.x = -200
