@@ -337,7 +337,7 @@ function moveToHold( event )
 		totalStars = 1 -- get one star for completing with a positive score 
 
 		if (currentLevel.victoryCondition ~= false) then
-			if (currentLevel.conditionmet ~= false) then
+			if (currentLevel.victoryCondition.conditionMet ~= false) then
 				totalStars = totalStars +1 
 			end
 		end
@@ -737,7 +737,7 @@ function checkEnemy()
 		totalStars = 1 -- get one star for completing with a positive score 
 
 		if (currentLevel.victoryCondition ~= false) then
-			if (currentLevel.conditionmet ~= false) then
+			if (currentLevel.victoryCondition.conditionMet ~= false) then
 				totalStars = totalStars +1 
 			end
 		end
@@ -1397,7 +1397,7 @@ function scene:exitScene( event )
 		totalStars = 1 -- get one star for completing with a positive score 
 
 		if (currentLevel.victoryCondition ~= false) then
-			if (currentLevel.conditionmet ~= false) then
+			if (currentLevel.victoryCondition.conditionMet ~= false) then
 				totalStars = totalStars +1 
 			end
 		end
@@ -1412,6 +1412,8 @@ function scene:exitScene( event )
 			if (globals.score >= currentLevel.scoreCondition.score) then
 				totalStars = totalStars +1
 			end
+	
+
 		end
 
 		-- only replaces stars when you beat the level.
