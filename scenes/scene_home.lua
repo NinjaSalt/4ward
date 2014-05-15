@@ -24,12 +24,12 @@ function scene:createScene( event )
    time = 250
 }
 
-local socialOptions = {
+--[[local socialOptions = {
    service = "facebook",
    message = "Check out the game I'm making",
    listener = socialEventListener,
    url = "http://nwcgame.com"
-}
+}]]
 
   local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
@@ -83,7 +83,7 @@ local socialOptions = {
 
   startButton:addEventListener( "tap", onTap )
   
-  native.showPopup( "social", socialOptions )
+  --native.showPopup( "social", socialOptions )
 end
  
 -- Called BEFORE scene has moved onscreen:
