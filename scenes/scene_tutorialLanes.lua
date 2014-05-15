@@ -35,6 +35,18 @@ function scene:createScene( event )
   local swipe = display.newRect( 95, lane1-20, 54, 54)
   swipe.alpha = .01
   group:insert (swipe)
+  --hero[n]
+  local chef1 = display.newRect( hero[0].x, hero[0].y, hero[0].width, hero[0].height)
+  chef1.alpha = .01
+  group:insert (chef1)
+  
+  local chef2 = display.newRect( hero[1].x, hero[1].y, hero[1].width, hero[1].height)
+  chef2.alpha = .01
+  group:insert (chef2)
+  
+  local chef3 = display.newRect( hero[2].x, hero[2].y, hero[2].width, hero[2].height)
+  chef3.alpha = .01
+  group:insert (chef3)
   
   local toDo = display.newText( "Chefs serve one type of food", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
   toDo:setFillColor(black)
@@ -71,15 +83,6 @@ function scene:createScene( event )
 	
   end
   
-  local function step1()
-	transition.to( breakfast, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
-  end
-  local function step2()
-	transition.to( dinner, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
-  end
-  local function step3()
-	transition.to( dessert, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
-  end
   local function step4()
     storyboard.hideOverlay( "slideUp", 500 )
 	storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
@@ -107,15 +110,35 @@ function scene:createScene( event )
 	--transition.to( dinner, { time=(400), x=(-100) , tag= "animation"} )
 	--transition.to( dessert, { time=(400), x=(-100) , tag= "animation"} )
   end
+  
+  local function step3()
+	transition.to( dessert, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
+	chef3:addEventListener( "touch", step4 )
+	toDo.text = "Tap the Dessert Chef"
+  end
+  
+  local function step2()
+	transition.to( dinner, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
+	chef2:addEventListener( "touch", step3 )
+	toDo.text = "Tap the Dinner Chef"
+  end
+  
+  local function step1()
+	transition.to( breakfast, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
+	chef1:addEventListener( "touch", step2 )
+	toDo.text = "Tap the Breakfast Chef"
+  end
+  
+  
   local function step5()
 	toDo.text = "Tap the serve button"
 	swipe:addEventListener( "touch", onTapBack )
   end
   
   timer.performWithDelay(1500, step1 )
-  timer.performWithDelay(3000, step2 )
-  timer.performWithDelay(4500, step3 )
-  timer.performWithDelay(6000, step4 )
+  --timer.performWithDelay(3000, step2 )
+  --timer.performWithDelay(4500, step3 )
+  --timer.performWithDelay(6000, step4 )
   --timer.performWithDelay(7500, step5 )
   --startButton:addEventListener( "tap", onTap )
 end
