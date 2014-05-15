@@ -31,6 +31,7 @@ function scene:createScene( event )
   local params = event.params
   nextLevel = params.level
   nextWorld = params.world
+  numStars = params.starTotal
   
   --timer.pause(attackTimer)
   timer.pause(spawnEneTimer)
@@ -100,22 +101,22 @@ function scene:createScene( event )
 
  -- timer.performWithDelay(300, callSparkles )
 
- local gameTitle = display.newText( "Level Cleared!", 0, 0, globals.IMPRIMA, 30 )
+ local gameTitle = display.newText( "You Cleared the Level!", 0, 0, globals.LOBSTERTWO, 30 )
   gameTitle:setFillColor(black)
   gameTitle.x = display.contentCenterX
-  gameTitle.y = 80
+  gameTitle.y = 75
   
   group:insert( gameTitle )
   
-  local scoreTitle = display.newText( "SCORE: " ..globals.score, 0, 0, globals.IMPRIMA, 26)
+  local scoreTitle = display.newText( "Score: " ..globals.score, 0, 0, globals.IMPRIMA, 20)
    
   scoreTitle:setFillColor(black)
   scoreTitle.x = display.contentCenterX
-  scoreTitle.y = gameTitle.y + 45
+  scoreTitle.y = gameTitle.y + 35
   --adding the score integer into the currency
   group:insert( scoreTitle )
   
-  local buttonY = scoreTitle.y + 60
+  local buttonY = scoreTitle.y + 120
 
   if nextLevel == LevelList.getNumOfLevels(params.world) then
   --nextWorldButton = display.newText( "Next World", 0, 0, globals.IMPRIMA, 24 )
@@ -159,6 +160,55 @@ function scene:createScene( event )
   mapButton.x = 800 --display.contentWidth/2
   mapButton.y = buttonY
   group:insert( mapButton)
+
+  -- DISPLAY: number of stars you received during this round, NOT the highesst number of stars you've reached in this round.
+  local function starShow()
+    local sideStarX = 45
+    local sideStarY = scoreTitle.y + 55
+    local centStarY = scoreTitle.y + 45
+
+    local firstStar = display.newImage( "images/star.png", 150, 150, true )
+    firstStar.width = 50
+    firstStar.height = 50
+    firstStar.x = display.contentWidth/2 - sideStarX
+    firstStar.y = sideStarY
+    group: insert(firstStar)
+
+    if (numStars ~= 3) then
+      local thirdStar = display.newImage( "images/star_gray.png", 150, 150, true )
+      thirdStar.width = 50
+      thirdStar.height = 50
+      thirdStar.x = display.contentWidth/2 + sideStarX
+      thirdStar.y = sideStarY
+      group: insert(thirdStar)
+    else
+      local thirdStar = display.newImage( "images/star.png", 150, 150, true )
+      thirdStar.width = 50
+      thirdStar.height = 50
+      thirdStar.x = display.contentWidth/2 + sideStarX
+      thirdStar.y = sideStarY
+      group: insert(thirdStar)
+    end
+
+    if (numStars ~= 1) then
+      local secondStar = display.newImage( "images/star.png", 150, 150, true )
+      secondStar.width = 50
+      secondStar.height = 50
+      secondStar.x = display.contentWidth/2
+      secondStar.y = centStarY
+      group: insert(secondStar)
+    else
+      local secondStar = display.newImage( "images/star_gray.png", 150, 150, true )
+      secondStar.width = 50
+      secondStar.height = 50
+      secondStar.x = display.contentWidth/2
+      secondStar.y = centStarY
+      group: insert(secondStar)
+    end
+
+
+  end
+  
   
   if nextLevel == LevelList.getNumOfLevels(params.world) then
 	timer.performWithDelay(800, function() transition.to(nextWorldButton, {time = 700, x= display.contentWidth/2 + 60}) end)
@@ -167,8 +217,8 @@ function scene:createScene( event )
   end
   timer.performWithDelay(800, function() transition.to(replayButton, {time = 700, x= display.contentWidth/2 - 60}) end)
   timer.performWithDelay(800, function() transition.to(mapButton, {time = 700, x= display.contentWidth/2}) end)
-  
-  
+  timer.performWithDelay( 1000, starShow )
+
   local function onTapNextLevel( event )
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_inBetween",{ effect = "fade", time = 500, params = {level = nextLevel+1, world = nextWorld}})

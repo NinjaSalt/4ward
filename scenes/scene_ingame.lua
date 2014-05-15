@@ -328,16 +328,51 @@ function moveToHold( event )
 	globals.spot = display.newRect( eneX, eneY, 30, 30 )
 	group:insert(globals.spot)
 	if ((currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) or levelEnded == true) then
+		local totalStars = 0
+
+	-- CHECK TO SEE HOW MANY STARS WE HAVE.
+
+	if (globals.score > 0) then
+
+		totalStars = 1 -- get one star for completing with a positive score 
+
+		if (currentLevel.victoryCondition ~= false) then
+			if (currentLevel.conditionmet ~= false) then
+				totalStars = totalStars +1 
+			end
+		end
+
+		if (currentLevel.categoryCondition ~= false) then
+			if (currentLevel.categoryCondition.success~= false) then
+				totalStars = totalStars + 1
+			end
+		end
+
+		if (currentLevel.scoreCondition~= false) then
+			if (globals.score >= currentLevel.scoreCondition.score) then
+				totalStars = totalStars +1
+			end
+		end
+
+		-- only replaces stars when you beat the level.
+
+		if (totalStars > globals.stars[world][thisLevel]) then
+			globals.stars[world][thisLevel] = totalStars
+		end
+	end
+
+	-- END STAR CHECKS 
+
 		if(currentLevel.victoryCondition~=false or levelEnded == true) then
 			if(currentLevel.victoryCondition.conditionMet==true)then
 				LevelList.unlockLevel(world, thisLevel+1)
-				storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 700, params = {level = thisLevel, world = world}})
+				storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 700, params = {level = thisLevel, world = world, starTotal = totalStars}})
 			else 
 				storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 500, params = {level = thisLevel, world = world, condition = true}})
 			end
 		else	
 		LevelList.unlockLevel(world, thisLevel+1)
-		storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 700, params = {level = thisLevel, world = world}})
+		storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 700, params = {level = thisLevel, world = world, starTotal = totalStars}})
 		end
 	end
 
@@ -692,9 +727,45 @@ function checkEnemy()
                     delayTime = 3000
                 end
 		if (globals.score > 0) then
+
+			local totalStars = 0
+
+	-- CHECK TO SEE HOW MANY STARS WE HAVE (Before leaving victory screen.)
+
+	if (globals.score > 0) then
+
+		totalStars = 1 -- get one star for completing with a positive score 
+
+		if (currentLevel.victoryCondition ~= false) then
+			if (currentLevel.conditionmet ~= false) then
+				totalStars = totalStars +1 
+			end
+		end
+
+		if (currentLevel.categoryCondition ~= false) then
+			if (currentLevel.categoryCondition.success~= false) then
+				totalStars = totalStars + 1
+			end
+		end
+
+		if (currentLevel.scoreCondition~= false) then
+			if (globals.score >= currentLevel.scoreCondition.score) then
+				totalStars = totalStars +1
+			end
+		end
+
+		-- only replaces stars when you beat the level.
+
+		if (totalStars > globals.stars[world][thisLevel]) then
+			globals.stars[world][thisLevel] = totalStars
+		end
+	end
+
+	-- END STAR CHECKS 
+
 			LevelList.unlockLevel(world, thisLevel+1)
 			transition.to( noComboText, { time=(700), y=(display.contentHeight/2) } )
-			timer.performWithDelay(delayTime, function()storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 700, params = {level = thisLevel, world = world}})end )
+			timer.performWithDelay(delayTime, function()storyboard.showOverlay( "scenes.scene_victory",{ effect = "fade", time = 700, params = {level = thisLevel, world = world, starTotal = totalStars}})end )
     
 		else
                 timer.performWithDelay(delayTime, function()storyboard.showOverlay( "scenes.scene_loss",{ effect = "fade", time = 700, params = {level = thisLevel, world = world}})end )
