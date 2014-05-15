@@ -38,10 +38,7 @@ function combination( obj1, obj2 )
 end
 
 function replaceEnemy (obj1, obj2)
-      if (obj1~=nil and obj2~=nil) then
-          if obj1.type == "bad" and obj2.type == "bad" then return "bad" end
       return foodgroup[obj1.type][obj2.type]
-   end
 end
 
 -- function for creating a new health based on what the two combined enemies were.
@@ -179,10 +176,6 @@ end
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
        fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
        
-      bad = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
-       scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
-       fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
-
       sheperdsPie = {egg = "bad", flour = "bad", potato = "bad", strawberry = "bad", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
        fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad"},
