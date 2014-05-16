@@ -63,44 +63,46 @@ function scene:createScene( event )
   bkg.alpha = .5
   group:insert (bkg)
 
-  local bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
-  bkg.height=display.contentHeight*.7; bkg.width=display.contentWidth*.7
+  local bkg = display.newImage( "images/pauseBack.png", centerX, centerY, true )
+  bkg.height=display.contentHeight*.5; bkg.width=display.contentWidth*.5
   group:insert (bkg)
 
  local gameTitle = display.newText( "Defeat!", 0, 0, globals.LOBSTERTWO, 48 )
   gameTitle:setFillColor(black)
   gameTitle.x = display.contentCenterX
-  gameTitle.y = 80
+  gameTitle.y = 120
   
   group:insert( gameTitle )
   
-  if conditionsNotMet == true then
-	local scoreTitle = display.newText( "Unable to meet the objective...", 0, 0, globals.IMPRIMA, 24 )
-	scoreTitle:setFillColor(black)
-	scoreTitle.x = display.contentCenterX
-	scoreTitle.y = gameTitle.y + 50
-    group:insert( scoreTitle )
-  end
+  -- not needed because objectives are obtional?
+  --if conditionsNotMet == true then
+	--local scoreTitle = display.newText( "Unable to meet the objective...", 0, 0, globals.IMPRIMA, 24 )
+	--scoreTitle:setFillColor(black)
+	--scoreTitle.x = display.contentCenterX
+	--scoreTitle.y = gameTitle.y + 50
+  -- group:insert( scoreTitle )
+  -- end
  
  
-  local replayButton = display.newText( "Replay", 0, 0, globals.IMPRIMA, 24 )
-  replayButton:setFillColor(black)
-  replayButton.x = display.contentWidth * 1.5
-  replayButton.y = gameTitle.y + 100
+  local replayButton= display.newImage( "images/buttonReplay.png", 150,150, true )
+  replayButton.width = 50
+  replayButton.height = 50
+  replayButton.x = -100
+  replayButton.y = display.contentHeight/2 + 30
 
   group:insert( replayButton)
   
-  local mapButton = display.newText( "Map", 0, 0, globals.IMPRIMA, 24 )
-  mapButton:setFillColor(black)
-  mapButton.x = display.contentWidth * 1.5
-  mapButton.y = replayButton.y + 50
-
+  local mapButton = display.newImage("images/buttonMenu.png", 150,150, true)
+  mapButton.width =50
+  mapButton.height= 50
+  mapButton.x = 800
+  mapButton.y = display.contentHeight/2 + 30
   group:insert( mapButton)
   
   
   
-  timer.performWithDelay(200, function() transition.to(replayButton, {time = 400, x= display.contentWidth/2}) end)
-  timer.performWithDelay(500, function() transition.to(mapButton, {time = 400, x= display.contentWidth/2}) end)
+  timer.performWithDelay(200, function() transition.to(replayButton, {time = 400, x= display.contentWidth/2-30}) end)
+  timer.performWithDelay(200, function() transition.to(mapButton, {time = 400, x= display.contentWidth/2+30}) end)
 
 
   local function onTapReplay( event )

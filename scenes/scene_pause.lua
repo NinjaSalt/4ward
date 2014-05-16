@@ -32,12 +32,28 @@ function scene:createScene( event )
   
   bkg:addEventListener("touch", function() return true end)
   bkg:addEventListener("tap", function() return true end)
-  local menuBack = display.newRect( display.contentWidth/2, display.contentHeight/2, 250, 250)
+
+  local menuBack = display.newImage("images/pauseBack.png", 150, 150, true)
+  menuBack.width = 250
+  menuBack.height = 150
+  menuBack.x = display.contentWidth/2
+  menuBack.y = display.contentHeight/2
   group:insert (menuBack)
+
+  -- title
+  local pauseTitle = display.newText( "Paused!", display.contentWidth/2, display.contentHeight/2 -35 , globals.LOBSTERTWO, 35 )
+  pauseTitle:setFillColor( black )
+  group:insert(pauseTitle)
+
+  -- y button location
+  local buttonY = display.contentHeight/2 + 20
   
-  local replayButton = display.newText( "Replay", display.contentWidth/2, (display.contentHeight/2) - 60, globals.LOBSTERTWO, 36 )
-  replayButton:setFillColor(black)
-  group:insert (replayButton)
+  local replayButton= display.newImage( "images/buttonReplay.png", 150,150, true )
+  replayButton.width = 50
+  replayButton.height = 50
+  replayButton.x = display.contentWidth/2 - 60
+  replayButton.y = buttonY
+  group:insert( replayButton)
   
   local function onTapReplay( event )
     storyboard.removeScene( scene )
@@ -49,8 +65,11 @@ function scene:createScene( event )
   
   replayButton:addEventListener( "tap", onTapReplay )
   
-  local worldButton = display.newText( "World Map", display.contentWidth/2, (display.contentHeight/2) , globals.LOBSTERTWO, 36 )
-  worldButton:setFillColor(black)
+  local worldButton = display.newImage("images/buttonMenu.png", 150, 150, true)
+  worldButton.width = 50
+  worldButton.height = 50
+  worldButton.x = display.contentWidth/2
+  worldButton.y = buttonY
   group:insert (worldButton)
   
   local function onTapWorld( event )
@@ -63,8 +82,12 @@ end
   
   worldButton:addEventListener( "tap", onTapWorld )
 
-  local backButton = display.newText( "Back", display.contentWidth/2, (display.contentHeight/2) + 60, globals.LOBSTERTWO, 36 )
-  backButton:setFillColor(black)
+  
+  local backButton = display.newImage( "images/buttonBack.png", 150, 150, true )
+  backButton.width = 50
+  backButton.height = 50
+  backButton.x = display.contentWidth/2 + 60 
+  backButton.y = buttonY
   group:insert (backButton)
 
   local function onTapBack( event )
