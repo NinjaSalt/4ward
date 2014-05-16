@@ -858,22 +858,11 @@ function validCombosRemaining()
 end
 
 local function gameLoop( event )
+        if levelEnded == true then return end
+        
 	globals.multiplier = getMultiplier()
 	globals.multiplierText.text = (globals.multiplier)
         
-        
-        if levelEnded == true then return end
-        if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
-            levelEnded = true
-            checkEnemy()
-            return
-        elseif validCombosRemaining() == false then
-			levelEnded = true
-                        noCombos = true
-                        checkEnemy()
-                        return
-        end
-
 	-- CHECKS FOR OBJECTIVES (visual representations) HERE --
 	if currentLevel.victoryCondition ~=false then
 		globals.objectiveText.text = getObjectiveProgress()
@@ -887,6 +876,17 @@ local function gameLoop( event )
 		globals.scoreObjText.text = getScoreNumbers()
 	end
 	-- end objectives text. 
+        
+        if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
+            levelEnded = true
+            checkEnemy()
+            return
+        elseif validCombosRemaining() == false then
+			levelEnded = true
+                        noCombos = true
+                        checkEnemy()
+                        return
+        end
 
 	if ( globals.notDurningAntagonist ) then
 		for i = 0,table.maxn( allEne ) do
