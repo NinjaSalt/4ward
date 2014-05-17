@@ -130,7 +130,7 @@ levels[1][4] = Level.create(4, false, {0,5,0}, {300,2600,2600}, makeCatWin("brea
 -- Donut Mess Up! (4 Items)
 levels[1][5] = Level.create (5, makeSecondaryWin(donut, 1), {1,4,1,0}, {300,3000,3000,3000}, makeCatWin("breakfast",2), false)
 -- [Unnammed Level] (6 Items)
-levels[1][6] = Level.create (6, false, {0,1,2,5,2,5}, {1,2,3,4,5,6}, makeCatWin("dinner",1), makeScoreWin(40))
+levels[1][6] = Level.create (6, false, {0,1,2,5,2,5}, {500,3000,3000,3000,3000,3000}, makeCatWin("dinner",1), makeScoreWin(40))
 -- Your Life is at Steak! (8 items)
 levels[1][7] = Level.create(7, makeSecondaryWin(steakOm,1), {0,2,0,1,1,4,2,0}, {500,3000,3000,3000,3000,3000,3000,3000}, false, makeScoreWin(40))
 -- The Most Important Meal of the Day (10 items)
