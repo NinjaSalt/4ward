@@ -28,7 +28,7 @@ function scene:createScene( event )
   local group = self.view
 
   local levelSelect = 1
-  levels = {}
+  local levels = {}
   levels_1 = {}
   levels_2 = {}
   levels_3 = {}
