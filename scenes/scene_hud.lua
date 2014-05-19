@@ -282,7 +282,7 @@ function scene:createScene( event )
       gameItems[i].x = itemSpace
       gameItems[i].y = 300
       gameItems[i].myItemRef = i
-      if ( gameItems[i].itemType == "foodType") then
+      if ( gameItems[i].itemType == "foodType" or gameItems[i].itemType == "trash") then
       gameItems[i]:addEventListener( "touch", itemFoodDrag ) 
       elseif ( gameItems[i].itemType == "break" ) then
       gameItems[i]:addEventListener( "tap", itemTap ) 
