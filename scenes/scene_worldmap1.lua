@@ -7,6 +7,7 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals = require("classes.globals")
 local widget = require( "widget" )
+--require("classes.level")
 -- local loadsave = require("classes.loadsave")
 require("classes.levelUnlocking")
 
@@ -32,6 +33,7 @@ function scene:createScene( event )
   levels_1 = {}
   levels_2 = {}
   levels_3 = {}
+  --local currentLevel
   
   local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
@@ -69,6 +71,11 @@ function scene:createScene( event )
   recipeBook.x = 100
   recipeBook.y = 40
   group:insert(recipeBook)
+
+  local levelBack = display.newImageRect( "images/levelback.png", 320, 200 )
+  levelBack.x = display.contentWidth/2
+  levelBack.y = display.contentHeight/2 + 60
+  group:insert(levelBack)
 
   -- ScrollView listener
   local function scrollListener( event )
@@ -166,96 +173,15 @@ function scene:createScene( event )
     scrollView:insert(  levels[i] )
   end
 
-   local function onTapLevel1 ( event )
-    if (levelTitle ~= nil and objectives ~= nil) then
-      transition.to( levelTitle, { time=200, alpha=0} )
-      transition.to( objectives, { time=200, alpha=0} )
-    end
-        levelSelect = 1
-        print("levelselet: " ..levelSelect)
-    end
-    local function onTapLevel2 ( event )
-    if (levelTitle ~= nil and objectives ~= nil) then
-      transition.to( levelTitle, { time=200, alpha=0} )
-      transition.to( objectives, { time=200, alpha=0} )
-    end
-        levelSelect = 2
-        print("levelselet: " ..levelSelect)
-    end
-    local function onTapLevel3 ( event )
-    if (levelTitle ~= nil and objectives ~= nil) then
-      transition.to( levelTitle, { time=200, alpha=0} )
-      transition.to( objectives, { time=200, alpha=0} )
-    end
-        levelSelect = 3
-        print("levelselet: " ..levelSelect)
-    end
-    local function onTapLevel4 ( event )
-    if (levelTitle ~= nil and objectives ~= nil) then
-      transition.to( levelTitle, { time=200, alpha=0} )
-      transition.to( objectives, { time=200, alpha=0} )
-    end
-        levelSelect = 4
-        print("levelselet: " ..levelSelect)
-    end
-    local function onTapLevel5 ( event )
-    if (levelTitle ~= nil and objectives ~= nil) then
-      transition.to( levelTitle, { time=200, alpha=0} )
-      transition.to( objectives, { time=200, alpha=0} )
-    end
-        levelSelect = 5
-        print("levelselet: " ..levelSelect)
-    end
-    local function onTapLevel6 ( event )
-    if (levelTitle ~= nil and objectives ~= nil) then
-      transition.to( levelTitle, { time=200, alpha=0} )
-      transition.to( objectives, { time=200, alpha=0} )
-    end
-        levelSelect = 6
-        print("levelselet: " ..levelSelect)
-    end
-    local function onTapLevel7 ( event )
-    if (levelTitle ~= nil and objectives ~= nil) then
-      transition.to( levelTitle, { time=200, alpha=0} )
-      transition.to( objectives, { time=200, alpha=0} )
-    end
-        levelSelect = 7
-        print("levelselet: " ..levelSelect)
-    end
-    local function onTapLevel8 ( event )
-    if (levelTitle ~= nil and objectives ~= nil) then
-      transition.to( levelTitle, { time=200, alpha=0} )
-      transition.to( objectives, { time=200, alpha=0} )
-    end
-        levelSelect = 8
-        print("levelselet: " ..levelSelect)
-    end
-    local function onTapLevel9 ( event )
-    if (levelTitle ~= nil and objectives ~= nil) then
-      transition.to( levelTitle, { time=200, alpha=0} )
-      transition.to( objectives, { time=200, alpha=0} )
-    end
-        levelSelect = 9
-        print("levelselet: " ..levelSelect)
-    end
-    local function onTapLevel10 ( event )
-    if (levelTitle ~= nil and objectives ~= nil) then
-      transition.to( levelTitle, { time=200, alpha=0} )
-      transition.to( objectives, { time=200, alpha=0} )
-    end
-        levelSelect = 10
-        print("levelselet: " ..levelSelect)
-    end
-
-    local levelStart = display.newImageRect( "images/startButton.png", 65/2, 65/2 )
-  levelStart.x = display.contentWidth-levelStart.width/2
-  levelStart.y = display.contentHeight-levelStart.height/2
+    local levelStart = display.newImageRect( "images/startButton.png", 40, 40 )
+  levelStart.x = display.contentWidth/2+levelBack.width/2 - 30
+  levelStart.y = display.contentHeight-25
   group:insert(levelStart)
 
   local objectivesText = {
     text = "Objectives: Make a pancake!",     
-    x = -250,
-    y = -240,
+    x = display.contentWidth/2 + 25,
+    y = display.contentHeight/2+50,
     width = display.contentWidth-152,     --required for multi-line and alignment
     font = globals.IMPRIMA,   
     fontSize = 18,
@@ -263,20 +189,126 @@ function scene:createScene( event )
   }
 
   local objectives = display.newText(objectivesText)
+  objectives:setFillColor( black )
   group:insert(objectives)
 
   local levelTitleText = {
     text = "Step 1: Can you... Cook?",     
-    x = -250,
-    y = -195,
-    width = display.contentWidth-152,     --required for multi-line and alignment
+    x = display.contentWidth/2+25,
+    y = display.contentHeight/2,
+    width = display.contentWidth/2,     --required for multi-line and alignment
     font = globals.LOBSTERTWO,   
-    fontSize = 28,
+    fontSize = 25,
+    alpha = 0,
     align = "center"  --new alignment parameter
   }
 
   local levelTitle = display.newText(levelTitleText)
+  levelTitle:setFillColor( black )
   group:insert(levelTitle)
+
+
+   local function onTapLevel1 ( event )
+    --[[if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end]]
+        levelSelect = 1
+        -- currentLevel = Level.load(1, levelSelect)
+        -- levelTitle.text = currentLevel.levelTitle;
+        -- print("levelselet: " ..levelSelect)
+        -- print("title: " ..currentLevel.levelTitle)
+    end
+    local function onTapLevel2 ( event )
+     --[[if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end]]
+        levelSelect = 2
+       --  currentLevel = Level.load(1, levelSelect)
+       -- levelTitle.text = currentLevel.levelTitle;
+       --  print("levelselet: " ..levelSelect)
+    end
+    local function onTapLevel3 ( event )
+     --[[if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end]]
+        levelSelect = 3
+        --currentLevel = Level.load(1, levelSelect)
+        --levelTitle.text = currentLevel.levelTitle;
+        print("levelselet: " ..levelSelect)
+    end
+    local function onTapLevel4 ( event )
+     --[[if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end]]
+        levelSelect = 4
+        --currentLevel = Level.load(1, levelSelect)
+        --levelTitle.text = currentLevel.levelTitle;
+        print("levelselet: " ..levelSelect)
+    end
+    local function onTapLevel5 ( event )
+     --[[if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end]]
+        levelSelect = 5
+        --currentLevel = Level.load(1, levelSelect)
+       -- levelTitle.text = currentLevel.levelTitle;
+        print("levelselet: " ..levelSelect)
+    end
+    local function onTapLevel6 ( event )
+     --[[if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end]]
+        levelSelect = 6
+        --currentLevel = Level.load(1, levelSelect)
+       -- levelTitle.text = currentLevel.levelTitle;
+        print("levelselet: " ..levelSelect)
+    end
+    local function onTapLevel7 ( event )
+     --[[if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end]]
+        levelSelect = 7
+        --currentLevel = Level.load(1, levelSelect)
+        --levelTitle.text = currentLevel.levelTitle;
+        print("levelselet: " ..levelSelect)
+    end
+    local function onTapLevel8 ( event )
+     --[[if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end]]
+        levelSelect = 8
+        --currentLevel = Level.load(1, levelSelect)
+       -- levelTitle.text = currentLevel.levelTitle;
+        print("levelselet: " ..levelSelect)
+    end
+    local function onTapLevel9 ( event )
+     --[[if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end]]
+        levelSelect = 9
+        --currentLevel = Level.load(1, levelSelect)
+        --levelTitle.text = currentLevel.levelTitle;
+        print("levelselet: " ..levelSelect)
+    end
+    local function onTapLevel10 ( event )
+     --[[if (levelTitle ~= nil and objectives ~= nil) then
+      transition.to( levelTitle, { time=200, alpha=0} )
+      transition.to( objectives, { time=200, alpha=0} )
+    end]]
+        levelSelect = 10
+        --currentLevel = Level.load(1, levelSelect)
+        --levelTitle.text = currentLevel.levelTitle;
+        print("levelselet: " ..levelSelect)
+    end
 
       -- to get to recipe book.
   local function onTapBookIcon( event )
@@ -327,11 +359,18 @@ function scene:createScene( event )
   backButton:addEventListener("tap",onTapBack)
 
 
+  -- local function onTapStartLevel (event)
+  -- 	if( levelSelect < 10 or ( levelSelect == 10  and worlds[1].levelsUnlocked[5] ) ) then
+  -- 		storyboard.removeScene( scene )
+  -- 		storyboard.gotoScene( "scenes.scene_ingame", { effect = "fade", time = 250, params = {level = levelSelect, world = 1}})
+  -- 	end
+  -- end
+
   local function onTapStartLevel (event)
-  	if( levelSelect < 10 or ( levelSelect == 10  and worlds[1].levelsUnlocked[5] ) ) then
-  		storyboard.removeScene( scene )
-  		storyboard.gotoScene( "scenes.scene_ingame", { effect = "fade", time = 250, params = {level = levelSelect, world = 1}})
-  	end
+    if( levelSelect < 10 or ( levelSelect == 10  and worlds[1].levelsUnlocked[5] ) ) then
+      storyboard.removeScene( scene )
+      storyboard.gotoScene( "scenes.scene_ingame", { effect = "fade", time = 250, params = {level = levelSelect, world = 1}})
+    end
   end
   
   levels[1]:addEventListener("tap", onTapLevel1)
@@ -354,7 +393,7 @@ function scene:createScene( event )
   -- end
 
   -- backArrow:addEventListener("tap", onTapBackArrow)
-  --onTapLevel1()
+  onTapLevel1()
 end
  
 -- Called BEFORE scene has moved onscreen:

@@ -50,6 +50,7 @@ function makeItemArray ()
 	--nextItem=nextItem+1
 	items[nextItem+1]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem+1, false, "Pauses the game.", "Click to activate.", 4)
 	items[nextItem+2]= Item.makeItem("Producer Swap","swap", "images/swap.png", 700, nextItem+2, false, "Swaps two items.", "Click to activate.",4)
+	items[nextItem+3]= Item.makeItem("Compost Bin","trash", "images/trash_item.png", 1000, nextItem+3, true, "Removes one item", "Drag to food.",5)
 end
 makeItemArray()
 myItems = {}
@@ -133,7 +134,7 @@ function producerSwap()
 end
 
   local function resume()
-  	print("CHOP ENDING")
+  	--print("CHOP ENDING")
 		for i = 0,table.maxn( allEne ) do
 			if (allEne[i] ~= nil) then
 				allEne[i]:removeEventListener( "touch", chopping )
@@ -189,6 +190,12 @@ function itemFoodDrag( event )
 					-- in game
 					if (body.itemType == "foodType") then
 						itemCombo( body, allEne[n], true )
+						break
+					elseif (body.itemType == "trash") then
+						--itemCombo( body, allEne[n], true )
+						allEne[n]: removeSelf()
+						table.remove(allEne, n)
+						--decrementEnemy(currentLevel)
 						break
 					end
 				hit = 1
