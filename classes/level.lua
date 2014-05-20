@@ -1,3 +1,4 @@
+require("classes.enemies") 
 Level = {}
 Level.__index = Level
 

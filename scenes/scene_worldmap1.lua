@@ -7,7 +7,7 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals = require("classes.globals")
 local widget = require( "widget" )
---require("classes.level")
+require("classes.level")
 -- local loadsave = require("classes.loadsave")
 require("classes.levelUnlocking")
 
