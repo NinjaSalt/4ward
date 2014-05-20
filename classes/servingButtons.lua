@@ -30,9 +30,9 @@ function bkftbuttonPressed()
 
             -- NEW SECONDARY CONDITION CHECK
             if currentLevel.victoryCondition~=false and
-            currentLevel.victoryCondition.enemy.name==allEne[i].name then
+            currentLevel.victoryCondition.enemy==allEne[i].name then
                 currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
-                print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
+                print(currentLevel.victoryCondition.enemy .. "left: " .. currentLevel.victoryCondition.amount)
                 if (currentLevel.victoryCondition.amount == 0) then
                   print("Condition Met")
                   currentLevel.victoryCondition.conditionMet = true
@@ -93,9 +93,9 @@ function dnrbuttonPressed()
 
             -- NEW SECONDARY CONDITION CHECK
             if(currentLevel.victoryCondition~=false) then
-              if(currentLevel.victoryCondition.enemy.name==allEne[i].name)then
+              if(currentLevel.victoryCondition.enemy==allEne[i].name)then
                 currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
-                print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
+                print(currentLevel.victoryCondition.enemy .. "left: " .. currentLevel.victoryCondition.amount)
                 if (currentLevel.victoryCondition.amount == 0) then
                   print("Condition Met")
                   currentLevel.victoryCondition.conditionMet = true
@@ -158,9 +158,9 @@ function dstbuttonPressed()
 
             -- NEW SECONDARY CONDITION CHECK
             if(currentLevel.victoryCondition~=false) then
-              if(currentLevel.victoryCondition.enemy.name==allEne[i].name)then
+              if(currentLevel.victoryCondition.enemy==allEne[i].name)then
                 currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
-                print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
+                print(currentLevel.victoryCondition.enemy .. "left: " .. currentLevel.victoryCondition.amount)
                 if (currentLevel.victoryCondition.amount == 0) then
                   print("Condition Met")
                   currentLevel.victoryCondition.conditionMet = true

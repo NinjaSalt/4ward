@@ -158,16 +158,16 @@ function scene:createScene( event )
    local function makeSecCond()
     if (vicCond ~= false) then
     -- print second condition here.
-    local secObj = display.newText("Serve " .. vicCond.amount .. " " .. vicCond.enemy.name.. ".", 400, spacer, globals.IMPRIMA, 16)
+    local secObj = display.newText("Serve " .. vicCond.amount .. " " .. vicCond.enemy.. ".", 400, spacer, globals.IMPRIMA, 16)
     secObj: setFillColor(black)
     group: insert(secObj)
     transition.to(secObj, {time=150, x=display.contentWidth/2+ moveText})
     if (vicCond.amount ~= 1) then
-      if (vicCond.enemy.name == "Fries") then
+      if (vicCond.enemy == "Fries") then
       -- do nothing
     else
       secObj:removeSelf()
-      secObj = display.newText("Serve " .. vicCond.amount .. " " .. vicCond.enemy.name .. "s.", 400, spacer, globals.IMPRIMA, 16)
+      secObj = display.newText("Serve " .. vicCond.amount .. " " .. vicCond.enemy .. "s.", 400, spacer, globals.IMPRIMA, 16)
        secObj: setFillColor(black)
        group: insert(secObj)
        transition.to(secObj, {time=150, x=display.contentWidth/2+ moveText})
@@ -179,7 +179,7 @@ function scene:createScene( event )
   end
   spacer  = spacer + 25
 end
-    --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)
+    --print("Make " .. vicCond.amount .. " " .. vicCond.enemy)
   end
 
 local function makeCatCond()
@@ -198,7 +198,7 @@ local function makeCatCond()
   end
    spacer  = spacer + 25
 end
-    --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)
+    --print("Make " .. vicCond.amount .. " " .. vicCond.enemy)
   end
 
 local function makeScoreCond()
@@ -209,7 +209,7 @@ local function makeScoreCond()
     group: insert(scoreObj)
     transition.to(scoreObj, {time=150, x=display.contentWidth/2+ moveText})
     spacer  = spacer + 25
-end    --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)
+end    --print("Make " .. vicCond.amount .. " " .. vicCond.enemy)
   end  
 
 local function makeStars()

@@ -328,12 +328,12 @@ function scene:createScene( event )
         if (selectedLevel.victoryCondition ~= false) then
           if (selectedLevel.victoryCondition.memAmount ~= 1) then
             if (selectedLevel.victoryCondition.enemy == mashed) then
-              objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." " ..selectedLevel.victoryCondition.enemy.name .. "es"
+              objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." " ..selectedLevel.victoryCondition.enemy .. "es"
             else 
-              objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." " ..selectedLevel.victoryCondition.enemy.name .. "s"
+              objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." " ..selectedLevel.victoryCondition.enemy .. "s"
             end
           else
-            objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." " ..selectedLevel.victoryCondition.enemy.name
+            objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." " ..selectedLevel.victoryCondition.enemy
           end
         --end
         elseif (selectedLevel.victoryCondition == false and selectedLevel.categoryCondition ~= false) then

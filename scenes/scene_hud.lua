@@ -80,7 +80,7 @@ function scene:createScene( event )
     
     group:insert(objectiveGradient)  
     
-    local objectiveIcon = display.newImage(currentLevel.victoryCondition.enemy.image)
+    local objectiveIcon = display.newImage("images/"..currentLevel.victoryCondition.enemy..".png")
     objectiveIcon.width = 25
     objectiveIcon.height = 25
     
