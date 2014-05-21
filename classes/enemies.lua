@@ -100,6 +100,7 @@ flour = Enemy.create("Flour", 10, 2, speed, 4, "images/flour.png", 10, "flour", 
 potato = Enemy.create("Potato", 10, 2,speed, 4, "images/potato.png", 10, "potato", "basic", "Potato")
 oil = Enemy.create("Oil", 10, 2, speed, 4, "images/fryer.png", 10, "oil", "basic", "Oil")
 sugar = Enemy.create("Sugar", 10, 2, speed, 4, "images/sugar.png", 10, "sugar", "basic", "Sugar")
+lemon = Enemy.create("Lemon", 10, 2, speed, 4, "images/lemon.png", 10, "lemon", "basic", "Lemon")
 
 --combinations
 bad = Enemy.create("Bad", 5, 2, speed, 4, "images/BombGreen.png", 5, "bad", "bad", "All bad combos")
@@ -116,12 +117,20 @@ steakBaked = Enemy.create ("Steak & Baked Potato", 5, 2, speed, 4, "images/steak
 steakOm = Enemy.create ("Steak Omelette", 5, 2, speed, 4, "images/SteakOm.png", 5, "steakOm","breakfast", "Egg + Steak")
 strawberryCandy = Enemy.create ("Strawberry Candy", 5, 2, speed, 4, "images/StrawberryCandy.png", 5, "strawberryCandy","dessert", "Strawberry + Sugar")
 strawberryTart = Enemy.create ("Strawberry Tart", 5, 2, speed, 4, "images/StrawberryTart.png", 5, "strawberryTart","dessert", "Strawberry + Flour")
+lemonCookie = Enemy.create ("Lemon Cookie", 5, 2, speed, 4, "images/lemonCookie.png", 5, "lemonCookie","dessert", "Lemon + Flour")
+strawLemonade = Enemy.create ("Strawberry Lemonade", 5, 2, speed, 4, "images/strawLemonade.png", 5, "strawLemonade","breakfast", "Strawberry + Lemon")
+lemonSteak = Enemy.create ("Lemon Marinaded Steak", 5, 2, speed, 4, "images/lemonSteak.png", 5, "lemonSteak","dinner", "Lemon + Steak")
+lemonCandy = Enemy.create ("Lemon Candy", 5, 2, speed, 4, "images/lemonCandy.png", 5, "lemonCandy","dessert", "Lemon + Sugar")
 
 -- TRIPLE COMBOS
 sheperdsPie = Enemy.create("Sheperd's Pie", 5, 2, speed, 4, "images/shepPie.png", 10, "sheperdsPie", "dinner", "Mashed Potato + Steak" )
 strawberryCake = Enemy.create("Strawberry Cake", 5, 2, speed, 4, "images/strawberryCake.png", 10, "strawberryCake", "dessert", "Cake + Strawberry" )
 steakFries = Enemy.create("Steak and Fries", 5, 2, speed, 4, "images/steakFries.png", 10, "steakFries", "dinner", "Steak + Fries")
 strawPancake = Enemy.create("Strawberry Jam Pancake", 5, 2, speed, 4, "images/strJamPancake.png", 10, "strawPancake", "breakfast", "Pancake + Strawberry")
+lemonDonut = Enemy.create("Lemon Curd Donut", 5, 2, speed, 4, "images/lemonDonut.png", 10, "lemonDonut", "breakfast", "Donut + Lemon")
+lemonCake = Enemy.create("Lemon Cake", 5, 2, speed, 4, "images/lemonCake.png", 10, "lemonCake", "dessert", "Cake + Lemon")
+lemonPie = Enemy.create("Lemon Meringue Pie", 5, 2, speed, 4, "images/lemonPie.png", 10, "lemonPie", "dessert", "Meringue + Lemon")
+
 
 myEnemies = {}
 myEnemies[0] = egg
@@ -131,6 +140,7 @@ myEnemies[3] = strawberry
 myEnemies[4] = oil
 myEnemies[5] = potato
 myEnemies[6] = sugar
+myEnemies[7] = lemon
 
 comboEnemies = {}
 --myEnemies[2] = pinkBomb
@@ -150,9 +160,16 @@ comboEnemies[10] = steakBaked
 comboEnemies[11] = steakOm
 comboEnemies[12] = strawberryCandy
 comboEnemies[13] = strawberryTart
+comboEnemies[14] = lemonCookie
+comboEnemies[15] = strawLemonade
+comboEnemies[16] = lemonSteak
+comboEnemies[17] = lemonCandy
 
 -- triple combos
-comboEnemies[14] = sheperdsPie
-comboEnemies[15] = strawberryCake
-comboEnemies[16] = steakFries
-comboEnemies[17] = strawPancake 
+comboEnemies[18] = sheperdsPie
+comboEnemies[19] = strawberryCake
+comboEnemies[20] = steakFries
+comboEnemies[21] = strawPancake 
+comboEnemies[22] = lemonDonut
+comboEnemies[23] = lemonCake
+comboEnemies[24] = lemonPie

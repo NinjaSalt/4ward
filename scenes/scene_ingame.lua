@@ -1166,8 +1166,9 @@ function replayLevel()
 
 end
 
-local function goToIntro(vicCond, id, catCond, scoreCond)
-	storyboard.showOverlay("scenes.scene_intro", {effect = "slideDown", time=500, params = {vic= vicCond, levelNumber=id, cat=catCond, scr = scoreCond}})
+local function goToIntro(vicCond, id, catCond, scoreCond, wNum)
+	
+	storyboard.showOverlay("scenes.scene_intro", {effect = "slideDown", time=500, params = {vic= vicCond, levelNumber=id, cat=catCond, scr = scoreCond, worldnum = wNum}})
 	--timer.pause(attackTimer)
 	timer.pause(spawnEneTimer)
 	if (globals.breakfastButton~=nil) then
@@ -1318,7 +1319,8 @@ else
 
 	-- scene.overlay hud
 	storyboard.showOverlay("scenes.scene_hud")
-	goToIntro(currentLevel.victoryCondition, currentLevel.levelID, currentLevel.categoryCondition, currentLevel.scoreCondition)
+
+	goToIntro(currentLevel.victoryCondition, currentLevel.levelID, currentLevel.categoryCondition, currentLevel.scoreCondition, world)
 end
  
 -- Called BEFORE scene has moved onscreen:

@@ -44,7 +44,7 @@ function scene:createScene( event )
   local catCond = event.params.cat
   local scoreCond = event.params.scr
   local globals = require("classes.globals")
-
+  worldNum = event.params.worldnum
  
   local function makeText()
 	local title = display.newText( "Objectives:", display.contentWidth/2, (display.contentHeight/2) - 115, globals.LOBSTERTWO, 48 )
@@ -286,11 +286,18 @@ function scene:exitScene( event )
   if ( levelNumber == 1 ) then
 	antagonistRandom = 0
   end
+
+  -- if it's the first world, the antagonist will not show up.
+  if ( worldNum == 1) then
+    antagonistRandom= 0 
+  end
+
   local antTime = math.random(5000, 15000)
-  print (antagonistRandom)
+  --print (antagonistRandom)
   if(antagonistRandom~=0)then
 	antagonistTimer = timer.performWithDelay ( antTime, antagonistShow )
   end
+
 end
  
 -- Called AFTER scene has finished moving offscreen:
