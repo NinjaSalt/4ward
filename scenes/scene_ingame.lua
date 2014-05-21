@@ -1251,7 +1251,7 @@ scene.createConveyorBelts()
 	currentLevel.victoryCondition.amount = currentLevel.victoryCondition.memAmount
 	currentLevel.victoryCondition.conditionMet = false
 	numCond = numCond +1 
-	--print("Make " .. currentLevel.victoryCondition.amount .. " " .. currentLevel.victoryCondition.enemy.name)
+	print("Make " .. currentLevel.victoryCondition.amount .. " " .. currentLevel.victoryCondition.enemy.name)
 else
 	print ("No Second Condition")
   end

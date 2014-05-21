@@ -4,6 +4,7 @@
 ---------------------------------------------------------------------------------
  
 local storyboard = require( "storyboard" )
+require("classes.enemies") 
 local scene = storyboard.newScene()
 local globals = require("classes.globals")
 local widget = require( "widget" )
@@ -425,11 +426,11 @@ function scene:createScene( event )
   levelButtons2[3]:addEventListener("tap", onTapLevel3)
   levelButtons2[4]:addEventListener("tap", onTapLevel4)
   levelButtons2[5]:addEventListener("tap", onTapLevel5)
-  -- levelButtons2[6]:addEventListener("tap", onTapLevel6)
-  -- levelButtons2[7]:addEventListener("tap", onTapLevel7)
-  -- levelButtons2[8]:addEventListener("tap", onTapLevel8)
-  -- levelButtons2[9]:addEventListener("tap", onTapLevel9)
-  -- levelButtons2[10]:addEventListener("tap", onTapLevel10)
+  levelButtons2[6]:addEventListener("tap", onTapLevel6)
+  levelButtons2[7]:addEventListener("tap", onTapLevel7)
+  levelButtons2[8]:addEventListener("tap", onTapLevel8)
+  levelButtons2[9]:addEventListener("tap", onTapLevel9)
+  levelButtons2[10]:addEventListener("tap", onTapLevel10)
 
   star1:addEventListener("tap", onTapStar1)
   star2:addEventListener("tap", onTapStar2)
@@ -454,7 +455,7 @@ function scene:createScene( event )
 
 
   local function onTapStartLevel (event)
-  if( levelSelect < 5 or ( levelSelect == 5  and worlds[2].levelsUnlocked[5] ) ) then
+  if( levelSelect < 10 or ( levelSelect == 10 )) then
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_ingame", { effect = "fade", time = 250, params = {level = levelSelect, world = 2}})
   end

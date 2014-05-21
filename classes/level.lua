@@ -1,3 +1,4 @@
+require("classes.enemies") 
 Level = {}
 Level.__index = Level
 
@@ -146,23 +147,23 @@ levels[1][10] = Level.create(10, makeSecondaryWin(fries, 4), {1,4,5,5,0,1,4,2,5,
 -- Taste Test (10 items)
 levels[2][1] = Level.create(1, false, {0,6,1,6,5,1,0,6,6,1}, {300,2600,2600,4000,3000,3000,2600,2600,2600, 2600}, makeCatWin("dessert", 3), makeScoreWin(100), "Step 1: Taste Test") 
 -- Meringue Madness (10 items)
-levels[2][2] = Level.create (2, makeSecondaryWin("meringue", 2), {6,1,5,0,0,1,5,6,0,6}, {200, 3000,3000,3000,3000,3000, 3000, 3000,3000, 2600}, false, makeScoreWin(120), "Step 2: Meringue Madness")
+levels[2][2] = Level.create (2, makeSecondaryWin(meringue, 2), {6,1,5,0,0,1,5,6,0,6}, {200, 3000,3000,3000,3000,3000, 3000, 3000,3000, 2600}, false, makeScoreWin(120), "Step 2: Meringue Madness")
 -- Cake and Bake (10 items)
-levels[2][3] = Level.create(3, makeSecondaryWin("cake",3), {5,1,6,4,6,6,1,1,6,0}, {300,3100,3100,2600,4500,2600,2600,2600,3000,3000}, false, makeScoreWin(140), "Step 3: Cake and Bake") 
+levels[2][3] = Level.create(3, makeSecondaryWin(cake,3), {5,1,6,4,6,6,1,1,6,0}, {300,3100,3100,2600,4500,2600,2600,2600,3000,3000}, false, makeScoreWin(140), "Step 3: Cake and Bake") 
 -- Super Sugar Rush! (14 items)
-levels[2][4] = Level.create(4, makeSecondaryWin("strawberryCandy",2), {0,3,2,6,6,1,3,6,1,5,1,3,0,6}, {300,3100,3100,2600,4500,2600,2600,2600,3000,3000,3000,100,3000,3000}, makeCatWin("dessert", 4), false, "Step 4: Super Sugar Rush!")
+levels[2][4] = Level.create(4, makeSecondaryWin(strawberryCandy,2), {0,3,2,6,6,1,3,6,1,5,1,3,0,6}, {300,3100,3100,2600,4500,2600,2600,2600,3000,3000,3000,100,3000,3000}, makeCatWin("dessert", 4), false, "Step 4: Super Sugar Rush!")
 -- Sour Scramble (14 items) 
-levels[2][5] = Level.create (5, makeSecondaryWin("lemonCookie", 3), {7,1,6,3,7,0,3,1,3,7,3,6,1,3}, {200,3000,3000,3000,3000,3000,3000,3000,3000,3000,3000,3000,3000}, makeCatWin("dessert", 5), false, "Step 5: Sour Scramble")
+levels[2][5] = Level.create (5, makeSecondaryWin(lemonCookie, 3), {7,1,6,3,7,0,3,1,3,7,3,6,1,3}, {200,3000,3000,3000,3000,3000,3000,3000,3000,3000,3000,3000,3000}, makeCatWin("dessert", 5), false, "Step 5: Sour Scramble")
 -- Strawberries of Wrath (14 items)
-levels[2][6] = Level.create(6, makeSecondaryWin("strawberryTart", 4), {1,3,3,1,2,1,6,3,3,6,6,1,1,1}, {300,2600,2700,2600,2600,2700,2700,2600,2600,2600,2600,2600,2600,2600}, false, makeScoreWin(250), "Step 6: Strawberries of Wrath")
+levels[2][6] = Level.create(6, makeSecondaryWin(strawberryTart, 4), {1,3,3,1,2,1,6,3,3,6,6,1,1,1}, {300,2600,2700,2600,2600,2700,2700,2600,2600,2600,2600,2600,2600,2600}, false, makeScoreWin(250), "Step 6: Strawberries of Wrath")
 -- Candy Corner (16 items) 4 lemon candies, 220 points
-levels[2][7] = Level.create (7, makeSecondaryWin("lemonCandy", 4), {6,6,6,1,0,7,3,7,7,1,0,6,6,7,1,3}, {300,2800,2800,2800,2800,2800,2800,2800,2800,2800, 2800,2800,2800,2800,2800,2800}, false, makeScoreWin(260), "Step 7: Candy Corner")
+levels[2][7] = Level.create (7, makeSecondaryWin(lemonCandy, 4), {6,6,6,1,0,7,3,7,7,1,0,6,6,7,1,3}, {300,2800,2800,2800,2800,2800,2800,2800,2800,2800, 2800,2800,2800,2800,2800,2800}, false, makeScoreWin(260), "Step 7: Candy Corner")
 -- The Pie is a Lie (16 items) 2 lemon pies, 3 dessert items
-levels[2][8] = Level.create (8, makeSecondaryWin("lemonPie", 2), {0,6,7,1,3,6,7,0,3,0,5,6,7,4,0,1}, {200,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800}, makeCatWin("dessert", 3), false, "Step 8: The Pie is a Lie")
+levels[2][8] = Level.create (8, makeSecondaryWin(lemonPie, 2), {0,6,7,1,3,6,7,0,3,0,5,6,7,4,0,1}, {200,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800}, makeCatWin("dessert", 3), false, "Step 8: The Pie is a Lie")
 -- The Sweetest Treat! (20 items)
 levels[2][9] = Level.create(9, false, {0,3,6,1,2,0,1,3,6,6,3,5,1,3,6,3,1,6,0,1}, {300,2600,2600,3500,3500,3500,2600,2600,3500,3200,3000,3000,2800,2800,2800,2800,3100,3000,3000,2600}, makeCatWin("dessert", 5), makeScoreWin(280), "Step 9: The Sweetest Treat!")
 -- Zest-fest! (25 items) 3 lemon cakes, 7 dessert items
-levels[2][10] = Level.create (10, makeSecondaryWin("lemonCake",3),{0,1,2,6,3,7,7,1,3,6,6,0,3,7,1,7,5,0,1,6,2,0,7,3,7}, {300,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,6000,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800}, makeCatWin("dessert",6), false, "Step 10: Zest-fest!" )
+levels[2][10] = Level.create (10, makeSecondaryWin(lemonCake,3),{0,1,2,6,3,7,7,1,3,6,6,0,3,7,1,7,5,0,1,6,2,0,7,3,7}, {300,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,6000,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800}, makeCatWin("dessert",6), false, "Step 10: Zest-fest!" )
 
 
 --EPISODE 3

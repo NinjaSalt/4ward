@@ -125,7 +125,7 @@ end
       sugar = {egg = "meringue", flour = "cake", potato = "bad", strawberry = "strawberryCandy", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
        fries = "bad", steakBaked = "bad", strawberryCandy = "bad", sheperdsPie = "bad", strawberryCake = "bad" , steakFries = "bad", strawPancake = "bad", bad = "bad", 
-       lemon = "lemonSteak", lemonCookie = "bad", strawLemonade = "bad", lemonSteak = "bad", lemonCandy = "bad", lemonDonut = "bad", lemonCake = "bad", lemonPie = "bad"},
+       lemon = "lemonCandy", lemonCookie = "bad", strawLemonade = "bad", lemonSteak = "bad", lemonCandy = "bad", lemonDonut = "bad", lemonCake = "bad", lemonPie = "bad"},
 
       pancake = {egg = "bad", flour = "bad", potato = "bad", strawberry = "strawPancake", oil = "bad", steak = "bad", sugar = "bad", pancake = "bad",
        scrambledPotato = "bad", steakOm = "bad", meringue = "bad" , croquette = "bad", strawberryTart = "bad", donut = "bad", CFS = "bad", cake = "bad", mashed = "bad",
