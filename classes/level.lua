@@ -136,11 +136,7 @@ levels[1][6] = Level.create (6, false, {0,1,2,5,2,5}, {500,3000,3000,3000,3000,3
 -- Your Life is at Steak! (8 items)
 levels[1][7] = Level.create(7, makeSecondaryWin(steakOm,1), {0,2,0,1,1,4,2,0}, {500,3000,3000,3000,3000,3000,3000,3000}, false, makeScoreWin(40), "Step 7: Your Life is at Steak!")
 -- The Most Important Meal of the Day (10 items)
-<<<<<<< HEAD
-levels[1][8] = Level.create(8, false, {0,1,5,0,5,1,2,0,5,0}, {500,3000,3000,3000,3000,3000,3000,3000,2600,2600}, makeCatWin("breakfast", 2), makeScoreWin(60), "Step 8: The Most Important Meal")
-=======
 levels[1][8] = Level.create(8, false, {0,1,5,0,5,1,2,0,5,0}, {500,3000,3000,3000,3000,3000,3000,3000,2600,2600}, makeCatWin("breakfast", 2), makeScoreWin(60), "Step 8: Most Important Meal")
->>>>>>> 7587ffe1fe4d202dabce9bbefd222295ba693314
 -- I Say Potato (10 items)
 levels[1][9] = Level.create(9, makeSecondaryWin(mashed,2), {2,5,4,5,5,2,5,4,0,5}, {500,3000,3000,2600,3000,2600,3000,3000,2600,3100}, makeCatWin("dinner", 3), false, "Step 9: I Say Potato")
 -- Certi-fried Chef! (14 items)
@@ -152,7 +148,6 @@ levels[2][1] = Level.create(1, false, {0,6,1,6,5,1,0,6,6,1}, {300,2600,2600,4000
 -- Meringue Madness (10 items)
 levels[2][2] = Level.create (2, makeSecondaryWin("meringue", 2), {6,1,5,0,0,1,5,6,0,6}, {200, 3000,3000,3000,3000,3000, 3000, 3000,3000, 2600}, false, makeScoreWin(120), "Step 2: Meringue Madness")
 -- Cake and Bake (10 items)
-<<<<<<< HEAD
 levels[2][3] = Level.create(3, makeSecondaryWin("cake",3), {5,1,6,4,6,6,1,1,6,0}, {300,3100,3100,2600,4500,2600,2600,2600,3000,3000}, false, makeScoreWin(140), "Step 3: Cake and Bake") 
 -- Super Sugar Rush! (14 items)
 levels[2][4] = Level.create(4, makeSecondaryWin("strawberryCandy",2), {0,3,2,6,6,1,3,6,1,5,1,3,0,6}, {300,3100,3100,2600,4500,2600,2600,2600,3000,3000,3000,100,3000,3000}, makeCatWin("dessert", 4), false, "Step 4: Super Sugar Rush!")
@@ -169,15 +164,6 @@ levels[2][9] = Level.create(9, false, {0,3,6,1,2,0,1,3,6,6,3,5,1,3,6,3,1,6,0,1},
 -- Zest-fest! (25 items) 3 lemon cakes, 7 dessert items
 levels[2][10] = Level.create (10, makeSecondaryWin("lemonCake",3),{0,1,2,6,3,7,7,1,3,6,6,0,3,7,1,7,5,0,1,6,2,0,7,3,7}, {300,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,6000,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800}, makeCatWin("dessert",6), false, "Step 10: Zest-fest!" )
 
-=======
-levels[2][2] = Level.create(2, makeSecondaryWin(cake,3), {5,1,6,4,6,6,1,1,6,0}, {300,3100,3100,2600,4500,2600,2600,2600,3000,3000}, false, makeScoreWin(140), "Step 2: Cake and Bake") 
--- Super Sugar Rush! (14 items)
-levels[2][3] = Level.create(3, makeSecondaryWin(strawberryCandy,2), {0,3,2,6,6,1,3,6,1,5,1,3,0,6}, {300,3100,3100,2600,4500,2600,2600,2600,3000,3000,3000,100,3000,3000}, makeCatWin("dessert", 4), false, "Step 3: Super Sugar Rush!")
--- Strawberries of Wrath (14 items)
-levels[2][4] = Level.create(4, makeSecondaryWin(strawberryTart, 4), {1,3,3,1,2,1,6,3,3,6,6,1,1,1}, {300,2600,2700,2600,2600,2700,2700,2600,2600,2600,2600,2600,2600,2600}, false, makeScoreWin(250), "Step 4: Strawberries of Wrath")
--- The Sweetest Treat! (20 items)
-levels[2][5] = Level.create(5, makeSecondaryWin(strawberryCake, 3), {0,3,6,1,2,0,1,3,6,6,3,5,1,3,6,3,1,6,0,1}, {300,2600,2600,3500,3500,3500,2600,2600,3500,3200,3000,3000,2800,2800,2800,2800,3100,3000,3000,2600}, makeCatWin("dessert", 7), false, "Step 5: The Sweetest Treat!")
->>>>>>> 7587ffe1fe4d202dabce9bbefd222295ba693314
 
 --EPISODE 3
 levels[3][1] = Level.create(1, false, {1,4}, {500,500}, false, false, "Title")
