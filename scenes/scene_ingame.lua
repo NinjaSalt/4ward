@@ -598,9 +598,9 @@ function itemCombo( item , enemy, fromFoodItem )
 			-- Check for Secondary Win condition
 			
 			--if(currentLevel.victoryCondition~=false) then
-			--	if(currentLevel.victoryCondition.enemy==allEne[#allEne].name)then
+			--	if(currentLevel.victoryCondition.enemy.name==allEne[#allEne].name)then
 			--		currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
-			--		print(currentLevel.victoryCondition.enemy .. "left: " .. currentLevel.victoryCondition.amount)
+			--		print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
 			--		if (currentLevel.victoryCondition.amount == 0) then
 			--		print("Condition Met")
 			--		currentLevel.victoryCondition.conditionMet = true
@@ -695,7 +695,7 @@ function checkEnemy()
 			currentLevel.scoreCondition.success = true
 		end
 	end
-        --if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then levelEnded = true end
+        if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then levelEnded = true end
 	if (levelEnded) then
     	globals.attack = false
 
@@ -858,6 +858,7 @@ function validCombosRemaining()
 end
 
 local function gameLoop( event )
+        if levelEnded == true then return end
         
 	globals.multiplier = getMultiplier()
 	globals.multiplierText.text = (globals.multiplier)
@@ -875,8 +876,6 @@ local function gameLoop( event )
 		globals.scoreObjText.text = getScoreNumbers()
 	end
 	-- end objectives text. 
-        
-        if levelEnded == true then return end
         
         if (currentLevel.totalNumberOfEnemies == 0 and #allEne == 0) then
             levelEnded = true
@@ -999,9 +998,9 @@ local function gameLoop( event )
 							end
 							-- Check for Secondary Win condition
 							--if(currentLevel.victoryCondition~=false) then
-							--	if(currentLevel.victoryCondition.enemy==allEne[#allEne].name)then
+							--	if(currentLevel.victoryCondition.enemy.name==allEne[#allEne].name)then
 							--		currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
-							--		print(currentLevel.victoryCondition.enemy .. "left: " .. currentLevel.victoryCondition.amount)
+							--		print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
 							--		if (currentLevel.victoryCondition.amount == 0) then
 							--			print("Condition Met")
 							--			currentLevel.victoryCondition.conditionMet = true
@@ -1252,7 +1251,7 @@ scene.createConveyorBelts()
 	currentLevel.victoryCondition.amount = currentLevel.victoryCondition.memAmount
 	currentLevel.victoryCondition.conditionMet = false
 	numCond = numCond +1 
-	print("Make " .. currentLevel.victoryCondition.amount .. " " .. currentLevel.victoryCondition.enemy)
+	--print("Make " .. currentLevel.victoryCondition.amount .. " " .. currentLevel.victoryCondition.enemy.name)
 else
 	print ("No Second Condition")
   end

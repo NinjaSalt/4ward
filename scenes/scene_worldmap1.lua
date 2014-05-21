@@ -4,6 +4,7 @@
 ---------------------------------------------------------------------------------
  
 local storyboard = require( "storyboard" )
+require("classes.enemies") 
 local scene = storyboard.newScene()
 local globals = require("classes.globals")
 local widget = require( "widget" )
@@ -33,6 +34,10 @@ function scene:createScene( event )
   levels_1 = {}
   levels_2 = {}
   levels_3 = {}
+  local levelStars_1 = {}
+  local levelStars_2 = {}
+  local levelStars_3 = {}
+  local stars_1
   local selectedLevel
   
   local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
@@ -73,20 +78,20 @@ function scene:createScene( event )
   levelBack.y = display.contentHeight/2 + 60
   group:insert(levelBack)
 
-  local star1=  display.newImageRect( "images/star_gray.png", 30, 30 )
-  star1.x = 115
-  star1.y = 160
-  group:insert(star1)
+  -- local star1=  display.newImageRect( "images/star_gray.png", 30, 30 )
+  -- star1.x = 115
+  -- star1.y = 160
+  -- group:insert(star1)
 
-  local star2=  display.newImageRect( "images/star_gray.png", 30, 30 )
-  star2.x = 115
-  star2.y = 200
-  group:insert(star2)
+  -- local star2=  display.newImageRect( "images/star_gray.png", 30, 30 )
+  -- star2.x = 115
+  -- star2.y = 200
+  -- group:insert(star2)
 
-  local star3=  display.newImageRect( "images/star_gray.png", 30, 30 )
-  star3.x = 115
-  star3.y = 240
-  group:insert(star3)
+  -- local star3=  display.newImageRect( "images/star_gray.png", 30, 30 )
+  -- star3.x = 115
+  -- star3.y = 240
+  -- group:insert(star3)
 
   -- ScrollView listener
   local function scrollListener( event )
@@ -129,6 +134,7 @@ function scene:createScene( event )
   }
   group:insert( scrollView)
 
+  --tables of all the buttons
   levelButtons = {display.newImageRect( "images/world1/w1level1.png", 50, 50 ), display.newImageRect( "images/world1/w1level2.png", 50, 50 ), display.newImageRect( "images/world1/w1level3.png", 50, 50 ), 
             display.newImageRect( "images/world1/w1level4.png", 50, 50 ), display.newImageRect( "images/world1/w1level5.png", 50, 50 ), display.newImageRect( "images/world1/w1level6.png", 50, 50 ), 
             display.newImageRect( "images/world1/w1level7.png", 50, 50 ), display.newImageRect( "images/world1/w1level8.png", 50, 50 ), display.newImageRect( "images/world1/w1level9.png", 50, 50 ), 
@@ -156,6 +162,9 @@ function scene:createScene( event )
       levels_1[i].alpha = 0
       levels_2[i].alpha = 0
       levels_3[i].alpha = 0
+      group:insert(levels_1[i])
+      group:insert(levels_2[i])
+      group:insert(levels_3[i])
     end
     levelButtons[i].x = 55*i
     if (globals.stars[1][i]~= nil) then
@@ -181,10 +190,30 @@ function scene:createScene( event )
         levelButtons[i].x = 55*i
       end
     end
+    if (levelStars_1 ~= nil) then
+      levelStars_1[i] = display.newImageRect( "images/star_gray.png", 30, 30 )
+      levelStars_1[i].alpha = 0
+      levelStars_1[i].x = 115
+      levelStars_1[i].y = 160
+      levelStars_2[i] = display.newImageRect( "images/star_gray.png", 30, 30 )
+      levelStars_2[i].alpha = 0
+      levelStars_2[i].x = 115
+      levelStars_2[i].y = 200
+      levelStars_3[i] = display.newImageRect( "images/star_gray.png", 30, 30 )
+      levelStars_3[i].alpha = 0
+      levelStars_3[i].x = 115
+      levelStars_3[i].y = 240
+      stars_1 = display.newImageRect( "images/star.png", 30, 30 )
+      stars_1.alpha = 0
+      group:insert(levelStars_1[i])
+      group:insert(levelStars_2[i])
+      group:insert(levelStars_3[i])
+      group:insert(stars_1)
+    end
     scrollView:insert(  levelButtons[i] )
   end
 
-    local levelStart = display.newImageRect( "images/startButton.png", 40, 40 )
+  local levelStart = display.newImageRect( "images/startButton.png", 40, 40 )
   levelStart.x = display.contentWidth/2+levelBack.width/2 - 30
   levelStart.y = display.contentHeight-25
   group:insert(levelStart)
@@ -219,32 +248,40 @@ function scene:createScene( event )
   objectives:setFillColor( black )
   group:insert(objectives)
 
-  local function setStars()
-    for i=1, table.maxn( levelButtons ) do
-      if (globals.stars[1][i]~= nil) then
-         if (globals.stars[1][i] >= 1) then
-          levelButtons[i]:removeSelf( )
-          levelButtons[i] = nil
-          levels_1[i].alpha = 1
-          levelButtons[i] = levels_1[i]
-          levelButtons[i].x = 55*i
+  local function setStars(level)
+      levelStars_1[level].alpha = 1
+      levelStars_2[level].alpha = 1
+      levelStars_3[level].alpha = 1
+      stars_1.alpha=0
+      if (globals.stars[1][level]~= nil) then
+         if (globals.stars[1][level] >= 1) then
+          print("1 star " ..globals.stars[1][level])
+          levelStars_1[level]:removeSelf( )
+          levelStars_1[level] = nil
+          stars_1.alpha=1
+          levelStars_1[level] = stars_1
+          levelStars_1[level].x = 115
+          levelStars_1[level].y = 160
         end
-        if (globals.stars[1][i] >= 2) then
-          levelButtons[i]:removeSelf( )
-          levelButtons[i] = nil
-          levels_2[i].alpha = 1
-          levelButtons[i] = levels_2[i]
-          levelButtons[i].x = 55*i
+        if (globals.stars[1][level] >= 2) then
+          print("2 star" ..globals.stars[1][level])
+          levelStars_2[level]:removeSelf( )
+          levelStars_2[level] = nil
+          stars_1.alpha=1
+          levelStars_2[level] = stars_1
+          levelStars_2[level].x = 115
+          levelStars_2[level].y = 200
         end
-        if (globals.stars[1][i] >= 3) then
-          levelButtons[i]:removeSelf( )
-          levelButtons[i] = nil
-          levels_3[i].alpha = 1
-          levelButtons[i] = levels_3[i]
-          levelButtons[i].x = 55*i
+        if (globals.stars[1][level] >= 3) then
+          print("3 star" ..globals.stars[1][level])
+          levelStars_3[level]:removeSelf( )
+          levelStars_3[level] = nil
+          stars_1.alpha=1
+          levelStars_3[level] = stars_1
+          levelStars_3[level].x = 115
+          levelStars_3[level].y = 240
         end
       end
-    end
   end
 
   local function onTapStar1 ( event )
@@ -257,85 +294,148 @@ function scene:createScene( event )
         levelTitle.text = selectedLevel.levelTitle;
         print("levelselet: " ..levelSelect)
         print("title: " ..selectedLevel.levelTitle)
+        for i=1, table.maxn( levelStars_1 ) do
+          levelStars_1[i].alpha = 0
+          levelStars_2[i].alpha = 0
+          levelStars_3[i].alpha = 0
+        end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel2 ( event )
         levelSelect = 2
         selectedLevel = Level.load(1, levelSelect)
        levelTitle.text = selectedLevel.levelTitle;
         print("levelselet: " ..levelSelect)
+        for i=1, table.maxn( levelStars_1 ) do
+          levelStars_1[i].alpha = 0
+          levelStars_2[i].alpha = 0
+          levelStars_3[i].alpha = 0
+        end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel3 ( event )
         levelSelect = 3
         selectedLevel = Level.load(1, levelSelect)
         levelTitle.text = selectedLevel.levelTitle;
         print("levelselet: " ..levelSelect)
+        for i=1, table.maxn( levelStars_1 ) do
+          levelStars_1[i].alpha = 0
+          levelStars_2[i].alpha = 0
+          levelStars_3[i].alpha = 0
+        end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel4 ( event )
         levelSelect = 4
         selectedLevel = Level.load(1, levelSelect)
         levelTitle.text = selectedLevel.levelTitle;
         print("levelselet: " ..levelSelect)
+        for i=1, table.maxn( levelStars_1 ) do
+          levelStars_1[i].alpha = 0
+          levelStars_2[i].alpha = 0
+          levelStars_3[i].alpha = 0
+        end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel5 ( event )
         levelSelect = 5
         selectedLevel = Level.load(1, levelSelect)
        levelTitle.text = selectedLevel.levelTitle;
         print("levelselet: " ..levelSelect)
+        for i=1, table.maxn( levelStars_1 ) do
+          levelStars_1[i].alpha = 0
+          levelStars_2[i].alpha = 0
+          levelStars_3[i].alpha = 0
+        end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel6 ( event )
         levelSelect = 6
         selectedLevel = Level.load(1, levelSelect)
        levelTitle.text = selectedLevel.levelTitle;
         print("levelselet: " ..levelSelect)
+        for i=1, table.maxn( levelStars_1 ) do
+          levelStars_1[i].alpha = 0
+          levelStars_2[i].alpha = 0
+          levelStars_3[i].alpha = 0
+        end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel7 ( event )
         levelSelect = 7
         selectedLevel = Level.load(1, levelSelect)
         levelTitle.text = selectedLevel.levelTitle;
         print("levelselet: " ..levelSelect)
+        for i=1, table.maxn( levelStars_1 ) do
+          levelStars_1[i].alpha = 0
+          levelStars_2[i].alpha = 0
+          levelStars_3[i].alpha = 0
+        end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel8 ( event )
         levelSelect = 8
         selectedLevel = Level.load(1, levelSelect)
        levelTitle.text = selectedLevel.levelTitle;
         print("levelselet: " ..levelSelect)
+        for i=1, table.maxn( levelStars_1 ) do
+          levelStars_1[i].alpha = 0
+          levelStars_2[i].alpha = 0
+          levelStars_3[i].alpha = 0
+        end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel9 ( event )
         levelSelect = 9
         selectedLevel = Level.load(1, levelSelect)
         levelTitle.text = selectedLevel.levelTitle;
         print("levelselet: " ..levelSelect)
+        for i=1, table.maxn( levelStars_1 ) do
+          levelStars_1[i].alpha = 0
+          levelStars_2[i].alpha = 0
+          levelStars_3[i].alpha = 0
+        end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel10 ( event )
         levelSelect = 10
         selectedLevel = Level.load(1, levelSelect)
         levelTitle.text = selectedLevel.levelTitle;
         print("levelselet: " ..levelSelect)
+        for i=1, table.maxn( levelStars_1 ) do
+          levelStars_1[i].alpha = 0
+          levelStars_2[i].alpha = 0
+          levelStars_3[i].alpha = 0
+        end
         onTapStar1()
+        setStars(levelSelect)
     end
 
     local function onTapStar2 ( event )
         selectedLevel = Level.load(1, levelSelect)
+        --checks is the victory condition is not false so then we have the objective text show it
         if (selectedLevel.victoryCondition ~= false) then
           if (selectedLevel.victoryCondition.memAmount ~= 1) then
             if (selectedLevel.victoryCondition.enemy == mashed) then
-              objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." " ..selectedLevel.victoryCondition.enemy .. "es"
+              --for purals with an 'es'
+              objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." " ..selectedLevel.victoryCondition.enemy.name .. "es"
             else 
-              objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." " ..selectedLevel.victoryCondition.enemy .. "s"
+              --purals with 's'
+              objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." " ..selectedLevel.victoryCondition.enemy.name .. "s"
             end
           else
-            objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." " ..selectedLevel.victoryCondition.enemy
+            objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." " ..selectedLevel.victoryCondition.enemy.name
           end
-        --end
+          --if the victory condition is false, check if the category condition is true
         elseif (selectedLevel.victoryCondition == false and selectedLevel.categoryCondition ~= false) then
           if (selectedLevel.categoryCondition.memAmount ~= 1) then
             objectives.text = "Serve " ..selectedLevel.categoryCondition.memAmount .." " ..selectedLevel.categoryCondition.type .. " items."
@@ -346,9 +446,10 @@ function scene:createScene( event )
     end
     local function onTapStar3 ( event )
         selectedLevel = Level.load(1, levelSelect)
+        --first checks if the score condition is true
         if (selectedLevel.scoreCondition ~= false) then
           objectives.text = "Score over " ..selectedLevel.scoreCondition.memScore .. " points."
-        --end
+          --if score condition is false, then check if category condition is true
         elseif (selectedLevel.scoreCondition == false and selectedLevel.categoryCondition ~= false) then
           if (selectedLevel.categoryCondition.memAmount ~= 1) then
             objectives.text = "Serve " ..selectedLevel.categoryCondition.memAmount .." " ..selectedLevel.categoryCondition.type .. " items."
@@ -432,9 +533,17 @@ function scene:createScene( event )
   levelButtons[9]:addEventListener("tap", onTapLevel9)
   levelButtons[10]:addEventListener("tap", onTapLevel10)
 
-  star1:addEventListener("tap", onTapStar1)
-  star2:addEventListener("tap", onTapStar2)
-  star3:addEventListener("tap", onTapStar3)
+  for i=1, 10, 1 do
+    if (levelStars_1[i]~=nil) then
+      levelStars_1[i]:addEventListener("tap", onTapStar1)
+    end
+    if (levelStars_2[i]~=nil) then
+      levelStars_2[i]:addEventListener("tap", onTapStar2)
+    end
+    if (levelStars_3[i]~=nil) then
+      levelStars_3[i]:addEventListener("tap", onTapStar3)
+    end
+  end
 
 
   levelStart:addEventListener("tap", onTapStartLevel)
