@@ -669,12 +669,12 @@ end
 local function noMoreCombos()
     local backBorder = display.newRect( display.contentWidth/2, -100, 155, 65 )
 			backBorder: setFillColor (black)
-			transition.to( backBorder, { time=700, y=(display.contentHeight/2) } )
+			transition.to( backBorder, { time=600, y=(30) } )
 			group:insert (backBorder)
 			
 			--the white background
 			local back = display.newRect( display.contentWidth/2, -100, 150, 60 )
-			transition.to( back, { time=700,y=(display.contentHeight/2)} )
+			transition.to( back, { time=600,y=(30)} )   --display.contentHeight/2
 			group:insert (back)
 			
 			local noComboText = display.newText( "No More Combos", display.contentWidth/2, -100, globals.LOBSTERTWO, 36 )
@@ -682,9 +682,17 @@ local function noMoreCombos()
 			group:insert (noComboText)
 			backBorder.width = noComboText.width+20
 			back.width = noComboText.width+15
-                        transition.to( noComboText, { time=(700), y=(display.contentHeight/2) } )
+                        transition.to( noComboText, { time=(600), y=(30) } )
 			
+                        
+                        local delay = 500
+                        for i = 1, #allEne, 1 do
+                            delay = delay + 500
+                            timer.performWithDelay(delay, function() clearEnemy() end)
+                        end
+                        
 			noComboPause()
+                        
 end
 
 function checkEnemy()
@@ -699,39 +707,16 @@ function checkEnemy()
 	if (levelEnded) then
     	globals.attack = false
 
-    	local totalCond = 0
-
-    	--[[-- accounts for two conditions now.
-		if (currentLevel.victoryCondition~=false) then
-			if(currentLevel.victoryCondition.conditionMet==true)then
-				totalCond = totalCond + 1
-			end
-		end
-		if (currentLevel.categoryCondition~=false) then
-			if(currentLevel.categoryCondition.success==true)then
-				totalCond = totalCond + 1
-			end
-		end
-		if (currentLevel.scoreCondition~=false) then
-			if(currentLevel.scoreCondition.success==true)then
-				totalCond = totalCond + 1
-			end
-		end
-		-- end account check
-		]]--
-
 		-- NOW YOU WIN WIN WIN (Unless your score is negative.)
 		local delayTime = 100
                 if noCombos == true then
+                    delayTime = 1500 + (#allEne * 500)
                     noMoreCombos()
-                    delayTime = 3000
                 end
 		if (globals.score > 0) then
-
 			local totalStars = 0
 
 	-- CHECK TO SEE HOW MANY STARS WE HAVE (Before leaving victory screen.)
-
 	if (globals.score > 0) then
 
 		totalStars = 1 -- get one star for completing with a positive score 
@@ -755,7 +740,6 @@ function checkEnemy()
 		end
 
 		-- only replaces stars when you beat the level.
-
 		if (totalStars > globals.stars[world][thisLevel]) then
 			globals.stars[world][thisLevel] = totalStars
 		end
@@ -854,7 +838,18 @@ function validCombosRemaining()
         end
     end
     return false
+end
+
+function clearEnemy()
     
+    local comboPoof = display.newImage( "images/comboPoof.png", allEne[1].x, allEne[1].y, true )
+    comboPoof.width = comboPoof.width/3
+    comboPoof.height = comboPoof.height/3
+    transition.to( comboPoof, { time=500, alpha=0, onComplete=function() comboPoof:removeSelf() end } )
+    allEne[1]: removeSelf()
+    table.remove(allEne, 1)
+    globals.score = globals.score - 10
+    globals.scoreText.text = (globals.score)
 end
 
 local function gameLoop( event )
