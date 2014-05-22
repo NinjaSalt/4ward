@@ -19,8 +19,8 @@ storyboard.removeAll()
 -- BEGINNING OF YOUR IMPLEMENTATION
 ---------------------------------------------------------------------------------
  -- for objective spacing purposes. 
-local spacer = (display.contentHeight/2) - 60
-local moveText = 40
+local spacer = (display.contentHeight/2) - 30
+local moveText = 0
 
 local function antagonistShow()
 	storyboard.showOverlay("scenes.scene_antagonist", {effect = "slideLeft", time=500})
@@ -34,6 +34,8 @@ function scene:createScene( event )
    time = 500
 }
 
+
+
   local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
   bkg:setFillColor( gray)
   bkg.alpha = .5
@@ -45,20 +47,27 @@ function scene:createScene( event )
   local scoreCond = event.params.scr
   local globals = require("classes.globals")
   worldNum = event.params.worldnum
+
+  local levelName = levels[worldNum][levelNumber].levelTitle
  
   local function makeText()
 	local title = display.newText( "Objectives:", display.contentWidth/2, (display.contentHeight/2) - 115, globals.LOBSTERTWO, 48 )
   title:setFillColor( black )
 	group:insert (title)
+
+  local subtitle = display.newText( levelName, display.contentWidth/2, (display.contentHeight/2) - 80, globals.LOBSTERTWO, 20 )
+  subtitle:setFillColor( black )
+  group:insert (subtitle)
+
   end
   --bkg:addEventListener("touch", function() return true end)
   --bkg:addEventListener("tap", function() return true end)
 
   --local objBorder = display.newRect( display.contentWidth/2, 170, 310, 210 )
-  local objBorder = display.newRect( display.contentWidth/2, 160, 310, display.contentHeight )
+  local objBorder = display.newRect( display.contentWidth/2, 160, 340, display.contentHeight )
   objBorder:setFillColor(black)
   group:insert (objBorder)
-  local objBack = display.newRect( display.contentWidth/2, 160, 300, display.contentHeight-10 )
+  local objBack = display.newRect( display.contentWidth/2, 160, 330, display.contentHeight-10 )
   group:insert(objBack)
 
 
@@ -138,17 +147,19 @@ function scene:createScene( event )
  -- group: insert(standardObj)
   end
 
+  local center = display.contentWidth/2
+  local textSize = 18
   local function introText()
-    local introT = display.newText("Serve all the food!", 400, spacer, globals.IMPRIMA, 16)
+    local introT = display.newText("Serve all the food!", 400, spacer, globals.IMPRIMA, textSize )
     introT: setFillColor(black)
     group: insert(introT)
-    spacer  = spacer + 35
+    spacer  = spacer + 30
     transition.to(introT, {time=150, x=display.contentWidth/2 + moveText})
 
     local bonus = display.newText("Bonuses!:", 400, spacer, globals.LOBSTERTWO, 30)
     bonus: setFillColor(black)
     group: insert(bonus)
-    spacer  = spacer + 35
+    spacer  = spacer + 45
     transition.to(bonus, {time=150, x=display.contentWidth/2+ moveText})
 
   end
@@ -158,7 +169,7 @@ function scene:createScene( event )
    local function makeSecCond()
     if (vicCond ~= false) then
     -- print second condition here.
-    local secObj = display.newText("Serve " .. vicCond.amount .. " " .. vicCond.enemy.name.. ".", 400, spacer, globals.IMPRIMA, 16)
+    local secObj = display.newText("Serve " .. vicCond.amount .. " " .. vicCond.enemy.name.. ".", 400, spacer, globals.IMPRIMA, textSize )
     secObj: setFillColor(black)
     group: insert(secObj)
     transition.to(secObj, {time=150, x=display.contentWidth/2+ moveText})
@@ -167,7 +178,7 @@ function scene:createScene( event )
       -- do nothing
     else
       secObj:removeSelf()
-      secObj = display.newText("Serve " .. vicCond.amount .. " " .. vicCond.enemy.name .. "s.", 400, spacer, globals.IMPRIMA, 16)
+      secObj = display.newText("Serve " .. vicCond.amount .. " " .. vicCond.enemy.name .. "s.", 400, spacer, globals.IMPRIMA, textSize )
        secObj: setFillColor(black)
        group: insert(secObj)
        transition.to(secObj, {time=150, x=display.contentWidth/2+ moveText})
@@ -177,7 +188,7 @@ function scene:createScene( event )
     group: insert(secObj)
 
   end
-  spacer  = spacer + 25
+  spacer  = spacer + 38
 end
     --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)
   end
@@ -185,18 +196,18 @@ end
 local function makeCatCond()
     if (catCond ~= false) then
     -- print category condition here.
-    local catObj = display.newText("Serve " .. catCond.amount .. " " .. catCond.type.. " items.", 400, spacer, globals.IMPRIMA, 16)
+    local catObj = display.newText("Serve " .. catCond.amount .. " " .. catCond.type.. " items.", 400, spacer, globals.IMPRIMA, textSize )
     catObj: setFillColor(black)
     group: insert(catObj)
     transition.to(catObj, {time=150, x=display.contentWidth/2+ moveText})
     if (catCond.amount == 1) then
       catObj:removeSelf()
-      catObj = display.newText("Serve 1 " .. catCond.type .. " item.", 400, spacer, globals.IMPRIMA, 16)
+      catObj = display.newText("Serve 1 " .. catCond.type .. " item.", 400, spacer, globals.IMPRIMA, textSize )
       catObj: setFillColor(black)
       group: insert(catObj)
       transition.to(catObj, {time=150, x=display.contentWidth/2+ moveText})
   end
-   spacer  = spacer + 25
+   spacer  = spacer + 38
 end
     --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)
   end
@@ -204,49 +215,76 @@ end
 local function makeScoreCond()
     if (scoreCond ~= false) then
     -- print category condition here.
-    local scoreObj = display.newText("Score over " .. scoreCond.score .. " points.", 400, spacer, globals.IMPRIMA, 16)
+    local scoreObj = display.newText("Score over " .. scoreCond.score .. " points.", 400, spacer, globals.IMPRIMA, textSize )
     scoreObj: setFillColor(black)
     group: insert(scoreObj)
     transition.to(scoreObj, {time=150, x=display.contentWidth/2+ moveText})
-    spacer  = spacer + 25
+    spacer  = spacer + 38
 end    --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)
   end  
 
 local function makeStars()
-  local firstStar = display.newImage("images/starg.png")
-  firstStar.width = 18
-  firstStar.height = 18
+  local firstStar = display.newImage("images/starb.png")
+  firstStar.width = 25
+  firstStar.height = 25
   firstStar.x = -200
-  firstStar.y = 100
+  firstStar.y = 110
   group:insert(firstStar)
-  transition.to(firstStar, {time=150, x=185})
+  transition.to(firstStar, {time=150, x=center})
 
-  local twoStar = display.newImage("images/starg.png")
-  twoStar.width = 18
-  twoStar.height = 18
+  local twoStar = display.newImage("images/starb.png")
+  twoStar.width = 25
+  twoStar.height = 25
   twoStar.x = -200
-  twoStar.y = 170
+  twoStar.y = 185
   group:insert(twoStar)
-  transition.to(twoStar, {time=150, x=185})
+  transition.to(twoStar, {time=150, x=center - 12})
 
-  local threeStar = display.newImage("images/starg.png")
-  threeStar.width = 18
-  threeStar.height = 18
+  local twoStarb = display.newImage("images/starb.png")
+  twoStarb.width = 25
+  twoStarb.height = 25
+  twoStarb.x = -200
+  twoStarb.y = 185
+  group:insert(twoStarb)
+  transition.to(twoStarb, {time=150, x=center + 12})
+
+  local threeStar = display.newImage("images/starb.png")
+  threeStar.width = 25
+  threeStar.height = 25
   threeStar.x = -200
-  threeStar.y = 195
+  threeStar.y = 225
   group:insert(threeStar)
-  transition.to(threeStar, {time=150, x=185})
+  transition.to(threeStar, {time=150, x=center})
+
+  local threeStarb = display.newImage("images/starb.png")
+  threeStarb.width = 25
+  threeStarb.height = 25
+  threeStarb.x = -200
+  threeStarb.y = 225
+  group:insert(threeStarb)
+  transition.to(threeStarb, {time=150, x=center+25})
+
+  local threeStarc = display.newImage("images/starb.png")
+  threeStarc.width = 25
+  threeStarc.height = 25
+  threeStarc.x = -200
+  threeStarc.y = 225
+  group:insert(threeStarc)
+  transition.to(threeStarc, {time=150, x=center-25})
 
 
 end
 
   local function makeAnt()
   local antag = display.newImage("images/antag_01.png")
-  antag.width = antag.width/5
-  antag.height = antag.height/5
-  antag.x = display.contentWidth/5 - 20
-  antag.y = 400 
-  transition.to(antag,{time = 300,  y= display.contentHeight/2})
+  antag.width = 236--antag.width/5.5
+  antag.height = 294--antag.height/5.5
+  --antag.width = antag.width/5
+  --antag.height = antag.height/5
+  antag.x = display.contentWidth - 60
+  --antag.x = display.contentWidth/5 - 20
+  antag.y = 480 
+  transition.to(antag,{time = 300,  y= display.contentHeight/2 + 20})
   --antag.x = display.contentWidth/5
   --antag.y = display.contentHeight/2
   group: insert (antag)
