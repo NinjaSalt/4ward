@@ -38,7 +38,7 @@ function scene:createScene( event )
   local levelStars_2 = {}
   local levelStars_3 = {}
 
-  local selectedLevel
+  local selectedLevel = Level.load(1, levelSelect)
   
   local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
@@ -59,20 +59,24 @@ function scene:createScene( event )
     align = "center"  --new alignment parameter
   }
 
+  -- SETS TITLE
   local title = display.newText(titleText)
   title:setFillColor( black )  
   group:insert(title)
 
+  -- SETS PANTRY BUTTON
   local itemShop = display.newImageRect( "images/pantry.png", 80, 80 )
   itemShop.x = 370
   itemShop.y = 40
   group:insert(itemShop)
 
+  -- SETS BOOK BUTTON
   local recipeBook = display.newImageRect( "images/book.png", 100, 100 )
   recipeBook.x = 100
   recipeBook.y = 40
   group:insert(recipeBook)
 
+  -- SETS BACK ARROW
   local levelBack = display.newImageRect( "images/levelback.png", 320, 200 )
   levelBack.x = display.contentWidth/2
   levelBack.y = display.contentHeight/2 + 60
@@ -92,27 +96,6 @@ function scene:createScene( event )
   -- star3.x = 115
   -- star3.y = 240
   -- group:insert(star3)
-
-  -- ScrollView listener
-  local function scrollListener( event )
-
-      local phase = event.phase
-      if ( phase == "began" ) then print( "Scroll view was touched" )
-      elseif ( phase == "moved" ) then print( "Scroll view was moved" )
-      elseif ( phase == "ended" ) then print( "Scroll view was released" )
-      end
-
-      -- In the event a scroll limit is reached...
-      if ( event.limitReached ) then
-          --if ( event.direction == "up" ) then print( "Reached top limit" )
-         -- elseif ( event.direction == "down" ) then print( "Reached bottom limit" )
-          if ( event.direction == "left" ) then print( "Reached left limit" )
-          elseif ( event.direction == "right" ) then print( "Reached right limit" )
-          end
-      end
-
-      return true
-  end
 
   -- Create the widget
   local scrollView = widget.newScrollView{
@@ -171,9 +154,10 @@ function scene:createScene( event )
             display.newImageRect( "images/star_gray.png", 30, 30 )}        
 
 
-
+  -- sets all the level buttons
   for i=1, table.maxn( levelButtons ) do
     if (levels_1[i] ~=nil and levels_2[i] ~= nil and levels_3[i] ~= nil) then
+      --sets their alpha to 0 until they are called
       levels_1[i].alpha = 0
       levels_2[i].alpha = 0
       levels_3[i].alpha = 0
@@ -181,9 +165,10 @@ function scene:createScene( event )
       group:insert(levels_2[i])
       group:insert(levels_3[i])
     end
-    levelButtons[i].x = 55*i
+    ---levelButtons[i].x = 55*i
     if (globals.stars[1][i]~= nil) then
        if (globals.stars[1][i] >= 1) then
+        --sets the button to have 1 star
         levelButtons[i]:removeSelf( )
         levelButtons[i] = nil
         levels_1[i].alpha = 1
@@ -191,6 +176,7 @@ function scene:createScene( event )
         levelButtons[i].x = 55*i
       end
       if (globals.stars[1][i] >= 2) then
+        --sets the button to have 2 stars
         levelButtons[i]:removeSelf( )
         levelButtons[i] = nil
         levels_2[i].alpha = 1
@@ -198,6 +184,7 @@ function scene:createScene( event )
         levelButtons[i].x = 55*i
       end
       if (globals.stars[1][i] >= 3) then
+        --sets the button to have 3 stars
         levelButtons[i]:removeSelf( )
         levelButtons[i] = nil
         levels_3[i].alpha = 1
@@ -208,6 +195,7 @@ function scene:createScene( event )
     scrollView:insert(  levelButtons[i] )
   end
 
+--for the stars to show objectives and sets to alpha until they are called
   for i=1, table.maxn( levelStars_1 ) do
     if (levelStars_1[i] ~=nil) then
       levelStars_1[i].alpha = 0
@@ -262,59 +250,82 @@ function scene:createScene( event )
   objectives:setFillColor( black )
   group:insert(objectives)
 
-    local function setStars(level)
-      print(level)
-      levelStars_1[level].alpha = 1
-      levelStars_1[level].x = 115
-      levelStars_1[level].y = 160
-      levelStars_2[level].alpha = 1
-      levelStars_2[level].x = 115
-      levelStars_2[level].y = 200
-      levelStars_3[level].alpha = 1
-      levelStars_3[level].x = 115
-      levelStars_3[level].y = 240
-      if (globals.stars[1][level]~= nil) then
-         if (globals.stars[1][level] >= 1) then
-          levelStars_1[level]:removeSelf( )
-          levelStars_1[level] = nil
-          levelStars_1[level] = display.newImageRect( "images/star.png", 30, 30 )
-          levelStars_1[level].x = 115
-          levelStars_1[level].y = 160
-          group:insert(levelStars_1[level])
-        end
-        if (globals.stars[1][level] >= 2) then
-          levelStars_2[level]:removeSelf( )
-          levelStars_2[level] = nil
-          levelStars_2[level] = display.newImageRect( "images/star.png", 30, 30 )
-          levelStars_2[level].x = 115
-          levelStars_2[level].y = 200
-          group:insert(levelStars_2[level])
-        end
-        if (globals.stars[1][level] >= 3) then
-          levelStars_3[level]:removeSelf( )
-          levelStars_3[level] = nil
-          levelStars_3[level] = display.newImageRect( "images/star.png", 30, 30 )
-          levelStars_3[level].x = 115
-          levelStars_3[level].y = 240
-          group:insert(levelStars_3[level])
-        end
+  local function setStars(level)
+    levelStars_1[level].alpha = 1
+    levelStars_1[level].x = 115
+    levelStars_1[level].y = 160
+    levelStars_2[level].alpha = 1
+    levelStars_2[level].x = 115
+    levelStars_2[level].y = 200
+    levelStars_3[level].alpha = 1
+    levelStars_3[level].x = 115
+    levelStars_3[level].y = 240
+    if (globals.stars[1][level]~= nil) then
+      --sets all stars to gray if the number of stars they earned is 0 or haven't played that level yet
+      if (globals.stars[1][level] == 0) then
+        --levelStars_1[level]:removeSelf( )
+        --levelStars_1[level] = nil
+        levelStars_1[level] = display.newImageRect( "images/star_gray.png", 30, 30 )
+        levelStars_1[level].x = 115
+        levelStars_1[level].y = 160
+        group:insert(levelStars_1[level])
+        levelStars_2[level] = display.newImageRect( "images/star_gray.png", 30, 30 )
+        levelStars_2[level].x = 115
+        levelStars_2[level].y = 200
+        group:insert(levelStars_2[level])
+        levelStars_3[level] = display.newImageRect( "images/star_gray.png", 30, 30 )
+        levelStars_3[level].x = 115
+        levelStars_3[level].y = 240
+        group:insert(levelStars_3[level])
+      end
+      --sets the top star to the yellow star
+       if (globals.stars[1][level] >= 1) then
+        --levelStars_1[level]:removeSelf( )
+        --levelStars_1[level] = nil
+        levelStars_1[level] = display.newImageRect( "images/star.png", 30, 30 )
+        levelStars_1[level].x = 115
+        levelStars_1[level].y = 160
+        group:insert(levelStars_1[level])
+      end
+      --sets the middle star to yellow
+      if (globals.stars[1][level] >= 2) then
+        --levelStars_2[level]:removeSelf( )
+        --levelStars_2[level] = nil
+        levelStars_2[level] = display.newImageRect( "images/star.png", 30, 30 )
+        levelStars_2[level].x = 115
+        levelStars_2[level].y = 200
+        group:insert(levelStars_2[level])
+      end
+      --sets the third star to yellow
+      if (globals.stars[1][level] >= 3) then
+        --levelStars_3[level]:removeSelf( )
+        --levelStars_3[level] = nil
+        levelStars_3[level] = display.newImageRect( "images/star.png", 30, 30 )
+        levelStars_3[level].x = 115
+        levelStars_3[level].y = 240
+        group:insert(levelStars_3[level])
+      end
     end
   end
 
+  --sets the objective text to the default objective
   local function onTapStar1 ( event )
         objectives.text = "Serve all the food.";
     end
 
+    --events for each level button
    local function onTapLevel1 ( event )
         levelSelect = 1
         selectedLevel = Level.load(1, levelSelect)
         levelTitle.text = selectedLevel.levelTitle;
+        -- sets all the stars to 0 to clear it
         for i=1, table.maxn( levelStars_1 ) do
           levelStars_1[i].alpha = 0
           levelStars_2[i].alpha = 0
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
+        --places the appropriate representation of stars
        setStars(levelSelect)
     end
     local function onTapLevel2 ( event )
@@ -376,7 +387,6 @@ function scene:createScene( event )
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
-        setStars(levelSelect)
     end
     local function onTapLevel7 ( event )
         levelSelect = 7
@@ -388,7 +398,6 @@ function scene:createScene( event )
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
-        setStars(levelSelect)
     end
     local function onTapLevel8 ( event )
         levelSelect = 8
@@ -400,7 +409,6 @@ function scene:createScene( event )
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
-        setStars(levelSelect)
     end
     local function onTapLevel9 ( event )
         levelSelect = 9
@@ -412,7 +420,6 @@ function scene:createScene( event )
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
-       setStars(levelSelect)
     end
     local function onTapLevel10 ( event )
         levelSelect = 10
@@ -424,11 +431,10 @@ function scene:createScene( event )
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
-       setStars(levelSelect)
     end
 
+    --sets the objective text to the second objective wheb the second star is tapped
     local function onTapStar2 ( event )
-       -- selectedLevel = Level.load(1, levelSelect)
         --checks is the victory condition is not false so then we have the objective text show it
         if (selectedLevel.victoryCondition ~= false) then
           if (selectedLevel.victoryCondition.memAmount ~= 1) then
@@ -451,8 +457,8 @@ function scene:createScene( event )
           end
         end
     end
+    --sets the objective text to the 3rd objective when the third star is tapped
     local function onTapStar3 ( event )
-       -- selectedLevel = Level.load(1, levelSelect)
         --first checks if the score condition is true
         if (selectedLevel.scoreCondition ~= false) then
           objectives.text = "Score over " ..selectedLevel.scoreCondition.memScore .. " points."
@@ -498,7 +504,6 @@ function scene:createScene( event )
 
   recipeBook:addEventListener( "tap", onTapBookIcon )
   itemShop:addEventListener( "tap", onTapStoreButton )
-  --resetScreen:addEventListener( "tap", resetlevelSelect )
 
   local backButton = display.newImage("images/leftArrow.png")
   backButton.x = 466 
@@ -529,6 +534,7 @@ function scene:createScene( event )
     end
   end
   
+  --adds all the event listeners to the level button
   levelButtons[1]:addEventListener("tap", onTapLevel1)
   levelButtons[2]:addEventListener("tap", onTapLevel2)
   levelButtons[3]:addEventListener("tap", onTapLevel3)
@@ -540,32 +546,15 @@ function scene:createScene( event )
   levelButtons[9]:addEventListener("tap", onTapLevel9)
   levelButtons[10]:addEventListener("tap", onTapLevel10)
 
-  for i=1, 10, 1 do
-    --if (levelStars_1[i]~=nil) then
+  --sets the listeners to the stars
+  for i=1, table.maxn(levelStars_1) do
       levelStars_1[i]:addEventListener("tap", onTapStar1)
-    --end
-    --if (levelStars_2[i]~=nil) then
       levelStars_2[i]:addEventListener("tap", onTapStar2)
-    --end
-    --if (levelStars_3[i]~=nil) then
       levelStars_3[i]:addEventListener("tap", onTapStar3)
-    --end
   end
 
-
-      -- star1:addEventListener("tap", onTapStar1)
-      -- star2:addEventListener("tap", onTapStar2)
-      -- star3:addEventListener("tap", onTapStar3)
-
-
   levelStart:addEventListener("tap", onTapStartLevel)
-
-  -- local function onTapBackArrow (event)
-  --   storyboard.removeScene(scene)
-  --   storyboard.gotoScene("scenes.scene_worldmap", {effect = "fade", time = 250})
-  -- end
-
-  -- backArrow:addEventListener("tap", onTapBackArrow)
+  --tells the scene to start at the first level
   onTapLevel1()
 end
  
@@ -584,7 +573,6 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
- 
 end
  
 -- Called AFTER scene has finished moving offscreen:
