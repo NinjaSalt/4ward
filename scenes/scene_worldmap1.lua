@@ -165,7 +165,7 @@ function scene:createScene( event )
       group:insert(levels_2[i])
       group:insert(levels_3[i])
     end
-    ---levelButtons[i].x = 55*i
+    levelButtons[i].x = 55*i
     if (globals.stars[1][i]~= nil) then
        if (globals.stars[1][i] >= 1) then
         --sets the button to have 1 star
