@@ -29,35 +29,171 @@ function scene:createScene( event )
    time = 500
 }
 
+  local textArray = {}
+
+-- have an array of helpful hints/text
+  textArray = {"", "", "", "", "", "", ""}
+
   local bkg = display.newImage( "images/b8.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
+  local function startLevel()
+    timer.performWithDelay(200, function()storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = nextLevel, world = nextWorld}})end)
+  end
 
-  local loadText = display.newText("Now Loading", display.contentWidth/2-30, display.contentHeight/2, globals.LOBSTERTWO, 40)
+    local loadText = display.newText("Now Loading", display.contentWidth/2-30, display.contentHeight/2+50, globals.LOBSTERTWO, 35)
   loadText:setFillColor( 0 )
   group:insert(loadText)
 
-  local dotOne = display.newImage("images/sugar.png", 800, display.contentHeight/2+10,30,30)
+  local dotOne = display.newImage("images/sugar.png", 800, display.contentHeight/2+60,30,30)
   dotOne.width = 15
   dotOne.height = 15
   group:insert(dotOne)
 
-  local dotTwo = display.newImage("images/flour.png", 800, display.contentHeight/2+10,30,30)
+  local dotTwo = display.newImage("images/flour.png", 800, display.contentHeight/2+60,30,30)
   dotTwo.width = 15
   dotTwo.height = 15
   group:insert(dotTwo)
 
-  local dotThree = display.newImage("images/sugar.png", 800, display.contentHeight/2+10,30,30)
+  local dotThree = display.newImage("images/sugar.png", 800, display.contentHeight/2+60,30,30)
   dotThree.width = 15
   dotThree.height = 15
   group:insert(dotThree)
 
-
-	timer.performWithDelay(400, function() transition.to(dotOne, {time=300, x= display.contentWidth/2+80}) end)
+  timer.performWithDelay(400, function() transition.to(dotOne, {time=300, x= display.contentWidth/2+80}) end)
   timer.performWithDelay(800, function() transition.to(dotTwo, {time=300, x= display.contentWidth/2+ 100}) end)
   timer.performWithDelay(1200, function() transition.to(dotThree, {time=300, x= display.contentWidth/2+ 120}) end)
-  timer.performWithDelay(2200, function()storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = nextLevel, world = nextWorld}})end)
+
+--if it's world 1, show the breakfast chef
+  if (nextWorld == 1) then
+    local breakfast_load = display.newImageRect( "images/breakfast_fill.png", 300, 300 )
+    breakfast_load.x = display.contentWidth/2
+    breakfast_load.y = display.contentHeight/3
+    breakfast_load:scale( 0.3, 0.3 )
+     group:insert (breakfast_load)
+
+    local breakfast_hurt = display.newImageRect( "images/breakfast_hurt.png", 256, 256 )
+    breakfast_hurt.x = display.contentWidth/2
+    breakfast_hurt.y = display.contentHeight/3
+    breakfast_hurt:scale( 0, 0 )
+    breakfast_hurt.alpha = 0
+    group:insert (breakfast_hurt)
+
+    transition.to(breakfast_load, {time=2000, height = 300, onComplete=
+      function() 
+        breakfast_load:removeSelf( )
+        breakfast_load = nil
+        transition.to(breakfast_hurt, {time=300, alpha = 1, xScale = 0.4, yScale = 0.4, onComplete=
+          function() 
+            dotOne:removeSelf( )
+            dotOne = nil
+            dotTwo:removeSelf( )
+            dotTwo = nil
+            dotThree:removeSelf( )
+            dotThree = nil
+            loadText.text = "Tap to start!"
+            loadText.x = display.contentWidth/2
+          end})
+        bkg:addEventListener( "tap", startLevel )
+      end})
+  end
+
+  if (nextWorld == 2) then
+    local dessert_load = display.newImageRect( "images/dessert_fill.png", 300, 300 )
+    dessert_load.x = display.contentWidth/2
+    dessert_load.y = display.contentHeight/3
+    dessert_load:scale( 0.3, 0.3 )
+     group:insert (dessert_load)
+
+    local dessert_hurt = display.newImageRect( "images/dessert_hurt.png", 256, 256 )
+    dessert_hurt.x = display.contentWidth/2
+    dessert_hurt.y = display.contentHeight/3
+    dessert_hurt:scale( 0, 0 )
+    dessert_hurt.alpha = 0
+    group:insert (dessert_hurt)
+
+    transition.to(dessert_load, {time=2000, height = 300, onComplete=
+      function() 
+        dessert_load:removeSelf( )
+        dessert_load = nil
+        transition.to(dessert_hurt, {time=300, alpha = 1, xScale = 0.4, yScale = 0.4, onComplete=
+          function() 
+            dotOne:removeSelf( )
+            dotOne = nil
+            dotTwo:removeSelf( )
+            dotTwo = nil
+            dotThree:removeSelf( )
+            dotThree = nil
+            loadText.text = "Tap to start!"
+            loadText.x = display.contentWidth/2
+          end})
+        bkg:addEventListener( "tap", startLevel )
+      end})
+  end
+
+  if (nextWorld == 3) then
+    local dinner_load = display.newImageRect( "images/dinner_fill.png", 300, 300 )
+    dinner_load.x = display.contentWidth/2
+    dinner_load.y = display.contentHeight/3
+    dinner_load:scale( 0.3, 0.3 )
+     group:insert (dinner_load)
+
+    local dinner_hurt = display.newImageRect( "images/dinner_hurt.png", 256, 256 )
+    dinner_hurt.x = display.contentWidth/2
+    dinner_hurt.y = display.contentHeight/3
+    dinner_hurt:scale( 0, 0 )
+    dinner_hurt.alpha = 0
+    group:insert (dinner_hurt)
+
+    transition.to(dinner_load, {time=2000, height = 300, onComplete=
+      function() 
+        dinner_load:removeSelf( )
+        dinner_load = nil
+        transition.to(dinner_hurt, {time=300, alpha = 1, xScale = 0.4, yScale = 0.4, onComplete=
+          function() 
+            dotOne:removeSelf( )
+            dotOne = nil
+            dotTwo:removeSelf( )
+            dotTwo = nil
+            dotThree:removeSelf( )
+            dotThree = nil
+            loadText.text = "Tap to start!"
+            loadText.x = display.contentWidth/2
+          end})
+        bkg:addEventListener( "tap", startLevel )
+      end})
+  end
+
+
+
+
+  -- local loadText = display.newText("Now Loading", display.contentWidth/2-30, display.contentHeight/2, globals.LOBSTERTWO, 40)
+  -- loadText:setFillColor( 0 )
+  -- group:insert(loadText)
+
+  -- local dotOne = display.newImage("images/sugar.png", 800, display.contentHeight/2+10,30,30)
+  -- dotOne.width = 15
+  -- dotOne.height = 15
+  -- group:insert(dotOne)
+
+  -- local dotTwo = display.newImage("images/flour.png", 800, display.contentHeight/2+10,30,30)
+  -- dotTwo.width = 15
+  -- dotTwo.height = 15
+  -- group:insert(dotTwo)
+
+  -- local dotThree = display.newImage("images/sugar.png", 800, display.contentHeight/2+10,30,30)
+  -- dotThree.width = 15
+  -- dotThree.height = 15
+  -- group:insert(dotThree)
+
+	--timer.performWithDelay(400, function() transition.to(dotOne, {time=300, x= display.contentWidth/2+80}) end)
+  --timer.performWithDelay(800, function() transition.to(dotTwo, {time=300, x= display.contentWidth/2+ 100}) end)
+  --timer.performWithDelay(1200, function() transition.to(dotThree, {time=300, x= display.contentWidth/2+ 120}) end)
+  --timer.performWithDelay(2200, function()storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 500, params = {level = nextLevel, world = nextWorld}})end)
+
+  --bkg:addEventListener( "tap", startLevel )
+
  
 end
  
