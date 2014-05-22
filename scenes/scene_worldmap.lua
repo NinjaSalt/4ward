@@ -125,11 +125,18 @@ function scene:createScene( event )
     storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
 
+  local function onTapBanner3( event )
+    storyboard.removeScene( scene )
+    storyboard.gotoScene( "scenes.scene_worldmap3", {effect = "fade", time = 500})
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
+  end
+
   bookIcon:addEventListener("tap", onTapBookIcon)
   storeButton:addEventListener("tap", onTapStoreButton)
   backArrow:addEventListener("tap", onTapBackArrow)
   banner1:addEventListener("tap", onTapBanner1)
   banner2:addEventListener("tap", onTapBanner2)
+  banner3:addEventListener("tap", onTapBanner3)
 
 end
  
