@@ -5,7 +5,7 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
-local globals = require ("classes.globals") 
+local globals = require ("classes.globals")
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -19,86 +19,32 @@ storyboard.removeAll()
 function scene:createScene( event )
   local group = self.view
 
-  local options = {
-   effect = "fade",
-   time = 250
-}
-
---[[local socialOptions = {
-   service = "facebook",
-   message = "Check out the game I'm making",
-   listener = socialEventListener,
-   url = "http://nwcgame.com"
-}]]
-
   local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
- local splashSheetSettings =
-    {
-   --  width = 1107,
-  --   height = 781,
-    width = 420,
-    height = 296,
-   -- sheetContentWidth=280,
-  -- sheetContentHeight=70,
-  sheetContentWidth=840,
-  sheetContentHeight=1480,
-  numFrames = 10
-  }
-  local splashSheet = graphics.newImageSheet("images/nwc_logo.png",splashSheetSettings)
-  local splashSheetSsequenceData = {
-      {name = "splash", frames={1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 10, 1, 10, 1, 10, 1}, time=3000, loopCount=0}
-    }
+  local opTitle = display.newText( "Options", 0, 0, globals.LOBSTERTWO, 38 )
+  opTitle:setFillColor(black)
+  opTitle.x = display.contentCenterX
+  opTitle.y = 30
+  group:insert( opTitle )
 
-  --local splashScreen = display.newImage("images/4wardlogo.png", centerX,centerY,true)
-  local splashScreen = display.newSprite(splashSheet,splashSheetSsequenceData)
-  splashScreen.x =display.contentCenterX - 10
-    splashScreen.y = display.contentCenterY - 20  
-  --splashScreen.height = splashScreen.height*.2; splashScreen.width = splashScreen.width*.2
-  splashScreen:setSequence( "splash" )
-  splashScreen:play()
 
- --local gameTitle = display.newText( "Now we're cooking!", 0, 0, native.systemFontBold, 36 )
-  --gameTitle = display.newImage("images/mocklogo.png")
-  --gameTitle.width = gameTitle.width*.2
-  --gameTitle.height = gameTitle.height*.2
-  --gameTitle.x = display.contentCenterX - 10
-  --gameTitle.y = display.contentCenterY - 30
- 
-  group:insert( splashScreen )
- 
-  local startButton = display.newText( "Start!", 0, 0, globals.LOBSTERTWO, 45 )
-  startButton:setFillColor(black)
-  startButton.x = display.contentCenterX - 90
-  startButton.y = display.contentCenterY + 120
-
-  group:insert( startButton)
-
-  local opButton = display.newText( "Options", 0, 0, globals.LOBSTERTWO, 45 )
-  opButton:setFillColor(black)
-  opButton.x = display.contentCenterX + 80
-  opButton.y = display.contentCenterY + 120
-
-  group:insert(opButton)
-
-  local function onOpTap( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_options",options)
-  end
-
-  local function onTap( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_worldmap",options)
-  end
-
-  startButton:addEventListener( "tap", onTap )
-  opButton:addEventListener( "tap", onOpTap )
+  local backButton = display.newImage("images/leftArrow.png")
+  backButton.x = 466 
+  backButton.y = 12
+  backButton.height = 20
+  backButton.width = 20
+  group:insert(backButton)
   
-  --native.showPopup( "social", socialOptions )
-end
- 
+  local function onTapBack( event )
+   storyboard.removeScene( scene )
+   storyboard.gotoScene( "scenes.scene_home",{ effect = "fade", time = 250})
+  end
+
+  backButton:addEventListener("tap",onTapBack)
+
+ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
