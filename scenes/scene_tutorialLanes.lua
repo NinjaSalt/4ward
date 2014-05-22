@@ -72,6 +72,8 @@ function scene:createScene( event )
 			--timer.resume(attackTimer)
 			timer.resume(spawnEneTimer)
 			globals.breakfastanimation:play()
+      globals.dinneranimation:play()
+      globals.dessertanimation:play()
 			if ( antagonistTimer ~= nil) then
 				 timer.resume(antagonistTimer)
 			end
@@ -98,6 +100,8 @@ function scene:createScene( event )
 	  globals.dessertButton:play()
 	end
 	globals.breakfastanimation:play()
+  globals.dinneranimation:play()
+  globals.dessertanimation:play()
 	if ( antagonistTimer ~= nil) then
 	 timer.resume(antagonistTimer)
 	end
