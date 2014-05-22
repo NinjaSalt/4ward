@@ -37,6 +37,7 @@ function scene:createScene( event )
 
     tutFour:removeSelf()
     fourText:removeSelf()
+    triangle:removeSelf()
     globals.completedShop = true
     storyboard.hideOverlay("scenes.overlay_pantryTutorial", "slideUp", 500 )
     storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
@@ -47,6 +48,7 @@ function scene:createScene( event )
   local function tutorialFour()
     tutThree:removeSelf()
     threeText:removeSelf()
+    triangle:removeSelf()
 
     tutFour = display.newRect( centerX, centerY+ 20, display.contentWidth, display.contentHeight/5 )
     tutFour.alpha = .85
@@ -57,6 +59,13 @@ function scene:createScene( event )
     fourText:setFillColor( black )
     group:insert(fourText)
 
+  triangle = display.newImage( "images/continue.png", 100, 100, true )
+  triangle.x = 450
+  triangle.y = 200
+  triangle.width = 25
+  triangle.height = 25
+  group:insert( triangle )
+
   end
 
   -- third instruction pop-up
@@ -64,6 +73,7 @@ function scene:createScene( event )
 
     tutTwo:removeSelf()
     twoText:removeSelf()
+    triangle:removeSelf()
 
   tutThree = display.newRect( centerX, centerY+ 20, display.contentWidth, display.contentHeight/5 )
   tutThree.alpha = .85
@@ -74,6 +84,13 @@ function scene:createScene( event )
   threeText:setFillColor( black )
   group:insert(threeText)
 
+  triangle = display.newImage( "images/continue.png", 100, 100, true )
+  triangle.x = 450
+  triangle.y = 200
+  triangle.width = 25
+  triangle.height = 25
+  group:insert( triangle )
+
 
   end
   
@@ -82,6 +99,7 @@ function scene:createScene( event )
   print ("two")
   tutOne:removeSelf()
   oneText:removeSelf()
+  triangle:removeSelf()
 
   tutTwo = display.newRect( centerX, centerY+ 20, display.contentWidth, display.contentHeight/5 )
   tutTwo.alpha = .85
@@ -91,6 +109,13 @@ function scene:createScene( event )
   twoText = display.newText("Buy items to help you during showtime.", display.contentWidth/2, 185, globals.IMPRIMA, 20)
   twoText:setFillColor( black )
   group:insert(twoText)
+
+  triangle = display.newImage( "images/continue.png", 100, 100, true )
+  triangle.x = 450
+  triangle.y = 200
+  triangle.width = 25
+  triangle.height = 25
+  group:insert( triangle )
 
 
   end
@@ -106,6 +131,13 @@ function scene:createScene( event )
   oneText = display.newText( "Welcome to the pantry!", display.contentWidth/2, 185, globals.IMPRIMA, 20 )
   oneText:setFillColor(black )
   group:insert(oneText)
+
+  triangle = display.newImage( "images/continue.png", 100, 100, true )
+  triangle.x = 450
+  triangle.y = 200
+  triangle.width = 25
+  triangle.height = 25
+  group:insert( triangle )
 
   end
 

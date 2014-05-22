@@ -37,6 +37,7 @@ function scene:createScene( event )
   local function tutorialFour()
     tutThree:removeSelf()
     threeText:removeSelf()
+    triangle:removeSelf()
     globals.completedBook = true
     --storyboard.hideOverlay( "slideUp", 500 )
     storyboard.hideOverlay("scenes.overlay_recipeTutorial", "slideUp", 500 )
@@ -49,6 +50,7 @@ function scene:createScene( event )
 
     tutTwo:removeSelf()
     twoText:removeSelf()
+    triangle:removeSelf()
 
   tutThree = display.newRect( centerX, centerY+ 20, display.contentWidth, display.contentHeight/5 )
   tutThree.alpha = .85
@@ -59,7 +61,12 @@ function scene:createScene( event )
   threeText:setFillColor( black )
   group:insert(threeText)
 
-
+  triangle = display.newImage( "images/continue.png", 100, 100, true )
+  triangle.x = 450
+  triangle.y = 200
+  triangle.width = 25
+  triangle.height = 25
+  group:insert( triangle )
  
   end
   
@@ -68,6 +75,7 @@ function scene:createScene( event )
   print ("two")
   tutOne:removeSelf()
   oneText:removeSelf()
+  triangle:removeSelf()
 
   tutTwo = display.newRect( centerX, centerY+ 20, display.contentWidth, display.contentHeight/5 )
   tutTwo.alpha = .85
@@ -77,6 +85,13 @@ function scene:createScene( event )
   twoText = display.newText("See all your unlocked recipes here.", display.contentWidth/2, 185, globals.IMPRIMA, 20)
   twoText:setFillColor( black )
   group:insert(twoText)
+
+  triangle = display.newImage( "images/continue.png", 100, 100, true )
+  triangle.x = 450
+  triangle.y = 200
+  triangle.width = 25
+  triangle.height = 25
+  group:insert( triangle )
 
 
   end
@@ -92,6 +107,13 @@ function scene:createScene( event )
   oneText = display.newText( "Welcome to the Recipe Book!", display.contentWidth/2, 185, globals.IMPRIMA, 20 )
   oneText:setFillColor(black )
   group:insert(oneText)
+
+  triangle = display.newImage( "images/continue.png", 100, 100, true )
+  triangle.x = 450
+  triangle.y = 200
+  triangle.width = 25
+  triangle.height = 25
+  group:insert( triangle )
 
   end
 

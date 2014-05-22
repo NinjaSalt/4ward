@@ -183,23 +183,23 @@ function scene:createScene( event )
   -- SCORE --
 
   local scoreGradient = display.newImage("images/scoreGradient2.png")
-  scoreGradient.width = 70
+  scoreGradient.width = 50
   scoreGradient.height = 25
-  scoreGradient.x = 440
+  scoreGradient.x = 420
   scoreGradient.y = 15
   group:insert(scoreGradient)
 
-  globals.scoreText = display.newText( globals.score, 440, 15, globals.LOBSTERTWO, 20 )
+  globals.scoreText = display.newText( globals.score, 420, 15, globals.LOBSTERTWO, 20 )
   globals.scoreText:setFillColor(1,1,1)
   group:insert(globals.scoreText)  
 
   -- PAUSE BUTTON
 
-  local pauseButton = display.newImage("images/Pause.png")
-  pauseButton.x = 468
-  pauseButton.y = 21
-  pauseButton.width = 8
-  pauseButton.height = 8
+  local pauseButton = display.newImage("images/pauseNew.png")
+  pauseButton.x = 465
+  pauseButton.y = 15
+  pauseButton.width = 25
+  pauseButton.height = 25
   group:insert(pauseButton) 
 
     -- MULTIPLIER --
@@ -352,7 +352,7 @@ function scene:createScene( event )
     transition.pause("animation")
   end
 
-  scoreGradient:addEventListener( "tap", onTapPause )
+  pauseButton:addEventListener( "tap", onTapPause )
 end
  
 -- Called BEFORE scene has moved onscreen:
