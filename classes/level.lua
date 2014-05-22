@@ -153,9 +153,9 @@ levels[2][3] = Level.create(3, makeSecondaryWin(cake,3), {5,1,6,4,6,6,1,1,6,0}, 
 -- Super Sugar Rush! (14 items)
 levels[2][4] = Level.create(4, makeSecondaryWin(strawberryCandy,2), {0,3,2,6,6,1,3,6,1,5,1,3,0,6}, {300,3100,3100,2600,4500,2600,2600,2600,3000,3000,3000,100,3000,3000}, makeCatWin("dessert", 4), false, "4: Super Sugar Rush!")
 -- Sour Scramble (14 items) 
-levels[2][5] = Level.create (5, makeSecondaryWin(lemonCookie, 3), {7,1,6,3,7,0,3,1,3,7,3,6,1,3}, {200,3000,3000,3000,3000,3000,3000,3000,3000,3000,3000,3000,3000}, makeCatWin("dessert", 5), false, "5: Sour Scramble")
+levels[2][5] = Level.create (5, makeSecondaryWin(lemonCookie, 3), {7,1,6,3,7,0,3,1,3,7,3,6,1,3}, {200,3000,3000,3000,3000,3000,3000,3000,3000,3000,3000,3000,3000,3000}, makeCatWin("dessert", 5), false, "5: Sour Scramble")
 -- Strawberries of Wrath (14 items)
-levels[2][6] = Level.create(6, makeSecondaryWin(strawberryTart, 4), {1,3,3,1,2,1,6,3,3,6,6,1,1,1}, {300,2600,2700,2600,2600,2700,2700,2600,2600,2600,2600,2600,2600,2600}, false, makeScoreWin(250), "6: Strawberries of Wrath")
+levels[2][6] = Level.create(6, makeSecondaryWin(strawberryTart, 4), {1,3,3,1,2,1,6,3,3,7,6,1,1,1}, {300,2600,2700,2600,2600,2700,2700,2600,2600,2600,2600,2600,2600,2600}, false, makeScoreWin(250), "6: Strawberries of Wrath")
 -- Candy Corner (16 items) 4 lemon candies, 220 points
 levels[2][7] = Level.create (7, makeSecondaryWin(lemonCandy, 4), {6,6,6,1,0,7,3,7,7,1,0,6,6,7,1,3}, {300,2800,2800,2800,2800,2800,2800,2800,2800,2800, 2800,2800,2800,2800,2800,2800}, false, makeScoreWin(260), "7: Candy Corner")
 -- The Pie is a Lie (16 items) 2 lemon pies, 3 dessert items
