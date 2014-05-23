@@ -8,7 +8,7 @@ local scene = storyboard.newScene()
 local globals = require ("classes.globals")
 -- Clear previous scene
 storyboard.removeAll()
- 
+
 -- local forward references should go here --
  
 ---------------------------------------------------------------------------------
@@ -23,11 +23,16 @@ function scene:createScene( event )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-  local opTitle = display.newText( "Options", 0, 0, globals.LOBSTERTWO, 38 )
+  local opTitle = display.newText( "Credits", 0, 0, globals.LOBSTERTWO, 35 )
   opTitle:setFillColor(black)
   opTitle.x = display.contentCenterX
-  opTitle.y = 30
+  opTitle.y = 25
   group:insert( opTitle )
+
+  local credits= display.newImage( "images/credits.png", display.contentWidth/2+ 20, display.contentHeight/2+ 10 )
+  credits.width = 300
+  credits.height = 300
+  group:insert(credits)
 
 
   local backButton = display.newImage("images/leftArrow.png")
@@ -39,26 +44,13 @@ function scene:createScene( event )
   
   local function onTapBack( event )
    storyboard.removeScene( scene )
-   storyboard.gotoScene( "scenes.scene_home",{ effect = "fade", time = 250})
+   storyboard.gotoScene( "scenes.scene_options",{ effect = "fade", time = 250})
   end
 
   backButton:addEventListener("tap",onTapBack)
-
---credits 
-  local credButton = display.newText("Credits", 0, 0, globals.LOBSTERTWO, 30)
-  credButton.x = display.contentWidth/2 
-  credButton.y = 200
-  credButton:setFillColor( black )
-  group:insert(credButton)
-  
-  local function onTapCred( event )
-   storyboard.removeScene( scene )
-   storyboard.gotoScene( "scenes.scene_credits",{ effect = "fade", time = 250})
-  end
-
-  credButton:addEventListener("tap",onTapCred)
-
- end
+ 
+end
+ 
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
