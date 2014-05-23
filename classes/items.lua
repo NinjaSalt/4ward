@@ -42,6 +42,8 @@ function makeItemArray ()
 		items[i].id = i
 		items[i].foodId = i-1
 		items[i].unlocked = false
+		items[i].unlocked = gameSettings[4][i]
+		print(gameSettings[4][i])
 		items[i].description = "A basic ingredient."
 		items[i].toUse = "Drag to another food on the belt."
 		items[i].lockLevel = "discovered."

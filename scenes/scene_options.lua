@@ -8,13 +8,24 @@ local scene = storyboard.newScene()
 local globals = require ("classes.globals")
 -- Clear previous scene
 storyboard.removeAll()
+
+local loadsave = require("classes.loadsave")
+
+--gameSettings = loadsave.loadTable("gamesettings.json")
  
 -- local forward references should go here --
  
 ---------------------------------------------------------------------------------
 -- BEGINNING OF YOUR IMPLEMENTATION
 ---------------------------------------------------------------------------------
- 
+ local lfs = require "lfs"
+
+local doc_path = system.pathForFile( "", system.DocumentsDirectory )
+
+for file in lfs.dir(doc_path) do
+   --file is the current file or directory name
+   print( "Found file: " .. file )
+end
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
@@ -36,15 +47,76 @@ function scene:createScene( event )
   backButton.height = 20
   backButton.width = 20
   group:insert(backButton)
+
+  local resetButton = display.newImageRect("images/resetgame.png", 100,50)
+  resetButton.x = display.contentWidth/5
+  resetButton.y = display.contentHeight/4
+  group:insert(resetButton)
   
   local function onTapBack( event )
    storyboard.removeScene( scene )
    storyboard.gotoScene( "scenes.scene_home",{ effect = "fade", time = 250})
   end
 
-  backButton:addEventListener("tap",onTapBack)
+  local function resetGame( event )
 
---credits 
+    local destDir = system.DocumentsDirectory  -- where the file is stored
+    local results, reason = os.remove( system.pathForFile( "gamesettings.json", destDir  ) )
+
+    if results then
+       print( "file removed" )
+    else
+       print( "file does not exist", reason )
+    end
+       --if (gameSettings == nil) then --comment this to reset the saving ***
+        -- creating new table to save data
+        gameSettings  = {}
+        --world
+        for n=1, globals.numWorlds+3, 1 do
+            print("n: " .. n)
+            gameSettings[n] = {}
+        end
+
+        for i = 1,table.maxn( myEnemies )+1 do
+         -- if (gameSettings[4][i]~=nil) then
+           gameSettings[4][i] = false
+          --end
+          --print(gameSettings[4][i])
+        end
+
+        for h = 1,table.maxn( comboEnemies )+1 do
+          --if (gameSettings[5][h]~=nil) then
+             gameSettings[5][h] = false
+             --print(gameSettings[5][h])
+          --end
+        end
+        --levels
+        for n=1, globals.numWorlds, 1 do
+            for j=1, globals.numLevels, 1 do
+                gameSettings[n][j] = {}
+            end
+        end
+
+        for n=1, globals.numWorlds, 1 do
+            for j=1, globals.numLevels, 1 do
+                for i=1, globals.numStorage, 1 do
+                  gameSettings[n][j][i] = 0
+                end
+            end
+        end
+
+
+        loadsave.saveTable(gameSettings , "gamesettings.json")
+        print("First Time Data Initialisation") --comment this to reset the saving ***
+    -- else --comment this to reset the saving ***
+    --     print("Main Data Loaded") --comment this to reset the saving ***
+    -- end --comment this to reset the saving ***
+  end
+
+  backButton:addEventListener("tap",onTapBack)
+  resetButton:addEventListener("tap",resetGame)
+
+  --credits 
   local credButton = display.newText("Credits", 0, 0, globals.LOBSTERTWO, 30)
   credButton.x = display.contentWidth/2 
   credButton.y = 200
