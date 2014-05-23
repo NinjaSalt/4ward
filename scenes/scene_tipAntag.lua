@@ -6,6 +6,7 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals= require ("classes.globals") 
+require("classes.audioClass")
  
 -- Clear previous scene
 storyboard.removeAll()
@@ -25,11 +26,11 @@ function scene:createScene( event )
   bkg.alpha = .5
   group:insert (bkg)
 
-  local nbkg = display.newImage( "images/pauseBack.png", centerX, centerY, true )
+  local nbkg = display.newImage( "images/antagBack.png", centerX, centerY, true )
   nbkg.height=display.contentHeight*.7; nbkg.width=display.contentWidth*.7
   group:insert (nbkg)
 
-  local title = display.newText( "Pro Chef Tip!", 0, 0, globals.LOBSTERTWO, 35 )
+  local title = display.newText( "Danger!", 0, 0, globals.LOBSTERTWO, 35 )
   title:setFillColor(black)
   title.x = display.contentCenterX
   title.y = 75
@@ -40,6 +41,11 @@ function scene:createScene( event )
   tap.x = display.contentCenterX
   tap.y = 245
   group:insert( tap )
+
+  local antag = display.newImage( "images/antag_03.png", centerX+190, centerY, true )
+
+  antag.height=1620/5; antag.width=1301/5
+  group:insert (antag)
   
   -- invisible rectangle that moves text on when clicked.
   local inRect = display.newRect( display.contentWidth/2, display.contentHeight/2, display.contentWidth, display.contentHeight )
@@ -48,7 +54,7 @@ function scene:createScene( event )
   group:insert (inRect)
 
   local tutText = {}
-  tutText = {"You won't make it much further with simple recipes alone. ", "Try cooking up some triple combos!", "Here's a sample to help you get started!"}
+  tutText = {"Seems like my challenges are too easy for you. ", "I guess it's time for me to step in!", "BWAHAHAHAHAHAHA!"}
 
   local currentNum = 1
 
@@ -77,29 +83,19 @@ function scene:createScene( event )
     currentNum = currentNum + 1 
     
     if (currentNum == 4) then
-    storyboard.hideOverlay("scenes.scene_tipTriple", "slideUp", 500 )
-    storyboard.showOverlay("scenes.scene_tipAntag", {effect = "fade", time = 900})
-    --globals.completedTip = true
+    storyboard.hideOverlay("scenes.scne_tipAntag", "slideUp", 500 )
+    globals.completedTip = true
     else
     currentText = display.newText( tutText[currentNum], 0, 0, globals.IMPRIMA, 18 )
     currentText:setFillColor(black)
     currentText.x = display.contentCenterX
-    if (currentNum == 3 ) then
-      currentText.y = 110
-    else
       currentText.y = 150
-    end
     group:insert( currentText )
 
-    -- tip image
     if (currentNum == 3) then
-      local tipImage = display.newImage( "images/tip.png", 100,100, true )
-      tipImage.x = display.contentWidth/2
-      tipImage.y = display.contentHeight/2 + 20
-      tipImage.width = 500/3
-      tipImage.height = 400/3
-      group:insert(tipImage)
+      playSFX (audioBadCombo1, 1)
     end
+
 
   end
 
