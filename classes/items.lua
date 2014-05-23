@@ -41,16 +41,16 @@ function makeItemArray ()
 		items[i].cost = 300
 		items[i].id = i
 		items[i].foodId = i-1
-		items[i].unlocked = true
+		items[i].unlocked = false
 		items[i].description = "A basic ingredient."
 		items[i].toUse = "Drag to another food on the belt."
-		items[i].lockLevel = 0
+		items[i].lockLevel = "discovered."
 		nextItem=i
 	end
 	--nextItem=nextItem+1
-	items[nextItem+1]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem+1, false, "Pauses the game.", "Click to activate.", 4)
-	items[nextItem+2]= Item.makeItem("Producer Swap","swap", "images/swap.png", 700, nextItem+2, false, "Swaps two items.", "Click to activate.",4)
-	items[nextItem+3]= Item.makeItem("Compost Bin","trash", "images/trash_item.png", 1000, nextItem+3, true, "Removes one item", "Drag to food.",5)
+	--items[nextItem+1]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem+1, false, "Pauses the game.", "Click to activate.", 4)
+	--items[nextItem+2]= Item.makeItem("Producer Swap","swap", "images/swap.png", 700, nextItem+2, false, "Swaps two items.", "Click to activate.",4)
+	items[nextItem+1]= Item.makeItem("Compost Bin","trash", "images/trash_item.png", 1000, nextItem+3, true, "Removes one item", "Drag to food.",5)
 end
 makeItemArray()
 myItems = {}

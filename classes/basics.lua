@@ -1,5 +1,6 @@
 require("classes.enemies")
 local globals = require ("classes.globals")
+require ("classes.items")
 -- local loadsave = require("classes.loadsave")
 
 -- gameSettings = loadsave.loadTable("gamesettings.json")
@@ -18,6 +19,7 @@ end
 function unlockBasicCheck(number)
 	if (globals.basics[number+1]~= nil) then
 		globals.basics[number+1].locker = true
+		items[number+1].unlocked = true
 		-- if (gameSettings[number+1]~=nil) then
 		-- 	print("saving basic " .. number+1)
 		-- 	-- gameSettings[4][number+1] = globals.basics[number+1].locker

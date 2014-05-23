@@ -252,12 +252,12 @@ local currencyGradient = display.newImage("images/money.png")
 
 
   	-- description for locked:
-  	desc = display.newText("LOCKED UNTIL LEVEL", display.contentWidth/4, 200, globals.IMPRIMA, 16)
+  	desc = display.newText("LOCKED UNTIL", display.contentWidth/4, 200, globals.IMPRIMA, 16)
   	desc:setFillColor(0)
   	group:insert(desc)
 
   	--description for toUse (for locked it's the level)
-  	toUse = display.newText (body.lockLevel, display.contentWidth/4, 235, globals.IMPRIMA, 35)
+  	toUse = display.newText (body.lockLevel, display.contentWidth/4, 235, globals.IMPRIMA, 20)
   	toUse: setFillColor(0)
   	group:insert(toUse)
 
