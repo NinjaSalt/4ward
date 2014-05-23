@@ -6,7 +6,7 @@
 local storyboard = require( "storyboard" )
 local globals = require("classes.globals")
 local scene = storyboard.newScene()
--- local loadsave = require("classes.loadsave")
+local loadsave = require("classes.loadsave")
 local thisLevel 
 local world
 local eneInHold = nil
@@ -1341,12 +1341,12 @@ function scene:exitScene( event )
 	  globals.currency.save()
 	end
   --saving high score
-	-- if (globals.score > gameSettings[world][thisLevel][1]) then
-	-- 	gameSettings[world][thisLevel][1] = globals.score
-	-- 	loadsave.saveTable(gameSettings , "gamesettings.json")
-	-- 	print("new high score: " .. gameSettings[world][thisLevel][1])
-	-- end
-	-- print("saved score: " .. gameSettings[world][thisLevel][1])
+	if (globals.score > gameSettings[world][thisLevel][1]) then
+		gameSettings[world][thisLevel][1] = globals.score
+		loadsave.saveTable(gameSettings , "gamesettings.json")
+		print("new high score: " .. gameSettings[world][thisLevel][1])
+	end
+	print("saved score: " .. gameSettings[world][thisLevel][1])
   --Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )
   --timer.cancel(attackTimer)
@@ -1421,13 +1421,12 @@ function scene:exitScene( event )
 	end
 
 	-- END STAR CHECKS 
-
-
 		--saving stars of the level
-		-- if (globals.stars[world][thisLevel] > gameSettings[world][thisLevel][2]) then
-		-- 	gameSettings[world][thisLevel][2] = globals.stars[world][thisLevel]
-		-- 	loadsave.saveTable(gameSettings , "gamesettings.json")
-		-- end
+		if (globals.stars[world][thisLevel] > gameSettings[world][thisLevel][2]) then
+			gameSettings[world][thisLevel][2] = globals.stars[world][thisLevel]
+			loadsave.saveTable(gameSettings , "gamesettings.json")
+			print("Saving stars" .. gameSettings[world][thisLevel][2])
+		end
 	
 	print ("Stars: " .. levels[world][thisLevel].stars)
 

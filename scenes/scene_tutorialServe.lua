@@ -64,11 +64,10 @@ function scene:createScene( event )
 
   local function step1()
 	toDo.text = "Tap the serve button"
-  timer.performWithDelay(500, swipe:addEventListener( "touch", onTapBack ) )
-	--swipe:addEventListener( "touch", onTapBack )
+	swipe:addEventListener( "touch", onTapBack )
   end
   
-  --timer.performWithDelay(2000, step1 )
+  timer.performWithDelay(2000, step1 )
 end
  
 -- Called BEFORE scene has moved onscreen:

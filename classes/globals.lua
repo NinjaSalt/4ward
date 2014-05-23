@@ -6,8 +6,11 @@ local globals = {}
 globals.gamePaused = false;
 
 --SAVING NUMBERS
+--num worlds
 globals.numWorlds = 3
-globals.numLevels = 5
+--how many levels
+globals.numLevels = 10
+--1 = score, 2 = stars
 globals.numStorage = 2
 -- globals.gameSavedValues = {}
 -- for n = 1,table.maxn( numWorlds+1 ) do
