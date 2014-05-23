@@ -574,6 +574,10 @@ end
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
   local group = self.view
+
+  if (globals.completedTip~=true) then
+  storyboard.showOverlay( "scenes.scene_tipTriple" , {effect = "slideDown", time = 500 })
+  end
  
 end
  

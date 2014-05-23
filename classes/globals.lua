@@ -113,4 +113,7 @@ globals.stars[3] = {0,0,0,0,0,0,0,0,0,0}
 globals.completedBook = false
 globals.completedShop = false
 
+-- globals for chef tip / danger warning (needs to be saved)
+globals.completedTip = false
+
 return globals
