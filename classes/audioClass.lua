@@ -3,68 +3,100 @@
 -- LOADING SOUND EFFECTS --
 
 --CHEF MULTIPLIER INCREASE
-audioGoodCombo1 = audio.loadSound ("audio/goodComboFX1.wav")
-audioGoodCombo2 = audio.loadSound ("audio/goodComboFX2.wav")
-audioGoodCombo3 = audio.loadSound ("audio/goodComboFX3.wav")
-audioGoodCombo4 = audio.loadSound ("audio/goodComboFX4.wav")
-audioGoodCombo5 = audio.loadSound ("audio/goodComboFX5.wav")
-audioGoodCombo6 = audio.loadSound ("audio/goodComboFX6.wav")
+local audioGoodCombo1 = audio.loadSound ("audio/goodComboFX1.wav")
+local audioGoodCombo2 = audio.loadSound ("audio/goodComboFX2.wav")
+local audioGoodCombo3 = audio.loadSound ("audio/goodComboFX3.wav")
+local audioGoodCombo4 = audio.loadSound ("audio/goodComboFX4.wav")
+local audioGoodCombo5 = audio.loadSound ("audio/goodComboFX5.wav")
+local audioGoodCombo6 = audio.loadSound ("audio/goodComboFX6.wav")
 
 --ANTAGONIST MULTIPLIER RESET
-audioBadCombo = audio.loadSound ("audio/BadComboFX.wav")
-audioBadCombo1 = audio.loadSound ("audio/BadComboFX1.wav")
-audioBadCombo2 = audio.loadSound ("audio/BadComboFX2.wav")
-audioBadCombo3 = audio.loadSound ("audio/BadComboFX3.wav")
+local audioBadCombo = audio.loadSound ("audio/BadComboFX.wav")
+local audioBadCombo1 = audio.loadSound ("audio/BadComboFX1.wav")
+local audioBadCombo2 = audio.loadSound ("audio/BadComboFX2.wav")
+local audioBadCombo3 = audio.loadSound ("audio/BadComboFX3.wav")
 
 -- CHEF SAYING, ..."READY?"
-audioReady = audio.loadSound("audio/readyFX.wav")
+local audioReady = audio.loadSound("audio/readyFX.wav")
 
 -- CHEF START CATCH PHRASE
-audioStartLevel1 = audio.loadSound ("audio/beginFX1.wav")
-audioStartLevel2 = audio.loadSound ("audio/beginFX2.wav")
-audioStartLevel3 = audio.loadSound ("audio/beginFX3.wav")
-audioStartLevel4 = audio.loadSound ("audio/beginFX4.wav")
+local audioStartLevel1 = audio.loadSound ("audio/beginFX1.wav")
+local audioStartLevel2 = audio.loadSound ("audio/beginFX2.wav")
+local audioStartLevel3 = audio.loadSound ("audio/beginFX3.wav")
+local audioStartLevel4 = audio.loadSound ("audio/beginFX4.wav")
 
 -- CHEF VICTORY CATCH PHRASE
-audioVictory1 = audio.loadSound("audio/victoryFX1.wav")
-audioVictory2 = audio.loadSound("audio/victoryFX2.wav")
-audioVictory3 = audio.loadSound("audio/victoryFX3.wav")
-audioVictory4 = audio.loadSound("audio/victoryFX4.wav")
-audioVictory5 = audio.loadSound("audio/victoryFX5.wav")
-audioVictory6 = audio.loadSound("audio/victoryFX6.wav")
-audioVictory7 = audio.loadSound("audio/victoryFX7.wav")
+local audioVictory1 = audio.loadSound("audio/victoryFX1.wav")
+local audioVictory2 = audio.loadSound("audio/victoryFX2.wav")
+local audioVictory3 = audio.loadSound("audio/victoryFX3.wav")
+local audioVictory4 = audio.loadSound("audio/victoryFX4.wav")
+local audioVictory5 = audio.loadSound("audio/victoryFX5.wav")
+local audioVictory6 = audio.loadSound("audio/victoryFX6.wav")
+local audioVictory7 = audio.loadSound("audio/victoryFX7.wav")
 
 --ANTAGONIST DEFEAT CATCH PHRASE
-audioDefeat1 = audio.loadSound("audio/defeatFX1.wav")
-audioDefeat2 = audio.loadSound("audio/defeatFX2.wav")
-audioDefeat3 = audio.loadSound("audio/defeatFX3.wav")
-audioDefeat4 = audio.loadSound("audio/defeatFX4.wav")
+local audioDefeat1 = audio.loadSound("audio/defeatFX1.wav")
+local audioDefeat2 = audio.loadSound("audio/defeatFX2.wav")
+local audioDefeat3 = audio.loadSound("audio/defeatFX3.wav")
+local audioDefeat4 = audio.loadSound("audio/defeatFX4.wav")
 
 -- ANTAGONIST SOUND EFFECTS
-audioCakeAttack = audio.loadSound("audio/cakeAttackFX.wav")
-audioMashPotato = audio.loadSound("audio/mashPotatoFX.wav")
-audioSupriseSwap = audio.loadSound("audio/supriseSwapFX.wav")
+local audioCakeAttack = audio.loadSound("audio/cakeAttackFX.wav")
+local audioMashPotato = audio.loadSound("audio/mashPotatoFX.wav")
+local audioSupriseSwap = audio.loadSound("audio/supriseSwapFX.wav")
 
 -- SERVE FOOD ... ("DING")
-audioServeFood = audio.loadSound("audio/serveFoodFX.wav")
+local audioServeFood = audio.loadSound("audio/serveFoodFX.wav")
 
 -- CONVEYOR BELT SOUND EFFECTS
-audioLaneSlow = audio.loadSound("audio/laneSlowDown.wav")
-audioLaneSpeedUp = audio.loadSound("audio/laneSpeedUp.wav")
+local audioLaneSlow = audio.loadSound("audio/laneSlowDown.wav")
+local audioLaneSpeedUp = audio.loadSound("audio/laneSpeedUp.wav")
 
 --RANDOM SOUND EFFECTS
-audioFalling = audio.loadSound("audio/FallingDownFX.wav")
+local audioFalling = audio.loadSound("audio/FallingDownFX.wav")
 
 -- END LOADING SOUND EFFECTS -- 
 
 
 -- LOADING MUSIC --
+-- WORLD 1 --
+local w1banjo = audio.loadStream("audio/world1/banjo.wav")
+local w1bass = audio.loadStream("audio/world1/bass.wav")
+local w1drums = audio.loadStream("audio/world1/drums.wav")
+local w1vocal = audio.loadStream("audio/world1/SvenVocal.wav")
+local w1guitar1 = audio.loadStream("audio/world1/guitar1.wav")
+local w1guitar2 = audio.loadStream("audio/world1/guitar2.wav")
+local w1guitar3 = audio.loadStream("audio/world1/guitar3.wav")
+local w1guitar4 = audio.loadStream("audio/world1/guitar4.wav")
+local w1guitar5loop = audio.loadStream("audio/world1/guitar5loop.wav")
+local w1guitar6endloop = audio.loadStream("audio/world1/guitar6endloop.wav")
+local w1guitar7 = audio.loadStream("audio/world1/guitar7.wav")
+local w1guitar8 = audio.loadStream("audio/world1/guitar8.wav")
+local w1guitar9 = audio.loadStream("audio/world1/guitar9.wav")
+local w1guitar10 = audio.loadStream("audio/world1/guitar10.wav")
+local w1guitar11 = audio.loadStream("audio/world1/guitar11.wav")
+local w1guitar12 = audio.loadStream("audio/world1/guitar12.wav")
+local w1guitar13 = audio.loadStream("audio/world1/guitar13.wav")
+
+-- WORLD 2 --
+local w2intro = audio.loadstream("audio/world2/intro.wav")
+local w2chorus = audio.loadstream("audio/world2/chorus.wav")
+local w2chorusbreak = audio.loadstream("audio/world2/chorusbreak.wav")
+local w2chorusfull = audio.loadstream("audio/world2/chrousfull.wav")
+
+-- WORLD 3 --
+local w3intro = audio.loadstream("audio/world3/intro.wav")
+local w3chorus1 = audio.loadstream("audio/world3/chorus1.wav")
+local w3chorus2 = audio.loadstream("audio/world3/chorus2.wav")
+local w3chorus3 = audio.loadstream("audio/world3/chorus3.wav")
+local w3chorus4 = audio.loadstream("audio/world3/chorus4.wav")
+local w3chorusbreak = audio.loadstream("audio/world3/chorusbreak.wav")
 
 
 
 -- BEGIN SOUND CLASS --
-soundOn = true
-musicOn = true
+local soundOn = true
+local musicOn = true
 
 --reserve audio channel for background music
 audio.reserveChannels(1) 
@@ -82,7 +114,7 @@ end
 --Function to play Music
 function playgameMusic(soundFile)
 	if musicOn == true then
-		audio.play(soundFile, {channel = 1, loops = -1, fadein = 2500})
+		audio.play(soundFile, {channel = 2, loops = 0, fadein = 2500})
 	end
 end
 
