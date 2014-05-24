@@ -8,6 +8,7 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 require("classes.level")
 require("classes.audioClass")
+local sfx = require("classes.sfx")
 local globals = require ("classes.globals")
 local levelNumber
 -- Clear previous scene
@@ -108,7 +109,7 @@ function scene:createScene( event )
     local readyText= display.newText( "Ready!", display.contentWidth/2, 295, globals.LOBSTERTWO, 25 )
     readyText:setFillColor(black)
     group:insert(readyText)
-	playSFX (audioReady, 1)
+	playSFX (sfx.audioReady, 1)
   end
 
   
@@ -316,7 +317,7 @@ end
 function scene:exitScene( event )
   local group = self.view
   
-  local audioStartLevels = {audioStartLevel1, audioStartLevel2, audioStartLevel3, audioStartLevel4}
+  local audioStartLevels = {sfx.audioStartLevel1, sfx.audioStartLevel2, sfx.audioStartLevel3, sfx.audioStartLevel4}
   soundToPlay = math.random(1, 4)
   playSFX (audioStartLevels[soundToPlay], 1)
   

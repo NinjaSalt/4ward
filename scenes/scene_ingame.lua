@@ -42,6 +42,7 @@ local deathPoof
 local eneAndBar = {}
 local group 
 
+local sfx = require("classes.sfx")
 local move = require("classes.move")
 require("classes.heroes")
 require("classes.enemies")
@@ -982,12 +983,12 @@ local function gameLoop( event )
 							allEne[#allEne] = passValuesToNewEne(allEne[#allEne], comboEnemies[j])
 							unlockCheck(j)
 							if( j ~= 0 ) then
-								local audioGoodCombos = {audioGoodCombo1, audioGoodCombo2, audioGoodCombo3, audioGoodCombo4, audioGoodCombo5, audioGoodCombo6}
+								local audioGoodCombos = {sfx.audioGoodCombo1, sfx.audioGoodCombo2, sfx.audioGoodCombo3, sfx.audioGoodCombo4, sfx.audioGoodCombo5, sfx.audioGoodCombo6}
 								soundToPlay = math.random(1, 6)
 								playSFX (audioGoodCombos[soundToPlay], 1)
 							end
 							if( j == 0 ) then
-								local audioBadCombos = {audioBadCombo, audioBadCombo1, audioBadCombo2, audioBadCombo3}
+								local audioBadCombos = {sfx.audioBadCombo, sfx.audioBadCombo1, sfx.audioBadCombo2, sfx.audioBadCombo3}
 								soundToPlay = math.random(1, 4)
 								playSFX (audioBadCombos[soundToPlay], 1)
 							end
@@ -1210,6 +1211,8 @@ function scene:createScene( event )
     group:insert(eneAndBar[0])
 	--group:insert(eneAndBar[1])
   end
+
+  --
   if (world == 1) then
   	bkg = display.newImage( "images/floor02.png", centerX, centerY, true )
   	elseif (world == 2) then

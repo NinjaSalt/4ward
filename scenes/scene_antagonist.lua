@@ -6,6 +6,7 @@
 require("classes.items")
 require("classes.enemies")
 require("classes.audioClass")
+local sfx = require("classes.sfx")
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals= require ("classes.globals") 
@@ -78,17 +79,17 @@ function scene:createScene( event )
 	textBox.width=speech.width+30
 	--textBoxOutline.width=speech.width+20
   elseif ( antagonistAbility == 2 ) then
-    playSFX (audioSupriseSwap, 1)
+    playSFX (sfx.audioSupriseSwap, 1)
     speech.text = "SURPRISE SWAP!"
 	textBox.width=speech.width+30
 	--textBoxOutline.width=speech.width+20
   elseif ( antagonistAbility == 3 ) then
-    playSFX (audioCakeAttack, 1)
+    playSFX (sfx.audioCakeAttack, 1)
     speech.text = "CAKE ATTACK!"
 	textBox.width=speech.width+30
 	--textBoxOutline.width=speech.width+20
   elseif ( antagonistAbility == 4 ) then
-    playSFX (audioMashPotato, 1)
+    playSFX (sfx.audioMashPotato, 1)
     speech.text = "MASH THAT POTATO!"
 	textBox.width=speech.width+30
 	--textBoxOutline.width=speech.width+20

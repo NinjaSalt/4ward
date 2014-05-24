@@ -6,6 +6,7 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals= require ("classes.globals") 
+local sfx = require ("classes.sfx")
 require("classes.audioClass")
  
 -- Clear previous scene
@@ -93,7 +94,7 @@ function scene:createScene( event )
     group:insert( currentText )
 
     if (currentNum == 3) then
-      playSFX (audioBadCombo1, 1)
+      playSFX (sfx.audioBadCombo1, 1)
     end
 
 

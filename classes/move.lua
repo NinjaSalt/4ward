@@ -63,7 +63,7 @@ function teleport( event, params )
 						updateMoveSpeed(targetHero)
 						globals.levers[targetHero.num]:setSequence( "fast" )
 						globals.levers[targetHero.num]:play()
-						playSFX (audioLaneSpeedUp, 1)
+						playSFX (sfx.audioLaneSpeedUp, 1)
 						if (targetHero.num == 0) then
 							globals.belts[targetHero.num]:pause()
 							frameNum1 = globals.belts[targetHero.num].frame
@@ -85,7 +85,7 @@ function teleport( event, params )
 						updateMoveSpeed(targetHero)
 						globals.levers[targetHero.num]:setSequence( "normal" )
 						globals.levers[targetHero.num]:play()
-						playSFX (audioLaneSpeedUp, 1)
+						playSFX (sfx.audioLaneSpeedUp, 1)
 						if (targetHero.num == 0) then
 							globals.belts[targetHero.num]:pause()
 							frameNum1 = globals.belts[targetHero.num].frame
@@ -110,7 +110,7 @@ function teleport( event, params )
 						updateMoveSpeed(targetHero)
 						globals.levers[targetHero.num]:setSequence( "slow" )
 						globals.levers[targetHero.num]:play()
-						playSFX (audioLaneSlow, 1)
+						playSFX (sfx.audioLaneSlow, 1)
 						if (targetHero.num == 0) then
 							globals.belts[targetHero.num]:pause()
 							frameNum1 = globals.belts[targetHero.num].frame						
@@ -132,7 +132,7 @@ function teleport( event, params )
 						updateMoveSpeed(targetHero)
 						globals.levers[targetHero.num]:setSequence( "normal" )
 						globals.levers[targetHero.num]:play()
-						playSFX (audioLaneSlow, 1)
+						playSFX (sfx.audioLaneSlow, 1)
 						if (targetHero.num == 0) then
 							globals.belts[targetHero.num]:pause()
 							frameNum1 = globals.belts[targetHero.num].frame						

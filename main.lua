@@ -43,13 +43,14 @@ local options = {
 }
 
 
-  -- load music
-  local theme = audio.loadStream("audio/theme.wav")
-  local globals = require ("classes.globals")
-  require("classes.enemies")
+local globals = require ("classes.globals")
+require("classes.enemies")
+local sfx = require("classes.sfx")
+require("classes.audioClass")
 
-  -- play music
-  local themeChannel = audio.play(theme,{channel =1, loops=-1})
+-- play music
+playgameMusic(sfx.w3chorus2,1)
+
 
 
 local storyboard = require( "storyboard" )
@@ -111,14 +112,14 @@ for file in lfs.dir(doc_path) do
    print( "Found file: " .. file )
 end
 
--- local destDir = system.DocumentsDirectory  -- where the file is stored
--- local results, reason = os.remove( system.pathForFile( "currencyfile.txt", destDir  ) )
+local destDir = system.DocumentsDirectory  -- where the file is stored
+ local results, reason = os.remove( system.pathForFile( "currencyfile.txt", destDir  ) )
 
--- if results then
---    print( "file removed" )
--- else
---    print( "file does not exist", reason )
--- end
+ if results then
+    print( "file removed" )
+ else
+    print( "file does not exist", reason )
+ end
 
 ----- HOW TO RESET THE SAVED TABLE ------
 --[[

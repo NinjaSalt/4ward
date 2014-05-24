@@ -1,6 +1,7 @@
 require("classes.items")
 require("classes.beltsAnimation")
 require("classes.audioClass")
+local sfx = require("classes.sfx")
 local globals = require("classes.globals" )
 local bullet_speed = 50 
 local attackTimer_bfst = false
@@ -79,7 +80,7 @@ function ability( event )
 					updateMoveSpeed(targetHero)
 					globals.levers[targetHero.num]:setSequence( "fast" )
 					globals.levers[targetHero.num]:play()
-					playSFX (audioLaneSpeedUp, 1)
+					playSFX (sfx.audioLaneSpeedUp, 1)
 					if (targetHero.num == 0) then
 						globals.belts[targetHero.num]:pause()
 						frameNum1 = globals.belts[targetHero.num].frame
@@ -101,7 +102,7 @@ function ability( event )
 					updateMoveSpeed(targetHero)
 					globals.levers[targetHero.num]:setSequence( "normal" )
 					globals.levers[targetHero.num]:play()
-					playSFX (audioLaneSpeedUp, 1)
+					playSFX (sfx.audioLaneSpeedUp, 1)
 					if (targetHero.num == 0) then
 						globals.belts[targetHero.num]:pause()
 						frameNum1 = globals.belts[targetHero.num].frame
@@ -126,7 +127,7 @@ function ability( event )
 					updateMoveSpeed(targetHero)
 					globals.levers[targetHero.num]:setSequence( "slow" )
 					globals.levers[targetHero.num]:play()
-					playSFX (audioLaneSlow, 1)
+					playSFX (sfx.audioLaneSlow, 1)
 					if (targetHero.num == 0) then
 						globals.belts[targetHero.num]:pause()
 						frameNum1 = globals.belts[targetHero.num].frame						
@@ -148,7 +149,7 @@ function ability( event )
 					updateMoveSpeed(targetHero)
 					globals.levers[targetHero.num]:setSequence( "normal" )
 					globals.levers[targetHero.num]:play()
-					playSFX (audioLaneSlow, 1)
+					playSFX (sfx.audioLaneSlow, 1)
 					if (targetHero.num == 0) then
 						globals.belts[targetHero.num]:pause()
 						frameNum1 = globals.belts[targetHero.num].frame						

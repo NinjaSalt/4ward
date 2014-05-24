@@ -9,6 +9,7 @@ local nextLevel
 local nextWorld
 local conditionsNotMet
 local globals = require ("classes.globals")
+local sfx = require("classes.sfx")
 require("classes.audioClass")
 -- Clear previous scene
 storyboard.removeAll()
@@ -23,7 +24,7 @@ storyboard.removeAll()
 function scene:createScene( event )
   local group = self.view
   
-  local audioDefeats = {audioDefeat1, audioDefeat2, audioDefeat3, audioDefeat4}
+  local audioDefeats = {sfx.audioDefeat1, sfx.audioDefeat2, sfx.audioDefeat3, sfx.audioDefeat4}
   soundToPlay = math.random(1, 4)
   playSFX (audioDefeats[soundToPlay], 1)
   

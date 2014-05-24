@@ -8,6 +8,7 @@ local storyboard = require( "storyboard" )
 local globals = require("classes.globals")
 require("classes.levelUnlocking")
 require("classes.audioClass")
+local sfx = require("classes.sfx")
 local scene = storyboard.newScene()
 local nextLevel 
 local nextWorld
@@ -24,7 +25,7 @@ storyboard.removeAll()
 function scene:createScene( event )
   local group = self.view
   
-  local audioVictorys = {audioVictory1, audioVictory2, audioVictory3, audioVictory4, audioVictory5, audioVictory6, audioVictory7}
+  local audioVictorys = {sfx.audioVictory1, sfx.audioVictory2, sfx.audioVictory3, sfx.audioVictory4, sfx.audioVictory5, sfx.audioVictory6, sfx.audioVictory7}
   soundToPlay = math.random(1, 7)
   playSFX (audioVictorys[soundToPlay], 1)
   
