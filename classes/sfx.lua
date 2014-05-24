@@ -68,6 +68,7 @@ sfx.theme = audio.loadStream("audio/theme.wav")
 sfx.w1banjo = audio.loadStream("audio/world1/banjo.wav")
 sfx.w1bass = audio.loadStream("audio/world1/bass.wav")
 sfx.w1drums = audio.loadStream("audio/world1/drums.wav")
+sfx.w1trumpet = audio.loadStream("audio/world1/trumpet.wav")
 sfx.w1guitar1 = audio.loadStream("audio/world1/guitar1.wav")
 sfx.w1guitar2 = audio.loadStream("audio/world1/guitar2.wav")
 sfx.w1guitar3 = audio.loadStream("audio/world1/guitar3.wav")
@@ -80,6 +81,7 @@ sfx.w1guitar9 = audio.loadStream("audio/world1/guitar9.wav")
 sfx.w1guitar10 = audio.loadStream("audio/world1/guitar10.wav")
 sfx.w1guitar11 = audio.loadStream("audio/world1/guitar11.wav")
 sfx.w1guitar12end = audio.loadStream("audio/world1/guitar12end.wav")
+sfx.w1guitar13 = audio.loadStream("audio/world1/guitar13.wav")
 
 
 -- WORLD 2 --

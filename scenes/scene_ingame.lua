@@ -42,6 +42,7 @@ local deathPoof
 local eneAndBar = {}
 local group 
 
+require("classes.audioClass")
 local sfx = require("classes.sfx")
 local move = require("classes.move")
 require("classes.heroes")
@@ -854,8 +855,8 @@ function clearEnemy()
 end
 
 local function gameLoop( event )
-        if levelEnded == true then return end
-        
+    if levelEnded == true then return end
+
 	globals.multiplier = getMultiplier()
 	globals.multiplierText.text = (globals.multiplier)
         
@@ -1214,11 +1215,77 @@ function scene:createScene( event )
 
   --
   if (world == 1) then
+	local w1guitar = {}
+	w1guitar[1] = sfx.w1guitar1
+	w1guitar[2] = sfx.w1guitar2
+	w1guitar[3] = sfx.w1guitar3
+	w1guitar[4] = sfx.w1guitar4
+	w1guitar[5] = sfx.w1guitar5loop
+	w1guitar[6] = sfx.w1guitar6endloop
+	w1guitar[7] = sfx.w1guitar7
+	w1guitar[8] = sfx.w1guitar8
+	w1guitar[9] = sfx.w1guitar9
+	w1guitar[10] = sfx.w1guitar10
+	w1guitar[11] = sfx.w1guitar11
+	w1guitar[12] = sfx.w1guitar12end
+	w1guitar[13] = sfx.w1guitar13
+
+	local function playGuitar()
+		local num = math.random(#w1guitar)
+		local loops = math.random(2)-1
+		local guitarloops = loops
+		print("loops: "..loops)
+		print("Guitar Num: "..num)
+
+		if(num > 6) then
+			playgameMusic(sfx.w1trumpet,0)
+		end
+
+		if(num ~= 6) then
+			playgameMusic(sfx.w1drums,loops)
+		end
+
+		if(num ~= 6 or num < 10) then
+			playgameMusic(sfx.w1banjo,loops)
+		end
+
+		if(num == 10 or num == 11) then
+			guitarloops = 0
+			loops = 1
+		end
+
+		if(num == 12) then
+			guitarloops = 0
+			loops = 2
+		end 
+
+		playgameMusic(w1guitar[num],guitarloops,0, playGuitar)
+		playgameMusic(sfx.w1bass,loops)
+	end
+
+	 if (globals.worldMusic == 0 or globals.worldMusic == 2) then
+  		audio.fadeOut({channel=0,time=2000});
+  		audio.dispose(sfx.theme);
+  		audio.play(sfx.w1)
+  		audio.play(sfx.w1bass, {onComplete=playGuitar})
+  		globals.worldMusic = 1
+  	end
+
   	bkg = display.newImage( "images/floor02.png", centerX, centerY, true )
+
   	elseif (world == 2) then
-  	bkg = display.newImage( "images/floor03.png", centerX, centerY, true )
+  		
+  		if(globals.worldMusic == 0 or globals.worldMusic == 1 ) then
+  			audio.fadeOut({channel=0,time=2000});
+  			audio.dispose(theme)
+  			playgameMusic(sfx.w2chorus,-1,2000)
+  			globals.worldMusic = 2
+  		end
+
+
+  		bkg = display.newImage( "images/floor03.png", centerX, centerY, true )
   else 
-  	bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
+  		bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
   end
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert(bkg)

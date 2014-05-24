@@ -1,4 +1,6 @@
 -- BEGIN AUDIO CLASS --
+local sfx = require("classes.sfx")
+
 local soundOn = true
 local musicOn = true
 
@@ -16,9 +18,9 @@ end
 
 
 --Function to play Music
-function playgameMusic(soundFile, channelNum, fadeNum)
+function playgameMusic(soundFile, loopNum, fadeNum, follow)
 	if musicOn == true then
-		audio.play(soundFile, {channel = channelNum, loops = -1, fadein = fadeNum})
+		audio.play(soundFile, {loops = loopNum, fadein = fadeNum, onComplete=follow})
 	end
 end
 
@@ -36,4 +38,10 @@ function resumeMusic (channel)
 		audio.resume()
 		musicOn = true
 	end
-end 
+end
+
+--function to
+function playnextTrack(track)
+
+end
+

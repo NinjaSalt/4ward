@@ -5,6 +5,8 @@ local globals = {}
 -- global variable is game paused
 globals.gamePaused = false;
 
+globals.worldMusic = 0;
+
 --SAVING NUMBERS
 --num worlds
 globals.numWorlds = 3

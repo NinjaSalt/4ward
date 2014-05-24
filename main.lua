@@ -49,9 +49,7 @@ local sfx = require("classes.sfx")
 require("classes.audioClass")
 
 -- play music
-playgameMusic(sfx.w3chorus2,1)
-
-
+playgameMusic(sfx.theme,-1)
 
 local storyboard = require( "storyboard" )
 storyboard.gotoScene("scenes.scene_splash" , options)

@@ -1,4 +1,5 @@
 local globals = require("classes.globals")
+local sfx = require("classes.sfx")
 --module(..., package.seeall)
 
 --the teleport mechanic
