@@ -161,6 +161,9 @@ function scene:createScene( event )
   mapButton.x = 800 --display.contentWidth/2
   mapButton.y = buttonY
   group:insert( mapButton)
+  
+  local shareButton = display.newRect( 800, buttonY, 50, 50 )
+  group:insert( shareButton)
 
   -- DISPLAY: number of stars you received during this round, NOT the highesst number of stars you've reached in this round.
   local function starShow()
@@ -212,12 +215,13 @@ function scene:createScene( event )
   
   
   if nextLevel == LevelList.getNumOfLevels(params.world) then
-	timer.performWithDelay(800, function() transition.to(nextWorldButton, {time = 700, x= display.contentWidth/2 + 60}) end)
+	timer.performWithDelay(800, function() transition.to(nextWorldButton, {time = 700, x= display.contentWidth/2 + 90}) end)
   else
-    timer.performWithDelay(800, function() transition.to(nextLevelButton, {time = 700, x= display.contentWidth/2 + 60}) end)
+    timer.performWithDelay(800, function() transition.to(nextLevelButton, {time = 700, x= display.contentWidth/2 + 90}) end)
   end
-  timer.performWithDelay(800, function() transition.to(replayButton, {time = 700, x= display.contentWidth/2 - 60}) end)
-  timer.performWithDelay(800, function() transition.to(mapButton, {time = 700, x= display.contentWidth/2}) end)
+  timer.performWithDelay(800, function() transition.to(replayButton, {time = 700, x= display.contentWidth/2 - 90}) end)
+  timer.performWithDelay(800, function() transition.to(mapButton, {time = 700, x= display.contentWidth/2 + 30}) end)
+  timer.performWithDelay(800, function() transition.to(shareButton, {time = 700, x= display.contentWidth/2 - 30}) end)
   timer.performWithDelay( 1000, starShow )
 
   local function onTapNextLevel( event )
@@ -241,6 +245,19 @@ function scene:createScene( event )
     storyboard.gotoScene( "scenes.scene_worldmap"..nextWorld,options)
   end
   
+  --[[local socialOptions = {
+   service = "facebook",
+   message = "Check out the game I'm making",
+   listener = socialEventListener,
+   url = "http://nwcgame.com"
+}]]
+  
+  local function onTapShare( event )
+    --native.showPopup( "social", socialOptions )
+    print("I just scored " .. globals.score .. " points on level " .. nextWorld .. "-" .. nextLevel .. " in Now We're Cooking")
+  end
+  
+  
   timer.performWithDelay(1900, function()
 
 	if nextLevel == LevelList.getNumOfLevels(params.world) then
@@ -253,6 +270,8 @@ function scene:createScene( event )
   end
 	mapButton:addEventListener( "tap", onTapMap )
 	end )
+	
+	shareButton:addEventListener( "tap", onTapShare )
   
 end
  
