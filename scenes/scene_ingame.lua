@@ -1213,9 +1213,9 @@ function scene:createScene( event )
 	--group:insert(eneAndBar[1])
   end
 
-  --
+  -- WORLD 1 MUSIC and BACKGROUND.img--
   if (world == 1) then
-	local w1guitar = {}
+ 	local w1guitar = {}
 	w1guitar[1] = sfx.w1guitar1
 	w1guitar[2] = sfx.w1guitar2
 	w1guitar[3] = sfx.w1guitar3
@@ -1229,62 +1229,118 @@ function scene:createScene( event )
 	w1guitar[11] = sfx.w1guitar11
 	w1guitar[12] = sfx.w1guitar12end
 	w1guitar[13] = sfx.w1guitar13
+	w1guitar[14] = sfx.w1guitar13
 
 	local function playGuitar()
 		local num = math.random(#w1guitar)
 		local loops = math.random(2)-1
+		local bassloops = loops
 		local guitarloops = loops
 		print("loops: "..loops)
 		print("Guitar Num: "..num)
 
 		if(num > 6) then
-			playgameMusic(sfx.w1trumpet,0)
+			playgameMusic(sfx.w1trumpet,5,0)
 		end
 
 		if(num ~= 6) then
-			playgameMusic(sfx.w1drums,loops)
+			playgameMusic(sfx.w1drums,1,loops)
 		end
 
 		if(num ~= 6 or num < 10) then
-			playgameMusic(sfx.w1banjo,loops)
+			playgameMusic(sfx.w1banjo,2,loops)
 		end
 
 		if(num == 10 or num == 11) then
 			guitarloops = 0
 			loops = 1
+			bassloops = 1
 		end
 
 		if(num == 12) then
 			guitarloops = 0
 			loops = 2
+			bassloops = 2
 		end 
 
-		playgameMusic(w1guitar[num],guitarloops,0, playGuitar)
-		playgameMusic(sfx.w1bass,loops)
+		playgameMusic(w1guitar[num],3,guitarloops,0, playGuitar)
+		playgameMusic(sfx.w1bass,4,bassloops)
 	end
 
-	 if (globals.worldMusic == 0 or globals.worldMusic == 2) then
-  		audio.fadeOut({channel=0,time=2000});
-  		audio.dispose(sfx.theme);
-  		audio.play(sfx.w1)
-  		audio.play(sfx.w1bass, {onComplete=playGuitar})
+	if (globals.worldMusic == 0 or globals.worldMusic == 2 or globals.worldMusic == 3) then
+  		audio.fadeOut({channel = 0, time =1000})
+  		audio.pause(6)
+  		audio.pause(7)
+  		audio.resume(1)
+  		audio.resume(2)
+  		audio.resume(3)
+  		audio.resume(4)
+  		audio.resume(5)
+  		playgameMusic(sfx.w1banjo,2,0)
+  		playgameMusic(sfx.w1bass, 4,0,0, playGuitar)
   		globals.worldMusic = 1
   	end
 
   	bkg = display.newImage( "images/floor02.png", centerX, centerY, true )
 
+  	-- BEGIN WORLD 2 MUSIC AND BACKGROUND.IMG --
   	elseif (world == 2) then
-  		
-  		if(globals.worldMusic == 0 or globals.worldMusic == 1 ) then
-  			audio.fadeOut({channel=0,time=2000});
-  			audio.dispose(theme)
-  			playgameMusic(sfx.w2chorus,-1,2000)
+  		local w2music = {}
+  		w2music[1] = sfx.w2chorus
+  		w2music[2] = sfx.w2chorusbreak
+  		w2music[3] = sfx.w2chorusfull
+
+  		local function playWorld2()
+			local num = math.random(#w2music)
+			local loops = math.random(2)-1
+			print("loops: "..loops)
+			print("w2music Num: "..num)
+
+			playgameMusic(w2music[num],6,loops,0,playWorld2)
+		end
+
+  		if(globals.worldMusic == 0 or globals.worldMusic == 1 or globals.worldMusic == 3) then
+  			audio.fadeOut({channel = 0, time =1000})
+  			audio.pause(1)
+  			audio.pause(2)
+  			audio.pause(3)
+  			audio.pause(4)
+  			audio.pause(5)
+  			audio.pause(7)
+  			audio.resume(6)
+  			playgameMusic(sfx.w2intro,6,0,0,playWorld2)
   			globals.worldMusic = 2
   		end
 
-
   		bkg = display.newImage( "images/floor03.png", centerX, centerY, true )
   else 
+  		local w3music = {}
+  		w3music[1] = sfx.w3chorus1
+  		w3music[2] = sfx.w3chorus2
+  		w3music[3] = sfx.w3chorus3
+  		w3music[4] = sfx.w3chorus4
+  		w3music[5] = sfx.w3chorusbreak
+
+  		local function playWorld3()
+  			local num = math.random(#w3music)
+  			local loops = math.random(2)-1
+			print("loops: "..loops)
+			print("w3music Num: "..num)  
+			playgameMusic(w3music[num],7,loops,0,playWorld3)			
+  		end
+
+  		  if(globals.worldMusic == 0 or globals.worldMusic == 1 or globals.worldMusic == 2) then
+  			audio.fadeOut({channel = 0, time =1000})
+  			audio.pause(1)
+  			audio.pause(2)
+  			audio.pause(3)
+  			audio.pause(4)
+  			audio.pause(5)
+  			audio.pause(6)
+  			audio.resume(7)
+  			playgameMusic(w3music[1],7,0,0,playWorld3)
+  			globals.worldMusic = 3
+  		end
   		bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
   end
   bkg.height=display.contentHeight; bkg.width=display.contentWidth

@@ -18,9 +18,9 @@ end
 
 
 --Function to play Music
-function playgameMusic(soundFile, loopNum, fadeNum, follow)
+function playgameMusic(soundFile, channelNum, loopNum, fadeNum, follow)
 	if musicOn == true then
-		audio.play(soundFile, {loops = loopNum, fadein = fadeNum, onComplete=follow})
+		audio.play(soundFile, {channel = channelNum, loops = loopNum, fadein = fadeNum, onComplete=follow})
 	end
 end
 
