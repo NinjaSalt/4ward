@@ -6,6 +6,7 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals = require ("classes.globals")
+local widget = require( "widget" )
 -- Clear previous scene
 storyboard.removeAll()
 
@@ -119,7 +120,7 @@ function scene:createScene( event )
   --credits 
   local credButton = display.newText("Credits", 0, 0, globals.LOBSTERTWO, 30)
   credButton.x = display.contentWidth/2 
-  credButton.y = 200
+  credButton.y = 300
   credButton:setFillColor( black )
   group:insert(credButton)
   
@@ -129,7 +130,48 @@ function scene:createScene( event )
   end
 
   credButton:addEventListener("tap",onTapCred)
+  
+  local musicVolume = display.newText("Music Volume", 0, 0, globals.LOBSTERTWO, 30)
+  musicVolume.x = display.contentWidth/2 
+  musicVolume.y = 200
+  musicVolume:setFillColor( black )
+  group:insert(musicVolume)
+  
+  local soundVolume = display.newText("Sound Volume", 0, 0, globals.LOBSTERTWO, 30)
+  soundVolume.x = display.contentWidth/2 
+  soundVolume.y = 110
+  soundVolume:setFillColor( black )
+  group:insert(soundVolume)
+  
+  -- Slider listeners
+local function musicSliderListener( event )
+    setMusicLevel(event.value / 100)
+end
 
+local function soundSliderListener( event )
+    setSoundLevel(event.value / 100)
+end
+
+-- Create the sliders
+local musicSlider = widget.newSlider
+{
+    top = 210,
+    left = 50,
+    width = 400,
+    value = globals.musicLevel * 100,
+    listener = musicSliderListener
+}
+
+local soundSlider = widget.newSlider
+{
+    top = 120,
+    left = 50,
+    width = 400,
+    value = globals.soundLevel * 100,
+    listener = soundSliderListener
+}
+group:insert(musicSlider)
+group:insert(soundSlider)
  end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )

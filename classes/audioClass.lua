@@ -1,5 +1,6 @@
 -- BEGIN AUDIO CLASS --
 local sfx = require("classes.sfx")
+local globals = require("classes.globals")
 
 local soundOn = true
 local musicOn = true
@@ -11,6 +12,7 @@ audio.reserveChannels(1)
 function playSFX (soundFile, volumeLevel)
 	if soundOn == true then
 		local volumeLevel = volumeLevel or 1.0
+                volumeLevel = volumeLevel * globals.soundLevel
 		audio.play(soundFile)
 		audio.setVolume(volumeLevel, {soundFile})
 	end
@@ -21,6 +23,7 @@ end
 function playgameMusic(soundFile, channelNum, loopNum, fadeNum, follow)
 	if musicOn == true then
 		audio.play(soundFile, {channel = channelNum, loops = loopNum, fadein = fadeNum, onComplete=follow})
+		audio.setVolume(globals.musicLevel, {soundFile})
 	end
 end
 
@@ -45,3 +48,11 @@ function playnextTrack(track)
 
 end
 
+function setSoundLevel(sLevel)
+    globals.soundLevel = sLevel
+end
+
+function setMusicLevel(mLevel)
+    globals.musicLevel = mLevel
+    audio.setVolume( globals.musicLevel, { channel=1  } )
+end

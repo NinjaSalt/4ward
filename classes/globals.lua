@@ -4,6 +4,8 @@ local globals = {}
 
 -- global variable is game paused
 globals.gamePaused = false;
+globals.musicLevel = 1
+globals.soundLevel = 1
 
 globals.worldMusic = 0;
 
