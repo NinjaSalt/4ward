@@ -16,7 +16,6 @@ require("classes.levelUnlocking")
 -- Clear previous scene
 storyboard.removeAll()
 
-print("here")
   gameSettings = loadsave.loadTable("gamesettings.json")
 
  
@@ -28,7 +27,6 @@ print("here")
 
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
-  print("hi")
   local group = self.view
 
   local levelSelect = 1
@@ -162,7 +160,6 @@ function scene:createScene( event )
         globals.stars[1][level] = gameSettings[1][level][2]
       end
     end
-    print("stars: " .. gameSettings[1][level][2])
   end
 
   -- sets all the level buttons
@@ -428,6 +425,7 @@ function scene:createScene( event )
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel7 ( event )
         levelSelect = 7
@@ -440,6 +438,7 @@ function scene:createScene( event )
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel8 ( event )
         levelSelect = 8
@@ -452,6 +451,7 @@ function scene:createScene( event )
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel9 ( event )
         levelSelect = 9
@@ -464,6 +464,7 @@ function scene:createScene( event )
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel10 ( event )
         levelSelect = 10
@@ -476,6 +477,7 @@ function scene:createScene( event )
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
+        setStars(levelSelect)
     end
 
     --sets the objective text to the second objective wheb the second star is tapped

@@ -38,12 +38,11 @@ function makeItemArray ()
 	for i = 1,table.maxn( myEnemies )+1 do
 		items[i] = myEnemies[i-1]
 		items[i].itemType = "foodType"
-		items[i].cost = 300
+		items[i].cost = 200
 		items[i].id = i
 		items[i].foodId = i-1
 		items[i].unlocked = false
 		items[i].unlocked = gameSettings[4][i]
-		print(gameSettings[4][i])
 		items[i].description = "A basic ingredient."
 		items[i].toUse = "Drag to another food on the belt."
 		items[i].lockLevel = "discovered."
@@ -52,7 +51,7 @@ function makeItemArray ()
 	--nextItem=nextItem+1
 	--items[nextItem+1]= Item.makeItem("Commercial Break","break", "images/rightArrow.png", 1000, nextItem+1, false, "Pauses the game.", "Click to activate.", 4)
 	--items[nextItem+2]= Item.makeItem("Producer Swap","swap", "images/swap.png", 700, nextItem+2, false, "Swaps two items.", "Click to activate.",4)
-	items[nextItem+1]= Item.makeItem("Compost Bin","trash", "images/trash_item.png", 1000, nextItem+3, true, "Removes one item", "Drag to food.",5)
+	items[nextItem+1]= Item.makeItem("Compost Bin","trash", "images/trash_item.png", 200, nextItem+1, true, "Removes one item", "Drag to food.",5)
 end
 makeItemArray()
 myItems = {}
@@ -92,48 +91,48 @@ function passValuesToNewItem ( newItem, oldItem )
 	return newItem
 end
 
-function commercialBreak()
-	storyboard.showOverlay("scenes.scene_break", {effect = "slideDown", time=500})
-    timer.pause(attackTimer)
-    timer.pause(spawnEneTimer)
-    if (antagonistTimer ~= nil) then
-		timer.pause(antagonistTimer)
-	end
-    transition.pause("animation")
-end
+-- function commercialBreak()
+-- 	storyboard.showOverlay("scenes.scene_break", {effect = "slideDown", time=500})
+--     timer.pause(attackTimer)
+--     timer.pause(spawnEneTimer)
+--     if (antagonistTimer ~= nil) then
+-- 		timer.pause(antagonistTimer)
+-- 	end
+--     transition.pause("animation")
+-- end
 
-function producerSwap()
-	if ( table.maxn(allEne)>1 ) then
-		local randomEne1 = math.random(1, table.maxn( allEne  ) )
-		local randomEne2 = math.random(1, table.maxn( allEne  ) )
-		while (randomEne1 == randomEne2) do
-			randomEne1 = math.random(1, table.maxn( allEne  ) )
-			randomEne2 = math.random(1, table.maxn( allEne  ) )
-		end
-		local randomEne1X = allEne[randomEne1].x
-		local randomEne2X = allEne[randomEne2].x
-		print ("enemy1 x: " .. randomEne1X .. " enemy2 x: " .. randomEne2X)
-		--local randomEne1BarX = allEnemHealth[randomEne1].x
-		--local randomEne2BarX = allEnemHealth[randomEne2].x
-		local randomEne1Y = allEne[randomEne1].y
-		local randomEne2Y = allEne[randomEne2].y
-		--local randomEne1BarY = allEnemHealth[randomEne1].y
-		--local randomEne2BarY = allEnemHealth[randomEne2].y
+-- function producerSwap()
+-- 	if ( table.maxn(allEne)>1 ) then
+-- 		local randomEne1 = math.random(1, table.maxn( allEne  ) )
+-- 		local randomEne2 = math.random(1, table.maxn( allEne  ) )
+-- 		while (randomEne1 == randomEne2) do
+-- 			randomEne1 = math.random(1, table.maxn( allEne  ) )
+-- 			randomEne2 = math.random(1, table.maxn( allEne  ) )
+-- 		end
+-- 		local randomEne1X = allEne[randomEne1].x
+-- 		local randomEne2X = allEne[randomEne2].x
+-- 		print ("enemy1 x: " .. randomEne1X .. " enemy2 x: " .. randomEne2X)
+-- 		--local randomEne1BarX = allEnemHealth[randomEne1].x
+-- 		--local randomEne2BarX = allEnemHealth[randomEne2].x
+-- 		local randomEne1Y = allEne[randomEne1].y
+-- 		local randomEne2Y = allEne[randomEne2].y
+-- 		--local randomEne1BarY = allEnemHealth[randomEne1].y
+-- 		--local randomEne2BarY = allEnemHealth[randomEne2].y
 		
-		local smoke1 = display.newImage( "images/smoke.png", allEne[randomEne1].x, allEne[randomEne1].y, true )
-		transition.to( smoke1, { time=1500, alpha=0, onComplete=function() smoke1:removeSelf()end } )
+-- 		local smoke1 = display.newImage( "images/smoke.png", allEne[randomEne1].x, allEne[randomEne1].y, true )
+-- 		transition.to( smoke1, { time=1500, alpha=0, onComplete=function() smoke1:removeSelf()end } )
 		
-		local smoke2 = display.newImage( "images/smoke.png", allEne[randomEne2].x, allEne[randomEne2].y, true )
-		transition.to( smoke2, { time=1500, alpha=0, onComplete=function() smoke2:removeSelf()end } )
-		local function resetMove()
-			transition.to( allEne[randomEne1], { time=(moveSpeed(allEne[randomEne1].x, allEne[randomEne1].speed, allEne[randomEne1].y)), x=(50) ,tag="animation"}  )
-			transition.to( allEne[randomEne2], { time=(moveSpeed(allEne[randomEne2].x, allEne[randomEne2].speed, allEne[randomEne2].y)), x=(50) ,tag="animation"}  )
-			transition.pause("animation")
-		end
-		transition.to(allEne[randomEne1], { time= 2000,  x = randomEne2X, y = randomEne2Y})
-		transition.to(allEne[randomEne2], { time= 2000,  x = randomEne1X, y = randomEne1Y, onComplete= resetMove })
-	end
-end
+-- 		local smoke2 = display.newImage( "images/smoke.png", allEne[randomEne2].x, allEne[randomEne2].y, true )
+-- 		transition.to( smoke2, { time=1500, alpha=0, onComplete=function() smoke2:removeSelf()end } )
+-- 		local function resetMove()
+-- 			transition.to( allEne[randomEne1], { time=(moveSpeed(allEne[randomEne1].x, allEne[randomEne1].speed, allEne[randomEne1].y)), x=(50) ,tag="animation"}  )
+-- 			transition.to( allEne[randomEne2], { time=(moveSpeed(allEne[randomEne2].x, allEne[randomEne2].speed, allEne[randomEne2].y)), x=(50) ,tag="animation"}  )
+-- 			transition.pause("animation")
+-- 		end
+-- 		transition.to(allEne[randomEne1], { time= 2000,  x = randomEne2X, y = randomEne2Y})
+-- 		transition.to(allEne[randomEne2], { time= 2000,  x = randomEne1X, y = randomEne1Y, onComplete= resetMove })
+-- 	end
+-- end
 
   local function resume()
   	--print("CHOP ENDING")
@@ -197,6 +196,8 @@ function itemFoodDrag( event )
 						--itemCombo( body, allEne[n], true )
 						allEne[n]: removeSelf()
 						table.remove(allEne, n)
+						body:removeSelf( )
+						--body = nil
 						--decrementEnemy(currentLevel)
 						break
 					end

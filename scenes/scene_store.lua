@@ -208,7 +208,7 @@ local currencyGradient = display.newImage("images/money.png")
 
     buyButton.alpha = 0.2
   	buyButton.id = body.id
-    if (prevScore > 300) then
+    if (prevScore > 200) then
       buyButton.alpha = 1
       buyButton: setFillColor(0.282353, 0.819608, 0.8)
       buyButton:addEventListener( "tap", onTapBuy )

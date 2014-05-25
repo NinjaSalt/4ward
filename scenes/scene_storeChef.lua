@@ -75,7 +75,7 @@ function scene:createScene( event )
       -- gameSettings[6][1]=myItems[0]
       -- loadsave.saveTable(gameSettings , "gamesettings.json")
   		notTouched = false
-      if (prevScore > 300) then
+      if (prevScore > 200) then
         globals.currency.add((-1)*myItems[0].cost)
         globals.currency.save()
         prevScore = globals.currency.load()
@@ -94,7 +94,7 @@ function scene:createScene( event )
       -- gameSettings[6][2]=myItems[1]
       -- loadsave.saveTable(gameSettings , "gamesettings.json")
   		notTouched = false
-      if (prevScore > 300) then
+      if (prevScore > 200) then
         globals.currency.add((-1)*myItems[0].cost)
         globals.currency.save()
         prevScore = globals.currency.load()
@@ -113,7 +113,7 @@ function scene:createScene( event )
       -- gameSettings[6][3]=myItems[2]
       -- loadsave.saveTable(gameSettings , "gamesettings.json")
   		notTouched = false
-      if (prevScore > 300) then
+      if (prevScore > 200) then
         globals.currency.add((-1)*myItems[0].cost)
         globals.currency.save()
         prevScore = globals.currency.load()

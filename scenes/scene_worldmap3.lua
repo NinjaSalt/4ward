@@ -9,14 +9,13 @@ local scene = storyboard.newScene()
 local globals = require("classes.globals")
 local widget = require( "widget" )
 require("classes.level")
--- local loadsave = require("classes.loadsave")
+local loadsave = require("classes.loadsave")
 require("classes.levelUnlocking")
-
--- gameSettings = loadsave.loadTable("gamesettings.json")
-
  
 -- Clear previous scene
 storyboard.removeAll()
+
+gameSettings = loadsave.loadTable("gamesettings.json")
  
 -- local forward references should go here --
  
@@ -153,6 +152,13 @@ function scene:createScene( event )
             display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), 
             display.newImageRect( "images/star_gray.png", 30, 30 )}        
 
+  local function loadStars (level)
+    if (gameSettings[3][level][2] ~=nil) then
+      if (gameSettings[3][level][2] > globals.stars[3][level]) then
+        globals.stars[3][level] = gameSettings[3][level][2]
+      end
+    end
+  end
 
   -- sets all the level buttons
   for i=1, table.maxn( levelButtons3 ) do
@@ -166,6 +172,7 @@ function scene:createScene( event )
       group:insert(levels_3[i])
     end
     levelButtons3[i].x = 55*i
+    loadStars(i)
     if (globals.stars[3][i]~= nil) then
        if (globals.stars[3][i] >= 1) then
         --sets the button to have 1 star
@@ -250,6 +257,21 @@ function scene:createScene( event )
   objectives:setFillColor( black )
   group:insert(objectives)
 
+  local scoreText = {
+    text = "High Score: ",   
+    x = display.contentWidth/2+25,
+    y = display.contentHeight/2+100,
+    width = display.contentWidth-152,     --required for multi-line and alignment
+    font = globals.IMPRIMA,   
+    fontSize = 18,
+    align = "center"  --new alignment parameter
+  }
+
+  -- SETS high score text
+  local highScore = display.newText(scoreText)
+  highScore:setFillColor( black )  
+  group:insert(highScore)
+
   local function setStars(level)
     levelStars_1[level].alpha = 1
     levelStars_1[level].x = 115
@@ -318,6 +340,7 @@ function scene:createScene( event )
         levelSelect = 1
         selectedLevel = Level.load(3, levelSelect)
         levelTitle.text = selectedLevel.levelTitle;
+        highScore.text = "High Score: " .. gameSettings[3][levelSelect][1];
         -- sets all the stars to 0 to clear it
         for i=1, table.maxn( levelStars_1 ) do
           levelStars_1[i].alpha = 0
@@ -332,6 +355,7 @@ function scene:createScene( event )
         levelSelect = 2
         selectedLevel = Level.load(3, levelSelect)
        levelTitle.text = selectedLevel.levelTitle;
+       highScore.text = "High Score: " .. gameSettings[3][levelSelect][1];
         for i=1, table.maxn( levelStars_1 ) do
           levelStars_1[i].alpha = 0
           levelStars_2[i].alpha = 0
@@ -344,6 +368,7 @@ function scene:createScene( event )
         levelSelect = 3
         selectedLevel = Level.load(3, levelSelect)
         levelTitle.text = selectedLevel.levelTitle;
+        highScore.text = "High Score: " .. gameSettings[3][levelSelect][1];
         for i=1, table.maxn( levelStars_1 ) do
           levelStars_1[i].alpha = 0
           levelStars_2[i].alpha = 0
@@ -356,6 +381,7 @@ function scene:createScene( event )
         levelSelect = 4
         selectedLevel = Level.load(3, levelSelect)
         levelTitle.text = selectedLevel.levelTitle;
+        highScore.text = "High Score: " .. gameSettings[3][levelSelect][1];
 
         for i=1, table.maxn( levelStars_1 ) do
           levelStars_1[i].alpha = 0
@@ -369,6 +395,7 @@ function scene:createScene( event )
         levelSelect = 5
         selectedLevel = Level.load(3, levelSelect)
        levelTitle.text = selectedLevel.levelTitle;
+       highScore.text = "High Score: " .. gameSettings[3][levelSelect][1];
         for i=1, table.maxn( levelStars_1 ) do
           levelStars_1[i].alpha = 0
           levelStars_2[i].alpha = 0
@@ -381,6 +408,7 @@ function scene:createScene( event )
         levelSelect = 6
         selectedLevel = Level.load(3, levelSelect)
        levelTitle.text = selectedLevel.levelTitle;
+       highScore.text = "High Score: " .. gameSettings[3][levelSelect][1];
         for i=1, table.maxn( levelStars_1 ) do
           levelStars_1[i].alpha = 0
           levelStars_2[i].alpha = 0
@@ -392,6 +420,7 @@ function scene:createScene( event )
         levelSelect = 7
         selectedLevel = Level.load(3, levelSelect)
         levelTitle.text = selectedLevel.levelTitle;
+        highScore.text = "High Score: " .. gameSettings[3][levelSelect][1];
         for i=1, table.maxn( levelStars_1 ) do
           levelStars_1[i].alpha = 0
           levelStars_2[i].alpha = 0
@@ -403,6 +432,7 @@ function scene:createScene( event )
         levelSelect = 8
         selectedLevel = Level.load(3, levelSelect)
        levelTitle.text = selectedLevel.levelTitle;
+       highScore.text = "High Score: " .. gameSettings[3][levelSelect][1];
         for i=1, table.maxn( levelStars_1 ) do
           levelStars_1[i].alpha = 0
           levelStars_2[i].alpha = 0
@@ -414,6 +444,7 @@ function scene:createScene( event )
         levelSelect = 9
         selectedLevel = Level.load(3, levelSelect)
         levelTitle.text = selectedLevel.levelTitle;
+        highScore.text = "High Score: " .. gameSettings[3][levelSelect][1];
         for i=1, table.maxn( levelStars_1 ) do
           levelStars_1[i].alpha = 0
           levelStars_2[i].alpha = 0
@@ -425,6 +456,7 @@ function scene:createScene( event )
         levelSelect = 10
         selectedLevel = Level.load(3, levelSelect)
         levelTitle.text = selectedLevel.levelTitle;
+        highScore.text = "High Score: " .. gameSettings[3][levelSelect][1];
         for i=1, table.maxn( levelStars_1 ) do
           levelStars_1[i].alpha = 0
           levelStars_2[i].alpha = 0
