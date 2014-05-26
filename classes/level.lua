@@ -179,14 +179,14 @@ levels[2][10] = Level.create (10, makeSecondaryWin(lemonCake,3),{0,1,2,6,3,7,7,1
 
 
 --EPISODE 3: NO NAME YET D:
--- Delectable Dinner (16 items) 6 dinner, points
-levels[3][1] = Level.create(1, false, {1,0,0,2,5,7,2,2,5,4,3,7,7,5,3,4}, {200,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700}, makeCatWin("dinner", 6), makeScoreWin(300), "1: A Delectable Dinner")
+-- Delectable Dinner (16 items) 3 dinner, points
+levels[3][1] = Level.create(1, false, {1,0,0,2,5,7,2,2,5,4,3,7,7,5,3,4}, {200,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700}, makeCatWin("dinner", 3), makeScoreWin(300), "1: A Delectable Dinner")
 -- Combo Maker! (16 items) 2 steak fries combo, 4 dinner items
 levels[3][2] = Level.create(2, makeSecondaryWin(steakFries, 2), {0,5,1,4,1,2,2,4,1,5,5,4,1,2,7,2}, {200,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700}, makeCatWin("dinner",4), false, "2: Combo Maker!")
 -- That's My Jam! (18 items) 3 strawbery jam pancakes, score
 levels[3][3] = Level.create(3, makeSecondaryWin(strawPancake, 3), {3,2,6,7,0,1,7,1,3,0,3,7,7,6,0,5,1,4}, {200,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700, 2700}, false, makeScoreWin(300), "3: That's My Jam!")
--- A Magical Morning Meal (18 items) serve 7 breakfast items, score ___ points
-levels[3][4] = Level.create(4, false, {6,2,1,0,7,4,2,3,5,0,2,2,0,7,1,3,5,0}, {200,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700, 2700}, makeCatWin("breakfast",7), makeScoreWin(300), "4: Magical Morning Meal")
+-- A Magical Morning Meal (18 items) serve 4 breakfast items, score ___ points
+levels[3][4] = Level.create(4, false, {6,2,1,0,7,4,2,3,5,0,2,2,0,7,1,3,5,0}, {200,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700, 2700}, makeCatWin("breakfast",4), makeScoreWin(300), "4: Magical Morning Meal")
 -- Donuts and Dessert (20 items), 3 donuts, serve 3 dessert items
 levels[3][5] = Level.create(5, makeSecondaryWin(donut, 3), {6,0,3,0,7,6,1,6,0,6,4,3,7,1,1,4,1,6,3,4}, {200,2600,2600,2600,2600,2600,2600,3000,2600,2600,2600,2600,2600,3000,2600,2600,2600,2600,2600,2600}, makeCatWin("dessert", 4), false, "5: Donuts and Dessert")
 -- Combo Breaker! (20 items) 2 steak fries, 4 breakfast
