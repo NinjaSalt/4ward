@@ -56,6 +56,7 @@ sfx.audioLaneSpeedUp = audio.loadSound("audio/laneSpeedUp.wav")
 --RANDOM SOUND EFFECTS
 sfx.audioFalling = audio.loadSound("audio/FallingDownFX.wav")
 sfx.pop = audio.loadSound("audio/pop.wav")
+sfx.whistle = audio.loadSound("audio/whistle.wav")
 
 
 -- END LOADING SOUND EFFECTS -- 

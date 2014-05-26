@@ -696,6 +696,7 @@ local function noMoreCombos()
 			back.width = noComboText.width+15
                         transition.to( noComboText, { time=(600), y=(30) } )
 			
+                        playSFX (sfx.whistle, 1)
                         
                         local delay = 500
                         for i = 1, #allEne, 1 do
