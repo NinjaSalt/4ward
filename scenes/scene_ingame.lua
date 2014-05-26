@@ -858,6 +858,7 @@ function clearEnemy()
     comboPoof.width = comboPoof.width/3
     comboPoof.height = comboPoof.height/3
     transition.to( comboPoof, { time=500, alpha=0, onComplete=function() comboPoof:removeSelf() end } )
+    playSFX (sfx.pop, 1)
     allEne[1]: removeSelf()
     table.remove(allEne, 1)
     globals.score = globals.score - 10
