@@ -505,7 +505,7 @@ end
 function stopTouch()
   local touchbkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
   touchbkg:setFillColor( gray )
-  touchbkg.alpha = .31
+  touchbkg.alpha = .01
   group:insert (touchbkg)
   touchbkg:addEventListener("touch", function() return true end)
   touchbkg:addEventListener("tap", function() return true end)
