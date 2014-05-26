@@ -116,7 +116,8 @@ end
 -- Called when scene is about to move offscreen:
 function scene:exitScene( event )
   local group = self.view
-  timer.performWithDelay(1700, tutorialServe )
+  timer.performWithDelay(10, tutorialServe )
+
 end
  
 -- Called AFTER scene has finished moving offscreen:

@@ -63,7 +63,7 @@ function scene:createScene( event )
 				--if myY ~= nil and myY<markY then
 				if event.y - event.yStart < -7 then
 					if body.y ~= lane1 then
-						storyboard.hideOverlay( "slideUp", 500 )
+						storyboard.hideOverlay( "fade", 500 )
 						storyboard.showOverlay("scenes.scene_hud", {effect = "fade", time = 500})
 						--timer.resume(attackTimer)
 						timer.resume(spawnEneTimer)
@@ -116,6 +116,8 @@ end
 function scene:exitScene( event )
   local group = self.view
   timer.performWithDelay(1700, tutorialLanes )
+  timer.performWithDelay(50, stopTouch)
+  
 end
  
 -- Called AFTER scene has finished moving offscreen:

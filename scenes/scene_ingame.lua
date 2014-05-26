@@ -502,6 +502,16 @@ function tutorialServe()
     transition.pause("animation")
 end
 
+function stopTouch()
+  local touchbkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
+  touchbkg:setFillColor( gray )
+  touchbkg.alpha = .31
+  group:insert (touchbkg)
+  touchbkg:addEventListener("touch", function() return true end)
+  touchbkg:addEventListener("tap", function() return true end)
+
+end
+
 function scene:createEne(enemyID, isCombo, x, lane)
 	--local eneAndBar = {}
 	--set the lane it will spawn in
