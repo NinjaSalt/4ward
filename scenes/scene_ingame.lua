@@ -1353,7 +1353,7 @@ function scene:createScene( event )
   			playgameMusic(w3music[1],7,0,0,playWorld3)
   			globals.worldMusic = 3
   		end
-  		bkg = display.newImage( "images/mockback1.png", centerX, centerY, true )
+  		bkg = display.newImage( "images/floor04.png", centerX, centerY, true )
   end
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert(bkg)

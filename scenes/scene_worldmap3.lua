@@ -49,7 +49,7 @@ function scene:createScene( event )
   -- group:insert(banner)
 
   local titleText = {
-    text = "On The Set",   
+    text = "Winner's Feast",   
     x = 236,
     y = 40,
     width = display.contentWidth-152,     --required for multi-line and alignment
