@@ -415,6 +415,7 @@ function scene:createScene( event )
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel7 ( event )
         levelSelect = 7
@@ -427,6 +428,7 @@ function scene:createScene( event )
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel8 ( event )
         levelSelect = 8
@@ -439,6 +441,7 @@ function scene:createScene( event )
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel9 ( event )
         levelSelect = 9
@@ -451,6 +454,7 @@ function scene:createScene( event )
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
+        setStars(levelSelect)
     end
     local function onTapLevel10 ( event )
         levelSelect = 10
@@ -463,6 +467,7 @@ function scene:createScene( event )
           levelStars_3[i].alpha = 0
         end
         onTapStar1()
+        setStars(levelSelect)
     end
 
     --sets the objective text to the second objective wheb the second star is tapped
