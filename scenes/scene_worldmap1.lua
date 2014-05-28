@@ -40,7 +40,7 @@ function scene:createScene( event )
 
   local selectedLevel = Level.load(1, levelSelect)
   
-  local bkg = display.newImage( "images/mockback2.png", centerX, centerY, true )
+  local bkg = display.newImage( "images/inbetween1.png", centerX, centerY, true )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
