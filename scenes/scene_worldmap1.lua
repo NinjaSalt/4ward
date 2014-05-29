@@ -44,11 +44,6 @@ function scene:createScene( event )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert (bkg)
 
-  -- local banner = display.newImageRect( "images/bannerBlue.png", 200, 80 )
-  -- banner.x = 236
-  -- banner.y = 45
-  -- group:insert(banner)
-
   local titleText = {
     text = "On The Set",   
     x = 236,
@@ -82,21 +77,6 @@ function scene:createScene( event )
   levelBack.y = display.contentHeight/2 + 60
   group:insert(levelBack)
 
-  -- local star1=  display.newImageRect( "images/star_gray.png", 30, 30 )
-  -- star1.x = 115
-  -- star1.y = 160
-  -- group:insert(star1)
-
-  -- local star2=  display.newImageRect( "images/star_gray.png", 30, 30 )
-  -- star2.x = 115
-  -- star2.y = 200
-  -- group:insert(star2)
-
-  -- local star3=  display.newImageRect( "images/star_gray.png", 30, 30 )
-  -- star3.x = 115
-  -- star3.y = 240
-  -- group:insert(star3)
-
   -- Create the widget
   local scrollView = widget.newScrollView{
   --left = 0,
@@ -118,41 +98,15 @@ function scene:createScene( event )
   group:insert( scrollView)
 
   --tables of all the buttons
-  levelButtons = {display.newImageRect( "images/world1/w1level1.png", 50, 50 ), display.newImageRect( "images/world1/w1level2.png", 50, 50 ), display.newImageRect( "images/world1/w1level3.png", 50, 50 ), 
-            display.newImageRect( "images/world1/w1level4.png", 50, 50 ), display.newImageRect( "images/world1/w1level5.png", 50, 50 ), display.newImageRect( "images/world1/w1level6.png", 50, 50 ), 
-            display.newImageRect( "images/world1/w1level7.png", 50, 50 ), display.newImageRect( "images/world1/w1level8.png", 50, 50 ), display.newImageRect( "images/world1/w1level9.png", 50, 50 ), 
-            display.newImageRect( "images/world1/w1level10.png", 50, 50 )}
-
-  levels_1 = {display.newImageRect( "images/world1/1star/w1level1_1.png", 50, 50 ), display.newImageRect( "images/world1/1star/w1level2_1.png", 50, 50 ), display.newImageRect( "images/world1/1star/w1level3_1.png", 50, 50 ), 
-            display.newImageRect( "images/world1/1star/w1level4_1.png", 50, 50 ), display.newImageRect( "images/world1/1star/w1level5_1.png", 50, 50 ), display.newImageRect( "images/world1/1star/w1level6_1.png", 50, 50 ), 
-            display.newImageRect( "images/world1/1star/w1level7_1.png", 50, 50 ), display.newImageRect( "images/world1/1star/w1level8_1.png", 50, 50 ), display.newImageRect( "images/world1/1star/w1level9_1.png", 50, 50 ), 
-            display.newImageRect( "images/world1/1star/w1level10_1.png", 50, 50 )}
-
-  levels_2 = {display.newImageRect( "images/world1/2star/w1level1_2.png", 50, 50 ), display.newImageRect( "images/world1/2star/w1level2_2.png", 50, 50 ), display.newImageRect( "images/world1/2star/w1level3_2.png", 50, 50 ), 
-            display.newImageRect( "images/world1/2star/w1level4_2.png", 50, 50 ), display.newImageRect( "images/world1/2star/w1level5_2.png", 50, 50 ), display.newImageRect( "images/world1/2star/w1level6_2.png", 50, 50 ), 
-            display.newImageRect( "images/world1/2star/w1level7_2.png", 50, 50 ), display.newImageRect( "images/world1/2star/w1level8_2.png", 50, 50 ), display.newImageRect( "images/world1/2star/w1level9_2.png", 50, 50 ), 
-            display.newImageRect( "images/world1/2star/w1level10_2.png", 50, 50 )}
-
-  levels_3 = {display.newImageRect( "images/world1/3star/w1level1_3.png", 50, 50 ), display.newImageRect( "images/world1/3star/w1level2_3.png", 50, 50 ), display.newImageRect( "images/world1/3star/w1level3_3.png", 50, 50 ), 
-            display.newImageRect( "images/world1/3star/w1level4_3.png", 50, 50 ), display.newImageRect( "images/world1/3star/w1level5_3.png", 50, 50 ), display.newImageRect( "images/world1/3star/w1level6_3.png", 50, 50 ), 
-            display.newImageRect( "images/world1/3star/w1level7_3.png", 50, 50 ), display.newImageRect( "images/world1/3star/w1level8_3.png", 50, 50 ), display.newImageRect( "images/world1/3star/w1level9_3.png", 50, 50 ), 
-            display.newImageRect( "images/world1/3star/w1level10_3.png", 50, 50 )}
-
-  levelStars_1 = {display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), 
-            display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), 
-            display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), 
-            display.newImageRect( "images/star_gray.png", 30, 30 )}
-
-  levelStars_2 = {display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), 
-            display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), 
-            display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), 
-            display.newImageRect( "images/star_gray.png", 30, 30 )}    
-
-  levelStars_3 = {display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), 
-            display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), 
-            display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), display.newImageRect( "images/star_gray.png", 30, 30 ), 
-            display.newImageRect( "images/star_gray.png", 30, 30 )}        
-
+  for i=1, 10, 1 do
+    levelButtons[i] = display.newImageRect( "images/world3/w3level" .. i.. ".png", 50, 50 )
+    levels_1[i] = display.newImageRect( "images/world3/1star/w3level" .. i .. "_1.png", 50, 50 )
+    levels_2[i] = display.newImageRect( "images/world3/2star/w3level" .. i .. "_2.png", 50, 50 )
+    levels_3[i] = display.newImageRect( "images/world3/3star/w3level" .. i .. "_3.png", 50, 50 )
+    levelStars_1[i] = display.newImageRect( "images/star_gray.png", 30, 30 )
+    levelStars_2[i] = display.newImageRect( "images/star_gray.png", 30, 30 )
+    levelStars_3[i] = display.newImageRect( "images/star_gray.png", 30, 30 )
+  end
 
   local function loadStars (level)
     if (gameSettings[1][level][2] ~=nil) then
@@ -180,8 +134,7 @@ function scene:createScene( event )
         --sets the button to have 1 star
         levelButtons[i]:removeSelf( )
         levelButtons[i] = nil
-        --levels_1[i].alpha = 1
-        levelButtons[i] = display.newImageRect( "images/world1/w1level" .. i .. ".png", 50, 50 )
+        levelButtons[i] = display.newImageRect( "images/world3/w3level" .. i .. ".png", 50, 50 )
         levelButtons[i].x = 55*i
       end
        if (globals.stars[1][i] >= 1) then
@@ -296,8 +249,6 @@ function scene:createScene( event )
     if (globals.stars[1][level]~= nil) then
       --sets all stars to gray if the number of stars they earned is 0 or haven't played that level yet
       if (globals.stars[1][level] == 0) then
-        --levelStars_1[level]:removeSelf( )
-        --levelStars_1[level] = nil
         levelStars_1[level] = display.newImageRect( "images/star_gray.png", 30, 30 )
         levelStars_1[level].x = 115
         levelStars_1[level].y = 160
@@ -313,8 +264,6 @@ function scene:createScene( event )
       end
       --sets the top star to the yellow star
        if (globals.stars[1][level] >= 1) then
-        --levelStars_1[level]:removeSelf( )
-        --levelStars_1[level] = nil
         levelStars_1[level] = display.newImageRect( "images/star.png", 30, 30 )
         levelStars_1[level].x = 115
         levelStars_1[level].y = 160
@@ -322,8 +271,6 @@ function scene:createScene( event )
       end
       --sets the middle star to yellow
       if (globals.stars[1][level] >= 2) then
-        --levelStars_2[level]:removeSelf( )
-        --levelStars_2[level] = nil
         levelStars_2[level] = display.newImageRect( "images/star.png", 30, 30 )
         levelStars_2[level].x = 115
         levelStars_2[level].y = 200
@@ -331,8 +278,6 @@ function scene:createScene( event )
       end
       --sets the third star to yellow
       if (globals.stars[1][level] >= 3) then
-        --levelStars_3[level]:removeSelf( )
-        --levelStars_3[level] = nil
         levelStars_3[level] = display.newImageRect( "images/star.png", 30, 30 )
         levelStars_3[level].x = 115
         levelStars_3[level].y = 240

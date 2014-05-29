@@ -23,6 +23,11 @@ function scene:createScene( event )
   local params = event.params
   nextLevel = params.level
   nextWorld = params.world
+  local dotOne
+  local dotTwo
+  local dotThree
+  local loadText
+
   
   local options = {
    effect = "fade",
@@ -36,55 +41,19 @@ function scene:createScene( event )
               "You can swipe left to speed up and right to slow down.", "Combine two ingredients when they're aligned on the belts and swipe up or down.", "Don't forget to serve your delicious meals!", 
               "You can use the compost bin to get rid of bad combinations.", "Try to get all the stars by completing the objectives!"}
 
-  local bkg = display.newImage( "images/b8.png", centerX, centerY, true )
-  bkg.height=display.contentHeight; bkg.width=display.contentWidth
-  group:insert (bkg)
+  -- local bkg = display.newImage( "images/b8.png", centerX, centerY, true )
+  -- bkg.height=display.contentHeight; bkg.width=display.contentWidth
+  -- group:insert (bkg)
 
   local function startLevel()
     timer.performWithDelay(200, function()storyboard.gotoScene( "scenes.scene_ingame",{ effect = "fade", time = 100, params = {level = nextLevel, world = nextWorld}})end)
   end
 
-    local loadText = display.newText("Now Loading", display.contentWidth/2-30, display.contentHeight/2+60, globals.LOBSTERTWO, 35)
-  loadText:setFillColor( 0 )
-  group:insert(loadText)
-
-  local dotOne = display.newImage("images/sugar.png", 800, display.contentHeight/2+70,30,30)
-  dotOne.width = 15
-  dotOne.height = 15
-  group:insert(dotOne)
-
-  local dotTwo = display.newImage("images/flour.png", 800, display.contentHeight/2+70,30,30)
-  dotTwo.width = 15
-  dotTwo.height = 15
-  group:insert(dotTwo)
-
-  local dotThree = display.newImage("images/sugar.png", 800, display.contentHeight/2+70,30,30)
-  dotThree.width = 15
-  dotThree.height = 15
-  group:insert(dotThree)
-
-  timer.performWithDelay(400, function() transition.to(dotOne, {time=300, x= display.contentWidth/2+80}) end)
-  timer.performWithDelay(800, function() transition.to(dotTwo, {time=300, x= display.contentWidth/2+ 100}) end)
-  timer.performWithDelay(1200, function() transition.to(dotThree, {time=300, x= display.contentWidth/2+ 120}) end)
-
-  --selects a random number from te textArray
-  local randomint = math.random(1,9)
-     local tipText = {
-    text = textArray[randomint],     
-    x = display.contentWidth/2,
-    y = display.contentHeight/2+15,
-    width = display.contentWidth-40,     --required for multi-line and alignment
-    font = globals.IMPRIMA,   
-    fontSize = 18,
-    align = "center"  --new alignment parameter
-  }
-
-  local tip = display.newText(tipText)
-  tip:setFillColor( black )  
-  group:insert(tip)
-
 --if it's world 1, show the breakfast chef
   if (nextWorld == 1) then
+    local bkg = display.newImage( "images/inbetween1.png", centerX, centerY, true )
+  bkg.height=display.contentHeight; bkg.width=display.contentWidth
+  group:insert (bkg)
     local breakfast_load = display.newImageRect( "images/breakfast_fill.png", 300, 300 )
     breakfast_load.x = display.contentWidth/2
     breakfast_load.y = display.contentHeight/3
@@ -118,6 +87,9 @@ function scene:createScene( event )
   end
 
   if (nextWorld == 2) then
+    local bkg = display.newImage( "images/inbetween2.png", centerX, centerY, true )
+  bkg.height=display.contentHeight; bkg.width=display.contentWidth
+  group:insert (bkg)
     local dessert_load = display.newImageRect( "images/dessert_fill.png", 300, 300 )
     dessert_load.x = display.contentWidth/2
     dessert_load.y = display.contentHeight/3
@@ -151,6 +123,9 @@ function scene:createScene( event )
   end
 
   if (nextWorld == 3) then
+    local bkg = display.newImage( "images/inbetween3.png", centerX, centerY, true )
+  bkg.height=display.contentHeight; bkg.width=display.contentWidth
+  group:insert (bkg)
     local dinner_load = display.newImageRect( "images/dinner_fill.png", 300, 300 )
     dinner_load.x = display.contentWidth/2
     dinner_load.y = display.contentHeight/3
@@ -182,6 +157,45 @@ function scene:createScene( event )
         bkg:addEventListener( "tap", startLevel )
       end})
   end
+
+  loadText = display.newText("Now Loading", display.contentWidth/2-30, display.contentHeight/2+60, globals.LOBSTERTWO, 35)
+  loadText:setFillColor( 0 )
+  group:insert(loadText)
+
+  dotOne = display.newImage("images/sugar.png", 800, display.contentHeight/2+70,30,30)
+  dotOne.width = 15
+  dotOne.height = 15
+  group:insert(dotOne)
+
+  dotTwo = display.newImage("images/flour.png", 800, display.contentHeight/2+70,30,30)
+  dotTwo.width = 15
+  dotTwo.height = 15
+  group:insert(dotTwo)
+
+  dotThree = display.newImage("images/sugar.png", 800, display.contentHeight/2+70,30,30)
+  dotThree.width = 15
+  dotThree.height = 15
+  group:insert(dotThree)
+
+  timer.performWithDelay(400, function() transition.to(dotOne, {time=300, x= display.contentWidth/2+80}) end)
+  timer.performWithDelay(800, function() transition.to(dotTwo, {time=300, x= display.contentWidth/2+ 100}) end)
+  timer.performWithDelay(1200, function() transition.to(dotThree, {time=300, x= display.contentWidth/2+ 120}) end)
+
+  --selects a random number from te textArray
+  local randomint = math.random(1,9)
+     local tipText = {
+    text = textArray[randomint],     
+    x = display.contentWidth/2,
+    y = display.contentHeight/2+15,
+    width = display.contentWidth-40,     --required for multi-line and alignment
+    font = globals.IMPRIMA,   
+    fontSize = 18,
+    align = "center"  --new alignment parameter
+  }
+
+  local tip = display.newText(tipText)
+  tip:setFillColor( black )  
+  group:insert(tip)
 
 
 
