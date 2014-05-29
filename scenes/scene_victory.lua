@@ -215,13 +215,16 @@ function scene:createScene( event )
   
   
   if nextLevel == LevelList.getNumOfLevels(params.world) then
-	timer.performWithDelay(800, function() transition.to(nextWorldButton, {time = 700, x= display.contentWidth/2 + 90}) end)
+	--timer.performWithDelay(800, function() transition.to(nextWorldButton, {time = 700, x= display.contentWidth/2 + 90}) end)
+    timer.performWithDelay(800, function() transition.to(replayButton, {time = 700, x= display.contentWidth/2 - 60}) end)
+    timer.performWithDelay(800, function() transition.to(mapButton, {time = 700, x= display.contentWidth/2 + 60}) end)
+    timer.performWithDelay(800, function() transition.to(shareButton, {time = 700, x= display.contentWidth/2 }) end)
   else
     timer.performWithDelay(800, function() transition.to(nextLevelButton, {time = 700, x= display.contentWidth/2 + 90}) end)
+    timer.performWithDelay(800, function() transition.to(replayButton, {time = 700, x= display.contentWidth/2 - 90}) end)
+    timer.performWithDelay(800, function() transition.to(mapButton, {time = 700, x= display.contentWidth/2 + 30}) end)
+    timer.performWithDelay(800, function() transition.to(shareButton, {time = 700, x= display.contentWidth/2 - 30}) end)
   end
-  timer.performWithDelay(800, function() transition.to(replayButton, {time = 700, x= display.contentWidth/2 - 90}) end)
-  timer.performWithDelay(800, function() transition.to(mapButton, {time = 700, x= display.contentWidth/2 + 30}) end)
-  timer.performWithDelay(800, function() transition.to(shareButton, {time = 700, x= display.contentWidth/2 - 30}) end)
   timer.performWithDelay( 1000, starShow )
 
   local function onTapNextLevel( event )
