@@ -13,8 +13,6 @@ for i,fontname in ipairs(fonts) do
     count = count+1
 end
 
-print( "\rFont count = " .. count )
-
 local name = "pt"     -- part of the Font name we are looking for
 
 name = string.lower( name )
@@ -22,12 +20,6 @@ name = string.lower( name )
 -- Display each font in the terminal console
 for i, fontname in ipairs(fonts) do
     j, k = string.find( string.lower( fontname ), name )
-
-    if( j ~= nil ) then
-
-       -- print( "fontname = " .. tostring( fontname ) )
-
-    end
 end
 ---------------------------------------------------------
 
@@ -65,8 +57,6 @@ for i,fontname in ipairs(fonts) do
     count = count+1
 end
 
---print( "\rFont count = " .. count )
-
 local name = "pt"     -- part of the Font name we are looking for
 
 name = string.lower( name )
@@ -93,31 +83,14 @@ end
 -- Display each font in the terminal console
 for i, fontname in ipairs(fonts) do
     j, k = string.find( string.lower( fontname ), name )
-
-    if( j ~= nil ) then
-
-        --print( "fontname = " .. tostring( fontname ) )
-
-    end
 end
 
 local lfs = require "lfs"
 
 local doc_path = system.pathForFile( "", system.DocumentsDirectory )
 
-for file in lfs.dir(doc_path) do
-   --file is the current file or directory name
-   print( "Found file: " .. file )
-end
-
 local destDir = system.DocumentsDirectory  -- where the file is stored
  local results, reason = os.remove( system.pathForFile( "currencyfile.txt", destDir  ) )
-
- if results then
-    print( "file removed" )
- else
-    print( "file does not exist", reason )
- end
 
 ----- HOW TO RESET THE SAVED TABLE ------
 --[[
@@ -141,22 +114,15 @@ if (gameSettings == nil) then --comment this to reset the saving ***
     gameSettings  = {}
     --world
     for n=1, globals.numWorlds+3, 1 do
-        --print("n: " .. n)
         gameSettings[n] = {}
     end
 
     for i = 1,table.maxn( myEnemies )+1 do
-     -- if (gameSettings[4][i]~=nil) then
        gameSettings[4][i] = false
-      --end
-      --print(gameSettings[4][i])
     end
 
     for h = 1,table.maxn( comboEnemies )+1 do
-      --if (gameSettings[5][h]~=nil) then
          gameSettings[5][h] = false
-         --print(gameSettings[5][h])
-      --end
     end
 
     --- FOR REFERENCE ---
@@ -198,9 +164,6 @@ if (gameSettings == nil) then --comment this to reset the saving ***
     --- FOR REFERENCE ---
 
     loadsave.saveTable(gameSettings , "gamesettings.json")
-    print("First Time Data Initialisation") --comment this to reset the saving ***
-else --comment this to reset the saving ***
-    print("Main Data Loaded") --comment this to reset the saving ***
 end --comment this to reset the saving ***
 ---------------------------------------------------------
 

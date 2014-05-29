@@ -96,7 +96,6 @@ function scene:createScene( event )
   
   -- second instruction pop-up
   local function tutorialTwo()
-  print ("two")
   tutOne:removeSelf()
   oneText:removeSelf()
   triangle:removeSelf()
@@ -122,7 +121,6 @@ function scene:createScene( event )
 
   --first instruction.
   local function tutorialOne()
-  print ("one")
   tutOne = display.newRect( centerX, centerY+ 20, display.contentWidth, display.contentHeight/5 )
   tutOne.alpha = .85
   tutOne:addEventListener( "tap", tutorialTwo )

@@ -51,28 +51,6 @@ function scene:createScene( event )
   local extendBasic = display.newRect(440, extendY, 25, 50)
   group:insert(extendBasic)
 
-
-
-
-  local function scrollListener( event )
-    local phase = event.phase
-    if ( phase == "began" ) then print( "Scroll view was touched" )
-    elseif ( phase == "moved" ) then print( "Scroll view was moved" )
-    elseif ( phase == "ended" ) then print( "Scroll view was released" )
-    end
-
-    -- In the event a scroll limit is reached...
-    if ( event.limitReached ) then
-      if ( event.direction == "up" ) then print( "Reached top limit" )
-      elseif ( event.direction == "down" ) then print( "Reached bottom limit" )
-      elseif ( event.direction == "left" ) then print( "Reached left limit" )
-      elseif ( event.direction == "right" ) then print( "Reached right limit" )
-      end
-    end
-
-    return true
-  end
-
   -- Create the widget
    local scrollView = widget.newScrollView{
     y = 185,
@@ -81,7 +59,6 @@ function scene:createScene( event )
     height = display.contentHeight - 90,
     topPadding = 20,
     horizontalScrollDisabled = true,
-    listener = scrollListener
     }
     group:insert(scrollView)
 
@@ -328,7 +305,6 @@ end
 
     local myY = 0
     for i = 1,table.maxn( globals.recipes ) do
-    --print (globals.recipes[i].category)
     -- if recipes are still locked, display them as ???
     if ( globals.recipes[i].unlocked == false) then 
       if (globals.recipes[i].category == event.target.category) then
@@ -431,7 +407,6 @@ end
 
   local myY = 0
     for i = 1,table.maxn( globals.recipes ) do
-      --print (globals.recipes[i].category)
       -- if recipes are still locked, display them as ???
       if ( globals.recipes[i].unlocked == false) then 
       recipesList[i] = display.newText( "? ? ?", 0, 0, globals.IMPRIMA, 17 )

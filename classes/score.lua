@@ -67,7 +67,6 @@ function M.save()
         io.close( file )
         return true
     else
-    	print("Error: could not read ", M.filename, ".")
         return false
     end
 end
@@ -85,7 +84,6 @@ function M.load()
          io.close( file )
          return score
     end
-    print("Could not read scores from ", M.filename, ".")
     return nil
 end
 
@@ -94,12 +92,10 @@ function increaseMultiplier()
 	if M.multiplier > 10 then
 		M.multiplier = 10
 	end
-	print("multiplier: "..M.multiplier)
 end
 
 function resetMultiplier()
 	M.multiplier = 1
-	print("multiplier: "..M.multiplier)
 end
 
 function getMultiplier()

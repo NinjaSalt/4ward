@@ -283,7 +283,6 @@ end
 function makeHoldEne()
 	local eneToMake
 	local isCombo = false
-	print ( eneInHold )
 	for n = 0,table.maxn( myEnemies ) do
 		if( myEnemies[n].type == eneInHold )then
 			eneToMake = n
@@ -595,9 +594,6 @@ function itemCombo( item , enemy, fromFoodItem )
 	for j = 0,table.maxn( comboEnemies ) do
 		if (comboEnemies[j].type == replaceEnemy(item, enemy)) then
 		------DO  A BREAK
-			print ("item: " .. item.name .. " enemy: " .. enemy.name)
-			print ("my new food: " .. comboEnemies[j].type)
-			
 			if (fromFoodItem) then
 				item: removeSelf()
 				myItems[item.myItemRef] = nil
@@ -607,29 +603,7 @@ function itemCombo( item , enemy, fromFoodItem )
 			allEne[#allEne] = display.newImage(allEne[#allEne].image)
 
 			allEne[#allEne] = passValuesToNewEne(allEne[#allEne], comboEnemies[j])
-			-- Check for Secondary Win condition
-			
-			--if(currentLevel.victoryCondition~=false) then
-			--	if(currentLevel.victoryCondition.enemy.name==allEne[#allEne].name)then
-			--		currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
-			--		print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
-			--		if (currentLevel.victoryCondition.amount == 0) then
-			--		print("Condition Met")
-			--		currentLevel.victoryCondition.conditionMet = true
-			--		end
-			--	end
-			--end
-
-			-- add health bars to enemies.
-			--allEnemHealth[#allEne] = #allEne
-			--allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
-			--allEnemHealth[#allEne].height = 10 
-			-- creates a new health.
-			--allEnemHealth[#allEne].health = newHealth(n,i)
-			--allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
-			--allEnemHealth[#allEne].x = enemy.x; allEnemHealth[#allEne].y = enemy.y
-			--end health bar.
-
+                        
 			--define the enemy
 			allEne[#allEne].height = 50; allEne[#allEne].width = 50
 			allEne[#allEne].x = enemy.x; allEne[#allEne].y = enemy.y
@@ -1005,28 +979,7 @@ local function gameLoop( event )
 								soundToPlay = math.random(1, 4)
 								playSFX (audioBadCombos[soundToPlay], 1)
 							end
-							-- Check for Secondary Win condition
-							--if(currentLevel.victoryCondition~=false) then
-							--	if(currentLevel.victoryCondition.enemy.name==allEne[#allEne].name)then
-							--		currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
-							--		print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
-							--		if (currentLevel.victoryCondition.amount == 0) then
-							--			print("Condition Met")
-							--			currentLevel.victoryCondition.conditionMet = true
-							--		end
-							--	end
-							--end
-							
-							-- add health bars to enemies.
-							--allEnemHealth[#allEne] = #allEne
-							--allEnemHealth[#allEne] = display.newImage( "images/enemhealth.jpg" )
-							--allEnemHealth[#allEne].height = 10 
-							-- creates a new health.
-							--allEnemHealth[#allEne].health = newHealth(n,i)
-							--allEnemHealth[#allEne].width = allEne[#allEne].health/allEne[#allEne].maxHealth * 50
-							--allEnemHealth[#allEne].x = allEnemHealth[n].x; allEnemHealth[#allEne].y = allEnemHealth[n].y
-							--end health bar.
-
+                                                        
 							--define the enemy
 							allEne[#allEne].height = 50; allEne[#allEne].width = 50
 							allEne[#allEne].x = allEne[n].x; allEne[#allEne].y = allEne[n].y
@@ -1248,8 +1201,6 @@ function scene:createScene( event )
 		local loops = math.random(2)-1
 		local bassloops = loops
 		local guitarloops = loops
-		print("loops: "..loops)
-		print("Guitar Num: "..num)
 
 		if(num > 6) then
 			playgameMusic(sfx.w1trumpet,5,0)
@@ -1305,8 +1256,6 @@ function scene:createScene( event )
   		local function playWorld2()
 			local num = math.random(#w2music)
 			local loops = math.random(2)-1
-			print("loops: "..loops)
-			print("w2music Num: "..num)
 
 			playgameMusic(w2music[num],6,loops,0,playWorld2)
 		end
@@ -1336,8 +1285,6 @@ function scene:createScene( event )
   		local function playWorld3()
   			local num = math.random(#w3music)
   			local loops = math.random(2)-1
-			print("loops: "..loops)
-			print("w3music Num: "..num)  
 			playgameMusic(w3music[num],7,loops,0,playWorld3)			
   		end
 
@@ -1358,13 +1305,6 @@ function scene:createScene( event )
   bkg.height=display.contentHeight; bkg.width=display.contentWidth
   group:insert(bkg)
   
-  function getxy( event )
-	--print("x: "..event.x)
-	--print("y: "..event.y)
-  end
-  
-  bkg:addEventListener( "touch", getxy )
-  
   --create the heroes
   scene:createBreakfastChef()
   scene.createHeroes()
@@ -1384,18 +1324,12 @@ scene.createConveyorBelts()
 	currentLevel.victoryCondition.amount = currentLevel.victoryCondition.memAmount
 	currentLevel.victoryCondition.conditionMet = false
 	numCond = numCond +1 
-	print("Make " .. currentLevel.victoryCondition.amount .. " " .. currentLevel.victoryCondition.enemy.name)
-else
-	print ("No Second Condition")
   end
 
  if(currentLevel.categoryCondition~=false)then
 	currentLevel.categoryCondition.amount = currentLevel.categoryCondition.memAmount
 	currentLevel.categoryCondition.success = false
 	numCond = numCond +1 
-	print("Make " .. currentLevel.categoryCondition.amount .. " " .. currentLevel.categoryCondition.type .. " item(s).")
-else
-	print ("No Category Condition")
   end
 
 --minimum score
@@ -1403,9 +1337,6 @@ if(currentLevel.scoreCondition~=false)then
 	currentLevel.scoreCondition.score = currentLevel.scoreCondition.memScore
 	currentLevel.scoreCondition.success = false
 	numCond = numCond +1 
-	print("Reach " .. currentLevel.scoreCondition.score .. " points.")
-else
-	print ("No Score Condition")
   end
 
   group:insert(currentLevel)
@@ -1482,9 +1413,7 @@ function scene:exitScene( event )
 	if (globals.score > gameSettings[world][thisLevel][1]) then
 		gameSettings[world][thisLevel][1] = globals.score
 		loadsave.saveTable(gameSettings , "gamesettings.json")
-		print("new high score: " .. gameSettings[world][thisLevel][1])
 	end
-	print("saved score: " .. gameSettings[world][thisLevel][1])
   --Runtime:removeEventListener( "enterFrame", updateEnemyHealth )
   Runtime:removeEventListener( "enterFrame", gameLoop )
   --timer.cancel(attackTimer)
@@ -1563,19 +1492,14 @@ function scene:exitScene( event )
 		if (globals.stars[world][thisLevel] > gameSettings[world][thisLevel][2]) then
 			gameSettings[world][thisLevel][2] = globals.stars[world][thisLevel]
 			loadsave.saveTable(gameSettings , "gamesettings.json")
-			print("Saving stars" .. gameSettings[world][thisLevel][2])
 		end
 	
-	print ("Stars: " .. levels[world][thisLevel].stars)
-
 	local stars = 0
 	for i = 0,table.maxn( levels[world] ) do
 		if ( levels[world][thisLevel].stars ~= nil ) then	
 			stars = stars + levels[world][thisLevel].stars
 		end
 	end
-
-	print (stars)
 
 	if(stars>0) then
 		LevelList.unlockLevel(world, 5)

@@ -58,24 +58,6 @@ myItems = {}
 myItems[0] = nil
 myItems[1] = nil
 myItems[2] = nil
---Not being used
-function useItem(hero)
-	local item = hero.item
-	if ( item == nil ) then emptyItem()
-	elseif ( item.id > 0 ) then foodItem(item, hero)
-	end
-	
-end
---not being used
-function emptyItem()
-	print ("You got nothin")
-end
---not being used
-function foodItem(item, hero)
-	--createEne(item.foodId)
-	print(item.name)
-	hero.item = nil
-end
 
 function passValuesToNewItem ( newItem, oldItem )
 	-- if the new item is an enemy/foodtype, use the enemy's passing valurs function from the enemy class
@@ -91,51 +73,7 @@ function passValuesToNewItem ( newItem, oldItem )
 	return newItem
 end
 
--- function commercialBreak()
--- 	storyboard.showOverlay("scenes.scene_break", {effect = "slideDown", time=500})
---     timer.pause(attackTimer)
---     timer.pause(spawnEneTimer)
---     if (antagonistTimer ~= nil) then
--- 		timer.pause(antagonistTimer)
--- 	end
---     transition.pause("animation")
--- end
-
--- function producerSwap()
--- 	if ( table.maxn(allEne)>1 ) then
--- 		local randomEne1 = math.random(1, table.maxn( allEne  ) )
--- 		local randomEne2 = math.random(1, table.maxn( allEne  ) )
--- 		while (randomEne1 == randomEne2) do
--- 			randomEne1 = math.random(1, table.maxn( allEne  ) )
--- 			randomEne2 = math.random(1, table.maxn( allEne  ) )
--- 		end
--- 		local randomEne1X = allEne[randomEne1].x
--- 		local randomEne2X = allEne[randomEne2].x
--- 		print ("enemy1 x: " .. randomEne1X .. " enemy2 x: " .. randomEne2X)
--- 		--local randomEne1BarX = allEnemHealth[randomEne1].x
--- 		--local randomEne2BarX = allEnemHealth[randomEne2].x
--- 		local randomEne1Y = allEne[randomEne1].y
--- 		local randomEne2Y = allEne[randomEne2].y
--- 		--local randomEne1BarY = allEnemHealth[randomEne1].y
--- 		--local randomEne2BarY = allEnemHealth[randomEne2].y
-		
--- 		local smoke1 = display.newImage( "images/smoke.png", allEne[randomEne1].x, allEne[randomEne1].y, true )
--- 		transition.to( smoke1, { time=1500, alpha=0, onComplete=function() smoke1:removeSelf()end } )
-		
--- 		local smoke2 = display.newImage( "images/smoke.png", allEne[randomEne2].x, allEne[randomEne2].y, true )
--- 		transition.to( smoke2, { time=1500, alpha=0, onComplete=function() smoke2:removeSelf()end } )
--- 		local function resetMove()
--- 			transition.to( allEne[randomEne1], { time=(moveSpeed(allEne[randomEne1].x, allEne[randomEne1].speed, allEne[randomEne1].y)), x=(50) ,tag="animation"}  )
--- 			transition.to( allEne[randomEne2], { time=(moveSpeed(allEne[randomEne2].x, allEne[randomEne2].speed, allEne[randomEne2].y)), x=(50) ,tag="animation"}  )
--- 			transition.pause("animation")
--- 		end
--- 		transition.to(allEne[randomEne1], { time= 2000,  x = randomEne2X, y = randomEne2Y})
--- 		transition.to(allEne[randomEne2], { time= 2000,  x = randomEne1X, y = randomEne1Y, onComplete= resetMove })
--- 	end
--- end
-
   local function resume()
-  	--print("CHOP ENDING")
 		for i = 0,table.maxn( allEne ) do
 			if (allEne[i] ~= nil) then
 				allEne[i]:removeEventListener( "touch", chopping )
@@ -185,7 +123,6 @@ function itemFoodDrag( event )
 
 		elseif "ended" == phase or "cancelled" == phase then
 			local hit = 0
-			print (body.itemType)
 			for n = 0,table.maxn( allEne  ) do
 				if ( hasCollidedCircle( body, allEne[n]) ) then
 					-- in game
@@ -206,9 +143,7 @@ function itemFoodDrag( event )
 			end
 			-- gameSettings[6][body.myItemRef+1] = nil
 			-- loadsave.saveTable(gameSettings , "gamesettings.json")
-			print("food used!")
 			if ( hit == 0) then
-				print (body.x .. " " .. startX)
 				transition.to( body, { time=400, x = startX, y = startY} )
 			end
 			startX = nil

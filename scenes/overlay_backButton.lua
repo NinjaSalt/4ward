@@ -23,7 +23,6 @@ function scene:createScene( event )
   --storyboard.gotoScene(previousScene)
   
   local backButton = display.newImage("images/leftArrow.png")
-  print(scene)
   backButton.x = 466 
   backButton.y = 12
   backButton.height = 20

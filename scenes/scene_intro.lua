@@ -191,7 +191,6 @@ function scene:createScene( event )
   end
   spacer  = spacer + 38
 end
-    --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)
   end
 
 local function makeCatCond()
@@ -210,7 +209,6 @@ local function makeCatCond()
   end
    spacer  = spacer + 38
 end
-    --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)
   end
 
 local function makeScoreCond()
@@ -221,7 +219,6 @@ local function makeScoreCond()
     group: insert(scoreObj)
     transition.to(scoreObj, {time=150, x=display.contentWidth/2+ moveText})
     spacer  = spacer + 38
-end    --print("Make " .. vicCond.amount .. " " .. vicCond.enemy.name)
   end  
 
 local function makeStars()
@@ -332,7 +329,6 @@ function scene:exitScene( event )
   end
 
   local antTime = math.random(5000, 15000)
-  --print (antagonistRandom)
   if(antagonistRandom~=0)then
 	antagonistTimer = timer.performWithDelay ( antTime, antagonistShow )
   end

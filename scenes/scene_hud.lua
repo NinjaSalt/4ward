@@ -319,7 +319,6 @@ function scene:createScene( event )
 	  globals.hold.height = 25
 	  globals.hold.x = 100
 	  globals.hold.y = 20
-	  print(eneInHold.x)
 	  globals.hold.eneX = eneX
 	  globals.hold.eneY = eneY
 	  globals.hold:addEventListener( "tap", makeHoldEne )

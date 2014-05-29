@@ -25,7 +25,6 @@ function bkftbuttonPressed()
       --if (allEne[i] ~= nil) then  --we shouldn't need this check anymore. We won't access any nil values
         if (allEne[i].y == lane1 and allEne[i].category == "breakfast") then
             enemyCounter = enemyCounter + 1
-            print(enemyCounter)
             makeDeathPoof(allEne[i])
 
 
@@ -33,9 +32,7 @@ function bkftbuttonPressed()
             if currentLevel.victoryCondition~=false and
             currentLevel.victoryCondition.enemy.name==allEne[i].name then
                 currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
-                print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
                 if (currentLevel.victoryCondition.amount == 0) then
-                  print("Condition Met")
                   currentLevel.victoryCondition.conditionMet = true
                 end
               
@@ -46,9 +43,7 @@ function bkftbuttonPressed()
             if currentLevel.categoryCondition~=false and
             currentLevel.categoryCondition.type==allEne[i].category then
                 currentLevel.categoryCondition.amount = currentLevel.categoryCondition.amount-1
-                print(currentLevel.categoryCondition.type .. "left: " .. currentLevel.categoryCondition.amount)
                 if (currentLevel.categoryCondition.amount == 0) then
-                  print("Category Condition Met")
                   currentLevel.categoryCondition.success = true
                 end
             
@@ -96,9 +91,7 @@ function dnrbuttonPressed()
             if(currentLevel.victoryCondition~=false) then
               if(currentLevel.victoryCondition.enemy.name==allEne[i].name)then
                 currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
-                print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
                 if (currentLevel.victoryCondition.amount == 0) then
-                  print("Condition Met")
                   currentLevel.victoryCondition.conditionMet = true
                 end
               end
@@ -109,9 +102,7 @@ function dnrbuttonPressed()
              if(currentLevel.categoryCondition~=false) then
               if(currentLevel.categoryCondition.type==allEne[i].category)then
                 currentLevel.categoryCondition.amount = currentLevel.categoryCondition.amount-1
-                print(currentLevel.categoryCondition.type .. "left: " .. currentLevel.categoryCondition.amount)
                 if (currentLevel.categoryCondition.amount == 0) then
-                  print("Category Condition Met")
                   currentLevel.categoryCondition.success = true
                 end
               end
@@ -161,9 +152,7 @@ function dstbuttonPressed()
             if(currentLevel.victoryCondition~=false) then
               if(currentLevel.victoryCondition.enemy.name==allEne[i].name)then
                 currentLevel.victoryCondition.amount = currentLevel.victoryCondition.amount-1
-                print(currentLevel.victoryCondition.enemy.name .. "left: " .. currentLevel.victoryCondition.amount)
                 if (currentLevel.victoryCondition.amount == 0) then
-                  print("Condition Met")
                   currentLevel.victoryCondition.conditionMet = true
                 end
               end
@@ -174,9 +163,7 @@ function dstbuttonPressed()
             if(currentLevel.categoryCondition~=false) then
               if(currentLevel.categoryCondition.type==allEne[i].category)then
                 currentLevel.categoryCondition.amount = currentLevel.categoryCondition.amount-1
-                print(currentLevel.categoryCondition.type .. "left: " .. currentLevel.categoryCondition.amount)
                 if (currentLevel.categoryCondition.amount == 0) then
-                  print("Category Condition Met")
                   currentLevel.categoryCondition.success = true
                 end
               end

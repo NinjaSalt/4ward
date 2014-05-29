@@ -70,7 +70,6 @@ function scene:createScene( event )
 
   local function giveItem1( event )
   	if (notTouched) then
-  		print( "give 1")
   		myItems[0] = itemToGive
       -- gameSettings[6][1]=myItems[0]
       -- loadsave.saveTable(gameSettings , "gamesettings.json")
@@ -89,7 +88,6 @@ function scene:createScene( event )
 
   local function giveItem2( event )
     if (notTouched) then
-  		print( "give 2")
   		myItems[1] = itemToGive
       -- gameSettings[6][2]=myItems[1]
       -- loadsave.saveTable(gameSettings , "gamesettings.json")
@@ -108,7 +106,6 @@ function scene:createScene( event )
 
   local function giveItem3( event )
     if (notTouched) then
-  		print( "give 3")
   		myItems[2] = itemToGive
       -- gameSettings[6][3]=myItems[2]
       -- loadsave.saveTable(gameSettings , "gamesettings.json")

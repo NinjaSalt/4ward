@@ -118,8 +118,6 @@ function scene:createScene( event )
     hideBackground = true,
     horizontalScrollDisabled = false,
     verticalScrollDisabled = true,
-    --backgroundColor = { 0.7373, 0.5608, 0.5608 },
-    --listener = scrollListener
   }
   group:insert( scrollView)
 

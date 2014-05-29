@@ -23,7 +23,6 @@ storyboard.removeAll()
 function scene:createScene( event )
   local group = self.view
   local prevScore = globals.currency.load()
-  print("prevScore " .. prevScore)
   globals.currency.set(prevScore)
 
   -- if (prevScore==nil or globals.currency ~= nil) then
@@ -106,27 +105,6 @@ local currencyGradient = display.newImage("images/money.png")
     })
  -- currenyText:setFillColor( black )
   group:insert(globals.currenyText)
-  
-	local function scrollListener( event )
-
-		local phase = event.phase
-		if ( phase == "began" ) then print( "Scroll view was touched" )
-		elseif ( phase == "moved" ) then print( "Scroll view was moved" )
-		elseif ( phase == "ended" ) then print( "Scroll view was released" )
-		end
-
-		-- In the event a scroll limit is reached...
-		if ( event.limitReached ) then
-			if ( event.direction == "up" ) then print( "Reached top limit" )
-			elseif ( event.direction == "down" ) then print( "Reached bottom limit" )
-			elseif ( event.direction == "left" ) then print( "Reached left limit" )
-			elseif ( event.direction == "right" ) then print( "Reached right limit" )
-			end
-		end
-
-		return true
-	end
-
 	
 -- Create the widget
 	local scrollView = widget.newScrollView{
@@ -138,7 +116,6 @@ local currencyGradient = display.newImage("images/money.png")
 		--hideBackground = true,
 		horizontalScrollDisabled = true,
 		backgroundColor = { 0.2, 0.2, 0.2 },
-		listener = scrollListener
 	}
   group:insert( scrollView)
   

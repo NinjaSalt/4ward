@@ -24,7 +24,6 @@ end
 function enemyAbility( event )
         local enemy = event.target
         if event.phase == "began" then
-                print ( enemy.name )
         end
 end
 

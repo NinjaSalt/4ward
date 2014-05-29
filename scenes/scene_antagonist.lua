@@ -178,9 +178,7 @@ function scene:createScene( event )
 			flashPotato.height = 100
 			transition.to( flashPotato, { time=100, alpha=0, onComplete=function() flashPotato:removeSelf()end } )
 			mashCount=mashCount+1
-			print("mashed")
 			if ( mashCount > 10 ) then
-				print ("Great Job!")
 				local smoke = display.newImage( "images/comboPoof.png", potato.x, potato.y, true )
 				transition.to( smoke, { time=500, alpha=0, onComplete=function() smoke:removeSelf()end } )
 				potato:removeSelf()

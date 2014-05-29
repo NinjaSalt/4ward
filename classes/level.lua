@@ -42,7 +42,6 @@ function Level.load(world, levelID)
 end
 
 function startLevel(level)
-print("#enemies:"..level.totalNumberOfEnemies)
 	spawnEneTimer = timer.performWithDelay( level.timeBetweenEachSpawn[1], function() spawnNextEnemy(level) end)
 end
 

@@ -74,22 +74,15 @@ function scene:createScene( event )
         gameSettings  = {}
         --world
         for n=1, globals.numWorlds+3, 1 do
-            print("n: " .. n)
             gameSettings[n] = {}
         end
 
         for i = 1,table.maxn( myEnemies )+1 do
-         -- if (gameSettings[4][i]~=nil) then
            gameSettings[4][i] = false
-          --end
-          --print(gameSettings[4][i])
         end
 
         for h = 1,table.maxn( comboEnemies )+1 do
-          --if (gameSettings[5][h]~=nil) then
              gameSettings[5][h] = false
-             --print(gameSettings[5][h])
-          --end
         end
         --levels
         for n=1, globals.numWorlds, 1 do

@@ -28,9 +28,6 @@ function combination( obj1, obj2 )
 	  else
 		increaseMultiplier()
 	  end
-      print(obj1.type)
-      print(obj2.type)
-      print(newType)
       return true
    end
 
@@ -61,7 +58,6 @@ function newHealth (obj1, obj2)
     if (allEne[obj1].type ~= "bad" and allEne[obj2].type == "bad") then
       newHealthTotal= (allEne[obj1].health + allEne[obj2].health)*1.5
     end
-    print (newHealthTotal)
     return newHealthTotal
   end
 end
