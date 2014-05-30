@@ -123,4 +123,7 @@ globals.completedShop = false
 -- globals for chef tip / danger warning (needs to be saved)
 globals.completedTip = false
 
+-- globals for trash can tip
+globals.completedTrash = false
+
 return globals

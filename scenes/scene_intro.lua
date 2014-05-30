@@ -220,6 +220,7 @@ local function makeScoreCond()
     transition.to(scoreObj, {time=150, x=display.contentWidth/2+ moveText})
     spacer  = spacer + 38
   end  
+end
 
 local function makeStars()
   local firstStar = display.newImage("images/starb.png")

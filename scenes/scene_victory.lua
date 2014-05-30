@@ -213,8 +213,11 @@ function scene:createScene( event )
 
   end
   
-  
-  if nextLevel == LevelList.getNumOfLevels(params.world) then
+   timer.performWithDelay( 1000, starShow )
+
+  if ( params.world == 1 and nextLevel == 4 and globals.completedTrash == false) then
+   timer.performWithDelay(2000, function() storyboard.showOverlay( "scenes.scene_tipTrash" , {effect = "slideDown", time = 500 } )end)
+  elseif (nextLevel == LevelList.getNumOfLevels(params.world)) then
 	--timer.performWithDelay(800, function() transition.to(nextWorldButton, {time = 700, x= display.contentWidth/2 + 90}) end)
     timer.performWithDelay(800, function() transition.to(replayButton, {time = 700, x= display.contentWidth/2 - 60}) end)
     timer.performWithDelay(800, function() transition.to(mapButton, {time = 700, x= display.contentWidth/2 + 60}) end)
@@ -225,7 +228,7 @@ function scene:createScene( event )
     timer.performWithDelay(800, function() transition.to(mapButton, {time = 700, x= display.contentWidth/2 + 30}) end)
     timer.performWithDelay(800, function() transition.to(shareButton, {time = 700, x= display.contentWidth/2 - 30}) end)
   end
-  timer.performWithDelay( 1000, starShow )
+
 
   local function onTapNextLevel( event )
     storyboard.removeScene( scene )
