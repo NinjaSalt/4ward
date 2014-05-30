@@ -5,11 +5,14 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
+local loadsave = require("classes.loadsave")
 local globals= require ("classes.globals") 
 -- Clear previous scene
 storyboard.removeAll()
  
 -- local forward references should go here --
+
+gameSettings = loadsave.loadTable("gamesettings.json")
  
 ---------------------------------------------------------------------------------
 -- BEGINNING OF YOUR IMPLEMENTATION
@@ -38,7 +41,8 @@ function scene:createScene( event )
     tutFour:removeSelf()
     fourText:removeSelf()
     triangle:removeSelf()
-    globals.completedShop = true
+    gameSettings[8][2] = true
+    loadsave.saveTable(gameSettings , "gamesettings.json")
     storyboard.hideOverlay("scenes.overlay_pantryTutorial", "slideUp", 500 )
     storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
    end

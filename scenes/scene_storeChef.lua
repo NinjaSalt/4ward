@@ -9,14 +9,14 @@ local scene = storyboard.newScene()
 local itemToGive
  notTouched = true
 local globals= require("classes.globals") 
--- local loadsave = require("classes.loadsave")
+local loadsave = require("classes.loadsave")
  
 require("classes.items")
 require("classes.heroes")
 -- Clear previous scene
 storyboard.removeAll()
 
--- gameSettings = loadsave.loadTable("gamesettings.json")
+gameSettings = loadsave.loadTable("gamesettings.json")
  
 -- local forward references should go here --
  
@@ -32,8 +32,8 @@ function scene:createScene( event )
    effect = "fade",
    time = 500
   }
-  local prevScore = globals.currency.load()
-  globals.currency.set(prevScore)
+  local prevScore = gameSettings[7]
+  --globals.currency.set(prevScore)
 
 
   local bkg = display.newRect( centerX, centerY, display.contentWidth, display.contentHeight )
@@ -71,14 +71,14 @@ function scene:createScene( event )
   local function giveItem1( event )
   	if (notTouched) then
   		myItems[0] = itemToGive
-      -- gameSettings[6][1]=myItems[0]
-      -- loadsave.saveTable(gameSettings , "gamesettings.json")
+      if gameSettings[6][1] == false then
+        gameSettings[6][1]=myItems[0]
+        loadsave.saveTable(gameSettings , "gamesettings.json")
+      end
   		notTouched = false
-      if (prevScore > 200) then
-        globals.currency.add((-1)*myItems[0].cost)
-        globals.currency.save()
-        prevScore = globals.currency.load()
-        globals.currency.set(prevScore)
+      if (prevScore > itemToGive.cost) then
+        gameSettings[7] = gameSettings[7] - myItems[0].cost
+        loadsave.saveTable(gameSettings , "gamesettings.json")
       end
   	end
 	  storyboard.removeScene( scene )
@@ -89,14 +89,18 @@ function scene:createScene( event )
   local function giveItem2( event )
     if (notTouched) then
   		myItems[1] = itemToGive
-      -- gameSettings[6][2]=myItems[1]
-      -- loadsave.saveTable(gameSettings , "gamesettings.json")
+      if gameSettings[6][2] == false then
+        gameSettings[6][2]=myItems[1]
+        loadsave.saveTable(gameSettings , "gamesettings.json")
+      end
   		notTouched = false
-      if (prevScore > 200) then
-        globals.currency.add((-1)*myItems[0].cost)
-        globals.currency.save()
-        prevScore = globals.currency.load()
-        globals.currency.set(prevScore)
+      if (prevScore > itemToGive.cost) then
+        gameSettings[7] = gameSettings[7] - myItems[1].cost
+        loadsave.saveTable(gameSettings , "gamesettings.json")
+        --globals.currency.add((-1)*myItems[1].cost)
+       -- globals.currency.save()
+        --prevScore = globals.currency.load()
+        --globals.currency.set(prevScore)
       end
   	end
 	  storyboard.removeScene( scene )
@@ -107,14 +111,16 @@ function scene:createScene( event )
   local function giveItem3( event )
     if (notTouched) then
   		myItems[2] = itemToGive
-      -- gameSettings[6][3]=myItems[2]
-      -- loadsave.saveTable(gameSettings , "gamesettings.json")
+      gameSettings[6][3]=myItems[2]
+      loadsave.saveTable(gameSettings , "gamesettings.json")
   		notTouched = false
-      if (prevScore > 200) then
-        globals.currency.add((-1)*myItems[0].cost)
-        globals.currency.save()
-        prevScore = globals.currency.load()
-        globals.currency.set(prevScore)
+      if (prevScore > itemToGive.cost) then
+        gameSettings[7] = gameSettings[7] - myItems[2].cost
+        loadsave.saveTable(gameSettings , "gamesettings.json")
+        -- globals.currency.add((-1)*myItems[2].cost)
+        -- globals.currency.save()
+        -- prevScore = globals.currency.load()
+        -- globals.currency.set(prevScore)
       end
   	end
 	  storyboard.removeScene( scene )
@@ -123,11 +129,11 @@ function scene:createScene( event )
     
   end
 
-  -- for i = 0, 2, 1 do
-  --   if (gameSettings[6][i+1]~=nil) then
-  --     myItems[i] = gameSettings[6][i+1]
-  --   end
-  -- end
+  for i = 0, 2, 1 do
+    if (gameSettings[6][i+1]~=false) then
+      myItems[i] = gameSettings[6][i+1]
+    end
+  end
 
   local gameItems = {}
   local spacing = -60

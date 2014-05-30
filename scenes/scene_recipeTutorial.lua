@@ -5,11 +5,14 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
+local loadsave = require("classes.loadsave")
 local globals= require ("classes.globals") 
 -- Clear previous scene
 storyboard.removeAll()
  
 -- local forward references should go here --
+
+gameSettings = loadsave.loadTable("gamesettings.json")
  
 ---------------------------------------------------------------------------------
 -- BEGINNING OF YOUR IMPLEMENTATION
@@ -38,7 +41,8 @@ function scene:createScene( event )
     tutThree:removeSelf()
     threeText:removeSelf()
     triangle:removeSelf()
-    globals.completedBook = true
+    gameSettings[8][1] = true
+    loadsave.saveTable(gameSettings , "gamesettings.json")
     --storyboard.hideOverlay( "slideUp", 500 )
     storyboard.hideOverlay("scenes.overlay_recipeTutorial", "slideUp", 500 )
     storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})

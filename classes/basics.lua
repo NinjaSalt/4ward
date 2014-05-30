@@ -18,6 +18,7 @@ function unlockBasicCheck(number)
 	if (globals.basics[number+1]~= nil) then
 		globals.basics[number+1].locker = true
 		if (gameSettings[number+1]~=nil) then
+			items[number+1].unlocked = true
 			gameSettings[4][number+1] = globals.basics[number+1].locker
 		end
 	end

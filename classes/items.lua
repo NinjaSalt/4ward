@@ -5,7 +5,7 @@ require("classes.move")
 --equire("classes.heroes")
 local globals = require("classes.globals")
 local storyboard = require( "storyboard" )
---local loadsave = require("classes.loadsave")
+local loadsave = require("classes.loadsave")
 --require("scenes.scene_ingame")
 Item = {}
 Item.__index = Item
@@ -13,7 +13,7 @@ Item.__index = Item
 local startX = nil
 local startY = nil
 
---gameSettings = loadsave.loadTable("gamesettings.json")
+gameSettings = loadsave.loadTable("gamesettings.json")
 
 
 function Item.makeItem(name, itemType, image, cost, id, unlocked, description, toUse, lockLevel)
@@ -83,23 +83,52 @@ end
   end
 
 
-function itemTap ( event )
-	itemUsed = event.target
-	-- if the item is "break", call the commercialBreak function
-	if (itemUsed.itemType == "break") then
-		commercialBreak()
-		itemUsed: removeSelf()
-		myItems[itemUsed.myItemRef] = nil
-		-- gameSettings[6][itemUsed.myItemRef+1] = nil
-		-- loadsave.saveTable(gameSettings , "gamesettings.json")
-	elseif (itemUsed.itemType == "swap")then
-		producerSwap()
-		itemUsed: removeSelf()
-		myItems[itemUsed.myItemRef] = nil
-		-- gameSettings[6][itemUsed.myItemRef+1] = nil
-		-- loadsave.saveTable(gameSettings , "gamesettings.json")
-	end
-end
+-- function itemTap ( event )
+-- 	itemUsed = event.target
+-- 	-- if the item is "break", call the commercialBreak function
+-- 	if (itemUsed.itemType == "break") then
+-- 		commercialBreak()
+-- 		itemUsed: removeSelf()
+-- 		gameSettings[6][itemUsed.myItemRef+1] = nil
+-- 		gameSettings[6][itemUsed.myItemRef+1] = false
+-- 		myItems[itemUsed.myItemRef] = nil
+-- 		loadsave.saveTable(gameSettings , "gamesettings.json")
+-- 	elseif (itemUsed.itemType == "swap")then
+-- 		producerSwap()
+-- 		itemUsed: removeSelf()
+-- 		myItems[itemUsed.myItemRef] = nil
+-- 		-- gameSettings[6][itemUsed.myItemRef+1] = nil
+-- 		-- loadsave.saveTable(gameSettings , "gamesettings.json")
+-- 	end
+-- end
+
+function producerSwap()
+  	if ( table.maxn(allEne)>1 ) then
+  		local randomEne1 = math.random(1, table.maxn( allEne  ) )
+  		local randomEne2 = math.random(1, table.maxn( allEne  ) )
+  		while (randomEne1 == randomEne2) do
+  			randomEne1 = math.random(1, table.maxn( allEne  ) )
+  			randomEne2 = math.random(1, table.maxn( allEne  ) )
+  		end
+  		local randomEne1X = allEne[randomEne1].x
+  		local randomEne2X = allEne[randomEne2].x
+  		local randomEne1Y = allEne[randomEne1].y
+  		local randomEne2Y = allEne[randomEne2].y
+  		
+  		local smoke1 = display.newImage( "images/smoke.png", allEne[randomEne1].x, allEne[randomEne1].y, true )
+  		transition.to( smoke1, { time=1500, alpha=0, onComplete=function() smoke1:removeSelf()end } )
+  		
+  		local smoke2 = display.newImage( "images/smoke.png", allEne[randomEne2].x, allEne[randomEne2].y, true )
+  		transition.to( smoke2, { time=1500, alpha=0, onComplete=function() smoke2:removeSelf()end } )
+  		local function resetMove()
+  			transition.to( allEne[randomEne1], { time=(moveSpeed(allEne[randomEne1].x, allEne[randomEne1].speed, allEne[randomEne1].y)), x=(50) ,tag="animation"}  )
+  			transition.to( allEne[randomEne2], { time=(moveSpeed(allEne[randomEne2].x, allEne[randomEne2].speed, allEne[randomEne2].y)), x=(50) ,tag="animation"}  )
+  			transition.pause("animation")
+  		end
+  		transition.to(allEne[randomEne1], { time= 2000,  x = randomEne2X, y = randomEne2Y})
+  		transition.to(allEne[randomEne2], { time= 2000,  x = randomEne1X, y = randomEne1Y, onComplete= resetMove })
+  	end
+  end
 
 function itemFoodDrag( event )
 	local body = event.target
@@ -128,21 +157,25 @@ function itemFoodDrag( event )
 					-- in game
 					if (body.itemType == "foodType") then
 						itemCombo( body, allEne[n], true )
+						gameSettings[6][body.myItemRef+1] = false
+						print(gameSettings[6][body.myItemRef+1])
+						loadsave.saveTable(gameSettings , "gamesettings.json")
 						break
 					elseif (body.itemType == "trash") then
-						--itemCombo( body, allEne[n], true )
 						allEne[n]: removeSelf()
 						table.remove(allEne, n)
 						body:removeSelf( )
+						gameSettings[6][body.myItemRef+1] = false
+						print(gameSettings[6][body.myItemRef+1])
+						loadsave.saveTable(gameSettings , "gamesettings.json")
 						--body = nil
 						--decrementEnemy(currentLevel)
 						break
 					end
-				hit = 1
+					--gameSettings[6][body.myItemRef+1] = nil
+					hit = 1
 				end
 			end
-			-- gameSettings[6][body.myItemRef+1] = nil
-			-- loadsave.saveTable(gameSettings , "gamesettings.json")
 			if ( hit == 0) then
 				transition.to( body, { time=400, x = startX, y = startY} )
 			end

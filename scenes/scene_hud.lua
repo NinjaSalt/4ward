@@ -24,18 +24,6 @@ storyboard.removeAll()
 function scene:createScene( event )
   local group = self.view
 
-  --   currencyText = globals.currency.init({
-  --   fontSize = 20,
-  --   font = "Helvetica",
-  --   x = -84,
-  --   y = -14,
-  --   maxDigits = 7,
-  --   leadingZeros = false,
-  --   filename = "currencyfile.txt",
-  --   })
-  -- currencyText:setFillColor( black )
-  -- group:insert(currencyText)
-  
   -- OBJECTIVE --
   -- for spacing out objectives
   local spacer = 40
@@ -218,28 +206,6 @@ function scene:createScene( event )
   globals.multiplierText:setFillColor(250,250,0)
   group:insert(globals.multiplierText)
 
--- NUMBER OF LIVES
-  --[[local hearts = display.newImage("images/lives.png")
-  hearts.width = 50
-  hearts.height = 25
-  hearts.x = 30
-  hearts.y = 15
-  group:insert(hearts)
-
-  globals.numLives = display.newText( globals.lives, 40, 14, globals.LOBSTERTWO, 20)
-  globals.numLives:setFillColor(1,1,1)
-  group:insert(globals.numLives)
-]]
---PLAYERS CURRENCY
---[[
-  money = display.newImage("images/money.png")
-  money.width = 58
-  money.height = 28
-  money.x = 85
-  money.y = 14  
-  group:insert(money)
-]]--
-
 -- PLAYERS ITEM BELT
   itemBelt = {}
 
@@ -264,11 +230,11 @@ function scene:createScene( event )
   itemBelt[0].y = 300
   group:insert(itemBelt[0])
 
-	-- for i = 0, 2, 1 do
-	-- 	--if (gameSettings[6][i+1] ~= nil) then
-	-- 	--	myItems[i] = gameSettings[6][i+1]
-	-- 	--end
-	-- end
+	for i = 0, 2, 1 do
+      if gameSettings[6][i+1] ~= false then
+  			myItems[i] = gameSettings[6][i+1]
+      end
+	end
     
   local gameItems = {}
 
@@ -284,10 +250,10 @@ function scene:createScene( event )
       gameItems[i].myItemRef = i
       if ( gameItems[i].itemType == "foodType" or gameItems[i].itemType == "trash") then
       gameItems[i]:addEventListener( "touch", itemFoodDrag ) 
-      elseif ( gameItems[i].itemType == "break" ) then
-      gameItems[i]:addEventListener( "tap", itemTap ) 
-	    elseif ( gameItems[i].itemType == "swap" ) then
-      gameItems[i]:addEventListener( "tap", itemTap )
+     --  elseif ( gameItems[i].itemType == "break" ) then
+     --  gameItems[i]:addEventListener( "tap", itemTap ) 
+	    -- elseif ( gameItems[i].itemType == "swap" ) then
+     --  gameItems[i]:addEventListener( "tap", itemTap )
       end
       group:insert(gameItems[i])
     end
@@ -357,10 +323,6 @@ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
-  -- local prevCurrency = globals.currency.load()
-  -- if prevCurrency then
-  --   globals.currency.set(prevCurrency)
-  -- end
  
 end
  

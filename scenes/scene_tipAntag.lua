@@ -5,6 +5,7 @@
  
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
+local loadsave = require("classes.loadsave")
 local globals= require ("classes.globals") 
 local sfx = require ("classes.sfx")
 require("classes.audioClass")
@@ -13,6 +14,8 @@ require("classes.audioClass")
 storyboard.removeAll()
  
 -- local forward references should go here --
+
+gameSettings = loadsave.loadTable("gamesettings.json")
  
 ---------------------------------------------------------------------------------
 -- BEGINNING OF YOUR IMPLEMENTATION
@@ -85,7 +88,8 @@ function scene:createScene( event )
     
     if (currentNum == 4) then
     storyboard.hideOverlay("scenes.scne_tipAntag", "slideUp", 500 )
-    globals.completedTip = true
+    gameSettings[8][3] = true
+    loadsave.saveTable(gameSettings , "gamesettings.json")
     else
     currentText = display.newText( tutText[currentNum], 0, 0, globals.IMPRIMA, 18 )
     currentText:setFillColor(black)

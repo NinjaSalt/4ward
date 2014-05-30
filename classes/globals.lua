@@ -60,25 +60,6 @@ globals.multiplierText = nil
 globals.score = 0
 globals.scoreText = nil
 globals.negativeNum = 0
-globals.currency = require( "classes.score" )
-globals.currency.filename = "currencyfile.txt"
-globals.currenyText = globals.currency.init({
-    fontSize = 0,
-    font = "Helvetica",
-    x = -20,
-    y = -20,
-    maxDigits = 7,
-    leadingZeros = false,
-    filename = "currencyfile.txt",
-    })
---globals.currency.set(0)
-
--- HUD ITEM BELT --
-globals.loadItemBelt = false
-
--- HUD LIVES --
---globals.lives = 3
---globals.numLives = nil
 
 -- FONTS --
 globals.LOBSTERTWO = "blank"

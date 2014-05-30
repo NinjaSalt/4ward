@@ -35,13 +35,14 @@ local options = {
 }
 
 
-local globals = require ("classes.globals")
-require("classes.enemies")
-local sfx = require("classes.sfx")
-require("classes.audioClass")
+  local globals = require ("classes.globals")
+  require("classes.enemies")
+  local sfx = require("classes.sfx")
+  require("classes.audioClass")
 
--- play music
-playgameMusic(sfx.theme,1,-1)
+  -- play music
+  playgameMusic(sfx.theme,1,-1)
+
 
 local storyboard = require( "storyboard" )
 storyboard.gotoScene("scenes.scene_splash" , options)
@@ -89,20 +90,19 @@ local lfs = require "lfs"
 
 local doc_path = system.pathForFile( "", system.DocumentsDirectory )
 
-local destDir = system.DocumentsDirectory  -- where the file is stored
- local results, reason = os.remove( system.pathForFile( "currencyfile.txt", destDir  ) )
+for file in lfs.dir(doc_path) do
+   --file is the current file or directory name
+   print( "Found file: " .. file )
+end
 
------ HOW TO RESET THE SAVED TABLE ------
---[[
-1. Comment out the lines indicated to be commented out
-2. You don't have to play the game, just run it and then close it.
-3. Uncomment out the lines.
-7. Now when you run the game, everything should been resetted!
-]]--
+-- local destDir = system.DocumentsDirectory  -- where the file is stored
+-- local results, reason = os.remove( system.pathForFile( "gamesettings.json", destDir  ) )
 
-----UNCOMMENT TO RESET SCORE -------
--- globals.currency.set(0)
---   globals.currency.save()
+-- if results then
+--    print( "file removed" )
+-- else
+--    print( "file does not exist", reason )
+-- end
 
 local loadsave = require("classes.loadsave")
 
@@ -113,33 +113,10 @@ if (gameSettings == nil) then --comment this to reset the saving ***
     -- creating new table to save data
     gameSettings  = {}
     --world
-    for n=1, globals.numWorlds+3, 1 do
+    for n=1, globals.numWorlds+5, 1 do
         gameSettings[n] = {}
     end
 
-    for i = 1,table.maxn( myEnemies )+1 do
-       gameSettings[4][i] = false
-    end
-
-    for h = 1,table.maxn( comboEnemies )+1 do
-         gameSettings[5][h] = false
-    end
-
-    --- FOR REFERENCE ---
-    --worlds:
-    -- gameSettings[1] = {}
-    -- gameSettings[2] = {}
-    -- gameSettings[3] = {}
-    -- --recipe book unlocking:
-    -- --basic
-    --gameSettings[4] = {}
-    -- --recipe
-    -- gameSettings[5] = {}
-    --item belt saving:
-    --gameSettings[6] = {}
-    --- FOR REFERENCE ---
-
-    -- * --
     --levels
     for n=1, globals.numWorlds, 1 do
         for j=1, globals.numLevels, 1 do
@@ -163,7 +140,49 @@ if (gameSettings == nil) then --comment this to reset the saving ***
     -- gameSettings[n][j][2] = 0
     --- FOR REFERENCE ---
 
+    for i = 1,table.maxn( myEnemies )+1 do
+       gameSettings[4][i] = false
+    end
+
+    for h = 1,table.maxn( comboEnemies )+1 do
+         gameSettings[5][h] = false
+    end
+    for j = 1,3,1 do
+         gameSettings[6][j] = false
+    end
+
+    gameSettings[7] = 0
+
+    gameSettings[8] = {}
+    for j = 1,3,1 do
+      --1 = recipe tutorial
+      --2 = pantry tutorial
+      --3 = tips in world 2
+         gameSettings[8][j] = false
+    end
+
+    --- FOR REFERENCE ---
+    --worlds:
+    -- gameSettings[1] = {}
+    -- gameSettings[2] = {}
+    -- gameSettings[3] = {}
+    -- --recipe book unlocking:
+    -- --basic
+    --gameSettings[4] = {}
+    -- --recipe
+    -- gameSettings[5] = {}
+    --item belt saving:
+    --gameSettings[6] = {}
+    --currency
+    --gameSettings[7] = 0
+    --bools for tutorial and tips
+    --gameSettings[8] = {}
+    --- FOR REFERENCE ---
+
     loadsave.saveTable(gameSettings , "gamesettings.json")
+    print("First Time Data Initialisation") --comment this to reset the saving ***
+else --comment this to reset the saving ***
+    print("Main Data Loaded") --comment this to reset the saving ***
 end --comment this to reset the saving ***
 ---------------------------------------------------------
 

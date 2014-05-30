@@ -9,7 +9,6 @@ local globals= require("classes.globals")
 require("classes.items")
 require("classes.heroes")
 local widget = require( "widget" )
---globals.currency = require( "classes.score" )
 -- Clear previous scene
 storyboard.removeAll()
  
@@ -22,12 +21,7 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
-  local prevScore = globals.currency.load()
-  globals.currency.set(prevScore)
-
-  -- if (prevScore==nil or globals.currency ~= nil) then
-  --   globals.currency.set(0)
-  -- end
+  local prevScore = gameSettings[7]
   local itemList = {}
 
   local buyButton
@@ -94,17 +88,9 @@ local currencyGradient = display.newImage("images/money.png")
   currencyGradient.y = currencyGradient.height/2+5
   group:insert(currencyGradient)
 
-  globals.currenyText = globals.currency.init({
-    fontSize = 20,
-    font = "Helvetica",
-    x = currencyGradient.width/2+5,
-    y = currencyGradient.height/2+5,
-    maxDigits = 7,
-    leadingZeros = false,
-    filename = "currencyfile.txt"
-    })
- -- currenyText:setFillColor( black )
-  group:insert(globals.currenyText)
+ local currencyText = display.newText( gameSettings[7], currencyGradient.width/2+20, currencyGradient.height/2+5, globals.IMPRIMA, 20 )
+  currencyText:setFillColor(1,1,1)
+  group:insert(currencyText)  
 	
 -- Create the widget
 	local scrollView = widget.newScrollView{
@@ -185,7 +171,7 @@ local currencyGradient = display.newImage("images/money.png")
 
     buyButton.alpha = 0.2
   	buyButton.id = body.id
-    if (prevScore > 200) then
+    if (prevScore > body.cost) then
       buyButton.alpha = 1
       buyButton: setFillColor(0.282353, 0.819608, 0.8)
       buyButton:addEventListener( "tap", onTapBuy )
@@ -314,11 +300,9 @@ end
 -- Called immediately after scene has moved onscreen:
 function scene:enterScene( event )
   local group = self.view
-  prevScore = globals.currency.load()
-        globals.currency.set(prevScore)
 
 -- goes to pantry tutorial page.
-if (globals.completedShop ~= true) then
+if (gameSettings[8][2] ~= true) then
   storyboard.showOverlay( "scenes.scene_pantryTutorial" , {effect = "slideDown", time = 500 })
  end
 end

@@ -69,22 +69,13 @@ function scene:createScene( event )
     else
        print( "file does not exist", reason )
     end
-       --if (gameSettings == nil) then --comment this to reset the saving ***
         -- creating new table to save data
         gameSettings  = {}
         --world
-        for n=1, globals.numWorlds+3, 1 do
+        for n=1, globals.numWorlds+5, 1 do
             gameSettings[n] = {}
         end
-
-        for i = 1,table.maxn( myEnemies )+1 do
-           gameSettings[4][i] = false
-        end
-
-        for h = 1,table.maxn( comboEnemies )+1 do
-             gameSettings[5][h] = false
-        end
-        --levels
+     --levels
         for n=1, globals.numWorlds, 1 do
             for j=1, globals.numLevels, 1 do
                 gameSettings[n][j] = {}
@@ -99,12 +90,56 @@ function scene:createScene( event )
             end
         end
 
+        --- FOR REFERENCE ---
+        --score
+        -- gameSettings[n][j][1] = 0
+
+        -- --stars
+        -- gameSettings[n][j][2] = 0
+        --- FOR REFERENCE ---
+
+        for i = 1,table.maxn( myEnemies )+1 do
+           gameSettings[4][i] = false
+        end
+
+        for h = 1,table.maxn( comboEnemies )+1 do
+             gameSettings[5][h] = false
+        end
+        for j = 1,3,1 do
+             gameSettings[6][j] = false
+        end
+
+        gameSettings[7] = 0
+
+        gameSettings[8] = {}
+        for j = 1,3,1 do
+          --1 = recipe tutorial
+          --2 = pantry tutorial
+          --3 = tips in world 2
+          gameSettings[8][j] = false
+        end
+
+        --- FOR REFERENCE ---
+        --worlds:
+        -- gameSettings[1] = {}
+        -- gameSettings[2] = {}
+        -- gameSettings[3] = {}
+        -- --recipe book unlocking:
+        -- --basic
+        --gameSettings[4] = {}
+        -- --recipe
+        -- gameSettings[5] = {}
+        --item belt saving:
+        --gameSettings[6] = {}
+        --currency
+        --gameSettings[7] = 0
+        --bools for tutorial and tips
+        --gameSettings[8] = {}
+        --- FOR REFERENCE ---
+
 
         loadsave.saveTable(gameSettings , "gamesettings.json")
         print("First Time Data Initialisation") --comment this to reset the saving ***
-    -- else --comment this to reset the saving ***
-    --     print("Main Data Loaded") --comment this to reset the saving ***
-    -- end --comment this to reset the saving ***
   end
 
   backButton:addEventListener("tap",onTapBack)

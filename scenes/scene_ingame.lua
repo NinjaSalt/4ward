@@ -55,11 +55,7 @@ require("classes.recipes")
 require("classes.basics")
 require("classes.servingButtons")
 require("classes.beltsAnimation")
-
-globals.currency = require( "classes.score" )
 require("classes.timeLine")
-
-local currencyText
  
 --sprite.xScale, sprite.yScale = 3,3 --The image is a little small so we scale it up
 
@@ -1406,8 +1402,10 @@ function scene:exitScene( event )
   local group = self.view
 
 	if (globals.score > 0) then
-	  globals.currency.add(globals.score)
-	  globals.currency.save()
+	  -- globals.currency.add(globals.score)
+	  -- globals.currency.save()
+	  gameSettings[7] = gameSettings[7] + globals.score
+	  loadsave.saveTable(gameSettings , "gamesettings.json")
 	end
   --saving high score
 	if (globals.score > gameSettings[world][thisLevel][1]) then
