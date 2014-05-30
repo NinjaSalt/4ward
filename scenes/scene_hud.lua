@@ -4,7 +4,6 @@
 ---------------------------------------------------------------------------------
  
 local globals = require("classes.globals") 
-local score = require("classes.score")
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 -- local loadsave = require("classes.loadsave")
