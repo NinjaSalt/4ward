@@ -6,11 +6,13 @@
 local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals = require("classes.globals")
+local loadsave = require("classes.loadsave")
  
 -- Clear previous scene
 storyboard.removeAll()
  
 -- local forward references should go here --
+gameSettings = loadsave.loadTable("gamesettings.json")
  
 ---------------------------------------------------------------------------------
 -- BEGINNING OF YOUR IMPLEMENTATION
@@ -50,7 +52,7 @@ function scene:createScene( event )
   group:insert (inRect)
 
   local tutText = {} -- list of tips
-  tutText = {"Did that third item ruin your score?", "Use the compost bin in the item shop to help you out!", "Here's 1,000 gold to purchase some items!", "Let's head there now!"}
+  tutText = {"Did that third item ruin your score?", "Use the compost bin in the item shop to help you out!", "Here's 200 gold to purchase some items!", "Let's head there now!"}
 
   local currentNum = 1
 
@@ -80,6 +82,8 @@ function scene:createScene( event )
     
     if (currentNum == 5) then
     globals.completedTrash = true
+    gameSettings[7] = gameSettings[7] + 200
+    loadsave.saveTable(gameSettings , "gamesettings.json")
     storyboard.hideOverlay("scenes.scene_tipTrash", "slideUp", 500 )
     storyboard.gotoScene( "scenes.scene_worldmap",{ effect = "fade", time = 500})
     --globals.completedTip = true
