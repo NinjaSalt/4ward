@@ -81,7 +81,7 @@ function scene:createScene( event )
     if (currentNum == 5) then
     globals.completedTrash = true
     storyboard.hideOverlay("scenes.scene_tipTrash", "slideUp", 500 )
-    storyboard.gotoScene( "scenes.scene_worldMap",{ effect = "fade", time = 500})
+    storyboard.gotoScene( "scenes.scene_worldmap",{ effect = "fade", time = 500})
     --globals.completedTip = true
     else
     textContent = {
