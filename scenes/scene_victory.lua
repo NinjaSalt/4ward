@@ -162,7 +162,9 @@ function scene:createScene( event )
   mapButton.y = buttonY
   group:insert( mapButton)
   
-  local shareButton = display.newRect( 800, buttonY, 50, 50 )
+  local shareButton = display.newImage("images/buttonShare.png", 800, buttonY, true )
+  shareButton.width = 50
+  shareButton.height = 50
   group:insert( shareButton)
 
   -- DISPLAY: number of stars you received during this round, NOT the highesst number of stars you've reached in this round.

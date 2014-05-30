@@ -69,17 +69,23 @@ function scene:createScene( event )
  
   group:insert( splashScreen )
  
-  local startButton = display.newText( "Start!", 0, 0, globals.LOBSTERTWO, 45 )
-  startButton:setFillColor(black)
-  startButton.x = display.contentCenterX - 90
+  local startButton = display.newImage ("images/buttonPlay.png", 10, 10, true)
+  --display.newText( "Start!", 0, 0, globals.LOBSTERTWO, 45 )
+  --startButton:setFillColor(black)
+  startButton.x = 50 --display.contentCenterX - 30
   startButton.y = display.contentCenterY + 120
+  startButton.width = 70
+  startButton.height = 70
 
   group:insert( startButton)
 
-  local opButton = display.newText( "Options", 0, 0, globals.LOBSTERTWO, 45 )
-  opButton:setFillColor(black)
-  opButton.x = display.contentCenterX + 80
+  local opButton = display.newImage ("images/buttonOptions.png", 10, 10, true)
+  --display.newText( "Options", 0, 0, globals.LOBSTERTWO, 45 )
+  --opButton:setFillColor(black)
+  opButton.x = display.contentWidth - 50
   opButton.y = display.contentCenterY + 120
+  opButton.width = 70
+  opButton.height = 70
 
   group:insert(opButton)
 
