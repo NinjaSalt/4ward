@@ -23,6 +23,25 @@ function scene:createScene( event )
    effect = "fade",
    time = 250
 }
+-- Called when a key event has been received.
+local function onKeyEvent( event )
+    -- Print which key was pressed down/up to the log.
+    local message = "Key '" .. event.keyName .. "' was pressed " .. event.phase
+    print( message )
+
+    -- If the "back" key was pressed on Android, then prevent it from backing out of your app.
+    if (event.keyName == "back") and (system.getInfo("platformName") == "Android") then
+        return true
+    end
+
+    -- Return false to indicate that this app is *not* overriding the received key.
+    -- This lets the operating system execute its default handling of this key.
+    return false
+end
+
+-- Add the key event listener.
+Runtime:addEventListener( "key", onKeyEvent );
+
 
 --[[local socialOptions = {
    service = "facebook",
