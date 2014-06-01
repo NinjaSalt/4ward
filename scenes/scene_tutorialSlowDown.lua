@@ -36,10 +36,27 @@ function scene:createScene( event )
   swipe.alpha = .01
   group:insert (swipe)
   
-  local toDo = display.newText( "Let's slow down a lane", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
+  local border = display.newRect( display.contentWidth/2, 20, 25, 50)
+  border:setFillColor(black)
+  group:insert (border)
+  
+  local back = display.newRect( display.contentWidth/2, 20, 25, 50)
+  group:insert (back)
+  
+  local toDo = display.newText( "Let's slow down a lane", display.contentWidth/2, 30, globals.IMPRIMA, 36 )
   toDo:setFillColor(black)
   group:insert (toDo)
-
+  
+  border.x=toDo.x
+  border.y=toDo.y
+  border.width=toDo.width+10
+  border.height=toDo.height+10
+  
+  back.x=toDo.x
+  back.y=toDo.y
+  back.width=toDo.width
+  back.height=toDo.height
+  
   local function onTapBack( event )
 	local phase = event.phase
 	if "ended" == phase or "cancelled" == phase then
@@ -76,6 +93,8 @@ function scene:createScene( event )
   end
   local function step1 ()
 	toDo.text = "Swipe the middle lane right"
+	border.width=toDo.width+10
+	back.width=toDo.width
 	swipe:addEventListener( "touch", onTapBack )
   end
   
