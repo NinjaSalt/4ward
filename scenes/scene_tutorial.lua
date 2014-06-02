@@ -36,9 +36,26 @@ function scene:createScene( event )
   swipe.alpha = .01
   group:insert (swipe)
   
-  local toDo = display.newText( "Swipe the bottom lane left!", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
+  local border = display.newRect( display.contentWidth/2, 20, 25, 50)
+  border:setFillColor(black)
+  group:insert (border)
+  
+  local back = display.newRect( display.contentWidth/2, 20, 25, 50)
+  group:insert (back)
+  
+  local toDo = display.newText( "Swipe the bottom lane left!", display.contentWidth/2, 30, globals.IMPRIMA, 36 )
   toDo:setFillColor(black)
   group:insert (toDo)
+  
+  border.x=toDo.x
+  border.y=toDo.y
+  border.width=toDo.width+10
+  border.height=toDo.height+10
+  
+  back.x=toDo.x
+  back.y=toDo.y
+  back.width=toDo.width
+  back.height=toDo.height
 
   local function onTapBack( event )
 	local phase = event.phase

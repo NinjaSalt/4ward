@@ -36,9 +36,26 @@ function scene:createScene( event )
   swipe.alpha = .01
   group:insert (swipe)
   
-  local toDo = display.newText( "Now let's serve the pancake", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
+   local border = display.newRect( display.contentWidth/2, 20, 25, 50)
+  border:setFillColor(black)
+  group:insert (border)
+  
+  local back = display.newRect( display.contentWidth/2, 20, 25, 50)
+  group:insert (back)
+  
+  local toDo = display.newText( "Now let's serve the pancake", display.contentWidth/2, 30, globals.IMPRIMA, 36 )
   toDo:setFillColor(black)
   group:insert (toDo)
+  
+  border.x=toDo.x
+  border.y=toDo.y
+  border.width=toDo.width+10
+  border.height=toDo.height+10
+  
+  back.x=toDo.x
+  back.y=toDo.y
+  back.width=toDo.width
+  back.height=toDo.height
   
   
   local function onTapBack( event )
@@ -64,10 +81,20 @@ function scene:createScene( event )
 
   local function step1()
 	toDo.text = "Tap the serve button"
+	border.width=toDo.width+10
+	back.width=toDo.width
+	
+  end
+  
+  local function step2()
+	transition.to( toDo, { time=(400), y=(-100) , tag= "animation"} )
+	transition.to( border, { time=(400), y=(-100) , tag= "animation"} )
+	transition.to( back, { time=(400), y=(-100) , tag= "animation"} )
 	swipe:addEventListener( "touch", onTapBack )
   end
   
   timer.performWithDelay(2000, step1 )
+  timer.performWithDelay(4000, step2 )
 end
  
 -- Called BEFORE scene has moved onscreen:

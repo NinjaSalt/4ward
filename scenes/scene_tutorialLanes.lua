@@ -48,9 +48,26 @@ function scene:createScene( event )
   chef3.alpha = .01
   group:insert (chef3)
   
-  local toDo = display.newText( "Chefs serve one type of food", display.contentWidth/2, 20, globals.IMPRIMA, 36 )
+  local border = display.newRect( display.contentWidth/2, 20, 25, 50)
+  border:setFillColor(black)
+  group:insert (border)
+  
+  local back = display.newRect( display.contentWidth/2, 20, 25, 50)
+  group:insert (back)
+  
+  local toDo = display.newText( "Chefs serve one type of food", display.contentWidth/2, 30, globals.IMPRIMA, 36 )
   toDo:setFillColor(black)
   group:insert (toDo)
+  
+  border.x=toDo.x
+  border.y=toDo.y
+  border.width=toDo.width+10
+  border.height=toDo.height+10
+  
+  back.x=toDo.x
+  back.y=toDo.y
+  back.width=toDo.width
+  back.height=toDo.height
   
   local breakfast = display.newText( "Breakfast", -100,lane1+10, globals.IMPRIMA, 36 )
   breakfast:setFillColor(black)
@@ -119,18 +136,24 @@ function scene:createScene( event )
 	transition.to( dessert, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
 	chef3:addEventListener( "touch", step4 )
 	toDo.text = "Tap the Dessert Chef"
+	border.width=toDo.width+10
+	back.width=toDo.width
   end
   
   local function step2()
 	transition.to( dinner, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
 	chef2:addEventListener( "touch", step3 )
 	toDo.text = "Tap the Dinner Chef"
+	border.width=toDo.width+10
+	back.width=toDo.width
   end
   
   local function step1()
 	transition.to( breakfast, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
 	chef1:addEventListener( "touch", step2 )
 	toDo.text = "Tap the Breakfast Chef"
+	border.width=toDo.width+10
+	back.width=toDo.width
   end
   
   
