@@ -777,6 +777,13 @@ function validCombosRemaining()
         return true
     end
     
+    for i = 0, 2, 1 do
+        if myItems[i] ~= nil and myItems[i].itemType == "trash" then
+            return true
+        end
+    end
+    
+    
     for i = 1,table.maxn( allEne ) do
         local basicItemFlag = false
         for j = 0,table.maxn( myEnemies ) do

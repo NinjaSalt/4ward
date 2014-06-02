@@ -165,6 +165,7 @@ function itemFoodDrag( event )
 						allEne[n]: removeSelf()
 						table.remove(allEne, n)
 						body:removeSelf( )
+                                                myItems[body.myItemRef] = nil
 						gameSettings[6][body.myItemRef+1] = false
 						print(gameSettings[6][body.myItemRef+1])
 						loadsave.saveTable(gameSettings , "gamesettings.json")
