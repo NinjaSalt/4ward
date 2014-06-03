@@ -107,7 +107,7 @@ function scene:createConveyorBelts()
 				globals.belts[n]:addEventListener( "touch", ability )
 			end
 		end
-		globals.belts[n].x = 278
+		globals.belts[n].x = 277
 		group:insert(globals.belts[n])
 	end
 	eggsheetSettings =
@@ -1409,8 +1409,6 @@ function scene:exitScene( event )
   local group = self.view
 
 	if (globals.score > 0) then
-	  -- globals.currency.add(globals.score)
-	  -- globals.currency.save()
 	  gameSettings[7] = gameSettings[7] + globals.score
 	  loadsave.saveTable(gameSettings , "gamesettings.json")
 	end
