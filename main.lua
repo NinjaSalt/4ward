@@ -1,6 +1,5 @@
 --main.lua
  
-package.loaded["classes.score"] = nil
 -- Code to have Corona display the font names found
 --
 local fonts = native.getFontNames()
