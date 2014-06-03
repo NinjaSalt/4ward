@@ -111,8 +111,10 @@ function scene:createScene( event )
   local function giveItem3( event )
     if (notTouched) then
   		myItems[2] = itemToGive
-      gameSettings[6][3]=myItems[2]
-      loadsave.saveTable(gameSettings , "gamesettings.json")
+  		if gameSettings[6][3] == false then
+	      gameSettings[6][3]=myItems[2]
+	      loadsave.saveTable(gameSettings , "gamesettings.json")
+	  	end
   		notTouched = false
       if (prevScore > itemToGive.cost) then
         gameSettings[7] = gameSettings[7] - myItems[2].cost
@@ -132,6 +134,11 @@ function scene:createScene( event )
   for i = 0, 2, 1 do
     if (gameSettings[6][i+1]~=false) then
       myItems[i] = gameSettings[6][i+1]
+    elseif (gameSettings[6][i+1]==false) then
+  --   	gameSettings[6][i+1] = display.newRect(display.contentWidth/2, (display.contentHeight/2) + spacing, 50, 50)
+  --   	gameSettings[6][i+1]:setStrokeColor("black")
+		-- gameSettings[6][i+1].strokeWidth = 3
+		myItems[i] = nil
     end
   end
 

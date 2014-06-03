@@ -231,7 +231,9 @@ function scene:createScene( event )
 
 	for i = 0, 2, 1 do
       if gameSettings[6][i+1] ~= false then
-  			myItems[i] = gameSettings[6][i+1]
+		myItems[i] = gameSettings[6][i+1]
+	  elseif gameSettings[6][i+1] == false then
+		myItems[i] = nil
       end
 	end
     
