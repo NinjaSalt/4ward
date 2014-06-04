@@ -494,19 +494,19 @@ function scene:createScene( event )
   recipeBook:addEventListener( "tap", onTapBookIcon )
   itemShop:addEventListener( "tap", onTapStoreButton )
 
-  local backButton = display.newImage("images/leftArrow.png")
-  backButton.x = 466 
-  backButton.y = 12
-  backButton.height = 20
-  backButton.width = 20
-  group:insert(backButton)
+  --local backButton = display.newImage("images/leftArrow.png")
+  --backButton.x = 466 
+  --backButton.y = 12
+  --backButton.height = 20
+  --backButton.width = 20
+  --group:insert(backButton)
   
-  local function onTapBack( event )
-    storyboard.removeScene( scene )
-    storyboard.gotoScene( "scenes.scene_worldmap",{ effect = "fade", time = 250})
-  end
+  --local function onTapBack( event )
+  -- storyboard.removeScene( scene )
+  --  storyboard.gotoScene( "scenes.scene_worldmap",{ effect = "fade", time = 250})
+  --end
 
-  backButton:addEventListener("tap",onTapBack)
+ -- backButton:addEventListener("tap",onTapBack)
 
 
   -- local function onTapStartLevel (event)

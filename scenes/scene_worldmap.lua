@@ -41,7 +41,7 @@ function scene:createScene( event )
   storeButton.y = display.contentHeight-storeButton.width/2 - storeButton.width/4
   group:insert(storeButton)
 
-  local backArrow = display.newImageRect("images/backArrow.png",75,75)
+  local backArrow = display.newImageRect("images/buttonReturn.png",75,75)
   backArrow.x = 50
   backArrow.y = 270
   group:insert(backArrow)

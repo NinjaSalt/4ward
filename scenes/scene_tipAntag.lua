@@ -88,6 +88,7 @@ function scene:createScene( event )
     
     if (currentNum == 4) then
     storyboard.hideOverlay("scenes.scne_tipAntag", "slideUp", 500 )
+    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500}) 
     gameSettings[8][3] = true
     loadsave.saveTable(gameSettings , "gamesettings.json")
     else
