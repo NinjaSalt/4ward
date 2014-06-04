@@ -111,6 +111,12 @@ local currencyGradient = display.newImage("images/money.png")
     --globals.negativeNum = (-1)*items[event.target.id].cost
   end
 
+  local function notEnough( event )
+    --storyboard.removeScene( scene )
+    storyboard.showOverlay( "scenes.scene_storeFail",{ effect = "slideDown", time = 500})
+    --globals.negativeNum = (-1)*items[event.target.id].cost
+  end
+
   --local buyButton
   --local itemName
   --local itemImage
@@ -175,6 +181,8 @@ local currencyGradient = display.newImage("images/money.png")
       buyButton.alpha = 1
       buyButton: setFillColor(0.282353, 0.819608, 0.8)
       buyButton:addEventListener( "tap", onTapBuy )
+    else 
+      buyButton:addEventListener( "tap", notEnough )
     end
   	group:insert(buyButton)
 
@@ -272,20 +280,6 @@ local currencyGradient = display.newImage("images/money.png")
 		  myY=myY+35
 		end
 	end
-
-  -- local backButton = display.newImage("images/leftArrow.png")
-  -- backButton.x = 466 
-  -- backButton.y = 12
-  -- backButton.height = 20
-  -- backButton.width = 20
-  -- group:insert(backButton)
-  
-  -- local function onTapBack( event )
-  --   storyboard.removeScene( scene )
-  --   storyboard.gotoScene( "scenes.scene_worldmap",{ effect = "fade", time = 250})
-  -- end
-
-  -- backButton:addEventListener("tap",onTapBack)
 
 
 
