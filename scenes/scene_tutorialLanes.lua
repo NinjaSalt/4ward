@@ -69,17 +69,83 @@ function scene:createScene( event )
   back.width=toDo.width
   back.height=toDo.height
   
+  local borderBreak = display.newRect( display.contentWidth/2, 20, 100, 50)
+  borderBreak:setFillColor(black)
+  group:insert (borderBreak)
+  
+  local backBreak = display.newRect( display.contentWidth/2, 20, 100, 50)
+  group:insert (backBreak)
+  
   local breakfast = display.newText( "Breakfast", -100,lane1+10, globals.IMPRIMA, 36 )
   breakfast:setFillColor(black)
   group:insert (breakfast)
+  
+  borderBreak.x=breakfast.x
+  borderBreak.y=breakfast.y
+  borderBreak.width=breakfast.width+10
+  borderBreak.height=breakfast.height+10
+  
+  backBreak.x=breakfast.x
+  backBreak.y=breakfast.y
+  backBreak.width=breakfast.width
+  backBreak.height=breakfast.height
+  
+  local borderDin = display.newRect( display.contentWidth/2, 20, 100, 50)
+  borderDin:setFillColor(black)
+  group:insert (borderBreak)
+  
+  local backDin = display.newRect( display.contentWidth/2, 20, 100, 50)
+  group:insert (backDin)
   
   local dinner = display.newText( "Dinner", -100 , lane2+10, globals.IMPRIMA, 36 )
   dinner:setFillColor(black)
   group:insert (dinner)
   
+  borderDin.x=dinner.x
+  borderDin.y=dinner.y
+  borderDin.width=dinner.width+10
+  borderDin.height=dinner.height+10
+  
+  backDin.x=dinner.x
+  backDin.y=dinner.y
+  backDin.width=dinner.width
+  backDin.height=dinner.height
+  
+  local borderDess = display.newRect( display.contentWidth/2, 20, 100, 50)
+  borderDess:setFillColor(black)
+  group:insert (borderDess)
+  
+  local backDess = display.newRect( display.contentWidth/2, 20, 100, 50)
+  group:insert (backDess)
+  
   local dessert = display.newText( "Dessert", -100, lane3+10, globals.IMPRIMA, 36 )
   dessert:setFillColor(black)
   group:insert (dessert)
+  
+  borderDess.x=dessert.x
+  borderDess.y=dessert.y
+  borderDess.width=dessert.width+10
+  borderDess.height=dessert.height+10
+  
+  backDess.x=dessert.x
+  backDess.y=dessert.y
+  backDess.width=dessert.width
+  backDess.height=dessert.height
+  
+  local newborder = display.newRect( display.contentWidth/2, 20, 100, 50)
+  newborder:setFillColor(black)
+  group:insert (newborder)
+  newborder.x=dinner.x
+  newborder.y=dinner.y
+  newborder.width=dinner.width+10
+  newborder.height=dinner.height+10
+  
+  backBreak:toFront()
+  breakfast:toFront()
+  
+  borderDin:toBack()
+  backDin:toFront()
+  dinner:toFront()
   
   local function onTapBack( event )
 	local phase = event.phase
@@ -134,6 +200,8 @@ function scene:createScene( event )
   
   local function step3()
 	transition.to( dessert, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
+	transition.to( borderDess, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
+	transition.to( backDess, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
 	chef3:addEventListener( "touch", step4 )
 	toDo.text = "Tap the Dessert Chef"
 	border.width=toDo.width+10
@@ -142,6 +210,9 @@ function scene:createScene( event )
   
   local function step2()
 	transition.to( dinner, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
+	transition.to( borderDin, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
+	transition.to( backDin, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
+	transition.to( newborder, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
 	chef2:addEventListener( "touch", step3 )
 	toDo.text = "Tap the Dinner Chef"
 	border.width=toDo.width+10
@@ -150,6 +221,8 @@ function scene:createScene( event )
   
   local function step1()
 	transition.to( breakfast, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
+	transition.to( borderBreak, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
+	transition.to( backBreak, { time=(400), x=(display.contentWidth/2-75) , tag= "animation"} )
 	chef1:addEventListener( "touch", step2 )
 	toDo.text = "Tap the Breakfast Chef"
 	border.width=toDo.width+10
