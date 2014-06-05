@@ -14,6 +14,8 @@ local nextLevel
 local nextWorld
 -- Clear previous scene
 storyboard.removeAll()
+
+
  
 -- local forward references should go here --
  
@@ -217,7 +219,7 @@ function scene:createScene( event )
   
    timer.performWithDelay( 1000, starShow )
 
-  if ( params.world == 1 and nextLevel == 4 and globals.completedTrash == false) then
+  if ( params.world == 1 and nextLevel == 4 and gameSettings[8][4] == false) then
    timer.performWithDelay(2000, function() storyboard.showOverlay( "scenes.scene_tipTrash" , {effect = "slideDown", time = 500 } )end)
   elseif (nextLevel == LevelList.getNumOfLevels(params.world)) then
 	--timer.performWithDelay(800, function() transition.to(nextWorldButton, {time = 700, x= display.contentWidth/2 + 90}) end)

@@ -81,7 +81,7 @@ function scene:createScene( event )
     currentNum = currentNum + 1 
     
     if (currentNum == 5) then
-    globals.completedTrash = true
+    gameSettings[8][4] = true
     gameSettings[7] = gameSettings[7] + 200
     loadsave.saveTable(gameSettings , "gamesettings.json")
     storyboard.hideOverlay("scenes.scene_tipTrash", "slideUp", 500 )

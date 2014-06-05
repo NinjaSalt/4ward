@@ -1,5 +1,5 @@
 --main.lua
- 
+
 -- Code to have Corona display the font names found
 --
 local fonts = native.getFontNames()
@@ -153,10 +153,11 @@ if (gameSettings == nil) then --comment this to reset the saving ***
     gameSettings[7] = 0
 
     gameSettings[8] = {}
-    for j = 1,3,1 do
+    for j = 1,4,1 do
       --1 = recipe tutorial
       --2 = pantry tutorial
       --3 = tips in world 2
+      --4 = trash tutorial in level 4
          gameSettings[8][j] = false
     end
 
