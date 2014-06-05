@@ -9,10 +9,6 @@ local globals = require ("classes.globals")
 local widget = require( "widget" )
 -- Clear previous scene
 storyboard.removeAll()
-
-local loadsave = require("classes.loadsave")
-
---gameSettings = loadsave.loadTable("gamesettings.json")
  
 -- local forward references should go here --
  
@@ -43,10 +39,10 @@ function scene:createScene( event )
 
 
   local backButton = display.newImage("images/leftArrow.png")
-  backButton.x = 466 
-  backButton.y = 12
-  backButton.height = 20
-  backButton.width = 20
+  backButton.x = 450 
+  backButton.y = 32
+  backButton.height = 40
+  backButton.width = 40
   group:insert(backButton)
 
   local resetButton = display.newImageRect("images/resetgame.png", 100,50)
@@ -60,86 +56,7 @@ function scene:createScene( event )
   end
 
   local function resetGame( event )
-
-    local destDir = system.DocumentsDirectory  -- where the file is stored
-    local results, reason = os.remove( system.pathForFile( "gamesettings.json", destDir  ) )
-
-    if results then
-       print( "file removed" )
-    else
-       print( "file does not exist", reason )
-    end
-        -- creating new table to save data
-        gameSettings  = {}
-        --world
-        for n=1, globals.numWorlds+5, 1 do
-            gameSettings[n] = {}
-        end
-     --levels
-        for n=1, globals.numWorlds, 1 do
-            for j=1, globals.numLevels, 1 do
-                gameSettings[n][j] = {}
-            end
-        end
-
-        for n=1, globals.numWorlds, 1 do
-            for j=1, globals.numLevels, 1 do
-                for i=1, globals.numStorage, 1 do
-                  gameSettings[n][j][i] = 0
-                end
-            end
-        end
-
-        --- FOR REFERENCE ---
-        --score
-        -- gameSettings[n][j][1] = 0
-
-        -- --stars
-        -- gameSettings[n][j][2] = 0
-        --- FOR REFERENCE ---
-
-        for i = 1,table.maxn( myEnemies )+1 do
-           gameSettings[4][i] = false
-        end
-
-        for h = 1,table.maxn( comboEnemies )+1 do
-             gameSettings[5][h] = false
-        end
-        for j = 1,3,1 do
-             gameSettings[6][j] = false
-        end
-
-        gameSettings[7] = 0
-
-        gameSettings[8] = {}
-        for j = 1,3,1 do
-          --1 = recipe tutorial
-          --2 = pantry tutorial
-          --3 = tips in world 2
-          gameSettings[8][j] = false
-        end
-
-        --- FOR REFERENCE ---
-        --worlds:
-        -- gameSettings[1] = {}
-        -- gameSettings[2] = {}
-        -- gameSettings[3] = {}
-        -- --recipe book unlocking:
-        -- --basic
-        --gameSettings[4] = {}
-        -- --recipe
-        -- gameSettings[5] = {}
-        --item belt saving:
-        --gameSettings[6] = {}
-        --currency
-        --gameSettings[7] = 0
-        --bools for tutorial and tips
-        --gameSettings[8] = {}
-        --- FOR REFERENCE ---
-
-
-        loadsave.saveTable(gameSettings , "gamesettings.json")
-        print("First Time Data Initialisation") --comment this to reset the saving ***
+    storyboard.showOverlay( "scenes.scene_resetConfirm",{ effect = "slideDown", time = 500})
   end
 
   backButton:addEventListener("tap",onTapBack)
