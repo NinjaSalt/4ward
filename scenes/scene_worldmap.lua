@@ -116,19 +116,19 @@ function scene:createScene( event )
   local function onTapBanner1( event )
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_worldmap1", {effect = "fade", time = 500})
-    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
+    --storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
 
   local function onTapBanner2( event )
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_worldmap2", {effect = "fade", time = 500})
-    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
+    --storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
 
   local function onTapBanner3( event )
     storyboard.removeScene( scene )
     storyboard.gotoScene( "scenes.scene_worldmap3", {effect = "fade", time = 500})
-    storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
+    --storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
 
   bookIcon:addEventListener("tap", onTapBookIcon)

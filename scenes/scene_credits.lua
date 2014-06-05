@@ -36,10 +36,10 @@ function scene:createScene( event )
 
 
   local backButton = display.newImage("images/leftArrow.png")
-  backButton.x = 466 
-  backButton.y = 12
-  backButton.height = 20
-  backButton.width = 20
+  backButton.x = 450 
+  backButton.y = 32
+  backButton.height = 40
+  backButton.width = 40
   group:insert(backButton)
   
   local function onTapBack( event )

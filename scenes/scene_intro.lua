@@ -51,12 +51,12 @@ function scene:createScene( event )
 
   local levelName = levels[worldNum][levelNumber].levelTitle
  
-  local function makeText()
-	local title = display.newText( "Objectives:", display.contentWidth/2, (display.contentHeight/2) - 115, globals.LOBSTERTWO, 48 )
+  local function makeText() 
+	local title = display.newText( "Objectives:", display.contentWidth/2, (display.contentHeight/2) - 80, globals.LOBSTERTWO, 28 )
   title:setFillColor( black )
 	group:insert (title)
 
-  local subtitle = display.newText( levelName, display.contentWidth/2, (display.contentHeight/2) - 80, globals.LOBSTERTWO, 20 )
+  local subtitle = display.newText( levelName, display.contentWidth/2, (display.contentHeight/2) - 115, globals.LOBSTERTWO, 34)
   subtitle:setFillColor( black )
   group:insert (subtitle)
 

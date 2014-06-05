@@ -46,5 +46,5 @@ end
 worlds = {}
 
 worlds[1] = LevelList.create(1, 10)
-worlds[2] = LevelList.create(2, 4)
-worlds[3] = LevelList.create(3, 4)
+worlds[2] = LevelList.create(2, 10)
+worlds[3] = LevelList.create(3, 10)
