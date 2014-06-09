@@ -88,6 +88,7 @@ local currencyGradient = display.newImage("images/money.png")
   currencyGradient.y = currencyGradient.height/2+5
   group:insert(currencyGradient)
 
+  --display the currency
  local currencyText = display.newText( gameSettings[7], currencyGradient.width/2+20, currencyGradient.height/2+5, globals.IMPRIMA, 20 )
   currencyText:setFillColor(1,1,1)
   group:insert(currencyText)  
@@ -108,13 +109,11 @@ local currencyGradient = display.newImage("images/money.png")
   local function onTapBuy( event )
     storyboard.removeScene( scene )
     storyboard.showOverlay( "scenes.scene_storeChef",{ effect = "slideDown", time = 500, params = {item = items[event.target.id]}})
-    --globals.negativeNum = (-1)*items[event.target.id].cost
   end
 
   local function notEnough( event )
     --storyboard.removeScene( scene )
     storyboard.showOverlay( "scenes.scene_storeFail",{ effect = "slideDown", time = 500})
-    --globals.negativeNum = (-1)*items[event.target.id].cost
   end
 
   --local buyButton
@@ -281,7 +280,13 @@ local currencyGradient = display.newImage("images/money.png")
 		end
 	end
 
-
+   function updateCurrency()
+    currencyText:removeSelf( )
+    currencyText = nil
+    currencyText = display.newText( gameSettings[7], 80/2+20, 40/2+5, globals.IMPRIMA, 20 )
+    currencyText:setFillColor(1,1,1)
+    group:insert(currencyText)
+  end
 
 end
  

@@ -13,6 +13,7 @@ local loadsave = require("classes.loadsave")
  
 require("classes.items")
 require("classes.heroes")
+require("scenes.scene_store")
 -- Clear previous scene
 storyboard.removeAll()
 
@@ -67,7 +68,6 @@ function scene:createScene( event )
   goBack:addEventListener( "tap", cancel )
   group:insert(goBack)
 
-
   local function giveItem1( event )
   	if (notTouched) then
   		myItems[0] = itemToGive
@@ -81,6 +81,7 @@ function scene:createScene( event )
         loadsave.saveTable(gameSettings , "gamesettings.json")
       end
   	end
+    updateCurrency()
 	  storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )
     storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
@@ -97,12 +98,9 @@ function scene:createScene( event )
       if (prevScore > itemToGive.cost) then
         gameSettings[7] = gameSettings[7] - myItems[1].cost
         loadsave.saveTable(gameSettings , "gamesettings.json")
-        --globals.currency.add((-1)*myItems[1].cost)
-       -- globals.currency.save()
-        --prevScore = globals.currency.load()
-        --globals.currency.set(prevScore)
       end
   	end
+    updateCurrency()
 	  storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )
     storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
@@ -119,12 +117,9 @@ function scene:createScene( event )
       if (prevScore > itemToGive.cost) then
         gameSettings[7] = gameSettings[7] - myItems[2].cost
         loadsave.saveTable(gameSettings , "gamesettings.json")
-        -- globals.currency.add((-1)*myItems[2].cost)
-        -- globals.currency.save()
-        -- prevScore = globals.currency.load()
-        -- globals.currency.set(prevScore)
       end
   	end
+    updateCurrency()
 	  storyboard.removeScene( scene )
     storyboard.hideOverlay( "slideDown", 500 )
     storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
@@ -135,10 +130,7 @@ function scene:createScene( event )
     if (gameSettings[6][i+1]~=false) then
       myItems[i] = gameSettings[6][i+1]
     elseif (gameSettings[6][i+1]==false) then
-  --   	gameSettings[6][i+1] = display.newRect(display.contentWidth/2, (display.contentHeight/2) + spacing, 50, 50)
-  --   	gameSettings[6][i+1]:setStrokeColor("black")
-		-- gameSettings[6][i+1].strokeWidth = 3
-		myItems[i] = nil
+		  myItems[i] = nil
     end
   end
 
@@ -151,8 +143,6 @@ function scene:createScene( event )
   			gameItems[i].width = 50 
   			gameItems[i]:setStrokeColor("black")
   			gameItems[i].strokeWidth = 3
-        -- gameSettings[6][i+1]=myItems[i]
-        -- loadsave.saveTable(gameSettings , "gamesettings.json")
   			if ( i == 0 )then gameItems[i]:addEventListener( "touch", giveItem1 ) 
   			elseif ( i == 1 ) then gameItems[i]:addEventListener( "touch", giveItem2 )
   			elseif ( i == 2) then gameItems[i]:addEventListener( "touch", giveItem3 )
@@ -162,8 +152,6 @@ function scene:createScene( event )
 			gameItems[i] = display.newRect(display.contentWidth/2, (display.contentHeight/2) + spacing, 50, 50)
 			gameItems[i]:setStrokeColor("black")
 			gameItems[i].strokeWidth = 3
-      -- gameSettings[6][i+1]=nil
-      -- loadsave.saveTable(gameSettings , "gamesettings.json")
 			if ( i == 0 )then gameItems[i]:addEventListener( "touch", giveItem1 ) 
 			elseif  ( i == 1 ) then gameItems[i]:addEventListener( "touch", giveItem2 )
 			elseif ( i == 2) then gameItems[i]:addEventListener( "touch", giveItem3 )
@@ -178,11 +166,6 @@ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
-  -- for i = 0, 2, 1 do
-  --   --if (gameSettings[6][i+1] ~= nil) then
-  --    myItems[i] = gameSettings[6][i+1]
-  --   --end
-  --   end
  
 end
  
