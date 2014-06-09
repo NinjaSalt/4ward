@@ -604,8 +604,11 @@ function itemCombo( item , enemy, fromFoodItem )
 			allEne[#allEne].height = 50; allEne[#allEne].width = 50
 			allEne[#allEne].x = enemy.x; allEne[#allEne].y = enemy.y
 
-			--set the move speedallEne
-			transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50), tag="animation" } )
+			--set the move speedallEne UNLESS the enemy is made during an antagonist event
+                        if globals.notDurningAntagonist == true then
+                            transition.to( allEne[#allEne], { time=(moveSpeed(allEne[#allEne].x, allEne[#allEne].speed, allEne[#allEne].y)), x=(50), tag="animation" } )
+                        end
+                        
 			allEne[#allEne]:addEventListener( "touch", teleport ) 
 			--allEne[#allEne]:addEventListener( "tap", moveToHold )
 			eneAndBar[0]=allEne[#allEne]
