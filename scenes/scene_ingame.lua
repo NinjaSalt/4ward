@@ -112,13 +112,13 @@ function scene:createConveyorBelts()
 	end
 	eggsheetSettings =
   	{
-  	 width = 60,
+  	 width = 20,
   	 height = 20,
  	 numFrames = 3,
  	 sheetContentWidth=60,
-	 sheetContentHeight=60,
+	 sheetContentHeight=20,
 	}
-	eggsheet = graphics.newImageSheet("images/egg_sheet.png",eggsheetSettings)
+	eggsheet = graphics.newImageSheet("images/breakfast_speed.png",eggsheetSettings)
 	eggsequenceData = {
 	--higher the time, slower it goes
    { name = "normal", start=2,  count=1 },
@@ -128,13 +128,13 @@ function scene:createConveyorBelts()
 
 	fishsheetSettings =
   	{
-  	 width = 48,
-  	 height = 16,
+  	 width = 20,
+  	 height = 20,
  	 numFrames = 3,
- 	 sheetContentWidth=48,
-	 sheetContentHeight=48,
+ 	 sheetContentWidth=60,
+	 sheetContentHeight=20,
 	}
-	fishsheet = graphics.newImageSheet("images/fish_sheet.png",fishsheetSettings)
+	fishsheet = graphics.newImageSheet("images/dinner_speed.png",fishsheetSettings)
 	fishsequenceData = {
 	--higher the time, slower it goes
    { name = "normal", start=2,  count=1 },
@@ -144,13 +144,13 @@ function scene:createConveyorBelts()
 
 	macaronsheetSettings =
   	{
-  	 width = 60,
+  	 width = 20,
   	 height = 20,
  	 numFrames = 3,
  	 sheetContentWidth=60,
-	 sheetContentHeight=60,
+	 sheetContentHeight=20,
 	}
-	macaronsheet = graphics.newImageSheet("images/macaron_sheet.png",macaronsheetSettings)
+	macaronsheet = graphics.newImageSheet("images/dessert_speed.png",macaronsheetSettings)
 	macaronsequenceData = {
 	--higher the time, slower it goes
    { name = "normal", start=2,  count=1 },
@@ -164,17 +164,17 @@ function scene:createConveyorBelts()
   		--globals.levers[n].x = 73
   		if (n==0) then
   			globals.levers[n] = display.newSprite(eggsheet,eggsequenceData)
-  		globals.levers[n].x = display.contentWidth/3
+  		globals.levers[n].x = display.contentCenterX/2 - 20
 			globals.levers[n].y = lane1+39
 		end
 		if (n==1) then
 			globals.levers[n] = display.newSprite(fishsheet,fishsequenceData)
-  			globals.levers[n].x = display.contentWidth/3
+  			globals.levers[n].x = display.contentCenterX/2 - 20
 			globals.levers[n].y = lane2+39
 		end
 		if (n==2) then
 			globals.levers[n] = display.newSprite(macaronsheet,macaronsequenceData)
-  			globals.levers[n].x = display.contentWidth/3
+  			globals.levers[n].x = display.contentCenterX/2 - 20
 			globals.levers[n].y = lane3+38
 		end
 		globals.levers[n]:setSequence( "normal" )
