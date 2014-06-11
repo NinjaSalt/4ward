@@ -200,6 +200,32 @@ if ( antagonistAbility == 1 ) then
 		potato.width = 100
 		potato.height = 100
 		group:insert(potato)
+		--creates the hand image
+		local tapHand = display.newImage("images/hand.png", centerX+50, centerY+50)
+		tapHand.width = 70
+		tapHand.height = 70
+		group:insert(tapHand)
+		--function to move hand back to original position
+		function tap1()
+			if (tapHand~=nil) then
+				tapHand.x = centerX+40
+				tapHand.y = centerY+40
+			end
+		end
+		--function to move the hand a little bit to look like tapping
+		function tap2()
+			if (tapHand ~= nil) then
+				tapHand.x = centerX+35
+				tapHand.y = centerY+45
+				--to call back the function to move it back
+				timer.performWithDelay(200, tap1)
+			end
+		end
+		if (tapHand ~= nil) then
+			--calls every frame so the hand will move
+			timer.performWithDelay(400, tap2, 0 )
+		end
+		--timer.performWithDelay(400, bkftbuttonPressed )
 		local mashCount = 0
 		
 		
@@ -217,6 +243,12 @@ if ( antagonistAbility == 1 ) then
 				mashedPotato.width = 100
 				mashedPotato.height = 100
 				group:insert(mashedPotato)
+				if (tapHand ~= nil) then
+					transition.to( tapHand, { time=100, alpha=0, onComplete=function() 
+						tapHand:removeSelf( )
+						tapHand = nil
+						end } )
+				end
 				timer.performWithDelay( 500, resume )
 			end
 		end
