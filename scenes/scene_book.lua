@@ -459,7 +459,7 @@ end
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )
   local group = self.view
-  if (globals.completedBook ~= true) then
+  if (gameSettings[8][1] ~= true) then
   storyboard.showOverlay( "scenes.scene_recipeTutorial" , {effect = "slideDown", time = 500 })
   end
 end
