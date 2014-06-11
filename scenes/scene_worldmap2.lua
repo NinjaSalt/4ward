@@ -72,7 +72,7 @@ function scene:createScene( event )
   levelBack.y = display.contentHeight/2 + 60
   group:insert(levelBack)
 
-   local levelStart = display.newImageRect( "images/startButton.png", 40, 40 )
+   local levelStart = display.newImageRect( "images/buttonPlay.png", 40, 40 )
   levelStart.x = display.contentWidth/2+levelBack.width/2 - 30
   levelStart.y = display.contentHeight-25
   group:insert(levelStart)
@@ -200,12 +200,6 @@ function scene:createScene( event )
       group:insert(levelStars_3[i])
     end
   end
-
-    local levelStart = display.newImageRect( "images/startButton.png", 40, 40 )
-  levelStart.x = display.contentWidth/2+levelBack.width/2 - 30
-  levelStart.y = display.contentHeight-25
-  group:insert(levelStart)
-
 
   local levelTitleText = {
     text = "Step 1: Can you... Cook?",     

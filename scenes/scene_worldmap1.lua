@@ -183,7 +183,7 @@ function scene:createScene( event )
     end
   end
 
-  local levelStart = display.newImageRect( "images/startButton.png", 40, 40 )
+  local levelStart = display.newImageRect( "images/buttonPlay.png", 40, 40 )
   levelStart.x = display.contentWidth/2+levelBack.width/2 - 30
   levelStart.y = display.contentHeight-25
   group:insert(levelStart)

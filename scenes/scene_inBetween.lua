@@ -73,12 +73,18 @@ function scene:createScene( event )
         breakfast_load = nil
         transition.to(breakfast_hurt, {time=300, alpha = 1, xScale = 0.4, yScale = 0.4, onComplete=
           function() 
-            dotOne:removeSelf( )
-            dotOne = nil
-            dotTwo:removeSelf( )
-            dotTwo = nil
-            dotThree:removeSelf( )
-            dotThree = nil
+            if (dotOne~=nil) then
+                dotOne:removeSelf( )
+                dotOne = nil
+              end
+            if (dotTwo~=nil) then
+                dotTwo:removeSelf( )
+                dotTwo = nil
+              end
+            if (dotThree~=nil) then
+              dotThree:removeSelf( )
+              dotThree = nil
+            end
             loadText.text = "Tap to start!"
             loadText.x = display.contentWidth/2
           end})
@@ -109,12 +115,18 @@ function scene:createScene( event )
         dessert_load = nil
         transition.to(dessert_hurt, {time=300, alpha = 1, xScale = 0.4, yScale = 0.4, onComplete=
           function() 
-            dotOne:removeSelf( )
-            dotOne = nil
-            dotTwo:removeSelf( )
-            dotTwo = nil
-            dotThree:removeSelf( )
-            dotThree = nil
+            if (dotOne~=nil) then
+                dotOne:removeSelf( )
+                dotOne = nil
+              end
+            if (dotTwo~=nil) then
+                dotTwo:removeSelf( )
+                dotTwo = nil
+              end
+            if (dotThree~=nil) then
+              dotThree:removeSelf( )
+              dotThree = nil
+            end
             loadText.text = "Tap to start!"
             loadText.x = display.contentWidth/2
           end})
@@ -145,12 +157,18 @@ function scene:createScene( event )
         dinner_load = nil
         transition.to(dinner_hurt, {time=300, alpha = 1, xScale = 0.4, yScale = 0.4, onComplete=
           function() 
-            dotOne:removeSelf( )
-            dotOne = nil
-            dotTwo:removeSelf( )
-            dotTwo = nil
-            dotThree:removeSelf( )
-            dotThree = nil
+            if (dotOne~=nil) then
+                dotOne:removeSelf( )
+                dotOne = nil
+              end
+            if (dotTwo~=nil) then
+                dotTwo:removeSelf( )
+                dotTwo = nil
+              end
+            if (dotThree~=nil) then
+              dotThree:removeSelf( )
+              dotThree = nil
+            end
             loadText.text = "Tap to start!"
             loadText.x = display.contentWidth/2
           end})

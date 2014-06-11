@@ -60,13 +60,13 @@ function scene:createScene( event )
 
   -- SETS PANTRY BUTTON
   local itemShop = display.newImageRect( "images/pantry.png", 80, 80 )
-  itemShop.x = 370
+  itemShop.x = 375
   itemShop.y = 40
   group:insert(itemShop)
 
   -- SETS BOOK BUTTON
   local recipeBook = display.newImageRect( "images/book.png", 100, 100 )
-  recipeBook.x = 100
+  recipeBook.x = 95
   recipeBook.y = 40
   group:insert(recipeBook)
 
@@ -182,7 +182,7 @@ function scene:createScene( event )
     end
   end
 
-  local levelStart = display.newImageRect( "images/startButton.png", 40, 40 )
+  local levelStart = display.newImageRect( "images/buttonPlay.png", 40, 40 )
   levelStart.x = display.contentWidth/2+levelBack.width/2 - 30
   levelStart.y = display.contentHeight-25
   group:insert(levelStart)
@@ -466,7 +466,7 @@ function scene:createScene( event )
     recipeBook: removeSelf()
     recipeBook = nil
     recipeBook = display.newImageRect( "images/book2.png", 100, 100 )
-    recipeBook.x = 100
+    recipeBook.x = 95
     recipeBook.y = 40
   group:insert(recipeBook)
     timer.performWithDelay(700, function()
@@ -481,7 +481,7 @@ function scene:createScene( event )
     itemShop: removeSelf( )
     itemShop = nil
     itemShop = display.newImageRect( "images/pantry2.png", 80, 80 )
-    itemShop.x = 370
+    itemShop.x = 375
     itemShop.y = 40
     group:insert(itemShop)
   timer.performWithDelay(700, function()
