@@ -760,8 +760,8 @@ end
 function makeDeathPoof(allEne)
 	-- add visual poof of death.
 	deathPoof = display.newImage( "images/death.png", allEne.x, allEne.y, true )
-	deathPoof.width = deathPoof.width/9
-	deathPoof.height = deathPoof.height/9
+	deathPoof.width = deathPoof.width/5
+	deathPoof.height = deathPoof.height/5
 	group:insert(deathPoof)
 	table.insert( globals.deathPoofArray, deathPoof)
 	transition.to( deathPoof, { time=1200, alpha=0, onComplete=
