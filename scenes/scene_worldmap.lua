@@ -61,6 +61,24 @@ function scene:createScene( event )
   banner3.y = display.contentHeight/3
   group:insert(banner3)
 
+    local starbkg = display.newImage("images/starb.png", 100,100)
+  starbkg.width = 70
+  starbkg.height = 70
+  starbkg.x = 430
+  starbkg.y = display.contentHeight - 55
+  group:insert(starbkg)
+
+  local starTotal = 0
+  for n=1, 3, 1 do
+    for i=1,10, 1 do
+      starTotal = starTotal + globals.stars[n][i]
+    end
+  end
+
+  local starNum = display.newText(  starTotal, 430, display.contentHeight - 55, globals.IMPRIMA, 25 )
+  starNum: setFillColor( black )
+  group:insert(starNum)
+
   -- local banner2Text = display.newText( "? ? ?", 0, 0, globals.LOBSTERTWO, 48 )
   -- banner2Text:setFillColor(black)
   -- banner2Text.x = 300

@@ -20,6 +20,7 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
+  local tapHand
   
   local options = {
    effect = "fade",
@@ -56,6 +57,32 @@ function scene:createScene( event )
   back.y=toDo.y
   back.width=toDo.width
   back.height=toDo.height
+
+  local function swipeUp1 ()
+    --creates the hand image
+    tapHand = display.newImage("images/hand.png", allEne[#allEne].x+10, globals.belts[2].y+10)
+    tapHand.width = 40
+    tapHand.height = 40
+    group:insert(tapHand)
+  end
+
+  local function swipeUp2 ()
+    if (tapHand ~= nil) then
+      transition.to( tapHand, { time=1000, y = globals.belts[1].y+10, onComplete=
+        function() 
+          transition.to( tapHand, { time=300, alpha = 0, onComplete=
+            function() 
+            	if (tapHand ~= nil) then
+	              tapHand:removeSelf( )
+	              tapHand = nil
+	              swipeUp1 ()
+	          	end
+            end, 
+            tag="animation" } ) 
+        end,
+        tag="animation" } )
+    end
+  end
 
   
   local function onTapBack( event )
@@ -103,6 +130,10 @@ function scene:createScene( event )
 						for n=0, 2, 1 do
 						  globals.belts[n]:play()
 						end
+						if (tapHand ~= nil) then
+					        tapHand:removeSelf( )
+					        tapHand = nil
+					    end
 						allEne[#allEne].y = allEne[#allEne].y - (lane2-lane1)
 					end
 				end
@@ -114,6 +145,10 @@ function scene:createScene( event )
   end
   
   swipe:addEventListener( "touch", onTapBack )
+  swipeUp1 ()
+    if (tapHand ~= nil) then
+      timer.performWithDelay(2000, swipeUp2, 0 )
+    end
 
   --startButton:addEventListener( "tap", onTap )
 end

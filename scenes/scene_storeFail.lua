@@ -29,6 +29,10 @@ function scene:createScene( event )
   nbkg.height=display.contentHeight*.7; nbkg.width=display.contentWidth*.7
   group:insert (nbkg)
 
+  local exclamation = display.newImage( "images/warning.png", display.contentCenterX+150, 100, true )
+  exclamation.height=100; exclamation.width=100
+  group:insert (exclamation)
+
   local title = display.newText( "Not enough coins.", 0, 0, globals.LOBSTERTWO, 35 )
   title:setFillColor(black)
   title.x = display.contentCenterX

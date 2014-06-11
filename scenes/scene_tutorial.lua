@@ -20,6 +20,7 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
+  local tapHand
   
   local options = {
    effect = "fade",
@@ -57,6 +58,30 @@ function scene:createScene( event )
   back.width=toDo.width
   back.height=toDo.height
 
+  local function swipeLeft1 ()
+    --creates the hand image
+    tapHand = display.newImage("images/hand.png", 400, swipe.y+10)
+    tapHand.width = 40
+    tapHand.height = 40
+    group:insert(tapHand)
+  end
+
+  local function swipeLeft2 ()
+    if (tapHand ~= nil) then
+      transition.to( tapHand, { time=1000, x = swipe.x-100, onComplete=
+        function() 
+          transition.to( tapHand, { time=300, alpha = 0, onComplete=
+            function() 
+              tapHand:removeSelf( )
+              tapHand = nil
+              swipeLeft1 ()
+            end, 
+            tag="animation" } ) 
+        end,
+        tag="animation" } )
+    end
+  end
+
   local function onTapBack( event )
 	local phase = event.phase
 	if "ended" == phase or "cancelled" == phase then
@@ -87,12 +112,20 @@ function scene:createScene( event )
 			updateMoveSpeed(hero[2])
 			globals.levers[hero[2].num]:setSequence( "fast" )
 			globals.levers[hero[2].num]:play()
+      if (tapHand ~= nil) then
+        tapHand:removeSelf( )
+        tapHand = nil
+      end
 			transition.resume()
 		end
 	end
   end
   
   swipe:addEventListener( "touch", onTapBack )
+  swipeLeft1 ()
+    if (tapHand ~= nil) then
+      timer.performWithDelay(2000, swipeLeft2, 0 )
+    end
 
   --startButton:addEventListener( "tap", onTap )
 end

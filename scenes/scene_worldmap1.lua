@@ -427,10 +427,16 @@ function scene:createScene( event )
     local function onTapStar2 ( event )
         --checks is the victory condition is not false so then we have the objective text show it
         if (selectedLevel.victoryCondition ~= false) then
-          if (selectedLevel.victoryCondition.memAmount ~= 1) then
-            if (selectedLevel.victoryCondition.enemy == mashed) then
+           if (selectedLevel.victoryCondition.memAmount ~= 1) then
+            if (selectedLevel.victoryCondition.enemy.name == "Mashed Potato") or (selectedLevel.victoryCondition.enemy.name == "Steak and Potato") or (selectedLevel.victoryCondition.enemy.name == "Scrambled Eggs & Potato") then
               --for purals with an 'es'
               objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." " ..selectedLevel.victoryCondition.enemy.name .. "es"
+            elseif (selectedLevel.victoryCondition.enemy.name == "Fries") or (selectedLevel.victoryCondition.enemy.name == "Steak and Fries") then
+              objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." " ..selectedLevel.victoryCondition.enemy.name
+            elseif (selectedLevel.victoryCondition.enemy.name == "Strawberry Candy") then
+             objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." Strawberry Candies"
+            elseif (selectedLevel.victoryCondition.enemy.name == "Lemon Candy") then
+              objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." Lemon Candies"
             else 
               --purals with 's'
               objectives.text = "Serve " ..selectedLevel.victoryCondition.memAmount .." " ..selectedLevel.victoryCondition.enemy.name .. "s"

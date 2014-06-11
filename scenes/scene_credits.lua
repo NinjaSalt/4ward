@@ -29,10 +29,23 @@ function scene:createScene( event )
   opTitle.y = 25
   group:insert( opTitle )
 
-  local credits= display.newImage( "images/credits.png", display.contentWidth/2+ 20, display.contentHeight/2+ 10 )
-  credits.width = 300
-  credits.height = 300
-  group:insert(credits)
+  local credW = 417/1.5
+  local credH = 360/1.5
+
+  local creditsOne= display.newImage( "images/cred1.png", display.contentWidth/2- 80, display.contentHeight/2+ 15 )
+  creditsOne.width =  credW
+  creditsOne.height = credH
+  group:insert(creditsOne)
+
+  local creditsTwo= display.newImage( "images/cred2.png", display.contentWidth/2+230, display.contentHeight/2+ 10 )
+  creditsTwo.width = credW
+  creditsTwo.height = credH
+  group:insert(creditsTwo)
+
+  local creditsThree= display.newImage( "images/cred3.png", display.contentWidth/2+ 230, display.contentHeight/2+ 160 )
+  creditsThree.width = credW
+  creditsThree.height = credH
+  group:insert(creditsThree)
 
 
   local backButton = display.newImage("images/leftArrow.png")

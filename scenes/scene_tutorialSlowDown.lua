@@ -20,6 +20,7 @@ storyboard.removeAll()
 -- Called when the scene's view does not exist:
 function scene:createScene( event )
   local group = self.view
+  local tapHand
   
   local options = {
    effect = "fade",
@@ -56,6 +57,30 @@ function scene:createScene( event )
   back.y=toDo.y
   back.width=toDo.width
   back.height=toDo.height
+
+  local function swipeRight1 ()
+    --creates the hand image
+    tapHand = display.newImage("images/hand.png", swipe.x-100, swipe.y+10)
+    tapHand.width = 40
+    tapHand.height = 40
+    group:insert(tapHand)
+  end
+
+  local function swipeRight2 ()
+    if (tapHand ~= nil) then
+      transition.to( tapHand, { time=1000, x = 400, onComplete=
+        function() 
+          transition.to( tapHand, { time=300, alpha = 0, onComplete=
+            function() 
+              tapHand:removeSelf( )
+              tapHand = nil
+              swipeRight1 ()
+            end, 
+            tag="animation" } ) 
+        end,
+        tag="animation" } )
+    end
+  end
   
   local function onTapBack( event )
 	local phase = event.phase
@@ -87,20 +112,28 @@ function scene:createScene( event )
 			updateMoveSpeed(hero[1])
 			globals.levers[hero[1].num]:setSequence( "slow" )
 			globals.levers[hero[1].num]:play()
+      if (tapHand ~= nil) then
+        tapHand:removeSelf( )
+        tapHand = nil
+      end
 			transition.resume()
 		end
 	end
   end
   local function step1 ()
-	toDo.text = "Swipe the middle lane right"
-	border.width=toDo.width+10
-	back.width=toDo.width
-	swipe:addEventListener( "touch", onTapBack )
+  	toDo.text = "Swipe the middle lane right"
+  	border.width=toDo.width+10
+  	back.width=toDo.width
+    swipeRight1 ()
+    if (tapHand ~= nil) then
+      timer.performWithDelay(2000, swipeRight2, 0 )
+    end
+  	swipe:addEventListener( "touch", onTapBack )
+    end
+    
+    timer.performWithDelay(2000, step1 )
+    --startButton:addEventListener( "tap", onTap )
   end
-  
-  timer.performWithDelay(2000, step1 )
-  --startButton:addEventListener( "tap", onTap )
-end
  
 -- Called BEFORE scene has moved onscreen:
 function scene:willEnterScene( event )

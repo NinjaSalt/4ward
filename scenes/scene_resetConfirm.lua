@@ -33,10 +33,14 @@ function scene:createScene( event )
   nbkg.height=display.contentHeight*.7; nbkg.width=display.contentWidth*.7
   group:insert (nbkg)
 
+  local exclamation = display.newImage( "images/warning.png", 70, 60, true )
+  exclamation.height=100; exclamation.width=100
+  group:insert (exclamation)
+
   local resetText = {
     text = "Resetting will erase all progress. Are you sure?",     
     x = display.contentCenterX,
-    y = display.contentCenterY-50,
+    y = display.contentCenterY-20,
     width = nbkg.width,     --required for multi-line and alignment
     font = globals.IMPRIMA,   
     fontSize = 20,
@@ -148,7 +152,7 @@ function scene:createScene( event )
   end
 
   local function cancelReset( event )
-    storyboard.hideOverlay ("scenes.scene_resetConfirm", "slideUp", 500 )
+    storyboard.hideOverlay ("scenes.scene_resetConfirm", "slideUp", 600 )
     storyboard.showOverlay("scenes.overlay_backButton", {effect = "fade", time = 500})
   end
 
