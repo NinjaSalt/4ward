@@ -132,23 +132,23 @@ levels[1][4] = Level.create(4, false, {0,5,0}, {300,2600,2600}, makeCatWin("brea
 -- Donut Mess Up! (4 Items)
 levels[1][5] = Level.create (5, makeSecondaryWin(donut, 1), {1,4,1,0}, {300,3000,3000,3000}, makeCatWin("breakfast",2), false, "5: Donut Mess Up!")
 -- [Unnammed Level] (6 Items)
-levels[1][6] = Level.create (6, false, {0,1,2,5,2,5}, {500,3000,3000,3000,3000,3000}, makeCatWin("dinner",1), makeScoreWin(40), "6: Winner's Dinner")
+levels[1][6] = Level.create (6, false, {0,1,2,5,2,5}, {500,3000,3000,3000,3000,3000}, makeCatWin("dinner",1), makeScoreWin(80), "6: Winner's Dinner")
 -- Your Life is at Steak! (8 items)
-levels[1][7] = Level.create(7, makeSecondaryWin(steakOm,1), {0,2,0,1,1,4,2,0}, {500,3000,3000,3000,3000,3000,3000,3000}, false, makeScoreWin(40), "7: Your Life is at Steak!")
+levels[1][7] = Level.create(7, makeSecondaryWin(steakOm,1), {0,2,0,1,1,4,2,0}, {500,3000,3000,3000,3000,3000,3000,3000}, false, makeScoreWin(80), "7: Your Life is at Steak!")
 -- The Most Important Meal of the Day (10 items)
-levels[1][8] = Level.create(8, false, {0,1,5,0,5,1,2,0,5,0}, {500,3000,3000,3000,3000,3000,3000,3000,2600,2600}, makeCatWin("breakfast", 2), makeScoreWin(60), "8: Most Important Meal")
+levels[1][8] = Level.create(8, false, {0,1,5,0,5,1,2,0,5,0}, {500,3000,3000,3000,3000,3000,3000,3000,2600,2600}, makeCatWin("breakfast", 2), makeScoreWin(100), "8: Most Important Meal")
 -- I Say Potato (10 items)
 levels[1][9] = Level.create(9, makeSecondaryWin(mashed,2), {2,5,4,5,5,2,5,4,0,5}, {500,3000,3000,2600,3000,2600,3000,3000,2600,3100}, makeCatWin("dinner", 3), false, "9: I Say Potato")
 -- Certi-fried Chef! (14 items)
-levels[1][10] = Level.create(10, makeSecondaryWin(fries, 4), {1,4,5,5,0,1,4,2,5,4,2,4,1,5}, {300,2600,2600,3100,3100,3000,3000,2800,3100,3000,3000,3200,2600,2600}, false, makeScoreWin(100), "10: Certi-fried Chef!")
+levels[1][10] = Level.create(10, makeSecondaryWin(fries, 4), {1,4,5,5,0,1,4,2,5,4,2,4,1,5}, {300,2600,2600,3100,3100,3000,3000,2800,3100,3000,3000,3200,2600,2600}, false, makeScoreWin(360), "10: Certi-fried Chef!")
 
 -- EPISODE TWO: CANDY STORE CRAZE
 -- Taste Test (10 items)
-levels[2][1] = Level.create(1, false, {0,6,1,6,5,1,0,6,6,1}, {300,2600,2600,4000,3000,3000,2600,2600,2600, 2600}, makeCatWin("dessert", 3), makeScoreWin(100), "Step 1: Taste Test") 
+levels[2][1] = Level.create(1, false, {0,6,1,6,5,1,0,6,6,1}, {300,2600,2600,4000,3000,3000,2600,2600,2600, 2600}, makeCatWin("dessert", 3), makeScoreWin(200), "Step 1: Taste Test") 
 -- Meringue Madness (10 items)
-levels[2][2] = Level.create (2, makeSecondaryWin(meringue, 2), {6,1,5,0,0,1,5,6,0,6}, {200, 3000,3000,3000,3000,3000, 3000, 3000,3000, 2600}, false, makeScoreWin(120), "2: Meringue Madness")
+levels[2][2] = Level.create (2, makeSecondaryWin(meringue, 2), {6,1,5,0,0,1,5,6,0,6}, {200, 3000,3000,3000,3000,3000, 3000, 3000,3000, 2600}, false, makeScoreWin(200), "2: Meringue Madness")
 -- Cake and Bake (10 items)
-levels[2][3] = Level.create(3, makeSecondaryWin(cake,3), {5,1,6,4,6,6,1,1,6,0}, {300,3100,3100,2600,4500,2600,2600,2600,3000,3000}, false, makeScoreWin(140), "3: Cake and Bake") 
+levels[2][3] = Level.create(3, makeSecondaryWin(cake,3), {5,1,6,4,6,6,1,1,6,0}, {300,3100,3100,2600,4500,2600,2600,2600,3000,3000}, false, makeScoreWin(240), "3: Cake and Bake") 
 -- Super Sugar Rush! (14 items)
 levels[2][4] = Level.create(4, makeSecondaryWin(strawberryCandy,2), {0,3,2,6,6,1,3,6,1,5,1,3,0,6}, {300,3100,3100,2600,4500,2600,2600,2600,3000,3000,3000,100,3000,3000}, makeCatWin("dessert", 4), false, "4: Super Sugar Rush!")
 -- Sour Scramble (14 items) 
@@ -156,11 +156,11 @@ levels[2][5] = Level.create (5, makeSecondaryWin(lemonCookie, 3), {7,1,6,3,7,0,3
 -- Strawberries of Wrath (14 items)
 levels[2][6] = Level.create(6, makeSecondaryWin(strawberryTart, 4), {1,3,3,1,2,1,6,3,3,7,6,1,1,1}, {300,2600,2700,2600,2600,2700,2700,2600,2600,2600,2600,2600,2600,2600}, false, makeScoreWin(250), "6: Strawberries of Wrath")
 -- Candy Corner (16 items) 4 lemon candies, 220 points
-levels[2][7] = Level.create (7, makeSecondaryWin(lemonCandy, 4), {6,6,6,1,0,7,3,7,7,1,0,6,6,7,1,3}, {300,2800,2800,2800,2800,2800,2800,2800,2800,2800, 2800,2800,2800,2800,2800,2800}, false, makeScoreWin(260), "7: Candy Corner")
+levels[2][7] = Level.create (7, makeSecondaryWin(lemonCandy, 4), {6,6,6,1,0,7,3,7,7,1,0,6,6,7,1,3}, {300,2800,2800,2800,2800,2800,2800,2800,2800,2800, 2800,2800,2800,2800,2800,2800}, false, makeScoreWin(190), "7: Candy Corner")
 -- The Pie is a Lie (16 items) 2 lemon pies, 3 dessert items
 levels[2][8] = Level.create (8, makeSecondaryWin(lemonPie, 2), {0,6,7,1,3,6,7,0,3,0,5,6,7,4,0,1}, {200,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800}, makeCatWin("dessert", 3), false, "8: The Pie is a Lie")
 -- The Sweetest Treat! (20 items)
-levels[2][9] = Level.create(9, false, {0,3,6,1,2,0,1,3,6,6,3,5,1,3,6,3,1,6,0,1}, {300,2600,2600,3500,3500,3500,2600,2600,3500,3200,3000,3000,2800,2800,2800,2800,3100,3000,3000,2600}, makeCatWin("dessert", 5), makeScoreWin(280), "9: The Sweetest Treat!")
+levels[2][9] = Level.create(9, false, {0,3,6,1,2,0,1,3,6,6,3,5,1,3,6,3,1,6,0,1}, {300,2600,2600,3500,3500,3500,2600,2600,3500,3200,3000,3000,2800,2800,2800,2800,3100,3000,3000,2600}, makeCatWin("dessert", 5), makeScoreWin(350), "9: The Sweetest Treat!")
 -- Zest-fest! (25 items) 3 lemon cakes, 7 dessert items
 levels[2][10] = Level.create (10, makeSecondaryWin(lemonCake,3),{0,1,2,6,3,7,7,1,3,6,6,0,3,7,1,7,5,0,1,6,2,0,7,3,7}, {300,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,6000,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800,2800}, makeCatWin("dessert",6), false, "Step 10: Zest-fest!" )
 
@@ -179,23 +179,22 @@ levels[2][10] = Level.create (10, makeSecondaryWin(lemonCake,3),{0,1,2,6,3,7,7,1
 
 --EPISODE 3: NO NAME YET D:
 -- Delectable Dinner (16 items) 3 dinner, points
-levels[3][1] = Level.create(1, false, {1,0,0,2,5,7,2,2,5,4,3,7,7,5,3,4}, {200,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700}, makeCatWin("dinner", 3), makeScoreWin(300), "1: A Delectable Dinner")
+levels[3][1] = Level.create(1, false, {1,0,0,2,5,7,2,2,5,4,3,7,7,5,3,4}, {200,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700}, makeCatWin("dinner", 3), makeScoreWin(350), "1: A Delectable Dinner")
 -- Combo Maker! (16 items) 2 steak fries combo, 4 dinner items
 levels[3][2] = Level.create(2, makeSecondaryWin(steakFries, 2), {0,5,1,4,1,2,2,4,1,5,5,4,1,2,7,2}, {200,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700}, makeCatWin("dinner",4), false, "2: Combo Maker!")
 -- That's My Jam! (18 items) 3 strawbery jam pancakes, score
-levels[3][3] = Level.create(3, makeSecondaryWin(strawPancake, 3), {3,2,6,7,0,1,7,1,3,0,3,7,7,6,0,5,1,4}, {200,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700, 2700}, false, makeScoreWin(300), "3: That's My Jam!")
+levels[3][3] = Level.create(3, makeSecondaryWin(strawPancake, 3), {3,2,6,7,0,1,7,1,3,0,3,7,7,6,0,5,1,4}, {200,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700, 2700}, false, makeScoreWin(480), "3: That's My Jam!")
 -- A Magical Morning Meal (18 items) serve 4 breakfast items, score ___ points
-levels[3][4] = Level.create(4, false, {6,2,1,0,7,4,2,3,5,0,2,2,0,7,1,3,5,0}, {200,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700, 2700}, makeCatWin("breakfast",4), makeScoreWin(300), "4: Magical Morning Meal")
+levels[3][4] = Level.create(4, false, {6,2,1,0,7,4,2,3,5,0,2,2,0,7,1,3,5,0}, {200,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700, 2700}, makeCatWin("breakfast",4), makeScoreWin(500), "4: Magical Morning Meal")
 -- Donuts and Dessert (20 items), 3 donuts, serve 3 dessert items
 levels[3][5] = Level.create(5, makeSecondaryWin(donut, 3), {6,0,3,0,7,6,1,6,0,6,4,3,7,1,1,4,1,6,3,4}, {200,2600,2600,2600,2600,2600,2600,3000,2600,2600,2600,2600,2600,3000,2600,2600,2600,2600,2600,2600}, makeCatWin("dessert", 4), false, "5: Donuts and Dessert")
 -- Combo Breaker! (20 items) 2 steak fries, 4 breakfast
 levels[3][6] = Level.create(6, makeSecondaryWin(steakFries, 2), {4,1,4,4,5,0,2,2,2,0,4,0,1,5,5,5,2,1,4,2}, {200,2600,2600,2600,2600,2600,2600,3000,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600}, makeCatWin("breakfast", 4), false, "6: Combo Breaker!")
 -- Divine Desserts! (22 items) 8 dessert, score
-levels[3][7] = Level.create(7, false, {0,1,6,6,7,3,7,1,0,6,3,6,1,3,1,1,1,1,7,3,6,0}, {200,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600}, makeCatWin("dessert", 8), makeScoreWin(300), "7: Divine Desserts!")
+levels[3][7] = Level.create(7, false, {0,1,6,6,7,3,7,1,0,6,3,6,1,3,1,1,1,1,7,3,6,0}, {200,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600}, makeCatWin("dessert", 8), makeScoreWin(700), "7: Divine Desserts!")
 -- Morning Munchies (22 items) 2 strawberry cakes, 5 breakfast items
 levels[3][8] = Level.create(8, makeSecondaryWin(strawberryCake,2), {1,0,1,3,0,6,2,7,2,6,0,0,0,5,5,1,3,3,6,5,0,5}, {200,2600,2600,2600,2600,2600,2600,2600,2600,2600,3800,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600}, makeCatWin("breakfast",5), false, "8: Morning Munchies")
 -- Dinsert Dash (26 items) 3 sherperd's pie, 6 dessert items
 levels[3][9] = Level.create(9, makeSecondaryWin(sheperdsPie, 3), {1,5,6,3,5,5,2,3,2,2,6,7,6,5,1,5,2,2,6,7,3,6,7,0,6,5}, {200,2600,2600,2600,2600,2600,2600,2600,2600,2600,3800,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600}, makeCatWin("dessert", 6), false, "9: Dinsert Dash")
 -- Now We're Cooking (30 items) 12 dinner items, score. 
-levels[3][10] = Level.create(10, false, {5,0,4,4,5,1,0,2,1,5,4,7,5,2,5,5,2,0,1,2,4,5,7,0,2,2,5,4,0,1}, {200,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600}, makeCatWin("dinner", 12), makeScoreWin(500), "10: Now We're Cooking!")
-
+levels[3][10] = Level.create(10, false, {5,0,4,4,5,1,1,2,1,5,4,7,5,2,5,5,2,5,1,2,4,5,7,0,2,2,5,4,0,1}, {200,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600,2600}, makeCatWin("dinner", 12), makeScoreWin(900), "10: Now We're Cooking!")
