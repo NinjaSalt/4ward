@@ -1360,8 +1360,8 @@ if(currentLevel.scoreCondition~=false)then
   group:insert (spawnNotice)
   
   -- timeline creation.
-  timeLine = TimeLine.create(currentLevel.enemyIDQueue, currentLevel.timeBetweenEachSpawn)
-  for i = 1, #timeLine.enemyQueue, 1 do
+  local timeLine = TimeLine.create(currentLevel.enemyIDQueue, currentLevel.timeBetweenEachSpawn)
+  for i = #timeLine.enemyQueue, 1, -1 do
 	group:insert(timeLine.enemyQueue[i])
 	-- previous speed: (240-timeLineWidth/2)-enemySize/2
 	transition.to( timeLine.enemyQueue[i], {x=200, time=timeLine.spawnTimes[i], tag="animation", 
