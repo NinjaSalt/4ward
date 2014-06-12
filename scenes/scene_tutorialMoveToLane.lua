@@ -147,7 +147,10 @@ function scene:createScene( event )
   swipe:addEventListener( "touch", onTapBack )
   swipeUp1 ()
     if (tapHand ~= nil) then
-      timer.performWithDelay(2000, swipeUp2, 0 )
+    	--plays the swiping right once so there's no delay
+    	timer.performWithDelay(100, swipeUp2)
+    	--then calls it to do the function infinintly
+      	timer.performWithDelay(2000, swipeUp2, 0 )
     end
 
   --startButton:addEventListener( "tap", onTap )

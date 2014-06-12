@@ -112,7 +112,7 @@ if (gameSettings == nil) then --comment this to reset the saving ***
     -- creating new table to save data
     gameSettings  = {}
     --world
-    for n=1, globals.numWorlds+5, 1 do
+    for n=1, globals.numWorlds+6, 1 do
         gameSettings[n] = {}
     end
 
@@ -160,6 +160,7 @@ if (gameSettings == nil) then --comment this to reset the saving ***
       --4 = trash tutorial in level 4
          gameSettings[8][j] = false
     end
+    gameSettings[9]= 0
 
     --- FOR REFERENCE ---
     --worlds:
@@ -177,6 +178,8 @@ if (gameSettings == nil) then --comment this to reset the saving ***
     --gameSettings[7] = 0
     --bools for tutorial and tips
     --gameSettings[8] = {}
+    --total num stars
+    --gameSettings[9]= 0
     --- FOR REFERENCE ---
 
     loadsave.saveTable(gameSettings , "gamesettings.json")

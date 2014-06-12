@@ -7,9 +7,12 @@ local storyboard = require( "storyboard" )
 local scene = storyboard.newScene()
 local globals = require("classes.globals")
 require("classes.levelUnlocking")
+local loadsave = require("classes.loadsave")
  
 -- Clear previous scene
 storyboard.removeAll()
+
+gameSettings = loadsave.loadTable("gamesettings.json")
  
 -- local forward references should go here --
  
@@ -68,14 +71,29 @@ function scene:createScene( event )
   starbkg.y = display.contentHeight - 55
   group:insert(starbkg)
 
-  local starTotal = 0
+	local starTotal = 0
+	if (gameSettings[9] == nil) then
+  	    gameSettings[9] = 0
+	end
   for n=1, 3, 1 do
     for i=1,10, 1 do
-      starTotal = starTotal + globals.stars[n][i]
+    	--if the saved setting is nil then set it to the global stars variable
+    	if (gameSettings[n][i][2] == nil) then
+    		gameSettings[n][i][2] = globals.stars[n][i]
+    	end
+    	if (gameSettings[9] ~= nil and gameSettings[n][i][2] ~= nil) then
+    		--creates a variable to store in the total
+    		 starTotal = starTotal + gameSettings[n][i][2]
+    		--if the saved setting does not match the total, then replace and save it
+    		if (gameSettings[9] ~= starTotal) then
+				gameSettings[9] = starTotal
+				loadsave.saveTable(gameSettings , "gamesettings.json")
+			end
+		end
     end
   end
 
-  local starNum = display.newText(  starTotal, 430, display.contentHeight - 55, globals.IMPRIMA, 25 )
+  local starNum = display.newText(  gameSettings[9], 430, display.contentHeight - 55, globals.IMPRIMA, 25 )
   starNum: setFillColor( black )
   group:insert(starNum)
 

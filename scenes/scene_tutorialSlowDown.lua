@@ -126,6 +126,9 @@ function scene:createScene( event )
   	back.width=toDo.width
     swipeRight1 ()
     if (tapHand ~= nil) then
+    	--plays the swiping right once so there's no delay
+    	timer.performWithDelay(100, swipeRight2)
+    	--then calls it to do the function infinintly
       timer.performWithDelay(2000, swipeRight2, 0 )
     end
   	swipe:addEventListener( "touch", onTapBack )

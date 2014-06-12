@@ -78,7 +78,7 @@ function scene:createScene( event )
         -- creating new table to save data
         gameSettings  = {}
         --world
-        for n=1, globals.numWorlds+5, 1 do
+        for n=1, globals.numWorlds+6, 1 do
             gameSettings[n] = {}
         end
      --levels
@@ -125,24 +125,27 @@ function scene:createScene( event )
           --4 = trash tutorial in level 4
           gameSettings[8][j] = false
         end
+	    gameSettings[9]= 0
 
-        --- FOR REFERENCE ---
-        --worlds:
-        -- gameSettings[1] = {}
-        -- gameSettings[2] = {}
-        -- gameSettings[3] = {}
-        -- --recipe book unlocking:
-        -- --basic
-        --gameSettings[4] = {}
-        -- --recipe
-        -- gameSettings[5] = {}
-        --item belt saving:
-        --gameSettings[6] = {}
-        --currency
-        --gameSettings[7] = 0
-        --bools for tutorial and tips
-        --gameSettings[8] = {}
-        --- FOR REFERENCE ---
+	    --- FOR REFERENCE ---
+	    --worlds:
+	    -- gameSettings[1] = {}
+	    -- gameSettings[2] = {}
+	    -- gameSettings[3] = {}
+	    -- --recipe book unlocking:
+	    -- --basic
+	    --gameSettings[4] = {}
+	    -- --recipe
+	    -- gameSettings[5] = {}
+	    --item belt saving:
+	    --gameSettings[6] = {}
+	    --currency
+	    --gameSettings[7] = 0
+	    --bools for tutorial and tips
+	    --gameSettings[8] = {}
+	    --total num stars
+	    --gameSettings[9]= 0
+	    --- FOR REFERENCE ---
 
 
         loadsave.saveTable(gameSettings , "gamesettings.json")
