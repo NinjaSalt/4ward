@@ -282,151 +282,27 @@ local dessertsheetSettings =
 function breakfast_fast (hero, frameNum)
 	if (frameNum == 1) then
 		return globals.belts[hero]:setSequence( "breakfast_fast" )
-	elseif (frameNum == 2) then
-		return globals.belts[hero]:setSequence( "breakfast_fast2" )
-	elseif (frameNum == 3) then
-		return globals.belts[hero]:setSequence( "breakfast_fast3" )
-	elseif (frameNum == 4) then
-		return globals.belts[hero]:setSequence( "breakfast_fast4" )
-	elseif (frameNum == 5) then
-		return globals.belts[hero]:setSequence( "breakfast_fast5" )
-	elseif (frameNum == 6) then
-		return globals.belts[hero]:setSequence( "breakfast_fast6" )
-	elseif (frameNum == 7) then
-		return globals.belts[hero]:setSequence( "breakfast_fast7" )
-	elseif (frameNum == 8) then 
-		return globals.belts[hero]:setSequence( "breakfast_fast8" )
-	elseif (frameNum == 9) then 
-		return globals.belts[hero]:setSequence( "breakfast_fast9" )
-	elseif (frameNum == 10) then 
-		return globals.belts[hero]:setSequence( "breakfast_fast10" )
-	elseif (frameNum == 11) then 
-		return globals.belts[hero]:setSequence( "breakfast_fast11" )
-	elseif (frameNum == 12) then 
-		return globals.belts[hero]:setSequence( "breakfast_fast12")
-    elseif (frameNum == 13) then 
-    return globals.belts[hero]:setSequence( "breakfast_fast13")
-  elseif (frameNum == 14) then 
-    return globals.belts[hero]:setSequence( "breakfast_fast14")
-  elseif (frameNum == 15) then 
-    return globals.belts[hero]:setSequence( "breakfast_fast15")
-  elseif (frameNum == 16) then 
-    return globals.belts[hero]:setSequence( "breakfast_fast16")
-  elseif (frameNum == 17) then 
-    return globals.belts[hero]:setSequence( "breakfast_fast17")
-  elseif (frameNum == 18) then 
-    return globals.belts[hero]:setSequence( "breakfast_fast18")
-  elseif (frameNum == 19) then 
-    return globals.belts[hero]:setSequence( "breakfast_fast19")
-  elseif (frameNum == 20) then 
-    return globals.belts[hero]:setSequence( "breakfast_fast20")
-  elseif (frameNum == 21) then 
-    return globals.belts[hero]:setSequence( "breakfast_fast21")
-  elseif (frameNum == 22) then 
-    return globals.belts[hero]:setSequence( "breakfast_fast22")
-  elseif (frameNum == 23) then 
-    return globals.belts[hero]:setSequence( "breakfast_fast23")
+   else
+      return globals.belts[hero]:setSequence( "breakfast_fast" .. frameNum )
 	end
 end
 
 function breakfast_normal (hero, frameNum)
 	if (frameNum == 1) then
 		return globals.belts[hero]:setSequence( "breakfast_normal" )
-	elseif (frameNum == 2) then
-		return globals.belts[hero]:setSequence( "breakfast_normal2" )
-	elseif (frameNum == 3) then
-		return globals.belts[hero]:setSequence( "breakfast_normal3" )
-	elseif (frameNum == 4) then
-		return globals.belts[hero]:setSequence( "breakfast_normal4" )
-	elseif (frameNum == 5) then
-		return globals.belts[hero]:setSequence( "breakfast_normal5" )
-	elseif (frameNum == 6) then
-		return globals.belts[hero]:setSequence( "breakfast_normal6" )
-	elseif (frameNum == 7) then 
-		return globals.belts[hero]:setSequence( "breakfast_normal7" )
-	elseif (frameNum == 8) then 
-		return globals.belts[hero]:setSequence( "breakfast_normal8" )
-	elseif (frameNum == 9) then 
-		return globals.belts[hero]:setSequence( "breakfast_normal9" )
-	elseif (frameNum == 10) then 
-		return globals.belts[hero]:setSequence( "breakfast_normal10" )
-	elseif (frameNum == 11) then 
-		return globals.belts[hero]:setSequence( "breakfast_normal11" )
-	elseif (frameNum == 12) then 
-		return globals.belts[hero]:setSequence( "breakfast_normal12")
-  elseif (frameNum == 13) then 
-    return globals.belts[hero]:setSequence( "breakfast_normal13")
-  elseif (frameNum == 14) then 
-    return globals.belts[hero]:setSequence( "breakfast_normal14")
-  elseif (frameNum == 15) then 
-    return globals.belts[hero]:setSequence( "breakfast_normal15")
-  elseif (frameNum == 16) then 
-    return globals.belts[hero]:setSequence( "breakfast_normal16")
-  elseif (frameNum == 17) then 
-    return globals.belts[hero]:setSequence( "breakfast_normal17")
-  elseif (frameNum == 18) then 
-    return globals.belts[hero]:setSequence( "breakfast_normal18")
-  elseif (frameNum == 19) then 
-    return globals.belts[hero]:setSequence( "breakfast_normal19")
-  elseif (frameNum == 20) then 
-    return globals.belts[hero]:setSequence( "breakfast_normal20")
-  elseif (frameNum == 21) then 
-    return globals.belts[hero]:setSequence( "breakfast_normal21")
-  elseif (frameNum == 22) then 
-    return globals.belts[hero]:setSequence( "breakfast_normal22")
-  elseif (frameNum == 23) then 
-    return globals.belts[hero]:setSequence( "breakfast_normal23")
+   else
+      return globals.belts[hero]:setSequence( "breakfast_normal" .. frameNum)
 	end
 end
 
 function breakfast_slow (hero, frameNum)
 	if (frameNum == 1) then
 	 return globals.belts[hero]:setSequence( "breakfast_slow2" )
-  elseif (frameNum == 2) then
-    return globals.belts[hero]:setSequence( "breakfast_slow3" )
-  elseif (frameNum == 3) then
-    return globals.belts[hero]:setSequence( "breakfast_slow4" )
-  elseif (frameNum == 4) then
-    return globals.belts[hero]:setSequence( "breakfast_slow5" )
-  elseif (frameNum == 5) then
-    return globals.belts[hero]:setSequence( "breakfast_slow6" )
-  elseif (frameNum == 6) then
-    return globals.belts[hero]:setSequence( "breakfast_slow7" )
-  elseif (frameNum == 7) then
-    return globals.belts[hero]:setSequence( "breakfast_slow8" )
-  elseif (frameNum == 8) then 
-    return globals.belts[hero]:setSequence( "breakfast_slow9" )
-  elseif (frameNum == 9) then 
-    return globals.belts[hero]:setSequence( "breakfast_slow10" )
-  elseif (frameNum == 10) then 
-    return globals.belts[hero]:setSequence( "breakfast_slow11" )
-  elseif (frameNum == 11) then 
-    return globals.belts[hero]:setSequence( "breakfast_slow12" )
-  elseif (frameNum == 12) then 
-    return globals.belts[hero]:setSequence( "breakfast_slow13")
-  elseif (frameNum == 13) then 
-    return globals.belts[hero]:setSequence( "breakfast_slow14")
-  elseif (frameNum == 14) then 
-    return globals.belts[hero]:setSequence( "breakfast_slow15")
-  elseif (frameNum == 15) then 
-    return globals.belts[hero]:setSequence( "breakfast_slow16")
-  elseif (frameNum == 16) then 
-    return globals.belts[hero]:setSequence( "breakfast_slow17")
-  elseif (frameNum == 17) then 
-    return globals.belts[hero]:setSequence( "breakfast_slow18")
-  elseif (frameNum == 18) then 
-    return globals.belts[hero]:setSequence( "breakfast_slow19")
-  elseif (frameNum == 19) then 
-    return globals.belts[hero]:setSequence( "breakfast_slow20")
-  elseif (frameNum == 20) then 
-    return globals.belts[hero]:setSequence( "breakfast_slow21")
-  elseif (frameNum == 21) then 
-    return globals.belts[hero]:setSequence( "breakfast_slow22")
-  elseif (frameNum == 22) then 
-    return globals.belts[hero]:setSequence( "breakfast_slow23")
   elseif (frameNum == 23) then 
     return globals.belts[hero]:setSequence( "breakfast_slow")
-	end
+ else
+   return globals.belts[hero]:setSequence( "breakfast_slow" .. frameNum+1)
+end
 end
 -- BREAKFAST END --
 
@@ -434,150 +310,26 @@ end
 function dinner_fast (hero, frameNum)
 	if (frameNum == 1) then
 		return globals.belts[hero]:setSequence( "dinner_fast" )
-	elseif (frameNum == 2) then
-		return globals.belts[hero]:setSequence( "dinner_fast2" )
-	elseif (frameNum == 3) then
-		return globals.belts[hero]:setSequence( "dinner_fast3" )
-	elseif (frameNum == 4) then
-		return globals.belts[hero]:setSequence( "dinner_fast4" )
-	elseif (frameNum == 5) then
-		return globals.belts[hero]:setSequence( "dinner_fast5" )
-	elseif (frameNum == 6) then
-		return globals.belts[hero]:setSequence( "dinner_fast6" )
-	elseif (frameNum == 7) then
-		return globals.belts[hero]:setSequence( "dinner_fast7" )
-	elseif (frameNum == 8) then 
-		return globals.belts[hero]:setSequence( "dinner_fast8" )
-	elseif (frameNum == 9) then 
-		return globals.belts[hero]:setSequence( "dinner_fast9" )
-	elseif (frameNum == 10) then 
-		return globals.belts[hero]:setSequence( "dinner_fast10" )
-	elseif (frameNum == 11) then 
-		return globals.belts[hero]:setSequence( "dinner_fast11" )
-	elseif (frameNum == 12) then 
-		return globals.belts[hero]:setSequence( "dinner_fast12")
-	elseif (frameNum == 13) then 
-		return globals.belts[hero]:setSequence( "dinner_fast13")
-	elseif (frameNum == 14) then 
-		return globals.belts[hero]:setSequence( "dinner_fast14")
-	elseif (frameNum == 15) then 
-		return globals.belts[hero]:setSequence( "dinner_fast15")
-	elseif (frameNum == 16) then 
-		return globals.belts[hero]:setSequence( "dinner_fast16")
-	elseif (frameNum == 17) then 
-		return globals.belts[hero]:setSequence( "dinner_fast17")
-	elseif (frameNum == 18) then 
-		return globals.belts[hero]:setSequence( "dinner_fast18")
-	elseif (frameNum == 19) then 
-		return globals.belts[hero]:setSequence( "dinner_fast19")
-	elseif (frameNum == 20) then 
-		return globals.belts[hero]:setSequence( "dinner_fast20")
-	elseif (frameNum == 21) then 
-		return globals.belts[hero]:setSequence( "dinner_fast21")
-	elseif (frameNum == 22) then 
-		return globals.belts[hero]:setSequence( "dinner_fast22")
-	elseif (frameNum == 23) then 
-		return globals.belts[hero]:setSequence( "dinner_fast23")
+   else
+      return globals.belts[hero]:setSequence( "dinner_fast" .. frameNum)
 	end
 end
 
 function dinner_normal (hero, frameNum)
 	if (frameNum == 1) then
 		return globals.belts[hero]:setSequence( "dinner_normal" )
-	elseif (frameNum == 2) then
-		return globals.belts[hero]:setSequence( "dinner_normal2" )
-	elseif (frameNum == 3) then
-		return globals.belts[hero]:setSequence( "dinner_normal3" )
-	elseif (frameNum == 4) then
-		return globals.belts[hero]:setSequence( "dinner_normal4" )
-	elseif (frameNum == 5) then
-		return globals.belts[hero]:setSequence( "dinner_normal5" )
-	elseif (frameNum == 6) then
-		return globals.belts[hero]:setSequence( "dinner_normal6" )
-	elseif (frameNum == 7) then 
-		return globals.belts[hero]:setSequence( "dinner_normal7" )
-	elseif (frameNum == 8) then 
-		return globals.belts[hero]:setSequence( "dinner_normal8" )
-	elseif (frameNum == 9) then 
-		return globals.belts[hero]:setSequence( "dinner_normal9" )
-	elseif (frameNum == 10) then 
-		return globals.belts[hero]:setSequence( "dinner_normal10" )
-	elseif (frameNum == 11) then 
-		return globals.belts[hero]:setSequence( "dinner_normal11" )
-	elseif (frameNum == 12) then 
-		return globals.belts[hero]:setSequence( "dinner_normal12")
-  elseif (frameNum == 13) then 
-    return globals.belts[hero]:setSequence( "dinner_normal13")
-  elseif (frameNum == 14) then 
-    return globals.belts[hero]:setSequence( "dinner_normal14")
-  elseif (frameNum == 15) then 
-    return globals.belts[hero]:setSequence( "dinner_normal15")
-  elseif (frameNum == 16) then 
-    return globals.belts[hero]:setSequence( "dinner_normal16")
-  elseif (frameNum == 17) then 
-    return globals.belts[hero]:setSequence( "dinner_normal17")
-  elseif (frameNum == 18) then 
-    return globals.belts[hero]:setSequence( "dinner_normal18")
-  elseif (frameNum == 19) then 
-    return globals.belts[hero]:setSequence( "dinner_normal19")
-  elseif (frameNum == 20) then 
-    return globals.belts[hero]:setSequence( "dinner_normal20")
-  elseif (frameNum == 21) then 
-    return globals.belts[hero]:setSequence( "dinner_normal21")
-  elseif (frameNum == 22) then 
-    return globals.belts[hero]:setSequence( "dinner_normal22")
-  elseif (frameNum == 23) then 
-    return globals.belts[hero]:setSequence( "dinner_normal23")
+   else
+      return globals.belts[hero]:setSequence( "dinner_normal" .. frameNum)
 	end
 end
 
 function dinner_slow (hero, frameNum)
 	if (frameNum == 1) then
 		return globals.belts[hero]:setSequence( "dinner_slow2" )
-	elseif (frameNum == 2) then
-		return globals.belts[hero]:setSequence( "dinner_slow3" )
-	elseif (frameNum == 3) then
-		return globals.belts[hero]:setSequence( "dinner_slow4" )
-	elseif (frameNum == 4) then
-		return globals.belts[hero]:setSequence( "dinner_slow5" )
-	elseif (frameNum == 5) then
-		return globals.belts[hero]:setSequence( "dinner_slow6" )
-	elseif (frameNum == 6) then
-		return globals.belts[hero]:setSequence( "dinner_slow7" )
-	elseif (frameNum == 7) then
-		return globals.belts[hero]:setSequence( "dinner_slow8" )
-	elseif (frameNum == 8) then 
-		return globals.belts[hero]:setSequence( "dinner_slow9" )
-	elseif (frameNum == 9) then 
-		return globals.belts[hero]:setSequence( "dinner_slow10" )
-	elseif (frameNum == 10) then 
-		return globals.belts[hero]:setSequence( "dinner_slow11" )
-	elseif (frameNum == 11) then 
-		return globals.belts[hero]:setSequence( "dinner_slow12" )
-	elseif (frameNum == 12) then 
-		return globals.belts[hero]:setSequence( "dinner_slow13")
-  elseif (frameNum == 13) then 
-    return globals.belts[hero]:setSequence( "dinner_slow14")
-  elseif (frameNum == 14) then 
-    return globals.belts[hero]:setSequence( "dinner_slow15")
-  elseif (frameNum == 15) then 
-    return globals.belts[hero]:setSequence( "dinner_slow16")
-  elseif (frameNum == 16) then 
-    return globals.belts[hero]:setSequence( "dinner_slow17")
-  elseif (frameNum == 17) then 
-    return globals.belts[hero]:setSequence( "dinner_slow18")
-  elseif (frameNum == 18) then 
-    return globals.belts[hero]:setSequence( "dinner_slow19")
-  elseif (frameNum == 19) then 
-    return globals.belts[hero]:setSequence( "dinner_slow20")
-  elseif (frameNum == 20) then 
-    return globals.belts[hero]:setSequence( "dinner_slow21")
-  elseif (frameNum == 21) then 
-    return globals.belts[hero]:setSequence( "dinner_slow22")
-  elseif (frameNum == 22) then 
-    return globals.belts[hero]:setSequence( "dinner_slow23")
   elseif (frameNum == 23) then 
     return globals.belts[hero]:setSequence( "dinner_slow")
+ else
+   return globals.belts[hero]:setSequence( "dinner_slow" .. frameNum+1)
 	end
 end
 -- DINNER END --
@@ -586,150 +338,26 @@ end
 function dessert_fast (hero, frameNum)
 	if (frameNum == 1) then
 		return globals.belts[hero]:setSequence( "dessert_fast" )
-	elseif (frameNum == 2) then
-		return globals.belts[hero]:setSequence( "dessert_fast2" )
-	elseif (frameNum == 3) then
-		return globals.belts[hero]:setSequence( "dessert_fast3" )
-	elseif (frameNum == 4) then
-		return globals.belts[hero]:setSequence( "dessert_fast4" )
-	elseif (frameNum == 5) then
-		return globals.belts[hero]:setSequence( "dessert_fast5" )
-	elseif (frameNum == 6) then 
-		return globals.belts[hero]:setSequence( "dessert_fast6" )
-	elseif (frameNum == 7) then
-		return globals.belts[hero]:setSequence( "dessert_fast7" )
-	elseif (frameNum == 8) then 
-		return globals.belts[hero]:setSequence( "dessert_fast8" )
-	elseif (frameNum == 9) then 
-		return globals.belts[hero]:setSequence( "dessert_fast9" )
-	elseif (frameNum == 10) then 
-		return globals.belts[hero]:setSequence( "dessert_fast10" )
-	elseif (frameNum == 11) then 
-		return globals.belts[hero]:setSequence( "dessert_fast11" )
-	elseif (frameNum == 12) then 
-		return globals.belts[hero]:setSequence( "dessert_fast12")
-  elseif (frameNum == 13) then 
-    return globals.belts[hero]:setSequence( "dessert_fast13")
-  elseif (frameNum == 14) then 
-    return globals.belts[hero]:setSequence( "dessert_fast14")
-  elseif (frameNum == 15) then 
-    return globals.belts[hero]:setSequence( "dessert_fast15")
-  elseif (frameNum == 16) then 
-    return globals.belts[hero]:setSequence( "dessert_fast16")
-  elseif (frameNum == 17) then 
-    return globals.belts[hero]:setSequence( "dessert_fast17")
-  elseif (frameNum == 18) then 
-    return globals.belts[hero]:setSequence( "dessert_fast18")
-  elseif (frameNum == 19) then 
-    return globals.belts[hero]:setSequence( "dessert_fast19")
-  elseif (frameNum == 20) then 
-    return globals.belts[hero]:setSequence( "dessert_fast20")
-  elseif (frameNum == 21) then 
-    return globals.belts[hero]:setSequence( "dessert_fast21")
-  elseif (frameNum == 22) then 
-    return globals.belts[hero]:setSequence( "dessert_fast22")
-  elseif (frameNum == 23) then 
-    return globals.belts[hero]:setSequence( "dessert_fast23")
+   else 
+      return globals.belts[hero]:setSequence( "dessert_fast" .. frameNum)
 	end
 end
 
 function dessert_normal (hero, frameNum)
 	if (frameNum == 1) then
 		return globals.belts[hero]:setSequence( "dessert_normal" )
-	elseif (frameNum == 2) then
-		return globals.belts[hero]:setSequence( "dessert_normal2" )
-	elseif (frameNum == 3) then
-		return globals.belts[hero]:setSequence( "dessert_normal3" )
-	elseif (frameNum == 4) then
-		return globals.belts[hero]:setSequence( "dessert_normal4" )
-	elseif (frameNum == 5) then
-		return globals.belts[hero]:setSequence( "dessert_normal5" )
-	elseif (frameNum == 6) then
-		return globals.belts[hero]:setSequence( "dessert_normal6" )
-	elseif (frameNum == 7) then 
-		return globals.belts[hero]:setSequence( "dessert_normal7" )
-	elseif (frameNum == 8) then 
-		return globals.belts[hero]:setSequence( "dessert_normal8" )
-	elseif (frameNum == 9) then 
-		return globals.belts[hero]:setSequence( "dessert_normal9" )
-	elseif (frameNum == 10) then 
-		return globals.belts[hero]:setSequence( "dessert_normal10" )
-	elseif (frameNum == 11) then 
-		return globals.belts[hero]:setSequence( "dessert_normal11" )
-	elseif (frameNum == 12) then 
-		return globals.belts[hero]:setSequence( "dessert_normal12")
-  elseif (frameNum == 13) then 
-    return globals.belts[hero]:setSequence( "dinner_normal13")
-  elseif (frameNum == 14) then 
-    return globals.belts[hero]:setSequence( "dessert_normal14")
-  elseif (frameNum == 15) then 
-    return globals.belts[hero]:setSequence( "dessert_normal15")
-  elseif (frameNum == 16) then 
-    return globals.belts[hero]:setSequence( "dessert_normal16")
-  elseif (frameNum == 17) then 
-    return globals.belts[hero]:setSequence( "dessert_normal17")
-  elseif (frameNum == 18) then 
-    return globals.belts[hero]:setSequence( "dessert_normal18")
-  elseif (frameNum == 19) then 
-    return globals.belts[hero]:setSequence( "dessert_normal19")
-  elseif (frameNum == 20) then 
-    return globals.belts[hero]:setSequence( "dessert_normal20")
-  elseif (frameNum == 21) then 
-    return globals.belts[hero]:setSequence( "dessert_normal21")
-  elseif (frameNum == 22) then 
-    return globals.belts[hero]:setSequence( "dessert_normal22")
-  elseif (frameNum == 23) then 
-    return globals.belts[hero]:setSequence( "dessert_normal23")
+   else
+      return globals.belts[hero]:setSequence( "dessert_normal" .. frameNum)
 	end
 end
 
 function dessert_slow (hero, frameNum)
 	if (frameNum == 1) then
 	 return globals.belts[hero]:setSequence( "dessert_slow2" )
-  elseif (frameNum == 2) then
-    return globals.belts[hero]:setSequence( "dessert_slow3" )
-  elseif (frameNum == 3) then
-    return globals.belts[hero]:setSequence( "dessert_slow4" )
-  elseif (frameNum == 4) then
-    return globals.belts[hero]:setSequence( "dessert_slow5" )
-  elseif (frameNum == 5) then
-    return globals.belts[hero]:setSequence( "dessert_slow6" )
-  elseif (frameNum == 6) then
-    return globals.belts[hero]:setSequence( "dessert_slow7" )
-  elseif (frameNum == 7) then
-    return globals.belts[hero]:setSequence( "dessert_slow8" )
-  elseif (frameNum == 8) then 
-    return globals.belts[hero]:setSequence( "dessert_slow9" )
-  elseif (frameNum == 9) then 
-    return globals.belts[hero]:setSequence( "dessert_slow10" )
-  elseif (frameNum == 10) then 
-    return globals.belts[hero]:setSequence( "dessert_slow11" )
-  elseif (frameNum == 11) then 
-    return globals.belts[hero]:setSequence( "dessert_slow2" )
-  elseif (frameNum == 12) then 
-    return globals.belts[hero]:setSequence( "dessert_slow13")
-  elseif (frameNum == 13) then 
-    return globals.belts[hero]:setSequence( "dessert_slow14")
-  elseif (frameNum == 14) then 
-    return globals.belts[hero]:setSequence( "dessert_slow15")
-  elseif (frameNum == 15) then 
-    return globals.belts[hero]:setSequence( "dessert_slow16")
-  elseif (frameNum == 16) then 
-    return globals.belts[hero]:setSequence( "dessert_slow17")
-  elseif (frameNum == 17) then 
-    return globals.belts[hero]:setSequence( "dessert_slow18")
-  elseif (frameNum == 18) then 
-    return globals.belts[hero]:setSequence( "dessert_slow19")
-  elseif (frameNum == 19) then 
-    return globals.belts[hero]:setSequence( "dessert_slow20")
-  elseif (frameNum == 20) then 
-    return globals.belts[hero]:setSequence( "dessert_slow21")
-  elseif (frameNum == 21) then 
-    return globals.belts[hero]:setSequence( "dessert_slow22")
-  elseif (frameNum == 22) then 
-    return globals.belts[hero]:setSequence( "dessert_slow23")
   elseif (frameNum == 23) then 
     return globals.belts[hero]:setSequence( "dessert_slow")
+ else
+   return globals.belts[hero]:setSequence( "dessert_slow2" .. frameNum)
 	end
 end
 -- DESSERT END --
